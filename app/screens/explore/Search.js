@@ -6,8 +6,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {LocationKey} from '../../key';
+import {setLatLng} from '../../actions/setLatLang';
+import {connect, useSelector} from 'react-redux';
 
-const Search = ({modalVisible}) => {
+const Search = ({modalVisible, navigation, setLatLng, onRechange}) => {
   const onSpeechStartHandler = e => {
     console.log('start handler==>>>', e);
   };
@@ -74,8 +76,9 @@ const Search = ({modalVisible}) => {
       fetchDetails={true}
       placeholder="Search Location"
       onPress={(data, details = null) => {
-        console.log('data:', data);
-        console.log('details', details);
+        const lat = details.geometry.location.lat;
+        const lng = details.geometry.location.lng;
+        setLatLng({lat, lng});
       }}
       query={{
         key: `${LocationKey}`,
@@ -91,7 +94,7 @@ const Search = ({modalVisible}) => {
   );
 };
 
-export default Search;
+export default connect(null, {setLatLng})(Search);
 
 const styles = StyleSheet.create({
   googlePlaces: {

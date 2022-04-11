@@ -3,16 +3,13 @@ import {
   View,
   Text,
   Dimensions,
-  PanResponder,
-  ActivityIndicator,
   Image,
-  Animated,
   StyleSheet,
   ScrollView,
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
-import axios from 'axios';
+
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Search from './Search';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -25,20 +22,31 @@ import {data} from './data';
 import ModalView from './ModalView';
 import CustomMarker from './CustomMarker';
 import Profile from '../profile';
-import {Base_url} from '../../key';
-import {get_coordinates} from '../../actions/coordinates';
+
+import {get_coordinates, marker_seleted} from '../../actions/coordinates';
 import {connect, useSelector} from 'react-redux';
 
-import BottomSheet, {BottomSheetView} from '@gorhom/bottom-sheet';
+import BottomSheet from '@gorhom/bottom-sheet';
+import {get_location_details} from '../../actions/loacationDetails';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
-const SCREEN_WIDTH = Dimensions.get('window').width;
 
-const Explore = ({navigation, get_coordinates}) => {
+const Explore = ({
+  navigation,
+  get_coordinates,
+  get_location_details,
+  marker_seleted,
+}) => {
   const isFocused = useIsFocused();
 
-  const coordinates = useSelector(state => state.coordinates);
-  const latlang = useSelector(state => state.setLatLang);
+  const {coordinates} = useSelector(state => state.coordinates);
+  const {lat, lng} = useSelector(state => state.setLatLang);
+  const location_data = useSelector(state => state.location_details.data);
+
+  ///state data
+  // console.log(coordinates, 'latlang');
+
   const mapRef = useRef(null);
 
   const [markerData, setMarkerData] = useState(null);
@@ -50,12 +58,17 @@ const Explore = ({navigation, get_coordinates}) => {
   // added by Dildar Khan start
   const bottomSheetRef = useRef(null);
 
-  const snapPoints = useMemo(() => ['30%', '90%'], []);
+  const snapPoints = useMemo(() => ['30%', '100%'], []);
 
   const handleSheetChanges = useCallback(index => {
     console.log('handleSheetChanges', index);
   }, []);
   // added by Dildar Khan end
+  //anup
+  const onRechange = (lat, lng) => {
+    setLatitute(lat);
+    setLongitute(lng);
+  };
 
   const onMapReadyHandler = () => {
     if (Platform.OS === 'ios') {
@@ -63,7 +76,7 @@ const Explore = ({navigation, get_coordinates}) => {
     } else {
       const markersCoordinates = [];
 
-      coordinates.coordinates.forEach(coords => {
+      coordinates.forEach(coords => {
         markersCoordinates.push({
           latitude: coords.Latitude,
           longitude: coords.Longitude,
@@ -91,14 +104,77 @@ const Explore = ({navigation, get_coordinates}) => {
   const renderBottomSheet = () => {
     return (
       <BottomSheet
+        handleIndicatorStyle={{
+          backgroundColor: '#757575',
+          height: 2.5,
+          opacity: 0.5,
+        }}
+        enabledInnerScrolling={true}
+        enabledContentGestureInteraction={false}
         ref={bottomSheetRef}
         index={-1}
         snapPoints={snapPoints}
         enablePanDownToClose={true}
-        onChange={handleSheetChanges}>
-        <BottomSheetView style={styles.contentContainer}>
-          <Text>Bottomsheet contents goes here!</Text>
-        </BottomSheetView>
+        // onChange={handleSheetChanges}
+      >
+        <View style={{width: '100%', height: 110}}>
+          {location_data ? (
+            <>
+              <View style={{...styles.bottomUpperTop}}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <MaterialIcons
+                    name="keyboard-arrow-right"
+                    size={24}
+                    color="#1b5a90"
+                    style={{marginTop: 5}}
+                  />
+                  <Text style={{color: '#1b5a90'}}>
+                    {location_data?.FullAddress}
+                  </Text>
+                </View>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <MaterialIcons
+                    name="keyboard-arrow-right"
+                    size={24}
+                    color="black"
+                  />
+                  <Text style={{color: '#1b5a90'}}>
+                    {location_data.Address}
+                  </Text>
+                </View>
+              </View>
+              <View
+                style={{
+                  ...styles.bottomUpperLower,
+                  marginTop: 3,
+                  paddingHorizontal: 5,
+                }}>
+                <View style={styles.buttonUpperLowerTop}>
+                  {/* <Text style={styles.textStyles}>
+                Site Status:
+                <Text style={{color: '#8cff84', fontWeight: 'bold'}}>
+                  {' '}
+                  Active{' '}
+                </Text>{' '}
+              </Text> */}
+                  <Text style={{...styles.textStyles, margin: 3}}>
+                    Site Type:
+                    <Text> {location_data.Concat_LocationTypes} </Text>{' '}
+                  </Text>
+                  {/* <Text style={styles.textStyles}>
+                Asset Cost(Y):<Text> :$26808 </Text>{' '}
+              </Text> */}
+                </View>
+                {/* <View style={{width: '50%', height: '100%', paddingLeft: 20}}>
+              <Text style={styles.textStyles}>Property Cost (Y):$0:00</Text>
+              <Text style={styles.textStyles}>Circuits:9 </Text>
+              <Text style={styles.textStyles}>Devices:5 </Text>
+            </View> */}
+              </View>
+            </>
+          ) : null}
+        </View>
+        <Profile />
       </BottomSheet>
     );
   };
@@ -119,14 +195,14 @@ const Explore = ({navigation, get_coordinates}) => {
           provider={PROVIDER_GOOGLE}
           style={styles.container}
           region={{
-            latitude: latitute,
-            longitude: longitute,
+            latitude: lat,
+            longitude: lng,
             latitudeDelta: 0.0112333,
             longitudeDelta: 5.001233,
           }}
           initialRegion={{
-            latitude: 41.85942,
-            longitude: -71.519236,
+            latitude: lat,
+            longitude: lng,
             latitudeDelta: 0.0112333,
             longitudeDelta: 5.001233,
           }}
@@ -135,20 +211,8 @@ const Explore = ({navigation, get_coordinates}) => {
               onMapReadyHandler();
             }, 5000)
           }>
-          <Marker
-            title="dummy marker"
-            description="just for testing"
-            coordinate={{
-              latitude: 41.85942,
-              longitude: -71.519236,
-              latitudeDelta: 0.0112333,
-              longitudeDelta: 5.001233,
-            }}
-            onPress={() => bottomSheetRef.current.snapToIndex(0)}>
-            <CustomMarker />
-          </Marker>
-          {coordinates.coordinates &&
-            coordinates.coordinates.map((item, i) => {
+          {coordinates &&
+            coordinates.map((item, i) => {
               return (
                 <Marker
                   key={i}
@@ -156,10 +220,19 @@ const Explore = ({navigation, get_coordinates}) => {
                     latitude: item.Latitude,
                     longitude: item.Longitude,
                   }}
-                  title="Test Title"
-                  description="This is the test description"
-                  onPress={() => setMarkerData(item)}>
-                  <CustomMarker />
+                  onPress={() => {
+                    bottomSheetRef.current.snapToIndex(0);
+                    get_location_details(item.Location_ID);
+                    marker_seleted(i);
+                    // setMarkerData(item);
+                  }}>
+                  <CustomMarker isChecked={item.isChecked} />
+                  {/* <MapView.Callout
+                    onPress={() => {
+                      alert(item.Location_ID);
+                    }}>
+                    <View></View>
+                  </MapView.Callout> */}
                 </Marker>
               );
             })}
@@ -246,7 +319,11 @@ const Explore = ({navigation, get_coordinates}) => {
   );
 };
 
-export default connect(null, {get_coordinates})(Explore);
+export default connect(null, {
+  get_coordinates,
+  get_location_details,
+  marker_seleted,
+})(Explore);
 
 const styles = StyleSheet.create({
   searchRight: {
@@ -354,8 +431,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    flex: 1,
-    alignItems: 'center',
+    paddingTop: 10,
   },
   // added by Dildar Khan end
 });
