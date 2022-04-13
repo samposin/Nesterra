@@ -114,9 +114,9 @@ const styles = StyleSheet.create({
   googlePlaces: {
     container: {
       position: 'absolute',
-      width: '95%',
+      width: '70%',
       alignSelf: 'center',
-      top: 15,
+      top: 12,
       zIndex: 10,
       backgroundColor: 'white',
       borderRadius: 10,
