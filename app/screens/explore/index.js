@@ -15,7 +15,10 @@ import {
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Search from './Search';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
+import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Geolocation from 'react-native-geolocation-service';
 
 import {LogBox} from 'react-native';
 LogBox.ignoreLogs(['new NativeEventEmitter']);
@@ -33,6 +36,7 @@ import {get_location_details} from '../../actions/loacationDetails';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const Explore = ({
   navigation,
@@ -58,7 +62,7 @@ const Explore = ({
   const [marginBottom, setMarginBottom] = useState(100);
   const [satellite, setSatellite] = useState('standard');
   const [aHeight, setAheight] = useState(new Animated.Value(40));
-  const [aWidth, setaWidth] = useState(new Animated.Value(40));
+  const [findDirection, setaWidth] = useState(new Animated.Value(0));
   const [animatioVal, setanimatioVal] = useState(false);
   const [mapType, setMapType] = useState(false);
 
@@ -66,6 +70,25 @@ const Explore = ({
     Animated.timing(aHeight, {
       toValue: 230,
       duration: 500,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  //find coordinate Animation on
+  const animationFindON = () => {
+    Animated.timing(findDirection, {
+      toValue: 170,
+      duration: 200,
+      easing: Easing.in(Easing.bounce),
+      useNativeDriver: false,
+    }).start();
+  };
+  //find coordinate Animation of
+  const animationFindOff = () => {
+    Animated.timing(findDirection, {
+      toValue: 0,
+      duration: 200,
       easing: Easing.ease,
       useNativeDriver: false,
     }).start();
@@ -117,7 +140,19 @@ const Explore = ({
       });
     }
   };
-
+  //DEVICE CURRENT LAT LNG GET
+  const getLocation = async () => {
+    Geolocation.getCurrentPosition(position => {
+      // this.setState({ coords: position.coords, loading: false });
+      const region = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        latitudeDelta: 0.0112333,
+        longitudeDelta: 5.001233,
+      };
+      mapRef.current.animateToRegion(region, 500);
+    });
+  };
   useEffect(() => {
     get_coordinates();
   }, []);
@@ -210,8 +245,6 @@ const Explore = ({
 
       <View style={styles.container}>
         <MapView
-          showsPointsOfInterest={true}
-          showsUserLocation={true}
           mapType={satellite}
           ref={mapRef}
           zoomControlEnabled={false}
@@ -269,6 +302,69 @@ const Explore = ({
               );
             })}
         </MapView>
+        {/* ===========get Current position=== */}
+        <TouchableOpacity onPress={getLocation} style={styles.currentLocation}>
+          <MaterialCommunityIcons name="target" size={32} color="black" />
+        </TouchableOpacity>
+        {/* ===========get Current position=== */}
+        {/* ===========Direction=== */}
+        <TouchableOpacity
+          onPress={animationFindON}
+          style={styles.directionButton}>
+          <MaterialIcons name="directions" size={24} color="white" />
+        </TouchableOpacity>
+        {/* ===========Direction=== */}
+        {/* ===========find Direction=== */}
+        <Animated.View
+          style={{
+            width: SCREEN_WIDTH,
+            height: findDirection,
+            backgroundColor: 'red',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 20,
+            flexDirection: 'row',
+          }}>
+          <View
+            style={{
+              width: '20%',
+              height: '100%',
+              backgroundColor: 'yellow',
+              flexDirection: 'row',
+            }}>
+            <View style={{width: '50%', height: '100%'}}>
+              <TouchableOpacity onPress={animationFindOff}>
+                <Feather name="arrow-left" size={24} color="black" />
+              </TouchableOpacity>
+            </View>
+            <View style={{width: '50%', height: '100%'}}>
+              <Entypo name="dot-single" size={24} color="black" />
+              <MaterialCommunityIcons
+                name="dots-vertical"
+                size={24}
+                color="black"
+              />
+              <Feather name="map-pin" size={24} color="black" />
+            </View>
+          </View>
+          <View
+            style={{
+              width: '60%',
+              height: '100%',
+              backgroundColor: 'green',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}></View>
+          <View
+            style={{
+              width: '20%',
+              height: '100%',
+              backgroundColor: 'yellowgreen',
+            }}></View>
+        </Animated.View>
+        {/* ===========find Direction=== */}
 
         <Animated.View
           style={{
@@ -649,7 +745,46 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 3,
   },
+  currentLocation: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'white',
+    position: 'absolute',
+    bottom: 220,
+    right: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
 
+    elevation: 8,
+  },
+  directionButton: {
+    width: 50,
+    height: 50,
+    backgroundColor: '#4676fc',
+    position: 'absolute',
+    bottom: 160,
+    right: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 25,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+
+    elevation: 8,
+  },
   // added by Dildar Khan start
   container: {
     flex: 1,
