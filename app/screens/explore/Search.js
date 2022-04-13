@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Image, useRef, TouchableOpacity} from 'react-native';
 // import Voice from '@react-native-voice/voice';
 import Voice from '@react-native-community/voice';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -9,7 +9,14 @@ import {LocationKey} from '../../key';
 import {setLatLng} from '../../actions/setLatLang';
 import {connect, useSelector} from 'react-redux';
 
-const Search = ({modalVisible, navigation, setLatLng, onRechange}) => {
+const Search = ({
+  modalVisible,
+  navigation,
+  setModalVisible,
+  setLatLng,
+  onRechange,
+  speechRef,
+}) => {
   const onSpeechStartHandler = e => {
     console.log('start handler==>>>', e);
   };
@@ -25,7 +32,8 @@ const Search = ({modalVisible, navigation, setLatLng, onRechange}) => {
   };
 
   const startRecording = async () => {
-    //setLoading(true)
+    //setModalVisible(true);
+    console.log(speechRef.current);
     try {
       await Voice.start('en-Us');
     } catch (error) {
@@ -75,6 +83,12 @@ const Search = ({modalVisible, navigation, setLatLng, onRechange}) => {
     <GooglePlacesAutocomplete
       fetchDetails={true}
       placeholder="Search Location"
+      textInputProps={{
+        ref: {speechRef},
+        onSubmitEditing: () => {
+          alert('Hello');
+        },
+      }}
       onPress={(data, details = null) => {
         const lat = details.geometry.location.lat;
         const lng = details.geometry.location.lng;

@@ -7,13 +7,15 @@ import {
   StyleSheet,
   ScrollView,
   StatusBar,
+  Animated,
+  Easing,
   TouchableOpacity,
 } from 'react-native';
 
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Search from './Search';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useIsFocused} from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {LogBox} from 'react-native';
 LogBox.ignoreLogs(['new NativeEventEmitter']);
@@ -38,8 +40,6 @@ const Explore = ({
   get_location_details,
   marker_seleted,
 }) => {
-  const isFocused = useIsFocused();
-
   const {coordinates} = useSelector(state => state.coordinates);
   const {lat, lng} = useSelector(state => state.setLatLang);
   const location_data = useSelector(state => state.location_details.data);
@@ -48,17 +48,40 @@ const Explore = ({
   // console.log(coordinates, 'latlang');
 
   const mapRef = useRef(null);
-
+  const speechRef = useRef(null);
   const [markerData, setMarkerData] = useState(null);
   const [latitute, setLatitute] = useState(41.85942);
   const [longitute, setLongitute] = useState(-71.519236);
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [marginBottom, setMarginBottom] = useState(0);
+  const [satellite, setSatellite] = useState('hybrid');
+  const [aHeight, setAheight] = useState(new Animated.Value(40));
+  const [aWidth, setaWidth] = useState(new Animated.Value(40));
+  const [animatioVal, setanimatioVal] = useState(false);
+  const [mapType, setMapType] = useState(false);
 
+  const animationChange = () => {
+    Animated.timing(aHeight, {
+      toValue: 175,
+      duration: 500,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const animationChangeoff = () => {
+    Animated.timing(aHeight, {
+      toValue: 40,
+      duration: 500,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start();
+  };
   // added by Dildar Khan start
   const bottomSheetRef = useRef(null);
 
-  const snapPoints = useMemo(() => ['30%', '100%'], []);
+  const snapPoints = useMemo(() => ['20%', '100%'], []);
 
   const handleSheetChanges = useCallback(index => {
     console.log('handleSheetChanges', index);
@@ -186,14 +209,16 @@ const Explore = ({
 
       <View style={styles.container}>
         <MapView
+          mapType={satellite}
           ref={mapRef}
           zoomControlEnabled={false}
           zoomEnabled={true}
           zoomTapEnabled={true}
           rotateEnabled={true}
           scrollEnabled={true}
+          showsMyLocationButton={true}
           provider={PROVIDER_GOOGLE}
-          style={styles.container}
+          style={{...styles.container, marginBottom}}
           region={{
             latitude: lat,
             longitude: lng,
@@ -206,9 +231,10 @@ const Explore = ({
             latitudeDelta: 0.0112333,
             longitudeDelta: 5.001233,
           }}
+          onMapReady={() => setMarginBottom(50)}
           onLayout={() =>
             setTimeout(() => {
-              onMapReadyHandler();
+              //onMapReadyHandler();
             }, 5000)
           }>
           {coordinates &&
@@ -227,12 +253,6 @@ const Explore = ({
                     // setMarkerData(item);
                   }}>
                   <CustomMarker isChecked={item.isChecked} />
-                  {/* <MapView.Callout
-                    onPress={() => {
-                      alert(item.Location_ID);
-                    }}>
-                    <View></View>
-                  </MapView.Callout> */}
                 </Marker>
               );
             })}
@@ -240,7 +260,11 @@ const Explore = ({
 
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Filtter');
+            setanimatioVal(true);
+
+            animationChange();
+
+            //navigation.navigate('Filtter');
           }}
           style={{
             position: 'absolute',
@@ -255,6 +279,114 @@ const Explore = ({
           }}>
           <AntDesign name="menufold" size={28} color="white" />
         </TouchableOpacity>
+
+        <Animated.View
+          style={{
+            position: 'absolute',
+            top: 140,
+            right: 4,
+            width: aHeight,
+            height: aHeight,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 20,
+            backgroundColor: 'white',
+          }}>
+          <TouchableOpacity
+            onPress={() => {
+              setanimatioVal(true);
+
+              animationChange();
+
+              //navigation.navigate('Filtter');
+            }}>
+            {!animatioVal ? (
+              <MaterialCommunityIcons
+                name="layers-outline"
+                size={24}
+                color="black"
+              />
+            ) : (
+              <View
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'white',
+                  borderRadius: 5,
+                }}>
+                <View
+                  style={{
+                    width: '100%',
+                    height: '50%',
+
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setanimatioVal(false);
+                      animationChangeoff();
+                      setSatellite('hybrid');
+                    }}
+                    style={{
+                      width: '30%',
+                      height: '100%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Image
+                      source={require('../../images/satellite.jpg')}
+                      style={{width: 40, height: 40}}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setanimatioVal(false);
+                      animationChangeoff();
+                      setSatellite('standard');
+                    }}
+                    style={{
+                      width: '30%',
+                      height: '100%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Image
+                      source={require('../../images/defaultMap.png')}
+                      style={{width: 40, height: 40}}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setanimatioVal(false);
+                      animationChangeoff();
+                      setSatellite('terrain');
+                    }}
+                    style={{
+                      width: '30%',
+                      height: '100%',
+                      height: '100%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Image
+                      source={require('../../images/terrain.jpg')}
+                      style={{width: 40, height: 40}}
+                    />
+                  </TouchableOpacity>
+                </View>
+                <View
+                  style={{
+                    width: '100%',
+                    height: '50%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}></View>
+              </View>
+            )}
+          </TouchableOpacity>
+        </Animated.View>
+
         <View
           style={{
             position: 'absolute',
@@ -277,7 +409,11 @@ const Explore = ({
           </View>
         </View>
 
-        <Search modalVisible={modalVisible} />
+        <Search
+          modalVisible={modalVisible}
+          speechRef={speechRef}
+          setModalVisible={setModalVisible}
+        />
         {/* =================search=============== */}
         <ScrollView
           horizontal
