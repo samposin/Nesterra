@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       width: '95%',
       alignSelf: 'center',
-      top: 12,
+      top: 46,
       zIndex: 10,
       backgroundColor: 'white',
       borderRadius: 10,
@@ -127,7 +127,13 @@ const styles = StyleSheet.create({
       borderBottomColor: 'white',
     },
   },
-  leftIconImage: {width: 30, height: 30, alignSelf: 'center', marginLeft: 10},
+  leftIconImage: {
+    width: 30,
+    height: 30,
+    alignSelf: 'center',
+
+    marginLeft: 10,
+  },
   searchRighIcons: {
     display: 'flex',
     flexDirection: 'row',
@@ -135,7 +141,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   rightIconImage: {width: 30, height: 30, borderRadius: 15},
-  mr10: {marginRight: 10},
+  mr10: {marginRight: 18},
 });
 
 // added by Dildar Khan end

@@ -9,6 +9,7 @@ import {
   StatusBar,
   Animated,
   Easing,
+  TextInput,
   TouchableOpacity,
 } from 'react-native';
 
@@ -16,16 +17,20 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Search from './Search';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
-import Entypo from 'react-native-vector-icons/Entypo';
+import MapViewDirections from 'react-native-maps-directions';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Geolocation from 'react-native-geolocation-service';
 
 import {LogBox} from 'react-native';
 LogBox.ignoreLogs(['new NativeEventEmitter']);
-LogBox.ignoreAllLogs();
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 import {data} from './data';
 import ModalView from './ModalView';
-import CustomMarker from './CustomMarker';
+
 import Profile from '../profile';
 
 import {get_coordinates, marker_seleted} from '../../actions/coordinates';
@@ -34,10 +39,15 @@ import {setLatLng} from '../../actions/setLatLang';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {get_location_details} from '../../actions/loacationDetails';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {hasLocationPermission} from '../../utils/AskPermission';
+import {LocationKey} from '../../key';
+import CustomMarker from '../../components/CustomMarker';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
-
+const ASPECT_RATIO = SCREEN_WIDTH / SCREEN_HEIGHT;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const Explore = ({
   navigation,
   get_coordinates,
@@ -54,7 +64,7 @@ const Explore = ({
 
   const mapRef = useRef(null);
   const speechRef = useRef(null);
-  const [markerData, setMarkerData] = useState(null);
+  // const [markerData, setMarkerData] = useState(null);
   const [latitute, setLatitute] = useState(41.85942);
   const [longitute, setLongitute] = useState(-71.519236);
   const [isLoading, setIsLoading] = useState(false);
@@ -64,8 +74,99 @@ const Explore = ({
   const [aHeight, setAheight] = useState(new Animated.Value(40));
   const [findDirection, setaWidth] = useState(new Animated.Value(0));
   const [animatioVal, setanimatioVal] = useState(false);
-  const [mapType, setMapType] = useState(false);
+  const [inputRotate, setInputRotate] = useState(true);
+  const [rotatedIcon, setrotatedIcon] = useState(new Animated.Value(0));
+  const [animatioValOff, setanimatioValOff] = useState(false);
+  // const [tranformInput, settranformInput] = useState(new Animated.Value(0));
+  const [startPoints, setStartPoints] = useState({});
+  const [destinationPoints, setdestinationPoints] = useState({});
+  let transformX = useRef(new Animated.Value(0)).current;
+  let transformX1 = useRef(new Animated.Value(0)).current;
+  ///
+  const origin = {latitude: 22.082948, longitude: 88.078499};
+  const destination1 = {latitude: 22.5726, longitude: 88.3639};
 
+  const transX = transformX.interpolate({
+    inputRange: [0, 1],
+    outputRange: [10, 54],
+  });
+  const transX1 = transformX1.interpolate({
+    inputRange: [0, 1],
+    outputRange: [20, 66],
+  });
+
+  /// arrow rotated
+  // get start points
+  const startPoint = (lat, lng) => {
+    setStartPoints({
+      startPoints: {
+        latitude: lat,
+        longitude: lng,
+      },
+    });
+    console.log(startPoints, 'startPoints');
+    console.log(Object.keys(startPoints).length);
+  };
+  // get destination points
+  const destination = (lat, lng) => {
+    setdestinationPoints({
+      destinationPoints: {
+        latitude: lat,
+        longitude: lng,
+      },
+    });
+    console.log(destinationPoints, 'destinationPoints');
+    console.log(Object.keys(destinationPoints).length);
+  };
+
+  const spin = rotatedIcon.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '180deg'],
+  });
+  const rotatedIconchange = () => {
+    Animated.timing(rotatedIcon, {
+      toValue: 1,
+      duration: 300,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start();
+
+    Animated.timing(transformX, {
+      toValue: 1,
+      duration: 200,
+
+      useNativeDriver: true,
+    }).start();
+    Animated.timing(transformX1, {
+      toValue: 0,
+      duration: 200,
+
+      useNativeDriver: true,
+    }).start();
+  };
+  const rotatedIconAntichange = () => {
+    Animated.timing(rotatedIcon, {
+      toValue: 0,
+      duration: 300,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start();
+
+    Animated.timing(transformX, {
+      toValue: 0,
+      duration: 200,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start();
+    Animated.timing(transformX1, {
+      toValue: 1,
+      duration: 200,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  /// arrow rotated
   const animationChange = () => {
     Animated.timing(aHeight, {
       toValue: 230,
@@ -78,20 +179,27 @@ const Explore = ({
   //find coordinate Animation on
   const animationFindON = () => {
     Animated.timing(findDirection, {
-      toValue: 170,
+      toValue: 130,
       duration: 200,
       easing: Easing.in(Easing.bounce),
       useNativeDriver: false,
     }).start();
+    setTimeout(() => {
+      setanimatioValOff(true);
+    }, 200);
   };
-  //find coordinate Animation of
+  //find coordinate Animation off
   const animationFindOff = () => {
     Animated.timing(findDirection, {
       toValue: 0,
       duration: 200,
-      easing: Easing.ease,
+      easing: Easing.out(Easing.bounce),
       useNativeDriver: false,
     }).start();
+    setanimatioValOff(false);
+    // setTimeout(() => {
+
+    // }, 200);
   };
 
   const animationChangeoff = () => {
@@ -142,13 +250,19 @@ const Explore = ({
   };
   //DEVICE CURRENT LAT LNG GET
   const getLocation = async () => {
+    const hasPermission = await hasLocationPermission();
+
+    if (!hasPermission) {
+      return;
+    }
     Geolocation.getCurrentPosition(position => {
       // this.setState({ coords: position.coords, loading: false });
+      // console.log(position);
       const region = {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
         latitudeDelta: 0.0112333,
-        longitudeDelta: 5.001233,
+        longitudeDelta: 0.001233,
       };
       mapRef.current.animateToRegion(region, 500);
     });
@@ -240,11 +354,17 @@ const Explore = ({
 
   return (
     <>
-      <StatusBar backgroundColor="#1b5a90" barStyle="light-content" />
+      {inputRotate ? rotatedIconAntichange() : rotatedIconchange()}
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
+      />
       <ModalView modalVisible={modalVisible} />
 
       <View style={styles.container}>
         <MapView
+          // showsUserLocation={true}
           mapType={satellite}
           ref={mapRef}
           zoomControlEnabled={false}
@@ -252,11 +372,11 @@ const Explore = ({
           zoomTapEnabled={true}
           rotateEnabled={true}
           scrollEnabled={true}
-          showsMyLocationButton={true}
+          // showsMyLocationButton={true}
           showsCompass={true}
-          followsUserLocation={true}
+          // followsUserLocation={true}
           provider={PROVIDER_GOOGLE}
-          style={{...styles.container, marginBottom}}
+          style={{...styles.container, marginBottom: 50}}
           region={{
             latitude: lat,
             longitude: lng,
@@ -266,8 +386,8 @@ const Explore = ({
           initialRegion={{
             latitude: lat,
             longitude: lng,
-            latitudeDelta: 0.0112333,
-            longitudeDelta: 5.001233,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
           }}
           onMapReady={() => {
             onMapReadyHandler();
@@ -281,7 +401,7 @@ const Explore = ({
           {coordinates &&
             coordinates.map((item, i) => {
               return (
-                <Marker
+                <Marker.Animated
                   key={i}
                   coordinate={{
                     latitude: item.Latitude,
@@ -298,9 +418,20 @@ const Explore = ({
                     // setMarkerData(item);
                   }}>
                   <CustomMarker isChecked={item.isChecked} />
-                </Marker>
+                </Marker.Animated>
               );
             })}
+          {Object.keys(startPoints).length > 0 &&
+          Object.keys(destinationPoints).length > 0 ? (
+            <MapViewDirections
+              origin={startPoints}
+              destination={destinationPoints}
+              apikey={LocationKey} // insert your API Key here
+              strokeWidth={6}
+              strokeColor="#1b5a90"
+              optimizeWaypoints={true}
+            />
+          ) : null}
         </MapView>
         {/* ===========get Current position=== */}
         <TouchableOpacity onPress={getLocation} style={styles.currentLocation}>
@@ -319,7 +450,7 @@ const Explore = ({
           style={{
             width: SCREEN_WIDTH,
             height: findDirection,
-            backgroundColor: 'red',
+            backgroundColor: 'white',
             position: 'absolute',
             top: 0,
             left: 0,
@@ -327,42 +458,169 @@ const Explore = ({
             zIndex: 20,
             flexDirection: 'row',
           }}>
-          <View
-            style={{
-              width: '20%',
-              height: '100%',
-              backgroundColor: 'yellow',
-              flexDirection: 'row',
-            }}>
-            <View style={{width: '50%', height: '100%'}}>
-              <TouchableOpacity onPress={animationFindOff}>
-                <Feather name="arrow-left" size={24} color="black" />
-              </TouchableOpacity>
-            </View>
-            <View style={{width: '50%', height: '100%'}}>
-              <Entypo name="dot-single" size={24} color="black" />
-              <MaterialCommunityIcons
-                name="dots-vertical"
-                size={24}
-                color="black"
-              />
-              <Feather name="map-pin" size={24} color="black" />
-            </View>
-          </View>
-          <View
-            style={{
-              width: '60%',
-              height: '100%',
-              backgroundColor: 'green',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}></View>
-          <View
-            style={{
-              width: '20%',
-              height: '100%',
-              backgroundColor: 'yellowgreen',
-            }}></View>
+          {animatioValOff ? (
+            <>
+              <View
+                style={{
+                  width: '20%',
+                  height: '100%',
+
+                  flexDirection: 'row',
+                }}>
+                <View
+                  style={{
+                    width: '50%',
+                    height: '100%',
+                    paddingTop: 20,
+                    paddingLeft: 10,
+                  }}>
+                  <TouchableOpacity onPress={animationFindOff}>
+                    <Feather name="arrow-left" size={24} color="black" />
+                  </TouchableOpacity>
+                </View>
+                <View
+                  style={{
+                    width: '50%',
+                    height: '100%',
+                    paddingTop: 20,
+                  }}>
+                  {/* <View
+                    style={{
+                      width: 10,
+                      height: 10,
+                      borderRadius: 10,
+                      borderColor: 'red',
+                      borderWidth: 2,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                                    
+
+                  </View> */}
+                  <FontAwesome5
+                    style={{marginLeft: 5}}
+                    name="dot-circle"
+                    size={12}
+                    color="black"
+                  />
+
+                  <MaterialCommunityIcons
+                    name="dots-vertical"
+                    size={22}
+                    color="gray"
+                  />
+                  <Feather name="map-pin" size={22} color="red" />
+                </View>
+              </View>
+              <View
+                style={{
+                  width: '60%',
+                  height: '100%',
+
+                  position: 'relative',
+                }}>
+                <Animated.View
+                  style={{
+                    position: 'absolute',
+
+                    top: 3,
+                    left: 2,
+                    paddingLeft: 2,
+                    backgroundColor: 'red',
+                    transform: [
+                      {
+                        translateY: transX,
+                      },
+                    ],
+                  }}>
+                  <TextInput
+                    placeholder="Choose Startin point"
+                    style={{
+                      borderColor: 'red',
+                      borderWidth: 1,
+                      position: 'absolute',
+                      top: 0,
+                      paddingVertical: 4,
+                      borderRadius: 25,
+                      width: 240,
+                      paddingLeft: 10,
+                    }}
+                    onFocus={() =>
+                      navigation.navigate('SearchStart', {
+                        startPoint: startPoint,
+                      })
+                    }
+                  />
+                </Animated.View>
+                <Animated.View
+                  style={{
+                    position: 'absolute',
+                    top: 30,
+                    left: 2,
+                    backgroundColor: 'red',
+                    transform: [
+                      {
+                        translateY: transX1,
+                      },
+                    ],
+                  }}>
+                  <TextInput
+                    placeholder="Choose destination"
+                    style={{
+                      borderColor: 'green',
+                      borderWidth: 1,
+                      borderRadius: 25,
+                      position: 'absolute',
+                      bottom: 0,
+                      width: 240,
+                      paddingVertical: 4,
+                      paddingLeft: 10,
+                    }}
+                    onFocus={() =>
+                      navigation.navigate('Destination', {
+                        destination: destination,
+                      })
+                    }
+                  />
+                </Animated.View>
+              </View>
+              <View
+                style={{
+                  width: '20%',
+                  height: '100%',
+
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setInputRotate(!inputRotate);
+                    //  rotatedIconchange();
+                  }}>
+                  <Animated.View
+                    style={{
+                      width: 40,
+                      height: 40,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      transform: [{rotate: spin}],
+                    }}>
+                    {/* <AntDesign
+                      name="arrowdown"
+                      size={24}
+                      style={{backgroundColor: 'red'}}
+                      color="black"
+                    />
+                    <AntDesign name="arrowup" size={24} color="black" /> */}
+                    <Image
+                      style={{width: 40, height: 40}}
+                      source={require('../../images/rotated.png')}
+                    />
+                  </Animated.View>
+                </TouchableOpacity>
+              </View>
+            </>
+          ) : null}
         </Animated.View>
         {/* ===========find Direction=== */}
 
@@ -545,7 +803,7 @@ const Explore = ({
         <View
           style={{
             position: 'absolute',
-            top: SCREEN_HEIGHT - 265,
+            top: SCREEN_HEIGHT - 120,
             left: 0,
             width: 150,
             height: 50,
@@ -569,6 +827,7 @@ const Explore = ({
           speechRef={speechRef}
           setModalVisible={setModalVisible}
         />
+
         {/* =================search=============== */}
         <ScrollView
           horizontal
@@ -591,6 +850,7 @@ const Explore = ({
               key={index}
               style={{
                 ...styles.chipsItem,
+
                 backgroundColor: category.isVisible ? '#1b5a90' : 'white',
               }}>
               {category.isVisible ? category.icon : null}
@@ -713,6 +973,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   chipsScrollView: {
+    marginTop: 24,
     position: 'absolute',
     top: Platform.OS === 'ios' ? 80 : 80,
     paddingHorizontal: 10,
