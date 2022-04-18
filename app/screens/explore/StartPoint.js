@@ -1,5 +1,11 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, Image, useRef, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  StatusBar,
+  useRef,
+  TouchableOpacity,
+} from 'react-native';
 // import Voice from '@react-native-voice/voice';
 
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
@@ -7,7 +13,7 @@ import {LocationKey} from '../../key';
 import {setLatLng} from '../../actions/setLatLang';
 import {connect, useSelector} from 'react-redux';
 
-const SearchStart = ({route, navigation, setLatLng}) => {
+const StartPoint = ({route, navigation, setLatLng}) => {
   return (
     <GooglePlacesAutocomplete
       fetchDetails={true}
@@ -16,7 +22,10 @@ const SearchStart = ({route, navigation, setLatLng}) => {
         const lat = details.geometry.location.lat;
         const lng = details.geometry.location.lng;
         route.params.startPoint(lat, lng);
+
         setLatLng({lat, lng});
+
+        route.params.setStartAddress(data.description.split(',').toString());
         navigation.goBack();
       }}
       query={{
@@ -32,7 +41,7 @@ const SearchStart = ({route, navigation, setLatLng}) => {
   );
 };
 
-export default connect(null, {setLatLng})(SearchStart);
+export default connect(null, {setLatLng})(StartPoint);
 
 const styles = StyleSheet.create({
   //   placess: {
@@ -49,7 +58,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       width: '95%',
       alignSelf: 'center',
-
+      marginTop: StatusBar.currentHeight,
       backgroundColor: 'white',
       borderRadius: 10,
     },

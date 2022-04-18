@@ -1,5 +1,12 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, Image, useRef, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  useRef,
+  StatusBar,
+  TouchableOpacity,
+} from 'react-native';
 // import Voice from '@react-native-voice/voice';
 
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
@@ -7,31 +14,37 @@ import {LocationKey} from '../../key';
 import {setLatLng} from '../../actions/setLatLang';
 import {connect, useSelector} from 'react-redux';
 
-const Destination = ({route, navigation}) => {
+const DestinationPoint = ({route, navigation}) => {
   return (
-    <GooglePlacesAutocomplete
-      fetchDetails={true}
-      placeholder="Search Destination"
-      onPress={(data, details = null) => {
-        const lat = details.geometry.location.lat;
-        const lng = details.geometry.location.lng;
-        route.params.destination(lat, lng);
-        navigation.goBack();
-      }}
-      query={{
-        key: `${LocationKey}`,
-        language: 'en',
-      }}
-      nearbyPlacesAPI="GooglePlacesSearch"
-      debounce={300}
-      enablePoweredByContainer={false}
-      styles={styles.googlePlaces}
-      // style={styles.placess}
-    />
+    <>
+      <View style={{marginTop: 20, width: 1}}></View>
+      <GooglePlacesAutocomplete
+        fetchDetails={true}
+        placeholder="Search Destination"
+        onPress={(data, details = null) => {
+          const lat = details.geometry.location.lat;
+          const lng = details.geometry.location.lng;
+          route.params.setDestinationAddress(
+            data.description.split(',').toString(),
+          );
+          route.params.destination(lat, lng);
+          navigation.goBack();
+        }}
+        query={{
+          key: `${LocationKey}`,
+          language: 'en',
+        }}
+        nearbyPlacesAPI="GooglePlacesSearch"
+        debounce={300}
+        enablePoweredByContainer={false}
+        styles={styles.googlePlaces}
+        // style={styles.placess}
+      />
+    </>
   );
 };
 
-export default connect(null, {setLatLng})(Destination);
+export default connect(null, {setLatLng})(DestinationPoint);
 
 const styles = StyleSheet.create({
   //   placess: {
@@ -48,7 +61,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       width: '95%',
       alignSelf: 'center',
-
+      marginTop: StatusBar.currentHeight,
       backgroundColor: 'white',
       borderRadius: 10,
     },

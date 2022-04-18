@@ -3,8 +3,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import SearchAddress from '../components/searchAddress';
 import Explore from '../screens/explore';
-import SearchStart from '../screens/explore/SearchStart';
-import Destination from '../screens/explore/Destination';
+import StartPoint from '../screens/explore/StartPoint';
+import DestinationPoint from '../screens/explore/DestinationPoint';
 import Filtter from '../screens/filtter';
 import Profile from '../screens/profile';
 
@@ -20,8 +20,8 @@ const ExploreStack = () => {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Filtter" component={Filtter} />
       <Stack.Screen name="SearchAddress" component={SearchAddress} />
-      <Stack.Screen name="SearchStart" component={SearchStart} />
-      <Stack.Screen name="Destination" component={Destination} />
+      <Stack.Screen name="StartPoint" component={StartPoint} />
+      <Stack.Screen name="DestinationPoint" component={DestinationPoint} />
     </Stack.Navigator>
   );
 };

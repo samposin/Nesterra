@@ -1,5 +1,12 @@
 import React, {useEffect} from 'react';
-import {View, StyleSheet, Image, useRef, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  StatusBar,
+  useRef,
+  TouchableOpacity,
+} from 'react-native';
 // import Voice from '@react-native-voice/voice';
 import Voice from '@react-native-community/voice';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -16,6 +23,8 @@ const Search = ({
   setLatLng,
   onRechange,
   speechRef,
+
+  bottomSheetRef,
 }) => {
   const onSpeechStartHandler = e => {
     console.log('start handler==>>>', e);
@@ -83,16 +92,11 @@ const Search = ({
     <GooglePlacesAutocomplete
       fetchDetails={true}
       placeholder="Search Location"
-      textInputProps={{
-        ref: {speechRef},
-        onSubmitEditing: () => {
-          alert('Hello');
-        },
-      }}
       onPress={(data, details = null) => {
         const lat = details.geometry.location.lat;
         const lng = details.geometry.location.lng;
         setLatLng({lat, lng});
+        bottomSheetRef.current.close();
       }}
       query={{
         key: `${LocationKey}`,
@@ -116,10 +120,18 @@ const styles = StyleSheet.create({
       position: 'absolute',
       width: '95%',
       alignSelf: 'center',
-      top: 46,
+      marginTop: StatusBar.currentHeight,
       zIndex: 10,
       backgroundColor: 'white',
       borderRadius: 10,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 2,
+        height: 6,
+      },
+      shadowOpacity: 0.32,
+      shadowRadius: 5.46,
+      elevation: 29,
     },
     listView: {
       borderBottomWidth: 10,
