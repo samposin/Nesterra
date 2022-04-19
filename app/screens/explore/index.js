@@ -12,7 +12,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import BottomSheetView from './BottomSheet';
-import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView from 'react-native-map-clustering';
+import {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Search from './Search';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
@@ -277,6 +278,17 @@ const Explore = ({
       });
     }
   };
+  //cluster change
+  const animateToRegion = (lat, lng) => {
+    let region = {
+      latitude: lat,
+      longitude: lng,
+      latitudeDelta: 7.5,
+      longitudeDelta: 7.5,
+    };
+
+    mapRef.current.animateToRegion(region, 2000);
+  };
   //DEVICE CURRENT LAT LNG GET
   const getLocation = async () => {
     const hasPermission = await hasLocationPermission();
@@ -313,6 +325,8 @@ const Explore = ({
       <View style={styles.container}>
         <MapView
           //showsUserLocation={true}
+          preserveClusterPressBehavior={true}
+          maxZoom={20}
           mapType={satellite}
           ref={mapRef}
           zoomControlEnabled={false}
@@ -350,6 +364,7 @@ const Explore = ({
             coordinates.map((item, i) => {
               return (
                 <Marker.Animated
+                  isOutsideCluster={true}
                   key={i}
                   coordinate={{
                     latitude: item.Latitude,
@@ -363,6 +378,7 @@ const Explore = ({
                     const lng = item.Longitude;
                     // console.log(latt, langg);
                     setLatLng({lat, lng});
+                    animateToRegion(lat, lng);
                     // setMarkerData(item);
                   }}>
                   <CustomMarker isChecked={item.isChecked} />

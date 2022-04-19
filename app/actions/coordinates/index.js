@@ -3,7 +3,7 @@ import {GET_COORDINATES, MARKER_IS_SELECTED} from '../action.type';
 import Axios from 'axios';
 import {Base_url} from '../../key';
 export const get_coordinates = () => async dispatch => {
-  Axios.get(`${Base_url}/citizenapi/api/GetLocationDataByCoordinates?limit=30`)
+  Axios.get(`${Base_url}/citizenapi/api/GetLocationDataByCoordinates?limit=100`)
     .then(response => {
       dispatch({
         type: GET_COORDINATES,

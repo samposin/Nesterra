@@ -1,9 +1,16 @@
-
-import {StyleSheet, Dimensions,TouchableOpacity, Text, View,SafeAreaView} from 'react-native';
+import {
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  StatusBar,
+  Text,
+  View,
+  SafeAreaView,
+} from 'react-native';
 import React from 'react';
 import {Heading, VStack} from 'native-base';
 import OrderButton from '../../components/button/OrderButton';
-import { useSelector, useDispatch,connect } from 'react-redux'
+import {useSelector, useDispatch, connect} from 'react-redux';
 
 const {height, width} = Dimensions.get('screen');
 
@@ -13,119 +20,102 @@ import SiteStatus from './SiteStatus';
 import SiteType from './SiteType';
 import SiteSubType from './SiteSubType';
 import Vendor from './Vendor';
-import { clear_all } from '../../actions/selectList';
+import {clear_all} from '../../actions/selectList';
 
+const data1 = [
+  {id: 0, name: 'Site Status', isActive: true},
+  {id: 1, name: 'Country', isActive: false},
+  {id: 2, name: 'Site Type', isActive: false},
+  {id: 3, name: 'Site SubType', isActive: false},
+  {id: 4, name: 'Vendor', isActive: false},
+];
 
-const data1=[
-  {id:0,name: 'Site Status',isActive:true},
-  {id:1,name: 'Country',isActive:false},
-  {id:2,name: 'Site Type',isActive:false},
-  {id:3,name: 'Site SubType',isActive:false},
-  {id:4,name: 'Vendor',isActive:false},
-
-]
-
-const Filtter = ({clear_all,navigation}) => {
-  const list=useSelector((state)=>state)
-  
+const Filtter = ({clear_all, navigation}) => {
+  const list = useSelector(state => state);
 
   const [item, setItem] = React.useState(0);
-  const[allItem,setAllItem]=React.useState(data1)
- 
+  const [allItem, setAllItem] = React.useState(data1);
+
   const [title, setTitle] = React.useState('Close');
   const colorChange = data => {
     setTitle(data);
   };
 
+  const actiText = id => {
+    let listData = allItem.map(item => {
+      let itm = {...item, isActive: false};
+      return itm;
+    });
 
- const actiText=(id)=>{
-  let listData = allItem.map(item => {
-    let itm = {...item, isActive: false };
-    return itm;
-  });
- 
-  listData[id].isActive = true;
-  setAllItem(listData)
- }
+    listData[id].isActive = true;
+    setAllItem(listData);
+  };
 
-
-  const selectedComponent=()=>{
-    
+  const selectedComponent = () => {
     switch (true) {
-      case item==0:
-        
-        return(
-              <SiteStatus />
-        )
+      case item == 0:
+        return <SiteStatus />;
         break;
-      case item==1:
-        return(
-              <Country/>
-        )
+      case item == 1:
+        return <Country />;
         break;
-      case item==2:
-        return(
-              <SiteType/>
-        )
+      case item == 2:
+        return <SiteType />;
         break;
-      case item==3:
-        return(
-              <SiteSubType/>
-        )
+      case item == 3:
+        return <SiteSubType />;
         break;
-      case item==4:
-        return(
-              <Vendor/>
-        )
+      case item == 4:
+        return <Vendor />;
         break;
     }
-  }
- 
-  
+  };
+
   return (
     <SafeAreaView>
-    <View style={styles.header}>
-    <Heading size="sm">Filters</Heading>
-      <TouchableOpacity onPress={()=>{
-        clear_all(list.selectList.list)
-        // setChecked(false);
-       // handleChangeClear()
-      }} >
-        
-        <Text style={styles.rightText}>CLEAR ALL</Text>
-      </TouchableOpacity>
+      <StatusBar backgroundColor="#1b5a90" barStyle="light-content" />
+      <View style={{...styles.header, marginTop: StatusBar.currentHeight}}>
+        <Heading size="sm">Filters</Heading>
+        <TouchableOpacity
+          onPress={() => {
+            clear_all(list.selectList.list);
+            // setChecked(false);
+            // handleChangeClear()
+          }}>
+          <Text style={styles.rightText}>CLEAR ALL</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.mainContainer}>
         <View style={styles.mainContainerLeft}>
-          <VStack space="6" mt="8" >
-            {allItem.map((item,i)=>{
-              
-              return(
-                <TouchableOpacity key={i} onPress={()=>{
-                  setItem(item.id)
-                  actiText(item.id)}}>
-            <Heading size="xs" style={{color:item.isActive?'#1b5a90':'#757575'}}>{item.name}{item.isActive}</Heading>
-            </TouchableOpacity>
-              )
+          <VStack space="6" mt="8">
+            {allItem.map((item, i) => {
+              return (
+                <TouchableOpacity
+                  key={i}
+                  onPress={() => {
+                    setItem(item.id);
+                    actiText(item.id);
+                  }}>
+                  <Heading
+                    size="xs"
+                    style={{color: item.isActive ? '#1b5a90' : '#757575'}}>
+                    {item.name}
+                    {item.isActive}
+                  </Heading>
+                </TouchableOpacity>
+              );
             })}
-           
           </VStack>
         </View>
-        <View style={styles.mainContainerRight}>
-        {selectedComponent()}
-         
-          
-        </View>
-       
+        <View style={styles.mainContainerRight}>{selectedComponent()}</View>
       </View>
 
       <View style={styles.buttonUpper}>
         <OrderButton
-          colorChange={() =>{
-             colorChange('Close')
-             navigation.goBack()}
-          
-            }
+          colorChange={() => {
+            colorChange('Close');
+            navigation.goBack();
+          }}
           bgColor={title === 'Close' ? '#1b5a90' : '#ffffff'}
           textColor={title === 'Close' ? '#ffffff' : '#1b5a90'}
           title="Close"
@@ -141,7 +131,7 @@ const Filtter = ({clear_all,navigation}) => {
   );
 };
 
-export default connect(null,{clear_all})(Filtter);
+export default connect(null, {clear_all})(Filtter);
 
 const styles = StyleSheet.create({
   rightText: {
@@ -155,7 +145,7 @@ const styles = StyleSheet.create({
   },
   buttonUpper: {
     position: 'absolute',
-    bottom:0,
+    bottom: 0,
     left: 0,
     right: 0,
     flexDirection: 'row',
@@ -170,7 +160,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   mainContainer: {
-
     height: height - 195,
     width: '100%',
     flexDirection: 'row',

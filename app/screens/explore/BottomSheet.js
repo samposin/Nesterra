@@ -3,7 +3,6 @@ import React, {useMemo, useEffect} from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import Profile from '../profile';
 import {useSelector} from 'react-redux';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const BottomSheetView = ({bottomSheetRef}) => {
