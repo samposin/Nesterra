@@ -42,7 +42,7 @@ const Category = () => {
                 color: category.isActive ? '#ffffff' : '#1b5a90',
                 fontWeight: '800',
               }}>
-              {category.name} #
+              {category.name}
             </Text>
           </View>
         ))}

@@ -56,6 +56,7 @@ const Explore = ({
 }) => {
   const {coordinates} = useSelector(state => state.coordinates);
   const {lat, lng} = useSelector(state => state.setLatLang);
+  // console.log(coordinates);
 
   const mapRef = useRef(null);
   const pointStart = useRef(null);
@@ -73,6 +74,8 @@ const Explore = ({
   const [inputRotate, setInputRotate] = useState(true);
   const [rotatedIcon, setrotatedIcon] = useState(new Animated.Value(0));
   const [animatioValOff, setanimatioValOff] = useState(false);
+  ///cluster color
+  const [colorCluster, setColorCluster] = useState('green');
 
   const [startPoints, setStartPoints] = useState({});
   const [startAddress, setStartAddress] = useState('Choose Start Point');
@@ -311,7 +314,8 @@ const Explore = ({
   useEffect(() => {
     get_coordinates();
   }, []);
-
+  const clusterRef = useRef(null);
+  // console.log(clusterRef.current.options);
   return (
     <>
       {inputRotate ? rotatedIconAntichange() : rotatedIconchange()}
@@ -325,10 +329,20 @@ const Explore = ({
       <View style={styles.container}>
         <MapView
           //showsUserLocation={true}
+          radius={70}
+          onClusterPress={(cluster, markers) => {
+            console.log(cluster);
+            if (markers.length > 10) {
+              setColorCluster('red');
+            }
+          }}
+          // superClusterRef={clusterRef}
+          clusterColor={colorCluster}
           preserveClusterPressBehavior={true}
           maxZoom={20}
           mapType={satellite}
           ref={mapRef}
+          pitchEnabled={true}
           zoomControlEnabled={false}
           zoomEnabled={true}
           zoomTapEnabled={true}
@@ -339,12 +353,12 @@ const Explore = ({
           followsUserLocation={true}
           provider={PROVIDER_GOOGLE}
           style={{...styles.container, marginBottom: 50}}
-          region={{
-            latitude: lat,
-            longitude: lng,
-            latitudeDelta: 0.0112333,
-            longitudeDelta: 5.001233,
-          }}
+          // region={{
+          //   latitude: lat,
+          //   longitude: lng,
+          //   latitudeDelta: 0.0112333,
+          //   longitudeDelta: 5.001233,
+          // }}
           initialRegion={{
             latitude: lat,
             longitude: lng,
@@ -357,14 +371,13 @@ const Explore = ({
           }}
           onLayout={() =>
             setTimeout(() => {
-              // onMapReadyHandler();
+              onMapReadyHandler();
             }, 2000)
           }>
           {coordinates &&
             coordinates.map((item, i) => {
               return (
                 <Marker.Animated
-                  isOutsideCluster={true}
                   key={i}
                   coordinate={{
                     latitude: item.Latitude,
@@ -381,7 +394,10 @@ const Explore = ({
                     animateToRegion(lat, lng);
                     // setMarkerData(item);
                   }}>
-                  <CustomMarker isChecked={item.isChecked} />
+                  <CustomMarker
+                    officeType={item.HierarchyLocationType}
+                    isChecked={item.isChecked}
+                  />
                 </Marker.Animated>
               );
             })}
@@ -795,7 +811,7 @@ const Explore = ({
         <View
           style={{
             position: 'absolute',
-            bottom: 120,
+            bottom: 70,
             left: 0,
             width: 150,
             height: 50,
