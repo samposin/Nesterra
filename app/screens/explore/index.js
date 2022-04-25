@@ -21,7 +21,7 @@ import MapViewDirections from 'react-native-maps-directions';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Geolocation from 'react-native-geolocation-service';
-
+import CustomClusteredMarkers from './components/CustomClusteredMarkers';
 import {LogBox} from 'react-native';
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 
@@ -41,6 +41,7 @@ import {hasLocationPermission} from '../../utils/AskPermission';
 import {LocationKey} from '../../key';
 import CustomMarker from '../../components/CustomMarker';
 import Category from './Category';
+import {clusterImages} from '../../utils/Constants';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -314,8 +315,46 @@ const Explore = ({
   useEffect(() => {
     get_coordinates();
   }, []);
-  const clusterRef = useRef(null);
-  // console.log(clusterRef.current.options);
+
+  // console.log(clusterRef.current.options.radius);
+  // console.log(JSON.stringify(clusterRef.current));
+  const getImage = value => {
+    //console.log(typeof value, value, 'value', colorCluster);
+    switch (true) {
+      case value > 2 && value < 10:
+        setColorCluster('red');
+
+        break;
+      case value > 10 && value < 20:
+        setColorCluster('green');
+
+        break;
+      case value > 20 && value < 100:
+        setColorCluster('blue');
+
+        break;
+    }
+  };
+  const [currentRegion, setCurrentRegion] = useState();
+  const mapRegionChangeComplete = mapRegion => {
+    setCurrentRegion({
+      latitude: mapRegion.latitude,
+      longitude: mapRegion.longitude,
+      latitudeDelta: mapRegion.latitudeDelta,
+      longitudeDelta: mapRegion.longitudeDelta,
+    });
+  };
+
+  const onSearchPress = (data, details = null) => {
+    setCurrentRegion({
+      latitude: details.geometry.location.lat,
+      longitude: details.geometry.location.lng,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    });
+    bottomSheetRef.current.close();
+  };
+
   return (
     <>
       {inputRotate ? rotatedIconAntichange() : rotatedIconchange()}
@@ -329,15 +368,30 @@ const Explore = ({
       <View style={styles.container}>
         <MapView
           //showsUserLocation={true}
-          radius={70}
-          onClusterPress={(cluster, markers) => {
-            console.log(cluster);
-            if (markers.length > 10) {
-              setColorCluster('red');
-            }
+          // radius={70}
+          renderCluster={props => {
+            const clusterCounts =
+              props.properties.point_count.toString().length;
+
+            return (
+              <CustomClusteredMarkers
+                key={props.properties.cluster_id}
+                tracksViewChanges={false}
+                imageSrc={
+                  clusterCounts === 1
+                    ? clusterImages.cluster1
+                    : clusterCounts === 2
+                    ? clusterImages.cluster2
+                    : clusterCounts === 3
+                    ? clusterImages.cluster3
+                    : clusterCounts === 4
+                    ? clusterImages.cluster4
+                    : clusterImages.cluster5
+                }
+                {...props}
+              />
+            );
           }}
-          // superClusterRef={clusterRef}
-          clusterColor={colorCluster}
           preserveClusterPressBehavior={true}
           maxZoom={20}
           mapType={satellite}
@@ -353,12 +407,16 @@ const Explore = ({
           followsUserLocation={true}
           provider={PROVIDER_GOOGLE}
           style={{...styles.container, marginBottom: 50}}
-          // region={{
-          //   latitude: lat,
-          //   longitude: lng,
-          //   latitudeDelta: 0.0112333,
-          //   longitudeDelta: 5.001233,
-          // }}
+          onRegionChangeComplete={mapRegionChangeComplete}
+          region={
+            currentRegion
+            //   {
+            //   latitude: lat,
+            //   longitude: lng,
+            //   latitudeDelta: 0.0112333,
+            //   longitudeDelta: 5.001233,
+            // }
+          }
           initialRegion={{
             latitude: lat,
             longitude: lng,
@@ -371,18 +429,19 @@ const Explore = ({
           }}
           onLayout={() =>
             setTimeout(() => {
-              onMapReadyHandler();
+              // onMapReadyHandler();
             }, 2000)
           }>
           {coordinates &&
             coordinates.map((item, i) => {
               return (
                 <Marker.Animated
-                  key={i}
+                  key={`${item.Latitude}_${item.Longitude}`}
                   coordinate={{
                     latitude: item.Latitude,
                     longitude: item.Longitude,
                   }}
+                  tracksViewChanges={false}
                   onPress={() => {
                     bottomSheetRef.current.snapToIndex(0);
                     get_location_details(item.Location_ID);
@@ -445,14 +504,14 @@ const Explore = ({
                 style={{
                   width: '20%',
                   height: '100%',
-                  marginTop: StatusBar.currentHeight / 2,
+
                   flexDirection: 'row',
                 }}>
                 <View
                   style={{
                     width: '50%',
                     height: '100%',
-                    paddingTop: 20,
+                    paddingTop: 35,
                     paddingLeft: 10,
                   }}>
                   <TouchableOpacity onPress={animationFindOff}>
@@ -463,7 +522,7 @@ const Explore = ({
                   style={{
                     width: '50%',
                     height: '100%',
-                    marginTop: StatusBar.currentHeight / 2,
+                    marginTop: 40,
                   }}>
                   {/* <View
                     style={{
@@ -596,7 +655,7 @@ const Explore = ({
                 style={{
                   width: '20%',
                   height: '100%',
-                  marginTop: 15,
+
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
@@ -835,6 +894,7 @@ const Explore = ({
           speechRef={speechRef}
           setModalVisible={setModalVisible}
           bottomSheetRef={bottomSheetRef}
+          onPress={onSearchPress}
         />
 
         {/* =================search=============== */}

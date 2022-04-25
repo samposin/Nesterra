@@ -1,3 +1,4 @@
+import {SITE_STATUS_COORDINATES} from '../../actions/action.coordinate.type';
 import {GET_COORDINATES, MARKER_IS_SELECTED} from '../../actions/action.type';
 
 const initialState = {
@@ -17,6 +18,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         coordinates: data1,
+        latt: action.payload.lat,
+        lngg: action.payload.lng,
+        error: null,
+      };
+    case SITE_STATUS_COORDINATES:
+      let data = action.payload.data.map(item => {
+        return {...item, isChecked: false};
+      });
+      // console.log(data1, 'data1');
+      return {
+        ...state,
+        coordinates: data,
         latt: action.payload.lat,
         lngg: action.payload.lng,
         error: null,

@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import React from 'react';
 import {Heading, VStack} from 'native-base';
-import OrderButton from '../../components/button/OrderButton';
-import {useSelector, useDispatch, connect} from 'react-redux';
+import ApplyButton from '../../components/button/ApplyButton';
+import {useSelector, connect} from 'react-redux';
 
 const {height, width} = Dimensions.get('screen');
 
@@ -21,7 +21,8 @@ import SiteType from './SiteType';
 import SiteSubType from './SiteSubType';
 import Vendor from './Vendor';
 import {clear_all} from '../../actions/selectList';
-
+import {sity_status_coordinates} from '../../actions/coordinates';
+useSelector;
 const data1 = [
   {id: 0, name: 'Site Status', isActive: true},
   {id: 1, name: 'Country', isActive: false},
@@ -30,8 +31,10 @@ const data1 = [
   {id: 4, name: 'Vendor', isActive: false},
 ];
 
-const Filtter = ({clear_all, navigation}) => {
+const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
   const list = useSelector(state => state);
+  const list1 = useSelector(state => state.selectList);
+  // console.log(list1.checkList, 'aaa');
 
   const [item, setItem] = React.useState(0);
   const [allItem, setAllItem] = React.useState(data1);
@@ -111,7 +114,7 @@ const Filtter = ({clear_all, navigation}) => {
       </View>
 
       <View style={styles.buttonUpper}>
-        <OrderButton
+        <ApplyButton
           colorChange={() => {
             colorChange('Close');
             navigation.goBack();
@@ -120,8 +123,12 @@ const Filtter = ({clear_all, navigation}) => {
           textColor={title === 'Close' ? '#ffffff' : '#1b5a90'}
           title="Close"
         />
-        <OrderButton
-          colorChange={() => colorChange('Apply')}
+        <ApplyButton
+          colorChange={() => {
+            colorChange('Apply');
+            sity_status_coordinates();
+            navigation.goBack();
+          }}
           bgColor={title === 'Apply' ? '#1b5a90' : '#ffffff'}
           textColor={title === 'Apply' ? '#ffffff' : '#1b5a90'}
           title="Apply"
@@ -131,7 +138,7 @@ const Filtter = ({clear_all, navigation}) => {
   );
 };
 
-export default connect(null, {clear_all})(Filtter);
+export default connect(null, {clear_all, sity_status_coordinates})(Filtter);
 
 const styles = StyleSheet.create({
   rightText: {
@@ -145,7 +152,7 @@ const styles = StyleSheet.create({
   },
   buttonUpper: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 10,
     left: 0,
     right: 0,
     flexDirection: 'row',

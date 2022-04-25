@@ -43,7 +43,7 @@ const TabButton = ({focused, imagePath, name}) => {
           }}>
           <Text
             style={{
-              fontSize: 12,
+              fontSize: 11,
               fontWeight: '800',
               color: focused ? '#1b5a90' : 'gray',
             }}>

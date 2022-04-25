@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
   View,
   StyleSheet,
   Image,
   StatusBar,
-  useRef,
   TouchableOpacity,
 } from 'react-native';
 // import Voice from '@react-native-voice/voice';
@@ -23,9 +22,11 @@ const Search = ({
   setLatLng,
   onRechange,
   speechRef,
-
+  onPress,
   bottomSheetRef,
 }) => {
+  const googlePlacesRef = useRef(null);
+
   const onSpeechStartHandler = e => {
     console.log('start handler==>>>', e);
   };
@@ -38,6 +39,7 @@ const Search = ({
     let text = e.value[0];
     // setResult(text)
     console.log('speech result handler', e);
+    googlePlacesRef.current?.setAddressText(text);
   };
 
   const startRecording = async () => {
@@ -90,14 +92,18 @@ const Search = ({
 
   return (
     <GooglePlacesAutocomplete
+      ref={googlePlacesRef}
       fetchDetails={true}
       placeholder="Search Location"
-      onPress={(data, details = null) => {
-        const lat = details.geometry.location.lat;
-        const lng = details.geometry.location.lng;
-        setLatLng({lat, lng});
-        bottomSheetRef.current.close();
-      }}
+      onPress={
+        onPress
+        //   (data, details = null) => {
+        //   const lat = details.geometry.location.lat;
+        //   const lng = details.geometry.location.lng;
+        //   setLatLng({lat, lng});
+        //   bottomSheetRef.current.close();
+        // }
+      }
       query={{
         key: `${LocationKey}`,
         language: 'en',

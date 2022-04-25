@@ -9,3 +9,17 @@ export const data = {
     {id: 4, name: 'Other', isActive: false},
   ],
 };
+
+const cluster1 = require('../images/m1.png');
+const cluster2 = require('../images/m2.png');
+const cluster3 = require('../images/m3.png');
+const cluster4 = require('../images/m4.png');
+const cluster5 = require('../images/m5.png');
+
+export const clusterImages = {
+  cluster1,
+  cluster2,
+  cluster3,
+  cluster4,
+  cluster5,
+};
