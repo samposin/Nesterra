@@ -10,11 +10,15 @@ import {
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Modal, Portal, Text, Button, Provider} from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 import {list} from '../../utils/Constants';
+import {useNavigation} from '@react-navigation/native';
 const Setting = ({settingView, setSettingView}) => {
+  const navigation = useNavigation();
+  // console.log(navigation, 'navigation');
   const containerStyle = {
     marginTop: 110,
     backgroundColor: 'white',
@@ -71,13 +75,13 @@ const Setting = ({settingView, setSettingView}) => {
                 <Text>name@gmail.com</Text>
               </View>
               <View style={styles.accountLeft}>
-                <View style={styles.rotatedIconView}>
-                  <MaterialIcons
+                {/* <View style={styles.rotatedIconView}> */}
+                {/* <MaterialIcons
                     name="keyboard-arrow-down"
                     size={24}
                     color="black"
-                  />
-                </View>
+                  /> */}
+                {/* </View> */}
               </View>
             </View>
             {/* ===========account============= */}
@@ -90,26 +94,70 @@ const Setting = ({settingView, setSettingView}) => {
           {/* ===========account============= */}
           {/* ===========List============= */}
           <View style={{width: '100%', height: 500}}>
-            <ScrollView>
-              {list.map((item, i) => {
-                return (
-                  <View key={i} style={styles.listItem}>
-                    <View style={styles.listItemLeft}>
-                      <EvilIcons name="user" size={24} color="black" />
-                    </View>
-                    <View
-                      style={{
-                        width: '60%',
-                        height: '100%',
-                        justifyContent: 'center',
-                      }}>
-                      <Text>Your Profile</Text>
-                    </View>
-                    <View style={{width: '20%', height: '100%'}}></View>
-                  </View>
-                );
-              })}
-            </ScrollView>
+            <View style={styles.listItem}>
+              <View style={styles.listItemLeft}>
+                <EvilIcons name="user" size={32} color="black" />
+              </View>
+              <View
+                style={{
+                  width: '60%',
+                  height: '100%',
+                  justifyContent: 'center',
+                }}>
+                <Text>Your Profile</Text>
+              </View>
+              <View style={{width: '20%', height: '100%'}}></View>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                setSettingView(!settingView);
+                navigation.navigate('SettingProfile');
+              }}>
+              <View style={styles.listItem}>
+                <View style={styles.listItemLeft}>
+                  <AntDesign name="setting" size={24} color="black" />
+                </View>
+                <View
+                  style={{
+                    width: '60%',
+                    height: '100%',
+                    justifyContent: 'center',
+                  }}>
+                  <Text> Setting</Text>
+                </View>
+                <View style={{width: '20%', height: '100%'}}></View>
+              </View>
+            </TouchableOpacity>
+
+            <View style={styles.listItem}>
+              <View style={styles.listItemLeft}>
+                <FontAwesome5 name="question-circle" size={24} color="black" />
+              </View>
+              <View
+                style={{
+                  width: '60%',
+                  height: '100%',
+                  justifyContent: 'center',
+                }}>
+                <Text>Help</Text>
+              </View>
+              <View style={{width: '20%', height: '100%'}}></View>
+            </View>
+
+            <View style={styles.listItem}>
+              <View style={styles.listItemLeft}>
+                <Entypo name="share" size={24} color="black" />
+              </View>
+              <View
+                style={{
+                  width: '60%',
+                  height: '100%',
+                  justifyContent: 'center',
+                }}>
+                <Text>Share</Text>
+              </View>
+              <View style={{width: '20%', height: '100%'}}></View>
+            </View>
           </View>
           {/* ===========List============= */}
         </Animated.View>

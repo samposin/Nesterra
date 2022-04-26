@@ -897,7 +897,11 @@ const Explore = ({
       <BottomSheetView bottomSheetRef={bottomSheetRef} />
       {/* =================Setting=============== */}
       {settingView ? (
-        <Setting settingView={settingView} setSettingView={setSettingView} />
+        <Setting
+          settingView={settingView}
+          navigation={navigation}
+          setSettingView={setSettingView}
+        />
       ) : null}
     </>
   );
@@ -1026,7 +1030,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: 'white',
     position: 'absolute',
-    bottom: 240,
+    bottom: 120,
     right: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -1046,7 +1050,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: '#4676fc',
     position: 'absolute',
-    bottom: 180,
+    bottom: 60,
     right: 10,
     justifyContent: 'center',
     alignItems: 'center',

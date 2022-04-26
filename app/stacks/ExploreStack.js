@@ -7,6 +7,7 @@ import StartPoint from '../screens/explore/StartPoint';
 import DestinationPoint from '../screens/explore/DestinationPoint';
 import Filtter from '../screens/filtter';
 import Profile from '../screens/profile';
+import SettingProfile from '../screens/explore/SettingProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ const ExploreStack = () => {
       <Stack.Screen name="SearchAddress" component={SearchAddress} />
       <Stack.Screen name="StartPoint" component={StartPoint} />
       <Stack.Screen name="DestinationPoint" component={DestinationPoint} />
+      <Stack.Screen name="SettingProfile" component={SettingProfile} />
     </Stack.Navigator>
   );
 };
