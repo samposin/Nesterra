@@ -42,6 +42,7 @@ import {LocationKey} from '../../key';
 import CustomMarker from '../../components/CustomMarker';
 import Category from './Category';
 import {clusterImages} from '../../utils/Constants';
+import Setting from './Setting';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -76,7 +77,7 @@ const Explore = ({
   const [rotatedIcon, setrotatedIcon] = useState(new Animated.Value(0));
   const [animatioValOff, setanimatioValOff] = useState(false);
   ///cluster color
-  const [colorCluster, setColorCluster] = useState('green');
+  const [settingView, setSettingView] = useState(false);
 
   const [startPoints, setStartPoints] = useState({});
   const [startAddress, setStartAddress] = useState('Choose Start Point');
@@ -408,15 +409,7 @@ const Explore = ({
           provider={PROVIDER_GOOGLE}
           style={{...styles.container, marginBottom: 50}}
           onRegionChangeComplete={mapRegionChangeComplete}
-          region={
-            currentRegion
-            //   {
-            //   latitude: lat,
-            //   longitude: lng,
-            //   latitudeDelta: 0.0112333,
-            //   longitudeDelta: 5.001233,
-            // }
-          }
+          region={currentRegion}
           initialRegion={{
             latitude: lat,
             longitude: lng,
@@ -890,11 +883,9 @@ const Explore = ({
         </View>
         {/* =================search=============== */}
         <Search
-          modalVisible={modalVisible}
-          speechRef={speechRef}
-          setModalVisible={setModalVisible}
-          bottomSheetRef={bottomSheetRef}
           onPress={onSearchPress}
+          settingView={settingView}
+          setSettingView={setSettingView}
         />
 
         {/* =================search=============== */}
@@ -902,7 +893,12 @@ const Explore = ({
         <Category />
         {/* =================Category=============== */}
       </View>
+      {/* =================BottomSheetView=============== */}
       <BottomSheetView bottomSheetRef={bottomSheetRef} />
+      {/* =================Setting=============== */}
+      {settingView ? (
+        <Setting settingView={settingView} setSettingView={setSettingView} />
+      ) : null}
     </>
   );
 };

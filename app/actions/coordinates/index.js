@@ -18,9 +18,10 @@ export const get_coordinates = () => async dispatch => {
       });
     })
     .catch(error => {
-      console.log(error);
+      console.log(error, 'ooo');
     });
 };
+//active&inactive
 export const sity_status_coordinates = () => async dispatch => {
   Axios.get(
     `${Base_url}/api/GetLocationDataBySiteStatus?LocationStatusDesc=active`,

@@ -6,53 +6,43 @@ import {
   StatusBar,
   TouchableOpacity,
 } from 'react-native';
-// import Voice from '@react-native-voice/voice';
 import Voice from '@react-native-community/voice';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {LocationKey} from '../../key';
-import {setLatLng} from '../../actions/setLatLang';
-import {connect, useSelector} from 'react-redux';
 
-const Search = ({
-  modalVisible,
-  navigation,
-  setModalVisible,
-  setLatLng,
-  onRechange,
-  speechRef,
-  onPress,
-  bottomSheetRef,
-}) => {
+const Search = ({onPress, onSearchPress, setSettingView, settingView}) => {
   const googlePlacesRef = useRef(null);
 
   const onSpeechStartHandler = e => {
     console.log('start handler==>>>', e);
   };
-  const onSpeechEndHandler = e => {
-    //  setLoading(false)
-    console.log('stop handler', e);
+  const onSpeechEndHandler = async e => {
+    if (e.error === false) {
+      try {
+        await Voice.stop();
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   const onSpeechResultsHandler = e => {
-    let text = e.value[0];
-    // setResult(text)
-    console.log('speech result handler', e);
-    googlePlacesRef.current?.setAddressText(text);
+    console.log(e.value[0]);
+    googlePlacesRef.current?.setAddressText(e.value[0]);
+    googlePlacesRef.current?.focus();
   };
 
   const startRecording = async () => {
-    //setModalVisible(true);
-    console.log(speechRef.current);
     try {
       await Voice.start('en-Us');
     } catch (error) {
       console.log('error raised', error);
     }
   };
+
   useEffect(() => {
-    //alert('yyyy')
     Voice.onSpeechStart = onSpeechStartHandler;
     Voice.onSpeechEnd = onSpeechEndHandler;
     Voice.onSpeechResults = onSpeechResultsHandler;
@@ -75,17 +65,19 @@ const Search = ({
   const renderSearchRightIcons = () => {
     return (
       <View style={styles.searchRighIcons}>
-        {!modalVisible ? (
-          <TouchableOpacity onPress={startRecording} style={styles.mr10}>
-            <FontAwesome name="microphone" size={24} color="black" />
-          </TouchableOpacity>
-        ) : (
+        {/* {!modalVisible ? ( */}
+        <TouchableOpacity onPress={startRecording} style={styles.mr10}>
+          <FontAwesome name="microphone" size={24} color="black" />
+        </TouchableOpacity>
+        {/* ) : (
           <Entypo name="cross" size={24} color="black" style={styles.mr10} />
-        )}
-        <Image
-          source={require('../../images/dalasi.png')}
-          style={styles.rightIconImage}
-        />
+        )} */}
+        <TouchableOpacity onPress={() => setSettingView(!settingView)}>
+          <Image
+            source={require('../../images/dalasi.png')}
+            style={styles.rightIconImage}
+          />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -95,15 +87,7 @@ const Search = ({
       ref={googlePlacesRef}
       fetchDetails={true}
       placeholder="Search Location"
-      onPress={
-        onPress
-        //   (data, details = null) => {
-        //   const lat = details.geometry.location.lat;
-        //   const lng = details.geometry.location.lng;
-        //   setLatLng({lat, lng});
-        //   bottomSheetRef.current.close();
-        // }
-      }
+      onPress={onPress}
       query={{
         key: `${LocationKey}`,
         language: 'en',
@@ -118,7 +102,7 @@ const Search = ({
   );
 };
 
-export default connect(null, {setLatLng})(Search);
+export default Search;
 
 const styles = StyleSheet.create({
   googlePlaces: {

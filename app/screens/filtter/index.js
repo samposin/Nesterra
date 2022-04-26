@@ -7,7 +7,7 @@ import {
   View,
   SafeAreaView,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Heading, VStack} from 'native-base';
 import ApplyButton from '../../components/button/ApplyButton';
 import {useSelector, connect} from 'react-redux';
@@ -34,7 +34,38 @@ const data1 = [
 const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
   const list = useSelector(state => state);
   const list1 = useSelector(state => state.selectList);
-  // console.log(list1.checkList, 'aaa');
+  // console.log(list1.checkList, 'filter');
+  const get_filterdata = () => {
+    let data = [];
+    const data1 = list1.checkList.map((item, i) => {
+      const pp = {
+        id: item.id,
+        value: item.txt,
+      };
+      //console.log(data);
+      data.push(pp);
+      //const stringifydate = JSON.stringify(data);
+      console.log(encodeURIComponent(JSON.stringify(data)));
+
+      const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'}, //s,
+        // body: {stringdate: JSON.stringify(data)},
+        //data: {stringdate: JSON.stringify(data)},
+      };
+      fetch(
+        'http://citizenmobileapi.azurewebsites.net/api/testingurl?stringdate=' +
+          encodeURIComponent(JSON.stringify(data)),
+        requestOptions,
+      )
+        .then(response => response.json())
+        .then(data => console.log(data, 'fasdfsda'))
+        .catch(err => console.log(err, 'err'));
+    });
+    //  console.log(data);
+    // var stringyvalue = JSON.stringify(data);
+    // console.log(stringyvalue);
+  };
 
   const [item, setItem] = React.useState(0);
   const [allItem, setAllItem] = React.useState(data1);
@@ -74,6 +105,19 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
     }
   };
 
+  //  componentDidMount() {
+  //     // Simple POST request with a JSON body using fetch
+  //     const requestOptions = {
+  //         method: 'POST',
+  //         headers: { 'Content-Type': 'application/json' },
+  //         body: JSON.stringify({ stringdate: stringyfyvarieble })
+  //     };
+  //     fetch('http://citizenmobileapi.azurewebsites.net/api/testingurl', requestOptions)
+  //         .then(response => response.json())
+  //         .then(data => this.setState({ postId: data.id }));
+  // }
+
+  // useEffect(() => {}, []);
   return (
     <SafeAreaView>
       <StatusBar backgroundColor="#1b5a90" barStyle="light-content" />
@@ -126,6 +170,7 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
         <ApplyButton
           colorChange={() => {
             colorChange('Apply');
+            get_filterdata();
             sity_status_coordinates();
             navigation.goBack();
           }}
