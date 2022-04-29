@@ -12,7 +12,7 @@ import {Modal, Portal, Text, Button, Provider} from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {list} from '../../utils/Constants';
 import {useNavigation} from '@react-navigation/native';
@@ -94,20 +94,6 @@ const Setting = ({settingView, setSettingView}) => {
           {/* ===========account============= */}
           {/* ===========List============= */}
           <View style={{width: '100%', height: 500}}>
-            <View style={styles.listItem}>
-              <View style={styles.listItemLeft}>
-                <EvilIcons name="user" size={32} color="black" />
-              </View>
-              <View
-                style={{
-                  width: '60%',
-                  height: '100%',
-                  justifyContent: 'center',
-                }}>
-                <Text>Your Profile</Text>
-              </View>
-              <View style={{width: '20%', height: '100%'}}></View>
-            </View>
             <TouchableOpacity
               onPress={() => {
                 setSettingView(!settingView);
@@ -115,7 +101,11 @@ const Setting = ({settingView, setSettingView}) => {
               }}>
               <View style={styles.listItem}>
                 <View style={styles.listItemLeft}>
-                  <AntDesign name="setting" size={24} color="black" />
+                  <Ionicons
+                    name="arrow-forward-sharp"
+                    size={20}
+                    color="black"
+                  />
                 </View>
                 <View
                   style={{
@@ -123,41 +113,59 @@ const Setting = ({settingView, setSettingView}) => {
                     height: '100%',
                     justifyContent: 'center',
                   }}>
-                  <Text> Setting</Text>
+                  <Text>App Language</Text>
                 </View>
                 <View style={{width: '20%', height: '100%'}}></View>
               </View>
             </TouchableOpacity>
-
-            <View style={styles.listItem}>
-              <View style={styles.listItemLeft}>
-                <FontAwesome5 name="question-circle" size={24} color="black" />
+            <TouchableOpacity
+              onPress={() => {
+                setSettingView(!settingView);
+                navigation.navigate('SettingProfile');
+              }}>
+              <View style={styles.listItem}>
+                <View style={styles.listItemLeft}>
+                  <Ionicons
+                    name="arrow-forward-sharp"
+                    size={20}
+                    color="black"
+                  />
+                </View>
+                <View
+                  style={{
+                    width: '60%',
+                    height: '100%',
+                    justifyContent: 'center',
+                  }}>
+                  <Text> Offline Map Setting</Text>
+                </View>
+                <View style={{width: '20%', height: '100%'}}></View>
               </View>
-              <View
-                style={{
-                  width: '60%',
-                  height: '100%',
-                  justifyContent: 'center',
-                }}>
-                <Text>Help</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setSettingView(!settingView);
+                navigation.navigate('SettingProfile');
+              }}>
+              <View style={styles.listItem}>
+                <View style={styles.listItemLeft}>
+                  <Ionicons
+                    name="arrow-forward-sharp"
+                    size={20}
+                    color="black"
+                  />
+                </View>
+                <View
+                  style={{
+                    width: '60%',
+                    height: '100%',
+                    justifyContent: 'center',
+                  }}>
+                  <Text>Wi-fi Only</Text>
+                </View>
+                <View style={{width: '20%', height: '100%'}}></View>
               </View>
-              <View style={{width: '20%', height: '100%'}}></View>
-            </View>
-
-            <View style={styles.listItem}>
-              <View style={styles.listItemLeft}>
-                <Entypo name="share" size={24} color="black" />
-              </View>
-              <View
-                style={{
-                  width: '60%',
-                  height: '100%',
-                  justifyContent: 'center',
-                }}>
-                <Text>Share</Text>
-              </View>
-              <View style={{width: '20%', height: '100%'}}></View>
-            </View>
+            </TouchableOpacity>
           </View>
           {/* ===========List============= */}
         </Animated.View>
@@ -190,8 +198,7 @@ const styles = StyleSheet.create({
   account: {
     width: '100%',
     height: 150,
-    borderBottomColor: 'black',
-    borderBottomWidth: 0.5,
+
     paddingBottom: 10,
   },
   accountLeft: {
@@ -246,11 +253,14 @@ const styles = StyleSheet.create({
   //Account
   //List
   listItem: {
-    width: '100%',
+    width: '90%',
     height: 50,
     margin: 2,
     flexDirection: 'row',
     alignItems: 'center',
+    borderTopColor: 'black',
+    borderTopWidth: 0.5,
+    alignSelf: 'center',
   },
   listItemLeft: {
     width: '20%',

@@ -14,12 +14,16 @@ const SettingProfile = () => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={{flex: 1}}>
-      <View style={{flex: 1, paddingVertical: StatusBar.currentHeight}}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'white',
+          paddingVertical: StatusBar.currentHeight,
+        }}>
         <View
           style={{
             height: 50,
             width: '100%',
-
             flexDirection: 'row',
           }}>
           <View
@@ -30,7 +34,7 @@ const SettingProfile = () => {
               alignItems: 'center',
             }}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <AntDesign name="arrowleft" size={24} color="black" />
+              <AntDesign name="arrowleft" size={20} color="black" />
             </TouchableOpacity>
           </View>
           <View
@@ -38,11 +42,52 @@ const SettingProfile = () => {
               width: '70%',
               height: '100%',
               justifyContent: 'center',
+              alignItems: 'center',
             }}>
-            <Text>About Term </Text>
+            <Text style={{fontSize: 20}}>Setting </Text>
           </View>
           <View style={{width: '15%', height: '100%'}}></View>
         </View>
+        {/* ========= lowerView======================= */}
+        <View style={{padding: 10}}>
+          <View
+            style={{
+              width: '90%',
+              height: 50,
+              borderTopColor: 'red',
+              borderTopWidth: 0.5,
+              alignSelf: 'center',
+              justifyContent: 'center',
+              marginVertical: 2,
+            }}>
+            <Text>App Language</Text>
+          </View>
+          <View
+            style={{
+              width: '90%',
+              height: 50,
+              borderTopColor: 'red',
+              borderTopWidth: 0.5,
+              alignSelf: 'center',
+              justifyContent: 'center',
+              marginVertical: 2,
+            }}>
+            <Text>Offline Map Setting</Text>
+          </View>
+          <View
+            style={{
+              width: '90%',
+              height: 50,
+              borderTopColor: 'red',
+              borderTopWidth: 0.5,
+              alignSelf: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text>Wi-fi Only</Text>
+          </View>
+        </View>
+
+        {/* ========= lowerView======================= */}
       </View>
     </SafeAreaView>
   );

@@ -319,23 +319,7 @@ const Explore = ({
 
   // console.log(clusterRef.current.options.radius);
   // console.log(JSON.stringify(clusterRef.current));
-  const getImage = value => {
-    //console.log(typeof value, value, 'value', colorCluster);
-    switch (true) {
-      case value > 2 && value < 10:
-        setColorCluster('red');
 
-        break;
-      case value > 10 && value < 20:
-        setColorCluster('green');
-
-        break;
-      case value > 20 && value < 100:
-        setColorCluster('blue');
-
-        break;
-    }
-  };
   const [currentRegion, setCurrentRegion] = useState();
   const mapRegionChangeComplete = mapRegion => {
     setCurrentRegion({
@@ -863,7 +847,7 @@ const Explore = ({
         <View
           style={{
             position: 'absolute',
-            bottom: 70,
+            top: 120,
             left: 0,
             width: 150,
             height: 50,
