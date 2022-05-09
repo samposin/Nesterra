@@ -11,7 +11,6 @@ import MapView, {Marker, Polyline} from 'react-native-maps';
 import {connect, useSelector} from 'react-redux';
 import SuperCluster from 'supercluster';
 import {setLatLng} from '../../../actions/setLatLang';
-
 import SearchA from '../Search';
 
 import ClusterMarker from './ClusteredMarker';
@@ -140,6 +139,7 @@ const ClusteredMapView = forwardRef(
     }, [isSpiderfier, markers]);
 
     const _onRegionChangeComplete = region => {
+      // setLatLng({lat: region.latitude, lng: region.longitude});
       if (superCluster && region) {
         const bBox = calculateBBox(region);
         const zoom = returnMapZoom(region, bBox, minZoom);
@@ -198,8 +198,7 @@ const ClusteredMapView = forwardRef(
             restProps.mapRef(map);
           }}
           onRegionChangeComplete={_onRegionChangeComplete}
-          // region={currentRegion1}
-        >
+          region={currentRegion1}>
           {markers.map(marker =>
             marker.properties.point_count === 0 ? (
               propsChildren[marker.properties.index]
@@ -280,4 +279,4 @@ ClusteredMapView.defaultProps = {
   mapRef: () => {},
 };
 
-export default memo(ClusteredMapView);
+export default connect(null, {setLatLng})(memo(ClusteredMapView));

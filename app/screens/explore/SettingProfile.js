@@ -49,16 +49,17 @@ const SettingProfile = () => {
           <View style={{width: '15%', height: '100%'}}></View>
         </View>
         {/* ========= lowerView======================= */}
-        <View style={{padding: 10}}>
+        <View>
           <View
             style={{
               width: '90%',
               height: 50,
-              borderTopColor: 'red',
+
+              borderTopColor: 'black',
               borderTopWidth: 0.5,
               alignSelf: 'center',
               justifyContent: 'center',
-              marginVertical: 2,
+              marginVertical: 1,
             }}>
             <Text>App Language</Text>
           </View>
@@ -66,11 +67,12 @@ const SettingProfile = () => {
             style={{
               width: '90%',
               height: 50,
-              borderTopColor: 'red',
+              marginTop: 2,
+              marginVertical: 1,
+              borderTopColor: 'black',
               borderTopWidth: 0.5,
               alignSelf: 'center',
               justifyContent: 'center',
-              marginVertical: 2,
             }}>
             <Text>Offline Map Setting</Text>
           </View>
@@ -78,7 +80,9 @@ const SettingProfile = () => {
             style={{
               width: '90%',
               height: 50,
-              borderTopColor: 'red',
+              marginTop: 2,
+              marginVertical: 10,
+              borderTopColor: 'black',
               borderTopWidth: 0.5,
               alignSelf: 'center',
               justifyContent: 'center',

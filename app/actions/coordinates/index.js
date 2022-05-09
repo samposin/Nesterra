@@ -5,7 +5,23 @@ import {SITE_STATUS_COORDINATES} from '../action.coordinate.type';
 import Axios from 'axios';
 import {Base_url} from '../../key';
 import {FILTER_MARKER} from '../actionType/action.Coordinatefilter.type';
-export const get_coordinates = () => async dispatch => {
+
+import Realm from 'realm';
+
+const BSON = Realm.BSON;
+const da = [
+  {
+    _id: 0,
+    name: 'go grocery shopping',
+    status: 'Open',
+  },
+  {
+    _id: 1,
+    name: 'go grocery shopping',
+    status: 'Open',
+  },
+];
+export const get_coordinates = () => dispatch => {
   // Axios.get(`${Base_url}/citizenapi/api/GetLocationDataByCoordinates?limit=100`)
   // const value = await AsyncStorage.getItem('@coordinate');
   // const data = value != null ? JSON.parse(value) : null;
@@ -29,18 +45,74 @@ export const get_coordinates = () => async dispatch => {
   // console.log(value, 'response');
 
   // }
-  Axios.get(`${Base_url}/api/GetLocationData?limit=6000`)
-
-    .then(async response => {
+  // Axios.get(`${Base_url}/api/GetLocationData?limit=10`);
+  fetch(`${Base_url}/api/GetLocationData?limit=6000`, {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(res => {
+      return res.json();
+    })
+    .then(response => {
+      getData();
       dispatch({
         type: GET_COORDINATES,
         payload: {
-          data: response.data,
-          lat: response.data[600].Latitude,
-          lng: response.data[600].Longitude,
+          data: response,
+          lat: response[2].Latitude,
+          lng: response[2].Longitude,
         },
       });
     })
+
+    // .then(async response => {
+    //   const TaskSchema = {
+    //     name: 'Task',
+    //     properties: {
+    //       _id: 'int',
+    //       name: 'string',
+    //       status: 'string?',
+    //     },
+    //     primaryKey: '_id',
+    //   };
+    //   const realm = await Realm.open({
+    //     path: 'myrealm',
+    //     schema: [TaskSchema],
+    //   });
+    //   realm.write(() => {
+    //     const da = [
+    //       {
+    //         _id: 0,
+    //         name: 'go grocery shopping',
+    //         status: 'Open',
+    //       },
+    //       {
+    //         _id: 1,
+    //         name: 'go grocery shopping',
+    //         status: 'Open',
+    //       },
+    //     ];
+    //     // da.map((item, i) => {
+    //     //   realm.create('Task', {
+    //     //     _id: i,
+    //     //     name: item.name,
+    //     //     status: item.status,
+    //     //   });
+    //     // });
+    //   });
+    //   const cats = realm.objects('Task');
+    //   console.log('cats', cats);
+    //   dispatch({
+    //     type: GET_COORDINATES,
+    //     payload: {
+    //       data: response.data,
+    //       lat: response.data[2].Latitude,
+    //       lng: response.data[2].Longitude,
+    //     },
+    //   });
+    // })
     .catch(error => {
       console.log(error, 'ooo');
     });
@@ -79,5 +151,35 @@ export const third_party_filter = HierarchyLocationType => dispatch => {
     payload: {
       HierarchyLocationType: HierarchyLocationType,
     },
+  });
+};
+const getData = async () => {
+  const TaskSchema = {
+    name: 'Task',
+    properties: {
+      _id: 'int',
+      name: 'string',
+      status: 'string?',
+    },
+    primaryKey: '_id',
+  };
+  const realm = await Realm.open({
+    path: 'myrealm',
+    schema: [TaskSchema],
+  });
+  const cats = realm.objects('Task');
+  console.log(cats);
+  // alert('cats');
+  realm.write(() => {
+    const cats = realm.objects('Task');
+    console.log(cats);
+    console.log('cats');
+    // da.map((item, i) => {
+    //   realm.create('Task', {
+    //     _id: i,
+    //     name: item.name,
+    //     status: item.status,
+    //   });
+    // });
   });
 };

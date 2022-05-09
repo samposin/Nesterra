@@ -25,7 +25,7 @@ import {connect, useSelector} from 'react-redux';
 const Search = () => {
   const {coordinates} = useSelector(state => state.coordinates);
   const {lat, lng} = useSelector(state => state.setLatLang);
-
+  console.log(lat, lng, 'lat, lng');
   const INITIAL_REGION = {
     latitude: lat,
     longitude: lng,
