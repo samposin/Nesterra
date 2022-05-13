@@ -10,7 +10,7 @@ import {Dimensions, LayoutAnimation, Platform} from 'react-native';
 import MapView, {Marker, Polyline} from 'react-native-maps';
 import {connect, useSelector} from 'react-redux';
 import SuperCluster from 'supercluster';
-import {setLatLng} from '../../../actions/setLatLang';
+
 import SearchA from '../Search';
 
 import ClusterMarker from './ClusteredMarker';
@@ -25,8 +25,8 @@ import {
 const ClusteredMapView = forwardRef(
   (
     {
-      setLatLng,
-      currentRegion1,
+      changeLatLng,
+      currentRegion2,
       radius,
       maxZoom,
       minZoom,
@@ -53,6 +53,7 @@ const ClusteredMapView = forwardRef(
     },
     ref,
   ) => {
+    //console.log(restProps);
     const {lat, lng} = useSelector(state => state.setLatLang);
 
     const [markers, updateMarkers] = useState([]);
@@ -137,11 +138,22 @@ const ClusteredMapView = forwardRef(
         updateSpiderMarker([]);
       }
     }, [isSpiderfier, markers]);
-
+    const _onRegionChange = (region, details) => {
+      console.log(region, details, 'first');
+    };
     const _onRegionChangeComplete = region => {
+      changeLatLng(
+        region.latitude,
+        region.longitude,
+        region.latitudeDelta,
+        region.longitudeDelta,
+      );
+      // console.log(region, 'region');
+      // console.log(superCluster, 'superCluster');
       // setLatLng({lat: region.latitude, lng: region.longitude});
       if (superCluster && region) {
         const bBox = calculateBBox(region);
+        // console.log(bBox, 'bBox');
         const zoom = returnMapZoom(region, bBox, minZoom);
         const markers = superCluster.getClusters(bBox, zoom);
         if (animationEnabled && Platform.OS === 'ios') {
@@ -189,7 +201,7 @@ const ClusteredMapView = forwardRef(
     };
     return (
       <>
-        <SearchA />
+        {/* <SearchA /> */}
         <MapView
           {...restProps}
           ref={map => {
@@ -197,8 +209,9 @@ const ClusteredMapView = forwardRef(
             if (ref) ref.current = map;
             restProps.mapRef(map);
           }}
+          onRegionChange={_onRegionChange}
           onRegionChangeComplete={_onRegionChangeComplete}
-          region={currentRegion1}>
+          region={currentRegion2}>
           {markers.map(marker =>
             marker.properties.point_count === 0 ? (
               propsChildren[marker.properties.index]
@@ -279,4 +292,4 @@ ClusteredMapView.defaultProps = {
   mapRef: () => {},
 };
 
-export default connect(null, {setLatLng})(memo(ClusteredMapView));
+export default memo(ClusteredMapView);

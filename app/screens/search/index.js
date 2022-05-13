@@ -21,10 +21,19 @@ function getRandomLongitude(min = 14, max = 24) {
 }
 
 import {connect, useSelector} from 'react-redux';
+import {setLatLng} from '../../actions/setLatLang';
 
-const Search = () => {
+const Search = ({setLatLng}) => {
   const {coordinates} = useSelector(state => state.coordinates);
   const {lat, lng} = useSelector(state => state.setLatLang);
+  const [latdetra, setlatdetra] = useState(LATITUDE_DELTA);
+  const [lngdetra, setlngdetra] = useState(LONGITUDE_DELTA);
+  const [currentRegion, setCurrentRegion] = useState({
+    latitude: 42.34278590115251,
+    longitude: -71.0256371833384,
+    latitudeDelta: latdetra,
+    longitudeDelta: lngdetra,
+  });
   console.log(lat, lng, 'lat, lng');
   const INITIAL_REGION = {
     latitude: lat,
@@ -32,11 +41,30 @@ const Search = () => {
     latitudeDelta: 8.5,
     longitudeDelta: 8.5,
   };
+  const changeLatLng = (lat, lng, ltd, lnd) => {
+    console.log(lat, lng, ltd, lnd, 'ff');
+    setLatLng({lat, lng});
+    const regi = {
+      latitude: lat,
+      longitude: lng,
+      latitudeDelta: ltd,
+      longitudeDelta: lnd,
+    };
+    setCurrentRegion(regi);
+  };
   const currentRegion1 = {
     latitude: lat,
     longitude: lng,
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
+  };
+  const onSearchPress = (lat, lng) => {
+    setCurrentRegion({
+      latitude: lat,
+      longitude: lng,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    });
   };
   const _generateMarkers = count => {
     const markers = [];
@@ -71,13 +99,14 @@ const Search = () => {
     <>
       <MapView
         initialRegion={INITIAL_REGION}
-        currentRegion1={currentRegion1}
+        currentRegion2={currentRegion}
+        changeLatLng={changeLatLng}
         style={{flex: 1}}>
         {_generateMarkers(coordinates)}
       </MapView>
-      {/* <SearchA /> */}
+      <SearchA onSearchPress={onSearchPress} />
     </>
   );
 };
 
-export default Search;
+export default connect(null, {setLatLng})(Search);

@@ -23,6 +23,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Geolocation from 'react-native-geolocation-service';
 import CustomClusteredMarkers from './components/CustomClusteredMarkers';
 import {LogBox} from 'react-native';
+
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 
 LogBox.ignoreLogs([
@@ -68,6 +69,7 @@ const Explore = ({
   const [longitute, setLongitute] = useState(-71.519236);
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [locationText, setlocationText] = useState('');
   const [marginBottom, setMarginBottom] = useState(100);
   const [satellite, setSatellite] = useState('standard');
   const [aHeight, setAheight] = useState(new Animated.Value(40));
@@ -106,6 +108,7 @@ const Explore = ({
     inputRange: [0, 1],
     outputRange: [20, 66],
   });
+  //
 
   /// arrow rotated
   // get start points
@@ -348,7 +351,11 @@ const Explore = ({
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-      <ModalView modalVisible={modalVisible} />
+      <ModalView
+        modalVisible={modalVisible}
+        locationText={locationText}
+        setModalVisible={setModalVisible}
+      />
 
       <View style={styles.container}>
         <MapView
@@ -364,14 +371,25 @@ const Explore = ({
                 tracksViewChanges={false}
                 imageSrc={
                   clusterCounts === 1
-                    ? clusterImages.cluster1
+                    ? 'red'
                     : clusterCounts === 2
-                    ? clusterImages.cluster2
+                    ? '#ef8e34'
                     : clusterCounts === 3
-                    ? clusterImages.cluster3
+                    ? '#bb271a'
                     : clusterCounts === 4
-                    ? clusterImages.cluster4
-                    : clusterImages.cluster5
+                    ? '#8c3ac4'
+                    : 'pink'
+                }
+                textCount={
+                  clusterCounts === 1
+                    ? '5+'
+                    : clusterCounts === 2
+                    ? '100+'
+                    : clusterCounts === 3
+                    ? '200+'
+                    : clusterCounts === 4
+                    ? '1000+'
+                    : '10000+'
                 }
                 {...props}
               />
@@ -390,7 +408,7 @@ const Explore = ({
           showsMyLocationButton={true}
           showsCompass={true}
           followsUserLocation={true}
-          provider={PROVIDER_GOOGLE}
+          provider={MapView.PROVIDER_GOOGLE}
           style={{...styles.container, marginBottom: 50}}
           onRegionChangeComplete={mapRegionChangeComplete}
           region={currentRegion}
@@ -451,15 +469,15 @@ const Explore = ({
         </MapView>
         {/* ===========get Current position=== */}
         <TouchableOpacity onPress={getLocation} style={styles.currentLocation}>
-          <MaterialCommunityIcons name="target" size={32} color="black" />
+          <MaterialCommunityIcons name="target" size={26} color="black" />
         </TouchableOpacity>
         {/* ===========get Current position=== */}
         {/* ===========Direction=== */}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={animationFindON}
           style={styles.directionButton}>
           <MaterialIcons name="directions" size={24} color="white" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {/* ===========Direction=== */}
         {/* ===========find Direction=== */}
         {/* <FindeDirection animatioValOff={animatioValOff}/> */}
@@ -847,14 +865,16 @@ const Explore = ({
         <View
           style={{
             position: 'absolute',
-            top: 120,
+            top: 30,
             left: 0,
-            width: 150,
+            width: '100%',
             height: 50,
+
+            flexDirection: 'row',
           }}>
           <View
             style={{
-              width: '100%',
+              width: '50%',
               height: '100%',
               justifyContent: 'center',
               alignItems: 'center',
@@ -864,11 +884,26 @@ const Explore = ({
               style={{width: '90%', height: 25, resizeMode: 'contain'}}
             />
           </View>
+          <View
+            style={{
+              width: '50%',
+              height: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Image
+              source={require('../../images/banKTitle.png')}
+              style={{width: '90%', height: 25, resizeMode: 'contain'}}
+            />
+          </View>
         </View>
         {/* =================search=============== */}
         <Search
           onPress={onSearchPress}
+          setModalVisible={setModalVisible}
           settingView={settingView}
+          modalVisible={modalVisible}
+          setlocationText={setlocationText}
           setSettingView={setSettingView}
         />
 
@@ -1014,7 +1049,7 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: 'white',
     position: 'absolute',
-    bottom: 120,
+    bottom: 60,
     right: 10,
     justifyContent: 'center',
     alignItems: 'center',

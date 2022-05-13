@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
+  View,
 } from 'react-native';
 import {Marker} from 'react-native-maps';
 import {returnMarkerStyle} from './helper';
@@ -16,6 +17,7 @@ const CustomClusteredMarkers = ({
   clusterFontFamily,
   tracksViewChanges,
   imageSrc,
+  textCount,
 }) => {
   const points = properties.point_count;
   const {width, height, fontSize} = returnMarkerStyle(points);
@@ -33,7 +35,7 @@ const CustomClusteredMarkers = ({
       <TouchableOpacity
         activeOpacity={0.5}
         style={[styles.container, {width, height}]}>
-        <ImageBackground
+        {/* <ImageBackground
           source={imageSrc}
           style={[
             styles.cluster,
@@ -41,7 +43,16 @@ const CustomClusteredMarkers = ({
               width,
               height,
             },
-          ]}>
+          ]}> */}
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 50,
+            backgroundColor: imageSrc,
+          }}>
           <Text
             style={[
               styles.text,
@@ -51,9 +62,10 @@ const CustomClusteredMarkers = ({
                 fontFamily: clusterFontFamily,
               },
             ]}>
-            {points}
+            {textCount}
           </Text>
-        </ImageBackground>
+        </View>
+        {/* </ImageBackground> */}
       </TouchableOpacity>
     </Marker>
   );

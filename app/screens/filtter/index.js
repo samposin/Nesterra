@@ -34,37 +34,31 @@ const data1 = [
 const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
   const list = useSelector(state => state);
   const list1 = useSelector(state => state.selectList);
-  // console.log(list1.checkList, 'filter');
+  //
+  console.log(list1.checkList, 'filter');
   const get_filterdata = () => {
     let data = [];
     const data1 = list1.checkList.map((item, i) => {
-      const pp = {
-        id: item.id,
-        value: item.txt,
-      };
-      //console.log(data);
-      data.push(pp);
-      //const stringifydate = JSON.stringify(data);
-      console.log(encodeURIComponent(JSON.stringify(data)));
-
-      const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'}, //s,
-        // body: {stringdate: JSON.stringify(data)},
-        //data: {stringdate: JSON.stringify(data)},
-      };
-      fetch(
-        'http://citizenmobileapi.azurewebsites.net/api/testingurl?stringdate=' +
-          encodeURIComponent(JSON.stringify(data)),
-        requestOptions,
-      )
-        .then(response => response.json())
-        .then(data => console.log(data, 'fasdfsda'))
-        .catch(err => console.log(err, 'err'));
+      const a = item.txt;
+      return data.push(a);
     });
-    //  console.log(data);
-    // var stringyvalue = JSON.stringify(data);
-    // console.log(stringyvalue);
+    console.log(data.toString());
+
+    console.log(encodeURIComponent(JSON.stringify(data)));
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'}, //s,
+    };
+
+    fetch(
+      'http://citizenmobileapi.azurewebsites.net/apiGetLocationDataBySiteStatus=' +
+        encodeURIComponent(JSON.stringify(data)),
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(data => console.log(data, 'fasdfsda'))
+      .catch(err => console.log(err, 'err'));
   };
 
   const [item, setItem] = React.useState(0);
@@ -160,8 +154,9 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
       <View style={styles.buttonUpper}>
         <ApplyButton
           colorChange={() => {
+            get_filterdata();
             colorChange('Close');
-            navigation.goBack();
+            // navigation.goBack();
           }}
           bgColor={title === 'Close' ? '#1b5a90' : '#ffffff'}
           textColor={title === 'Close' ? '#ffffff' : '#1b5a90'}

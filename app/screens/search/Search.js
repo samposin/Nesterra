@@ -14,7 +14,7 @@ import {LocationKey} from '../../key';
 import {setLatLng} from '../../actions/setLatLang';
 import {connect} from 'react-redux';
 
-const SearchA = ({setLatLng}) => {
+const SearchA = ({setLatLng, onSearchPress}) => {
   const googlePlacesRef = useRef(null);
 
   const onSpeechStartHandler = e => {
@@ -93,6 +93,7 @@ const SearchA = ({setLatLng}) => {
         const lat = details.geometry.location.lat;
         const lng = details.geometry.location.lng;
         setLatLng({lat, lng});
+        onSearchPress(lat, lng);
         // console.log(
         //   details.geometry.location.lat,
         //   details.geometry.location.lng,

@@ -1,8 +1,7 @@
 export default {
-    imgExlore: require('../../images/maps-and-flags.png'),
-     imgOrder: require('../../images/chat.png'),
-     imgStats: require('../../images/user.png'),
-     imgSaved: require('../../images/settings.png'),
-     imgSearch: require('../../images/search.png'),
-   
-}
+  imgExlore: require('../../images/thumbtack.png'),
+  imgOrder: require('../../images/shopping-cart.png'),
+  imgStats: require('../../images/signal-status.png'),
+  imgAssets: require('../../images/star.png'),
+  imgSearch: require('../../images/search.png'),
+};

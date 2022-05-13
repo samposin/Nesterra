@@ -6,21 +6,6 @@ import Axios from 'axios';
 import {Base_url} from '../../key';
 import {FILTER_MARKER} from '../actionType/action.Coordinatefilter.type';
 
-import Realm from 'realm';
-
-const BSON = Realm.BSON;
-const da = [
-  {
-    _id: 0,
-    name: 'go grocery shopping',
-    status: 'Open',
-  },
-  {
-    _id: 1,
-    name: 'go grocery shopping',
-    status: 'Open',
-  },
-];
 export const get_coordinates = () => dispatch => {
   // Axios.get(`${Base_url}/citizenapi/api/GetLocationDataByCoordinates?limit=100`)
   // const value = await AsyncStorage.getItem('@coordinate');
@@ -46,7 +31,7 @@ export const get_coordinates = () => dispatch => {
 
   // }
   // Axios.get(`${Base_url}/api/GetLocationData?limit=10`);
-  fetch(`${Base_url}/api/GetLocationData?limit=6000`, {
+  fetch(`${Base_url}/api/GetLocationDataAll?limit=6000`, {
     method: 'get',
     headers: {
       'Content-Type': 'application/json',
@@ -56,7 +41,7 @@ export const get_coordinates = () => dispatch => {
       return res.json();
     })
     .then(response => {
-      getData();
+      // getData();
       dispatch({
         type: GET_COORDINATES,
         payload: {
@@ -151,35 +136,5 @@ export const third_party_filter = HierarchyLocationType => dispatch => {
     payload: {
       HierarchyLocationType: HierarchyLocationType,
     },
-  });
-};
-const getData = async () => {
-  const TaskSchema = {
-    name: 'Task',
-    properties: {
-      _id: 'int',
-      name: 'string',
-      status: 'string?',
-    },
-    primaryKey: '_id',
-  };
-  const realm = await Realm.open({
-    path: 'myrealm',
-    schema: [TaskSchema],
-  });
-  const cats = realm.objects('Task');
-  console.log(cats);
-  // alert('cats');
-  realm.write(() => {
-    const cats = realm.objects('Task');
-    console.log(cats);
-    console.log('cats');
-    // da.map((item, i) => {
-    //   realm.create('Task', {
-    //     _id: i,
-    //     name: item.name,
-    //     status: item.status,
-    //   });
-    // });
   });
 };

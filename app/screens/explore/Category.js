@@ -2,6 +2,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   Platform,
   StatusBar,
   ScrollView,
@@ -46,19 +47,32 @@ const Category = ({third_party_filter}) => {
           <TouchableOpacity
             onPress={() => {
               actiText(index);
+
               third_party_filter(category.value);
             }}
             key={index}
             style={{
               ...styles.chipsItem,
+              alignItems: 'center',
 
               backgroundColor: category.isActive ? '#1b5a90' : 'white',
             }}>
             {category.isActive ? category.icon : null}
+
+            <Image
+              source={require('../../images/upload.png')}
+              style={{
+                width: 15,
+                height: 15,
+                tintColor: category.isActive ? '#ffffff' : '#1b5a90',
+              }}
+            />
             <Text
               style={{
                 color: category.isActive ? '#ffffff' : '#1b5a90',
                 fontWeight: '800',
+                marginLeft: 7,
+                marginTop: 2,
               }}>
               {category.name}
             </Text>
@@ -90,10 +104,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
 
     position: 'absolute',
-    top:
-      Platform.OS === 'ios'
-        ? StatusBar.currentHeight
-        : StatusBar.currentHeight + 60,
+    top: Platform.OS === 'ios' ? 140 : 140,
     //paddingHorizontal: 10,
   },
 });
