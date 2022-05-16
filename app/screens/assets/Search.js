@@ -14,7 +14,6 @@ import {LocationKey} from '../../key';
 import Geocoder from 'react-native-geocoding';
 
 const Search = ({
-  catShow,
   onPress,
   setModalVisible,
   setlocationText,
@@ -116,12 +115,6 @@ const Search = ({
     <GooglePlacesAutocomplete
       ref={googlePlacesRef}
       fetchDetails={true}
-      // textInputProps={{
-      //   // Super hacky..
-      //   ref: textInput => {
-      //     () => textInput && textInput.focus(catShow(false));
-      //   },
-      // }}
       placeholder="Search Location"
       onPress={(data, details = null) => {
         const {lat, lng} = details.geometry.location;

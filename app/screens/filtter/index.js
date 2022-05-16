@@ -156,7 +156,7 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
           colorChange={() => {
             get_filterdata();
             colorChange('Close');
-            // navigation.goBack();
+            navigation.goBack();
           }}
           bgColor={title === 'Close' ? '#1b5a90' : '#ffffff'}
           textColor={title === 'Close' ? '#ffffff' : '#1b5a90'}

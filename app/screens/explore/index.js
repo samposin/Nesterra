@@ -80,7 +80,7 @@ const Explore = ({
   const [animatioValOff, setanimatioValOff] = useState(false);
   ///cluster color
   const [settingView, setSettingView] = useState(false);
-
+  const [catShow, setCatShow] = useState(true);
   const [startPoints, setStartPoints] = useState({});
   const [startAddress, setStartAddress] = useState('Choose Start Point');
   const [destinationAddress, setDestinationAddress] =
@@ -217,14 +217,14 @@ const Explore = ({
   //find coordinate Animation on
   const animationFindON = () => {
     Animated.timing(findDirection, {
-      toValue: 150,
+      toValue: 130,
       duration: 200,
       easing: Easing.in(Easing.bounce),
       useNativeDriver: false,
     }).start();
     setTimeout(() => {
       setanimatioValOff(true);
-    }, 200);
+    }, 0);
   };
   //find coordinate Animation off
   const animationFindOff = () => {
@@ -473,11 +473,11 @@ const Explore = ({
         </TouchableOpacity>
         {/* ===========get Current position=== */}
         {/* ===========Direction=== */}
-        {/* <TouchableOpacity
+        <TouchableOpacity
           onPress={animationFindON}
           style={styles.directionButton}>
           <MaterialIcons name="directions" size={24} color="white" />
-        </TouchableOpacity> */}
+        </TouchableOpacity>
         {/* ===========Direction=== */}
         {/* ===========find Direction=== */}
         {/* <FindeDirection animatioValOff={animatioValOff}/> */}
@@ -689,7 +689,7 @@ const Explore = ({
         <Animated.View
           style={{
             position: 'absolute',
-            top: 170,
+            top: 180,
             right: 8,
             width: aHeight,
             height: aHeight,
@@ -899,6 +899,7 @@ const Explore = ({
         </View>
         {/* =================search=============== */}
         <Search
+          catShow={setCatShow}
           onPress={onSearchPress}
           setModalVisible={setModalVisible}
           settingView={settingView}
@@ -909,7 +910,8 @@ const Explore = ({
 
         {/* =================search=============== */}
         {/* =================Category=============== */}
-        <Category />
+        {catShow && <Category />}
+
         {/* =================Category=============== */}
       </View>
       {/* =================BottomSheetView=============== */}
