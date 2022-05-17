@@ -116,12 +116,6 @@ const Search = ({
     <GooglePlacesAutocomplete
       ref={googlePlacesRef}
       fetchDetails={true}
-      // textInputProps={{
-      //   // Super hacky..
-      //   ref: textInput => {
-      //     () => textInput && textInput.focus(catShow(false));
-      //   },
-      // }}
       placeholder="Search Location"
       onPress={(data, details = null) => {
         const {lat, lng} = details.geometry.location;
@@ -149,6 +143,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       width: '95%',
       alignSelf: 'center',
+      zIndex: 100,
       marginTop: 80,
       // zIndex: -1,
       backgroundColor: 'white',

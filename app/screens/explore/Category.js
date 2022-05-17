@@ -98,12 +98,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 10,
-    zIndex: 0,
   },
   chipsScrollView: {
     //  marginTop: 10,
     paddingLeft: 5,
-
+    zIndex: 1,
     position: 'absolute',
     top: Platform.OS === 'ios' ? 140 : 140,
     //paddingHorizontal: 10,

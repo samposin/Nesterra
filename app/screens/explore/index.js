@@ -441,6 +441,7 @@ const Explore = ({
                     bottomSheetRef.current.snapToIndex(0);
                     get_location_details(item.Location_ID);
                     marker_seleted(i);
+                    // setCatShow(false);
                     const lat = item.Latitude;
                     const lng = item.Longitude;
                     // console.log(latt, langg);
@@ -915,7 +916,7 @@ const Explore = ({
         {/* =================Category=============== */}
       </View>
       {/* =================BottomSheetView=============== */}
-      <BottomSheetView bottomSheetRef={bottomSheetRef} />
+      <BottomSheetView bottomSheetRef={bottomSheetRef} catShow={setCatShow} />
       {/* =================Setting=============== */}
       {settingView ? (
         <Setting

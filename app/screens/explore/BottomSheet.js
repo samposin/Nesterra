@@ -8,7 +8,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const data = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
 ];
-const BottomSheetView = ({bottomSheetRef}) => {
+const BottomSheetView = ({bottomSheetRef, catShow}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const location_data = useSelector(state => state.location_details.data);
 
@@ -36,7 +36,7 @@ const BottomSheetView = ({bottomSheetRef}) => {
         //   console.log(fromIndex, toIndex);
         // }}
       >
-        <View style={{flex: 1, paddingHorizontal: 15}}>
+        <View style={{flex: 1, paddingHorizontal: 15, zIndex: 10}}>
           {/* {location_data && {}} */}
 
           <Text style={{fontSize: 18, fontWeight: '700'}}>
