@@ -33,17 +33,21 @@ LogBox.ignoreLogs([
 import ModalView from './ModalView';
 
 import {get_coordinates, marker_seleted} from '../../actions/coordinates';
-import {connect, useSelector} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {setLatLng} from '../../actions/setLatLang';
 
 import {get_location_details} from '../../actions/loacationDetails';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {hasLocationPermission} from '../../utils/AskPermission';
 import {LocationKey} from '../../key';
 import CustomMarker from '../../components/CustomMarker';
 import Category from './Category';
 import {clusterImages} from '../../utils/Constants';
 import Setting from './Setting';
+import BottomSheetViewImage from '../../components/BottomSheet';
+import {photo_url_from_map} from '../../actions/photpUrlFromMap';
+import {GET_PHOTO_URL_FROM_MAP} from '../../actions/actionType/action.photoMapurl.type';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -56,7 +60,9 @@ const Explore = ({
   get_location_details,
   marker_seleted,
   setLatLng,
+  photo_url_from_map,
 }) => {
+  const dispatch = useDispatch();
   const {coordinates} = useSelector(state => state.coordinates);
   const {lat, lng} = useSelector(state => state.setLatLang);
   // console.log(coordinates);
@@ -250,6 +256,7 @@ const Explore = ({
   };
   // added by Dildar Khan start
   const bottomSheetRef = useRef(null);
+  const bottomSheetRefImage = useRef(null);
 
   const snapPoints = useMemo(() => ['20%', '100%'], []);
 
@@ -333,14 +340,46 @@ const Explore = ({
     });
   };
 
-  const onSearchPress = (data, details = null) => {
+  const onSearchPress = (lat, lng) => {
+    // console.log(lat, lng);
     setCurrentRegion({
-      latitude: details.geometry.location.lat,
-      longitude: details.geometry.location.lng,
+      latitude: lat,
+      longitude: lng,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
     });
     bottomSheetRef.current.close();
+  };
+  const fetchNearestPlacesFromGoogle = e => {
+    const lat = e.nativeEvent.coordinate.latitude;
+    const lng = e.nativeEvent.coordinate.longitude;
+    let radMetter = 20 * 1000; // Search withing 2 KM radius
+    const url =
+      'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' +
+      lat +
+      ',' +
+      lng +
+      '&radius=' +
+      radMetter +
+      '&key=' +
+      LocationKey;
+
+    fetch(url)
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        // console.log(res.results.photos);
+        dispatch({
+          type: GET_PHOTO_URL_FROM_MAP,
+          payload: {
+            data: res.results,
+          },
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (
@@ -361,6 +400,13 @@ const Explore = ({
         <MapView
           //showsUserLocation={true}
           // radius={70}
+          onPress={e => {
+            const latitude = e.nativeEvent.coordinate.latitude;
+            const longitude = e.nativeEvent.coordinate.longitude;
+            // photo_url_from_map({lat: latitude, lng: longitude});
+            fetchNearestPlacesFromGoogle(e);
+            bottomSheetRefImage.current.snapToIndex(0);
+          }}
           renderCluster={props => {
             const clusterCounts =
               props.properties.point_count.toString().length;
@@ -476,6 +522,11 @@ const Explore = ({
         {/* ===========Direction=== */}
         <TouchableOpacity
           onPress={animationFindON}
+          // onPress={() => {
+          //   alert('dd');
+          //   console.log('first');
+          //   bottomSheetRefImage.current.snapToIndex(0);
+          // }}
           style={styles.directionButton}>
           <MaterialIcons name="directions" size={24} color="white" />
         </TouchableOpacity>
@@ -708,11 +759,7 @@ const Explore = ({
               //navigation.navigate('Filtter');
             }}>
             {!animatioVal ? (
-              <MaterialCommunityIcons
-                name="layers-outline"
-                size={24}
-                color="black"
-              />
+              <Ionicons name="md-layers" size={24} color="black" />
             ) : (
               <View style={styles.mapTypeView}>
                 {/* ============map Type view============= */}
@@ -873,13 +920,7 @@ const Explore = ({
 
             flexDirection: 'row',
           }}>
-          <View
-            style={{
-              width: '50%',
-              height: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
+          <View style={styles.titleView}>
             <Image
               source={require('../../images/siteTitle.png')}
               style={{width: '90%', height: 25, resizeMode: 'contain'}}
@@ -887,11 +928,15 @@ const Explore = ({
           </View>
           <View
             style={{
-              width: '50%',
+              width: '20%',
               height: '100%',
+
               justifyContent: 'center',
               alignItems: 'center',
             }}>
+            <Text style={{fontSize: 18, color: 'black'}}>for</Text>
+          </View>
+          <View style={styles.titleView}>
             <Image
               source={require('../../images/banKTitle.png')}
               style={{width: '90%', height: 25, resizeMode: 'contain'}}
@@ -907,6 +952,7 @@ const Explore = ({
           modalVisible={modalVisible}
           setlocationText={setlocationText}
           setSettingView={setSettingView}
+          bottomSheetRefImage={bottomSheetRefImage}
         />
 
         {/* =================search=============== */}
@@ -917,6 +963,10 @@ const Explore = ({
       </View>
       {/* =================BottomSheetView=============== */}
       <BottomSheetView bottomSheetRef={bottomSheetRef} catShow={setCatShow} />
+      <BottomSheetViewImage
+        bottomSheetRefImage={bottomSheetRefImage}
+        catShow={setCatShow}
+      />
       {/* =================Setting=============== */}
       {settingView ? (
         <Setting
@@ -934,6 +984,7 @@ export default connect(null, {
   get_location_details,
   marker_seleted,
   setLatLng,
+  photo_url_from_map,
 })(Explore);
 
 const styles = StyleSheet.create({
@@ -1093,6 +1144,12 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingTop: 10,
+  },
+  titleView: {
+    width: '40%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   // added by Dildar Khan end
 });

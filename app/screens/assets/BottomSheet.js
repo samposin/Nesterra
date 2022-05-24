@@ -27,15 +27,7 @@ const BottomSheetView = ({bottomSheetRef}) => {
         snapPoints={snapPoints}
         enablePanDownToClose={true}
         animateOnMount
-        // onChange={handleSheetChanges}
-        animatedPosition={true}
-        // snapToPosition={dfs => {
-        //   console.log(dfs, 'dfs');
-        // }}
-        // onAnimate={(fromIndex, toIndex) => {
-        //   console.log(fromIndex, toIndex);
-        // }}
-      >
+        animatedPosition={true}>
         <View style={{flex: 1, paddingHorizontal: 15}}>
           {/* {location_data && {}} */}
 

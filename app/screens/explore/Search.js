@@ -12,6 +12,8 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {LocationKey} from '../../key';
 import Geocoder from 'react-native-geocoding';
+import {useDispatch} from 'react-redux';
+import {GET_PHOTO_URL_FROM_SEARCH} from '../../actions/actionType/action.photoMapurl.type';
 
 const Search = ({
   catShow,
@@ -22,7 +24,9 @@ const Search = ({
   onSearchPress,
   setSettingView,
   settingView,
+  bottomSheetRefImage,
 }) => {
+  const dispatch = useDispatch();
   const googlePlacesRef = useRef(null);
   const [lactext, setLaction] = useState('');
   const onSpeechStartHandler = e => {
@@ -59,9 +63,12 @@ const Search = ({
     Geocoder.init(`${LocationKey}`);
     Geocoder.from(data)
       .then(json => {
-        var location = json.results[0].geometry.location;
-        const {lat, lng} = location;
-        onPress(lat, lng);
+        console.log(json);
+
+        // var location = json.results[0].geometry.location;
+
+        // const {lat, lng} = location;
+        // onPress(lat, lng);
         setModalVisible(false);
         setlocationText('');
       })
@@ -81,7 +88,7 @@ const Search = ({
   const renderSearchLeftIcons = () => {
     return (
       <Image
-        source={require('../../images/logo.png')}
+        source={require('../../images/Logo-SmartSite-Color-640px.png')}
         style={styles.leftIconImage}
       />
     );
@@ -111,6 +118,13 @@ const Search = ({
       </View>
     );
   };
+  const changeValue = data => {
+    if (data.length == 0) {
+      catShow(true);
+    } else {
+      catShow(false);
+    }
+  };
 
   return (
     <GooglePlacesAutocomplete
@@ -118,8 +132,24 @@ const Search = ({
       fetchDetails={true}
       placeholder="Search Location"
       onPress={(data, details = null) => {
+        // console.log(details.photos, 'pp');
+        dispatch({
+          type: GET_PHOTO_URL_FROM_SEARCH,
+          payload: {
+            data: details.photos,
+          },
+        });
+        bottomSheetRefImage.current.snapToIndex(0);
         const {lat, lng} = details.geometry.location;
+        catShow(true);
         onPress(lat, lng);
+      }}
+      textInputProps={{
+        onFocus: () => {
+          catShow(false);
+          bottomSheetRefImage.current?.close();
+        },
+        onChangeText: text => changeValue(text),
       }}
       query={{
         key: `${LocationKey}`,
@@ -143,7 +173,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       width: '95%',
       alignSelf: 'center',
-      zIndex: 100,
+      zIndex: 0,
       marginTop: 80,
       // zIndex: -1,
       backgroundColor: 'white',
@@ -161,6 +191,7 @@ const styles = StyleSheet.create({
       borderBottomWidth: 10,
       borderRadius: 10,
       borderBottomColor: 'white',
+      zIndex: 2,
     },
   },
   leftIconImage: {

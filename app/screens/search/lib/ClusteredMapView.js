@@ -211,7 +211,8 @@ const ClusteredMapView = forwardRef(
           }}
           onRegionChange={_onRegionChange}
           onRegionChangeComplete={_onRegionChangeComplete}
-          region={currentRegion2}>
+          // region={currentRegion2}
+        >
           {markers.map(marker =>
             marker.properties.point_count === 0 ? (
               propsChildren[marker.properties.index]

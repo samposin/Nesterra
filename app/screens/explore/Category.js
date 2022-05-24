@@ -54,25 +54,24 @@ const Category = ({third_party_filter}) => {
             style={{
               ...styles.chipsItem,
               alignItems: 'center',
-
-              backgroundColor: category.isActive ? '#1b5a90' : 'white',
+              backgroundColor: 'white',
+              borderWidth: 1.5,
+              borderColor: category.isActive ? 'white' : '#0A7AFF',
             }}>
             {category.isActive ? category.icon : null}
 
-            <Image
+            {/* <Image
               source={require('../../images/upload.png')}
               style={{
                 width: 15,
                 height: 15,
                 tintColor: category.isActive ? '#ffffff' : '#1b5a90',
               }}
-            />
+            /> */}
             <Text
               style={{
-                color: category.isActive ? '#ffffff' : '#1b5a90',
+                color: category.isActive ? '#0A7AFF' : 'black',
                 fontWeight: '800',
-                marginLeft: 7,
-                marginTop: 2,
               }}>
               {category.name}
             </Text>
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
   chipsItem: {
     flexDirection: 'row',
     borderRadius: 20,
-    padding: 7,
+    // padding: 7,
     paddingHorizontal: 15,
     marginHorizontal: 5,
     height: 35,
@@ -100,9 +99,8 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   chipsScrollView: {
-    //  marginTop: 10,
     paddingLeft: 5,
-    zIndex: 1,
+    zIndex: 0,
     position: 'absolute',
     top: Platform.OS === 'ios' ? 140 : 140,
     //paddingHorizontal: 10,
