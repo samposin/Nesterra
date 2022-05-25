@@ -1,4 +1,11 @@
-import {StyleSheet, Text, ScrollView, View, Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  ScrollView,
+  View,
+  Image,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useMemo} from 'react';
 
 import BottomSheet, {
@@ -10,8 +17,9 @@ import Imagee from './Imagee';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import ImageLoder from '../lodder/imageLodder';
 
-const BottomSheetViewImage = ({bottomSheetRefImage}) => {
+const BottomSheetViewImage = ({bottomSheetRefImage, isLoading}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const photo = useSelector(state => state.photo_url.photo_url);
 
@@ -60,14 +68,18 @@ const BottomSheetViewImage = ({bottomSheetRefImage}) => {
                     return <Imagee key={i} image={item.photo_reference} />;
                   })}
               </ScrollView> */}
-              <BottomSheetFlatList
-                showsHorizontalScrollIndicator={false}
-                horizontal={true}
-                data={photo}
-                keyExtractor={(item, index) => index}
-                renderItem={renderItem}
-                contentContainerStyle={{backgroundColor: 'white'}}
-              />
+              {isLoading ? (
+                <ImageLoder />
+              ) : (
+                <BottomSheetFlatList
+                  showsHorizontalScrollIndicator={false}
+                  horizontal={true}
+                  data={photo}
+                  keyExtractor={(item, index) => index}
+                  renderItem={renderItem}
+                  contentContainerStyle={{backgroundColor: 'white'}}
+                />
+              )}
             </View>
 
             {/* =============top======== */}

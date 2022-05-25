@@ -351,6 +351,7 @@ const Explore = ({
     bottomSheetRef.current.close();
   };
   const fetchNearestPlacesFromGoogle = e => {
+    setIsLoading(true);
     const lat = e.nativeEvent.coordinate.latitude;
     const lng = e.nativeEvent.coordinate.longitude;
     let radMetter = 20 * 1000; // Search withing 2 KM radius
@@ -370,12 +371,15 @@ const Explore = ({
       })
       .then(res => {
         // console.log(res.results.photos);
-        dispatch({
-          type: GET_PHOTO_URL_FROM_MAP,
-          payload: {
-            data: res.results,
-          },
-        });
+        if (res.results) {
+          dispatch({
+            type: GET_PHOTO_URL_FROM_MAP,
+            payload: {
+              data: res.results,
+            },
+          });
+          setIsLoading(false);
+        }
       })
       .catch(error => {
         console.log(error);
@@ -934,7 +938,15 @@ const Explore = ({
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{fontSize: 18, color: 'black'}}>for</Text>
+            <Text
+              style={{
+                fontSize: 20,
+                color: 'black',
+                fontWeight: 'bold',
+                fontStyle: 'italic',
+              }}>
+              for
+            </Text>
           </View>
           <View style={styles.titleView}>
             <Image
@@ -953,6 +965,7 @@ const Explore = ({
           setlocationText={setlocationText}
           setSettingView={setSettingView}
           bottomSheetRefImage={bottomSheetRefImage}
+          setIsLoading={setIsLoading}
         />
 
         {/* =================search=============== */}
@@ -966,6 +979,7 @@ const Explore = ({
       <BottomSheetViewImage
         bottomSheetRefImage={bottomSheetRefImage}
         catShow={setCatShow}
+        isLoading={isLoading}
       />
       {/* =================Setting=============== */}
       {settingView ? (

@@ -25,6 +25,7 @@ const Search = ({
   setSettingView,
   settingView,
   bottomSheetRefImage,
+  setIsLoading,
 }) => {
   const dispatch = useDispatch();
   const googlePlacesRef = useRef(null);
@@ -99,17 +100,17 @@ const Search = ({
       <View style={styles.searchRighIcons}>
         {!modalVisible ? (
           <TouchableOpacity onPress={startRecording} style={styles.mr10}>
-            <FontAwesome name="microphone" size={30} color="#a3a2a2" />
+            <FontAwesome name="microphone" size={26} color="#a3a2a2" />
           </TouchableOpacity>
         ) : (
-          <Entypo name="cross" size={24} color="black" style={styles.mr10} />
+          <Entypo name="cross" size={22} color="black" style={styles.mr10} />
         )}
         <TouchableOpacity onPress={() => setSettingView(!settingView)}>
           <Image
             source={require('../../images/user.png')}
             style={{
               width: 20,
-              height: 20,
+              height: 23,
               marginRight: 12,
               tintColor: '#b9b7b7',
             }}
@@ -133,12 +134,17 @@ const Search = ({
       placeholder="Search Location"
       onPress={(data, details = null) => {
         // console.log(details.photos, 'pp');
-        dispatch({
-          type: GET_PHOTO_URL_FROM_SEARCH,
-          payload: {
-            data: details.photos,
-          },
-        });
+        setIsLoading(true);
+        if (details.photos) {
+          dispatch({
+            type: GET_PHOTO_URL_FROM_SEARCH,
+            payload: {
+              data: details.photos,
+            },
+          });
+          setIsLoading(false);
+        }
+
         bottomSheetRefImage.current.snapToIndex(0);
         const {lat, lng} = details.geometry.location;
         catShow(true);
@@ -158,7 +164,9 @@ const Search = ({
       nearbyPlacesAPI="GooglePlacesSearch"
       debounce={300}
       enablePoweredByContainer={false}
-      styles={styles.googlePlaces}
+      styles={{
+        ...styles.googlePlaces,
+      }}
       renderLeftButton={renderSearchLeftIcons}
       renderRightButton={renderSearchRightIcons}
     />
@@ -175,6 +183,7 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
       zIndex: 0,
       marginTop: 80,
+
       // zIndex: -1,
       backgroundColor: 'white',
       borderRadius: 10,
@@ -192,6 +201,9 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       borderBottomColor: 'white',
       zIndex: 2,
+    },
+    textInput: {
+      paddingTop: 12,
     },
   },
   leftIconImage: {
