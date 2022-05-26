@@ -48,6 +48,7 @@ import Setting from './Setting';
 import BottomSheetViewImage from '../../components/BottomSheet';
 import {photo_url_from_map} from '../../actions/photpUrlFromMap';
 import {GET_PHOTO_URL_FROM_MAP} from '../../actions/actionType/action.photoMapurl.type';
+import Lodder from '../../components/lodder';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -389,6 +390,7 @@ const Explore = ({
   return (
     <>
       {inputRotate ? rotatedIconAntichange() : rotatedIconchange()}
+
       <StatusBar
         translucent
         backgroundColor="transparent"
@@ -966,6 +968,7 @@ const Explore = ({
           setSettingView={setSettingView}
           bottomSheetRefImage={bottomSheetRefImage}
           setIsLoading={setIsLoading}
+          isLoading={isLoading}
         />
 
         {/* =================search=============== */}
@@ -989,6 +992,7 @@ const Explore = ({
           setSettingView={setSettingView}
         />
       ) : null}
+      {isLoading && <Lodder lodding={isLoading} />}
     </>
   );
 };

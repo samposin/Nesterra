@@ -26,7 +26,9 @@ const Search = ({
   settingView,
   bottomSheetRefImage,
   setIsLoading,
+  isLoading,
 }) => {
+  console.log(isLoading, setIsLoading, 'setIsLoading');
   const dispatch = useDispatch();
   const googlePlacesRef = useRef(null);
   const [lactext, setLaction] = useState('');
@@ -135,6 +137,7 @@ const Search = ({
       onPress={(data, details = null) => {
         // console.log(details.photos, 'pp');
         setIsLoading(true);
+        console.log(isLoading, 'setIsLoading');
         if (details.photos) {
           dispatch({
             type: GET_PHOTO_URL_FROM_SEARCH,
@@ -143,6 +146,7 @@ const Search = ({
             },
           });
           setIsLoading(false);
+          console.log(isLoading, 'setIsLoadingf');
         }
 
         bottomSheetRefImage.current.snapToIndex(0);

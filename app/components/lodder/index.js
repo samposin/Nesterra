@@ -3,9 +3,10 @@ import React from 'react';
 import {ProgressDialog} from 'react-native-simple-dialogs';
 
 const Lodder = ({lodding}) => {
+  // console.log(lodding, 'lodding');
   return (
     <>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
         <ProgressDialog
           visible={lodding}
           message="Please, wait..."
