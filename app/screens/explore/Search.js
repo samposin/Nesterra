@@ -12,8 +12,9 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {LocationKey} from '../../key';
 import Geocoder from 'react-native-geocoding';
-import {useDispatch} from 'react-redux';
+useDispatch;
 import {GET_PHOTO_URL_FROM_SEARCH} from '../../actions/actionType/action.photoMapurl.type';
+import {useDispatch} from 'react-redux';
 
 const Search = ({
   catShow,
@@ -28,7 +29,6 @@ const Search = ({
   setIsLoading,
   isLoading,
 }) => {
-  console.log(isLoading, setIsLoading, 'setIsLoading');
   const dispatch = useDispatch();
   const googlePlacesRef = useRef(null);
   const [lactext, setLaction] = useState('');
@@ -134,22 +134,21 @@ const Search = ({
       ref={googlePlacesRef}
       fetchDetails={true}
       placeholder="Search Location"
-      onPress={(data, details = null) => {
+      onPress={async (data, details = null) => {
         // console.log(details.photos, 'pp');
-        setIsLoading(true);
-        console.log(isLoading, 'setIsLoading');
-        if (details.photos) {
-          dispatch({
-            type: GET_PHOTO_URL_FROM_SEARCH,
-            payload: {
-              data: details.photos,
-            },
-          });
-          setIsLoading(false);
-          console.log(isLoading, 'setIsLoadingf');
-        }
+        //setIsLoading(true);
 
-        bottomSheetRefImage.current.snapToIndex(0);
+        dispatch({
+          type: GET_PHOTO_URL_FROM_SEARCH,
+          payload: {
+            data: details.photos,
+          },
+        });
+        setTimeout(() => {
+          setIsLoading(false);
+          bottomSheetRefImage.current.snapToIndex(0);
+        }, 1000);
+
         const {lat, lng} = details.geometry.location;
         catShow(true);
         onPress(lat, lng);
@@ -160,6 +159,9 @@ const Search = ({
           bottomSheetRefImage.current?.close();
         },
         onChangeText: text => changeValue(text),
+        onEndEditing: () => {
+          setIsLoading(true);
+        },
       }}
       query={{
         key: `${LocationKey}`,

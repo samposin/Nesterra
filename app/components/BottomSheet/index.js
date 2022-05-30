@@ -6,7 +6,7 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
-import React, {useMemo} from 'react';
+import React, {useMemo, useEffect, useState} from 'react';
 
 import BottomSheet, {
   BottomSheetScrollView,
@@ -18,12 +18,19 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import ImageLoder from '../lodder/imageLodder';
+import {useIsFocused} from '@react-navigation/native';
 
-const BottomSheetViewImage = ({bottomSheetRefImage, isLoading}) => {
+const BottomSheetViewImage = ({
+  bottomSheetRefImage,
+  isLoading,
+  setIsLoading,
+}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const photo = useSelector(state => state.photo_url.photo_url);
+  const [photo1, setPhoto1] = useState(photo);
 
-  // console.log(photo);
+  const isFocused = useIsFocused();
+
   const renderItem = ({item}) => {
     return (
       <>
@@ -31,6 +38,7 @@ const BottomSheetViewImage = ({bottomSheetRefImage, isLoading}) => {
       </>
     );
   };
+  useEffect(() => {}, []);
 
   return (
     <>

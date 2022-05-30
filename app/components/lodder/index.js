@@ -1,12 +1,18 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Dimensions, StatusBar} from 'react-native';
 import React from 'react';
 import {ProgressDialog} from 'react-native-simple-dialogs';
-
+const {height} = Dimensions.get('screen');
 const Lodder = ({lodding}) => {
   // console.log(lodding, 'lodding');
   return (
     <>
-      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+      <StatusBar hidden />
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: height,
+        }}>
         <ProgressDialog
           visible={lodding}
           message="Please, wait..."
@@ -30,6 +36,7 @@ const Lodder = ({lodding}) => {
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'row',
+            flex: 1,
           }}
         />
       </View>

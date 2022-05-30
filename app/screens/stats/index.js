@@ -166,7 +166,7 @@ const Stats = () => {
           </View>
         </TouchableWithoutFeedback>
         {/* ==========Lodder======== */}
-        <Lodder lodding={lodding} />
+        {/* <Lodder lodding={lodding} /> */}
       </SafeAreaView>
     </>
   );

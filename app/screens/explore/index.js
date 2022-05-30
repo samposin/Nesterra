@@ -47,7 +47,10 @@ import {clusterImages} from '../../utils/Constants';
 import Setting from './Setting';
 import BottomSheetViewImage from '../../components/BottomSheet';
 import {photo_url_from_map} from '../../actions/photpUrlFromMap';
-import {GET_PHOTO_URL_FROM_MAP} from '../../actions/actionType/action.photoMapurl.type';
+import {
+  GET_PHOTO_URL_FROM_MAP,
+  GET_PHOTO_URL_FROM_SEARCH,
+} from '../../actions/actionType/action.photoMapurl.type';
 import Lodder from '../../components/lodder';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -349,6 +352,7 @@ const Explore = ({
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
     });
+
     bottomSheetRef.current.close();
   };
   const fetchNearestPlacesFromGoogle = e => {
@@ -491,6 +495,7 @@ const Explore = ({
                   tracksViewChanges={false}
                   onPress={() => {
                     bottomSheetRef.current.snapToIndex(0);
+                    bottomSheetRefImage.current.close();
                     get_location_details(item.Location_ID);
                     marker_seleted(i);
                     // setCatShow(false);
@@ -983,6 +988,7 @@ const Explore = ({
         bottomSheetRefImage={bottomSheetRefImage}
         catShow={setCatShow}
         isLoading={isLoading}
+        setIsLoading={setIsLoading}
       />
       {/* =================Setting=============== */}
       {settingView ? (
