@@ -66,7 +66,7 @@ const Search = ({
     Geocoder.init(`${LocationKey}`);
     Geocoder.from(data)
       .then(json => {
-        console.log(json);
+        // console.log(json);
 
         // var location = json.results[0].geometry.location;
 

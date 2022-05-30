@@ -494,9 +494,13 @@ const Explore = ({
                   }}
                   tracksViewChanges={false}
                   onPress={() => {
-                    bottomSheetRef.current.snapToIndex(0);
+                    // bottomSheetRef.current.snapToIndex(0);
                     bottomSheetRefImage.current.close();
-                    get_location_details(item.Location_ID);
+                    get_location_details({
+                      id: item.Location_ID,
+                      setIsLoading,
+                      bottomSheetRef,
+                    });
                     marker_seleted(i);
                     // setCatShow(false);
                     const lat = item.Latitude;
