@@ -150,7 +150,7 @@ const ClusteredMapView = forwardRef(
       );
       // console.log(region, 'region');
       // console.log(superCluster, 'superCluster');
-      // setLatLng({lat: region.latitude, lng: region.longitude});
+      //setLatLng({lat: region.latitude, lng: region.longitude});
       if (superCluster && region) {
         const bBox = calculateBBox(region);
         // console.log(bBox, 'bBox');
@@ -211,8 +211,7 @@ const ClusteredMapView = forwardRef(
           }}
           onRegionChange={_onRegionChange}
           onRegionChangeComplete={_onRegionChangeComplete}
-          // region={currentRegion2}
-        >
+          region={currentRegion2}>
           {markers.map(marker =>
             marker.properties.point_count === 0 ? (
               propsChildren[marker.properties.index]

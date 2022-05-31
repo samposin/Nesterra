@@ -136,7 +136,7 @@ const Search = ({
       placeholder="Search Location"
       onPress={async (data, details = null) => {
         // console.log(details.photos, 'pp');
-        //setIsLoading(true);
+        setIsLoading(true);
 
         dispatch({
           type: GET_PHOTO_URL_FROM_SEARCH,
@@ -159,9 +159,6 @@ const Search = ({
           bottomSheetRefImage.current?.close();
         },
         onChangeText: text => changeValue(text),
-        onEndEditing: () => {
-          setIsLoading(true);
-        },
       }}
       query={{
         key: `${LocationKey}`,

@@ -410,13 +410,13 @@ const Explore = ({
         <MapView
           //showsUserLocation={true}
           // radius={70}
-          onPress={e => {
-            const latitude = e.nativeEvent.coordinate.latitude;
-            const longitude = e.nativeEvent.coordinate.longitude;
-            // photo_url_from_map({lat: latitude, lng: longitude});
-            fetchNearestPlacesFromGoogle(e);
-            bottomSheetRefImage.current.snapToIndex(0);
-          }}
+          // onPress={e => {
+          //   const latitude = e.nativeEvent.coordinate.latitude;
+          //   const longitude = e.nativeEvent.coordinate.longitude;
+          //   // photo_url_from_map({lat: latitude, lng: longitude});
+          //   fetchNearestPlacesFromGoogle(e);
+          //   bottomSheetRefImage.current.snapToIndex(0);
+          // }}
           renderCluster={props => {
             const clusterCounts =
               props.properties.point_count.toString().length;
@@ -485,6 +485,7 @@ const Explore = ({
           }>
           {coordinates &&
             coordinates.map((item, i) => {
+              // console.log(item.SubLocationType);
               return (
                 <Marker.Animated
                   key={`${item.Latitude}_${item.Longitude}`}
@@ -511,7 +512,7 @@ const Explore = ({
                     // setMarkerData(item);
                   }}>
                   <CustomMarker
-                    officeType={item.HierarchyLocationType}
+                    officeType={item.SubLocationType}
                     isChecked={item.isChecked}
                   />
                 </Marker.Animated>

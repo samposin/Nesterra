@@ -61,8 +61,8 @@ export default (state = initialState, action) => {
 
       const fdata = coord.filter(function (item) {
         return (
-          item.HierarchyLocationType.toLowerCase() ===
-          action.payload.HierarchyLocationType.toLowerCase()
+          item.SubLocationType.toLowerCase() ===
+          action.payload.SubLocationType.toLowerCase()
         );
       });
 

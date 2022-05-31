@@ -13,6 +13,7 @@ export default (state = initialState, action) => {
       let photo = [];
       //  console.log(action.payload.data);
       let data1 = action.payload.data.map(item => {
+        console.log(item);
         const pho = {
           photo_reference: item.photos
             ? item.photos[0].photo_reference
