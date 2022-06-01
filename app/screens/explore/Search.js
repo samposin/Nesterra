@@ -135,7 +135,7 @@ const Search = ({
       fetchDetails={true}
       placeholder="Search Location"
       onPress={async (data, details = null) => {
-        // console.log(details.photos, 'pp');
+        console.log(details.geometry, 'pp');
         setIsLoading(true);
 
         dispatch({

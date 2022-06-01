@@ -53,7 +53,7 @@ const ClusteredMapView = forwardRef(
     },
     ref,
   ) => {
-    //console.log(restProps);
+    console.log(clusterColor);
     const {lat, lng} = useSelector(state => state.setLatLang);
 
     const [markers, updateMarkers] = useState([]);
@@ -209,8 +209,14 @@ const ClusteredMapView = forwardRef(
             if (ref) ref.current = map;
             restProps.mapRef(map);
           }}
-          onRegionChange={_onRegionChange}
-          onRegionChangeComplete={_onRegionChangeComplete}
+          onRegionChange={(region, gesture) => {
+            if (Platform.OS === 'android') {
+              if (gesture.isGesture) {
+                _onRegionChange(region);
+              }
+            }
+          }}
+          // onRegionChangeComplete={_onRegionChangeComplete}
           region={currentRegion2}>
           {markers.map(marker =>
             marker.properties.point_count === 0 ? (
@@ -271,7 +277,7 @@ ClusteredMapView.defaultProps = {
   layoutAnimationConf: LayoutAnimation.Presets.spring,
   tracksViewChanges: false,
   // SuperCluster parameters
-  radius: Dimensions.get('window').width * 0.06,
+  radius: Dimensions.get('window').width * 0.08,
   maxZoom: 20,
   minZoom: 1,
   minPoints: 2,
