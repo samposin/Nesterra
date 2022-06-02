@@ -86,11 +86,10 @@ export const generateSpiral = (marker, clusterChildren, markers, index) => {
 export const returnMarkerStyle = points => {
   if (points >= 50) {
     return {
-      width: 84,
-      height: 84,
+      width: 150,
+      height: 150,
       size: 64,
       fontSize: 20,
-      backgroundColor: 'red',
     };
   }
 

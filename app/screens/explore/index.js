@@ -317,7 +317,7 @@ const Explore = ({
     }
     Geolocation.getCurrentPosition(position => {
       // this.setState({ coords: position.coords, loading: false });
-
+      console.log(position);
       const region = {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
@@ -467,7 +467,7 @@ const Explore = ({
           provider={MapView.PROVIDER_GOOGLE}
           style={{...styles.container, marginBottom: 50}}
           onRegionChangeComplete={mapRegionChangeComplete}
-          region={currentRegion}
+          // region={currentRegion}
           initialRegion={{
             latitude: lat,
             longitude: lng,
@@ -536,7 +536,7 @@ const Explore = ({
         </TouchableOpacity>
         {/* ===========get Current position=== */}
         {/* ===========Direction=== */}
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={animationFindON}
           // onPress={() => {
           //   alert('dd');
@@ -545,7 +545,7 @@ const Explore = ({
           // }}
           style={styles.directionButton}>
           <MaterialIcons name="directions" size={24} color="white" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         {/* ===========Direction=== */}
         {/* ===========find Direction=== */}
         {/* <FindeDirection animatioValOff={animatioValOff}/> */}

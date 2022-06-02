@@ -11,6 +11,7 @@ import Stats from '../screens/stats';
 import Assets from '../screens/assets';
 import Search from '../screens/search';
 import ExploreStack from './ExploreStack';
+import Extra from '../screens/NEW';
 
 const Tab = createBottomTabNavigator();
 const TabNaV = ({navigation}) => {
@@ -103,6 +104,21 @@ const TabNaV = ({navigation}) => {
             return (
               <TabButton
                 name="Search"
+                imagePath={tabButtonImage.imgSearch}
+                focused={focused}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Extra"
+        component={Extra}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <TabButton
+                name="Extra"
                 imagePath={tabButtonImage.imgSearch}
                 focused={focused}
               />

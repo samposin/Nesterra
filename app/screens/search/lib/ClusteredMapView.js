@@ -139,7 +139,7 @@ const ClusteredMapView = forwardRef(
       }
     }, [isSpiderfier, markers]);
     const _onRegionChange = (region, details) => {
-      console.log(region, details, 'first');
+      // console.log(region, details, 'first');
     };
     const _onRegionChangeComplete = region => {
       changeLatLng(
@@ -225,7 +225,7 @@ const ClusteredMapView = forwardRef(
               renderCluster ? (
                 renderCluster({
                   onPress: _onClusterPress(marker),
-                  clusterColor,
+                  clusterColor: 'red',
                   clusterTextColor,
                   clusterFontFamily,
                   ...marker,
@@ -237,8 +237,16 @@ const ClusteredMapView = forwardRef(
                   onPress={_onClusterPress(marker)}
                   clusterColor={
                     restProps.selectedClusterId === marker.id
-                      ? restProps.selectedClusterColor
-                      : clusterColor
+                      ? marker.restProps.selectedClusterColor
+                      : marker.properties.point_count.toString().length === 1
+                      ? 'red'
+                      : marker.properties.point_count.toString().length === 2
+                      ? '#ef8e34'
+                      : marker.properties.point_count.toString().length === 3
+                      ? '#bb271a'
+                      : marker.properties.point_count.toString().length === 4
+                      ? '#8c3ac4'
+                      : 'pink'
                   }
                   clusterTextColor={clusterTextColor}
                   clusterFontFamily={clusterFontFamily}

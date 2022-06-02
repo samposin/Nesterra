@@ -38,14 +38,11 @@ const ClusteredMarker = ({
       style={{zIndex: points + 1}}
       onPress={onPress}
       tracksViewChanges={tracksViewChanges}>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        style={[styles.container, {width, height}]}>
+      <TouchableOpacity style={[styles.container, {width, height}]}>
         <View
           style={[
             styles.wrapper,
             {
-              backgroundColor: clusterColor,
               width,
               height,
               borderRadius: width / 2,
