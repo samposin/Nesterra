@@ -1,15 +1,18 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Atms from '../atms';
-import Images from '../image';
-import Notes from '../notes';
-import {View, ScrollView} from 'react-native';
+
 import React from 'react';
-import Circuits from '../circuits';
-import Design from '../designs';
+import Circuits from '../../screens/circuits';
+
+import Hours from '../Hours';
+
+import Other from './Others';
+import Info from './Info';
+import Pics from './Pics';
+import Devices from './Devices';
 
 const Tab = createMaterialTopTabNavigator();
 
-const Profile = () => {
+const BottomSheetTab = () => {
   return (
     <Tab.Navigator
       tabBarPosition="top"
@@ -32,37 +35,39 @@ const Profile = () => {
         disableSwipe: false,
         tabBarIndicatorStyle: {
           width: 70,
+          marginLeft: 10,
 
           backgroundColor: '#1b5a90',
           height: 2.5,
         },
       }}>
       <Tab.Screen
+        name="Info"
+        component={Info}
+        options={{tabBarLabel: 'Info', labelStyle: {textTransform: 'none'}}}
+      />
+      <Tab.Screen
+        name="Pics"
+        component={Pics}
+        options={{tabBarLabel: 'Pics', labelStyle: {textTransform: 'none'}}}
+      />
+      <Tab.Screen
+        name="Hours"
+        component={Hours}
+        options={{tabBarLabel: 'Hours', labelStyle: {textTransform: 'none'}}}
+      />
+      <Tab.Screen
         name="Circuits"
         component={Circuits}
         options={{tabBarLabel: 'Circuits', labelStyle: {textTransform: 'none'}}}
       />
+
       <Tab.Screen
-        name="Atms"
-        component={Atms}
-        options={{tabBarLabel: 'Atms'}}
-      />
-      <Tab.Screen
-        name="Notes"
-        component={Notes}
-        options={{tabBarLabel: 'Notes'}}
-      />
-      <Tab.Screen
-        name="Images"
-        component={Images}
-        options={{tabBarLabel: 'Images'}}
-      />
-      <Tab.Screen
-        name="Design"
-        component={Design}
-        options={{tabBarLabel: 'Design'}}
+        name="Other"
+        component={Other}
+        options={{tabBarLabel: 'Other'}}
       />
     </Tab.Navigator>
   );
 };
-export default Profile;
+export default BottomSheetTab;

@@ -11,9 +11,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case GET_PHOTO_URL_FROM_MAP:
       let photo = [];
-      //  console.log(action.payload.data);
+
       let data1 = action.payload.data.map(item => {
-        console.log(item);
         const pho = {
           photo_reference: item.photos
             ? item.photos[0].photo_reference
@@ -21,7 +20,7 @@ export default (state = initialState, action) => {
         };
         photo.push(pho);
       });
-      const photoo = photo.filter(item => item.url !== 'undefined');
+      const photoo = photo.filter(item => item.photo_reference !== 'undefined');
 
       return {
         ...state,

@@ -355,10 +355,9 @@ const Explore = ({
 
     bottomSheetRef.current.close();
   };
-  const fetchNearestPlacesFromGoogle = e => {
-    setIsLoading(true);
-    const lat = e.nativeEvent.coordinate.latitude;
-    const lng = e.nativeEvent.coordinate.longitude;
+  const fetchNearestPlacesFromGoogle = (lat, lng) => {
+    // const lat = e.nativeEvent.coordinate.latitude;
+    // const lng = e.nativeEvent.coordinate.longitude;
     let radMetter = 20 * 1000; // Search withing 2 KM radius
     const url =
       'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' +
@@ -375,7 +374,6 @@ const Explore = ({
         return res.json();
       })
       .then(res => {
-        // console.log(res.results.photos);
         if (res.results) {
           dispatch({
             type: GET_PHOTO_URL_FROM_MAP,
@@ -383,7 +381,6 @@ const Explore = ({
               data: res.results,
             },
           });
-          setIsLoading(false);
         }
       })
       .catch(error => {
@@ -509,6 +506,7 @@ const Explore = ({
                     // console.log(latt, langg);
                     setLatLng({lat, lng});
                     animateToRegion(lat, lng);
+                    fetchNearestPlacesFromGoogle(lat, lng);
                     // setMarkerData(item);
                   }}>
                   <CustomMarker

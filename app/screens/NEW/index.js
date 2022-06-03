@@ -28,8 +28,8 @@ const Extra = () => {
   const [currentRegion, setCurrentRegion] = useState({
     latitude: lat,
     longitude: lng,
-    latitudeDelta: 0.0112333,
-    longitudeDelta: 0.001233,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA,
   });
 
   const getLocation = async () => {
@@ -40,13 +40,14 @@ const Extra = () => {
     }
     Geolocation.getCurrentPosition(
       position => {
-        // setLat(position.coords.latitude);
-        // setLng(position.coords.longitude);
+        console.log(position.coords.latitude);
+        setLat(Number(position.coords.latitude));
+        setLng(Number(position.coords.longitude));
         const region = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          latitudeDelta: 0.0112333,
-          longitudeDelta: 0.001233,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
         };
         mapRef.current.animateToRegion(region, 500);
       },
@@ -59,6 +60,7 @@ const Extra = () => {
   };
   const _onRegionChange = mapRegion => {
     console.log(mapRegion);
+
     setCurrentRegion({
       latitude: mapRegion.latitude,
       longitude: mapRegion.longitude,
@@ -67,6 +69,8 @@ const Extra = () => {
     });
   };
   const goToAddres = (lat, lng) => {
+    setLat(lat);
+    setLng(lng);
     const region = {
       latitude: lat,
       longitude: lng,
@@ -78,7 +82,7 @@ const Extra = () => {
   useEffect(() => {
     getLocation();
   }, []);
-
+  // Info - Pics - Hours - Circuits - Devices - Others
   return (
     <View style={{flex: 1}}>
       <MapView
@@ -93,12 +97,16 @@ const Extra = () => {
         rotateEnabled={true}
         scrollEnabled={true}
         showsMyLocationButton={true}
+        showsUserLocation={true}
         showsCompass={true}
         followsUserLocation={true}
         provider={MapView.PROVIDER_GOOGLE}
         style={{flex: 1}}
         region={currentRegion}
-        initialRegion={INITIAL_REGION}></MapView>
+        onRegionChangeComplete={region => {
+          setCurrentRegion(region);
+        }}
+        initialRegion={currentRegion}></MapView>
       <SearchAddress goToAddres={goToAddres} />
       {/* <MapView
         ref={mapRef}

@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const Circuits = () => {
+const Info = () => {
   return (
     <View style={{flex: 1, paddingHorizontal: 10}}>
       {/* =====================Branch Id ====================== */}
@@ -210,7 +210,7 @@ const Circuits = () => {
   );
 };
 
-export default Circuits;
+export default Info;
 
 const styles = StyleSheet.create({
   textStyles: {
