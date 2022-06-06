@@ -492,22 +492,20 @@ const Explore = ({
                   }}
                   tracksViewChanges={false}
                   onPress={() => {
-                    // bottomSheetRef.current.snapToIndex(0);
-                    bottomSheetRefImage.current.close();
+                    // bottomSheetRefImage.current.close();
                     get_location_details({
                       id: item.Location_ID,
                       setIsLoading,
                       bottomSheetRef,
                     });
                     marker_seleted(i);
-                    // setCatShow(false);
+
                     const lat = item.Latitude;
                     const lng = item.Longitude;
-                    // console.log(latt, langg);
+
                     setLatLng({lat, lng});
                     animateToRegion(lat, lng);
                     fetchNearestPlacesFromGoogle(lat, lng);
-                    // setMarkerData(item);
                   }}>
                   <CustomMarker
                     officeType={item.SubLocationType}

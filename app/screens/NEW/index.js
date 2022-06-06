@@ -1,13 +1,14 @@
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import React, {useEffect, useState, useRef} from 'react';
-import MapView from 'react-native-map-clustering';
+// import MapView from 'react-native-map-clustering';
 import {hasLocationPermission} from '../../utils/AskPermission';
 import Geolocation from 'react-native-geolocation-service';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+
 import SearchAddress from '../../components/searchAddress';
 import {useSelector} from 'react-redux';
-import {Marker} from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import CustomMarker from '../../components/CustomMarker';
+import BottomsheetView from './BottomsheetView';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -22,7 +23,9 @@ const INITIAL_REGION = {
 };
 const Extra = () => {
   const {coordinates} = useSelector(state => state.coordinates);
+  // console.log(coordinates, 'first');
   const mapRef = useRef(null);
+  const bottomSheetRef = useRef(null);
   const [lat, setLat] = useState(42.340350646);
   const [lng, setLng] = useState(-71.06219976);
   const [currentRegion, setCurrentRegion] = useState({
@@ -106,45 +109,24 @@ const Extra = () => {
         onRegionChangeComplete={region => {
           setCurrentRegion(region);
         }}
-        initialRegion={currentRegion}></MapView>
-      <SearchAddress goToAddres={goToAddres} />
-      {/* <MapView
-        ref={mapRef}
-        preserveClusterPressBehavior={true}
-        maxZoom={20}
-        mapType={'standard'}
-        pitchEnabled={true}
-        zoomControlEnabled={true}
-        zoomEnabled={true}
-        zoomTapEnabled={true}
-        rotateEnabled={true}
-        scrollEnabled={true}
-        showsMyLocationButton={true}
-        showsCompass={true}
-        onRegionChange={(region, gesture) => {
-          if (Platform.OS === 'android') {
-            if (gesture.isGesture) {
-              _onRegionChange(region);
-            }
-          }
-        }}
-        initialRegion={currentRegion}
-        region={currentRegion}
-        style={{flex: 1}}>
-        {coordinates.map(item => {
+        initialRegion={currentRegion}>
+        {coordinates.map((item, i) => {
           return (
-            <Marker.Animated
-              key={`${item.Latitude}_${item.Longitude}`}
+            <Marker
+              onPress={() => {
+                bottomSheetRef.current.snapToIndex(0);
+              }}
+              key={i}
               coordinate={{
                 latitude: item.Latitude,
                 longitude: item.Longitude,
-              }}>
-              <CustomMarker />
-            </Marker.Animated>
+              }}
+            />
           );
         })}
-      </MapView> */}
-      {/* <SearchAddress goToAddres={goToAddres} /> */}
+      </MapView>
+      <SearchAddress goToAddres={goToAddres} />
+      <BottomsheetView bottomSheetRef={bottomSheetRef} />
     </View>
   );
 };

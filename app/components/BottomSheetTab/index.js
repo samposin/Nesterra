@@ -1,14 +1,10 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-
 import React from 'react';
 import Circuits from '../../screens/circuits';
-
-import Hours from '../Hours';
-
+import Hours from './Hours';
 import Other from './Others';
 import Info from './Info';
 import Pics from './Pics';
-import Devices from './Devices';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -30,13 +26,11 @@ const BottomSheetTab = () => {
         tabBarScrollEnabled: true,
         tabBarItemStyle: {width: 90},
         lazy: true,
-
         swipeEnabled: true,
         disableSwipe: false,
         tabBarIndicatorStyle: {
           width: 70,
           marginLeft: 10,
-
           backgroundColor: '#1b5a90',
           height: 2.5,
         },

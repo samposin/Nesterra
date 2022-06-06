@@ -8,42 +8,23 @@ const ImageLoder = ({}) => {
     <SkeletonPlaceholder>
       <View
         style={{
-          flexDirection: 'row',
+          flexDirection: 'column',
         }}>
         <View style={{}}>
-          <View style={{width: 300, height: 100, borderRadius: 5}} />
-        </View>
-        <View>
           <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingLeft: 10,
-            }}>
-            <View style={{width: 200, height: 100, borderRadius: 5}} />
-            {/* <View
-              style={{
-                width: 70,
-                marginTop: 6,
-                marginLeft: 25,
-                height: 15,
-                borderRadius: 4,
-              }}
-            /> */}
-          </View>
-          {/* <View
-            style={{
-              flexDirection: 'column',
-              paddingLeft: 10,
-            }}>
-            <View
-              style={{width: 120, marginTop: 6, height: 15, borderRadius: 4}}
-            />
-            <View
-              style={{width: 150, marginTop: 6, height: 15, borderRadius: 4}}
-            />
-          </View> */}
+            style={{width: width, height: 150, borderRadius: 5, margin: 5}}
+          />
+          <View
+            style={{width: width, height: 150, borderRadius: 5, margin: 5}}
+          />
+          <View
+            style={{width: width, height: 150, borderRadius: 5, margin: 5}}
+          />
+          <View
+            style={{width: width, height: 150, borderRadius: 5, margin: 5}}
+          />
         </View>
+        <View></View>
       </View>
     </SkeletonPlaceholder>
   );
