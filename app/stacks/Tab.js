@@ -18,6 +18,7 @@ const TabNaV = ({navigation}) => {
   return (
     <Tab.Navigator
       screenOptions={{
+        lazy: true,
         headerShown: false,
         tabBarActiveTintColor: 'red',
         tabBarInactiveTintColor: 'gray',
