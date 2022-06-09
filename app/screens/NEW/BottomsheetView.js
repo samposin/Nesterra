@@ -10,7 +10,7 @@ import React, {useMemo} from 'react';
 
 import BottomSheet from '@gorhom/bottom-sheet';
 
-const BottomsheetView = ({bottomSheetRef}) => {
+const BottomsheetView = ({bottomSheetRefImage}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
 
   return (
@@ -23,7 +23,7 @@ const BottomsheetView = ({bottomSheetRef}) => {
         }}
         enabledInnerScrolling={true}
         enabledContentGestureInteraction={false}
-        ref={bottomSheetRef}
+        ref={bottomSheetRefImage}
         index={-1}
         snapPoints={snapPoints}
         enablePanDownToClose={true}

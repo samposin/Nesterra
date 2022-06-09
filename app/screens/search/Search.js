@@ -90,9 +90,10 @@ const SearchA = ({setLatLng, onSearchPress}) => {
       fetchDetails={true}
       placeholder="Search Location"
       onPress={(data, details = null) => {
+        // console.log(details.geometry);
         const lat = details.geometry.location.lat;
         const lng = details.geometry.location.lng;
-        setLatLng({lat, lng});
+        // setLatLng({lat, lng});
         onSearchPress(lat, lng);
         // console.log(
         //   details.geometry.location.lat,

@@ -80,7 +80,6 @@ const BottomSheetViewImage = ({
                 <ImageLoder />
               ) : (
                 <BottomSheetFlatList
-                  showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   data={photo}
                   keyExtractor={(item, index) => index}

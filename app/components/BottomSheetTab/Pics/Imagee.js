@@ -9,7 +9,7 @@ const Imagee = ({image}) => {
     <>
       <View
         style={{
-          width: '100%',
+          width: '98%',
           height: 150,
           marginRight: 2.5,
           borderRadius: 5,

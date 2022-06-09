@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       width: '95%',
       alignSelf: 'center',
-      zIndex: 0,
+      zIndex: 10,
       marginTop: 80,
 
       // zIndex: -1,

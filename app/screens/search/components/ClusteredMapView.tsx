@@ -1,31 +1,37 @@
+/* 
+  This component is taken from the venits/react-native-map-clustering repository and 
+  imported into ours so that you can replace something and experiment with working with 
+  clusters yourself.
+  
+  Some parts of this code may have already been changed.
+*/
+
 import React, {
+  forwardRef,
   memo,
-  useState,
   useEffect,
   useMemo,
   useRef,
-  forwardRef,
+  useState,
 } from 'react';
 import {Dimensions, LayoutAnimation, Platform} from 'react-native';
-import MapView, {Marker, Polyline} from 'react-native-maps';
-import {connect, useSelector} from 'react-redux';
+import MapView, {MapViewProps, Polyline} from 'react-native-maps';
 import SuperCluster from 'supercluster';
+import Search from '../Search';
 
-import SearchA from '../Search';
-
+import {MapClusteringProps} from './ClusteredMapViewTypes';
 import ClusterMarker from './ClusteredMarker';
 import {
+  calculateBBox,
+  generateSpiral,
   isMarker,
   markerToGeoJSONFeature,
-  calculateBBox,
   returnMapZoom,
-  generateSpiral,
 } from './helpers';
 
-const ClusteredMapView = forwardRef(
+const ClusteredMapView = forwardRef<MapClusteringProps & MapViewProps, any>(
   (
     {
-      changeLatLng,
       currentRegion2,
       radius,
       maxZoom,
@@ -53,26 +59,34 @@ const ClusteredMapView = forwardRef(
     },
     ref,
   ) => {
-    console.log(clusterColor);
-    const {lat, lng} = useSelector(state => state.setLatLang);
-
     const [markers, updateMarkers] = useState([]);
     const [spiderMarkers, updateSpiderMarker] = useState([]);
     const [otherChildren, updateChildren] = useState([]);
     const [superCluster, setSuperCluster] = useState(null);
-
     const [currentRegion, updateRegion] = useState(
       restProps.region || restProps.initialRegion,
     );
 
     const [isSpiderfier, updateSpiderfier] = useState(false);
     const [clusterChildren, updateClusterChildren] = useState(null);
+    const [reg, upreg] = useState();
     const mapRef = useRef();
 
     const propsChildren = useMemo(
       () => React.Children.toArray(children),
       [children],
     );
+    const onSearchPress = (lat, lng) => {
+      console.log(lat, lng);
+      // setLatLng({lat, lng});
+      const regid = {
+        latitude: lat,
+        longitude: lng,
+        latitudeDelta: 8.5,
+        longitudeDelta: 8.5,
+      };
+      updateRegion(regid);
+    };
 
     useEffect(() => {
       const rawData = [];
@@ -117,10 +131,12 @@ const ClusteredMapView = forwardRef(
     }, [propsChildren, clusteringEnabled]);
 
     useEffect(() => {
-      if (!spiralEnabled) return;
+      if (!spiralEnabled) {
+        return;
+      }
 
       if (isSpiderfier && markers.length > 0) {
-        let allSpiderMarkers = [];
+        const allSpiderMarkers = [];
         let spiralChildren = [];
         markers.map((marker, i) => {
           if (marker.properties.cluster) {
@@ -129,7 +145,7 @@ const ClusteredMapView = forwardRef(
               Infinity,
             );
           }
-          let positions = generateSpiral(marker, spiralChildren, markers, i);
+          const positions = generateSpiral(marker, spiralChildren, markers, i);
           allSpiderMarkers.push(...positions);
         });
 
@@ -138,31 +154,23 @@ const ClusteredMapView = forwardRef(
         updateSpiderMarker([]);
       }
     }, [isSpiderfier, markers]);
-    const _onRegionChange = (region, details) => {
-      // console.log(region, details, 'first');
-    };
+
     const _onRegionChangeComplete = region => {
-      changeLatLng(
-        region.latitude,
-        region.longitude,
-        region.latitudeDelta,
-        region.longitudeDelta,
-      );
-      // console.log(region, 'region');
-      // console.log(superCluster, 'superCluster');
-      //setLatLng({lat: region.latitude, lng: region.longitude});
       if (superCluster && region) {
         const bBox = calculateBBox(region);
-        // console.log(bBox, 'bBox');
         const zoom = returnMapZoom(region, bBox, minZoom);
         const markers = superCluster.getClusters(bBox, zoom);
         if (animationEnabled && Platform.OS === 'ios') {
           LayoutAnimation.configureNext(layoutAnimationConf);
         }
         if (zoom >= 18 && markers.length > 0 && clusterChildren) {
-          if (spiralEnabled) updateSpiderfier(true);
+          if (spiralEnabled) {
+            updateSpiderfier(true);
+          }
         } else {
-          if (spiralEnabled) updateSpiderfier(false);
+          if (spiralEnabled) {
+            updateSpiderfier(false);
+          }
         }
         updateMarkers(markers);
         onMarkersChange(markers);
@@ -170,6 +178,7 @@ const ClusteredMapView = forwardRef(
         updateRegion(region);
       } else {
         onRegionChangeComplete(region);
+        updateRegion(region);
       }
     };
 
@@ -193,31 +202,32 @@ const ClusteredMapView = forwardRef(
 
       onClusterPress(cluster, children);
     };
-    const region = {
-      latitude: 21.649719233396155,
-      latitudeDelta: 58.337528733629384,
-      longitude: -86.58709522336721,
-      longitudeDelta: 34.517042711377144,
+    const _onRegionChange = (region, details) => {
+      // console.log(region, details, 'first');
     };
+
     return (
       <>
-        {/* <SearchA /> */}
+        <Search onSearchPress={onSearchPress} />
         <MapView
+          animationEnabled={false}
           {...restProps}
           ref={map => {
             mapRef.current = map;
-            if (ref) ref.current = map;
+            if (ref) {
+              ref.current = map;
+            }
             restProps.mapRef(map);
           }}
-          onRegionChange={(region, gesture) => {
-            if (Platform.OS === 'android') {
-              if (gesture.isGesture) {
-                _onRegionChange(region);
-              }
-            }
-          }}
-          // onRegionChangeComplete={_onRegionChangeComplete}
-          region={currentRegion}>
+          //region={currentRegion}
+          // onRegionChange={(region, gesture) => {
+          //   if (Platform.OS === 'android') {
+          //     if (gesture.isGesture) {
+          //       _onRegionChange(region);
+          //     }
+          //   }
+          // }}
+          onRegionChangeComplete={_onRegionChangeComplete}>
           {markers.map(marker =>
             marker.properties.point_count === 0 ? (
               propsChildren[marker.properties.index]
@@ -225,7 +235,7 @@ const ClusteredMapView = forwardRef(
               renderCluster ? (
                 renderCluster({
                   onPress: _onClusterPress(marker),
-                  clusterColor: 'red',
+                  clusterColor,
                   clusterTextColor,
                   clusterFontFamily,
                   ...marker,
@@ -237,16 +247,8 @@ const ClusteredMapView = forwardRef(
                   onPress={_onClusterPress(marker)}
                   clusterColor={
                     restProps.selectedClusterId === marker.id
-                      ? marker.restProps.selectedClusterColor
-                      : marker.properties.point_count.toString().length === 1
-                      ? 'red'
-                      : marker.properties.point_count.toString().length === 2
-                      ? '#ef8e34'
-                      : marker.properties.point_count.toString().length === 3
-                      ? '#bb271a'
-                      : marker.properties.point_count.toString().length === 4
-                      ? '#8c3ac4'
-                      : 'pink'
+                      ? restProps.selectedClusterColor
+                      : clusterColor
                   }
                   clusterTextColor={clusterTextColor}
                   clusterFontFamily={clusterFontFamily}
@@ -285,7 +287,7 @@ ClusteredMapView.defaultProps = {
   layoutAnimationConf: LayoutAnimation.Presets.spring,
   tracksViewChanges: false,
   // SuperCluster parameters
-  radius: Dimensions.get('window').width * 0.08,
+  radius: Dimensions.get('window').width * 0.06,
   maxZoom: 20,
   minZoom: 1,
   minPoints: 2,
@@ -301,7 +303,6 @@ ClusteredMapView.defaultProps = {
   onRegionChangeComplete: () => {},
   onClusterPress: () => {},
   onMarkersChange: () => {},
-  onSearchPress: () => {},
   superClusterRef: {},
   mapRef: () => {},
 };

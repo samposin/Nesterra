@@ -37,13 +37,13 @@ import {connect, useDispatch, useSelector} from 'react-redux';
 import {setLatLng} from '../../actions/setLatLang';
 
 import {get_location_details} from '../../actions/loacationDetails';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {hasLocationPermission} from '../../utils/AskPermission';
 import {LocationKey} from '../../key';
 import CustomMarker from '../../components/CustomMarker';
 import Category from './Category';
-import {clusterImages} from '../../utils/Constants';
+
 import Setting from './Setting';
 import BottomSheetViewImage from '../../components/BottomSheet';
 import {photo_url_from_map} from '../../actions/photpUrlFromMap';

@@ -1,6 +1,6 @@
-import React, {useCallback, useRef, useMemo} from 'react';
-import {StyleSheet, View, Text, Button} from 'react-native';
-import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {useSelector} from 'react-redux';
 import Imagee from './Imagee';
 import ImageLoder from '../../lodder/imageLodder';
@@ -8,21 +8,28 @@ import ImageLoder from '../../lodder/imageLodder';
 const Pics = () => {
   const photo = useSelector(state => state.photo_url.photo_url);
 
+  const renderItem = ({item}) => {
+    return (
+      <>
+        <Imagee image={item.photo_reference} />
+      </>
+    );
+  };
   return (
     <View style={styles.container}>
-      <BottomSheetScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.contentContainer}>
-        {photo ? (
-          photo.map((item, i) => {
-            return <Imagee key={i} image={item.photo_reference} />;
-          })
-        ) : (
-          <ImageLoder />
-        )}
+      {photo ? (
+        <BottomSheetFlatList
+          showsVerticalScrollIndicator={false}
+          data={photo}
+          keyExtractor={(item, index) => index}
+          renderItem={renderItem}
+          contentContainerStyle={{backgroundColor: 'white'}}
+        />
+      ) : (
+        <ImageLoder />
+      )}
 
-        <View style={{height: 70}}></View>
-      </BottomSheetScrollView>
+      <View style={{height: 70}}></View>
     </View>
   );
 };

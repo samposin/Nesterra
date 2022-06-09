@@ -1,211 +1,217 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 const Info = () => {
   return (
     <View style={{flex: 1, paddingHorizontal: 10}}>
-      {/* =====================Branch Id ====================== */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Branch Id</Text>
+      <BottomSheetScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.contentContainer}>
+        {/* =====================Branch Id ====================== */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Branch Id</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
+        {/* =====================Branch Id ====================== */}
+        {/* =====================Facility Type ====================== */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Facility Type</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-      </View>
-      {/* =====================Branch Id ====================== */}
-      {/* =====================Facility Type ====================== */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Facility Type</Text>
+        {/* =====================Facility Type ====================== */}
+        {/* =====================Open Date ====================== */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Open Date</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
+        {/* =====================Open Date  ====================== */}
+        {/* =====================Annual Rent ====================== */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Annual Rent</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-      </View>
-      {/* =====================Facility Type ====================== */}
-      {/* =====================Open Date ====================== */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Open Date</Text>
+        {/* =====================Annual Rent ====================== */}
+        {/* =====================Headcount ====================== */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Headcount</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
+        {/* =====================Headcount ====================== */}
+        {/* =====================Square Feet ====================== */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Square Feet</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-      </View>
-      {/* =====================Open Date  ====================== */}
-      {/* =====================Annual Rent ====================== */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Annual Rent</Text>
+        {/* =====================Square Feet ====================== */}
+        {/* =====================ATM ID ====================== */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>ATM ID</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
+        {/* =====================ATM ID ====================== */}
+        {/* =====================Phone ====================== */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Phone #</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-      </View>
-      {/* =====================Annual Rent ====================== */}
-      {/* =====================Headcount ====================== */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Headcount</Text>
+        {/* =====================Phone ====================== */}
+        {/* =====================Backdoor Ph====================== */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Backdoor Ph#</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
+        {/* =====================Backdoor Ph====================== */}
+        {/* =====================Emergency====================== */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Emergency Phone Number</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-      </View>
-      {/* =====================Headcount ====================== */}
-      {/* =====================Square Feet ====================== */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Square Feet</Text>
+        {/* =====================Emergency====================== */}
+        {/* =====================Branch Mgr========= */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Branch Mgr</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
-        </View>
-      </View>
-      {/* =====================Square Feet ====================== */}
-      {/* =====================ATM ID ====================== */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>ATM ID</Text>
-        </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
-        </View>
-      </View>
-      {/* =====================ATM ID ====================== */}
-      {/* =====================Phone ====================== */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Phone #</Text>
-        </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
-        </View>
-      </View>
-      {/* =====================Phone ====================== */}
-      {/* =====================Backdoor Ph====================== */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Backdoor Ph#</Text>
-        </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
-        </View>
-      </View>
-      {/* =====================Backdoor Ph====================== */}
-      {/* =====================Emergency====================== */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Emergency Phone Number</Text>
-        </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
-        </View>
-      </View>
-      {/* =====================Emergency====================== */}
-      {/* =====================Branch Mgr========= */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Branch Mgr</Text>
-        </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
-        </View>
-      </View>
-      {/* =====================Branch Mgr========= */}
+        {/* =====================Branch Mgr========= */}
 
-      {/* =====================Branch Mgr Ph#========= */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Branch Mgr Ph#</Text>
+        {/* =====================Branch Mgr Ph#========= */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Branch Mgr Ph#</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
+        {/* =====================Branch Mgr Ph#========= */}
+        {/* =====================Region Mgr========= */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Region Mgr</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-      </View>
-      {/* =====================Branch Mgr Ph#========= */}
-      {/* =====================Region Mgr========= */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Region Mgr</Text>
+        {/* =====================Region Mgr========= */}
+        {/* =====================Region Mgr Ph#========= */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Region Mgr Ph#</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
-        </View>
-      </View>
-      {/* =====================Region Mgr========= */}
-      {/* =====================Region Mgr Ph#========= */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Region Mgr Ph#</Text>
-        </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
-        </View>
-      </View>
-      {/* =====================Region Mgr Ph#========= */}
+        {/* =====================Region Mgr Ph#========= */}
 
-      {/* =====================Senior Facility Manager========= */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Senior Facility Manager</Text>
+        {/* =====================Senior Facility Manager========= */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Senior Facility Manager</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
+        {/* =====================Senior Facility Manager========= */}
+        {/* ===================== Facility Manager========= */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Facility Manager</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-      </View>
-      {/* =====================Senior Facility Manager========= */}
-      {/* ===================== Facility Manager========= */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Facility Manager</Text>
+        {/* ===================== Facility Manager========= */}
+        {/* ===================== Facility Manager========= */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Facility Manager</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
+        {/* ===================== Facility Manager========= */}
+        {/* ===================== Facility Manager========= */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Facility Manager Phone</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-      </View>
-      {/* ===================== Facility Manager========= */}
-      {/* ===================== Facility Manager========= */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Facility Manager</Text>
+        {/* ===================== Facility Manager Ph#========= */}
+        {/* =====================  Location Code========= */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>Location Code</Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
+        {/* =====================  Location Code========= */}
+        {/* =====================  Mile ========= */}
+        <View style={styles.item}>
+          <View style={styles.leftItem}>
+            <Text>MileStone </Text>
+          </View>
+          <View style={styles.rightItem}>
+            <Text></Text>
+          </View>
         </View>
-      </View>
-      {/* ===================== Facility Manager========= */}
-      {/* ===================== Facility Manager========= */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Facility Manager Phone</Text>
-        </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
-        </View>
-      </View>
-      {/* ===================== Facility Manager Ph#========= */}
-      {/* =====================  Location Code========= */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>Location Code</Text>
-        </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
-        </View>
-      </View>
-      {/* =====================  Location Code========= */}
-      {/* =====================  Mile ========= */}
-      <View style={styles.item}>
-        <View style={styles.leftItem}>
-          <Text>MileStone </Text>
-        </View>
-        <View style={styles.rightItem}>
-          <Text></Text>
-        </View>
-      </View>
-      {/* =====================  MileStone========= */}
+        {/* =====================  MileStone========= */}
+        <View style={{height: 60}}></View>
+      </BottomSheetScrollView>
     </View>
   );
 };
