@@ -58,7 +58,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
     "rn-sliding-up-panel": "^2.4.5",
-    "supercluster": "^7.1.5"
+    "supercluster": "^7.1.5",
+    "victory-native": "^36.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

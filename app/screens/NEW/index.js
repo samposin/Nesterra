@@ -84,7 +84,7 @@ const Extra = () => {
     setCurrentRegion(region);
   };
   useEffect(() => {
-    getLocation();
+    // getLocation();
   }, []);
   // Info - Pics - Hours - Circuits - Devices - Others
   return (
