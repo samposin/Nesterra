@@ -8,7 +8,7 @@ import {
 import React, {useState, useEffect} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const Details = () => {
+const Details3 = () => {
   const [iconShow, setIconShow] = useState(false);
   const data = [
     {id: 1, name: 'Other', state: 10, city: 10, quantity: 15, uniqueL: 15},
@@ -74,21 +74,12 @@ const Details = () => {
       <View style={styles.container}>
         <Text
           style={{
-            textAlign: 'center',
-            color: '#4472c4',
-            fontSize: 22,
-            fontWeight: 'bold',
-          }}>
-          Invetory Details
-        </Text>
-        <Text
-          style={{
             marginLeft: 10,
             fontSize: 16,
             fontWeight: 'bold',
             color: 'black',
           }}>
-          Active Site Count
+          Circuit Count
         </Text>
         {/* ================== Table Header======= */}
         <View style={styles.tableHeaderView}>
@@ -190,13 +181,12 @@ const Details = () => {
   );
 };
 
-export default Details;
+export default Details3;
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 250,
-    paddingTop: 25,
+    height: 220,
   },
   //table
   tableHeaderView: {
