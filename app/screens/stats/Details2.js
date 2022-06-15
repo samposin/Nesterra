@@ -78,6 +78,7 @@ const Details2 = () => {
             fontSize: 16,
             fontWeight: 'bold',
             color: 'black',
+            fontStyle: 'italic',
           }}>
           Annual Circuit Spend
         </Text>

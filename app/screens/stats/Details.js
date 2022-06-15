@@ -55,12 +55,7 @@ const Details = () => {
     {id: 1, name: 'Other', state: 10, city: 10, quantity: 15, uniqueL: 15},
   ];
   const [data2, setData2] = useState([]);
-  const assen = () => {
-    setData2(data);
-  };
-  const dec = () => {
-    setData2(data1);
-  };
+
   useEffect(() => {
     if (iconShow) {
       setData2(data);
@@ -78,6 +73,7 @@ const Details = () => {
             color: '#4472c4',
             fontSize: 22,
             fontWeight: 'bold',
+            fontStyle: 'italic',
           }}>
           Invetory Details
         </Text>
@@ -87,6 +83,7 @@ const Details = () => {
             fontSize: 16,
             fontWeight: 'bold',
             color: 'black',
+            fontStyle: 'italic',
           }}>
           Active Site Count
         </Text>

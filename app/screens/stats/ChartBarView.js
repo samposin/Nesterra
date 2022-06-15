@@ -20,31 +20,31 @@ const data = [
   {quarter: 8, earnings: 200},
   {quarter: 9, earnings: 100},
   {quarter: 10, earnings: 300},
-  {quarter: 11, earnings: 2000},
-  {quarter: 12, earnings: 2000},
-  {quarter: 13, earnings: 2000},
+  {quarter: 11, earnings: 2150},
+  {quarter: 12, earnings: 585},
+  {quarter: 13, earnings: 564},
   {quarter: 14, earnings: 1000},
-  {quarter: 15, earnings: 2000},
+  {quarter: 15, earnings: 544},
   {quarter: 16, earnings: 2000},
-  {quarter: 17, earnings: 2000},
+  {quarter: 17, earnings: 477},
   {quarter: 18, earnings: 2000},
-  {quarter: 19, earnings: 2000},
+  {quarter: 19, earnings: 987},
   {quarter: 20, earnings: 2000},
-  {quarter: 21, earnings: 2000},
-  {quarter: 22, earnings: 2000},
-  {quarter: 23, earnings: 2000},
-  {quarter: 24, earnings: 2000},
-  {quarter: 25, earnings: 2000},
-  {quarter: 26, earnings: 2000},
-  {quarter: 27, earnings: 2000},
-  {quarter: 28, earnings: 2000},
-  {quarter: 29, earnings: 2000},
+  {quarter: 21, earnings: 498},
+  {quarter: 22, earnings: 212},
+  {quarter: 23, earnings: 878},
+  {quarter: 24, earnings: 545},
+  {quarter: 25, earnings: 777},
+  {quarter: 26, earnings: 555},
+  {quarter: 27, earnings: 999},
+  {quarter: 28, earnings: 111},
+  {quarter: 29, earnings: 5555},
   {quarter: 30, earnings: 2000},
   {quarter: 31, earnings: 2000},
   {quarter: 32, earnings: 2000},
   {quarter: 33, earnings: 2000},
   {quarter: 34, earnings: 2000},
-  {quarter: 35, earnings: 2000},
+  {quarter: 35, earnings: 599},
   {quarter: 36, earnings: 2000},
   {quarter: 37, earnings: 2000},
   {quarter: 38, earnings: 2000},
@@ -52,9 +52,9 @@ const data = [
   {quarter: 40, earnings: 2000},
   {quarter: 41, earnings: 2000},
   {quarter: 42, earnings: 2000},
-  {quarter: 43, earnings: 2000},
+  {quarter: 43, earnings: 213},
   {quarter: 44, earnings: 2000},
-  {quarter: 45, earnings: 2000},
+  {quarter: 45, earnings: 565},
   {quarter: 46, earnings: 2000},
   {quarter: 47, earnings: 2000},
   {quarter: 48, earnings: 2000},
@@ -111,36 +111,7 @@ const ChartBarView = () => {
           </VictoryChart>
         </View>
       </ScrollView>
-      {/* <View
-        style={{
-          width: '100%',
-          height: 260,
-          backgroundColor: 'yellowgreen',
 
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <VictoryBar
-          horizontal
-          data={data}
-          animate={{
-            duration: 2000,
-            onLoad: {duration: 1000},
-          }}
-          barWidth={({index}) => 18}
-          // style={{
-          //   labels: {fontSize: ({text}) => (text.length > 10 ? 20 : 30)},
-          //   parent: {border: '1px solid #000'},
-          // }}
-          domainPadding={{x: 30, y: 5}}
-          style={{data: {fill: '#c43a31'}}}
-          // data accessor for x values
-          x="quarter"
-          // data accessor for y values
-          y="earnings"
-          labels={({datum}) => `${datum._y}`}
-        />
-      </View> */}
       <View style={{height: 50}}></View>
     </>
   );

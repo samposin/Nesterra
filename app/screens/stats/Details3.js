@@ -78,6 +78,7 @@ const Details3 = () => {
             fontSize: 16,
             fontWeight: 'bold',
             color: 'black',
+            fontStyle: 'italic',
           }}>
           Circuit Count
         </Text>
