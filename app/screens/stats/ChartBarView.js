@@ -1,4 +1,4 @@
-import {StyleSheet, View, LogBox, ScrollView} from 'react-native';
+import {StyleSheet, View, Text, LogBox, ScrollView} from 'react-native';
 import React from 'react';
 LogBox.ignoreLogs(['Require cycle: node_modules']);
 
@@ -40,7 +40,7 @@ const data = [
   {quarter: 28, earnings: 111},
   {quarter: 29, earnings: 5555},
   {quarter: 30, earnings: 2000},
-  {quarter: 31, earnings: 2000},
+  {quarter: 31, earnings: 2200},
   {quarter: 32, earnings: 2000},
   {quarter: 33, earnings: 2000},
   {quarter: 34, earnings: 2000},
@@ -48,23 +48,23 @@ const data = [
   {quarter: 36, earnings: 2000},
   {quarter: 37, earnings: 2000},
   {quarter: 38, earnings: 2000},
-  {quarter: 39, earnings: 2000},
+  {quarter: 39, earnings: 200},
   {quarter: 40, earnings: 2000},
   {quarter: 41, earnings: 2000},
   {quarter: 42, earnings: 2000},
   {quarter: 43, earnings: 213},
-  {quarter: 44, earnings: 2000},
+  {quarter: 44, earnings: 10},
   {quarter: 45, earnings: 565},
   {quarter: 46, earnings: 2000},
-  {quarter: 47, earnings: 2000},
-  {quarter: 48, earnings: 2000},
-  {quarter: 49, earnings: 2000},
-  {quarter: 50, earnings: 2000},
+  {quarter: 47, earnings: 150},
+  {quarter: 48, earnings: 140},
+  {quarter: 49, earnings: 120},
+  {quarter: 50, earnings: 100},
 ];
 const ChartBarView = () => {
   return (
     <>
-      <ScrollView>
+      {/* <ScrollView nestedScrollEnabled={true}>
         <View
           style={{
             width: '100%',
@@ -110,9 +110,82 @@ const ChartBarView = () => {
             />
           </VictoryChart>
         </View>
+      </ScrollView> */}
+      <View style={{width: '100%', height: 55}}>
+        <Text
+          style={{
+            textAlign: 'center',
+            color: '#6494ec',
+            fontWeight: '900',
+            fontSize: 16,
+          }}>
+          State Breakdow
+        </Text>
+        <Text
+          style={{
+            textAlign: 'left',
+
+            fontWeight: '500',
+            fontSize: 16,
+            marginLeft: 10,
+          }}>
+          <Text style={{color: 'black'}}>Site</Text>
+
+          <Text> (by state)</Text>
+        </Text>
+      </View>
+      <ScrollView
+        nestedScrollEnabled={true}
+        showsVerticalScrollIndicator={false}
+        style={{height: 300}}>
+        <View
+          style={{
+            width: '100%',
+            height: 1200,
+
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <VictoryChart width={350} height={1200}>
+            <VictoryAxis
+              // tickValues specifies both the number of ticks and where
+              // they are placed on the axis
+              // dependentAxis
+
+              style={{
+                axis: {stroke: 'transparent'},
+                ticks: {stroke: 'transparent'},
+                tickLabels: {
+                  fontSize: 15,
+                  padding: 5,
+                  width: 0,
+                  height: 0,
+                },
+              }}
+              tickValues={[
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+                35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+              ]}
+              // tickFormat={['Yes', 'No', 'Probably', 'Never']}
+            />
+            <VictoryBar
+              barWidth={({index}) => 15}
+              domain={{x: [40, 30]}}
+              horizontal
+              style={{
+                data: {fill: '#006067'},
+              }}
+              labels={({datum}) => `${datum._y}`}
+              data={data}
+              x="quarter"
+              y="earnings"
+            />
+          </VictoryChart>
+        </View>
       </ScrollView>
 
-      <View style={{height: 50}}></View>
+      <View style={{height: 60}}></View>
     </>
   );
 };

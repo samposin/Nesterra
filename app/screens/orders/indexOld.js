@@ -4,12 +4,13 @@ import {
   View,
   SafeAreaView,
   StatusBar,
+  TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
-
+import Entypo from 'react-native-vector-icons/Entypo';
+import DropDownPicker from 'react-native-dropdown-picker';
 import {Picker} from '@react-native-picker/picker';
-import TabView from './components/TabView';
 const Orders = () => {
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
@@ -28,10 +29,28 @@ const Orders = () => {
           marginTop: StatusBar.currentHeight,
           flex: 1,
         }}>
-        <TabView />
         <View style={styles.container}>
+          {/* ==============top============== */}
+          <View style={styles.topView}>
+            <View style={styles.topItem1}>
+              <Text>
+                <Entypo name="cross" size={24} color="black" />
+              </Text>
+            </View>
+            <View style={styles.topItem}>
+              <Text style={{fontWeight: '900', fontSize: 18, color: 'black'}}>
+                Orders
+              </Text>
+            </View>
+            <View style={styles.topItem}>
+              <Text style={{fontWeight: '400', fontSize: 15, color: 'black'}}>
+                Reset
+              </Text>
+            </View>
+          </View>
+          {/* ==============top============== */}
           {/* ==============Button============== */}
-          {/* <View style={styles.buttonView}>
+          <View style={styles.buttonView}>
             <TouchableOpacity
               onPress={() => {
                 setButtonBorder('circuits');
@@ -71,7 +90,7 @@ const Orders = () => {
                 x-Connects
               </Text>
             </TouchableOpacity>
-          </View> */}
+          </View>
           {/* ==============Button============== */}
           <ScrollView showsVerticalScrollIndicator={false}>
             {/* ==============item============== */}
@@ -375,7 +394,8 @@ export default Orders;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    borderWidth: 1,
+    borderColor: 'red',
     margin: 10,
     marginBottom: 50,
   },

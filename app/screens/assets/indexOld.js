@@ -1,8 +1,16 @@
-import {StyleSheet, Text, View, SafeAreaView, StatusBar} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  StatusBar,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import React, {useState} from 'react';
-
-import TabView from './components/TabView';
-
+import Entypo from 'react-native-vector-icons/Entypo';
+import DropDownPicker from 'react-native-dropdown-picker';
+import {Picker} from '@react-native-picker/picker';
 const Assets = () => {
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
@@ -22,9 +30,27 @@ const Assets = () => {
           flex: 1,
         }}>
         <View style={styles.container}>
-          <TabView />
+          {/* ==============top============== */}
+          <View style={styles.topView}>
+            <View style={styles.topItem1}>
+              <Text>
+                <Entypo name="cross" size={24} color="black" />
+              </Text>
+            </View>
+            <View style={styles.topItem}>
+              <Text style={{fontWeight: '900', fontSize: 18, color: 'black'}}>
+                Assets
+              </Text>
+            </View>
+            <View style={styles.topItem}>
+              <Text style={{fontWeight: '700', fontSize: 15, color: 'black'}}>
+                Reset
+              </Text>
+            </View>
+          </View>
+          {/* ==============top============== */}
           {/* ==============Button============== */}
-          {/* <View style={styles.buttonView}>
+          <View style={styles.buttonView}>
             <TouchableOpacity
               onPress={() => {
                 setButtonBorder('active');
@@ -64,7 +90,7 @@ const Assets = () => {
                 Both
               </Text>
             </TouchableOpacity>
-          </View> */}
+          </View>
           {/* ==============Button============== */}
           {/* ==============Table============== */}
           <View style={styles.table}>
@@ -173,7 +199,7 @@ export default Assets;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    borderWidth: 1,
     borderColor: '#000000',
     margin: 10,
     marginBottom: 50,
@@ -181,6 +207,7 @@ const styles = StyleSheet.create({
   topView: {
     height: 50,
     width: '100%',
+
     flexDirection: 'row',
   },
   topItem: {

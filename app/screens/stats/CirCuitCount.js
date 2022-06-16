@@ -8,54 +8,64 @@ import {
 import React, {useState, useEffect} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const Details = () => {
+const CirCuitCount = () => {
   const [iconShow, setIconShow] = useState(false);
   const data = [
-    {id: 1, name: 'Other', state: 10, city: 10, quantity: 15, uniqueL: 15},
-    {id: 1, name: '3rd Party', state: 15, city: 20, quantity: 22, uniqueL: 22},
-    {id: 1, name: 'ATM', state: 16, city: 1052, quantity: 3136, uniqueL: 2455},
+    {id: 1, name: 'Voice', state: 10, city: 10, quantity: 15, uniqueL: 15},
+    {id: 1, name: 'Data', state: 15, city: 20, quantity: 22, uniqueL: 22},
     {
       id: 1,
-      name: 'Branch',
+      name: 'Service',
+      state: 16,
+      city: 1052,
+      quantity: 3136,
+      uniqueL: 2455,
+    },
+    {
+      id: 1,
+      name: 'Wireless',
       state: 15,
       city: 591,
       quantity: 1150,
       uniqueL: 1068,
     },
-    {id: 1, name: 'Office', state: 10, city: 10, quantity: 15, uniqueL: 15},
     {
       id: 1,
-      name: 'Data Center',
-      state: 8,
-      city: 8,
-      quantity: 8,
-      uniqueL: 8,
+      name: 'Cable/Sat',
+      state: 15,
+      city: 591,
+      quantity: 1150,
+      uniqueL: 1068,
     },
   ];
   const data1 = [
     {
       id: 1,
-      name: 'Data Center',
+      name: 'Cable/Sat',
       state: 8,
       city: 8,
       quantity: 8,
       uniqueL: 8,
     },
-    {id: 1, name: 'Office', state: 10, city: 10, quantity: 15, uniqueL: 15},
+    {id: 1, name: 'Wireless', state: 10, city: 10, quantity: 15, uniqueL: 15},
     {
       id: 1,
-      name: 'Branch',
+      name: 'Service',
       state: 15,
       city: 591,
       quantity: 1150,
       uniqueL: 1068,
     },
-    {id: 1, name: 'ATM', state: 16, city: 1052, quantity: 3136, uniqueL: 2455},
-    {id: 1, name: '3rd Party', state: 15, city: 20, quantity: 22, uniqueL: 22},
-    {id: 1, name: 'Other', state: 10, city: 10, quantity: 15, uniqueL: 15},
+    {id: 1, name: 'Data', state: 16, city: 1052, quantity: 3136, uniqueL: 2455},
+    {id: 1, name: 'Voice', state: 15, city: 20, quantity: 22, uniqueL: 22},
   ];
   const [data2, setData2] = useState([]);
-
+  const assen = () => {
+    setData2(data);
+  };
+  const dec = () => {
+    setData2(data1);
+  };
   useEffect(() => {
     if (iconShow) {
       setData2(data);
@@ -69,41 +79,31 @@ const Details = () => {
       <View style={styles.container}>
         <Text
           style={{
-            textAlign: 'center',
-            color: '#4472c4',
-            fontSize: 22,
-            fontWeight: 'bold',
-            fontStyle: 'italic',
-          }}>
-          Invetory Details
-        </Text>
-        <Text
-          style={{
             marginLeft: 10,
             fontSize: 16,
             fontWeight: 'bold',
             color: 'black',
             fontStyle: 'italic',
           }}>
-          Active Site Count
+          Circuit Count
         </Text>
         {/* ================== Table Header======= */}
         <View style={styles.tableHeaderView}>
           <View style={styles.tableHeader}>
             <View style={{...styles.left2, alignItems: 'flex-start'}}>
-              <Text style={styles.headerText}>Location Type</Text>
+              <Text style={styles.headerText}>Category</Text>
             </View>
             <View style={styles.left1}>
-              <Text style={styles.headerText}>States</Text>
+              <Text style={styles.headerText}>At&T</Text>
             </View>
             <View style={styles.left1}>
-              <Text style={styles.headerText}>Cities</Text>
+              <Text style={styles.headerText}>VeriZon</Text>
             </View>
             <View style={styles.left1}>
-              <Text style={styles.headerText}>Quantity</Text>
+              <Text style={styles.headerText}>Granite</Text>
             </View>
             <View style={styles.left2}>
-              <Text style={styles.headerText}>Unique Location</Text>
+              <Text style={styles.headerText}>Other</Text>
             </View>
           </View>
 
@@ -187,13 +187,12 @@ const Details = () => {
   );
 };
 
-export default Details;
+export default CirCuitCount;
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 250,
-    paddingTop: 25,
+    height: 220,
   },
   //table
   tableHeaderView: {
@@ -211,10 +210,12 @@ const styles = StyleSheet.create({
   tableHeaderIcon: {
     width: '100%',
     height: '30%',
-    paddingLeft: 10,
+    paddingRight: 10,
+
     borderBottomColor: '#2ac3b8',
     borderBottomWidth: 1,
     paddingBottom: 2,
+    alignItems: 'flex-end',
   },
   headerText: {
     fontWeight: 'bold',

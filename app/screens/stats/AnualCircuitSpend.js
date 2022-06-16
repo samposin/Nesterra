@@ -1,58 +1,58 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Foundation from 'react-native-vector-icons/Foundation';
 
-const Details3 = () => {
+const AnualCircuitSpend = () => {
   const [iconShow, setIconShow] = useState(false);
   const data = [
-    {id: 1, name: 'Other', state: 10, city: 10, quantity: 15, uniqueL: 15},
-    {id: 1, name: '3rd Party', state: 15, city: 20, quantity: 22, uniqueL: 22},
-    {id: 1, name: 'ATM', state: 16, city: 1052, quantity: 3136, uniqueL: 2455},
+    {id: 1, name: 'Voice', state: 10, city: 10, quantity: 15, uniqueL: 15},
+    {id: 1, name: 'Data', state: 15, city: 20, quantity: 22, uniqueL: 22},
     {
       id: 1,
-      name: 'Branch',
+      name: 'Service',
+      state: 16,
+      city: 1052,
+      quantity: 3136,
+      uniqueL: 2455,
+    },
+    {
+      id: 1,
+      name: 'Wireless',
       state: 15,
       city: 591,
       quantity: 1150,
       uniqueL: 1068,
     },
-    {id: 1, name: 'Office', state: 10, city: 10, quantity: 15, uniqueL: 15},
     {
       id: 1,
-      name: 'Data Center',
-      state: 8,
-      city: 8,
-      quantity: 8,
-      uniqueL: 8,
+      name: 'Cable/Sat',
+      state: 15,
+      city: 591,
+      quantity: 1150,
+      uniqueL: 1068,
     },
   ];
   const data1 = [
     {
       id: 1,
-      name: 'Data Center',
+      name: 'Cable/Sat',
       state: 8,
       city: 8,
       quantity: 8,
       uniqueL: 8,
     },
-    {id: 1, name: 'Office', state: 10, city: 10, quantity: 15, uniqueL: 15},
+    {id: 1, name: 'Wireless', state: 10, city: 10, quantity: 15, uniqueL: 15},
     {
       id: 1,
-      name: 'Branch',
+      name: 'Service',
       state: 15,
       city: 591,
       quantity: 1150,
       uniqueL: 1068,
     },
-    {id: 1, name: 'ATM', state: 16, city: 1052, quantity: 3136, uniqueL: 2455},
-    {id: 1, name: '3rd Party', state: 15, city: 20, quantity: 22, uniqueL: 22},
-    {id: 1, name: 'Other', state: 10, city: 10, quantity: 15, uniqueL: 15},
+    {id: 1, name: 'Data', state: 16, city: 1052, quantity: 3136, uniqueL: 2455},
+    {id: 1, name: 'Voice', state: 15, city: 20, quantity: 22, uniqueL: 22},
   ];
   const [data2, setData2] = useState([]);
   const assen = () => {
@@ -80,25 +80,25 @@ const Details3 = () => {
             color: 'black',
             fontStyle: 'italic',
           }}>
-          Circuit Count
+          Annual Circuit Spend
         </Text>
         {/* ================== Table Header======= */}
         <View style={styles.tableHeaderView}>
           <View style={styles.tableHeader}>
-            <View style={{...styles.left2, alignItems: 'flex-start'}}>
-              <Text style={styles.headerText}>Location Type</Text>
+            <View style={{...styles.left2}}>
+              <Text style={styles.headerText}>Category</Text>
             </View>
             <View style={styles.left1}>
-              <Text style={styles.headerText}>States</Text>
+              <Text style={styles.headerText}>AT&T</Text>
             </View>
             <View style={styles.left1}>
-              <Text style={styles.headerText}>Cities</Text>
+              <Text style={styles.headerText}>Varizon</Text>
             </View>
             <View style={styles.left1}>
-              <Text style={styles.headerText}>Quantity</Text>
+              <Text style={styles.headerText}>Granite</Text>
             </View>
-            <View style={styles.left2}>
-              <Text style={styles.headerText}>Unique Location</Text>
+            <View style={styles.left4}>
+              <Text style={styles.headerText}>Other</Text>
             </View>
           </View>
 
@@ -117,7 +117,7 @@ const Details3 = () => {
           {data2.map((item, i) => {
             return (
               <View key={i} style={styles.dataRow}>
-                <View style={{...styles.left2, alignItems: 'flex-start'}}>
+                <View style={{...styles.left3, alignItems: 'flex-start'}}>
                   <Text style={{...styles.headerText, marginLeft: 5}}>
                     {item.name}
                   </Text>
@@ -128,15 +128,27 @@ const Details3 = () => {
                     borderLeftWidth: 1,
                     borderLeftColor: '#2ac3b8',
                   }}>
+                  <Text style={{marginRight: 3}}>
+                    <Foundation name="dollar" size={18} />
+                  </Text>
                   <Text style={styles.headerText}>{item.state}</Text>
                 </View>
                 <View style={{...styles.left1}}>
+                  <Text style={{marginRight: 3}}>
+                    <Foundation name="dollar" size={18} />
+                  </Text>
                   <Text style={styles.headerText}>{item.city}</Text>
                 </View>
                 <View style={{...styles.left1}}>
+                  <Text style={{marginRight: 3}}>
+                    <Foundation name="dollar" size={18} />
+                  </Text>
                   <Text style={{...styles.headerText1}}>{item.quantity}</Text>
                 </View>
-                <View style={styles.left2}>
+                <View style={styles.left4}>
+                  <Text style={{marginRight: 3}}>
+                    <Foundation name="dollar" size={18} />
+                  </Text>
                   <Text style={{...styles.headerText, marginRight: 5}}>
                     {item.uniqueL}
                   </Text>
@@ -145,7 +157,7 @@ const Details3 = () => {
             );
           })}
           <View style={styles.dataRow}>
-            <View style={{...styles.left2, alignItems: 'flex-start'}}>
+            <View style={{...styles.left3, alignItems: 'flex-start'}}>
               <Text
                 style={{
                   marginLeft: 5,
@@ -158,19 +170,32 @@ const Details3 = () => {
             <View
               style={{
                 ...styles.left1,
-                borderLeftWidth: 1,
-                borderLeftColor: '#2ac3b8',
               }}>
-              <Text style={styles.headerText}>33</Text>
-            </View>
-            <View style={{...styles.left1}}>
-              <Text style={styles.headerText}>1,134</Text>
-            </View>
-            <View style={{...styles.left1}}>
+              <Text style={{marginRight: 3}}>
+                <Foundation name="dollar" size={18} />
+              </Text>
               <Text style={{...styles.headerText1}}>4,484</Text>
             </View>
-            <View style={styles.left2}>
-              <Text style={{...styles.headerText, marginRight: 5}}>2,639</Text>
+            <View style={{...styles.left1}}>
+              <Text style={{marginRight: 3}}>
+                <Foundation name="dollar" size={18} />
+              </Text>
+              <Text style={{...styles.headerText1}}>4,484</Text>
+            </View>
+            <View style={{...styles.left1}}>
+              <Text style={{marginRight: 3}}>
+                <Foundation name="dollar" size={18} />
+              </Text>
+              <Text style={{...styles.headerText1}}>4,484</Text>
+            </View>
+            <View
+              style={{
+                ...styles.left2,
+              }}>
+              <Text style={{marginRight: 3}}>
+                <Foundation name="dollar" size={18} />
+              </Text>
+              <Text style={{...styles.headerText1}}>4,484</Text>
             </View>
           </View>
           {/* ======data Row====== */}
@@ -182,7 +207,7 @@ const Details3 = () => {
   );
 };
 
-export default Details3;
+export default AnualCircuitSpend;
 
 const styles = StyleSheet.create({
   container: {
@@ -205,10 +230,11 @@ const styles = StyleSheet.create({
   tableHeaderIcon: {
     width: '100%',
     height: '30%',
-    paddingLeft: 10,
+    paddingRight: 10,
     borderBottomColor: '#2ac3b8',
     borderBottomWidth: 1,
     paddingBottom: 2,
+    alignItems: 'flex-end',
   },
   headerText: {
     fontWeight: 'bold',
@@ -231,16 +257,34 @@ const styles = StyleSheet.create({
   left2: {
     width: '24.5%',
     height: '100%',
-    alignItems: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
 
-    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  left4: {
+    width: '24.5%',
+    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+
+    alignItems: 'flex-end',
+  },
+  left3: {
+    width: '24.5%',
+    height: '100%',
+
+    justifyContent: 'flex-start',
+    paddingRight: 5,
   },
   left1: {
     width: '17%',
     height: '100%',
     alignItems: 'flex-end',
 
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+
+    flexDirection: 'row',
   },
   right: {
     width: '80%',

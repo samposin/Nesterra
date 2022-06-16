@@ -8,7 +8,7 @@ import {
 import React, {useState, useEffect} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const Details2 = () => {
+const InventoryDetails = () => {
   const [iconShow, setIconShow] = useState(false);
   const data = [
     {id: 1, name: 'Other', state: 10, city: 10, quantity: 15, uniqueL: 15},
@@ -55,12 +55,7 @@ const Details2 = () => {
     {id: 1, name: 'Other', state: 10, city: 10, quantity: 15, uniqueL: 15},
   ];
   const [data2, setData2] = useState([]);
-  const assen = () => {
-    setData2(data);
-  };
-  const dec = () => {
-    setData2(data1);
-  };
+
   useEffect(() => {
     if (iconShow) {
       setData2(data);
@@ -74,13 +69,23 @@ const Details2 = () => {
       <View style={styles.container}>
         <Text
           style={{
+            textAlign: 'center',
+            color: '#4472c4',
+            fontSize: 22,
+            fontWeight: 'bold',
+            fontStyle: 'italic',
+          }}>
+          Inventory Details
+        </Text>
+        <Text
+          style={{
             marginLeft: 10,
             fontSize: 16,
             fontWeight: 'bold',
             color: 'black',
             fontStyle: 'italic',
           }}>
-          Annual Circuit Spend
+          Active Site Count
         </Text>
         {/* ================== Table Header======= */}
         <View style={styles.tableHeaderView}>
@@ -182,12 +187,13 @@ const Details2 = () => {
   );
 };
 
-export default Details2;
+export default InventoryDetails;
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 220,
+    height: 250,
+    paddingTop: 25,
   },
   //table
   tableHeaderView: {
