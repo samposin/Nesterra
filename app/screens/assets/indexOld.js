@@ -9,8 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-import DropDownPicker from 'react-native-dropdown-picker';
-import {Picker} from '@react-native-picker/picker';
+
 const Assets = () => {
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);

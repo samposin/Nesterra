@@ -1,19 +1,8 @@
 import {StyleSheet, Text, View, SafeAreaView, StatusBar} from 'react-native';
 import React, {useState} from 'react';
-
 import TabView from './components/TabView';
 
 const Assets = () => {
-  const [open, setOpen] = useState(false);
-  const [open1, setOpen1] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'All', value: 'all'},
-    {label: 'One', value: 'One'},
-  ]);
-
-  const [buttonBorder, setButtonBorder] = useState('active');
-  const [selectedLanguage, setSelectedLanguage] = useState();
   return (
     <>
       <SafeAreaView
@@ -67,100 +56,7 @@ const Assets = () => {
           </View> */}
           {/* ==============Button============== */}
           {/* ==============Table============== */}
-          <View style={styles.table}>
-            {/* ===================table Tow============== */}
-            <View style={{...styles.tableRow, backgroundColor: '#dbe3f2'}}>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>Sites</Text>
-              </View>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>Circuits</Text>
-              </View>
-              <View style={styles.tableRowColumLast}>
-                <Text style={styles.boxText}>Devices</Text>
-              </View>
-            </View>
-            {/* ===================table Tow============== */}
-            {/* ===================table Tow============== */}
-            <View style={styles.tableRow}>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>Offices</Text>
-              </View>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>MPLS</Text>
-              </View>
-              <View style={styles.tableRowColumLast}>
-                <Text style={styles.boxText}>Routers</Text>
-              </View>
-            </View>
-            {/* ===================table Tow============== */}
-            {/* ===================table Tow============== */}
-            <View style={styles.tableRow}>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>Branches</Text>
-              </View>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>UVN</Text>
-              </View>
-              <View style={styles.tableRowColumLast}>
-                <Text style={styles.boxText}>Switches</Text>
-              </View>
-            </View>
-            {/* ===================table Tow============== */}
-            {/* ===================table Tow============== */}
-            <View style={styles.tableRow}>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>ATMs</Text>
-              </View>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>Wireless</Text>
-              </View>
-              <View style={styles.tableRowColumLast}>
-                <Text style={styles.boxText}>FireWalls</Text>
-              </View>
-            </View>
-            {/* ===================table Tow============== */}
-            {/* ===================table Tow============== */}
-            <View style={styles.tableRow}>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>DCs</Text>
-              </View>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>VolP</Text>
-              </View>
-              <View style={styles.tableRowColumLast}>
-                <Text style={styles.boxText}>Load Balancers</Text>
-              </View>
-            </View>
-            {/* ===================table Tow============== */}
-            {/* ===================table Tow============== */}
-            <View style={styles.tableRow}>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>Carrrier Colors</Text>
-              </View>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>Broadband</Text>
-              </View>
-              <View style={styles.tableRowColumLast}>
-                <Text style={styles.boxText}>Servers</Text>
-              </View>
-            </View>
-            {/* ===================table Tow============== */}
-            {/* ===================table Tow============== */}
-            <View style={styles.tableRow}>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>3rd Partys</Text>
-              </View>
-              <View style={styles.tableRowColum}>
-                <Text style={styles.boxText}>Broadband</Text>
-              </View>
-              <View style={styles.tableRowColumLast}>
-                <Text style={styles.boxText}>Instant Issue</Text>
-                <Text style={styles.boxText}>Printers</Text>
-              </View>
-            </View>
-            {/* ===================table Tow============== */}
-          </View>
+
           {/* ==============Table============== */}
         </View>
       </SafeAreaView>
