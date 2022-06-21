@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 
-import {Picker} from '@react-native-picker/picker';
 import TabView from './components/TabView';
 const Orders = () => {
   const [open, setOpen] = useState(false);
@@ -28,8 +27,8 @@ const Orders = () => {
           marginTop: StatusBar.currentHeight,
           flex: 1,
         }}>
-        <TabView />
         <View style={styles.container}>
+          <TabView />
           {/* ==============Button============== */}
           {/* <View style={styles.buttonView}>
             <TouchableOpacity
@@ -73,297 +72,6 @@ const Orders = () => {
             </TouchableOpacity>
           </View> */}
           {/* ==============Button============== */}
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {/* ==============item============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>item#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============item============== */}
-            {/* ==============Project============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>Project#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============Project============== */}
-            {/* ==============SmartSite============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>SmartSite#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============SmartSite============== */}
-            {/* ==============Tangoe============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>Tangoe#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============Tangoe============== */}
-            {/* ==============Carrier============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>Carrier#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============Carrier============== */}
-            {/* ==============Address============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>Address#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============Address============== */}
-            {/* ==============Vendor============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>Vendor#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============Vendor============== */}
-            {/* ==============Primary Contact============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>Primary Contact#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============Primary Contact============== */}
-            {/* ==============Technical Contact============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>Technical Contact#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============Technical Contact============== */}
-            {/* ==============Order Type============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>Order Type#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============Order Type============== */}
-            {/* ==============Order Status============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>Order Status#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                    <Picker.Item label="Net Banking" value="key4" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============Order Status============== */}
-            {/* ==============Services Category============== */}
-            <View style={styles.dropDownView}>
-              <View style={styles.dropDownViewLeft}>
-                <Text>Services Category#</Text>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-            </View>
-            {/* ==============Services Category============== */}
-            <View style={{height: 50}}></View>
-          </ScrollView>
         </View>
       </SafeAreaView>
     </>
@@ -375,14 +83,13 @@ export default Orders;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
+    backgroundColor: 'red',
     margin: 10,
     marginBottom: 50,
   },
   topView: {
     height: 50,
     width: '100%',
-
     flexDirection: 'row',
   },
   topItem: {

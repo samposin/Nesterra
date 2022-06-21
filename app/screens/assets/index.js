@@ -69,7 +69,6 @@ export default Assets;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     borderColor: '#000000',
     margin: 10,
     marginBottom: 50,
@@ -133,7 +132,6 @@ const styles = StyleSheet.create({
   ///=========Table
   table: {
     width: '90%',
-
     borderColor: 'black',
     borderWidth: 1,
     alignSelf: 'center',
@@ -152,7 +150,6 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRightColor: 'black',
     borderRightWidth: 1,
-
     justifyContent: 'center',
     alignItems: 'center',
   },

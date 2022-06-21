@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-import DropDownPicker from 'react-native-dropdown-picker';
+
 import {Picker} from '@react-native-picker/picker';
 const Orders = () => {
   const [open, setOpen] = useState(false);
@@ -402,7 +402,6 @@ const styles = StyleSheet.create({
   topView: {
     height: 50,
     width: '100%',
-
     flexDirection: 'row',
   },
   topItem: {
