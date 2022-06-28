@@ -1,16 +1,16 @@
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, Dimensions} from 'react-native';
 import React, {useEffect, useState, useRef} from 'react';
 // import MapView from 'react-native-map-clustering';
 import {hasLocationPermission} from '../../utils/AskPermission';
 import Geolocation from 'react-native-geolocation-service';
 
 import SearchAddress from '../../components/searchAddress';
-import {useSelector} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import MapView from 'react-native-map-clustering';
 import {Marker} from 'react-native-maps';
-import CustomMarker from '../../components/CustomMarker';
+// import CustomMarker from '../../components/CustomMarker';
 import BottomsheetView from './BottomsheetView';
-
+import {get_order} from '../../actions/order';
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const ASPECT_RATIO = SCREEN_WIDTH / SCREEN_HEIGHT;
@@ -22,7 +22,7 @@ const INITIAL_REGION = {
   latitudeDelta: 8.5,
   longitudeDelta: 8.5,
 };
-const Extra = () => {
+const Extra = ({navigation, get_order}) => {
   const {coordinates} = useSelector(state => state.coordinates);
   // console.log(coordinates, 'first');
   const mapRef = useRef(null);
@@ -44,7 +44,7 @@ const Extra = () => {
     }
     Geolocation.getCurrentPosition(
       position => {
-        console.log(position.coords.latitude);
+        // console.log(position.coords.latitude);
         setLat(Number(position.coords.latitude));
         setLng(Number(position.coords.longitude));
         const region = {
@@ -83,9 +83,12 @@ const Extra = () => {
     };
     setCurrentRegion(region);
   };
+  const che = () => {
+    console.log(currentRegion);
+  };
   useEffect(() => {
     // getLocation();
-  }, []);
+  }, [currentRegion]);
   // Info - Pics - Hours - Circuits - Devices - Others
   return (
     <View style={{flex: 1}}>
@@ -107,16 +110,25 @@ const Extra = () => {
         followsUserLocation={true}
         provider={MapView.PROVIDER_GOOGLE}
         style={{flex: 1}}
-        region={currentRegion}
-        onRegionChangeComplete={region => {
+        initialRegion={currentRegion}
+        // region={currentRegion}
+        onRegionChange={region => {
           setCurrentRegion(region);
         }}
-        initialRegion={currentRegion}>
+        // initialRegion={currentRegion}
+      >
         {coordinates.map((item, i) => {
           return (
             <Marker
               onPress={() => {
-                bottomSheetRef.current.snapToIndex(0);
+                console.log(item.Location_ID);
+                get_order(item.Location_ID);
+                setTimeout(() => {
+                  navigation.navigate('Orders', {
+                    location_ID: item.Location_ID,
+                  });
+                }, 1000);
+                //bottomSheetRef.current.snapToIndex(0);
               }}
               key={i}
               coordinate={{
@@ -133,6 +145,6 @@ const Extra = () => {
   );
 };
 
-export default Extra;
+export default connect(null, {get_order})(Extra);
 
 const styles = StyleSheet.create({});

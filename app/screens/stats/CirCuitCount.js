@@ -204,14 +204,12 @@ const styles = StyleSheet.create({
     height: '70%',
     flexDirection: 'row',
     paddingHorizontal: 3,
-
     alignItems: 'center',
   },
   tableHeaderIcon: {
     width: '100%',
     height: '30%',
     paddingRight: 10,
-
     borderBottomColor: '#2ac3b8',
     borderBottomWidth: 1,
     paddingBottom: 2,
@@ -246,13 +244,11 @@ const styles = StyleSheet.create({
     width: '17%',
     height: '100%',
     alignItems: 'flex-end',
-
     justifyContent: 'center',
   },
   right: {
     width: '80%',
     height: '100%',
-
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },

@@ -2,6 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import React from 'react';
+import OrderDetails from '../screens/OrderDetails.js';
 import Profile from '../screens/profile';
 
 import TabNaV from './Tab';
@@ -15,7 +16,7 @@ const MainStack = () => {
           headerShown: false,
         }}>
         <Stack.Screen name="TabNaV" component={TabNaV} />
-        {/* <Stack.Screen name="Profile" component={Profile} /> */}
+        <Stack.Screen name="OrderDetails" component={OrderDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );

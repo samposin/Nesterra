@@ -7,14 +7,15 @@ import {Base_url} from '../../key';
 import {FILTER_MARKER} from '../actionType/action.Coordinatefilter.type';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {markardata} from '../../utils/markerData';
+import {dataMar} from '../../utils/MarkerData1';
 
 export const get_coordinates = () => dispatch => {
   dispatch({
     type: GET_COORDINATES,
     payload: {
-      data: markardata,
-      lat: markardata[2].Latitude,
-      lng: markardata[2].Longitude,
+      data: dataMar,
+      lat: dataMar[2].Latitude,
+      lng: dataMar[2].Longitude,
     },
   });
   // Axios.get(`${Base_url}/citizenapi/api/GetLocationDataByCoordinates?limit=100`)

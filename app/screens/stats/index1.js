@@ -16,7 +16,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Snackbar from 'react-native-snackbar';
 import {Checkbox} from 'react-native-paper';
 import {TextInput, Input} from 'react-native-paper';
-import Lodder from '../../components/lodder';
+// import Lodder from '../../components/lodder';
 
 const Stats = () => {
   const [text, setText] = React.useState('');
@@ -132,7 +132,6 @@ const Stats = () => {
                 <Text
                   style={{
                     fontSize: 16,
-
                     color: 'black',
                   }}>
                   Remember me
@@ -207,12 +206,10 @@ const styles = StyleSheet.create({
   //=======check
   check: {
     width: '90%',
-
     flexDirection: 'row',
     alignSelf: 'center',
     marginTop: 10,
     borderRadius: 5,
-
     alignItems: 'center',
   },
   //=======check

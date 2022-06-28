@@ -1146,7 +1146,7 @@
 
 "@mapbox/geo-viewport@^0.4.1":
   version "0.4.1"
-  resolved "https://registry.npmjs.org/@mapbox/geo-viewport/-/geo-viewport-0.4.1.tgz"
+  resolved "https://registry.yarnpkg.com/@mapbox/geo-viewport/-/geo-viewport-0.4.1.tgz#a184c0b161975858a2e855a1e333e66af342964b"
   integrity sha512-5g6eM3EOSl7+0p0VY+vHWEYjUlNzof936VKHTi/NuJVABjbYe8D2NAVJ0qt5C9Np4glUlhKFepgAgQ0OEybrjQ==
   dependencies:
     "@mapbox/sphericalmercator" "~1.1.0"
@@ -1165,7 +1165,7 @@
 
 "@mapbox/sphericalmercator@~1.1.0":
   version "1.1.0"
-  resolved "https://registry.npmjs.org/@mapbox/sphericalmercator/-/sphericalmercator-1.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/@mapbox/sphericalmercator/-/sphericalmercator-1.1.0.tgz#f3b1af042620716a1289fc41e1e97f610823aefe"
   integrity sha512-pEsfZyG4OMThlfFQbCte4gegvHUjxXCjz0KZ4Xk8NdOYTQBLflj6U8PL05RPAiuRAMAQNUUKJuL6qYZ5Y4kAWA==
 
 "@motify/components@^0.17.1":
@@ -2220,9 +2220,9 @@
   resolved "https://registry.npmjs.org/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz"
   integrity sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==
 
-"@types/geojson@^7946.0.7":
+"@types/geojson@^7946.0.8":
   version "7946.0.8"
-  resolved "https://registry.npmjs.org/@types/geojson/-/geojson-7946.0.8.tgz"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.8.tgz#30744afdb385e2945e22f3b033f897f76b1f12ca"
   integrity sha512-1rkryxURpr6aWP7R786/UQOkJ3PcpQiWkAXBmdWc7ryFWqN6a4xfK7BtjXvFBKO9LjQ+MWQSWxYeZX1OApnArA==
 
 "@types/graceful-fs@^4.1.2":
@@ -7347,7 +7347,7 @@ react-native-linear-gradient@^2.5.6:
 
 react-native-map-clustering@^3.4.2:
   version "3.4.2"
-  resolved "https://registry.npmjs.org/react-native-map-clustering/-/react-native-map-clustering-3.4.2.tgz"
+  resolved "https://registry.yarnpkg.com/react-native-map-clustering/-/react-native-map-clustering-3.4.2.tgz#9ecdd489bfd7f22fc558f48c2b7a3e8a1807933f"
   integrity sha512-7VN3ZmOG6gH2THY1VCkrklJmLVxoaY3SyQHuPlNG1CPmL/unPkyAyfDxFoZahf+UxRYIWSbLa9C3oI3Lcswi+Q==
   dependencies:
     "@mapbox/geo-viewport" "^0.4.1"
@@ -7361,12 +7361,12 @@ react-native-maps-directions@^1.8.0:
     lodash.isequal "^4.5.0"
     prop-types "^15.6.0"
 
-react-native-maps@^0.30.1:
-  version "0.30.1"
-  resolved "https://registry.npmjs.org/react-native-maps/-/react-native-maps-0.30.1.tgz"
-  integrity sha512-VDgGygFcXwKLFNmdGb5DVy3DJhjP3qCe3txzDfeO6kQyNELj875ZbZMTYW84XsLUBFNpAWXKffWvMKHMQKv2Gg==
+react-native-maps@1.0.0-beta.2:
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.0.0-beta.2.tgz#9d76a76717aafd79b4a9f4f9499e0c3beaf81c53"
+  integrity sha512-YcYGPizxXUO235yqb93M7MqKqDHM5UYhfkT6NGd2QOTjNi9cqYSFPRlHcO60l9knVzM6kI7O7YN7FknzioWt5Q==
   dependencies:
-    "@types/geojson" "^7946.0.7"
+    "@types/geojson" "^7946.0.8"
 
 react-native-pager-view@^5.4.15:
   version "5.4.15"

@@ -929,7 +929,6 @@ const Explore = ({
             left: 0,
             width: '100%',
             height: 50,
-
             flexDirection: 'row',
           }}>
           <View style={styles.titleView}>
@@ -1104,7 +1103,6 @@ const styles = StyleSheet.create({
   mapTypeViewUpper: {
     width: '100%',
     height: '50%',
-
     borderRadius: 5,
   },
   mapTypeImage: {width: 40, height: 40, borderRadius: 5},
@@ -1119,7 +1117,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-
     borderWidth: 2,
     padding: 3,
   },
@@ -1140,7 +1137,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
-
     elevation: 8,
   },
   directionButton: {
@@ -1160,7 +1156,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
-
     elevation: 8,
   },
   // added by Dildar Khan start

@@ -13,6 +13,7 @@ const data = [
   {id: 3, txt: 'ATM', isChecked: false},
   {id: 4, txt: '3rd Party', isChecked: false},
   {id: 5, txt: 'Other', isChecked: false},
+  {id: 6, txt: 'Geneology', isChecked: false},
 ];
 
 const SiteType = ({getlist, select_all, is_selected}) => {
