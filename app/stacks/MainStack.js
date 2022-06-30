@@ -2,6 +2,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import React from 'react';
+import CircuitInventory from '../screens/CircuitInventory/index.js';
+import DevicesInventory from '../screens/DevicesInventory/index.js';
 import OrderDetails from '../screens/OrderDetails.js';
 import Profile from '../screens/profile';
 
@@ -17,6 +19,8 @@ const MainStack = () => {
         }}>
         <Stack.Screen name="TabNaV" component={TabNaV} />
         <Stack.Screen name="OrderDetails" component={OrderDetails} />
+        <Stack.Screen name="CircuitInventory" component={CircuitInventory} />
+        <Stack.Screen name="DevicesInventory" component={DevicesInventory} />
       </Stack.Navigator>
     </NavigationContainer>
   );

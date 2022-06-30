@@ -1,0 +1,1 @@
+export const GET_ALL_INVENTORY = 'GET_ALL_INVENTORY';

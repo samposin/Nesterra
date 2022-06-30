@@ -1,17 +1,18 @@
-import {GET_ORDER} from '../../actions/actionType/action.Order.type';
+import {GET_ALL_INVENTORY} from '../../actions/actionType/inventory.type';
 
 const initialState = {
-  order: [],
-  orderLoad: false,
+  cirCuitInventory: [],
+  inventoryLoad: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_ORDER:
+    case GET_ALL_INVENTORY:
       // console.log(action.payload.data, 'action.payload.data');
+      //console.log(action.payload.data);
       return {
         ...state,
-        order: action.payload.data,
+        cirCuitInventory: action.payload.data,
       };
 
     default:

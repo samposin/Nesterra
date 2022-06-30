@@ -19,6 +19,7 @@ const Orders = ({get_order, navigation, route}) => {
   const isFocused = useIsFocused();
   // const [order, setOrder] = useState([]);
   const order = useSelector(state => state.order.order);
+  console.log(order);
 
   const [id, setId] = useState('');
   useEffect(() => {
@@ -145,7 +146,6 @@ const styles = StyleSheet.create({
   topView: {
     height: 50,
     width: '100%',
-
     flexDirection: 'row',
   },
   topItem: {
@@ -165,26 +165,21 @@ const styles = StyleSheet.create({
   table: {
     width: '100%',
     paddingHorizontal: 10,
-
     alignSelf: 'center',
     marginTop: 15,
   },
   tableRow: {
     width: '100%',
     height: 50,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
-
     alignSelf: 'center',
   },
   tableRow1: {
     width: '100%',
     height: 100,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
-
     alignSelf: 'center',
   },
   tableRowColum: {

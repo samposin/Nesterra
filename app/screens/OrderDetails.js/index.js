@@ -237,7 +237,7 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {orderDetails.Bill_Stop_Date}
+                    {moment(orderDetails.Bill_Stop_Date).format('DD-MM-YYYY')}
                   </Text>
                 </View>
               </View>
@@ -435,7 +435,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#000000',
     margin: 10,
-    marginBottom: 50,
+    marginBottom: 5,
   },
   topView: {
     height: 50,
