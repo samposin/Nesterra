@@ -21,8 +21,7 @@ export const photo_url_from_map = (lat, lng) => dispatch => {
       return res.json();
     })
     .then(res => {
-      console.log(res.results, 'll');
-
+      // console.log(res.results, 'll');
       //   dispatch({
       //     type: GET_PHOTO_URL_FROM_MAP,
       //     payload: {
@@ -35,7 +34,6 @@ export const photo_url_from_map = (lat, lng) => dispatch => {
       //     };
       //     places.push(photo);
       //   });
-
       //   console.log(places);
     })
     .catch(error => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, FlatList, View} from 'react-native';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {useSelector} from 'react-redux';
 import Imagee from './Imagee';
@@ -19,6 +19,7 @@ const Pics = () => {
     <View style={styles.container}>
       {photo ? (
         <BottomSheetFlatList
+          numColumns={2}
           showsVerticalScrollIndicator={false}
           data={photo}
           keyExtractor={(item, index) => index}
@@ -37,16 +38,11 @@ const Pics = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
+    paddingRight: 3,
   },
   contentContainer: {
     backgroundColor: 'white',
-  },
-  itemContainer: {
-    width: 400,
-    height: 100,
-    padding: 6,
-    margin: 6,
-    backgroundColor: '#eee',
   },
 });
 

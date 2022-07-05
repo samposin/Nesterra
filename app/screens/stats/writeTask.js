@@ -10,7 +10,7 @@ const writeTask = async data => {
     createdTask = realm.create('Task', data);
     dadf = realm.objects('Task');
   });
-  console.log(dadf);
+  // console.log(dadf);
   realm.close();
   return createdTask;
 };

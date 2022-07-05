@@ -9,7 +9,7 @@ import order from './order';
 import photo_url from './photpUrlFromMap';
 import OrderDetails from './order/OrderDetails';
 import circuitInventory from './CircuitInventory';
-import devicesInventory from './DevicesInventory';
+import devicesInventory from './devicesInventory';
 
 const rootReducer = combineReducers({
   setLatLang,

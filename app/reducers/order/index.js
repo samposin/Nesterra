@@ -3,6 +3,7 @@ import {GET_ORDER} from '../../actions/actionType/action.Order.type';
 const initialState = {
   order: [],
   orderLoad: false,
+  id: '',
 };
 
 export default (state = initialState, action) => {
@@ -12,6 +13,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         order: action.payload.data,
+        id: action.payload.id,
       };
 
     default:

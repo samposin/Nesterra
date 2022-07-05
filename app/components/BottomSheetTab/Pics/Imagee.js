@@ -9,11 +9,12 @@ const Imagee = ({image}) => {
     <>
       <View
         style={{
-          width: '98%',
+          width: '48%',
           height: 150,
-          marginRight: 2.5,
-          borderRadius: 5,
+
           margin: 5,
+          marginRight: 5,
+          borderRadius: 5,
         }}>
         <Image
           source={{
@@ -24,7 +25,6 @@ const Imagee = ({image}) => {
             height: '100%',
             resizeMode: 'cover',
             borderRadius: 5,
-            marginRight: 2.5,
           }}
         />
       </View>

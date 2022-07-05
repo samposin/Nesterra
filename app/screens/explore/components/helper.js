@@ -1,8 +1,8 @@
 export const returnMarkerStyle = points => {
   if (points >= 50) {
     return {
-      width: 84,
-      height: 84,
+      width: 74,
+      height: 74,
       size: 64,
       fontSize: 16,
     };
@@ -10,8 +10,8 @@ export const returnMarkerStyle = points => {
 
   if (points >= 25) {
     return {
-      width: 78,
-      height: 78,
+      width: 60,
+      height: 60,
       size: 58,
       fontSize: 15,
     };

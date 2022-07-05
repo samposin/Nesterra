@@ -19,8 +19,8 @@ const MainStack = () => {
         }}>
         <Stack.Screen name="TabNaV" component={TabNaV} />
         <Stack.Screen name="OrderDetails" component={OrderDetails} />
-        <Stack.Screen name="CircuitInventory" component={CircuitInventory} />
-        <Stack.Screen name="DevicesInventory" component={DevicesInventory} />
+        {/* <Stack.Screen name="CircuitInventory" component={CircuitInventory} />
+        <Stack.Screen name="DevicesInventory" component={DevicesInventory} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

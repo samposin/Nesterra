@@ -19,7 +19,6 @@ const Orders = ({get_order, navigation, route}) => {
   const isFocused = useIsFocused();
   // const [order, setOrder] = useState([]);
   const order = useSelector(state => state.order.order);
-  console.log(order);
 
   const [id, setId] = useState('');
   useEffect(() => {

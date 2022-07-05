@@ -1,15 +1,63 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+} from 'react-native';
 import React, {useMemo} from 'react';
 
-import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetScrollView,
+  BottomSheetFlatList,
+} from '@gorhom/bottom-sheet';
 import Profile from '../profile';
 import {useSelector} from 'react-redux';
 import BottomSheetTab from '../../components/BottomSheetTab';
+import {useState} from 'react';
 
 const BottomSheetView = ({bottomSheetRef, catShow}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const location_data = useSelector(state => state.location_details.data);
 
+  const data = [
+    {id: 0, name: 'INFO', isActive: true},
+    {id: 1, name: 'PICS', isActive: false},
+    {id: 2, name: 'HOURS', isActive: false},
+    {id: 3, name: 'CIRCUITS', isActive: false},
+    {id: 4, name: 'DEVICES', isActive: false},
+    {id: 5, name: 'ORDERS', isActive: false},
+  ];
+  const [data1, setData1] = useState(data);
+  const changeColor = id => {
+    let listData = data1.map(item => {
+      let itm = {...item, isActive: false};
+      return itm;
+    });
+
+    listData[id].isActive = true;
+    setData1(listData);
+  };
+  const renderItem = ({item, i}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          changeColor(item.id);
+        }}
+        style={{
+          width: 100,
+          height: 30,
+          margin: 2,
+          backgroundColor: item.isActive ? 'green' : 'red',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{color: item.isActive ? 'white' : 'black'}}>
+          {item.name}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
   return (
     <>
       <BottomSheet
@@ -34,17 +82,21 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
         //   console.log(fromIndex, toIndex);
         // }}
       >
-        <View style={{flex: 1, paddingHorizontal: 5, zIndex: 10}}>
+        <View style={{flex: 1, zIndex: 10}}>
           {/* {location_data && {}} */}
 
-          <Text style={{fontSize: 18, fontWeight: '700', marginLeft: 10}}>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: '700',
+              color: 'black',
+              marginLeft: 10,
+            }}>
             {location_data?.Address}
             {location_data?.Location_ID}
           </Text>
-          <Text style={{fontSize: 13, marginLeft: 10}}>
-            {location_data?.SubLocationType}:
-          </Text>
-          <Text style={{fontSize: 16, marginLeft: 10}}>
+
+          <Text style={{fontSize: 16, color: 'black', marginLeft: 10}}>
             Sity Type:{' '}
             <Text
               style={{
@@ -56,7 +108,28 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
               {location_data?.SubLocationType}
             </Text>
           </Text>
-          <View style={{width: '100%', height: 10}}></View>
+          <View
+            style={{
+              width: '100%',
+              height: 30,
+
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <Text style={{fontSize: 16, marginLeft: 10, color: 'black'}}>
+              Sity Status:{' '}
+            </Text>
+
+            <View
+              style={{
+                width: 20,
+                height: 20,
+                backgroundColor: location_data?.LocationStatusDesc
+                  ? '#56ff00'
+                  : 'red',
+                borderRadius: 10,
+              }}></View>
+          </View>
 
           {/* <BottomSheetScrollView
             nestedScrollEnabled={true}
@@ -65,6 +138,13 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
               styles.contentContainer
             }></BottomSheetScrollView> */}
           <BottomSheetTab />
+          {/* <BottomSheetFlatList
+            horizontal
+            data={data1}
+            keyExtractor={i => i}
+            renderItem={renderItem}
+            contentContainerStyle={styles.contentContainer}
+          /> */}
         </View>
       </BottomSheet>
     </>
@@ -75,7 +155,7 @@ export default BottomSheetView;
 
 const styles = StyleSheet.create({
   textStyles: {
-    marginLeft: 5,
+    // marginLeft: 5,
   },
   contentContainer: {
     paddingTop: 10,
@@ -97,5 +177,8 @@ const styles = StyleSheet.create({
     height: '100%',
     borderLeftColor: '#77ccc5',
     borderLeftWidth: 1,
+  },
+  contentContainer: {
+    backgroundColor: 'white',
   },
 });

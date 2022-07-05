@@ -9,8 +9,9 @@ import React from 'react';
 
 import {connect, useSelector} from 'react-redux';
 
-const Devices = ({navigation}) => {
-  const {devicesInventory} = useSelector(state => state.devicesInventory);
+const Orders = ({navigation}) => {
+  const {order} = useSelector(state => state.order);
+  const {id} = useSelector(state => state.order);
 
   return (
     <>
@@ -22,7 +23,7 @@ const Devices = ({navigation}) => {
         {/* ==============top============== */}
 
         {/* ==============Table============== */}
-        {devicesInventory.length == 0 ? (
+        {order.length == 0 ? (
           <View
             style={{
               width: '100%',
@@ -40,7 +41,7 @@ const Devices = ({navigation}) => {
             <View style={{...styles.tableRow}}>
               <View style={{...styles.tableRowColum}}>
                 <Text style={{...styles.boxText, color: 'white'}}>
-                  Devices Id
+                  Inventory Id
                 </Text>
               </View>
               <View
@@ -49,7 +50,7 @@ const Devices = ({navigation}) => {
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
-                <Text style={styles.boxText}>Device Name</Text>
+                <Text style={styles.boxText}>Order Type</Text>
               </View>
               <View
                 style={{
@@ -57,7 +58,7 @@ const Devices = ({navigation}) => {
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
-                <Text style={styles.boxText}>Device Status</Text>
+                <Text style={styles.boxText}>Status</Text>
               </View>
               <View
                 style={{
@@ -65,7 +66,15 @@ const Devices = ({navigation}) => {
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
-                <Text style={styles.boxText}>Device Vendor</Text>
+                <Text style={styles.boxText}>Address</Text>
+              </View>
+              <View
+                style={{
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
+                  borderLeftWidth: 2,
+                }}>
+                <Text style={styles.boxText}>Address1</Text>
               </View>
             </View>
             {/* ===================table Tow============== */}
@@ -73,10 +82,15 @@ const Devices = ({navigation}) => {
             <ScrollView
               style={{width: '100%', height: 480}}
               showsVerticalScrollIndicator={false}>
-              {devicesInventory.map((item, i) => {
+              {order.map((item, i) => {
                 return (
                   <TouchableOpacity
-                    onPress={() => navigation.navigate('OrderDetails')}
+                    onPress={() =>
+                      navigation.navigate('OrderDetails', {
+                        inv_Id: item.Inventory_ID,
+                        loca_Id: id,
+                      })
+                    }
                     key={i}
                     style={{
                       ...styles.tableRow1,
@@ -89,7 +103,7 @@ const Devices = ({navigation}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.ID}</Text>
+                      <Text style={styles.boxText1}>{item.Inventory_ID}</Text>
                     </View>
                     <View
                       style={{
@@ -97,7 +111,7 @@ const Devices = ({navigation}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.Device_Name}</Text>
+                      <Text style={styles.boxText1}>{item.Order_Type}</Text>
                     </View>
                     <View
                       style={{
@@ -105,7 +119,7 @@ const Devices = ({navigation}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.Device_Status}</Text>
+                      <Text style={styles.boxText1}>{item.Status}</Text>
                     </View>
                     <View
                       style={{
@@ -113,7 +127,15 @@ const Devices = ({navigation}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.Device_Vendor}</Text>
+                      <Text style={styles.boxText1}>{item.vendor}</Text>
+                    </View>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                        borderLeftWidth: 2,
+                      }}>
+                      <Text style={styles.boxText1}>{item.vendor}</Text>
                     </View>
                   </TouchableOpacity>
                 );
@@ -131,7 +153,7 @@ const Devices = ({navigation}) => {
   );
 };
 
-export default connect(null, {})(Devices);
+export default connect(null, {})(Orders);
 
 const styles = StyleSheet.create({
   container: {

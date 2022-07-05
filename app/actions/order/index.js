@@ -11,6 +11,7 @@ export const get_order = id => dispatch => {
         type: GET_ORDER,
         payload: {
           data: response.data,
+          id: id,
         },
       });
     })

@@ -1,10 +1,12 @@
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import React from 'react';
-import Circuits from '../../screens/circuits';
+import Circuits from './Circuits';
 import Hours from './Hours';
-import Other from './Others';
+
 import Info from './Info';
 import Pics from './Pics';
+import Orders from './Orders';
+import Devices from './Devices';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -12,33 +14,48 @@ const BottomSheetTab = () => {
   return (
     <Tab.Navigator
       tabBarPosition="top"
-      backBehavior="none"
+      // backBehavior="none"
       initialRouteName={Circuits}
-      removeClippedSubviews={false}
-      animationEnabled={true}
+      // removeClippedSubviews={false}
+      // animationEnabled={true}
       upperCaseLabel="false"
       screenOptions={{
         tabBarLabelStyle: {textTransform: 'lowercase'},
         tabBarActiveTintColor: '#1b5a90',
         tabBarInactiveTintColor: '#757575',
+
         tabBarLabelStyle: {fontSize: 13, fontWeight: '700'},
         tabBarStyle: {backgroundColor: '#f5f5f5'},
         tabBarScrollEnabled: true,
-        tabBarItemStyle: {width: 90},
-        lazy: true,
-        swipeEnabled: true,
-        disableSwipe: false,
+        tabBarItemStyle: {
+          width: 93,
+          borderColor: 'black',
+          borderWidth: 1.5,
+          marginHorizontal: 3,
+          borderRadius: 5,
+        },
+
+        // swipeEnabled: true,
+        // disableSwipe: false,
         tabBarIndicatorStyle: {
-          width: 70,
+          width: 0,
           marginLeft: 10,
-          backgroundColor: '#1b5a90',
+
           height: 2.5,
         },
       }}>
       <Tab.Screen
         name="Info"
         component={Info}
-        options={{tabBarLabel: 'Info', labelStyle: {textTransform: 'none'}}}
+        options={{
+          tabBarLabel: 'Info',
+          labelStyle: {textTransform: 'none'},
+
+          tabBarActiveBackgroundColor: 'red',
+          style: {
+            backgroundColor: '#21147a',
+          },
+        }}
       />
       <Tab.Screen
         name="Pics"
@@ -57,9 +74,14 @@ const BottomSheetTab = () => {
       />
 
       <Tab.Screen
-        name="Other"
-        component={Other}
-        options={{tabBarLabel: 'Other'}}
+        name="Devices"
+        component={Devices}
+        options={{tabBarLabel: 'Devices'}}
+      />
+      <Tab.Screen
+        name="Orders"
+        component={Orders}
+        options={{tabBarLabel: 'Orders'}}
       />
     </Tab.Navigator>
   );

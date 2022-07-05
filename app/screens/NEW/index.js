@@ -15,8 +15,9 @@ import {connect, useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import ImageLoder from '../../components/lodder/imageLodder';
 import {dataMar} from '../../utils/MarkerData1';
-import {getInventory} from '../../actions/inventory';
+
 import {get_all_devices_inventory} from '../../actions/devicesInventory';
+import {getInventoryCircuit} from '../../actions/circuitInventory';
 
 const Extra = ({
   getInventory,
@@ -148,7 +149,9 @@ const Extra = ({
   );
 };
 
-export default connect(null, {getInventory, get_all_devices_inventory})(Extra);
+export default connect(null, {getInventoryCircuit, get_all_devices_inventory})(
+  Extra,
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -201,10 +204,8 @@ const styles = StyleSheet.create({
     width: '23%',
     height: '100%',
     marginHorizontal: 2,
-
     borderBottomColor: '#73c0b8',
     borderBottomWidth: 1,
-
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -225,17 +226,14 @@ const styles = StyleSheet.create({
   tableRow1: {
     width: '100%',
     height: 40,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
-
     alignSelf: 'center',
   },
   tableRowColum1: {
     width: '23%',
     height: '100%',
     marginHorizontal: 2,
-
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -254,7 +252,6 @@ const styles = StyleSheet.create({
   secondTableRow: {
     width: '100%',
     height: 30,
-
     flexDirection: 'row',
     borderBottomColor: 'black',
     borderBottomWidth: 1,

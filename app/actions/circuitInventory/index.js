@@ -1,13 +1,13 @@
 import Axios from 'axios';
 import {Base_url} from '../../key';
-import {GET_ALL_INVENTORY} from '../actionType/inventory.type';
+import {GET_ALL_CIRCUIT_INVENTORY} from '../actionType/circuitInventory.type';
 
-export const getInventory = id => dispatch => {
+export const getInventoryCircuit = id => dispatch => {
   Axios.get(`${Base_url}/api/GetCircuitInventoryByLocationId?Locationid=${id}`)
     .then(response => {
       //   console.log(response.data.length);
       dispatch({
-        type: GET_ALL_INVENTORY,
+        type: GET_ALL_CIRCUIT_INVENTORY,
         payload: {
           data: response.data,
         },

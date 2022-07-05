@@ -9,8 +9,8 @@ import React from 'react';
 
 import {connect, useSelector} from 'react-redux';
 
-const Devices = ({navigation}) => {
-  const {devicesInventory} = useSelector(state => state.devicesInventory);
+const Circuits = ({navigation}) => {
+  const {cirCuitInventory} = useSelector(state => state.circuitInventory);
 
   return (
     <>
@@ -22,7 +22,7 @@ const Devices = ({navigation}) => {
         {/* ==============top============== */}
 
         {/* ==============Table============== */}
-        {devicesInventory.length == 0 ? (
+        {cirCuitInventory.length == 0 ? (
           <View
             style={{
               width: '100%',
@@ -40,7 +40,7 @@ const Devices = ({navigation}) => {
             <View style={{...styles.tableRow}}>
               <View style={{...styles.tableRowColum}}>
                 <Text style={{...styles.boxText, color: 'white'}}>
-                  Devices Id
+                  Circuits Id
                 </Text>
               </View>
               <View
@@ -49,7 +49,7 @@ const Devices = ({navigation}) => {
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
-                <Text style={styles.boxText}>Device Name</Text>
+                <Text style={styles.boxText}>Vendor</Text>
               </View>
               <View
                 style={{
@@ -57,7 +57,7 @@ const Devices = ({navigation}) => {
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
-                <Text style={styles.boxText}>Device Status</Text>
+                <Text style={styles.boxText}>Category</Text>
               </View>
               <View
                 style={{
@@ -65,7 +65,7 @@ const Devices = ({navigation}) => {
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
-                <Text style={styles.boxText}>Device Vendor</Text>
+                <Text style={styles.boxText}>Sub Cat 1</Text>
               </View>
             </View>
             {/* ===================table Tow============== */}
@@ -73,7 +73,7 @@ const Devices = ({navigation}) => {
             <ScrollView
               style={{width: '100%', height: 480}}
               showsVerticalScrollIndicator={false}>
-              {devicesInventory.map((item, i) => {
+              {cirCuitInventory.map((item, i) => {
                 return (
                   <TouchableOpacity
                     onPress={() => navigation.navigate('OrderDetails')}
@@ -89,7 +89,7 @@ const Devices = ({navigation}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.ID}</Text>
+                      <Text style={styles.boxText1}>{item.Circuit_ID}</Text>
                     </View>
                     <View
                       style={{
@@ -97,7 +97,7 @@ const Devices = ({navigation}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.Device_Name}</Text>
+                      <Text style={styles.boxText1}>{item.Vendor}</Text>
                     </View>
                     <View
                       style={{
@@ -105,7 +105,7 @@ const Devices = ({navigation}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.Device_Status}</Text>
+                      <Text style={styles.boxText1}>{item.Category}</Text>
                     </View>
                     <View
                       style={{
@@ -113,7 +113,7 @@ const Devices = ({navigation}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.Device_Vendor}</Text>
+                      <Text style={styles.boxText1}>{item.Category}</Text>
                     </View>
                   </TouchableOpacity>
                 );
@@ -131,7 +131,7 @@ const Devices = ({navigation}) => {
   );
 };
 
-export default connect(null, {})(Devices);
+export default connect(null, {})(Circuits);
 
 const styles = StyleSheet.create({
   container: {

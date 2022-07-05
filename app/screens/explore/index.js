@@ -23,6 +23,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Geolocation from 'react-native-geolocation-service';
 import CustomClusteredMarkers from './components/CustomClusteredMarkers';
 import {LogBox} from 'react-native';
+import {get_order} from '../../actions/order';
 
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 
@@ -47,11 +48,14 @@ import Category from './Category';
 import Setting from './Setting';
 import BottomSheetViewImage from '../../components/BottomSheet';
 import {photo_url_from_map} from '../../actions/photpUrlFromMap';
+
 import {
   GET_PHOTO_URL_FROM_MAP,
   GET_PHOTO_URL_FROM_SEARCH,
 } from '../../actions/actionType/action.photoMapurl.type';
 import Lodder from '../../components/lodder';
+import {get_all_devices_inventory} from '../../actions/devicesInventory';
+import {getInventoryCircuit} from '../../actions/circuitInventory';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -61,10 +65,13 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const Explore = ({
   navigation,
   get_coordinates,
+  get_order,
   get_location_details,
   marker_seleted,
   setLatLng,
+  get_all_devices_inventory,
   photo_url_from_map,
+  getInventoryCircuit,
 }) => {
   const dispatch = useDispatch();
   const {coordinates} = useSelector(state => state.coordinates);
@@ -406,7 +413,7 @@ const Explore = ({
       <View style={styles.container}>
         <MapView
           //showsUserLocation={true}
-          // radius={70}
+          radius={50}
           // onPress={e => {
           //   const latitude = e.nativeEvent.coordinate.latitude;
           //   const longitude = e.nativeEvent.coordinate.longitude;
@@ -414,6 +421,7 @@ const Explore = ({
           //   fetchNearestPlacesFromGoogle(e);
           //   bottomSheetRefImage.current.snapToIndex(0);
           // }}
+
           renderCluster={props => {
             const clusterCounts =
               props.properties.point_count.toString().length;
@@ -424,25 +432,17 @@ const Explore = ({
                 tracksViewChanges={false}
                 imageSrc={
                   clusterCounts === 1
-                    ? 'red'
+                    ? '#0099cc'
                     : clusterCounts === 2
-                    ? '#ef8e34'
-                    : clusterCounts === 3
-                    ? '#bb271a'
-                    : clusterCounts === 4
-                    ? '#8c3ac4'
-                    : 'pink'
+                    ? '#669900'
+                    : '#bb271a'
                 }
                 textCount={
                   clusterCounts === 1
-                    ? '5+'
+                    ? '10+'
                     : clusterCounts === 2
-                    ? '100+'
-                    : clusterCounts === 3
-                    ? '200+'
-                    : clusterCounts === 4
-                    ? '1000+'
-                    : '10000+'
+                    ? '50+'
+                    : '100+'
                 }
                 {...props}
               />
@@ -499,6 +499,9 @@ const Explore = ({
                       bottomSheetRef,
                     });
                     marker_seleted(i);
+                    get_order(item.Location_ID);
+                    getInventoryCircuit(item.Location_ID);
+                    get_all_devices_inventory(item.Location_ID);
 
                     const lat = item.Latitude;
                     const lng = item.Longitude;
@@ -1009,6 +1012,9 @@ export default connect(null, {
   marker_seleted,
   setLatLng,
   photo_url_from_map,
+  get_all_devices_inventory,
+  get_order,
+  getInventoryCircuit,
 })(Explore);
 
 const styles = StyleSheet.create({

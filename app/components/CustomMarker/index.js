@@ -1,8 +1,9 @@
-import {View, Image} from 'react-native';
+import {Image} from 'react-native';
 import React from 'react';
 
 const CustomMarker = ({isChecked, officeType}) => {
   const getImage = value => {
+    // console.log(officeType);
     switch (true) {
       case value === 'Office':
         return require('../../images/office.png');
@@ -23,7 +24,11 @@ const CustomMarker = ({isChecked, officeType}) => {
   return (
     <Image
       style={{width: 35, height: 35}}
-      source={isChecked ? require('../../images/14.png') : getImage(officeType)}
+      source={
+        isChecked
+          ? require('../../images/14.png')
+          : require('../../images/office.png')
+      }
     />
   );
 };
