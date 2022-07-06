@@ -8,16 +8,17 @@ import {
   ScrollView,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import Entypo from 'react-native-vector-icons/Entypo';
 
 import {get_order} from '../../actions/order';
 import {connect, useSelector} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 import ImageLoder from '../../components/lodder/imageLodder';
+import {Picker} from '@react-native-picker/picker';
 
 const Orders = ({get_order, navigation, route}) => {
+  const [selectedLanguage, setSelectedLanguage] = useState();
   const isFocused = useIsFocused();
-  // const [order, setOrder] = useState([]);
+
   const order = useSelector(state => state.order.order);
 
   const [id, setId] = useState('');
@@ -37,54 +38,182 @@ const Orders = ({get_order, navigation, route}) => {
           flex: 1,
         }}>
         {/* ==============container============== */}
-
-        <View style={styles.container}>
-          {/* ==============top============== */}
-          <View style={styles.topView}>
-            <View style={styles.topItem1}>
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Text>
-                  <Entypo name="cross" size={24} color="black" />
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.topItem}>
-              <Text style={{fontWeight: '900', fontSize: 18, color: 'black'}}>
-                Orders
+        <View style={{flex: 1}}>
+          {/* ==============Summary View=========== */}
+          <View style={styles.summaryView}>
+            <TouchableOpacity style={styles.summaryButton}>
+              <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+                Sammary
               </Text>
-            </View>
-            <View style={styles.topItem}>
-              <Text style={{fontWeight: '700', fontSize: 15, color: 'black'}}>
-                Reset
-              </Text>
-            </View>
+            </TouchableOpacity>
           </View>
-          {/* ==============top============== */}
-
+          {/* ==============Summary View=========== */}
+          {/* ==============Category View=========== */}
+          {/* ==============Services Category============== */}
+          <View style={{...styles.dropDownView}}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={{width: '100%', height: '100%'}}>
+              <View style={styles.dropDownViewRight}>
+                <View style={styles.pickerBoxInner}>
+                  <Picker
+                    selectedValue={selectedLanguage}
+                    style={styles.pickerStyle}
+                    placeholder="Select your SIM"
+                    onValueChange={(itemValue, itemIndex) =>
+                      setSelectedLanguage(itemValue)
+                    }>
+                    <Picker.Item label="All " value="key4" />
+                    <Picker.Item label="Wallet" value="key0" />
+                    <Picker.Item label="ATM Card" value="key1" />
+                    <Picker.Item label="Debit Card" value="key2" />
+                    <Picker.Item label="Credit Card" value="key3" />
+                  </Picker>
+                </View>
+              </View>
+              <View style={styles.dropDownViewRight}>
+                <View style={styles.pickerBoxInner}>
+                  <Picker
+                    selectedValue={selectedLanguage}
+                    style={styles.pickerStyle}
+                    placeholder="Select your SIM"
+                    onValueChange={(itemValue, itemIndex) =>
+                      setSelectedLanguage(itemValue)
+                    }>
+                    <Picker.Item label="All " value="key4" />
+                    <Picker.Item label="Wallet" value="key0" />
+                    <Picker.Item label="ATM Card" value="key1" />
+                    <Picker.Item label="Debit Card" value="key2" />
+                    <Picker.Item label="Credit Card" value="key3" />
+                  </Picker>
+                </View>
+              </View>
+              <View style={styles.dropDownViewRight}>
+                <View style={styles.pickerBoxInner}>
+                  <Picker
+                    selectedValue={selectedLanguage}
+                    style={styles.pickerStyle}
+                    placeholder="Select your SIM"
+                    onValueChange={(itemValue, itemIndex) =>
+                      setSelectedLanguage(itemValue)
+                    }>
+                    <Picker.Item label="All " value="key4" />
+                    <Picker.Item label="Wallet" value="key0" />
+                    <Picker.Item label="ATM Card" value="key1" />
+                    <Picker.Item label="Debit Card" value="key2" />
+                    <Picker.Item label="Credit Card" value="key3" />
+                  </Picker>
+                </View>
+              </View>
+              <View style={styles.dropDownViewRight}>
+                <View style={styles.pickerBoxInner}>
+                  <Picker
+                    selectedValue={selectedLanguage}
+                    style={styles.pickerStyle}
+                    placeholder="Select your SIM"
+                    onValueChange={(itemValue, itemIndex) =>
+                      setSelectedLanguage(itemValue)
+                    }>
+                    <Picker.Item label="All " value="key4" />
+                    <Picker.Item label="Wallet" value="key0" />
+                    <Picker.Item label="ATM Card" value="key1" />
+                    <Picker.Item label="Debit Card" value="key2" />
+                    <Picker.Item label="Credit Card" value="key3" />
+                  </Picker>
+                </View>
+              </View>
+              <View style={styles.dropDownViewRight}>
+                <View style={styles.pickerBoxInner}>
+                  <Picker
+                    selectedValue={selectedLanguage}
+                    style={styles.pickerStyle}
+                    placeholder="Select your SIM"
+                    onValueChange={(itemValue, itemIndex) =>
+                      setSelectedLanguage(itemValue)
+                    }>
+                    <Picker.Item label="All " value="key4" />
+                    <Picker.Item label="Wallet" value="key0" />
+                    <Picker.Item label="ATM Card" value="key1" />
+                    <Picker.Item label="Debit Card" value="key2" />
+                    <Picker.Item label="Credit Card" value="key3" />
+                  </Picker>
+                </View>
+              </View>
+              <View style={styles.dropDownViewRight}>
+                <View style={styles.pickerBoxInner}>
+                  <Picker
+                    selectedValue={selectedLanguage}
+                    style={styles.pickerStyle}
+                    placeholder="Select your SIM"
+                    onValueChange={(itemValue, itemIndex) =>
+                      setSelectedLanguage(itemValue)
+                    }>
+                    <Picker.Item label="All " value="key4" />
+                    <Picker.Item label="Wallet" value="key0" />
+                    <Picker.Item label="ATM Card" value="key1" />
+                    <Picker.Item label="Debit Card" value="key2" />
+                    <Picker.Item label="Credit Card" value="key3" />
+                  </Picker>
+                </View>
+              </View>
+            </ScrollView>
+          </View>
+          {/* ==============Services Category============== */}
+          {/* ==============Category View=========== */}
           {/* ==============Table============== */}
           {order.length == 0 ? (
-            <ImageLoder />
+            <View
+              style={{
+                width: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: 300,
+              }}>
+              <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                No Data Found
+              </Text>
+            </View>
           ) : (
             <View style={styles.table}>
               {/* ===================table Tow============== */}
               <View style={{...styles.tableRow}}>
-                <View
-                  style={{...styles.tableRowColum, backgroundColor: '#ffffd1'}}>
-                  <Text style={{...styles.boxText, color: 'black'}}>
+                <View style={{...styles.tableRowColum}}>
+                  <Text style={{...styles.boxText, color: 'white'}}>
                     Inventory Id
                   </Text>
                 </View>
                 <View
-                  style={{...styles.tableRowColum, backgroundColor: '#b3b3b3'}}>
+                  style={{
+                    ...styles.tableRowColum,
+                    borderLeftColor: 'white',
+                    borderLeftWidth: 2,
+                  }}>
                   <Text style={styles.boxText}>Order Type</Text>
                 </View>
                 <View
-                  style={{...styles.tableRowColum, backgroundColor: '#b3b3b3'}}>
+                  style={{
+                    ...styles.tableRowColum,
+                    borderLeftColor: 'white',
+                    borderLeftWidth: 2,
+                  }}>
                   <Text style={styles.boxText}>Status</Text>
                 </View>
                 <View
-                  style={{...styles.tableRowColum, backgroundColor: '#b3b3b3'}}>
+                  style={{
+                    ...styles.tableRowColum,
+                    borderLeftColor: 'white',
+                    borderLeftWidth: 2,
+                  }}>
                   <Text style={styles.boxText}>Address</Text>
+                </View>
+                <View
+                  style={{
+                    ...styles.tableRowColum,
+                    borderLeftColor: 'white',
+                    borderLeftWidth: 2,
+                  }}>
+                  <Text style={styles.boxText}>Address1</Text>
                 </View>
               </View>
               {/* ===================table Tow============== */}
@@ -102,17 +231,49 @@ const Orders = ({get_order, navigation, route}) => {
                         })
                       }
                       key={i}
-                      style={styles.tableRow1}>
-                      <View style={styles.tableRowColum1}>
+                      style={{
+                        ...styles.tableRow1,
+                        backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                        marginVertical: 1,
+                      }}>
+                      <View
+                        style={{
+                          ...styles.tableRowColum1,
+                          borderLeftColor: 'white',
+                          borderLeftWidth: 2,
+                        }}>
                         <Text style={styles.boxText1}>{item.Inventory_ID}</Text>
                       </View>
-                      <View style={styles.tableRowColum1}>
+                      <View
+                        style={{
+                          ...styles.tableRowColum1,
+                          borderLeftColor: 'white',
+                          borderLeftWidth: 2,
+                        }}>
                         <Text style={styles.boxText1}>{item.Order_Type}</Text>
                       </View>
-                      <View style={styles.tableRowColum1}>
+                      <View
+                        style={{
+                          ...styles.tableRowColum1,
+                          borderLeftColor: 'white',
+                          borderLeftWidth: 2,
+                        }}>
                         <Text style={styles.boxText1}>{item.Status}</Text>
                       </View>
-                      <View style={styles.tableRowColum1}>
+                      <View
+                        style={{
+                          ...styles.tableRowColum1,
+                          borderLeftColor: 'white',
+                          borderLeftWidth: 2,
+                        }}>
+                        <Text style={styles.boxText1}>{item.vendor}</Text>
+                      </View>
+                      <View
+                        style={{
+                          ...styles.tableRowColum1,
+                          borderLeftColor: 'white',
+                          borderLeftWidth: 2,
+                        }}>
                         <Text style={styles.boxText1}>{item.vendor}</Text>
                       </View>
                     </TouchableOpacity>
@@ -124,23 +285,82 @@ const Orders = ({get_order, navigation, route}) => {
             </View>
           )}
           {/* ==============Table============== */}
-
-          {/* ==============Container============== */}
         </View>
+        {/* ==============container============== */}
       </SafeAreaView>
     </>
   );
+  s;
 };
 
 export default connect(null, {get_order})(Orders);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  summaryView: {
+    width: '100%',
+    height: 100,
+
+    justifyContent: 'center',
+    paddingLeft: 20,
+  },
+  ///========Summary Button
+  summaryButton: {
+    width: 100,
+    height: 50,
+    backgroundColor: '#007aff',
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  ///========dropdown
+  dropDownView: {
+    width: '100%',
+    height: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  dropDownViewLeft: {
+    width: '30%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+  dropDownViewRight: {
+    width: 100,
+    height: 40,
     borderWidth: 1,
-    borderColor: '#000000',
-    margin: 10,
-    marginBottom: 50,
+    borderRadius: 5,
+    borderColor: 'black',
+    marginHorizontal: 3,
+  },
+  pickerItem: {width: 200, height: 40, borderWidth: 0.5},
+  ///========dropdown
+  ///========dropdown
+  pickerBoxInner: {
+    borderWidth: 0.6,
+    borderColor: 'black',
+    borderRadius: 2,
+    overflow: 'hidden',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+  },
+  pickerBoxIcon: {
+    position: 'absolute',
+    right: 0,
+    fontSize: 23,
+    color: 'red',
+  },
+  pickerStyle: {
+    width: '120%',
+    paddingBottom: 0,
+    paddingLeft: 0,
+    transform: [{scaleX: 0.85}, {scaleY: 0.85}],
+    left: -10,
+    position: 'absolute',
+    backgroundColor: 'transparent',
   },
   topView: {
     height: 50,
@@ -157,19 +377,19 @@ const styles = StyleSheet.create({
     width: '33.33%',
     height: '100%',
     justifyContent: 'center',
-    paddingLeft: 10,
   },
 
   ///=========Table
   table: {
     width: '100%',
-    paddingHorizontal: 10,
+
     alignSelf: 'center',
     marginTop: 15,
   },
   tableRow: {
     width: '100%',
     height: 50,
+    backgroundColor: '#007aff',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
@@ -182,12 +402,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   tableRowColum: {
-    width: '23%',
+    width: '25%',
     height: '100%',
-    marginHorizontal: 2,
-
-    borderBottomColor: '#73c0b8',
-    borderBottomWidth: 1,
+    backgroundColor: '#007aff',
 
     justifyContent: 'center',
     alignItems: 'center',
@@ -201,7 +418,7 @@ const styles = StyleSheet.create({
   },
   boxText: {
     fontWeight: '700',
-    fontSize: 14,
+    fontSize: 16,
     color: 'white',
   },
   ///=========Table
@@ -216,17 +433,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   tableRowColum1: {
-    width: '23%',
+    width: '25%',
     height: '100%',
-    marginHorizontal: 2,
 
     justifyContent: 'center',
-    alignItems: 'center',
   },
 
   boxText1: {
     fontSize: 14,
     color: '#000000',
+    marginLeft: 7,
   },
   ///=========data row
   ///========Second table
