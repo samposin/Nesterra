@@ -7,28 +7,28 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useRef} from 'react';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {get_order} from '../../actions/order';
 import {connect, useSelector} from 'react-redux';
-import {useIsFocused} from '@react-navigation/native';
-import ImageLoder from '../../components/lodder/imageLodder';
+
+// import ImageLoder from '../../components/lodder/imageLodder';
 import {Picker} from '@react-native-picker/picker';
+import BottomSheetView from './components/BottomSheetView';
+import {GetCarrierNumber} from '../../actions/CarrierNumber';
 
-const Orders = ({get_order, navigation, route}) => {
+const Orders = ({GetCarrierNumber, navigation, route}) => {
   const [selectedLanguage, setSelectedLanguage] = useState();
-  const isFocused = useIsFocused();
 
+  const bottomSheetRef = useRef(null);
   const order = useSelector(state => state.order.order);
-
-  const [id, setId] = useState('');
-  useEffect(() => {
-    const idd = //'MST0007215';
-      route.params == undefined ? 'MST0007215' : route.params.location_ID;
-    setId(idd);
-    // get_ord();
-    // get_order(id);
-  }, [isFocused]);
+  const Category = [
+    {id: 0, name: 'Order Type', value: 'GetCarrierNumber'},
+    {id: 1, name: 'SmartSite#', value: 'GetSmartSiteNumber'},
+    {id: 1, name: 'Tangoe', value: 'GetTangoeNumber'},
+    {id: 1, name: 'Carrier', value: 'GetTangoeNumber'},
+  ];
 
   return (
     <>
@@ -55,108 +55,37 @@ const Orders = ({get_order, navigation, route}) => {
               horizontal
               showsHorizontalScrollIndicator={false}
               style={{width: '100%', height: '100%'}}>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
-              <View style={styles.dropDownViewRight}>
-                <View style={styles.pickerBoxInner}>
-                  <Picker
-                    selectedValue={selectedLanguage}
-                    style={styles.pickerStyle}
-                    placeholder="Select your SIM"
-                    onValueChange={(itemValue, itemIndex) =>
-                      setSelectedLanguage(itemValue)
-                    }>
-                    <Picker.Item label="All " value="key4" />
-                    <Picker.Item label="Wallet" value="key0" />
-                    <Picker.Item label="ATM Card" value="key1" />
-                    <Picker.Item label="Debit Card" value="key2" />
-                    <Picker.Item label="Credit Card" value="key3" />
-                  </Picker>
-                </View>
-              </View>
+              {Category.map((item, i) => {
+                return (
+                  <TouchableOpacity
+                    key={i}
+                    onPress={() => {
+                      GetCarrierNumber(item.value);
+                      bottomSheetRef.current.snapToIndex(1);
+                    }}
+                    style={{
+                      width: 100,
+                      height: 40,
+                      borderRadius: 5,
+                      borderColor: 'red',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      paddingHorizontal: 3,
+                      marginHorizontal: 5,
+
+                      borderWidth: 1,
+                    }}>
+                    <Text>{item.name}</Text>
+                    <AntDesign
+                      name="caretdown"
+                      size={20}
+                      style={{marginLeft: 2}}
+                      color="black"
+                    />
+                  </TouchableOpacity>
+                );
+              })}
             </ScrollView>
           </View>
           {/* ==============Services Category============== */}
@@ -288,12 +217,13 @@ const Orders = ({get_order, navigation, route}) => {
         </View>
         {/* ==============container============== */}
       </SafeAreaView>
+      <BottomSheetView bottomSheetRef={bottomSheetRef} />
     </>
   );
   s;
 };
 
-export default connect(null, {get_order})(Orders);
+export default connect(null, {GetCarrierNumber})(Orders);
 
 const styles = StyleSheet.create({
   summaryView: {

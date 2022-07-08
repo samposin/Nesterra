@@ -97,7 +97,9 @@ const Devices = ({navigation}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.Device_Name}</Text>
+                      <Text style={styles.boxText1}>
+                        {item.Device_Name.substr(1, 10)}..
+                      </Text>
                     </View>
                     <View
                       style={{
@@ -159,7 +161,6 @@ const styles = StyleSheet.create({
   ///=========Table
   table: {
     width: '100%',
-
     alignSelf: 'center',
     marginTop: 15,
   },
@@ -203,16 +204,13 @@ const styles = StyleSheet.create({
   tableRow1: {
     width: '100%',
     height: 40,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
-
     alignSelf: 'center',
   },
   tableRowColum1: {
     width: '25%',
     height: '100%',
-
     justifyContent: 'center',
   },
 
@@ -231,7 +229,6 @@ const styles = StyleSheet.create({
   secondTableRow: {
     width: '100%',
     height: 30,
-
     flexDirection: 'row',
     borderBottomColor: 'black',
     borderBottomWidth: 1,

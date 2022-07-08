@@ -10,6 +10,7 @@ import photo_url from './photpUrlFromMap';
 import OrderDetails from './order/OrderDetails';
 import circuitInventory from './CircuitInventory';
 import devicesInventory from './devicesInventory';
+import carrierNumber from './CarrierNumber';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -21,5 +22,6 @@ const rootReducer = combineReducers({
   OrderDetails,
   circuitInventory,
   devicesInventory,
+  carrierNumber,
 });
 export default rootReducer;

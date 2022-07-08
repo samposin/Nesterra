@@ -18,15 +18,17 @@ const BottomSheetTab = () => {
       initialRouteName={Circuits}
       // removeClippedSubviews={false}
       // animationEnabled={true}
+
       upperCaseLabel="false"
       screenOptions={{
         tabBarLabelStyle: {textTransform: 'lowercase'},
         tabBarActiveTintColor: '#1b5a90',
         tabBarInactiveTintColor: '#757575',
-
+        tabBarActiveBackgroundColor: 'red',
         tabBarLabelStyle: {fontSize: 13, fontWeight: '700'},
         tabBarStyle: {backgroundColor: '#f5f5f5'},
         tabBarScrollEnabled: true,
+
         tabBarItemStyle: {
           width: 93,
           borderColor: 'black',
@@ -35,7 +37,7 @@ const BottomSheetTab = () => {
           borderRadius: 5,
         },
 
-        // swipeEnabled: true,
+        swipeEnabled: true,
         // disableSwipe: false,
         tabBarIndicatorStyle: {
           width: 0,
@@ -50,7 +52,6 @@ const BottomSheetTab = () => {
         options={{
           tabBarLabel: 'Info',
           labelStyle: {textTransform: 'none'},
-
           tabBarActiveBackgroundColor: 'red',
           style: {
             backgroundColor: '#21147a',
