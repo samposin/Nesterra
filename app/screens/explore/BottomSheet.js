@@ -1,25 +1,22 @@
-import {
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  View,
-} from 'react-native';
-import React, {useMemo} from 'react';
+import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
+import React, {useMemo, useRef, useEffect} from 'react';
 
-import BottomSheet, {
-  BottomSheetScrollView,
-  BottomSheetFlatList,
-} from '@gorhom/bottom-sheet';
-import Profile from '../profile';
+import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
+
 import {useSelector} from 'react-redux';
-import BottomSheetTab from '../../components/BottomSheetTab';
+
 import {useState} from 'react';
+import Pics from '../../components/BottomSheetTab/Pics';
+import Hours from '../../components/BottomSheetTab/Hours';
+import Info from '../../components/BottomSheetTab/Info';
+import Circuits from '../../components/BottomSheetTab/Circuits';
+import Devices from '../../components/BottomSheetTab/Devices';
+import Orders from '../../components/BottomSheetTab/Orders';
 
 const BottomSheetView = ({bottomSheetRef, catShow}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const location_data = useSelector(state => state.location_details.data);
-
+  const myRef = useRef(null);
   const data = [
     {id: 0, name: 'INFO', isActive: true},
     {id: 1, name: 'PICS', isActive: false},
@@ -28,6 +25,7 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
     {id: 4, name: 'DEVICES', isActive: false},
     {id: 5, name: 'ORDERS', isActive: false},
   ];
+  const [item, setItem] = useState(0);
   const [data1, setData1] = useState(data);
   const changeColor = id => {
     let listData = data1.map(item => {
@@ -38,26 +36,36 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
     listData[id].isActive = true;
     setData1(listData);
   };
-  const renderItem = ({item, i}) => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          changeColor(item.id);
-        }}
-        style={{
-          width: 100,
-          height: 30,
-          margin: 2,
-          backgroundColor: item.isActive ? 'green' : 'red',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text style={{color: item.isActive ? 'white' : 'black'}}>
-          {item.name}
-        </Text>
-      </TouchableOpacity>
-    );
+
+  const centerTab = i => {
+    myRef.current.scrollToIndex({animated: true, index: i, viewPosition: 0.5});
   };
+  const ranDerView = () => {
+    switch (true) {
+      case item == 0:
+        return <Info />;
+        break;
+      case item == 1:
+        return <Pics />;
+        break;
+      case item == 2:
+        return <Hours />;
+        break;
+      case item == 3:
+        return <Circuits />;
+        break;
+      case item == 4:
+        return <Devices />;
+        break;
+      case item == 5:
+        return <Orders />;
+        break;
+    }
+  };
+  useEffect(() => {
+    ranDerView(0);
+  }, []);
+
   return (
     <>
       <BottomSheet
@@ -73,18 +81,13 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
         snapPoints={snapPoints}
         enablePanDownToClose={true}
         animateOnMount
-        // onChange={handleSheetChanges}
-        animatedPosition={true}
-        // snapToPosition={dfs => {
-        //   console.log(dfs, 'dfs');
-        // }}
-        // onAnimate={(fromIndex, toIndex) => {
-        //   console.log(fromIndex, toIndex);
-        // }}
-      >
-        <View style={{flex: 1, zIndex: 10}}>
-          {/* {location_data && {}} */}
-
+        animatedPosition={true}>
+        <View
+          style={{
+            height: 130,
+            width: '100%',
+            zIndex: 10,
+          }}>
           <Text
             style={{
               fontSize: 18,
@@ -93,6 +96,7 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
               marginLeft: 10,
             }}>
             {location_data?.Address}
+            <Text> </Text>
             {location_data?.Location_ID}
           </Text>
 
@@ -131,21 +135,41 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
               }}></View>
           </View>
 
-          {/* <BottomSheetScrollView
-            nestedScrollEnabled={true}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={
-              styles.contentContainer
-            }></BottomSheetScrollView> */}
-          <BottomSheetTab />
-          {/* <BottomSheetFlatList
+          <BottomSheetFlatList
             horizontal
+            ref={myRef}
             data={data1}
-            keyExtractor={i => i}
-            renderItem={renderItem}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({item, i}) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    changeColor(item.id);
+                    setItem(item.id);
+                    centerTab(item.id);
+                  }}
+                  style={{
+                    width: 100,
+                    backgroundColor: 'red',
+                    height: 45,
+                    margin: 2,
+                    borderRadius: 10,
+                    borderWidth: item.isActive ? 0 : 1,
+                    backgroundColor: item.isActive ? '#007aff' : '#f2f2f7',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{color: item.isActive ? 'white' : 'black'}}>
+                    {item.name}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }}
             contentContainerStyle={styles.contentContainer}
-          /> */}
+          />
         </View>
+        {ranDerView()}
       </BottomSheet>
     </>
   );
@@ -158,7 +182,8 @@ const styles = StyleSheet.create({
     // marginLeft: 5,
   },
   contentContainer: {
-    paddingTop: 10,
+    backgroundColor: 'yellow',
+    // paddingTop: 10,
   },
   leftLower: {
     width: '50%',

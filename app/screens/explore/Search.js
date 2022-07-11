@@ -145,7 +145,7 @@ const Search = ({
         });
         setTimeout(() => {
           setIsLoading(false);
-          bottomSheetRefImage.current.snapToIndex(0);
+          // bottomSheetRefImage.current.snapToIndex(0);
         }, 1000);
 
         const {lat, lng} = details.geometry.location;

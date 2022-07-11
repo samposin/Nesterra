@@ -56,6 +56,7 @@ import {
 import Lodder from '../../components/lodder';
 import {get_all_devices_inventory} from '../../actions/devicesInventory';
 import {getInventoryCircuit} from '../../actions/circuitInventory';
+import {markardata} from '../../utils/markerData';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -107,6 +108,12 @@ const Explore = ({
   let transformMap = useRef(new Animated.Value(0)).current;
   let transformX = useRef(new Animated.Value(0)).current;
   let transformX1 = useRef(new Animated.Value(0)).current;
+  const [currentRegion, setCurrentRegion] = useState({
+    latitude: 42.361145,
+    longitude: -71.057083,
+    latitudeDelta: LATITUDE_DELTA,
+    longitudeDelta: LONGITUDE_DELTA,
+  });
 
   const transMap = transformMap.interpolate({
     inputRange: [0, 1],
@@ -269,53 +276,12 @@ const Explore = ({
   const bottomSheetRef = useRef(null);
   const bottomSheetRefImage = useRef(null);
 
-  const snapPoints = useMemo(() => ['20%', '100%'], []);
-
   const handleSheetChanges = useCallback(index => {
     console.log('handleSheetChanges', index);
   }, []);
   // added by Dildar Khan end
   //anup
-  const onRechange = (lat, lng) => {
-    setLatitute(lat);
-    setLongitute(lng);
-  };
 
-  const onMapReadyHandler = () => {
-    if (Platform.OS === 'ios') {
-      mapRef.current.fitToElements(false);
-    } else {
-      const markersCoordinates = [];
-
-      coordinates.forEach(coords => {
-        markersCoordinates.push({
-          latitude: coords.Latitude,
-          longitude: coords.Longitude,
-        });
-      });
-      mapRef.current.fitToCoordinates(markersCoordinates, {
-        animated: true,
-        edgePadding: {
-          top: 200,
-          right: 50,
-          bottom: 50,
-          left: 50,
-        },
-      });
-    }
-  };
-  //cluster change
-  const animateToRegion = (lat, lng) => {
-    let region = {
-      latitude: lat,
-      longitude: lng,
-      latitudeDelta: 7.5,
-      longitudeDelta: 7.5,
-    };
-
-    mapRef.current.animateToRegion(region, 2000);
-  };
-  //DEVICE CURRENT LAT LNG GET
   const getLocation = async () => {
     const hasPermission = await hasLocationPermission();
 
@@ -324,7 +290,7 @@ const Explore = ({
     }
     Geolocation.getCurrentPosition(position => {
       // this.setState({ coords: position.coords, loading: false });
-      console.log(position);
+      // console.log(position);
       const region = {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
@@ -338,22 +304,11 @@ const Explore = ({
     get_coordinates();
   }, []);
 
-  // console.log(clusterRef.current.options.radius);
-  // console.log(JSON.stringify(clusterRef.current));
-
-  const [currentRegion, setCurrentRegion] = useState();
-  const mapRegionChangeComplete = mapRegion => {
-    setCurrentRegion({
-      latitude: mapRegion.latitude,
-      longitude: mapRegion.longitude,
-      latitudeDelta: mapRegion.latitudeDelta,
-      longitudeDelta: mapRegion.longitudeDelta,
-    });
+  const animateToRegion = region => {
+    mapRef.current.animateToRegion(region, 2000);
   };
-
   const onSearchPress = (lat, lng) => {
-    // console.log(lat, lng);
-    setCurrentRegion({
+    animateToRegion({
       latitude: lat,
       longitude: lng,
       latitudeDelta: LATITUDE_DELTA,
@@ -394,6 +349,15 @@ const Explore = ({
         console.log(error);
       });
   };
+  const onLayoutMap = () => {
+    mapRef.current.animateCamera({
+      center: {
+        currentRegion,
+      },
+      heading: 0,
+      pitch: 180,
+    });
+  };
 
   return (
     <>
@@ -412,16 +376,6 @@ const Explore = ({
 
       <View style={styles.container}>
         <MapView
-          //showsUserLocation={true}
-          radius={50}
-          // onPress={e => {
-          //   const latitude = e.nativeEvent.coordinate.latitude;
-          //   const longitude = e.nativeEvent.coordinate.longitude;
-          //   // photo_url_from_map({lat: latitude, lng: longitude});
-          //   fetchNearestPlacesFromGoogle(e);
-          //   bottomSheetRefImage.current.snapToIndex(0);
-          // }}
-
           renderCluster={props => {
             const clusterCounts =
               props.properties.point_count.toString().length;
@@ -448,38 +402,27 @@ const Explore = ({
               />
             );
           }}
-          preserveClusterPressBehavior={true}
-          maxZoom={20}
-          mapType={satellite}
+          maxZoomLevel={16}
+          minZoomLevel={0}
+          radius={50}
+          style={styles.map}
+          initialRegion={currentRegion}
           ref={mapRef}
-          pitchEnabled={true}
+          Provider={MapView.PROVIDER_GOOGLE}
           zoomControlEnabled={false}
           zoomEnabled={true}
           zoomTapEnabled={true}
+          animationEnabled={true}
           rotateEnabled={true}
           scrollEnabled={true}
-          showsMyLocationButton={true}
-          showsCompass={true}
-          followsUserLocation={true}
-          provider={MapView.PROVIDER_GOOGLE}
-          style={{...styles.container, marginBottom: 50}}
-          onRegionChangeComplete={mapRegionChangeComplete}
-          // region={currentRegion}
-          initialRegion={{
-            latitude: lat,
-            longitude: lng,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
-          }}
-          onMapReady={() => {
-            onMapReadyHandler();
-            setMarginBottom(0);
-          }}
-          onLayout={() =>
-            setTimeout(() => {
-              // onMapReadyHandler();
-            }, 2000)
-          }>
+          pitchEnabled={true}
+          showsMyLocationButton={false}
+          scrollDuringRotateOrZoomEnabled={true}
+          preserveClusterPressBehavior={true}
+          showsUserLocation={true}
+          userLocationPriority={'high'}
+          mapType={'standard'}
+          onLayout={onLayoutMap}>
           {coordinates &&
             coordinates.map((item, i) => {
               // console.log(item.SubLocationType);
@@ -507,7 +450,7 @@ const Explore = ({
                     const lng = item.Longitude;
 
                     setLatLng({lat, lng});
-                    animateToRegion(lat, lng);
+                    // animateToRegion(lat, lng);
                     fetchNearestPlacesFromGoogle(lat, lng);
                   }}>
                   <CustomMarker
@@ -1018,6 +961,13 @@ export default connect(null, {
 })(Explore);
 
 const styles = StyleSheet.create({
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
   searchRight: {
     width: '25%',
     height: '100%',

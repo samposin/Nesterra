@@ -229,7 +229,6 @@ const styles = StyleSheet.create({
   summaryView: {
     width: '100%',
     height: 100,
-
     justifyContent: 'center',
     paddingLeft: 20,
   },

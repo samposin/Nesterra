@@ -6,129 +6,113 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
+import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {connect, useSelector} from 'react-redux';
 
 const Devices = ({navigation}) => {
   const {devicesInventory} = useSelector(state => state.devicesInventory);
-
+  const {cirCuitInventory} = useSelector(state => state.circuitInventory);
   return (
     <>
       {/* ==============container============== */}
-
-      <View style={styles.container}>
-        {/* ==============top============== */}
-
-        {/* ==============top============== */}
-
-        {/* ==============Table============== */}
-        {devicesInventory.length == 0 ? (
+      <View style={{flex: 1}}>
+        {/* ==============Table Header============== */}
+        <View
+          style={{
+            width: '100%',
+            height: 60,
+            backgroundColor: 'red',
+            flexDirection: 'row',
+          }}>
           <View
             style={{
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: 300,
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
             }}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-              No Data Found
-            </Text>
+            <Text style={styles.boxText}>Devices ID</Text>
           </View>
-        ) : (
-          <View style={styles.table}>
-            {/* ===================table Tow============== */}
-            <View style={{...styles.tableRow}}>
-              <View style={{...styles.tableRowColum}}>
-                <Text style={{...styles.boxText, color: 'white'}}>
-                  Devices Id
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                }}>
-                <Text style={styles.boxText}>Device Name</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                }}>
-                <Text style={styles.boxText}>Device Status</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                }}>
-                <Text style={styles.boxText}>Device Vendor</Text>
-              </View>
-            </View>
-            {/* ===================table Tow============== */}
-            {/* ===================table Tow============== */}
-            <ScrollView
-              style={{width: '100%', height: 480}}
-              showsVerticalScrollIndicator={false}>
-              {devicesInventory.map((item, i) => {
-                return (
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate('OrderDetails')}
-                    key={i}
-                    style={{
-                      ...styles.tableRow1,
-                      backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
-                      marginVertical: 1,
-                    }}>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>{item.ID}</Text>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>
-                        {item.Device_Name.substr(1, 10)}..
-                      </Text>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>{item.Device_Status}</Text>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>{item.Device_Vendor}</Text>
-                    </View>
-                  </TouchableOpacity>
-                );
-              })}
-            </ScrollView>
-
-            {/* ===================table Tow============== */}
+          <View
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+            }}>
+            <Text style={styles.boxText}>Device Name</Text>
           </View>
-        )}
-        {/* ==============Table============== */}
-
-        {/* ==============Container============== */}
+          <View
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+            }}>
+            <Text style={styles.boxText}>Device Status</Text>
+          </View>
+          <View
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+            }}>
+            <Text style={styles.boxText}>Device Vendor</Text>
+          </View>
+        </View>
+        {/* ==============Table Header============== */}
+        {/* ==============Table Body============== */}
+        <BottomSheetScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.contentContainer}>
+          {devicesInventory.map((item, i) => {
+            return (
+              <View
+                key={i}
+                style={{
+                  width: '100%',
+                  height: 40,
+                  backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                  flexDirection: 'row',
+                  marginVertical: 1,
+                }}>
+                <View
+                  style={{
+                    ...styles.tableRowColum1,
+                    borderLeftColor: 'white',
+                  }}>
+                  <Text style={styles.boxText1}>{item.ID}</Text>
+                </View>
+                <View
+                  style={{
+                    ...styles.tableRowColum1,
+                    borderLeftColor: 'white',
+                    borderLeftWidth: 2,
+                  }}>
+                  <Text style={styles.boxText1}>
+                    {item.Device_Name.substr(1, 10)}..
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    ...styles.tableRowColum1,
+                    borderLeftColor: 'white',
+                    borderLeftWidth: 2,
+                  }}>
+                  <Text style={styles.boxText1}>{item.Device_Status}</Text>
+                </View>
+                <View
+                  style={{
+                    ...styles.tableRowColum1,
+                    borderLeftColor: 'white',
+                    borderLeftWidth: 2,
+                  }}>
+                  <Text style={styles.boxText1}>{item.Device_Vendor}</Text>
+                </View>
+              </View>
+            );
+          })}
+        </BottomSheetScrollView>
+        {/* ==============Table Body============== */}
       </View>
+      {/* ==============container============== */}
     </>
   );
 };
@@ -138,8 +122,7 @@ export default connect(null, {})(Devices);
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-
-    marginBottom: 50,
+    flex: 1,
   },
   topView: {
     height: 50,
@@ -187,10 +170,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  tableRowColumLast: {
+  tableRowColum1: {
     width: '25%',
-    marginHorizontal: 2,
-    height: 50,
+    height: '100%',
+
     justifyContent: 'center',
     alignItems: 'center',
   },

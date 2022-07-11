@@ -6,6 +6,7 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
+import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {connect, useSelector} from 'react-redux';
 
@@ -16,139 +17,101 @@ const Orders = ({navigation}) => {
   return (
     <>
       {/* ==============container============== */}
-
-      <View style={styles.container}>
-        {/* ==============top============== */}
-
-        {/* ==============top============== */}
-
-        {/* ==============Table============== */}
-        {order.length == 0 ? (
+      <View style={{flex: 1}}>
+        {/* ==============Table Header============== */}
+        <View
+          style={{
+            width: '100%',
+            height: 60,
+            backgroundColor: 'red',
+            flexDirection: 'row',
+          }}>
           <View
             style={{
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: 300,
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
             }}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-              No Data Found
-            </Text>
+            <Text style={styles.boxText}>Inventory ID</Text>
           </View>
-        ) : (
-          <View style={styles.table}>
-            {/* ===================table Tow============== */}
-            <View style={{...styles.tableRow}}>
-              <View style={{...styles.tableRowColum}}>
-                <Text style={{...styles.boxText, color: 'white'}}>
-                  Inventory Id
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                }}>
-                <Text style={styles.boxText}>Order Type</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                }}>
-                <Text style={styles.boxText}>Status</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                }}>
-                <Text style={styles.boxText}>Address</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                }}>
-                <Text style={styles.boxText}>Address1</Text>
-              </View>
-            </View>
-            {/* ===================table Tow============== */}
-            {/* ===================table Tow============== */}
-            <ScrollView
-              style={{width: '100%', height: 480}}
-              showsVerticalScrollIndicator={false}>
-              {order.map((item, i) => {
-                return (
-                  <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate('OrderDetails', {
-                        inv_Id: item.Inventory_ID,
-                        loca_Id: id,
-                      })
-                    }
-                    key={i}
-                    style={{
-                      ...styles.tableRow1,
-                      backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
-                      marginVertical: 1,
-                    }}>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>{item.Inventory_ID}</Text>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>{item.Order_Type}</Text>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>{item.Status}</Text>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>{item.vendor}</Text>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>{item.vendor}</Text>
-                    </View>
-                  </TouchableOpacity>
-                );
-              })}
-            </ScrollView>
-
-            {/* ===================table Tow============== */}
+          <View
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+            }}>
+            <Text style={styles.boxText}>Vendor</Text>
           </View>
-        )}
-        {/* ==============Table============== */}
-
-        {/* ==============Container============== */}
+          <View
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+            }}>
+            <Text style={styles.boxText}>Order Type</Text>
+          </View>
+          <View
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+            }}>
+            <Text style={styles.boxText}>Status</Text>
+          </View>
+        </View>
+        {/* ==============Table Header============== */}
+        {/* ==============Table Body============== */}
+        <BottomSheetScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.contentContainer}>
+          {order.map((item, i) => {
+            return (
+              <View
+                key={i}
+                style={{
+                  width: '100%',
+                  height: 40,
+                  backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                  flexDirection: 'row',
+                  marginVertical: 1,
+                }}>
+                <View
+                  style={{
+                    ...styles.tableRowColum1,
+                    borderLeftColor: 'white',
+                  }}>
+                  <Text style={styles.boxText1}>{item.Inventory_ID}</Text>
+                </View>
+                <View
+                  style={{
+                    ...styles.tableRowColum1,
+                    borderLeftColor: 'white',
+                    borderLeftWidth: 2,
+                  }}>
+                  <Text style={styles.boxText1}>{item.vendor}</Text>
+                </View>
+                <View
+                  style={{
+                    ...styles.tableRowColum1,
+                    borderLeftColor: 'white',
+                    borderLeftWidth: 2,
+                  }}>
+                  <Text style={styles.boxText1}>{item.Order_Type}</Text>
+                </View>
+                <View
+                  style={{
+                    ...styles.tableRowColum1,
+                    borderLeftColor: 'white',
+                    borderLeftWidth: 2,
+                  }}>
+                  <Text style={styles.boxText1}>{item.Status}</Text>
+                </View>
+              </View>
+            );
+          })}
+        </BottomSheetScrollView>
+        {/* ==============Table Body============== */}
       </View>
+      {/* ==============container============== */}
     </>
   );
 };
@@ -158,8 +121,7 @@ export default connect(null, {})(Orders);
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-
-    marginBottom: 50,
+    flex: 1,
   },
   topView: {
     height: 50,
@@ -181,7 +143,6 @@ const styles = StyleSheet.create({
   ///=========Table
   table: {
     width: '100%',
-
     alignSelf: 'center',
     marginTop: 15,
   },
@@ -208,10 +169,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  tableRowColumLast: {
+  tableRowColum1: {
     width: '25%',
-    marginHorizontal: 2,
-    height: 50,
+    height: '100%',
+
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -225,16 +186,13 @@ const styles = StyleSheet.create({
   tableRow1: {
     width: '100%',
     height: 40,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
-
     alignSelf: 'center',
   },
   tableRowColum1: {
     width: '25%',
     height: '100%',
-
     justifyContent: 'center',
   },
 
@@ -253,7 +211,6 @@ const styles = StyleSheet.create({
   secondTableRow: {
     width: '100%',
     height: 30,
-
     flexDirection: 'row',
     borderBottomColor: 'black',
     borderBottomWidth: 1,
