@@ -63,7 +63,7 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
     }
   };
   useEffect(() => {
-    ranDerView(0);
+    // ranDerView(0);
   }, []);
 
   return (
@@ -116,14 +116,12 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
             style={{
               width: '100%',
               height: 30,
-
               flexDirection: 'row',
               alignItems: 'center',
             }}>
             <Text style={{fontSize: 16, marginLeft: 10, color: 'black'}}>
               Sity Status:{' '}
             </Text>
-
             <View
               style={{
                 width: 20,

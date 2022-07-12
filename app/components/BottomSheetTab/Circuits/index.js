@@ -11,105 +11,120 @@ import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 import {connect, useSelector} from 'react-redux';
 
 const Circuits = ({navigation}) => {
-  const {devicesInventory} = useSelector(state => state.devicesInventory);
   const {cirCuitInventory} = useSelector(state => state.circuitInventory);
   return (
     <>
       {/* ==============container============== */}
       <View style={{flex: 1}}>
         {/* ==============Table Header============== */}
-        <View
-          style={{
-            width: '100%',
-            height: 60,
-            backgroundColor: 'red',
-            flexDirection: 'row',
-          }}>
+        {cirCuitInventory.length == 0 ? (
           <View
             style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
+              width: '100%',
+              height: 300,
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
-            <Text style={styles.boxText}>Circuit ID</Text>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+              No Data Found
+            </Text>
           </View>
-          <View
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-            }}>
-            <Text style={styles.boxText}>Vendor</Text>
-          </View>
-          <View
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-            }}>
-            <Text style={styles.boxText}>Category</Text>
-          </View>
-          <View
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-            }}>
-            <Text style={styles.boxText}>Sub Cat 1</Text>
-          </View>
-        </View>
-        {/* ==============Table Header============== */}
-        {/* ==============Table Body============== */}
-        <BottomSheetScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.contentContainer}>
-          {cirCuitInventory.map((item, i) => {
-            return (
+        ) : (
+          <>
+            <View
+              style={{
+                width: '100%',
+                height: 60,
+                backgroundColor: 'red',
+                flexDirection: 'row',
+              }}>
               <View
-                key={i}
                 style={{
-                  width: '100%',
-                  height: 40,
-                  backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
-                  flexDirection: 'row',
-                  marginVertical: 1,
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
                 }}>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                  }}>
-                  <Text style={styles.boxText1}>{item.Circuit_ID}</Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                    borderLeftWidth: 2,
-                  }}>
-                  <Text style={styles.boxText1}>{item.Vendor}</Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                    borderLeftWidth: 2,
-                  }}>
-                  <Text style={styles.boxText1}>{item.Category}</Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                    borderLeftWidth: 2,
-                  }}>
-                  <Text style={styles.boxText1}>{item.SubCat_1}</Text>
-                </View>
+                <Text style={styles.boxText}>Circuit ID</Text>
               </View>
-            );
-          })}
-          <View style={{height: 80}}></View>
-        </BottomSheetScrollView>
-        {/* ==============Table Body============== */}
+              <View
+                style={{
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
+                  borderLeftWidth: 2,
+                }}>
+                <Text style={styles.boxText}>Vendor</Text>
+              </View>
+              <View
+                style={{
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
+                  borderLeftWidth: 2,
+                }}>
+                <Text style={styles.boxText}>Category</Text>
+              </View>
+              <View
+                style={{
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
+                  borderLeftWidth: 2,
+                }}>
+                <Text style={styles.boxText}>Sub Cat 1</Text>
+              </View>
+            </View>
+            {/* ==============Table Header============== */}
+            {/* ==============Table Body============== */}
+            <BottomSheetScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.contentContainer}>
+              {cirCuitInventory.map((item, i) => {
+                return (
+                  <View
+                    key={i}
+                    style={{
+                      width: '100%',
+                      height: 40,
+                      backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                      flexDirection: 'row',
+                      marginVertical: 1,
+                    }}>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                      }}>
+                      <Text style={styles.boxText1}>{item.Circuit_ID}</Text>
+                    </View>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                        borderLeftWidth: 2,
+                      }}>
+                      <Text style={styles.boxText1}>{item.Vendor}</Text>
+                    </View>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                        borderLeftWidth: 2,
+                      }}>
+                      <Text style={styles.boxText1}>{item.Category}</Text>
+                    </View>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                        borderLeftWidth: 2,
+                      }}>
+                      <Text style={styles.boxText1}>{item.SubCat_1}</Text>
+                    </View>
+                  </View>
+                );
+              })}
+              <View style={{height: 80}}></View>
+            </BottomSheetScrollView>
+            {/* ==============Table Body============== */}
+          </>
+        )}
       </View>
       {/* ==============container============== */}
     </>

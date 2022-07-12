@@ -23,22 +23,11 @@ const Orders = ({GetCarrierNumber, navigation, route}) => {
 
   const bottomSheetRef = useRef(null);
   const order = useSelector(state => state.order.order);
-  const [diplayName, setDisplayName] = useState('');
   const Category = [
-    {
-      id: 0,
-      name: 'Order Type',
-      value: 'GetCarrierNumber',
-      disValue: 'OrderType',
-    },
-    {
-      id: 1,
-      name: 'SmartSite#',
-      value: 'GetSmartSiteNumber',
-      disValue: 'SmartSite',
-    },
-    {id: 1, name: 'Tangoe', value: 'GetTangoeNumber', disValue: 'Tangoe'},
-    {id: 1, name: 'Carrier', value: 'GetTangoeNumber', disValue: 'Carrier'},
+    {id: 0, name: 'Order Type', value: 'GetCarrierNumber'},
+    {id: 1, name: 'SmartSite#', value: 'GetSmartSiteNumber'},
+    {id: 1, name: 'Tangoe', value: 'GetTangoeNumber'},
+    {id: 1, name: 'Carrier', value: 'GetTangoeNumber'},
   ];
 
   return (
@@ -72,7 +61,6 @@ const Orders = ({GetCarrierNumber, navigation, route}) => {
                     key={i}
                     onPress={() => {
                       GetCarrierNumber(item.value);
-                      setDisplayName(item.disValue);
                       bottomSheetRef.current.snapToIndex(1);
                     }}
                     style={{
@@ -229,10 +217,7 @@ const Orders = ({GetCarrierNumber, navigation, route}) => {
         </View>
         {/* ==============container============== */}
       </SafeAreaView>
-      <BottomSheetView
-        diplayName={diplayName}
-        bottomSheetRef={bottomSheetRef}
-      />
+      <BottomSheetView bottomSheetRef={bottomSheetRef} />
     </>
   );
   s;
@@ -244,7 +229,6 @@ const styles = StyleSheet.create({
   summaryView: {
     width: '100%',
     height: 100,
-
     justifyContent: 'center',
     paddingLeft: 20,
   },

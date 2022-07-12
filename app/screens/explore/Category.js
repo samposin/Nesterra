@@ -7,7 +7,7 @@ import {
   StatusBar,
   ScrollView,
 } from 'react-native';
-import React from 'react';
+import React, {useRef} from 'react';
 import {data} from '../../utils/Constants';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {third_party_filter} from '../../actions/coordinates';
@@ -15,6 +15,7 @@ import {connect} from 'react-redux';
 
 const Category = ({third_party_filter}) => {
   const [allItem, setAllItem] = React.useState(data);
+  const myRef = useRef(null);
   const actiText = id => {
     let listData = allItem.map(item => {
       let itm = {...item, isActive: false};
@@ -23,6 +24,9 @@ const Category = ({third_party_filter}) => {
 
     listData[id].isActive = true;
     setAllItem(listData);
+  };
+  const centerTab = i => {
+    myRef.current.scrollToIndex({animated: true, index: i, viewPosition: 0.5});
   };
 
   return (
@@ -45,6 +49,7 @@ const Category = ({third_party_filter}) => {
         }}>
         {allItem.map((category, index) => (
           <TouchableOpacity
+            ref={myRef}
             onPress={() => {
               actiText(index);
 
@@ -54,9 +59,7 @@ const Category = ({third_party_filter}) => {
             style={{
               ...styles.chipsItem,
               alignItems: 'center',
-              backgroundColor: 'white',
-              borderWidth: 1.5,
-              borderColor: category.isActive ? 'white' : '#0A7AFF',
+              backgroundColor: category.isActive ? '#0A7AFF' : 'white',
             }}>
             {category.isActive ? category.icon : null}
 
@@ -70,7 +73,7 @@ const Category = ({third_party_filter}) => {
             /> */}
             <Text
               style={{
-                color: category.isActive ? '#0A7AFF' : 'black',
+                color: category.isActive ? 'white' : 'black',
                 fontWeight: '800',
               }}>
               {category.name}
@@ -91,7 +94,7 @@ const styles = StyleSheet.create({
     // padding: 7,
     paddingHorizontal: 15,
     marginHorizontal: 5,
-    height: 35,
+    height: 40,
     shadowColor: '#ccc',
     shadowOffset: {width: 0, height: 3},
     shadowOpacity: 0.5,

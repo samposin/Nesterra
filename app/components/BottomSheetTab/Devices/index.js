@@ -12,105 +12,121 @@ import {connect, useSelector} from 'react-redux';
 
 const Devices = ({navigation}) => {
   const {devicesInventory} = useSelector(state => state.devicesInventory);
-  const {cirCuitInventory} = useSelector(state => state.circuitInventory);
+
   return (
     <>
       {/* ==============container============== */}
       <View style={{flex: 1}}>
         {/* ==============Table Header============== */}
-        <View
-          style={{
-            width: '100%',
-            height: 60,
-            backgroundColor: 'red',
-            flexDirection: 'row',
-          }}>
+        {devicesInventory.length == 0 ? (
           <View
             style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
+              width: '100%',
+              height: 300,
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
-            <Text style={styles.boxText}>Devices ID</Text>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+              No Data Found
+            </Text>
           </View>
-          <View
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-            }}>
-            <Text style={styles.boxText}>Device Name</Text>
-          </View>
-          <View
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-            }}>
-            <Text style={styles.boxText}>Device Status</Text>
-          </View>
-          <View
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-            }}>
-            <Text style={styles.boxText}>Device Vendor</Text>
-          </View>
-        </View>
-        {/* ==============Table Header============== */}
-        {/* ==============Table Body============== */}
-        <BottomSheetScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.contentContainer}>
-          {devicesInventory.map((item, i) => {
-            return (
+        ) : (
+          <>
+            <View
+              style={{
+                width: '100%',
+                height: 60,
+                backgroundColor: 'red',
+                flexDirection: 'row',
+              }}>
               <View
-                key={i}
                 style={{
-                  width: '100%',
-                  height: 40,
-                  backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
-                  flexDirection: 'row',
-                  marginVertical: 1,
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
                 }}>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                  }}>
-                  <Text style={styles.boxText1}>{item.ID}</Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                    borderLeftWidth: 2,
-                  }}>
-                  <Text style={styles.boxText1}>
-                    {item.Device_Name.substr(1, 10)}..
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                    borderLeftWidth: 2,
-                  }}>
-                  <Text style={styles.boxText1}>{item.Device_Status}</Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                    borderLeftWidth: 2,
-                  }}>
-                  <Text style={styles.boxText1}>{item.Device_Vendor}</Text>
-                </View>
+                <Text style={styles.boxText}>Devices ID</Text>
               </View>
-            );
-          })}
-        </BottomSheetScrollView>
-        {/* ==============Table Body============== */}
+              <View
+                style={{
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
+                  borderLeftWidth: 2,
+                }}>
+                <Text style={styles.boxText}>Device Name</Text>
+              </View>
+              <View
+                style={{
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
+                  borderLeftWidth: 2,
+                }}>
+                <Text style={styles.boxText}>Device Status</Text>
+              </View>
+              <View
+                style={{
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
+                  borderLeftWidth: 2,
+                }}>
+                <Text style={styles.boxText}>Device Vendor</Text>
+              </View>
+            </View>
+            {/* ==============Table Header============== */}
+            {/* ==============Table Body============== */}
+            <BottomSheetScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.contentContainer}>
+              {devicesInventory.map((item, i) => {
+                return (
+                  <View
+                    key={i}
+                    style={{
+                      width: '100%',
+                      height: 40,
+                      backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                      flexDirection: 'row',
+                      marginVertical: 1,
+                    }}>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                      }}>
+                      <Text style={styles.boxText1}>{item.ID}</Text>
+                    </View>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                        borderLeftWidth: 2,
+                      }}>
+                      <Text style={styles.boxText1}>
+                        {item.Device_Name.substr(1, 10)}..
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                        borderLeftWidth: 2,
+                      }}>
+                      <Text style={styles.boxText1}>{item.Device_Status}</Text>
+                    </View>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                        borderLeftWidth: 2,
+                      }}>
+                      <Text style={styles.boxText1}>{item.Device_Vendor}</Text>
+                    </View>
+                  </View>
+                );
+              })}
+            </BottomSheetScrollView>
+            {/* ==============Table Body============== */}
+          </>
+        )}
       </View>
       {/* ==============container============== */}
     </>

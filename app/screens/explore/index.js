@@ -421,7 +421,7 @@ const Explore = ({
           preserveClusterPressBehavior={true}
           showsUserLocation={true}
           userLocationPriority={'high'}
-          mapType={'standard'}
+          mapType={satellite}
           onLayout={onLayoutMap}>
           {coordinates &&
             coordinates.map((item, i) => {
@@ -529,19 +529,6 @@ const Explore = ({
                     height: '100%',
                     marginTop: 40,
                   }}>
-                  {/* <View
-                    style={{
-                      width: 10,
-                      height: 10,
-                      borderRadius: 10,
-                      borderColor: 'red',
-                      borderWidth: 2,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                                    
-
-                  </View> */}
                   <Animated.View
                     style={{
                       justifyContent: 'center',
@@ -695,11 +682,11 @@ const Explore = ({
           ) : null}
         </Animated.View>
         {/* ===========find Direction=== */}
-
+        {/* =================Map Type Change=============== */}
         <Animated.View
           style={{
             position: 'absolute',
-            top: 180,
+            top: 200,
             right: 8,
             width: aHeight,
             height: aHeight,
@@ -720,153 +707,166 @@ const Explore = ({
               <Ionicons name="md-layers" size={24} color="black" />
             ) : (
               <View style={styles.mapTypeView}>
-                {/* ============map Type view============= */}
-                <View
-                  style={{
-                    ...styles.mapTypeViewUpper,
+                <TouchableOpacity
+                  onPress={() => {
+                    setanimatioVal(false);
+                    animationChangeoff();
                   }}>
+                  {/* ============map Type view============= */}
                   <View
                     style={{
-                      width: '100%',
-                      height: '20%',
-                      borderRadius: 5,
+                      ...styles.mapTypeViewUpper,
                     }}>
-                    <Text
-                      style={{fontWeight: '700', marginLeft: 10, marginTop: 5}}>
-                      Map Type
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      width: '100%',
-                      height: '80%',
-                      justifyContent: 'space-around',
-                      flexDirection: 'row',
-                    }}>
-                    <TouchableOpacity
-                      onPress={() => {
-                        setanimatioVal(false);
-                        animationChangeoff();
-                        setSatellite('hybrid');
-                      }}
+                    <View
                       style={{
-                        ...styles.mapTypeImageWrap,
-                      }}>
-                      <View
-                        style={{
-                          ...styles.imageView,
-                          borderColor:
-                            satellite === 'hybrid' ? '#1b5a90' : 'white',
-                        }}>
-                        <Image
-                          source={require('../../images/satellite.jpg')}
-                          style={styles.mapTypeImage}
-                        />
-                      </View>
-                      <Text
-                        style={{
-                          color: satellite === 'hybrid' ? '#1b5a90' : 'black',
-                        }}>
-                        Hybrid
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => {
-                        setanimatioVal(false);
-                        animationChangeoff();
-                        setSatellite('standard');
-                      }}
-                      style={{
-                        ...styles.mapTypeImageWrap,
-                      }}>
-                      <View
-                        style={{
-                          ...styles.imageView,
-                          borderColor:
-                            satellite === 'standard' ? '#1b5a90' : 'white',
-                        }}>
-                        <Image
-                          source={require('../../images/defaultMap.png')}
-                          style={styles.mapTypeImage}
-                        />
-                      </View>
-                      <Text
-                        style={{
-                          color: satellite === 'standard' ? '#1b5a90' : 'black',
-                        }}>
-                        Standard
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => {
-                        setanimatioVal(false);
-                        animationChangeoff();
-                        setSatellite('terrain');
-                      }}
-                      style={styles.mapTypeImageWrap}>
-                      <View
-                        style={{
-                          ...styles.imageView,
-                          borderColor:
-                            satellite === 'terrain' ? '#1b5a90' : 'white',
-                        }}>
-                        <Image
-                          source={require('../../images/terrain.jpg')}
-                          style={styles.mapTypeImage}
-                        />
-                      </View>
-                      <Text
-                        style={{
-                          color: satellite === 'terrain' ? '#1b5a90' : 'black',
-                        }}>
-                        Terrain
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-                {/* ============map Type view============= */}
-
-                <View style={{...styles.mapTypeViewUpper, paddingTop: 10}}>
-                  <View
-                    style={{
-                      width: '100%',
-                      height: '20%',
-                    }}>
-                    <Text style={{fontWeight: '700', marginLeft: 10}}>
-                      {' '}
-                      Filtter
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      width: '100%',
-                      height: '50%',
-                      paddingTop: 5,
-                    }}>
-                    <TouchableOpacity
-                      onPress={() => {
-                        setanimatioVal(false);
-                        animationChangeoff();
-
-                        navigation.navigate('Filtter');
-                      }}
-                      style={{
-                        width: 50,
-                        height: 50,
-                        marginLeft: 10,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#1b5a90',
+                        width: '100%',
+                        height: '20%',
                         borderRadius: 5,
                       }}>
-                      <AntDesign name="menufold" size={28} color="white" />
-                    </TouchableOpacity>
+                      <Text
+                        style={{
+                          fontWeight: '700',
+                          marginLeft: 10,
+                          marginTop: 5,
+                        }}>
+                        Map Type
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        width: '100%',
+                        height: '80%',
+                        justifyContent: 'space-around',
+                        flexDirection: 'row',
+                      }}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          setanimatioVal(false);
+                          animationChangeoff();
+                          setSatellite('hybrid');
+                        }}
+                        style={{
+                          ...styles.mapTypeImageWrap,
+                        }}>
+                        <View
+                          style={{
+                            ...styles.imageView,
+                            borderColor:
+                              satellite === 'hybrid' ? '#1b5a90' : 'white',
+                          }}>
+                          <Image
+                            source={require('../../images/satellite.jpg')}
+                            style={styles.mapTypeImage}
+                          />
+                        </View>
+                        <Text
+                          style={{
+                            color: satellite === 'hybrid' ? '#1b5a90' : 'black',
+                          }}>
+                          Hybrid
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => {
+                          setanimatioVal(false);
+                          animationChangeoff();
+                          setSatellite('standard');
+                        }}
+                        style={{
+                          ...styles.mapTypeImageWrap,
+                        }}>
+                        <View
+                          style={{
+                            ...styles.imageView,
+                            borderColor:
+                              satellite === 'standard' ? '#1b5a90' : 'white',
+                          }}>
+                          <Image
+                            source={require('../../images/defaultMap.png')}
+                            style={styles.mapTypeImage}
+                          />
+                        </View>
+                        <Text
+                          style={{
+                            color:
+                              satellite === 'standard' ? '#1b5a90' : 'black',
+                          }}>
+                          Standard
+                        </Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => {
+                          setanimatioVal(false);
+                          animationChangeoff();
+                          setSatellite('terrain');
+                        }}
+                        style={styles.mapTypeImageWrap}>
+                        <View
+                          style={{
+                            ...styles.imageView,
+                            borderColor:
+                              satellite === 'terrain' ? '#1b5a90' : 'white',
+                          }}>
+                          <Image
+                            source={require('../../images/terrain.jpg')}
+                            style={styles.mapTypeImage}
+                          />
+                        </View>
+                        <Text
+                          style={{
+                            color:
+                              satellite === 'terrain' ? '#1b5a90' : 'black',
+                          }}>
+                          Terrain
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
-                </View>
+                  {/* ============map Type view============= */}
+
+                  <View style={{...styles.mapTypeViewUpper, paddingTop: 10}}>
+                    <View
+                      style={{
+                        width: '100%',
+                        height: '20%',
+                      }}>
+                      <Text style={{fontWeight: '700', marginLeft: 10}}>
+                        {' '}
+                        Filtter
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        width: '100%',
+                        height: '50%',
+                        paddingTop: 5,
+                      }}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          setanimatioVal(false);
+                          animationChangeoff();
+
+                          navigation.navigate('Filtter');
+                        }}
+                        style={{
+                          width: 50,
+                          height: 50,
+                          marginLeft: 10,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          backgroundColor: '#1b5a90',
+                          borderRadius: 5,
+                        }}>
+                        <AntDesign name="menufold" size={28} color="white" />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </TouchableOpacity>
               </View>
             )}
           </TouchableOpacity>
         </Animated.View>
+        {/* =================Map Type Change=============== */}
 
         <View
           style={{

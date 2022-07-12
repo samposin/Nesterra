@@ -19,97 +19,113 @@ const Orders = ({navigation}) => {
       {/* ==============container============== */}
       <View style={{flex: 1}}>
         {/* ==============Table Header============== */}
-        <View
-          style={{
-            width: '100%',
-            height: 60,
-            backgroundColor: 'red',
-            flexDirection: 'row',
-          }}>
+        {order.length == 0 ? (
           <View
             style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
+              width: '100%',
+              height: 300,
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
-            <Text style={styles.boxText}>Inventory ID</Text>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+              No Data Found
+            </Text>
           </View>
-          <View
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-            }}>
-            <Text style={styles.boxText}>Vendor</Text>
-          </View>
-          <View
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-            }}>
-            <Text style={styles.boxText}>Order Type</Text>
-          </View>
-          <View
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-            }}>
-            <Text style={styles.boxText}>Status</Text>
-          </View>
-        </View>
-        {/* ==============Table Header============== */}
-        {/* ==============Table Body============== */}
-        <BottomSheetScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.contentContainer}>
-          {order.map((item, i) => {
-            return (
+        ) : (
+          <>
+            <View
+              style={{
+                width: '100%',
+                height: 60,
+                backgroundColor: 'red',
+                flexDirection: 'row',
+              }}>
               <View
-                key={i}
                 style={{
-                  width: '100%',
-                  height: 40,
-                  backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
-                  flexDirection: 'row',
-                  marginVertical: 1,
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
                 }}>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                  }}>
-                  <Text style={styles.boxText1}>{item.Inventory_ID}</Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                    borderLeftWidth: 2,
-                  }}>
-                  <Text style={styles.boxText1}>{item.vendor}</Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                    borderLeftWidth: 2,
-                  }}>
-                  <Text style={styles.boxText1}>{item.Order_Type}</Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.tableRowColum1,
-                    borderLeftColor: 'white',
-                    borderLeftWidth: 2,
-                  }}>
-                  <Text style={styles.boxText1}>{item.Status}</Text>
-                </View>
+                <Text style={styles.boxText}>Inventory ID</Text>
               </View>
-            );
-          })}
-        </BottomSheetScrollView>
-        {/* ==============Table Body============== */}
+              <View
+                style={{
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
+                  borderLeftWidth: 2,
+                }}>
+                <Text style={styles.boxText}>Vendor</Text>
+              </View>
+              <View
+                style={{
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
+                  borderLeftWidth: 2,
+                }}>
+                <Text style={styles.boxText}>Order Type</Text>
+              </View>
+              <View
+                style={{
+                  ...styles.tableRowColum,
+                  borderLeftColor: 'white',
+                  borderLeftWidth: 2,
+                }}>
+                <Text style={styles.boxText}>Status</Text>
+              </View>
+            </View>
+            {/* ==============Table Header============== */}
+            {/* ==============Table Body============== */}
+            <BottomSheetScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.contentContainer}>
+              {order.map((item, i) => {
+                return (
+                  <View
+                    key={i}
+                    style={{
+                      width: '100%',
+                      height: 40,
+                      backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                      flexDirection: 'row',
+                      marginVertical: 1,
+                    }}>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                      }}>
+                      <Text style={styles.boxText1}>{item.Inventory_ID}</Text>
+                    </View>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                        borderLeftWidth: 2,
+                      }}>
+                      <Text style={styles.boxText1}>{item.vendor}</Text>
+                    </View>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                        borderLeftWidth: 2,
+                      }}>
+                      <Text style={styles.boxText1}>{item.Order_Type}</Text>
+                    </View>
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                        borderLeftWidth: 2,
+                      }}>
+                      <Text style={styles.boxText1}>{item.Status}</Text>
+                    </View>
+                  </View>
+                );
+              })}
+            </BottomSheetScrollView>
+            {/* ==============Table Body============== */}
+          </>
+        )}
       </View>
       {/* ==============container============== */}
     </>

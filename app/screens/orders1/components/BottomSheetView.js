@@ -6,30 +6,37 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import React, {useMemo, useEffect, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 
-import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetScrollView,
+  BottomSheetFlatList,
+} from '@gorhom/bottom-sheet';
 import {useSelector} from 'react-redux';
 
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import {useDispatch} from 'react-redux';
-import {FILTER_CARRIER_NUMBERR} from '../../../actions/actionType/carrier.Number.type';
 
-const BottomSheetView = ({bottomSheetRef, diplayName}) => {
+const BottomSheetView = ({bottomSheetRef, catShow}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const {carrierNumber} = useSelector(state => state.carrierNumber);
+  console.log(carrierNumber, 'carrierNumber');
   const [search, setSearch] = useState('');
-
-  const dispatch = useDispatch();
+  const [filteredDataSource, setFilteredDataSource] = useState(carrierNumber);
+  const [masterDataSource, setMasterDataSource] = useState(carrierNumber);
   const searchFilterFunction = text => {
-    setSearch(text);
-    dispatch({
-      type: FILTER_CARRIER_NUMBERR,
-      data: text,
-    });
+    if (text) {
+      const newData = masterDataSource.filter(function (item) {
+        const itemData = item.id;
+        const textData = text;
+        return itemData.startsWith(textData);
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
   };
-  useEffect(() => {}, []);
-
   return (
     <>
       <BottomSheet
@@ -51,7 +58,7 @@ const BottomSheetView = ({bottomSheetRef, diplayName}) => {
             <Text style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
               Cancle
             </Text>
-            <Text style={{fontSize: 16, fontWeight: 'bold'}}>{diplayName}</Text>
+            <Text style={{fontSize: 16, fontWeight: 'bold'}}>SmartSite</Text>
             <Text style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
               Done
             </Text>
@@ -73,7 +80,7 @@ const BottomSheetView = ({bottomSheetRef, diplayName}) => {
           </View>
         </View>
         <BottomSheetFlatList
-          data={carrierNumber}
+          data={filteredDataSource}
           renderItem={({item}) => {
             return (
               <View
