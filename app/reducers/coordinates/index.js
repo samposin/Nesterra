@@ -13,14 +13,14 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_COORDINATES:
-      let data1 = action.payload.data.map(item => {
-        return {...item, isChecked: false};
-      });
+      // let data1 = action.payload.data.map(item => {
+      //   return {...item, isChecked: false};
+      // });
       // console.log(data1, 'data1');
       return {
         ...state,
-        coordinates: data1,
-        coordinates1: data1,
+        coordinates: action.payload.data,
+        coordinates1: action.payload.data,
         latt: action.payload.lat,
         lngg: action.payload.lng,
         error: null,

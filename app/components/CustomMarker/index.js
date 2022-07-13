@@ -24,11 +24,7 @@ const CustomMarker = ({isChecked, officeType}) => {
   return (
     <Image
       style={{width: 35, height: 35}}
-      source={
-        isChecked
-          ? require('../../images/14.png')
-          : require('../../images/office.png')
-      }
+      source={require('../../images/office.png')}
     />
   );
 };

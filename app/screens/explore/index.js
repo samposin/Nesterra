@@ -57,6 +57,7 @@ import Lodder from '../../components/lodder';
 import {get_all_devices_inventory} from '../../actions/devicesInventory';
 import {getInventoryCircuit} from '../../actions/circuitInventory';
 import {markardata} from '../../utils/markerData';
+import {ZStack} from 'native-base';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -358,7 +359,7 @@ const Explore = ({
       pitch: 180,
     });
   };
-
+  const [indexZ, settIndexZ] = useState(2);
   return (
     <>
       {inputRotate ? rotatedIconAntichange() : rotatedIconchange()}
@@ -435,6 +436,8 @@ const Explore = ({
                   }}
                   tracksViewChanges={false}
                   onPress={() => {
+                    settIndexZ(0);
+
                     // bottomSheetRefImage.current.close();
                     get_location_details({
                       id: item.Location_ID,
@@ -453,10 +456,7 @@ const Explore = ({
                     // animateToRegion(lat, lng);
                     fetchNearestPlacesFromGoogle(lat, lng);
                   }}>
-                  <CustomMarker
-                    officeType={item.SubLocationType}
-                    isChecked={item.isChecked}
-                  />
+                  <CustomMarker officeType={item.SubLocationType} />
                 </Marker.Animated>
               );
             })}
@@ -683,6 +683,25 @@ const Explore = ({
         </Animated.View>
         {/* ===========find Direction=== */}
         {/* =================Map Type Change=============== */}
+        {animatioVal ? (
+          <TouchableOpacity
+            onPress={() => {
+              setanimatioVal(false);
+              animationChangeoff();
+            }}
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              backgroundColor: 'black',
+              opacity: 0.1,
+
+              zIndex: 1,
+            }}></TouchableOpacity>
+        ) : null}
+
         <Animated.View
           style={{
             position: 'absolute',
@@ -694,24 +713,25 @@ const Explore = ({
             alignItems: 'center',
             borderRadius: 20,
             backgroundColor: 'white',
+            zIndex: indexZ,
           }}>
           <TouchableOpacity
             onPress={() => {
               setanimatioVal(true);
-
+              settIndexZ(2);
               animationChange();
 
               //navigation.navigate('Filtter');
             }}>
             {!animatioVal ? (
-              <Ionicons name="md-layers" size={24} color="black" />
+              <Ionicons
+                name="md-layers"
+                size={24}
+                color={animatioVal ? 'white' : 'black'}
+              />
             ) : (
-              <View style={styles.mapTypeView}>
-                <TouchableOpacity
-                  onPress={() => {
-                    setanimatioVal(false);
-                    animationChangeoff();
-                  }}>
+              <>
+                <View style={styles.mapTypeView}>
                   {/* ============map Type view============= */}
                   <View
                     style={{
@@ -861,8 +881,8 @@ const Explore = ({
                       </TouchableOpacity>
                     </View>
                   </View>
-                </TouchableOpacity>
-              </View>
+                </View>
+              </>
             )}
           </TouchableOpacity>
         </Animated.View>

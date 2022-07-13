@@ -9,8 +9,10 @@ import React from 'react';
 import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {connect, useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
-const Orders = ({navigation}) => {
+const Orders = ({}) => {
+  const navigation = useNavigation();
   const {order} = useSelector(state => state.order);
   const {id} = useSelector(state => state.order);
 
@@ -79,7 +81,13 @@ const Orders = ({navigation}) => {
               contentContainerStyle={styles.contentContainer}>
               {order.map((item, i) => {
                 return (
-                  <View
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('OrderDetails', {
+                        inv_Id: item.Inventory_ID,
+                        loca_Id: id,
+                      })
+                    }
                     key={i}
                     style={{
                       width: '100%',
@@ -119,7 +127,7 @@ const Orders = ({navigation}) => {
                       }}>
                       <Text style={styles.boxText1}>{item.Status}</Text>
                     </View>
-                  </View>
+                  </TouchableOpacity>
                 );
               })}
             </BottomSheetScrollView>
