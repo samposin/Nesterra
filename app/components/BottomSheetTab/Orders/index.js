@@ -10,11 +10,10 @@ import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {connect, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
-
 const Orders = ({}) => {
-  const navigation = useNavigation();
   const {order} = useSelector(state => state.order);
   const {id} = useSelector(state => state.order);
+  const navigation = useNavigation();
 
   return (
     <>
@@ -82,12 +81,12 @@ const Orders = ({}) => {
               {order.map((item, i) => {
                 return (
                   <TouchableOpacity
-                    onPress={() =>
+                    onPress={() => {
                       navigation.navigate('OrderDetails', {
-                        inv_Id: item.Inventory_ID,
                         loca_Id: id,
-                      })
-                    }
+                        inv_Id: item.Inventory_ID,
+                      });
+                    }}
                     key={i}
                     style={{
                       width: '100%',

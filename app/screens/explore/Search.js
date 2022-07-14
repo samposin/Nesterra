@@ -68,10 +68,10 @@ const Search = ({
       .then(json => {
         // console.log(json);
 
-        // var location = json.results[0].geometry.location;
+        var location = json.results[0].geometry.location;
 
-        // const {lat, lng} = location;
-        // onPress(lat, lng);
+        const {lat, lng} = location;
+        onPress(lat, lng);
         setModalVisible(false);
         setlocationText('');
       })
@@ -91,7 +91,7 @@ const Search = ({
   const renderSearchLeftIcons = () => {
     return (
       <Image
-        source={require('../../images/Logo-SmartSite-Color-640px.png')}
+        source={require('../../images/logo.png')}
         style={styles.leftIconImage}
       />
     );
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
 
       // zIndex: -1,
       backgroundColor: 'white',
-      borderRadius: 10,
+      borderRadius: 20,
       shadowColor: '#000',
       shadowOffset: {
         width: 2,

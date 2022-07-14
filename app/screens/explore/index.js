@@ -318,6 +318,16 @@ const Explore = ({
 
     bottomSheetRef.current.close();
   };
+  const markerZoom = (lat, lng) => {
+    animateToRegion({
+      latitude: lat,
+      longitude: lng,
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01,
+    });
+
+    bottomSheetRef.current.close();
+  };
   const fetchNearestPlacesFromGoogle = (lat, lng) => {
     // const lat = e.nativeEvent.coordinate.latitude;
     // const lng = e.nativeEvent.coordinate.longitude;
@@ -390,6 +400,8 @@ const Explore = ({
                     ? '#0099cc'
                     : clusterCounts === 2
                     ? '#669900'
+                    : clusterCounts === 3
+                    ? '#f3a54f'
                     : '#bb271a'
                 }
                 textCount={
@@ -397,13 +409,15 @@ const Explore = ({
                     ? '10+'
                     : clusterCounts === 2
                     ? '50+'
-                    : '100+'
+                    : clusterCounts === 3
+                    ? '100+'
+                    : '200+'
                 }
                 {...props}
               />
             );
           }}
-          maxZoomLevel={16}
+          maxZoomLevel={20}
           minZoomLevel={0}
           radius={50}
           style={styles.map}
@@ -436,6 +450,7 @@ const Explore = ({
                   }}
                   tracksViewChanges={false}
                   onPress={() => {
+                    markerZoom(item.Latitude, item.Longitude);
                     settIndexZ(0);
 
                     // bottomSheetRefImage.current.close();
