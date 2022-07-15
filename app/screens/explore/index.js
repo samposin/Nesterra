@@ -379,11 +379,14 @@ const Explore = ({
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-      <ModalView
-        modalVisible={modalVisible}
-        locationText={locationText}
-        setModalVisible={setModalVisible}
-      />
+      {modalVisible ? (
+        <ModalView
+          modalVisible={modalVisible}
+          catShow={catShow}
+          locationText={locationText}
+          setModalVisible={setModalVisible}
+        />
+      ) : null}
 
       <View style={styles.container}>
         <MapView

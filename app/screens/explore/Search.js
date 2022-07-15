@@ -123,8 +123,10 @@ const Search = ({
   };
   const changeValue = data => {
     if (data.length == 0) {
+      alert('one');
       catShow(true);
     } else {
+      alert('two');
       catShow(false);
     }
   };
@@ -157,7 +159,7 @@ const Search = ({
           catShow(false);
           bottomSheetRefImage.current?.close();
         },
-        onChangeText: text => changeValue(text),
+        // onChangeText: text => changeValue(text),
       }}
       query={{
         key: `${LocationKey}`,
