@@ -82,7 +82,7 @@ const TabNaV = ({navigation}) => {
         }}
       />
 
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Stats"
         component={Stats}
         options={{
@@ -96,8 +96,8 @@ const TabNaV = ({navigation}) => {
             );
           },
         }}
-      />
-      <Tab.Screen
+      /> */}
+      {/* <Tab.Screen
         name="Search"
         component={Search}
         options={{
@@ -111,8 +111,8 @@ const TabNaV = ({navigation}) => {
             );
           },
         }}
-      />
-      <Tab.Screen
+      /> */}
+      {/* <Tab.Screen
         name="Extra"
         component={Extra}
         options={{
@@ -126,7 +126,7 @@ const TabNaV = ({navigation}) => {
             );
           },
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };

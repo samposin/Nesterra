@@ -9,8 +9,10 @@ import React from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {connect, useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
-const Circuits = ({navigation}) => {
+const Circuits = ({}) => {
+  const navigation = useNavigation();
   const {cirCuitInventory} = useSelector(state => state.circuitInventory);
   return (
     <>
@@ -77,7 +79,10 @@ const Circuits = ({navigation}) => {
               contentContainerStyle={styles.contentContainer}>
               {cirCuitInventory.map((item, i) => {
                 return (
-                  <View
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('CircuitsDetails', {item})
+                    }
                     key={i}
                     style={{
                       width: '100%',
@@ -117,7 +122,7 @@ const Circuits = ({navigation}) => {
                       }}>
                       <Text style={styles.boxText1}>{item.SubCat_1}</Text>
                     </View>
-                  </View>
+                  </TouchableOpacity>
                 );
               })}
               <View style={{height: 80}}></View>

@@ -1,5 +1,7 @@
+import 'react-native-reanimated';
 import Realm from 'realm';
 
+global.__reanimatedWorkletInit = () => {};
 const BSON = Realm.BSON;
 
 import React, {useEffect} from 'react';

@@ -1,12 +1,12 @@
 import {
-  ScrollView,
   StyleSheet,
   TouchableOpacity,
   Text,
   View,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
-import React, {useMemo, useEffect, useState} from 'react';
+import React, {useMemo, useEffect, useState, useRef} from 'react';
 
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {useSelector} from 'react-redux';
@@ -18,8 +18,10 @@ import {FILTER_CARRIER_NUMBERR} from '../../../actions/actionType/carrier.Number
 const BottomSheetView = ({bottomSheetRef, diplayName}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const {carrierNumber} = useSelector(state => state.carrierNumber);
-  const [search, setSearch] = useState('');
+  const {isLoding} = useSelector(state => state.carrierNumber);
 
+  const [search, setSearch] = useState('');
+  const myRef = useRef(null);
   const dispatch = useDispatch();
   const searchFilterFunction = text => {
     setSearch(text);
@@ -48,13 +50,19 @@ const BottomSheetView = ({bottomSheetRef, diplayName}) => {
         animatedPosition={true}>
         <View style={styles.top}>
           <View style={styles.textView}>
-            <Text style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
-              Cancle
-            </Text>
+            <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
+              <Text
+                style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
+                Cancel
+              </Text>
+            </TouchableOpacity>
             <Text style={{fontSize: 16, fontWeight: 'bold'}}>{diplayName}</Text>
-            <Text style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
-              Done
-            </Text>
+            <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
+              <Text
+                style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
+                Done
+              </Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.searchView}>
             <View style={styles.searchViewLeft}>
@@ -72,24 +80,28 @@ const BottomSheetView = ({bottomSheetRef, diplayName}) => {
             </View>
           </View>
         </View>
-        <BottomSheetFlatList
-          data={carrierNumber}
-          renderItem={({item}) => {
-            return (
-              <View
-                style={{
-                  width: '100%',
-                  height: 30,
-                  marginVertical: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
-              </View>
-            );
-          }}
-          keyExtractor={item => item.id}
-        />
+        {isLoding ? (
+          <ActivityIndicator color="#007aff" size="large" />
+        ) : (
+          <BottomSheetFlatList
+            data={carrierNumber}
+            renderItem={({item}) => {
+              return (
+                <View
+                  style={{
+                    width: '100%',
+                    height: 30,
+                    marginVertical: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
+                </View>
+              );
+            }}
+            keyExtractor={item => item.id}
+          />
+        )}
       </BottomSheet>
     </>
   );

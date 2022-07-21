@@ -6,6 +6,7 @@ import {
 const initialState = {
   carrierNumber: [],
   carrierNumber1: [],
+  isLoding: true,
 };
 
 export default (state = initialState, action) => {
@@ -15,6 +16,7 @@ export default (state = initialState, action) => {
         ...state,
         carrierNumber: action.payload.data,
         carrierNumber1: action.payload.data,
+        isLoding: action.payload.loder,
       };
     case FILTER_CARRIER_NUMBERR:
       // console.log(action.payload.data, 'action.payload.data');

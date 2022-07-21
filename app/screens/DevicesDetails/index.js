@@ -9,17 +9,13 @@ import {
 import React, {useState, useEffect} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-import {get_order_details} from '../../actions/order';
-import {connect, useSelector} from 'react-redux';
 import moment from 'moment';
+import {useNavigation} from '@react-navigation/native';
 
-const OrderDetails = ({navigation, route, get_order_details}) => {
-  const {orderDetails} = useSelector(state => state.OrderDetails);
-
-  useEffect(() => {
-    get_order_details(route.params.inv_Id);
-  }, []);
-
+const DevicesDetails = ({route}) => {
+  const {item} = route.params;
+  console.log(item);
+  const navigation = useNavigation();
   return (
     <>
       <SafeAreaView
@@ -40,7 +36,7 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
             </View>
             <View style={styles.topItem}>
               <Text style={{fontWeight: '900', fontSize: 18, color: 'black'}}>
-                Orders Details
+                Devices Details
               </Text>
             </View>
             <View style={styles.topItem}>
@@ -57,24 +53,24 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
 
           <View style={styles.secondTable}>
             {/* ============== Second Table Row============== */}
-            {orderDetails?.Smart_Site_Order_No ? (
+            {item?.Device_Name ? (
               <View
                 style={{...styles.secondTableRow1, backgroundColor: '#b7c5e4'}}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    SmartSites#
+                    Device Name
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {orderDetails.Smart_Site_Order_No}
+                    {item.Device_Name}
                   </Text>
                 </View>
               </View>
             ) : null}
             {/* ============== Second Table Row============== */}
             {/* ============== Second Table Row============== */}
-            {orderDetails?.Inventory_ID ? (
+            {item?.Alternative_Device_Name ? (
               <View
                 style={{
                   ...styles.secondTableRow,
@@ -88,39 +84,39 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {orderDetails.Inventory_ID}
+                    {item.Alternative_Device_Name}
                   </Text>
                 </View>
               </View>
             ) : null}
 
             {/* ===================== */}
-            {orderDetails?.Order_Type ? (
+            {item?.Associated_Circuit ? (
               <View style={styles.secondTableRow}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Order Type#
+                    Associated Circuit
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {orderDetails.Order_Type}
+                    {item.Associated_Circuit}
                   </Text>
                 </View>
               </View>
             ) : null}
             {/* ===================== */}
             {/* ===================== */}
-            {orderDetails?.Status ? (
+            {item?.Branch_ID ? (
               <View style={styles.secondTableRow}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Status{' '}
+                    Branch_ID
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {orderDetails.Status}
+                    {item.Branch_ID}
                   </Text>
                 </View>
               </View>
@@ -128,7 +124,7 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
             {/* ===================== */}
 
             {/* ===================== */}
-            {orderDetails?.Requested_By_Name ? (
+            {item?.Code_Compliance ? (
               <View style={styles.secondTableRow}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
@@ -137,7 +133,7 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {orderDetails.Requested_By_Name}
+                    {item.Code_Compliance}
                   </Text>
                 </View>
               </View>
@@ -145,16 +141,16 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
 
             {/* ===================== */}
             {/* ===================== */}
-            {orderDetails?.Technical_Contact_Name ? (
+            {item?.Compiled ? (
               <View style={styles.secondTableRow}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Technical Contact Name
+                    Compiled
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {orderDetails.Technical_Contact_Name}
+                    {item.Compiled}
                   </Text>
                 </View>
               </View>
@@ -162,16 +158,16 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
 
             {/* ===================== */}
             {/* ===================== */}
-            {orderDetails?.Initiation_Date ? (
+            {item?.Compliant ? (
               <View style={styles.secondTableRow}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Initiation Date
+                    Compliant
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(orderDetails.Initiation_Date).format('DD-MM-YYYY')}
+                    {item.Compliant}
                   </Text>
                 </View>
               </View>
@@ -179,16 +175,16 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
 
             {/* ===================== */}
             {/* ===================== */}
-            {orderDetails?.Technical_Contact_Name ? (
+            {item?.Config_Compliance ? (
               <View style={styles.secondTableRow}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Creation Date
+                    Config Compliance
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(orderDetails.Creation_Date).format('DD-MM-YYYY')}
+                    {item.Config_Compliance}
                   </Text>
                 </View>
               </View>
@@ -196,7 +192,7 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
 
             {/* ===================== */}
             {/* ===================== */}
-            {orderDetails?.FOC_Date ? (
+            {item?.Contact_Information ? (
               <View style={styles.secondTableRow}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
@@ -205,7 +201,7 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(orderDetails.FOC_Date).format('DD-MM-YYYY')}
+                    {item.Contact_Information}
                   </Text>
                 </View>
               </View>
@@ -213,18 +209,16 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
 
             {/* ===================== */}
             {/* ===================== */}
-            {orderDetails?.Order_Completion_Date ? (
+            {item?.Decom_Date ? (
               <View style={styles.secondTableRow}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Order Completion Date
+                    Decom_Date
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(orderDetails.Order_Completion_Date).format(
-                      'DD-MM-YYYY',
-                    )}
+                    {moment(item.Decom_Date).format('DD-MM-YYYY')}
                   </Text>
                 </View>
               </View>
@@ -233,16 +227,16 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
             {/* ===================== */}
 
             {/* ===================== */}
-            {orderDetails?.Bill_Stop_Date ? (
+            {item?.Device_Details ? (
               <View style={styles.secondTableRow}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Bill Stop Date
+                    Device_Details
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(orderDetails.Bill_Stop_Date).format('DD-MM-YYYY')}
+                    {item.Device_Details}
                   </Text>
                 </View>
               </View>
@@ -250,176 +244,20 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
 
             {/* ===================== */}
             {/* ===================== */}
-            {orderDetails?.vendor ? (
+            {item?.Device_Function ? (
               <View style={styles.secondTableRow}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Vendor
+                    Device Function
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {orderDetails.vendor}
+                    {item.Device_Function}
                   </Text>
                 </View>
               </View>
             ) : null}
-
-            {/* ===================== */}
-
-            {/* ===================== */}
-            {orderDetails?.Category ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Category
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {orderDetails.Category}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
-            {/* ===================== */}
-            {orderDetails?.Subcat_1 ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Sub-Category 1
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {orderDetails.Subcat_1}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
-            {/* ===================== */}
-            {orderDetails?.Subcat_2 ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Sub-Category 2
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {orderDetails.Subcat_2}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
-            {/* ===================== */}
-            {orderDetails?.Address ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Address
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text
-                    style={{
-                      fontWeight: '700',
-                      color: 'black',
-                      paddingVertical: 5,
-                    }}>
-                    {orderDetails.Address}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
-            {/* ===================== */}
-            {orderDetails?.RC ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>RC</Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text
-                    style={{
-                      fontWeight: '700',
-                      color: 'black',
-                    }}>
-                    {orderDetails.RC}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
-            {/* ===================== */}
-            {orderDetails?.GL ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>GL</Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text
-                    style={{
-                      fontWeight: '700',
-                      color: 'black',
-                    }}>
-                    {orderDetails.GL}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
-            {/* ===================== */}
-            {orderDetails?.Monthly_Recurring_Cost ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Monthly Recurring Cost
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text
-                    style={{
-                      fontWeight: '700',
-                      color: 'black',
-                    }}>
-                    {orderDetails.Monthly_Recurring_Cost}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
-            {/* ===================== */}
-            {orderDetails?.Annual_Cost ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Annual Cost
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text
-                    style={{
-                      fontWeight: '700',
-                      color: 'black',
-                    }}>
-                    {orderDetails.Annual_Cost}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
 
             {/* ============== Second Table Row============== */}
           </View>
@@ -432,7 +270,7 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
   );
 };
 
-export default connect(null, {get_order_details})(OrderDetails);
+export default DevicesDetails;
 
 const styles = StyleSheet.create({
   container: {
@@ -441,7 +279,6 @@ const styles = StyleSheet.create({
     borderColor: '#000000',
     margin: 10,
     marginBottom: 5,
-    borderBottomWidth: 0,
   },
   topView: {
     height: 50,
@@ -535,6 +372,8 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 30,
     flexDirection: 'row',
+    borderTopColor: 'black',
+    borderTopWidth: 1,
     borderBottomColor: 'black',
     borderBottomWidth: 1,
     borderLeftColor: 'black',

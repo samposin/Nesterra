@@ -7,12 +7,13 @@ import {
 } from 'react-native';
 import React from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
-
+useNavigation;
 import {connect, useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
-const Devices = ({navigation}) => {
+const Devices = ({}) => {
   const {devicesInventory} = useSelector(state => state.devicesInventory);
-
+  const navigation = useNavigation();
   return (
     <>
       {/* ==============container============== */}
@@ -78,7 +79,10 @@ const Devices = ({navigation}) => {
               contentContainerStyle={styles.contentContainer}>
               {devicesInventory.map((item, i) => {
                 return (
-                  <View
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('DevicesDetails', {item})
+                    }
                     key={i}
                     style={{
                       width: '100%',
@@ -120,7 +124,7 @@ const Devices = ({navigation}) => {
                       }}>
                       <Text style={styles.boxText1}>{item.Device_Vendor}</Text>
                     </View>
-                  </View>
+                  </TouchableOpacity>
                 );
               })}
             </BottomSheetScrollView>

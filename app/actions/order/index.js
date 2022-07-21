@@ -20,11 +20,11 @@ export const get_order = id => dispatch => {
     });
 };
 
-export const get_order_details = (inv_Id, loca_Id) => dispatch => {
+export const get_order_details = inv_Id => dispatch => {
   // const loca_Id = 'MST0007215';
   // const inv_Id = 'CZB18062';
   Axios.get(
-    `${Base_url}/api/GetOrdersAlldetailsByLocationID?Locationid=${loca_Id}&InventoryID=${inv_Id}`,
+    `${Base_url}/api/GetOrdersAlldetailsByInventoryID?InventoryID=${inv_Id}`,
   )
     .then(response => {
       dispatch({

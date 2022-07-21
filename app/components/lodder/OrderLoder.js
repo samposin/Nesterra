@@ -1,0 +1,37 @@
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
+import React from 'react';
+
+const {height, width} = Dimensions.get('screen');
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+const OrderLoder = ({lodding}) => {
+  const [item, setItem] = React.useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  return (
+    <>
+      {item.map((item, index) => {
+        return (
+          <SkeletonPlaceholder key={index}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: 20,
+                paddingLeft: 20,
+              }}>
+              <View
+                style={{
+                  width: width - 20,
+                  marginLeft: 10,
+                  height: 40,
+                  borderRadius: 8,
+                }}
+              />
+            </View>
+          </SkeletonPlaceholder>
+        );
+      })}
+    </>
+  );
+};
+export default OrderLoder;
+
+const styles = StyleSheet.create({});

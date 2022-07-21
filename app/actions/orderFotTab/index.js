@@ -1,13 +1,16 @@
+import {GET_ORDERS_FOR_TAB} from '../actionType/action.OrdersForTab';
 import Axios from 'axios';
 import {Base_url} from '../../key';
-import {GET_CARRIER_NUMBERR} from '../actionType/carrier.Number.type';
 
-export const GetCarrierNumber = name => dispatch => {
-  Axios.get(`${Base_url}/api/${name}`)
+export const get_orders_for_tab = () => dispatch => {
+  Axios.get(
+    `${Base_url}/api/GetAllOrdersCustomDetails?OrderType=Disco&SmartSite=0&Tangoe=0&Carrier=0`,
+  )
     .then(response => {
+      //   console.log(response);
       if (response.data.length > 0) {
         dispatch({
-          type: GET_CARRIER_NUMBERR,
+          type: GET_ORDERS_FOR_TAB,
           payload: {
             data: response.data,
             loder: false,
@@ -15,10 +18,10 @@ export const GetCarrierNumber = name => dispatch => {
         });
       } else {
         dispatch({
-          type: GET_CARRIER_NUMBERR,
+          type: GET_ORDERS_FOR_TAB,
           payload: {
             data: response.data,
-            loder: false,
+            loder: true,
           },
         });
       }

@@ -1,0 +1,1 @@
+export const GET_ORDERS_FOR_TAB = 'GET_ORDERS_FOR_TAB';

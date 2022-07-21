@@ -69,9 +69,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     left: 0,
-
     zIndex: 998,
-
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -84,7 +82,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     zIndex: 10,
     opacity: 0.5,
-
     justifyContent: 'center',
     alignItems: 'center',
   },
