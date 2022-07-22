@@ -16,10 +16,11 @@ const OrderLoder = ({lodding}) => {
                 alignItems: 'center',
                 marginTop: 20,
                 paddingLeft: 20,
+                paddingRight: 20,
               }}>
               <View
                 style={{
-                  width: width - 20,
+                  width: width - 30,
                   marginLeft: 10,
                   height: 40,
                   borderRadius: 8,

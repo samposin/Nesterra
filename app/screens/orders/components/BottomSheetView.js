@@ -6,30 +6,38 @@ import {
   TextInput,
   ActivityIndicator,
 } from 'react-native';
-import React, {useMemo, useEffect, useState, useRef} from 'react';
+import React, {useMemo, useEffect, useRef} from 'react';
 
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {useSelector} from 'react-redux';
 
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch} from 'react-redux';
 import {FILTER_CARRIER_NUMBERR} from '../../../actions/actionType/carrier.Number.type';
-
-const BottomSheetView = ({bottomSheetRef, diplayName}) => {
+import SerachOrderTypeSmartSite from './SerachOrderTypeSmartSite';
+import SerachOrderType from './SerachOrderType';
+import SerachVendor from './SerachVendor';
+import SearchStatus from './SearchStatus';
+const BottomSheetView = ({bottomSheetRef, diplayName, bottomSheetDisplay}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const {carrierNumber} = useSelector(state => state.carrierNumber);
   const {isLoding} = useSelector(state => state.carrierNumber);
 
-  const [search, setSearch] = useState('');
-  const myRef = useRef(null);
-  const dispatch = useDispatch();
-  const searchFilterFunction = text => {
-    setSearch(text);
-    dispatch({
-      type: FILTER_CARRIER_NUMBERR,
-      data: text,
-    });
+  const selectedComponent = () => {
+    switch (true) {
+      case bottomSheetDisplay === 'Order Type':
+        return <SerachOrderType />;
+        break;
+      case bottomSheetDisplay === 'SmartSite#':
+        return <SerachOrderTypeSmartSite />;
+        break;
+      case bottomSheetDisplay === 'Vendor':
+        return <SerachVendor />;
+      case bottomSheetDisplay === 'Status':
+        return <SearchStatus />;
+        break;
+    }
   };
+
   useEffect(() => {}, []);
 
   return (
@@ -64,8 +72,10 @@ const BottomSheetView = ({bottomSheetRef, diplayName}) => {
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.searchView}>
+          {selectedComponent()}
+          {/* <View style={styles.searchView}>
             <View style={styles.searchViewLeft}>
+              
               <TextInput
                 value={search}
                 placeholder="Search Here"
@@ -78,7 +88,7 @@ const BottomSheetView = ({bottomSheetRef, diplayName}) => {
             <View style={styles.searchViewRight}>
               <EvilIcons name="search" size={24} color="black" />
             </View>
-          </View>
+          </View> */}
         </View>
         {isLoding ? (
           <ActivityIndicator color="#007aff" size="large" />

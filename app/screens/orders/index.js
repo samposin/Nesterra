@@ -21,25 +21,42 @@ import OrderLoder from '../../components/lodder/OrderLoder';
 
 const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation, route}) => {
   const {ordersForTab} = useSelector(state => state.ordersForTab);
+  console.log(ordersForTab);
+  console.log(ordersForTab.length);
   const {isLoding} = useSelector(state => state.ordersForTab);
   const [diplayName, setDisplayName] = useState('');
   const bottomSheetRef = useRef(null);
   // const [isLoding, setIsLoding] = useState(false);
+  const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
   const Category = [
     {
       id: 0,
       name: 'Order Type',
       value: 'GetCarrierNumber',
       disValue: 'OrderType',
+      search: 'Order Type',
     },
     {
       id: 1,
       name: 'SmartSite#',
       value: 'GetSmartSiteNumber',
       disValue: 'SmartSite',
+      search: 'SmartSite#',
     },
-    {id: 1, name: 'Tangoe', value: 'GetTangoeNumber', disValue: 'Tangoe'},
-    {id: 1, name: 'Carrier', value: 'GetTangoeNumber', disValue: 'Carrier'},
+    {
+      id: 1,
+      name: 'Tangoe',
+      value: 'GetTangoeNumber',
+      disValue: 'Tangoe',
+      search: 'Vendor',
+    },
+    {
+      id: 1,
+      name: 'Carrier',
+      value: 'GetTangoeNumber',
+      disValue: 'Carrier',
+      search: 'Status',
+    },
   ];
   useEffect(() => {
     get_orders_for_tab();
@@ -128,6 +145,7 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation, route}) => {
         {/* ==============Services Category============== */}
         <View style={{...styles.dropDownView}}>
           <ScrollView
+            keyboardShouldPersistTaps="handled"
             horizontal
             showsHorizontalScrollIndicator={false}
             style={{width: '100%', height: '100%'}}>
@@ -139,12 +157,13 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation, route}) => {
                     GetCarrierNumber(item.value);
                     setDisplayName(item.disValue);
                     bottomSheetRef.current.snapToIndex(1);
+                    setBottomSheetDisplay(item.search);
                   }}
                   style={{
                     width: 100,
                     height: 40,
                     borderRadius: 5,
-                    borderColor: 'red',
+                    borderColor: 'black',
                     flexDirection: 'row',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -186,20 +205,63 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation, route}) => {
                 </Text>
               </View>
             ) : (
-              <View style={styles.table}>
-                <FlatList
-                  showsVerticalScrollIndicator={false}
-                  data={ordersForTab}
-                  keyExtractor={(item, i) => i.toString()}
-                  renderItem={(item, i) => randerItem(item)}
-                />
-              </View>
+              <>
+                <View style={{...styles.tableRow}}>
+                  <View style={{...styles.tableRowColum}}>
+                    <Text style={{...styles.boxText, color: 'white'}}>
+                      Type
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      ...styles.tableRowColum,
+                      borderLeftColor: 'white',
+                      borderLeftWidth: 2,
+                    }}>
+                    <Text style={styles.boxText}>Vendor</Text>
+                  </View>
+                  <View
+                    style={{
+                      ...styles.tableRowColum,
+                      borderLeftColor: 'white',
+                      borderLeftWidth: 2,
+                    }}>
+                    <Text style={styles.boxText}>Status</Text>
+                  </View>
+                  <View
+                    style={{
+                      ...styles.tableRowColum,
+                      borderLeftColor: 'white',
+                      borderLeftWidth: 2,
+                    }}>
+                    <Text style={styles.boxText}>Date</Text>
+                  </View>
+                  <View
+                    style={{
+                      ...styles.tableRowColum,
+                      borderLeftColor: 'white',
+                      borderLeftWidth: 2,
+                    }}>
+                    <Text style={styles.boxText}>Inv ID</Text>
+                  </View>
+                </View>
+                <View style={styles.table}>
+                  <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={ordersForTab}
+                    keyExtractor={(item, i) => i.toString()}
+                    renderItem={(item, i) => randerItem(item)}
+                  />
+                </View>
+              </>
             )}
           </>
         )}
         {/* ==============Summary View=========== */}
       </SafeAreaView>
+      {/* {selectedComponent()} */}
       <BottomSheetView
+        bottomSheetDisplay={bottomSheetDisplay}
         diplayName={diplayName}
         bottomSheetRef={bottomSheetRef}
       />

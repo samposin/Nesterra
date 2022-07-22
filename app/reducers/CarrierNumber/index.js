@@ -33,7 +33,6 @@ export default (state = initialState, action) => {
           carrierNumber: newData,
         };
       } else {
-        console.log(state.carrierNumber1, 'state.carrierNumber1');
         return {
           ...state,
           carrierNumber: state.carrierNumber1,

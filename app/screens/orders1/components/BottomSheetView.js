@@ -7,7 +7,6 @@ import {
   TextInput,
 } from 'react-native';
 import React, {useMemo, useState} from 'react';
-
 import BottomSheet, {
   BottomSheetScrollView,
   BottomSheetFlatList,
@@ -19,7 +18,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 const BottomSheetView = ({bottomSheetRef, catShow}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const {carrierNumber} = useSelector(state => state.carrierNumber);
-  console.log(carrierNumber, 'carrierNumber');
+
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState(carrierNumber);
   const [masterDataSource, setMasterDataSource] = useState(carrierNumber);
@@ -116,7 +115,6 @@ const styles = StyleSheet.create({
   searchView: {
     width: '90%',
     height: 50,
-
     alignSelf: 'center',
     borderColor: 'black',
     paddingLeft: 10,
@@ -134,7 +132,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-
     paddingRight: 5,
   },
 });

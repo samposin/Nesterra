@@ -21,7 +21,7 @@ export const get_orders_for_tab = () => dispatch => {
           type: GET_ORDERS_FOR_TAB,
           payload: {
             data: response.data,
-            loder: true,
+            loder: false,
           },
         });
       }
