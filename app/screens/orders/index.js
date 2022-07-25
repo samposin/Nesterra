@@ -7,26 +7,28 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
-  ActivityIndicator,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {GetCarrierNumber} from '../../actions/CarrierNumber';
 import {get_orders_for_tab} from '../../actions/orderFotTab';
-import {connect, useSelector} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import BottomSheetView from './components/BottomSheetView';
 
 import moment from 'moment';
 import OrderLoder from '../../components/lodder/OrderLoder';
+import {SORT_BY_VENDOR} from '../../actions/actionType/action.OrdersForTab';
 
 const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation, route}) => {
   const {ordersForTab} = useSelector(state => state.ordersForTab);
+  const dispatch = useDispatch();
   console.log(ordersForTab);
   console.log(ordersForTab.length);
   const {isLoding} = useSelector(state => state.ordersForTab);
   const [diplayName, setDisplayName] = useState('');
   const bottomSheetRef = useRef(null);
   // const [isLoding, setIsLoding] = useState(false);
+  const [sort, setsort] = useState(true);
   const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
   const Category = [
     {
@@ -119,7 +121,9 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation, route}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>{item?.Inventory_ID}</Text>
+          <Text style={styles.boxText1}>
+            {item?.Inventory_ID.substr(1, 10)}..
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -184,7 +188,57 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation, route}) => {
             })}
           </ScrollView>
         </View>
+        {/* ======================Table  Header======================= */}
+        <View style={{...styles.tableRow}}>
+          <TouchableOpacity
+            onPress={() => {
+              if (sort) {
+                setsort(!sort);
+                alert('ddd');
+              } else {
+                setsort(!sort);
+                alert('pppp');
+              }
+            }}
+            style={{...styles.tableRowColum}}>
+            <Text style={{...styles.boxText, color: 'white'}}>Type</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => alert('ddadfas')}
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+            }}>
+            <Text style={styles.boxText}>Vendor</Text>
+          </TouchableOpacity>
+          <View
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+            }}>
+            <Text style={styles.boxText}>Status</Text>
+          </View>
+          <View
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+            }}>
+            <Text style={styles.boxText}>Date</Text>
+          </View>
+          <View
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+            }}>
+            <Text style={styles.boxText}>Inv ID</Text>
+          </View>
+        </View>
 
+        {/* ======================Table  Header======================= */}
         {/* ==============Services Category============== */}
         {isLoding ? (
           <View style={styles.loderView}>
@@ -206,45 +260,6 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation, route}) => {
               </View>
             ) : (
               <>
-                <View style={{...styles.tableRow}}>
-                  <View style={{...styles.tableRowColum}}>
-                    <Text style={{...styles.boxText, color: 'white'}}>
-                      Type
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      ...styles.tableRowColum,
-                      borderLeftColor: 'white',
-                      borderLeftWidth: 2,
-                    }}>
-                    <Text style={styles.boxText}>Vendor</Text>
-                  </View>
-                  <View
-                    style={{
-                      ...styles.tableRowColum,
-                      borderLeftColor: 'white',
-                      borderLeftWidth: 2,
-                    }}>
-                    <Text style={styles.boxText}>Status</Text>
-                  </View>
-                  <View
-                    style={{
-                      ...styles.tableRowColum,
-                      borderLeftColor: 'white',
-                      borderLeftWidth: 2,
-                    }}>
-                    <Text style={styles.boxText}>Date</Text>
-                  </View>
-                  <View
-                    style={{
-                      ...styles.tableRowColum,
-                      borderLeftColor: 'white',
-                      borderLeftWidth: 2,
-                    }}>
-                    <Text style={styles.boxText}>Inv ID</Text>
-                  </View>
-                </View>
                 <View style={styles.table}>
                   <FlatList
                     showsVerticalScrollIndicator={false}

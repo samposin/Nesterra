@@ -6,7 +6,8 @@ import TabButton from '../components/tabButton/TabButton';
 import tabButtonImage from '../components/imageLink/tabButtonImage';
 import Orders from '../screens/orders';
 
-import Stats from '../screens/stats';
+import Login from '../screens/Login';
+import OtpReceive from '../screens/OtpReceive';
 // import Saved from '../screens/saved';
 import Assets from '../screens/assets';
 import Search from '../screens/search';
@@ -82,36 +83,36 @@ const TabNaV = ({navigation}) => {
         }}
       />
 
-      {/* <Tab.Screen
-        name="Stats"
-        component={Stats}
+      <Tab.Screen
+        name="Login"
+        component={Login}
         options={{
           tabBarIcon: ({focused}) => {
             return (
               <TabButton
-                name="Stats"
+                name="Login"
                 imagePath={tabButtonImage.imgStats}
                 focused={focused}
               />
             );
           },
         }}
-      /> */}
-      {/* <Tab.Screen
-        name="Search"
-        component={Search}
+      />
+      <Tab.Screen
+        name="OtpReceive"
+        component={OtpReceive}
         options={{
           tabBarIcon: ({focused}) => {
             return (
               <TabButton
-                name="Search"
+                name="OtpReceive"
                 imagePath={tabButtonImage.imgSearch}
                 focused={focused}
               />
             );
           },
         }}
-      /> */}
+      />
       {/* <Tab.Screen
         name="Extra"
         component={Extra}

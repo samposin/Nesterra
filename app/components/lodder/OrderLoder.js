@@ -4,7 +4,7 @@ import React from 'react';
 const {height, width} = Dimensions.get('screen');
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 const OrderLoder = ({lodding}) => {
-  const [item, setItem] = React.useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const item = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <>
       {item.map((item, index) => {
@@ -20,8 +20,8 @@ const OrderLoder = ({lodding}) => {
               }}>
               <View
                 style={{
-                  width: width - 30,
-                  marginLeft: 10,
+                  width: width - 40,
+
                   height: 40,
                   borderRadius: 8,
                 }}

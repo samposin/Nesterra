@@ -7,6 +7,8 @@ import CircuitsDetails from '../screens/CircuitsDetails/index.js';
 import DevicesDetails from '../screens/DevicesDetails/index.js';
 
 import DevicesInventory from '../screens/DevicesInventory/index.js';
+import Login from '../screens/Login/index.js';
+import OtpReceive from '../screens/OtpReceive';
 import OrderDetails from '../screens/OrderDetails.js';
 import Profile from '../screens/profile';
 
@@ -21,6 +23,8 @@ const MainStack = () => {
           headerShown: false,
         }}>
         <Stack.Screen name="TabNaV" component={TabNaV} />
+        {/* <Stack.Screen name="OtpReceive" component={OtpReceive} /> */}
+        {/* <Stack.Screen name="Login" component={Login} /> */}
         <Stack.Screen name="OrderDetails" component={OrderDetails} />
         {/* <Stack.Screen name="CircuitInventory" component={CircuitInventory} />
         <Stack.Screen name="DevicesInventory" component={DevicesInventory} /> */}
