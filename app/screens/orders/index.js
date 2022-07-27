@@ -17,18 +17,34 @@ import BottomSheetView from './components/BottomSheetView';
 
 import moment from 'moment';
 import OrderLoder from '../../components/lodder/OrderLoder';
-import {SORT_BY_VENDOR} from '../../actions/actionType/action.OrdersForTab';
+import {
+  SORT_BY_VENDOR_ASC,
+  SORT_BY_VENDOR_DES,
+  SORT_BY_STATUS_ASC,
+  SORT_BY_STATUS_DES,
+  SORT_BY_DATE_ASC,
+  SORT_BY_DATE_DES,
+  SORT_BY_INV_ID_ASC,
+  SORT_BY_INV_ID_DES,
+  SORT_BY_ORDER_TYPE_ASC,
+  SORT_BY_ORDER_TYPE_DES,
+} from '../../actions/actionType/action.OrdersForTab';
 
-const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation, route}) => {
+const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
   const {ordersForTab} = useSelector(state => state.ordersForTab);
   const dispatch = useDispatch();
-  console.log(ordersForTab);
-  console.log(ordersForTab.length);
+  // console.log(ordersForTab);
+  // console.log(ordersForTab.length);
   const {isLoding} = useSelector(state => state.ordersForTab);
   const [diplayName, setDisplayName] = useState('');
   const bottomSheetRef = useRef(null);
   // const [isLoding, setIsLoding] = useState(false);
   const [sort, setsort] = useState(true);
+  const [status, setStatus] = useState(true);
+  const [dateType, setDateType] = useState(true);
+  const [invType, setInvType] = useState(true);
+  const [orderType, setOrderType] = useState(true);
+
   const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
   const Category = [
     {
@@ -192,19 +208,35 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation, route}) => {
         <View style={{...styles.tableRow}}>
           <TouchableOpacity
             onPress={() => {
-              if (sort) {
-                setsort(!sort);
-                alert('ddd');
+              if (orderType) {
+                setOrderType(!orderType);
+                dispatch({
+                  type: SORT_BY_ORDER_TYPE_ASC,
+                });
               } else {
-                setsort(!sort);
-                alert('pppp');
+                setOrderType(!orderType);
+                dispatch({
+                  type: SORT_BY_ORDER_TYPE_DES,
+                });
               }
             }}
             style={{...styles.tableRowColum}}>
             <Text style={{...styles.boxText, color: 'white'}}>Type</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => alert('ddadfas')}
+            onPress={() => {
+              if (sort) {
+                setsort(!sort);
+                dispatch({
+                  type: SORT_BY_VENDOR_ASC,
+                });
+              } else {
+                setsort(!sort);
+                dispatch({
+                  type: SORT_BY_VENDOR_DES,
+                });
+              }
+            }}
             style={{
               ...styles.tableRowColum,
               borderLeftColor: 'white',
@@ -212,30 +244,69 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation, route}) => {
             }}>
             <Text style={styles.boxText}>Vendor</Text>
           </TouchableOpacity>
-          <View
+          <TouchableOpacity
+            onPress={() => {
+              if (status) {
+                setStatus(!status);
+                dispatch({
+                  type: SORT_BY_STATUS_ASC,
+                });
+              } else {
+                setStatus(!status);
+                dispatch({
+                  type: SORT_BY_STATUS_DES,
+                });
+              }
+            }}
             style={{
               ...styles.tableRowColum,
               borderLeftColor: 'white',
               borderLeftWidth: 2,
             }}>
             <Text style={styles.boxText}>Status</Text>
-          </View>
-          <View
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (dateType) {
+                setDateType(!dateType);
+                dispatch({
+                  type: SORT_BY_DATE_ASC,
+                });
+              } else {
+                setDateType(!dateType);
+                dispatch({
+                  type: SORT_BY_DATE_DES,
+                });
+              }
+            }}
             style={{
               ...styles.tableRowColum,
               borderLeftColor: 'white',
               borderLeftWidth: 2,
             }}>
             <Text style={styles.boxText}>Date</Text>
-          </View>
-          <View
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (invType) {
+                setInvType(!invType);
+                dispatch({
+                  type: SORT_BY_INV_ID_ASC,
+                });
+              } else {
+                setInvType(!invType);
+                dispatch({
+                  type: SORT_BY_INV_ID_DES,
+                });
+              }
+            }}
             style={{
               ...styles.tableRowColum,
               borderLeftColor: 'white',
               borderLeftWidth: 2,
             }}>
             <Text style={styles.boxText}>Inv ID</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         {/* ======================Table  Header======================= */}

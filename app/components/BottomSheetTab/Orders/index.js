@@ -1,19 +1,30 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
 import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
-import {connect, useSelector} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
+import {
+  SORT_BY_ORDER_ID_ASC,
+  SORT_BY_ORDER_ID_DES,
+  SORT_BY_ORDER_STATUS_ASC,
+  SORT_BY_ORDER_STATUS_DES,
+  SORT_BY_ORDER_TYPE_ASC,
+  SORT_BY_ORDER_TYPE_DES,
+  SORT_BY_ORDER_VENDOR_ASC,
+  SORT_BY_ORDER_VENDOR_DES,
+} from '../../../actions/actionType/action.Order.type';
 const Orders = ({}) => {
   const {order} = useSelector(state => state.order);
   const {id} = useSelector(state => state.order);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  // console.log(order);
+  // console.log(order.length);
+  const [idType, setIdType] = useState(true);
+  const [vendorType, setVendorType] = useState(true);
+  const [statusType, setStatusType] = useState(true);
+  const [orderType, setOrderType] = useState(true);
 
   return (
     <>
@@ -38,40 +49,92 @@ const Orders = ({}) => {
               style={{
                 width: '100%',
                 height: 60,
-                backgroundColor: 'red',
+
                 flexDirection: 'row',
               }}>
-              <View
+              <TouchableOpacity
+                onPress={() => {
+                  if (idType) {
+                    setIdType(!idType);
+                    dispatch({
+                      type: SORT_BY_ORDER_ID_ASC,
+                    });
+                  } else {
+                    setIdType(!idType);
+                    dispatch({
+                      type: SORT_BY_ORDER_ID_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                 }}>
                 <Text style={styles.boxText}>Inventory ID</Text>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (vendorType) {
+                    setVendorType(!vendorType);
+                    dispatch({
+                      type: SORT_BY_ORDER_VENDOR_ASC,
+                    });
+                  } else {
+                    setVendorType(!vendorType);
+                    dispatch({
+                      type: SORT_BY_ORDER_VENDOR_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
                 <Text style={styles.boxText}>Vendor</Text>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (orderType) {
+                    setOrderType(!orderType);
+                    dispatch({
+                      type: SORT_BY_ORDER_TYPE_ASC,
+                    });
+                  } else {
+                    setOrderType(!orderType);
+                    dispatch({
+                      type: SORT_BY_ORDER_TYPE_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
                 <Text style={styles.boxText}>Order Type</Text>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (statusType) {
+                    setStatusType(!statusType);
+                    dispatch({
+                      type: SORT_BY_ORDER_STATUS_ASC,
+                    });
+                  } else {
+                    setStatusType(!statusType);
+                    dispatch({
+                      type: SORT_BY_ORDER_STATUS_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
                 <Text style={styles.boxText}>Status</Text>
-              </View>
+              </TouchableOpacity>
             </View>
             {/* ==============Table Header============== */}
             {/* ==============Table Body============== */}

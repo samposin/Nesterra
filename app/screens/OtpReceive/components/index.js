@@ -6,56 +6,127 @@ import {
   StyleSheet,
   Dimensions,
   ActivityIndicator,
+  Image,
 } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {Modal, Portal} from 'react-native-paper';
+import {Portal, Modal} from 'react-native-paper';
 const {width, height} = Dimensions.get('screen');
-const ModalView = ({setModal, modal}) => {
+const ModalView = ({setOpenModal, openModal, authType, setAuthType}) => {
   return (
-    <>
-      <View style={styles.container}></View>
+    <Portal>
+      <Modal
+        visible={openModal}
+        onDismiss={() => setOpenModal(false)}
+        contentContainerStyle={styles.containerStyle}>
+        <View
+          style={{
+            width: '100%',
+            height: 30,
 
-      <View style={styles.containerStyle}>
-        <Text style={{marginBottom: 20, fontSize: 18, color: '#1b5a90'}}>
-          Select an authentication factor
-        </Text>
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 16, color: 'black'}}>
+            Select an authentication factor
+          </Text>
+        </View>
         <TouchableOpacity
           onPress={() => {
-            setModal(!modal);
+            setAuthType(false);
+            setOpenModal(false);
           }}
           style={{
             width: '100%',
-            height: 50,
-            backgroundColor: 'red',
-          }}></TouchableOpacity>
+            height: 70,
+            borderWidth: 0.5,
+            flexDirection: 'row',
+          }}>
+          <View
+            style={{
+              width: '30%',
+              height: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <View
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: 30,
+                borderWidth: 1.5,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Image
+                style={{
+                  width: 50,
+                  height: 50,
+                  resizeMode: 'contain',
+                  borderRadius: 25,
+                }}
+                source={require('../../../images/okta.png')}
+              />
+            </View>
+          </View>
+          <View
+            style={{
+              width: '70%',
+              height: '100%',
+
+              justifyContent: 'center',
+            }}>
+            <Text>Okta Verify ('Sam's iPhone)</Text>
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            setModal(!modal);
+            setAuthType(true);
+            setOpenModal(false);
           }}
           style={{
             width: '100%',
-            height: 50,
-            backgroundColor: 'green',
-          }}></TouchableOpacity>
-      </View>
-    </>
-    // <Portal>
-    //   <Modal
-    //     visible={modalVisible}
-    //     onDismiss={() => setModalVisible(false)}
-    //     contentContainerStyle={styles.containerStyle}>
-    //     <Text style={{marginBottom: 20, fontSize: 25, color: '#1b5a90'}}>
-    //       {locationText}
-    //     </Text>
-    //     <Text style={{marginBottom: 20}}>
-    //       {' '}
-    //       <FontAwesome name="microphone" size={40} color="#1b5a90" />
-    //     </Text>
-    //     <Text>
-    //       <ActivityIndicator size="large" color="#1b5a90" />
-    //     </Text>
-    //   </Modal>
-    // </Portal>
+            height: 70,
+            borderWidth: 0.5,
+
+            flexDirection: 'row',
+          }}>
+          <View
+            style={{
+              width: '30%',
+              height: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <View
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: 30,
+                borderWidth: 1.5,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Image
+                style={{
+                  width: 50,
+                  height: 50,
+                  resizeMode: 'contain',
+                  borderRadius: 25,
+                }}
+                source={require('../../../images/sms2.png')}
+              />
+            </View>
+          </View>
+          <View
+            style={{
+              width: '70%',
+              height: '100%',
+
+              justifyContent: 'center',
+            }}>
+            <Text>SMS Authentication</Text>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+    </Portal>
   );
 };
 
@@ -64,12 +135,12 @@ export default ModalView;
 const styles = StyleSheet.create({
   containerStyle: {
     backgroundColor: 'white',
-    padding: 20,
+    paddingHorizontal: 10,
     width: 350,
-    height: 250,
+    height: 200,
     alignSelf: 'center',
-    borderRadius: 15,
-    alignItems: 'center',
+    borderRadius: 5,
+
     zIndex: 999,
     top: height / 2 - 125,
     position: 'absolute',
@@ -82,8 +153,6 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     zIndex: 998,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   container: {
     position: 'absolute',
@@ -94,7 +163,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     zIndex: 10,
     opacity: 0.5,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

@@ -1,19 +1,30 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import React from 'react';
-import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
-useNavigation;
-import {connect, useSelector} from 'react-redux';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
+
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
+import {
+  SORT_BY_DEVICE_ID_ASC,
+  SORT_BY_DEVICE_ID_DES,
+  SORT_BY_DEVICE_NAME_ASC,
+  SORT_BY_DEVICE_NAME_DES,
+  SORT_BY_DEVICE_STATUS_ASC,
+  SORT_BY_DEVICE_STATUS_DES,
+  SORT_BY_DEVICE_VENDOR_ASC,
+  SORT_BY_DEVICE_VENDOR_DES,
+} from '../../../actions/actionType/devicesInventory.type';
 
 const Devices = ({}) => {
   const {devicesInventory} = useSelector(state => state.devicesInventory);
+  // console.log(devicesInventory);
+  // console.log(devicesInventory.length);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [idType, setIdType] = useState(true);
+  const [vendorType, setVendorType] = useState(true);
+  const [statusType, setStatusType] = useState(true);
+  const [nameType, setNameType] = useState(true);
   return (
     <>
       {/* ==============container============== */}
@@ -37,40 +48,92 @@ const Devices = ({}) => {
               style={{
                 width: '100%',
                 height: 60,
-                backgroundColor: 'red',
+
                 flexDirection: 'row',
               }}>
-              <View
+              <TouchableOpacity
+                onPress={() => {
+                  if (idType) {
+                    setIdType(!idType);
+                    dispatch({
+                      type: SORT_BY_DEVICE_ID_ASC,
+                    });
+                  } else {
+                    setIdType(!idType);
+                    dispatch({
+                      type: SORT_BY_DEVICE_ID_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                 }}>
                 <Text style={styles.boxText}>Devices ID</Text>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (nameType) {
+                    setNameType(!nameType);
+                    dispatch({
+                      type: SORT_BY_DEVICE_NAME_ASC,
+                    });
+                  } else {
+                    setNameType(!nameType);
+                    dispatch({
+                      type: SORT_BY_DEVICE_NAME_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
                 <Text style={styles.boxText}>Device Name</Text>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (statusType) {
+                    setStatusType(!statusType);
+                    dispatch({
+                      type: SORT_BY_DEVICE_STATUS_ASC,
+                    });
+                  } else {
+                    setStatusType(!statusType);
+                    dispatch({
+                      type: SORT_BY_DEVICE_STATUS_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
                 <Text style={styles.boxText}>Device Status</Text>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (vendorType) {
+                    setVendorType(!vendorType);
+                    dispatch({
+                      type: SORT_BY_DEVICE_VENDOR_ASC,
+                    });
+                  } else {
+                    setVendorType(!vendorType);
+                    dispatch({
+                      type: SORT_BY_DEVICE_VENDOR_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
                 <Text style={styles.boxText}>Device Vendor</Text>
-              </View>
+              </TouchableOpacity>
             </View>
             {/* ==============Table Header============== */}
             {/* ==============Table Body============== */}

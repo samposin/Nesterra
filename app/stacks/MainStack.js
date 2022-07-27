@@ -23,7 +23,7 @@ const MainStack = () => {
           headerShown: false,
         }}>
         <Stack.Screen name="TabNaV" component={TabNaV} />
-        {/* <Stack.Screen name="OtpReceive" component={OtpReceive} /> */}
+        <Stack.Screen name="OtpReceive" component={OtpReceive} />
         {/* <Stack.Screen name="Login" component={Login} /> */}
         <Stack.Screen name="OrderDetails" component={OrderDetails} />
         {/* <Stack.Screen name="CircuitInventory" component={CircuitInventory} />

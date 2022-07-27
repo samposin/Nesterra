@@ -7,6 +7,7 @@ import tabButtonImage from '../components/imageLink/tabButtonImage';
 import Orders from '../screens/orders';
 
 import Login from '../screens/Login';
+import Notification from '../screens/Notification';
 import OtpReceive from '../screens/OtpReceive';
 // import Saved from '../screens/saved';
 import Assets from '../screens/assets';
@@ -51,7 +52,6 @@ const TabNaV = ({navigation}) => {
           },
         }}
       />
-
       <Tab.Screen
         name="Assets"
         component={Assets}
@@ -82,7 +82,6 @@ const TabNaV = ({navigation}) => {
           },
         }}
       />
-
       <Tab.Screen
         name="Login"
         component={Login}
@@ -113,21 +112,21 @@ const TabNaV = ({navigation}) => {
           },
         }}
       />
-      {/* <Tab.Screen
-        name="Extra"
-        component={Extra}
+      <Tab.Screen
+        name="Notification"
+        component={Notification}
         options={{
           tabBarIcon: ({focused}) => {
             return (
               <TabButton
-                name="Extra"
+                name="Notification"
                 imagePath={tabButtonImage.imgSearch}
                 focused={focused}
               />
             );
           },
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };

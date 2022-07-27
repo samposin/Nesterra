@@ -1,19 +1,30 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
-import React from 'react';
-import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
-import {connect, useSelector} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
+import {
+  SORT_BY_CATEGORY_ASC,
+  SORT_BY_CATEGORY_DES,
+  SORT_BY_CIRCUIT_ID_ASC,
+  SORT_BY_CIRCUIT_ID_DES,
+  SORT_BY_SUBCAT_1_ASC,
+  SORT_BY_SUBCAT_1_DES,
+  SORT_BY_VENDOR_ASC,
+  SORT_BY_VENDOR_DES,
+} from '../../../actions/actionType/circuitInventory.type';
 
 const Circuits = ({}) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [circuitType, setCircuitType] = useState(true);
+  const [vendorType, setVendorType] = useState(true);
+  const [categoryType, setCategoryType] = useState(true);
+  const [subCat1Type, setsubCat1Type] = useState(true);
   const {cirCuitInventory} = useSelector(state => state.circuitInventory);
+  // console.log(cirCuitInventory);
+  // console.log(cirCuitInventory.length);
   return (
     <>
       {/* ==============container============== */}
@@ -37,40 +48,92 @@ const Circuits = ({}) => {
               style={{
                 width: '100%',
                 height: 60,
-                backgroundColor: 'red',
+
                 flexDirection: 'row',
               }}>
-              <View
+              <TouchableOpacity
+                onPress={() => {
+                  if (circuitType) {
+                    setCircuitType(!circuitType);
+                    dispatch({
+                      type: SORT_BY_CIRCUIT_ID_ASC,
+                    });
+                  } else {
+                    setCircuitType(!circuitType);
+                    dispatch({
+                      type: SORT_BY_CIRCUIT_ID_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                 }}>
                 <Text style={styles.boxText}>Circuit ID</Text>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (vendorType) {
+                    setVendorType(!vendorType);
+                    dispatch({
+                      type: SORT_BY_VENDOR_ASC,
+                    });
+                  } else {
+                    setVendorType(!vendorType);
+                    dispatch({
+                      type: SORT_BY_VENDOR_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
                 <Text style={styles.boxText}>Vendor</Text>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (categoryType) {
+                    setCategoryType(!categoryType);
+                    dispatch({
+                      type: SORT_BY_CATEGORY_ASC,
+                    });
+                  } else {
+                    setCategoryType(!categoryType);
+                    dispatch({
+                      type: SORT_BY_CATEGORY_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
                 <Text style={styles.boxText}>Category</Text>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  if (subCat1Type) {
+                    setsubCat1Type(!subCat1Type);
+                    dispatch({
+                      type: SORT_BY_SUBCAT_1_ASC,
+                    });
+                  } else {
+                    setsubCat1Type(!subCat1Type);
+                    dispatch({
+                      type: SORT_BY_SUBCAT_1_DES,
+                    });
+                  }
+                }}
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
                 }}>
                 <Text style={styles.boxText}>Sub Cat 1</Text>
-              </View>
+              </TouchableOpacity>
             </View>
             {/* ==============Table Header============== */}
             {/* ==============Table Body============== */}

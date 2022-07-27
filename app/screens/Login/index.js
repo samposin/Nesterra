@@ -135,7 +135,7 @@ const Login = () => {
                     />
                   </View>
                   {/* ========= checkBox========== */}
-                  <SimpleCheckBox />
+                  <SimpleCheckBox ml={26} text="Rebember Me" />
                   {/* ========= checkBox========== */}
                   <TouchableOpacity
                     onPress={() => alert('kkk')}
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
   mainProfile: {
     width: '90%',
     height: '90%',
-    backgroundColor: 'red',
+
     borderRadius: 35,
   },
   profileImage: {
