@@ -5,87 +5,50 @@ import {
   SafeAreaView,
   StatusBar,
   TouchableOpacity,
-  ScrollView,
   FlatList,
 } from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import {GetCarrierNumber} from '../../actions/CarrierNumber';
-import {get_orders_for_tab} from '../../actions/orderFotTab';
+import React, {useState, useEffect} from 'react';
+
 import {connect, useDispatch, useSelector} from 'react-redux';
-import BottomSheetView from './components/BottomSheetView';
 
-import moment from 'moment';
 import OrderLoder from '../../components/lodder/OrderLoder';
+
+import {getAllDevice} from '../../actions/AllDevice';
 import {
-  SORT_BY_VENDOR_ASC,
-  SORT_BY_VENDOR_DES,
-  SORT_BY_STATUS_ASC,
-  SORT_BY_STATUS_DES,
-  SORT_BY_DATE_ASC,
-  SORT_BY_DATE_DES,
-  SORT_BY_INV_ID_ASC,
-  SORT_BY_INV_ID_DES,
-  SORT_BY_ORDER_TYPE_ASC,
-  SORT_BY_ORDER_TYPE_DES,
-} from '../../actions/actionType/action.OrdersForTab';
+  ALL_DEVICES_SORT_BY_ID_ASC,
+  ALL_DEVICES_SORT_BY_ID_DES,
+  ALL_DEVICES_SORT_BY_STATUS_ASC,
+  ALL_DEVICES_SORT_BY_STATUS_DES,
+  ALL_DEVICES_SORT_BY_VENDOR_ASC,
+  ALL_DEVICES_SORT_BY_VENDOR_DES,
+  ALL_DEVICES_SORT_BY_TYPE_ASC,
+  ALL_DEVICES_SORT_BY_TYPE_DES,
+} from '../../actions/actionType/AllDevice';
 
-const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
-  const {ordersForTab} = useSelector(state => state.ordersForTab);
+const AllDevice = ({getAllDevice, navigation}) => {
+  const {deviceAllData} = useSelector(state => state.deviceAllData);
+  const {isLoding} = useSelector(state => state.deviceAllData);
   const dispatch = useDispatch();
-  // console.log(ordersForTab);
-  // console.log(ordersForTab.length);
-  const {isLoding} = useSelector(state => state.ordersForTab);
-  const [diplayName, setDisplayName] = useState('');
-  const bottomSheetRef = useRef(null);
-  // const [isLoding, setIsLoding] = useState(false);
-  const [sort, setsort] = useState(true);
-  const [status, setStatus] = useState(true);
-  const [dateType, setDateType] = useState(true);
-  const [invType, setInvType] = useState(true);
-  const [orderType, setOrderType] = useState(true);
+  // console.log(deviceAllData.length, 'dd');
 
-  const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
-  const Category = [
-    {
-      id: 0,
-      name: 'Order Type',
-      value: 'GetCarrierNumber',
-      disValue: 'OrderType',
-      search: 'Order Type',
-    },
-    {
-      id: 1,
-      name: 'SmartSite#',
-      value: 'GetSmartSiteNumber',
-      disValue: 'SmartSite',
-      search: 'SmartSite#',
-    },
-    {
-      id: 1,
-      name: 'Tangoe',
-      value: 'GetTangoeNumber',
-      disValue: 'Tangoe',
-      search: 'Vendor',
-    },
-    {
-      id: 1,
-      name: 'Carrier',
-      value: 'GetTangoeNumber',
-      disValue: 'Carrier',
-      search: 'Status',
-    },
-  ];
+  // const {isLoding} = useSelector(state => state.ordersForTab);
+
+  const [vendor, setVendor] = useState(true);
+  const [status, setStatus] = useState(true);
+
+  const [invType, setInvType] = useState(true);
+  const [type, setType] = useState(true);
+
   useEffect(() => {
-    get_orders_for_tab();
+    getAllDevice();
   }, []);
 
   const randerItem = ({index, item}) => {
     return (
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate('OrderDetails', {
-            inv_Id: item.Inventory_ID,
+          navigation.navigate('AllDevicesDetails', {
+            inv_Id: item.ID,
           })
         }
         style={{
@@ -99,7 +62,7 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}> {item?.Order_Type}</Text>
+          <Text style={styles.boxText1}> {item?.Device_Type}</Text>
         </View>
         <View
           style={{
@@ -107,7 +70,7 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>{item?.vendor}</Text>
+          <Text style={styles.boxText1}>{item?.Device_Vendor}</Text>
         </View>
         <View
           style={{
@@ -115,7 +78,7 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>{item?.Status}</Text>
+          <Text style={styles.boxText1}>{item?.Device_Status}</Text>
         </View>
 
         <View
@@ -124,22 +87,7 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>
-            {item?.Initiation_Date
-              ? moment(item.Initiation_Date).format('DD-MM-YYYY')
-              : '--'}
-            {/* {moment(item.Initiation_Date).format('DD-MM-YYYY')} */}
-          </Text>
-        </View>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <Text style={styles.boxText1}>
-            {item?.Inventory_ID.substr(1, 10)}..
-          </Text>
+          <Text style={styles.boxText1}>{item?.ID}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -161,74 +109,34 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
             alignItems: 'center',
           }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('AllDevice')}
+            onPress={() => navigation.goBack()}
             style={styles.summaryButton}>
             <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-              Device
+              Back
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.summaryButton}>
+          {/* <TouchableOpacity style={styles.summaryButton}>
             <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
               Circuit
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         {/* ==============Services Category============== */}
-        <View style={{...styles.dropDownView}}>
-          <ScrollView
-            keyboardShouldPersistTaps="handled"
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{width: '100%', height: '100%'}}>
-            {Category.map((item, i) => {
-              return (
-                <TouchableOpacity
-                  key={i}
-                  onPress={() => {
-                    GetCarrierNumber(item.value);
-                    setDisplayName(item.disValue);
-                    bottomSheetRef.current.snapToIndex(1);
-                    setBottomSheetDisplay(item.search);
-                  }}
-                  style={{
-                    width: 100,
-                    height: 40,
-                    borderRadius: 5,
-                    borderColor: 'black',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    paddingHorizontal: 3,
-                    marginHorizontal: 5,
 
-                    borderWidth: 1,
-                  }}>
-                  <Text>{item.name}</Text>
-                  <AntDesign
-                    name="caretdown"
-                    size={20}
-                    style={{marginLeft: 2}}
-                    color="black"
-                  />
-                </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
-        </View>
         {/* ======================Table  Header======================= */}
         <View style={{...styles.tableRow}}>
           <TouchableOpacity
             onPress={() => {
-              if (orderType) {
-                setOrderType(!orderType);
+              if (type) {
+                setType(!type);
                 dispatch({
-                  type: SORT_BY_ORDER_TYPE_ASC,
+                  type: ALL_DEVICES_SORT_BY_TYPE_ASC,
                 });
               } else {
-                setOrderType(!orderType);
+                setType(!type);
                 dispatch({
-                  type: SORT_BY_ORDER_TYPE_DES,
+                  type: ALL_DEVICES_SORT_BY_TYPE_DES,
                 });
               }
             }}
@@ -237,15 +145,15 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              if (sort) {
-                setsort(!sort);
+              if (vendor) {
+                setVendor(!vendor);
                 dispatch({
-                  type: SORT_BY_VENDOR_ASC,
+                  type: ALL_DEVICES_SORT_BY_VENDOR_ASC,
                 });
               } else {
-                setsort(!sort);
+                setVendor(!vendor);
                 dispatch({
-                  type: SORT_BY_VENDOR_DES,
+                  type: ALL_DEVICES_SORT_BY_VENDOR_DES,
                 });
               }
             }}
@@ -261,12 +169,12 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
               if (status) {
                 setStatus(!status);
                 dispatch({
-                  type: SORT_BY_STATUS_ASC,
+                  type: ALL_DEVICES_SORT_BY_STATUS_ASC,
                 });
               } else {
                 setStatus(!status);
                 dispatch({
-                  type: SORT_BY_STATUS_DES,
+                  type: ALL_DEVICES_SORT_BY_STATUS_DES,
                 });
               }
             }}
@@ -277,38 +185,18 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
             }}>
             <Text style={styles.boxText}>Status</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (dateType) {
-                setDateType(!dateType);
-                dispatch({
-                  type: SORT_BY_DATE_ASC,
-                });
-              } else {
-                setDateType(!dateType);
-                dispatch({
-                  type: SORT_BY_DATE_DES,
-                });
-              }
-            }}
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-            }}>
-            <Text style={styles.boxText}>Date</Text>
-          </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() => {
               if (invType) {
                 setInvType(!invType);
                 dispatch({
-                  type: SORT_BY_INV_ID_ASC,
+                  type: ALL_DEVICES_SORT_BY_ID_ASC,
                 });
               } else {
                 setInvType(!invType);
                 dispatch({
-                  type: SORT_BY_INV_ID_DES,
+                  type: ALL_DEVICES_SORT_BY_ID_DES,
                 });
               }
             }}
@@ -329,7 +217,7 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
           </View>
         ) : (
           <>
-            {ordersForTab.length == 0 ? (
+            {deviceAllData.length == 0 ? (
               <View
                 style={{
                   width: '100%',
@@ -346,7 +234,7 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
                 <View style={styles.table}>
                   <FlatList
                     showsVerticalScrollIndicator={false}
-                    data={ordersForTab}
+                    data={deviceAllData}
                     keyExtractor={(item, i) => i.toString()}
                     renderItem={(item, i) => randerItem(item)}
                   />
@@ -357,17 +245,11 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
         )}
         {/* ==============Summary View=========== */}
       </SafeAreaView>
-      {/* {selectedComponent()} */}
-      <BottomSheetView
-        bottomSheetDisplay={bottomSheetDisplay}
-        diplayName={diplayName}
-        bottomSheetRef={bottomSheetRef}
-      />
     </>
   );
 };
 
-export default connect(null, {GetCarrierNumber, get_orders_for_tab})(Orders);
+export default connect(null, {getAllDevice})(AllDevice);
 
 const styles = StyleSheet.create({
   loderView: {
@@ -528,6 +410,7 @@ const styles = StyleSheet.create({
   ///========Second table
   secondTable: {
     width: '95%',
+
     marginTop: 20,
     alignSelf: 'center',
   },

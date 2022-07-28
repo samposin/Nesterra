@@ -364,6 +364,7 @@ const styles = StyleSheet.create({
     borderColor: '#000000',
     margin: 10,
     marginBottom: 5,
+    borderRadius: 5,
   },
   topView: {
     height: 50,

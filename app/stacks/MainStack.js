@@ -13,6 +13,8 @@ import OrderDetails from '../screens/OrderDetails.js';
 import Profile from '../screens/profile';
 
 import TabNaV from './Tab';
+import AllDevice from '../screens/AllDevice/index.js';
+import AllDevicesDetails from '../screens/AllDevice/AllDevicesDetails.js';
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
@@ -24,6 +26,8 @@ const MainStack = () => {
         }}>
         <Stack.Screen name="TabNaV" component={TabNaV} />
         <Stack.Screen name="OtpReceive" component={OtpReceive} />
+        <Stack.Screen name="AllDevice" component={AllDevice} />
+        <Stack.Screen name="AllDevicesDetails" component={AllDevicesDetails} />
         {/* <Stack.Screen name="Login" component={Login} /> */}
         <Stack.Screen name="OrderDetails" component={OrderDetails} />
         {/* <Stack.Screen name="CircuitInventory" component={CircuitInventory} />

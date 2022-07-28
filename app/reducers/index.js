@@ -12,6 +12,8 @@ import circuitInventory from './CircuitInventory';
 import devicesInventory from './devicesInventory';
 import carrierNumber from './CarrierNumber';
 import ordersForTab from './orderFotTab';
+import deviceAllData from './AllDevice';
+import allDeviceDetails from './AllDevice/allDeviceDetails';
 const rootReducer = combineReducers({
   setLatLang,
   selectList,
@@ -24,5 +26,7 @@ const rootReducer = combineReducers({
   devicesInventory,
   carrierNumber,
   ordersForTab,
+  deviceAllData,
+  allDeviceDetails,
 });
 export default rootReducer;

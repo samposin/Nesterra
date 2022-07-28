@@ -14,7 +14,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const DevicesDetails = ({route}) => {
   const {item} = route.params;
-  console.log(item);
+
   const navigation = useNavigation();
   return (
     <>
@@ -201,7 +201,7 @@ const DevicesDetails = ({route}) => {
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Contact_Information}
+                    {item.Contact_Information.substr(1, 20)}...
                   </Text>
                 </View>
               </View>
@@ -279,6 +279,7 @@ const styles = StyleSheet.create({
     borderColor: '#000000',
     margin: 10,
     marginBottom: 5,
+    borderRadius: 5,
   },
   topView: {
     height: 50,

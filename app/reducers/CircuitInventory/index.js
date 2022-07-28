@@ -153,8 +153,8 @@ export default (state = initialState, action) => {
     case SORT_BY_SUBCAT_1_ASC:
       const data6 = [...state.cirCuitInventory1];
       const subcat1Asc = data6.sort((a, b) => {
-        let fa = a.Category.toLowerCase(),
-          fb = b.Category.toLowerCase();
+        let fa = a.SubCat_1.toLowerCase(),
+          fb = b.SubCat_1.toLowerCase();
 
         if (fa < fb) {
           return -1;
@@ -174,8 +174,8 @@ export default (state = initialState, action) => {
       const data7 = [...state.cirCuitInventory1];
 
       const subcat1Des = data7.sort((a, b) => {
-        let fa = a.Category.toLowerCase(),
-          fb = b.Category.toLowerCase();
+        let fa = a.SubCat_1.toLowerCase(),
+          fb = b.SubCat_1.toLowerCase();
 
         if (fb < fa) {
           return -1;

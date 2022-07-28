@@ -442,6 +442,7 @@ const styles = StyleSheet.create({
     margin: 10,
     marginBottom: 5,
     borderBottomWidth: 0,
+    borderRadius: 5,
   },
   topView: {
     height: 50,
