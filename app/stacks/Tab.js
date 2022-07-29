@@ -82,7 +82,7 @@ const TabNaV = ({navigation}) => {
           },
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Login"
         component={Login}
         options={{
@@ -126,7 +126,7 @@ const TabNaV = ({navigation}) => {
             );
           },
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };

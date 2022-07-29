@@ -39,7 +39,7 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
   const [diplayName, setDisplayName] = useState('');
   const bottomSheetRef = useRef(null);
   // const [isLoding, setIsLoding] = useState(false);
-  const [sort, setsort] = useState(true);
+  const [vendor, setVendor] = useState(true);
   const [status, setStatus] = useState(true);
   const [dateType, setDateType] = useState(true);
   const [invType, setInvType] = useState(true);
@@ -160,16 +160,16 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
 
             alignItems: 'center',
           }}>
+          <TouchableOpacity style={styles.summaryButton}>
+            <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+              Circuit
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate('AllDevice')}
             style={styles.summaryButton}>
             <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
               Device
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.summaryButton}>
-            <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-              Circuit
             </Text>
           </TouchableOpacity>
         </View>
@@ -194,7 +194,7 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
                   style={{
                     width: 100,
                     height: 40,
-                    borderRadius: 5,
+                    borderRadius: 9,
                     borderColor: 'black',
                     flexDirection: 'row',
                     justifyContent: 'center',
@@ -232,18 +232,30 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
                 });
               }
             }}
-            style={{...styles.tableRowColum}}>
+            style={{
+              ...styles.tableRowColum,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+            }}>
             <Text style={{...styles.boxText, color: 'white'}}>Type</Text>
+            <Text style={{marginTop: 1, marginRight: 3}}>
+              <AntDesign
+                name={orderType ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              if (sort) {
-                setsort(!sort);
+              if (vendor) {
+                setVendor(!vendor);
                 dispatch({
                   type: SORT_BY_VENDOR_ASC,
                 });
               } else {
-                setsort(!sort);
+                setVendor(!vendor);
                 dispatch({
                   type: SORT_BY_VENDOR_DES,
                 });
@@ -251,10 +263,20 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
             }}
             style={{
               ...styles.tableRowColum,
+              flexDirection: 'row',
               borderLeftColor: 'white',
               borderLeftWidth: 2,
+              alignItems: 'center',
+              justifyContent: 'space-around',
             }}>
-            <Text style={styles.boxText}>Vendor</Text>
+            <Text style={{...styles.boxText, color: 'white'}}>Vendor</Text>
+            <Text style={{marginTop: 1, marginRight: 3}}>
+              <AntDesign
+                name={vendor ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -274,8 +296,20 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
               ...styles.tableRowColum,
               borderLeftColor: 'white',
               borderLeftWidth: 2,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+              alignItems: 'center',
             }}>
-            <Text style={styles.boxText}>Status</Text>
+            <Text style={{...styles.boxText, color: 'white'}}>Status</Text>
+            <Text style={{marginTop: 1, marginRight: 3}}>
+              <AntDesign
+                name={status ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -295,8 +329,18 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
               ...styles.tableRowColum,
               borderLeftColor: 'white',
               borderLeftWidth: 2,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
             }}>
-            <Text style={styles.boxText}>Date</Text>
+            <Text style={{...styles.boxText, color: 'white'}}>Date</Text>
+            <Text style={{marginTop: 1, marginRight: 3}}>
+              <AntDesign
+                name={dateType ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -316,8 +360,17 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
               ...styles.tableRowColum,
               borderLeftColor: 'white',
               borderLeftWidth: 2,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
             }}>
-            <Text style={styles.boxText}>Inv ID</Text>
+            <Text style={{...styles.boxText, color: 'white'}}>Inv ID</Text>
+            <Text style={{marginTop: 1, marginRight: 3}}>
+              <AntDesign
+                name={invType ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -378,7 +431,7 @@ const styles = StyleSheet.create({
   },
   summaryView: {
     width: '100%',
-    height: 100,
+    height: 70,
 
     paddingHorizontal: 20,
     justifyContent: 'space-between',
@@ -387,9 +440,9 @@ const styles = StyleSheet.create({
   ///========Summary Button
   summaryButton: {
     width: 100,
-    height: 50,
+    height: 44,
     backgroundColor: '#007aff',
-    borderRadius: 8,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },

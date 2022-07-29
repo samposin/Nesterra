@@ -90,11 +90,11 @@ export default connect(null, {third_party_filter})(Category);
 const styles = StyleSheet.create({
   chipsItem: {
     flexDirection: 'row',
-    borderRadius: 20,
+    borderRadius: 17.5,
     // padding: 7,
     paddingHorizontal: 15,
     marginHorizontal: 5,
-    height: 40,
+    height: 35,
     shadowColor: '#ccc',
     shadowOffset: {width: 0, height: 3},
     shadowOpacity: 0.5,

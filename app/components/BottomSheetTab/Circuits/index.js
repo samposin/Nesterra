@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
-
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -48,7 +48,6 @@ const Circuits = ({}) => {
               style={{
                 width: '100%',
                 height: 60,
-
                 flexDirection: 'row',
               }}>
               <TouchableOpacity
@@ -67,9 +66,20 @@ const Circuits = ({}) => {
                 }}
                 style={{
                   ...styles.tableRowColum,
+                  flexDirection: 'row',
                   borderLeftColor: 'white',
+                  justifyContent: 'space-around',
                 }}>
-                <Text style={styles.boxText}>Circuit ID</Text>
+                <Text style={{...styles.boxText, color: 'white'}}>
+                  Circuit ID
+                </Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={circuitType ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -89,8 +99,17 @@ const Circuits = ({}) => {
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
                 }}>
                 <Text style={styles.boxText}>Vendor</Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={vendorType ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -110,8 +129,17 @@ const Circuits = ({}) => {
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
                 }}>
                 <Text style={styles.boxText}>Category</Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={categoryType ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -131,8 +159,17 @@ const Circuits = ({}) => {
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
                 }}>
                 <Text style={styles.boxText}>Sub Cat 1</Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={subCat1Type ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
             </View>
             {/* ==============Table Header============== */}

@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -68,8 +69,18 @@ const Devices = ({}) => {
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
+                  flexDirection: 'row',
+
+                  justifyContent: 'space-around',
                 }}>
                 <Text style={styles.boxText}>Devices ID</Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={idType ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -89,8 +100,18 @@ const Devices = ({}) => {
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
+                  flexDirection: 'row',
+                  paddingHorizontal: 5,
+                  justifyContent: 'space-around',
                 }}>
-                <Text style={styles.boxText}>Device Name</Text>
+                <Text style={styles.boxText}>Device Name </Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={nameType ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -110,8 +131,18 @@ const Devices = ({}) => {
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
+                  flexDirection: 'row',
+                  paddingHorizontal: 2,
+                  justifyContent: 'space-around',
                 }}>
                 <Text style={styles.boxText}>Device Status</Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={statusType ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -131,8 +162,17 @@ const Devices = ({}) => {
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
                 }}>
                 <Text style={styles.boxText}>Device Vendor</Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={vendorType ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
             </View>
             {/* ==============Table Header============== */}

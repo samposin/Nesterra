@@ -49,15 +49,10 @@ import Setting from './Setting';
 import BottomSheetViewImage from '../../components/BottomSheet';
 import {photo_url_from_map} from '../../actions/photpUrlFromMap';
 
-import {
-  GET_PHOTO_URL_FROM_MAP,
-  GET_PHOTO_URL_FROM_SEARCH,
-} from '../../actions/actionType/action.photoMapurl.type';
+import {GET_PHOTO_URL_FROM_MAP} from '../../actions/actionType/action.photoMapurl.type';
 import Lodder from '../../components/lodder';
 import {get_all_devices_inventory} from '../../actions/devicesInventory';
 import {getInventoryCircuit} from '../../actions/circuitInventory';
-import {markardata} from '../../utils/markerData';
-import {ZStack} from 'native-base';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -72,7 +67,7 @@ const Explore = ({
   marker_seleted,
   setLatLng,
   get_all_devices_inventory,
-  photo_url_from_map,
+
   getInventoryCircuit,
 }) => {
   const dispatch = useDispatch();
@@ -82,14 +77,11 @@ const Explore = ({
 
   const mapRef = useRef(null);
   const pointStart = useRef(null);
-  const speechRef = useRef(null);
 
-  const [latitute, setLatitute] = useState(41.85942);
-  const [longitute, setLongitute] = useState(-71.519236);
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [locationText, setlocationText] = useState('');
-  const [marginBottom, setMarginBottom] = useState(100);
+
   const [satellite, setSatellite] = useState('standard');
   const [aHeight, setAheight] = useState(new Animated.Value(40));
   const [findDirection, setaWidth] = useState(new Animated.Value(0));
@@ -143,9 +135,6 @@ const Explore = ({
       longitude: lng,
     };
     setStartPoints(startPoints);
-    //console.log(startPoints);
-    // console.log(startPoints, 'startPoints');
-    // console.log(Object.keys(startPoints).length);
   };
   // get destination points
   const destination = (lat, lng) => {
@@ -154,8 +143,6 @@ const Explore = ({
       longitude: lng,
     };
     setdestinationPoints(destinationPoints);
-    // console.log(destinationPoints, 'destinationPoints');
-    // console.log(Object.keys(destinationPoints).length);
   };
 
   const spin = rotatedIcon.interpolate({

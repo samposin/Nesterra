@@ -127,16 +127,27 @@ const Setting = () => {
               />
             </View>
             <View style={styles.searchRight}>
-                <View style={{width:'50%', height:'100%',justifyContent:'center', alignItems:'center'}}>
-
-              <FontAwesome name="microphone" size={24} color="black" />
-                </View>
-                <View style={{width:'50%', height:'100%',justifyContent:'center', alignItems:'center'}}>
+              <View
+                style={{
+                  width: '50%',
+                  height: '100%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <FontAwesome name="microphone" size={24} color="black" />
+              </View>
+              <View
+                style={{
+                  width: '50%',
+                  height: '100%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 <Image
-                source={require('../../images/map.png')}
-                style={{width: 30, height: 30}}
-              />
-                </View>
+                  source={require('../../images/map.png')}
+                  style={{width: 30, height: 30}}
+                />
+              </View>
             </View>
           </View>
           {/* =================search=============== */}
@@ -255,7 +266,12 @@ const Setting = () => {
 export default Setting;
 
 const styles = StyleSheet.create({
-  searchRight: {width: '25%', height: '100%', borderRadius: 25, flexDirection:'row'},
+  searchRight: {
+    width: '25%',
+    height: '100%',
+    borderRadius: 25,
+    flexDirection: 'row',
+  },
   searchMiddele: {width: '60%', height: '100%'},
   searchLeft: {
     width: '15%',

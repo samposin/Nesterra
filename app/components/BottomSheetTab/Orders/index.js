@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -19,7 +20,7 @@ const Orders = ({}) => {
   const {id} = useSelector(state => state.order);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  // console.log(order);
+  // console.log(order[2]);
   // console.log(order.length);
   const [idType, setIdType] = useState(true);
   const [vendorType, setVendorType] = useState(true);
@@ -69,8 +70,18 @@ const Orders = ({}) => {
                 style={{
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
+                  flexDirection: 'row',
+                  paddingHorizontal: 10,
+                  justifyContent: 'space-around',
                 }}>
-                <Text style={styles.boxText}>Inventory ID</Text>
+                <Text style={styles.boxText}>Inv ID</Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={idType ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -90,8 +101,17 @@ const Orders = ({}) => {
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
                 }}>
                 <Text style={styles.boxText}>Vendor</Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={vendorType ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -111,8 +131,18 @@ const Orders = ({}) => {
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
+                  flexDirection: 'row',
+                  paddingHorizontal: 15,
+                  justifyContent: 'space-around',
                 }}>
                 <Text style={styles.boxText}>Order Type</Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={orderType ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -132,8 +162,17 @@ const Orders = ({}) => {
                   ...styles.tableRowColum,
                   borderLeftColor: 'white',
                   borderLeftWidth: 2,
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
                 }}>
                 <Text style={styles.boxText}>Status</Text>
+                <Text style={{marginTop: 1, marginRight: 3}}>
+                  <AntDesign
+                    name={statusType ? 'caretup' : 'caretdown'}
+                    size={16}
+                    color="white"
+                  />
+                </Text>
               </TouchableOpacity>
             </View>
             {/* ==============Table Header============== */}
