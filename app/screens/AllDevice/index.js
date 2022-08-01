@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 import {connect, useDispatch, useSelector} from 'react-redux';
 
@@ -24,8 +24,11 @@ import {
   ALL_DEVICES_SORT_BY_TYPE_ASC,
   ALL_DEVICES_SORT_BY_TYPE_DES,
 } from '../../actions/actionType/AllDevice';
+import BottomSheetView from './components';
+import {getAllDeviceDetails} from '../../actions/AllDevice/allDeviceDetails';
 
-const AllDevice = ({getAllDevice, navigation}) => {
+const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
+  const deviceRef = useRef(null);
   const {deviceAllData} = useSelector(state => state.deviceAllData);
   const {isLoding} = useSelector(state => state.deviceAllData);
   const dispatch = useDispatch();
@@ -46,11 +49,17 @@ const AllDevice = ({getAllDevice, navigation}) => {
   const randerItem = ({index, item}) => {
     return (
       <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('AllDevicesDetails', {
-            inv_Id: item.ID,
-          })
-        }
+        onPress={() => {
+          // navigation.navigate('AllDevicesDetails', {
+          //   inv_Id: item.ID,
+          // })
+          // console.log('snap');
+          getAllDeviceDetails(item.ID);
+
+          setTimeout(() => {
+            deviceRef.current.snapToIndex(1);
+          }, 1200);
+        }}
         style={{
           ...styles.tableRow1,
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
@@ -244,12 +253,13 @@ const AllDevice = ({getAllDevice, navigation}) => {
           </>
         )}
         {/* ==============Summary View=========== */}
+        <BottomSheetView deviceRef={deviceRef} />
       </SafeAreaView>
     </>
   );
 };
 
-export default connect(null, {getAllDevice})(AllDevice);
+export default connect(null, {getAllDevice, getAllDeviceDetails})(AllDevice);
 
 const styles = StyleSheet.create({
   loderView: {

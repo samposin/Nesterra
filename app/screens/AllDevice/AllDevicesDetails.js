@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-
+import BottomSheet from '@gorhom/bottom-sheet';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
 import {getAllDeviceDetails} from '../../actions/AllDevice/allDeviceDetails';
@@ -69,7 +69,11 @@ const AllDevicesDetails = ({route, getAllDeviceDetails}) => {
                     ...styles.secondTableRow1,
                     backgroundColor: '#b7c5e4',
                   }}>
-                  <View style={styles.secondTableColum}>
+                  <View
+                    style={{
+                      ...styles.secondTableColum,
+                      backgroundColor: 'red',
+                    }}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       Device Id
                     </Text>

@@ -478,7 +478,6 @@ const styles = StyleSheet.create({
     width: '20%',
     height: '100%',
     backgroundColor: '#007aff',
-
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -508,7 +507,6 @@ const styles = StyleSheet.create({
   tableRowColum1: {
     width: '20%',
     height: '100%',
-
     justifyContent: 'center',
   },
 
