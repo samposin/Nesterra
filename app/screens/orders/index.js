@@ -160,7 +160,11 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
 
             alignItems: 'center',
           }}>
-          <TouchableOpacity style={styles.summaryButton}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Circuits');
+            }}
+            style={styles.summaryButton}>
             <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
               Circuit
             </Text>
@@ -440,7 +444,7 @@ const styles = StyleSheet.create({
   ///========Summary Button
   summaryButton: {
     width: 100,
-    height: 44,
+    height: 40,
     backgroundColor: '#007aff',
     borderRadius: 10,
     justifyContent: 'center',

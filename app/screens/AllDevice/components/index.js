@@ -10,7 +10,7 @@ const BottomSheetView = ({deviceRef}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.allDeviceDetails);
-  console.log(item);
+
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -78,7 +78,7 @@ const BottomSheetView = ({deviceRef}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
-                    backgroundColor: '#ffc8ce',
+                    backgroundColor: item.Device_Name ? '#ffc8ce' : 'red',
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     Device Status
@@ -87,7 +87,8 @@ const BottomSheetView = ({deviceRef}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
-                    backgroundColor: item.Device_Status ? '#c6efcd' : '#e7c4b5',
+                    backgroundColor:
+                      item.Device_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Device_Status}
@@ -834,83 +835,13 @@ const BottomSheetView = ({deviceRef}) => {
               </View>
             ) : null}
             {/* ===================== 01/08/ */}
-            {item?.Site_Type_Concatenated_Detail ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Site Type Concatenated Detail
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Site_Type_Concatenated_Detail}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ===================== */}
-            {item?.Associated_Circuit ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Associated Circuit
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Associated_Circuit}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {item?.IP_Address ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    IP Address
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.IP_Address}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {item?.Code_Compliance ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Code Compliance
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Code_Compliance}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {item?.Contact_Information ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Contact Information
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Contact_Information.substr(1, 20)}...
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
             {item?.Non_Compliant ? (
               <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#dedbf7',
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     Non Compliant
                   </Text>
@@ -922,9 +853,16 @@ const BottomSheetView = ({deviceRef}) => {
                 </View>
               </View>
             ) : null}
+
+            {/* ==================== */}
+            {/* ===================== */}
             {item?.In_Progress ? (
               <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     In Progress
                   </Text>
@@ -936,25 +874,36 @@ const BottomSheetView = ({deviceRef}) => {
                 </View>
               </View>
             ) : null}
+
+            {/* ==================== */}
             {item?.Vulnerability_SLA_Achievement_Target ? (
               <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Vulnerability SLA_Achievement Target
+                    Vulnerability SLA Target
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {moment(item.Vulnerability_SLA_Achievement_Target).format(
-                      'DD-MM-YYYY',
+                      'YYYY-MM-DD',
                     )}
                   </Text>
                 </View>
               </View>
             ) : null}
+            {/* ==================== */}
             {item?.Prod_Rel_Team ? (
               <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     Prod Rel Team
                   </Text>
@@ -966,9 +915,14 @@ const BottomSheetView = ({deviceRef}) => {
                 </View>
               </View>
             ) : null}
+            {/* ==================== */}
             {item?.Compiled ? (
               <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     Compiled
                   </Text>
@@ -980,16 +934,21 @@ const BottomSheetView = ({deviceRef}) => {
                       color: 'black',
                       marginVertical: 3,
                     }}>
-                    {item.Compiled}
+                    {moment(item.Compiled).format('YYYY-MM-DD')}
                   </Text>
                 </View>
               </View>
             ) : null}
+            {/* ==================== */}
             {item?.Alternate_System_Description ? (
               <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Alternate System Description
+                    Alt System Description
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
@@ -1004,11 +963,16 @@ const BottomSheetView = ({deviceRef}) => {
                 </View>
               </View>
             ) : null}
+            {/* ==================== */}
             {item?.Alternative_Device_Name ? (
               <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Alternative Device Name
+                    Alt Device Name
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
@@ -1023,9 +987,14 @@ const BottomSheetView = ({deviceRef}) => {
                 </View>
               </View>
             ) : null}
+            {/* ==================== */}
             {item?.NB_First_Discovery_Time ? (
               <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     NB First Discovery Time
                   </Text>
@@ -1037,16 +1006,21 @@ const BottomSheetView = ({deviceRef}) => {
                       color: 'black',
                       marginVertical: 3,
                     }}>
-                    {moment(item.NB_First_Discovery_Time).format('DD-MM-YYYY')}
+                    {moment(item.NB_First_Discovery_Time).format('YYYY-MM-DD')}
                   </Text>
                 </View>
               </View>
             ) : null}
+            {/* ==================== */}
             {item?.NB_Last_Discovery_Time ? (
               <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    NB Last_Discovery Time
+                    NB Last Discovery Time
                   </Text>
                 </View>
                 <View style={styles.secondTableColum}>
@@ -1056,13 +1030,90 @@ const BottomSheetView = ({deviceRef}) => {
                       color: 'black',
                       marginVertical: 3,
                     }}>
-                    {moment(item.NB_Last_Discovery_Time).format('DD-MM-YYYY')}
+                    {moment(item.NB_Last_Discovery_Time).format('YYYY-MM-DD')}
                   </Text>
                 </View>
               </View>
             ) : null}
+
+            {/* ==================== */}
+            {/* {item?.Contact_Information ? (
+              <View style={styles.secondTableRow}>
+                <View style={styles.secondTableColum}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Contact Information
+                  </Text>
+                </View>
+                <View style={styles.secondTableColum}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item.Contact_Information.substr(1, 20)}...
+                  </Text>
+                </View>
+              </View>
+            ) : null} */}
+            {/* =====================  */}
+            {/* {item?.Site_Type_Concatenated_Detail ? (
+              <View style={styles.secondTableRow}>
+                <View style={styles.secondTableColum}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Site Type Concatenated Detail
+                  </Text>
+                </View>
+                <View style={styles.secondTableColum}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item.Site_Type_Concatenated_Detail}
+                  </Text>
+                </View>
+              </View>
+            ) : null} */}
             {/* ===================== */}
-            {item?.Device_Function_Abrv ? (
+            {/* {item?.Associated_Circuit ? (
+              <View style={styles.secondTableRow}>
+                <View style={styles.secondTableColum}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Associated Circuit
+                  </Text>
+                </View>
+                <View style={styles.secondTableColum}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item.Associated_Circuit}
+                  </Text>
+                </View>
+              </View>
+            ) : null} */}
+
+            {/* {item?.IP_Address ? (
+              <View style={styles.secondTableRow}>
+                <View style={styles.secondTableColum}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    IP Address
+                  </Text>
+                </View>
+                <View style={styles.secondTableColum}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item.IP_Address}
+                  </Text>
+                </View>
+              </View>
+            ) : null} */}
+
+            {/* {item?.Code_Compliance ? (
+              <View style={styles.secondTableRow}>
+                <View style={styles.secondTableColum}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Code Compliance
+                  </Text>
+                </View>
+                <View style={styles.secondTableColum}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item.Code_Compliance}
+                  </Text>
+                </View>
+              </View>
+            ) : null} */}
+
+            {/* ===================== */}
+            {/* {item?.Device_Function_Abrv ? (
               <View style={styles.secondTableRow}>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
@@ -1075,7 +1126,7 @@ const BottomSheetView = ({deviceRef}) => {
                   </Text>
                 </View>
               </View>
-            ) : null}
+            ) : null} */}
             <View style={{height: 30, width: '100%', borderTopWidth: 1}}></View>
           </>
         ) : (

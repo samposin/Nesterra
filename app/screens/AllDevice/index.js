@@ -12,6 +12,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
 
 import OrderLoder from '../../components/lodder/OrderLoder';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {getAllDevice} from '../../actions/AllDevice';
 import {
@@ -26,6 +27,7 @@ import {
 } from '../../actions/actionType/AllDevice';
 import BottomSheetView from './components';
 import {getAllDeviceDetails} from '../../actions/AllDevice/allDeviceDetails';
+import Lodder from '../../components/lodder';
 
 const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
   const deviceRef = useRef(null);
@@ -41,6 +43,7 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
 
   const [invType, setInvType] = useState(true);
   const [type, setType] = useState(true);
+  const [lodding, setLodding] = useState(false);
 
   useEffect(() => {
     getAllDevice();
@@ -50,15 +53,17 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
     return (
       <TouchableOpacity
         onPress={() => {
+          setLodding(true);
           // navigation.navigate('AllDevicesDetails', {
           //   inv_Id: item.ID,
           // })
           // console.log('snap');
-          getAllDeviceDetails(item.ID);
+          const id = item.ID;
+          getAllDeviceDetails(id, setLodding, deviceRef);
 
-          setTimeout(() => {
-            deviceRef.current.snapToIndex(1);
-          }, 1200);
+          // setTimeout(() => {
+          //   deviceRef.current.snapToIndex(1);
+          // }, 1200);
         }}
         style={{
           ...styles.tableRow1,
@@ -149,8 +154,19 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
                 });
               }
             }}
-            style={{...styles.tableRowColum}}>
+            style={{
+              ...styles.tableRowColum,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+            }}>
             <Text style={{...styles.boxText, color: 'white'}}>Type</Text>
+            <Text style={{marginTop: 1, marginRight: 3}}>
+              <AntDesign
+                name={type ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -170,8 +186,17 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
               ...styles.tableRowColum,
               borderLeftColor: 'white',
               borderLeftWidth: 2,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
             }}>
-            <Text style={styles.boxText}>Vendor</Text>
+            <Text style={{...styles.boxText}}>Vendor</Text>
+            <Text style={{marginTop: 1}}>
+              <AntDesign
+                name={vendor ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -191,8 +216,17 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
               ...styles.tableRowColum,
               borderLeftColor: 'white',
               borderLeftWidth: 2,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
             }}>
             <Text style={styles.boxText}>Status</Text>
+            <Text style={{marginTop: 1}}>
+              <AntDesign
+                name={status ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -213,8 +247,17 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
               ...styles.tableRowColum,
               borderLeftColor: 'white',
               borderLeftWidth: 2,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
             }}>
             <Text style={styles.boxText}>Inv ID</Text>
+            <Text style={{marginTop: 1}}>
+              <AntDesign
+                name={invType ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -254,6 +297,7 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
         )}
         {/* ==============Summary View=========== */}
         <BottomSheetView deviceRef={deviceRef} />
+        {lodding && <Lodder lodding={lodding} />}
       </SafeAreaView>
     </>
   );
@@ -270,7 +314,7 @@ const styles = StyleSheet.create({
   },
   summaryView: {
     width: '100%',
-    height: 100,
+    height: 80,
 
     paddingHorizontal: 20,
     justifyContent: 'space-between',
@@ -279,7 +323,7 @@ const styles = StyleSheet.create({
   ///========Summary Button
   summaryButton: {
     width: 100,
-    height: 50,
+    height: 40,
     backgroundColor: '#007aff',
     borderRadius: 8,
     justifyContent: 'center',
@@ -374,15 +418,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   tableRowColum: {
-    width: '20%',
+    width: '25%',
     height: '100%',
     backgroundColor: '#007aff',
 
-    justifyContent: 'center',
     alignItems: 'center',
   },
   tableRowColumLast: {
-    width: '20%',
+    width: '25%',
     marginHorizontal: 2,
     height: 50,
     justifyContent: 'center',
@@ -405,7 +448,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   tableRowColum1: {
-    width: '20%',
+    width: '25%',
     height: '100%',
 
     justifyContent: 'center',
@@ -433,7 +476,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   secondTableColum: {
-    width: '50%',
+    width: '25%',
     height: '100%',
     borderRightColor: 'black',
     borderRightWidth: 1,

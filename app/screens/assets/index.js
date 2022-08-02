@@ -32,6 +32,7 @@ import {
 
 const Assets = ({get_orders_for_tab, navigation}) => {
   const {ordersForTab} = useSelector(state => state.ordersForTab);
+  console.log(ordersForTab[0]);
   const dispatch = useDispatch();
   // console.log(ordersForTab);
   // console.log(ordersForTab.length);

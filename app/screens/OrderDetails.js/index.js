@@ -12,12 +12,13 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import {get_order_details} from '../../actions/order';
 import {connect, useSelector} from 'react-redux';
 import moment from 'moment';
+import Lodder from '../../components/lodder';
 
 const OrderDetails = ({navigation, route, get_order_details}) => {
   const {orderDetails} = useSelector(state => state.OrderDetails);
-
+  const [lodding, setLodding] = useState(true);
   useEffect(() => {
-    get_order_details(route.params.inv_Id);
+    get_order_details(route.params.inv_Id, setLodding);
   }, []);
 
   return (
@@ -427,6 +428,7 @@ const OrderDetails = ({navigation, route, get_order_details}) => {
 
           {/* ==============Container============== */}
         </View>
+        {lodding && <Lodder lodding={lodding} />}
       </SafeAreaView>
     </>
   );
