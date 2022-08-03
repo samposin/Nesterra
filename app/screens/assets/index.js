@@ -8,7 +8,7 @@ import {
   FlatList,
   TextInput,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -29,10 +29,19 @@ import {
   SORT_BY_ORDER_TYPE_ASC,
   SORT_BY_ORDER_TYPE_DES,
 } from '../../actions/actionType/action.OrdersForTab';
+import BottomSheetView1 from './components/BottomSheetView1';
+import {getAllBrachrID} from '../../actions/AllBranchID';
+import {getAllCircuitID} from '../../actions/AllCircuitID';
 
-const Assets = ({get_orders_for_tab, navigation}) => {
+const Assets = ({
+  get_orders_for_tab,
+  getAllCircuitID,
+  getAllBrachrID,
+  navigation,
+}) => {
+  const bottomSheetRef = useRef(null);
   const {ordersForTab} = useSelector(state => state.ordersForTab);
-  console.log(ordersForTab[0]);
+  // console.log(ordersForTab[0]);
   const dispatch = useDispatch();
   // console.log(ordersForTab);
   // console.log(ordersForTab.length);
@@ -45,6 +54,8 @@ const Assets = ({get_orders_for_tab, navigation}) => {
   const [invType, setInvType] = useState(true);
   const [orderType, setOrderType] = useState(true);
   const [name, setName] = useState('');
+  const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
+  const [lodding, setLodding] = useState(false);
 
   useEffect(() => {
     get_orders_for_tab();
@@ -156,21 +167,42 @@ const Assets = ({get_orders_for_tab, navigation}) => {
         {/* ==============Services Category============== */}
         <View style={{...styles.idView}}>
           <View style={styles.idViewLeft}>
-            <View style={styles.idButton}>
+            <TouchableOpacity
+              onPress={() => {
+                setLodding(true);
+                setBottomSheetDisplay('SiteID');
+                bottomSheetRef.current.snapToIndex(1);
+              }}
+              style={styles.idButton}>
               <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black'}}>
                 Site ID
               </Text>
-            </View>
-            <View style={styles.idButton}>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setLodding(true);
+                setBottomSheetDisplay('CircuitID');
+                getAllCircuitID(setLodding);
+
+                bottomSheetRef.current.snapToIndex(1);
+              }}
+              style={styles.idButton}>
               <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black'}}>
                 Circuit ID
               </Text>
-            </View>
-            <View style={styles.idButton}>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setLodding(true);
+                getAllBrachrID(setLodding);
+                setBottomSheetDisplay('BranchID');
+                bottomSheetRef.current.snapToIndex(1);
+              }}
+              style={styles.idButton}>
               <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black'}}>
                 Branch ID
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.idViewRight}></View>
         </View>
@@ -367,13 +399,22 @@ const Assets = ({get_orders_for_tab, navigation}) => {
           </>
         )}
         {/* ==============Summary View=========== */}
+        <BottomSheetView1
+          lodding={lodding}
+          bottomSheetRef={bottomSheetRef}
+          bottomSheetDisplay={bottomSheetDisplay}
+        />
       </SafeAreaView>
       {/* {selectedComponent()} */}
     </>
   );
 };
 
-export default connect(null, {get_orders_for_tab})(Assets);
+export default connect(null, {
+  get_orders_for_tab,
+  getAllCircuitID,
+  getAllBrachrID,
+})(Assets);
 
 const styles = StyleSheet.create({
   loderView: {

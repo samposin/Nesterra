@@ -6,7 +6,7 @@ const Lodder = ({lodding}) => {
   // console.log(lodding, 'lodding');
   return (
     <>
-      <StatusBar hidden />
+      {/* <StatusBar hidden /> */}
       <View
         style={{
           justifyContent: 'center',
@@ -37,6 +37,7 @@ const Lodder = ({lodding}) => {
             justifyContent: 'center',
             flexDirection: 'row',
             flex: 1,
+            backgroundColor: '#bababa',
           }}
         />
       </View>

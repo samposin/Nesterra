@@ -11,29 +11,32 @@ import React, {useMemo, useEffect} from 'react';
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {useSelector} from 'react-redux';
 
-import {useDispatch} from 'react-redux';
-import {FILTER_CARRIER_NUMBERR} from '../../../actions/actionType/carrier.Number.type';
-import SerachOrderTypeSmartSite from './SerachOrderTypeSmartSite';
-import SerachOrderType from './SerachOrderType';
-import SerachVendor from './SerachVendor';
-import SearchStatus from './SearchStatus';
-const BottomSheetView = ({bottomSheetRef, diplayName, bottomSheetDisplay}) => {
+// import SerachOrderTypeSmartSite from './SerachOrderTypeSmartSite';
+import BranchID from './BranchID';
+import SiteID from './SiteID';
+import CircuitID from './CircuitID';
+
+const BottomSheetView1 = ({
+  bottomSheetRef,
+  lodding,
+  diplayName,
+  bottomSheetDisplay,
+}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const {carrierNumber} = useSelector(state => state.carrierNumber);
   const {isLoding} = useSelector(state => state.carrierNumber);
 
   const selectedComponent = () => {
     switch (true) {
-      case bottomSheetDisplay === 'Order Type':
-        return <SerachOrderType />;
+      case bottomSheetDisplay === 'SiteID':
+        return <SiteID lodding={lodding} />;
         break;
-      case bottomSheetDisplay === 'SmartSite#':
-        return <SerachOrderTypeSmartSite />;
+      case bottomSheetDisplay === 'CircuitID':
+        return <CircuitID lodding={lodding} />;
         break;
-      case bottomSheetDisplay === 'Vendor':
-        return <SerachVendor />;
-      case bottomSheetDisplay === 'Status':
-        return <SearchStatus />;
+
+      case bottomSheetDisplay === 'BranchID':
+        return <BranchID lodding={lodding} />;
         break;
     }
   };
@@ -72,55 +75,35 @@ const BottomSheetView = ({bottomSheetRef, diplayName, bottomSheetDisplay}) => {
               </Text>
             </TouchableOpacity>
           </View>
-          {selectedComponent()}
-          {/* <View style={styles.searchView}>
-            <View style={styles.searchViewLeft}>
-              
-              <TextInput
-                value={search}
-                placeholder="Search Here"
-                style={{
-                  paddingLeft: 10,
-                }}
-                onChangeText={text => searchFilterFunction(text)}
-              />
-            </View>
-            <View style={styles.searchViewRight}>
-              <EvilIcons name="search" size={24} color="black" />
-            </View>
-          </View> */}
         </View>
-        {isLoding ? (
-          <ActivityIndicator color="#007aff" size="large" />
-        ) : (
-          <BottomSheetFlatList
-            data={carrierNumber}
-            renderItem={({item}) => {
-              return (
-                <View
+        {selectedComponent()}
+        {/* <View style={styles.searchView}>
+              <View style={styles.searchViewLeft}>
+                
+                <TextInput
+                  value={search}
+                  placeholder="Search Here"
                   style={{
-                    width: '100%',
-                    height: 30,
-                    marginVertical: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
-                </View>
-              );
-            }}
-            keyExtractor={item => item.id}
-          />
-        )}
+                    paddingLeft: 10,
+                  }}
+                  onChangeText={text => searchFilterFunction(text)}
+                />
+              </View>
+              <View style={styles.searchViewRight}>
+                <EvilIcons name="search" size={24} color="black" />
+              </View>
+            </View> */}
+
+        {/**/}
       </BottomSheet>
     </>
   );
 };
 
-export default BottomSheetView;
+export default BottomSheetView1;
 
 const styles = StyleSheet.create({
-  top: {width: '100%', height: 130},
+  // top: {width: '100%', height: 130},
   textView: {
     width: '100%',
     height: 50,
@@ -131,7 +114,7 @@ const styles = StyleSheet.create({
   searchView: {
     width: '90%',
     height: 50,
-
+    backgroundColor: 'yellow',
     alignSelf: 'center',
     borderColor: 'black',
     paddingLeft: 10,

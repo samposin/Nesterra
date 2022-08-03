@@ -13,11 +13,11 @@ import {connect, useDispatch, useSelector} from 'react-redux';
 
 import OrderLoder from '../../components/lodder/OrderLoder';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
-// import BottomSheetView from './components';
+import BottomSheetView from './components';
 
 import Lodder from '../../components/lodder';
 import {getAllCircuit} from '../../actions/AllCircuit';
+
 import {
   ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
   ALL_CIRCUIT_SORT_BY_LOC_ID_DES,
@@ -28,9 +28,10 @@ import {
   ALL_CIRCUIT_SORT_BY_BRANCH_ASC,
   ALL_CIRCUIT_SORT_BY_BRANCH_DES,
 } from '../../actions/actionType/AllCircuit';
+import {getAllCircuitDetails} from '../../actions/AllCircuit/allCorcuitDetails';
 
-const Circuits = ({getAllCircuit, navigation}) => {
-  const deviceRef = useRef(null);
+const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
+  const circuitRef = useRef(null);
 
   const {allCircuit} = useSelector(state => state.allCircuit);
   const {isLoding} = useSelector(state => state.allCircuit);
@@ -44,7 +45,7 @@ const Circuits = ({getAllCircuit, navigation}) => {
   const [cirType, setCirType] = useState(true);
 
   const [branchType, setBranchType] = useState(true);
-  const [type, setType] = useState(true);
+
   const [lodding, setLodding] = useState(false);
 
   useEffect(() => {
@@ -55,13 +56,11 @@ const Circuits = ({getAllCircuit, navigation}) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          // setLodding(true);
-          // navigation.navigate('AllDevicesDetails', {
-          //   inv_Id: item.ID,
-          // })
+          setLodding(true);
+
           // console.log('snap');
-          // const id = item.ID;
-          // getAllDeviceDetails(id, setLodding);
+          const id = item.Circuit_ID;
+          getAllCircuitDetails(id, setLodding, circuitRef);
           // setTimeout(() => {
           //   deviceRef.current.snapToIndex(1);
           // }, 1200);
@@ -122,7 +121,6 @@ const Circuits = ({getAllCircuit, navigation}) => {
         <View
           style={{
             ...styles.summaryView,
-
             alignItems: 'center',
           }}>
           <TouchableOpacity
@@ -299,14 +297,14 @@ const Circuits = ({getAllCircuit, navigation}) => {
           </>
         )}
         {/* ==============Summary View=========== */}
-        {/* <BottomSheetView deviceRef={deviceRef} /> */}
-        {lodding && <Lodder lodding={lodding} />}
+        <BottomSheetView circuitRef={circuitRef} lodding={lodding} />
+        {/* {lodding && <Lodder lodding={lodding} />} */}
       </SafeAreaView>
     </>
   );
 };
 
-export default connect(null, {getAllCircuit})(Circuits);
+export default connect(null, {getAllCircuit, getAllCircuitDetails})(Circuits);
 
 const styles = StyleSheet.create({
   loderView: {

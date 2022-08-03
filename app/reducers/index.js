@@ -15,6 +15,9 @@ import ordersForTab from './orderFotTab';
 import deviceAllData from './AllDevice';
 import allDeviceDetails from './AllDevice/allDeviceDetails';
 import allCircuit from './AllCircuit';
+import allCircuitDetails from './AllCircuit/allCircuitDetails';
+import allBranchID from './AllBranchID';
+
 const rootReducer = combineReducers({
   setLatLang,
   selectList,
@@ -30,5 +33,7 @@ const rootReducer = combineReducers({
   deviceAllData,
   allDeviceDetails,
   allCircuit,
+  allCircuitDetails,
+  allBranchID,
 });
 export default rootReducer;
