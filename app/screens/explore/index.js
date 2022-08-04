@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, useCallback, useMemo} from 'react';
+import React, {useEffect, useState, useRef, useCallback} from 'react';
 import {
   View,
   Text,
@@ -107,7 +107,8 @@ const Explore = ({
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
   });
-
+  const origin = {latitude: 42.3601, longitude: 71.0589};
+  const destination1 = {latitude: 40.7128, longitude: 74.006};
   const transMap = transformMap.interpolate({
     inputRange: [0, 1],
     outputRange: [0, -38],
@@ -130,6 +131,7 @@ const Explore = ({
   /// arrow rotated
   // get start points
   const startPoint = (lat, lng) => {
+    console.log(lat, lng, 'lat, lng');
     const startPoints = {
       latitude: lat,
       longitude: lng,
@@ -138,6 +140,7 @@ const Explore = ({
   };
   // get destination points
   const destination = (lat, lng) => {
+    console.log(lat, lng, 'f');
     const destinationPoints = {
       latitude: lat,
       longitude: lng,
@@ -465,7 +468,15 @@ const Explore = ({
                 </Marker.Animated>
               );
             })}
-          {Object.keys(startPoints).length > 0 &&
+          {/* <MapViewDirections
+            origin={origin}
+            destination={destination1}
+            apikey={LocationKey} // insert your API Key here
+            strokeWidth={6}
+            strokeColor="#1b5a90"
+            optimizeWaypoints={true}
+          /> */}
+          {/* {Object.keys(startPoints).length > 0 &&
           Object.keys(destinationPoints).length > 0 ? (
             <MapViewDirections
               origin={startPoints}
@@ -475,7 +486,7 @@ const Explore = ({
               strokeColor="#1b5a90"
               optimizeWaypoints={true}
             />
-          ) : null}
+          ) : null} */}
         </MapView>
         {/* ===========get Current position=== */}
         <TouchableOpacity onPress={getLocation} style={styles.currentLocation}>
@@ -495,7 +506,7 @@ const Explore = ({
         </TouchableOpacity> */}
         {/* ===========Direction=== */}
         {/* ===========find Direction=== */}
-        {/* <FindeDirection animatioValOff={animatioValOff}/> */}
+        {/* <FindeDirection animatioValOff={animatioValOff} /> */}
         <Animated.View
           style={{
             width: SCREEN_WIDTH,

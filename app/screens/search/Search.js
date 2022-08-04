@@ -157,5 +157,8 @@ const styles = StyleSheet.create({
   rightIconImage: {width: 30, height: 30, borderRadius: 15},
   mr10: {marginRight: 18},
 });
+//
+//mr10: {marginRight: 18},
+//
 
 // added by Dildar Khan end

@@ -1,11 +1,19 @@
-import {StyleSheet, View, TextInput} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  Text,
+  TextInput,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
-
+import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {GET_ORDERS_FOR_TAB_FILTER_STATUS} from '../../../actions/actionType/action.OrdersForTab';
 
-const SiteID = ({}) => {
+const SiteID = ({lodding}) => {
+  const {allSiteID} = useSelector(stata => stata.allSiteID);
+  // console.log(allSiteID.length, 'allBranchID');
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const searchFilterFunction = text => {
@@ -18,21 +26,53 @@ const SiteID = ({}) => {
   useEffect(() => {}, []);
 
   return (
-    <View style={styles.searchView}>
-      <View style={styles.searchViewLeft}>
-        <TextInput
-          value={search}
-          placeholder="Search Here"
+    <>
+      <View style={styles.searchView}>
+        <View style={styles.searchViewLeft}>
+          <TextInput
+            value={search}
+            placeholder="Search Here"
+            style={{
+              paddingLeft: 10,
+            }}
+            // onChangeText={text => searchFilterFunction(text)}
+          />
+        </View>
+        <View style={styles.searchViewRight}>
+          <EvilIcons name="search" size={24} color="black" />
+        </View>
+      </View>
+      {lodding ? (
+        <View
           style={{
-            paddingLeft: 10,
+            width: '100%',
+            height: 200,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <ActivityIndicator color="#007aff" size="large" />
+        </View>
+      ) : (
+        <BottomSheetFlatList
+          data={allSiteID}
+          renderItem={({item}) => {
+            return (
+              <View
+                style={{
+                  width: '100%',
+                  height: 30,
+                  marginVertical: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
+              </View>
+            );
           }}
-          onChangeText={text => searchFilterFunction(text)}
+          keyExtractor={item => item.id}
         />
-      </View>
-      <View style={styles.searchViewRight}>
-        <EvilIcons name="search" size={24} color="black" />
-      </View>
-    </View>
+      )}
+    </>
   );
 };
 

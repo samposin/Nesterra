@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
     justifyContent: 'center',
   },
@@ -143,5 +142,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
   },
+
   //body
 });

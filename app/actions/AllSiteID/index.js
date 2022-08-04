@@ -1,12 +1,12 @@
 import Axios from 'axios';
 import {Base_url} from '../../key';
+import {ALL_SITE_ID} from '../actionType/AllSiteID';
 
-import {ALL_SITE_ID} from '../../actions/AllSiteID';
-
-export const getAllDevice = () => dispatch => {
+export const getAllSiteID = setLodding => dispatch => {
   Axios.get(`${Base_url}/api/GetCircuitInventorySiteIds`)
     .then(response => {
       if (response.data.length > 0) {
+        setLodding(false);
         dispatch({
           type: ALL_SITE_ID,
           payload: {

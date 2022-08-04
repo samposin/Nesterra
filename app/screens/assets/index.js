@@ -32,11 +32,13 @@ import {
 import BottomSheetView1 from './components/BottomSheetView1';
 import {getAllBrachrID} from '../../actions/AllBranchID';
 import {getAllCircuitID} from '../../actions/AllCircuitID';
+import {getAllSiteID} from '../../actions/AllSiteID';
 
 const Assets = ({
   get_orders_for_tab,
   getAllCircuitID,
   getAllBrachrID,
+  getAllSiteID,
   navigation,
 }) => {
   const bottomSheetRef = useRef(null);
@@ -56,6 +58,7 @@ const Assets = ({
   const [name, setName] = useState('');
   const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
   const [lodding, setLodding] = useState(false);
+  const [diplayName, setDiplayName] = useState('');
 
   useEffect(() => {
     get_orders_for_tab();
@@ -171,10 +174,20 @@ const Assets = ({
               onPress={() => {
                 setLodding(true);
                 setBottomSheetDisplay('SiteID');
+                setDiplayName('Site ID');
+                getAllSiteID(setLodding);
                 bottomSheetRef.current.snapToIndex(1);
               }}
-              style={styles.idButton}>
-              <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black'}}>
+              style={{
+                ...styles.idButton,
+                borderColor: diplayName == 'Site ID' ? '#007aff' : 'black',
+              }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                  color: diplayName == 'Site ID' ? '#007aff' : 'black',
+                }}>
                 Site ID
               </Text>
             </TouchableOpacity>
@@ -183,11 +196,19 @@ const Assets = ({
                 setLodding(true);
                 setBottomSheetDisplay('CircuitID');
                 getAllCircuitID(setLodding);
-
+                setDiplayName('Circuit ID');
                 bottomSheetRef.current.snapToIndex(1);
               }}
-              style={styles.idButton}>
-              <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black'}}>
+              style={{
+                ...styles.idButton,
+                borderColor: diplayName == 'Circuit ID' ? '#007aff' : 'black',
+              }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                  color: diplayName == 'Circuit ID' ? '#007aff' : 'black',
+                }}>
                 Circuit ID
               </Text>
             </TouchableOpacity>
@@ -196,10 +217,19 @@ const Assets = ({
                 setLodding(true);
                 getAllBrachrID(setLodding);
                 setBottomSheetDisplay('BranchID');
+                setDiplayName('Branch ID');
                 bottomSheetRef.current.snapToIndex(1);
               }}
-              style={styles.idButton}>
-              <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black'}}>
+              style={{
+                ...styles.idButton,
+                borderColor: diplayName == 'Branch ID' ? '#007aff' : 'black',
+              }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: 'bold',
+                  color: diplayName == 'Branch ID' ? '#007aff' : 'black',
+                }}>
                 Branch ID
               </Text>
             </TouchableOpacity>
@@ -401,6 +431,7 @@ const Assets = ({
         {/* ==============Summary View=========== */}
         <BottomSheetView1
           lodding={lodding}
+          diplayName={diplayName}
           bottomSheetRef={bottomSheetRef}
           bottomSheetDisplay={bottomSheetDisplay}
         />
@@ -414,6 +445,7 @@ export default connect(null, {
   get_orders_for_tab,
   getAllCircuitID,
   getAllBrachrID,
+  getAllSiteID,
 })(Assets);
 
 const styles = StyleSheet.create({
@@ -469,8 +501,9 @@ const styles = StyleSheet.create({
   ///========id Button
   idButton: {
     width: '30%',
-    height: 42,
+    height: 40,
     borderWidth: 1,
+
     borderRadius: 10,
     margin: 3,
     justifyContent: 'center',

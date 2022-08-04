@@ -17,6 +17,7 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const location_data = useSelector(state => state.location_details.data);
   const myRef = useRef(null);
+
   const data = [
     {id: 0, name: 'INFO', isActive: true},
     {id: 1, name: 'PICS', isActive: false},
@@ -96,7 +97,7 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
               marginLeft: 10,
             }}>
             {location_data?.Address}
-            <Text> </Text>
+            <Text>{'  '} </Text>
             {location_data?.Location_ID}
           </Text>
 
@@ -150,9 +151,9 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
                   style={{
                     width: 100,
                     backgroundColor: 'red',
-                    height: 45,
+                    height: 40,
                     margin: 2,
-                    borderRadius: 10,
+                    borderRadius: 12,
                     borderWidth: item.isActive ? 0 : 1,
                     backgroundColor: item.isActive ? '#007aff' : '#f2f2f7',
                     justifyContent: 'center',

@@ -12,8 +12,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {GET_ORDERS_FOR_TAB_FILTER_STATUS} from '../../../actions/actionType/action.OrdersForTab';
 
 const CircuitID = ({lodding}) => {
-  const {allBranchID} = useSelector(stata => stata.allBranchID);
-  // console.log(allBranchID.length, 'allBranchID');
+  const {allCircuitID} = useSelector(stata => stata.allCircuitID);
+
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const searchFilterFunction = text => {
@@ -35,7 +35,7 @@ const CircuitID = ({lodding}) => {
             style={{
               paddingLeft: 10,
             }}
-            onChangeText={text => searchFilterFunction(text)}
+            // onChangeText={text => searchFilterFunction(text)}
           />
         </View>
         <View style={styles.searchViewRight}>
@@ -43,10 +43,18 @@ const CircuitID = ({lodding}) => {
         </View>
       </View>
       {lodding ? (
-        <ActivityIndicator color="#007aff" size="large" />
+        <View
+          style={{
+            width: '100%',
+            height: 200,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <ActivityIndicator color="#007aff" size="large" />
+        </View>
       ) : (
         <BottomSheetFlatList
-          data={allBranchID}
+          data={allCircuitID}
           renderItem={({item}) => {
             return (
               <View

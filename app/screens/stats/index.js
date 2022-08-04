@@ -24,7 +24,7 @@ import ChartBarView from './ChartBarView';
 import InventoryDetails from './InventoryDetails';
 import AnualCircuitSpend from './AnualCircuitSpend';
 import CirCuitCount from './CirCuitCount';
-import Header from './Header';
+
 import NationalOverView from './NationalOverView';
 
 const Stats = () => {

@@ -9,8 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-import DropDownPicker from 'react-native-dropdown-picker';
-import {Picker} from '@react-native-picker/picker';
+
 import {data} from '../../utils/Constants';
 
 const Search = () => {
@@ -155,7 +154,6 @@ const styles = StyleSheet.create({
   topView: {
     height: 50,
     width: '100%',
-
     flexDirection: 'row',
   },
   topItem: {
@@ -175,36 +173,29 @@ const styles = StyleSheet.create({
   table: {
     width: '100%',
     paddingHorizontal: 10,
-
     alignSelf: 'center',
     marginTop: 15,
   },
   tableRow: {
     width: '100%',
     height: 50,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
-
     alignSelf: 'center',
   },
   tableRow1: {
     width: '100%',
     height: 30,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
-
     alignSelf: 'center',
   },
   tableRowColum: {
     width: '23%',
     height: '100%',
     marginHorizontal: 2,
-
     borderBottomColor: '#73c0b8',
     borderBottomWidth: 1,
-
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -225,17 +216,14 @@ const styles = StyleSheet.create({
   tableRow1: {
     width: '100%',
     height: 30,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
-
     alignSelf: 'center',
   },
   tableRowColum1: {
     width: '23%',
     height: '100%',
     marginHorizontal: 2,
-
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -254,7 +242,6 @@ const styles = StyleSheet.create({
   secondTableRow: {
     width: '100%',
     height: 30,
-
     flexDirection: 'row',
     borderBottomColor: 'black',
     borderBottomWidth: 1,
@@ -267,5 +254,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     justifyContent: 'center',
   },
+
   ///========Second table
 });

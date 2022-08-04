@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import {Base_url} from '../../key';
-import {ALL_CIRCUIT_ID} from '../../actions/AllCircuitID';
+import {ALL_CIRCUIT_ID} from '../actionType/AllCircuitID';
 
 export const getAllCircuitID = setLodding => dispatch => {
   Axios.get(`${Base_url}/api/GetCircuitInventoryCircuitIds`)

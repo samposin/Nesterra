@@ -35,7 +35,7 @@ const BranchID = ({lodding}) => {
             style={{
               paddingLeft: 10,
             }}
-            onChangeText={text => searchFilterFunction(text)}
+            // onChangeText={text => searchFilterFunction(text)}
           />
         </View>
         <View style={styles.searchViewRight}>
@@ -43,7 +43,15 @@ const BranchID = ({lodding}) => {
         </View>
       </View>
       {lodding ? (
-        <ActivityIndicator color="#007aff" size="large" />
+        <View
+          style={{
+            width: '100%',
+            height: 200,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <ActivityIndicator color="#007aff" size="large" />
+        </View>
       ) : (
         <BottomSheetFlatList
           data={allBranchID}

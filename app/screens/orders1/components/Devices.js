@@ -19,7 +19,6 @@ const Devices = () => {
     {label: 'One', value: 'One'},
   ]);
 
-  const [buttonBorder, setButtonBorder] = useState('circuits');
   const [selectedLanguage, setSelectedLanguage] = useState();
   return (
     <>

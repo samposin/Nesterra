@@ -9,7 +9,6 @@ import {
   View,
   Image,
   Text,
-  Platform,
 } from 'react-native';
 import MapView from 'react-native-map-clustering';
 import {Marker} from 'react-native-maps';
@@ -369,7 +368,6 @@ const styles = StyleSheet.create({
   textView: {
     width: '20%',
     height: '100%',
-
     justifyContent: 'center',
     alignItems: 'center',
   },

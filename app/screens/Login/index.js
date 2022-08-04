@@ -226,5 +226,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 30,
   },
+
   //profile
 });

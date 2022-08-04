@@ -6,6 +6,7 @@ import {
   Platform,
   StatusBar,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import React, {useRef} from 'react';
 import {data} from '../../utils/Constants';
@@ -31,7 +32,42 @@ const Category = ({third_party_filter}) => {
 
   return (
     <>
-      <ScrollView
+      <View style={{top: Platform.OS === 'ios' ? 140 : 140}}>
+        <FlatList
+          horizontal
+          ref={myRef}
+          data={allItem}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index}) => {
+            return (
+              <TouchableOpacity
+                ref={myRef}
+                onPress={() => {
+                  actiText(index);
+                  centerTab(index);
+                  third_party_filter(item.value);
+                }}
+                key={index}
+                style={{
+                  ...styles.chipsItem,
+                  alignItems: 'center',
+                  backgroundColor: item.isActive ? '#0A7AFF' : 'white',
+                }}>
+                <Text
+                  style={{
+                    color: item.isActive ? 'white' : 'black',
+                    fontWeight: '800',
+                  }}>
+                  {item.name}
+                </Text>
+              </TouchableOpacity>
+            );
+          }}
+          contentContainerStyle={styles.contentContainer}
+        />
+      </View>
+      {/* <ScrollView
         horizontal
         scrollEventThrottle={1}
         showsHorizontalScrollIndicator={false}
@@ -51,6 +87,7 @@ const Category = ({third_party_filter}) => {
           <TouchableOpacity
             ref={myRef}
             onPress={() => {
+              
               actiText(index);
 
               third_party_filter(category.value);
@@ -63,14 +100,7 @@ const Category = ({third_party_filter}) => {
             }}>
             {category.isActive ? category.icon : null}
 
-            {/* <Image
-              source={require('../../images/upload.png')}
-              style={{
-                width: 15,
-                height: 15,
-                tintColor: category.isActive ? '#ffffff' : '#1b5a90',
-              }}
-            /> */}
+          
             <Text
               style={{
                 color: category.isActive ? 'white' : 'black',
@@ -80,7 +110,7 @@ const Category = ({third_party_filter}) => {
             </Text>
           </TouchableOpacity>
         ))}
-      </ScrollView>
+      </ScrollView> */}
     </>
   );
 };
