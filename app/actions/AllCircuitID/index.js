@@ -5,13 +5,25 @@ import {ALL_CIRCUIT_ID} from '../actionType/AllCircuitID';
 export const getAllCircuitID = setLodding => dispatch => {
   Axios.get(`${Base_url}/api/GetCircuitInventoryCircuitIds`)
     .then(response => {
-      if (response.data.length > 0) {
+      const data = response.data.sort((a, b) => {
+        let fa = a.id.toLowerCase(),
+          fb = b.id.toLowerCase();
+
+        if (fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
+      if (data.length > 0) {
         // console.log(response.data, 'response');
         setLodding(false);
         dispatch({
           type: ALL_CIRCUIT_ID,
           payload: {
-            data: response.data,
+            data: data,
             loder: false,
           },
         });
@@ -19,7 +31,7 @@ export const getAllCircuitID = setLodding => dispatch => {
         dispatch({
           type: ALL_CIRCUIT_ID,
           payload: {
-            data: response.data,
+            data: data,
             loder: false,
           },
         });

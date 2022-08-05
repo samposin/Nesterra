@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
-import React from 'react';
+import {StyleSheet, TouchableOpacity, View, Image} from 'react-native';
+import React, {useState} from 'react';
 import {LocationKey} from '../../../key';
 
 const Imagee = ({image}) => {

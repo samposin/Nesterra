@@ -1,20 +1,58 @@
 import React from 'react';
-import {StyleSheet, FlatList, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {useSelector} from 'react-redux';
 import Imagee from './Imagee';
 import ImageLoder from '../../lodder/imageLodder';
-
+import {Modal, Portal, Text, Button, Provider} from 'react-native-paper';
+import {Image} from 'moti';
+import {LocationKey} from '../../../key';
 const Pics = () => {
   const photo = useSelector(state => state.photo_url.photo_url);
-
+  const [visible, setVisible] = React.useState(false);
+  const [imgUrl, setImageUrl] = React.useState('');
+  // const showModal = () => setVisible(true);
+  // const hideModal = () => setVisible(false);
+  const containerStyle = {
+    backgroundColor: 'white',
+    height: 300,
+    width: 400,
+    alignSelf: 'center',
+    borderRadius: 15,
+    padding: 15,
+  };
   const renderItem = ({item}) => {
+    const url = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&maxheight=500&photoreference=${item.photo_reference}&key=${LocationKey}`;
+
     return (
-      <>
-        <Imagee image={item.photo_reference} />
-      </>
+      <TouchableOpacity
+        onPress={() => {
+          setVisible(true);
+          setImageUrl(item.photo_reference);
+        }}
+        style={{
+          width: '48%',
+          height: 150,
+
+          margin: 5,
+          marginRight: 5,
+          borderRadius: 5,
+        }}>
+        <Image
+          source={{
+            uri: url,
+          }}
+          style={{
+            width: '100%',
+            height: '100%',
+            resizeMode: 'cover',
+            borderRadius: 5,
+          }}
+        />
+      </TouchableOpacity>
     );
   };
+
   return (
     <View style={styles.container}>
       {photo ? (
@@ -31,6 +69,31 @@ const Pics = () => {
       )}
 
       <View style={{height: 70}}></View>
+      <>
+        {visible ? (
+          <>
+            <Portal>
+              <Modal
+                visible={visible}
+                onDismiss={() => setVisible(false)}
+                contentContainerStyle={containerStyle}>
+                <Image
+                  source={{
+                    uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${imgUrl}&key=${LocationKey}`,
+                  }}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    resizeMode: 'cover',
+                    borderRadius: 5,
+                  }}
+                />
+              </Modal>
+            </Portal>
+            <Button style={{marginTop: 30}}>{imgUrl}</Button>
+          </>
+        ) : null}
+      </>
     </View>
   );
 };

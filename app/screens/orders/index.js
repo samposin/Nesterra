@@ -525,7 +525,7 @@ const styles = StyleSheet.create({
   },
   tableRow: {
     width: '100%',
-    height: 50,
+    height: 40,
     backgroundColor: '#007aff',
     flexDirection: 'row',
     justifyContent: 'space-between',

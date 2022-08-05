@@ -11,7 +11,8 @@ const Lodder = ({lodding}) => {
         style={{
           justifyContent: 'center',
           alignItems: 'center',
-          height: height,
+
+          height: height + 70,
         }}>
         <ProgressDialog
           visible={lodding}
@@ -37,7 +38,7 @@ const Lodder = ({lodding}) => {
             justifyContent: 'center',
             flexDirection: 'row',
             flex: 1,
-            backgroundColor: '#bababa',
+            // backgroundColor: '#bababa',
           }}
         />
       </View>

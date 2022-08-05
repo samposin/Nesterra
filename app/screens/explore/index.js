@@ -53,7 +53,7 @@ import {GET_PHOTO_URL_FROM_MAP} from '../../actions/actionType/action.photoMapur
 import Lodder from '../../components/lodder';
 import {get_all_devices_inventory} from '../../actions/devicesInventory';
 import {getInventoryCircuit} from '../../actions/circuitInventory';
-
+import Voice from '@react-native-community/voice';
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const ASPECT_RATIO = SCREEN_WIDTH / SCREEN_HEIGHT;
@@ -70,6 +70,99 @@ const Explore = ({
 
   getInventoryCircuit,
 }) => {
+  const [modalVisible1, setModalVisible1] = useState(false);
+
+  //voice
+  const onSpeechStartHandler = e => {
+    console.log('start handler==>>>', e);
+  };
+  const onSpeechEndHandler = async e => {
+    if (e.error === false) {
+      try {
+        await Voice.stop();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  const onSpeechResultsHandler = e => {
+    // console.log(modalVisible, 'dd');
+    console.log(e, 'loctaion');
+    setlocationText(e.value[0]);
+
+    const voiceText = find(e.value[0]);
+    googlePlacesRef.current?.setAddressText(e.value[0]);
+    // googlePlacesRef.current?.focus();
+
+    // setTimeout(() => {
+    //   if (!voiceText) {
+    //     setModalVisible(false);
+    //     setlocationText('Place Not Found')
+    //      console.log('madan');
+    //   }
+
+    // }, 5000);
+  };
+  let timer = null;
+  const stopStartTimeOute = () => {
+    // setModalVisible1(false)
+    //alert(123)
+    clearTimeout(startTimeOute);
+    console.log('sec');
+    // clearTimeout(startTimeOute)
+    // startTimeOute()
+    timer = null;
+  };
+  const startTimeOute = () => {
+    timer = setTimeout(() => {
+      if (!locationText) {
+        setModalVisible1(true);
+        setlocationText('');
+        // setModalVisible(false)
+        console.log('object');
+      }
+    }, 10000);
+  };
+
+  const startRecording = async () => {
+    try {
+      setModalVisible(true);
+      setModalVisible1(false);
+      await Voice.start('en-Us');
+    } catch (error) {
+      console.log('error raised', error);
+    }
+  };
+  const find = data => {
+    Geocoder.init(`${LocationKey}`);
+    Geocoder.from(data)
+      .then(json => {
+        // console.log(json);
+
+        var location = json.results[0].geometry.location;
+
+        const {lat, lng} = location;
+        onSearchPress(lat, lng);
+        setModalVisible(false);
+        setlocationText('');
+      })
+      .catch(error => {
+        console.warn(error, 'ffd');
+        setModalVisible(false);
+        setlocationText('');
+      });
+  };
+  useEffect(() => {
+    Voice.onSpeechStart = onSpeechStartHandler;
+    Voice.onSpeechEnd = onSpeechEndHandler;
+    Voice.onSpeechResults = onSpeechResultsHandler;
+
+    return () => {
+      Voice.destroy().then(Voice.removeAllListeners);
+    };
+  }, []);
+  //voice
+
   const dispatch = useDispatch();
   const {coordinates} = useSelector(state => state.coordinates);
   const {lat, lng} = useSelector(state => state.setLatLang);
@@ -369,15 +462,32 @@ const Explore = ({
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-      {modalVisible ? (
+      {/* {modalVisible ? (
         <ModalView
           modalVisible={modalVisible}
           catShow={catShow}
           locationText={locationText}
           setModalVisible={setModalVisible}
         />
+      ) : null} */}
+      {/* =======Voice Modal======== */}
+      {modalVisible ? (
+        <ModalView
+          stopStartTimeOute={stopStartTimeOute}
+          startRecording={startRecording}
+          startTimeOute={startTimeOute}
+          modalVisible={modalVisible}
+          modalVisible1={modalVisible1}
+          catShow={catShow}
+          locationText={locationText}
+          setModalVisible={setModalVisible}
+          setModalVisible1={setModalVisible1}
+          bottomSheetRef={bottomSheetRef}
+          setlocationText={setlocationText}
+        />
       ) : null}
 
+      {/* =======Voice Modal======== */}
       <View style={styles.container}>
         <MapView
           renderCluster={props => {

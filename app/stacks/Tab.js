@@ -126,7 +126,8 @@ const TabNaV = ({navigation}) => {
             );
           },
         }}
-      /> */}
+      /> 
+      */}
     </Tab.Navigator>
   );
 };

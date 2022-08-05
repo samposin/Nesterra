@@ -4,6 +4,7 @@ import React, {useMemo, useRef, useEffect} from 'react';
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 
 import {useSelector} from 'react-redux';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 import {useState} from 'react';
 import Pics from '../../components/BottomSheetTab/Pics';
@@ -85,10 +86,34 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
         animatedPosition={true}>
         <View
           style={{
-            height: 130,
+            height: 170,
             width: '100%',
             zIndex: 10,
           }}>
+          <View
+            style={{
+              width: '100%',
+              height: 40,
+
+              alignItems: 'flex-end',
+              paddingRight: 10,
+            }}>
+            <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
+              <View
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: 12,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: '#007aff',
+                }}>
+                <Text>
+                  <Entypo name="cross" size={20} color="white" />
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
           <Text
             style={{
               fontSize: 18,
