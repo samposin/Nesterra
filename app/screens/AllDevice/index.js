@@ -8,6 +8,7 @@ import {
   FlatList,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
+import {useToast} from 'native-base';
 
 import {connect, useDispatch, useSelector} from 'react-redux';
 
@@ -28,6 +29,7 @@ import {
 import BottomSheetView from './components';
 import {getAllDeviceDetails} from '../../actions/AllDevice/allDeviceDetails';
 import Lodder from '../../components/lodder';
+import {tostalert, copyText} from '../../components/helper';
 
 const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
   const deviceRef = useRef(null);
@@ -48,6 +50,8 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
   useEffect(() => {
     getAllDevice();
   }, []);
+
+  const toast = useToast();
 
   const randerItem = ({index, item}) => {
     return (
@@ -70,39 +74,56 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           marginVertical: 1,
         }}>
-        <View
+        <TouchableOpacity
+          onLongPress={() => {
+            copyText(item.Device_Type);
+            tostalert('Text copied to Clipboard ', 'black', toast);
+          }}
           style={{
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
           <Text style={styles.boxText1}> {item?.Device_Type}</Text>
-        </View>
-        <View
+        </TouchableOpacity>
+        <TouchableOpacity
+          onLongPress={() => {
+            copyText(item.Device_Vendor);
+            tostalert('Text copied to Clipboard ', 'black', toast);
+          }}
           style={{
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
           <Text style={styles.boxText1}>{item?.Device_Vendor}</Text>
-        </View>
-        <View
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onLongPress={() => {
+            copyText(item.Device_Status);
+            tostalert('Text copied to Clipboard ', 'black', toast);
+          }}
           style={{
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
           <Text style={styles.boxText1}>{item?.Device_Status}</Text>
-        </View>
+        </TouchableOpacity>
 
-        <View
+        <TouchableOpacity
+          onLongPress={() => {
+            copyText(item.ID);
+            tostalert('Text copied to  ', 'red', toast);
+          }}
           style={{
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
           <Text style={styles.boxText1}>{item?.ID}</Text>
-        </View>
+        </TouchableOpacity>
       </TouchableOpacity>
     );
   };

@@ -32,7 +32,7 @@ const BottomSheetView = ({circuitRef, lodding}) => {
           width: '100%',
           height: 30,
           alignItems: 'flex-end',
-          paddingRight: 15,
+          paddingRight: 25,
         }}>
         <TouchableOpacity onPress={() => circuitRef.current.close()}>
           <View

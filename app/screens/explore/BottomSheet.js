@@ -96,7 +96,7 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
               height: 40,
 
               alignItems: 'flex-end',
-              paddingRight: 10,
+              paddingRight: 30,
             }}>
             <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
               <View

@@ -14,6 +14,7 @@ import {GetCarrierNumber} from '../../actions/CarrierNumber';
 import {get_orders_for_tab} from '../../actions/orderFotTab';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import BottomSheetView from './components/BottomSheetView';
+import BottomSheetViewDetails from './components/BottomSheetViewDetails';
 
 import moment from 'moment';
 import OrderLoder from '../../components/lodder/OrderLoder';
@@ -29,67 +30,130 @@ import {
   SORT_BY_ORDER_TYPE_ASC,
   SORT_BY_ORDER_TYPE_DES,
 } from '../../actions/actionType/action.OrdersForTab';
+import {tostalert, copyText} from '../../components/helper';
+import {useToast} from 'native-base';
+import {get_order_details} from '../../actions/order';
+const Category = [
+  {
+    id: 0,
+    name: 'Order Type',
+    value: 'GetCarrierNumber',
+    disValue: 'OrderType',
+    search: 'Order Type',
+    active: false,
+  },
+  {
+    id: 1,
+    name: 'Status',
+    value: 'GetSmartSiteNumber',
+    disValue: 'Status',
+    search: 'Status#',
+    active: false,
+  },
+  {
+    id: 2,
+    name: 'SmartSite#',
+    value: 'GetSmartSiteNumber',
+    disValue: 'SmartSite',
+    search: 'SmartSite#',
+    active: false,
+  },
 
-const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
+  {
+    id: 3,
+    name: 'Tangoe',
+    value: 'GetTangoeNumber',
+    disValue: 'Tangoe',
+    search: 'Vendor',
+    active: false,
+  },
+  {
+    id: 4,
+    name: 'Carrier',
+    value: 'GetTangoeNumber',
+    disValue: 'Carrier',
+    search: 'Status',
+    active: false,
+  },
+];
+
+const Orders = ({
+  GetCarrierNumber,
+  get_order_details,
+  get_orders_for_tab,
+  navigation,
+}) => {
   const {ordersForTab} = useSelector(state => state.ordersForTab);
   const dispatch = useDispatch();
-  // console.log(ordersForTab);
-  // console.log(ordersForTab.length);
+
   const {isLoding} = useSelector(state => state.ordersForTab);
   const [diplayName, setDisplayName] = useState('');
   const bottomSheetRef = useRef(null);
-  // const [isLoding, setIsLoding] = useState(false);
+  const bottomSheetRefdetails = useRef(null);
+
   const [vendor, setVendor] = useState(true);
   const [status, setStatus] = useState(true);
   const [dateType, setDateType] = useState(true);
   const [invType, setInvType] = useState(true);
   const [orderType, setOrderType] = useState(true);
 
+  const [data, setData] = useState(Category);
+
   const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
-  const Category = [
-    {
-      id: 0,
-      name: 'Order Type',
-      value: 'GetCarrierNumber',
-      disValue: 'OrderType',
-      search: 'Order Type',
-    },
-    {
-      id: 1,
-      name: 'SmartSite#',
-      value: 'GetSmartSiteNumber',
-      disValue: 'SmartSite',
-      search: 'SmartSite#',
-    },
-    {
-      id: 1,
-      name: 'Tangoe',
-      value: 'GetTangoeNumber',
-      disValue: 'Tangoe',
-      search: 'Vendor',
-    },
-    {
-      id: 1,
-      name: 'Carrier',
-      value: 'GetTangoeNumber',
-      disValue: 'Carrier',
-      search: 'Status',
-    },
-  ];
+  const [lodding, setLodding] = useState(false);
+
   useEffect(() => {
     get_orders_for_tab();
   }, []);
+  const toast = useToast();
+  //barckground color change
+  const selectedComponent = item => {
+    switch (true) {
+      case item === 'In Progress':
+        return '#ffffbf';
 
+      case item === 'Initiated':
+        return '#ffc8ce';
+
+      case item === 'Cancelled':
+        return '#ffc8ce';
+
+      case item === 'Completed':
+        return '#c6efcd';
+    }
+  };
+  //barckground color change
+  //bottom color change
+
+  const changeBottomColor = id => {
+    let listData = data.map(item => {
+      let itm = {...item, active: false};
+      return itm;
+    });
+
+    listData[id].active = true;
+    setData(listData);
+  };
+  //bottom color change
   const randerItem = ({index, item}) => {
     return (
       <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('OrderDetails', {
-            inv_Id: item.Inventory_ID,
-          })
+        onPress={
+          () => {
+            setLodding(true);
+            bottomSheetRef.current.close();
+            if (!lodding) {
+              bottomSheetRefdetails.current.snapToIndex(2);
+            }
+            get_order_details(item.Inventory_ID, setLodding);
+          }
+          // navigation.navigate('OrderDetails', {
+          //   inv_Id: item.Inventory_ID,
+          // })
         }
         style={{
           ...styles.tableRow1,
+          height: 60,
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           marginVertical: 1,
         }}>
@@ -98,24 +162,47 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
             borderLeftWidth: 2,
+            backgroundColor: selectedComponent(item?.Status),
           }}>
-          <Text style={styles.boxText1}> {item?.Order_Type}</Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Order_Type);
+
+              tostalert(item.Order_Type, 'black', toast);
+            }}>
+            <Text style={styles.boxText1}> {item?.Order_Type}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+            backgroundColor: selectedComponent(item?.Status),
+          }}>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.vendor);
+              tostalert(item.vendor, 'black', toast);
+            }}>
+            <Text style={styles.boxText1}>{item?.vendor}</Text>
+          </TouchableOpacity>
         </View>
         <View
           style={{
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
             borderLeftWidth: 2,
+            backgroundColor: selectedComponent(item?.Status),
           }}>
-          <Text style={styles.boxText1}>{item?.vendor}</Text>
-        </View>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <Text style={styles.boxText1}>{item?.Status}</Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Status);
+              tostalert(item.Status, 'black', toast);
+            }}>
+            <Text style={styles.boxText1}>{item?.Status}</Text>
+          </TouchableOpacity>
         </View>
 
         <View
@@ -124,22 +211,37 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>
-            {item?.Initiation_Date
-              ? moment(item.Initiation_Date).format('DD-MM-YYYY')
-              : '--'}
-            {/* {moment(item.Initiation_Date).format('DD-MM-YYYY')} */}
-          </Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Inventory_ID);
+              tostalert(item.Inventory_ID, 'black', toast);
+            }}>
+            <Text style={styles.boxText1}>{item?.Inventory_ID}</Text>
+          </TouchableOpacity>
         </View>
+
         <View
           style={{
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>
-            {item?.Inventory_ID.substr(1, 10)}..
-          </Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(moment(item.Initiation_Date).format('DD-MM-YYYY'));
+              tostalert(
+                moment(item.Initiation_Date).format('DD-MM-YYYY'),
+                'black',
+                toast,
+              );
+            }}>
+            <Text style={styles.boxText1}>
+              {item?.Initiation_Date
+                ? moment(item.Initiation_Date).format('DD-MM-YYYY')
+                : '--'}
+              {/* {moment(item.Initiation_Date).format('DD-MM-YYYY')} */}
+            </Text>
+          </TouchableOpacity>
         </View>
       </TouchableOpacity>
     );
@@ -185,7 +287,7 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
             horizontal
             showsHorizontalScrollIndicator={false}
             style={{width: '100%', height: '100%'}}>
-            {Category.map((item, i) => {
+            {data.map((item, i) => {
               return (
                 <TouchableOpacity
                   key={i}
@@ -194,26 +296,22 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
                     setDisplayName(item.disValue);
                     bottomSheetRef.current.snapToIndex(1);
                     setBottomSheetDisplay(item.search);
+                    changeBottomColor(item.id);
                   }}
                   style={{
-                    width: 100,
-                    height: 40,
-                    borderRadius: 9,
-                    borderColor: 'black',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    paddingHorizontal: 3,
-                    marginHorizontal: 5,
+                    ...styles.categoryBottom,
+                    backgroundColor: item.active ? '#007aff' : null,
 
-                    borderWidth: 1,
+                    borderWidth: item.active ? 0 : 1,
                   }}>
-                  <Text>{item.name}</Text>
+                  <Text style={{color: item.active ? 'white' : 'black'}}>
+                    {item.name}
+                  </Text>
                   <AntDesign
                     name="caretdown"
                     size={20}
                     style={{marginLeft: 2}}
-                    color="black"
+                    color={item.active ? 'white' : 'black'}
                   />
                 </TouchableOpacity>
               );
@@ -251,6 +349,7 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
               />
             </Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() => {
               if (vendor) {
@@ -315,6 +414,37 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
               />
             </Text>
           </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
+              if (invType) {
+                setInvType(!invType);
+                dispatch({
+                  type: SORT_BY_INV_ID_ASC,
+                });
+              } else {
+                setInvType(!invType);
+                dispatch({
+                  type: SORT_BY_INV_ID_DES,
+                });
+              }
+            }}
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+            }}>
+            <Text style={{...styles.boxText, color: 'white'}}>Inv ID</Text>
+            <Text style={{marginTop: 1, marginRight: 3}}>
+              <AntDesign
+                name={invType ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               if (dateType) {
@@ -341,36 +471,6 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
             <Text style={{marginTop: 1, marginRight: 3}}>
               <AntDesign
                 name={dateType ? 'caretup' : 'caretdown'}
-                size={16}
-                color="white"
-              />
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (invType) {
-                setInvType(!invType);
-                dispatch({
-                  type: SORT_BY_INV_ID_ASC,
-                });
-              } else {
-                setInvType(!invType);
-                dispatch({
-                  type: SORT_BY_INV_ID_DES,
-                });
-              }
-            }}
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            }}>
-            <Text style={{...styles.boxText, color: 'white'}}>Inv ID</Text>
-            <Text style={{marginTop: 1, marginRight: 3}}>
-              <AntDesign
-                name={invType ? 'caretup' : 'caretdown'}
                 size={16}
                 color="white"
               />
@@ -420,13 +520,34 @@ const Orders = ({GetCarrierNumber, get_orders_for_tab, navigation}) => {
         diplayName={diplayName}
         bottomSheetRef={bottomSheetRef}
       />
+      <BottomSheetViewDetails
+        lodding={lodding}
+        bottomSheetRefdetails={bottomSheetRefdetails}
+      />
     </>
   );
 };
 
-export default connect(null, {GetCarrierNumber, get_orders_for_tab})(Orders);
+export default connect(null, {
+  GetCarrierNumber,
+  get_order_details,
+  get_orders_for_tab,
+})(Orders);
 
 const styles = StyleSheet.create({
+  //category Bottom
+  categoryBottom: {
+    width: 100,
+    height: 40,
+    borderRadius: 9,
+    borderColor: 'black',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 3,
+    marginHorizontal: 5,
+  },
+  //category Bottom
   loderView: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -533,7 +654,7 @@ const styles = StyleSheet.create({
   },
   tableRow1: {
     width: '100%',
-    height: 100,
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
@@ -604,5 +725,13 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     justifyContent: 'center',
   },
+  secondTableColum: {
+    width: '50',
+    height: '100',
+    borderRightColor: 'black',
+    borderRightWidth: 1,
+    paddingLeft: 'center',
+  },
+
   ///========Second table
 });

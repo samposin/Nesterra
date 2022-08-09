@@ -27,7 +27,7 @@ export const get_order_details = (inv_Id, setLodding) => dispatch => {
     `${Base_url}/api/GetOrdersAlldetailsByInventoryID?InventoryID=${inv_Id}`,
   )
     .then(response => {
-      if (response.data) {
+      if (response.data.length > 0) {
         setLodding(false);
 
         dispatch({
