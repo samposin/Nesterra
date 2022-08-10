@@ -14,6 +14,7 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import {get_orders_for_tab} from '../../actions/orderFotTab';
 import {connect, useDispatch, useSelector} from 'react-redux';
+//
 
 import moment from 'moment';
 import OrderLoder from '../../components/lodder/OrderLoder';
@@ -29,31 +30,45 @@ import {
   SORT_BY_ORDER_TYPE_ASC,
   SORT_BY_ORDER_TYPE_DES,
 } from '../../actions/actionType/action.OrdersForTab';
+
 import BottomSheetView1 from './components/BottomSheetView1';
 import {getAllBrachrID} from '../../actions/AllBranchID';
 import {getAllCircuitID} from '../../actions/AllCircuitID';
 import {getAllSiteID} from '../../actions/AllSiteID';
-
+import {getAllAssets} from '../../actions/Assets';
+import {
+  ALL_ASSETS,
+  ALL_ASSETS_BRANCH_ID_ASC,
+  ALL_ASSETS_BRANCH_ID_DES,
+  ALL_ASSETS_CIRCUIT_ID_ASC,
+  ALL_ASSETS_CIRCUIT_ID_DES,
+  ALL_ASSETS_SITE_ID_OR_LOCATION_ID_ASC,
+  ALL_ASSETS_SITE_ID_OR_LOCATION_ID_DES,
+  ALL_ASSETS_VENDOR_ASC,
+  ALL_ASSETS_VENDOR_DES,
+} from '../../actions/actionType/Assets';
 const Assets = ({
   get_orders_for_tab,
   getAllCircuitID,
   getAllBrachrID,
   getAllSiteID,
+  getAllAssets,
   navigation,
 }) => {
   const bottomSheetRef = useRef(null);
   const {ordersForTab} = useSelector(state => state.ordersForTab);
-  // console.log(ordersForTab[0]);
+  const {allAssets} = useSelector(state => state.allAssets);
+  //console.log(ordersForTab[0]);
   const dispatch = useDispatch();
   // console.log(ordersForTab);
-  // console.log(ordersForTab.length);
+  // console.log(allAssets.length);
   const {isLoding} = useSelector(state => state.ordersForTab);
 
   // const [isLoding, setIsLoding] = useState(false);
   const [vendor, setVendor] = useState(true);
-  const [status, setStatus] = useState(true);
-  const [dateType, setDateType] = useState(true);
-  const [invType, setInvType] = useState(true);
+  const [siteId, setSiteId] = useState(true);
+  const [circuitId, setCircuitId] = useState(true);
+  const [branchID, setBranchId] = useState(true);
   const [orderType, setOrderType] = useState(true);
   const [name, setName] = useState('');
   const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
@@ -62,6 +77,7 @@ const Assets = ({
 
   useEffect(() => {
     get_orders_for_tab();
+    getAllAssets();
   }, []);
 
   const randerItem = ({index, item}) => {
@@ -83,7 +99,7 @@ const Assets = ({
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}> {item?.Order_Type}</Text>
+          <Text style={styles.boxText1}> {item?.Location_ID}</Text>
         </View>
         <View
           style={{
@@ -91,15 +107,7 @@ const Assets = ({
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>{item?.vendor}</Text>
-        </View>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <Text style={styles.boxText1}>{item?.Status}</Text>
+          <Text style={styles.boxText1}>{item?.Circuit_ID}</Text>
         </View>
 
         <View
@@ -109,9 +117,7 @@ const Assets = ({
             borderLeftWidth: 2,
           }}>
           <Text style={styles.boxText1}>
-            {item?.Initiation_Date
-              ? moment(item.Initiation_Date).format('DD-MM-YYYY')
-              : '--'}
+            {item?.Branch_ID ? item.Branch_ID : '--'}
             {/* {moment(item.Initiation_Date).format('DD-MM-YYYY')} */}
           </Text>
         </View>
@@ -121,9 +127,7 @@ const Assets = ({
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>
-            {item?.Inventory_ID.substr(1, 10)}..
-          </Text>
+          <Text style={styles.boxText1}>{item?.Vendor}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -162,7 +166,7 @@ const Assets = ({
             </View>
           </View>
           <View style={styles.searchViewRight}>
-            <Text style={{fontWeight: 'bold'}}>{ordersForTab.length}</Text>
+            <Text style={{fontWeight: 'bold'}}>{allAssets.length}</Text>
             <Text style={{fontWeight: 'bold'}}>Records</Text>
           </View>
         </View>
@@ -240,15 +244,15 @@ const Assets = ({
         <View style={{...styles.tableRow}}>
           <TouchableOpacity
             onPress={() => {
-              if (orderType) {
-                setOrderType(!orderType);
+              if (siteId) {
+                setSiteId(!siteId);
                 dispatch({
-                  type: SORT_BY_ORDER_TYPE_ASC,
+                  type: ALL_ASSETS_SITE_ID_OR_LOCATION_ID_ASC,
                 });
               } else {
-                setOrderType(!orderType);
+                setSiteId(!siteId);
                 dispatch({
-                  type: SORT_BY_ORDER_TYPE_DES,
+                  type: ALL_ASSETS_SITE_ID_OR_LOCATION_ID_DES,
                 });
               }
             }}
@@ -258,10 +262,74 @@ const Assets = ({
               justifyContent: 'space-around',
               alignItems: 'center',
             }}>
-            <Text style={{...styles.boxText, color: 'white'}}>Type</Text>
+            <Text style={{...styles.boxText, color: 'white'}}>Site ID</Text>
             <Text style={{marginTop: 1, marginRight: 3}}>
               <AntDesign
-                name={orderType ? 'caretup' : 'caretdown'}
+                name={siteId ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (circuitId) {
+                setCircuitId(!circuitId);
+                dispatch({
+                  type: ALL_ASSETS_CIRCUIT_ID_ASC,
+                });
+              } else {
+                setCircuitId(!circuitId);
+                dispatch({
+                  type: ALL_ASSETS_CIRCUIT_ID_DES,
+                });
+              }
+            }}
+            style={{
+              ...styles.tableRowColum,
+              flexDirection: 'row',
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+              alignItems: 'center',
+              justifyContent: 'space-around',
+            }}>
+            <Text style={{...styles.boxText, color: 'white'}}>Circuit ID</Text>
+            <Text style={{marginTop: 1, marginRight: 3}}>
+              <AntDesign
+                name={circuitId ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (branchID) {
+                setBranchId(!branchID);
+                dispatch({
+                  type: ALL_ASSETS_BRANCH_ID_ASC,
+                });
+              } else {
+                setBranchId(!branchID);
+                dispatch({
+                  type: ALL_ASSETS_BRANCH_ID_DES,
+                });
+              }
+            }}
+            style={{
+              ...styles.tableRowColum,
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+            }}>
+            <Text style={{...styles.boxText, color: 'white'}}>Branch ID</Text>
+            <Text style={{marginTop: 1, marginRight: 3}}>
+              <AntDesign
+                name={branchID ? 'caretup' : 'caretdown'}
                 size={16}
                 color="white"
               />
@@ -272,121 +340,27 @@ const Assets = ({
               if (vendor) {
                 setVendor(!vendor);
                 dispatch({
-                  type: SORT_BY_VENDOR_ASC,
+                  type: ALL_ASSETS_VENDOR_ASC,
                 });
               } else {
                 setVendor(!vendor);
                 dispatch({
-                  type: SORT_BY_VENDOR_DES,
+                  type: ALL_ASSETS_VENDOR_DES,
                 });
               }
             }}
             style={{
               ...styles.tableRowColum,
-              flexDirection: 'row',
               borderLeftColor: 'white',
               borderLeftWidth: 2,
-              alignItems: 'center',
+              flexDirection: 'row',
               justifyContent: 'space-around',
+              alignItems: 'center',
             }}>
             <Text style={{...styles.boxText, color: 'white'}}>Vendor</Text>
             <Text style={{marginTop: 1, marginRight: 3}}>
               <AntDesign
                 name={vendor ? 'caretup' : 'caretdown'}
-                size={16}
-                color="white"
-              />
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (status) {
-                setStatus(!status);
-                dispatch({
-                  type: SORT_BY_STATUS_ASC,
-                });
-              } else {
-                setStatus(!status);
-                dispatch({
-                  type: SORT_BY_STATUS_DES,
-                });
-              }
-            }}
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-            }}>
-            <Text style={{...styles.boxText, color: 'white'}}>Status</Text>
-            <Text style={{marginTop: 1, marginRight: 3}}>
-              <AntDesign
-                name={status ? 'caretup' : 'caretdown'}
-                size={16}
-                color="white"
-              />
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (dateType) {
-                setDateType(!dateType);
-                dispatch({
-                  type: SORT_BY_DATE_ASC,
-                });
-              } else {
-                setDateType(!dateType);
-                dispatch({
-                  type: SORT_BY_DATE_DES,
-                });
-              }
-            }}
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-            }}>
-            <Text style={{...styles.boxText, color: 'white'}}>Date</Text>
-            <Text style={{marginTop: 1, marginRight: 3}}>
-              <AntDesign
-                name={dateType ? 'caretup' : 'caretdown'}
-                size={16}
-                color="white"
-              />
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (invType) {
-                setInvType(!invType);
-                dispatch({
-                  type: SORT_BY_INV_ID_ASC,
-                });
-              } else {
-                setInvType(!invType);
-                dispatch({
-                  type: SORT_BY_INV_ID_DES,
-                });
-              }
-            }}
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-            }}>
-            <Text style={{...styles.boxText, color: 'white'}}>Inv ID</Text>
-            <Text style={{marginTop: 1, marginRight: 3}}>
-              <AntDesign
-                name={invType ? 'caretup' : 'caretdown'}
                 size={16}
                 color="white"
               />
@@ -402,7 +376,7 @@ const Assets = ({
           </View>
         ) : (
           <>
-            {ordersForTab.length == 0 ? (
+            {allAssets.length == 0 ? (
               <View
                 style={{
                   width: '100%',
@@ -419,7 +393,7 @@ const Assets = ({
                 <View style={styles.table}>
                   <FlatList
                     showsVerticalScrollIndicator={false}
-                    data={ordersForTab}
+                    data={allAssets}
                     keyExtractor={(item, i) => i.toString()}
                     renderItem={(item, i) => randerItem(item)}
                   />
@@ -446,6 +420,7 @@ export default connect(null, {
   getAllCircuitID,
   getAllBrachrID,
   getAllSiteID,
+  getAllAssets,
 })(Assets);
 
 const styles = StyleSheet.create({
@@ -550,14 +525,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   tableRowColum: {
-    width: '20%',
+    width: '25%',
     height: '100%',
     backgroundColor: '#007aff',
     justifyContent: 'center',
     alignItems: 'center',
   },
   tableRowColumLast: {
-    width: '20%',
+    width: '25%',
     marginHorizontal: 2,
     height: 50,
     justifyContent: 'center',
@@ -572,7 +547,7 @@ const styles = StyleSheet.create({
   ///=========data row
   tableRow1: {
     width: '100%',
-    height: 40,
+    height: 55,
 
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -580,7 +555,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   tableRowColum1: {
-    width: '20%',
+    width: '25%',
     height: '100%',
     justifyContent: 'center',
   },

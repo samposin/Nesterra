@@ -20,25 +20,28 @@ export const get_order = id => dispatch => {
     });
 };
 
-export const get_order_details = (inv_Id, setLodding) => dispatch => {
-  // const loca_Id = 'MST0007215';
-  // const inv_Id = 'CZB18062';
-  Axios.get(
-    `${Base_url}/api/GetOrdersAlldetailsByInventoryID?InventoryID=${inv_Id}`,
-  )
-    .then(response => {
-      if (response.data.length > 0) {
-        setLodding(false);
+export const get_order_details =
+  (inv_Id, setLodding, bottomSheetRefdetails) => dispatch => {
+    // const loca_Id = 'MST0007215';
+    // const inv_Id = 'CZB18062';
+    setLodding(true);
+    Axios.get(
+      `${Base_url}/api/GetOrdersAlldetailsByInventoryID?InventoryID=${inv_Id}`,
+    )
+      .then(response => {
+        if (response.data.length > 0) {
+          bottomSheetRefdetails.current.snapToIndex(2);
+          setLodding(false);
 
-        dispatch({
-          type: GET_ORDER_DETAILS,
-          payload: {
-            data: response.data[0],
-          },
-        });
-      }
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
+          dispatch({
+            type: GET_ORDER_DETAILS,
+            payload: {
+              data: response.data[0],
+            },
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };

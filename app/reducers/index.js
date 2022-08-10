@@ -19,6 +19,7 @@ import allCircuitDetails from './AllCircuit/allCircuitDetails';
 import allBranchID from './AllBranchID';
 import allCircuitID from './AllCircuitID';
 import allSiteID from './AllSiteID';
+import allAssets from './Assets';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -39,5 +40,6 @@ const rootReducer = combineReducers({
   allBranchID,
   allCircuitID,
   allSiteID,
+  allAssets,
 });
 export default rootReducer;

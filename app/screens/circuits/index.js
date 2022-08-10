@@ -29,6 +29,7 @@ import {
   ALL_CIRCUIT_SORT_BY_BRANCH_DES,
 } from '../../actions/actionType/AllCircuit';
 import {getAllCircuitDetails} from '../../actions/AllCircuit/allCorcuitDetails';
+import {tostalert, copyText} from '../../components/helper';
 
 const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
   const circuitRef = useRef(null);
@@ -67,6 +68,7 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
         }}
         style={{
           ...styles.tableRow1,
+          height: 55,
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           marginVertical: 1,
         }}>
@@ -76,7 +78,14 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}> {item?.Location_ID}</Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Location_ID);
+
+              tostalert(item.Location_ID);
+            }}>
+            <Text style={styles.boxText1}> {item?.Location_ID}</Text>
+          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -84,7 +93,14 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>{item?.Vendor}</Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Vendor);
+
+              tostalert(item.Vendor);
+            }}>
+            <Text style={styles.boxText1}>{item?.Vendor}</Text>
+          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -92,7 +108,14 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>{item?.Circuit_ID}</Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Circuit_ID);
+
+              tostalert(item.Circuit_ID);
+            }}>
+            <Text style={styles.boxText1}>{item?.Circuit_ID}</Text>
+          </TouchableOpacity>
         </View>
 
         <View
@@ -101,9 +124,16 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>
-            {item?.Branch_ID ? item.Branch_ID : '--'}
-          </Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Branch_ID);
+
+              tostalert(item.Branch_ID);
+            }}>
+            <Text style={styles.boxText1}>
+              {item?.Branch_ID ? item.Branch_ID : '--'}
+            </Text>
+          </TouchableOpacity>
         </View>
       </TouchableOpacity>
     );
@@ -413,10 +443,11 @@ const styles = StyleSheet.create({
   },
   tableRow1: {
     width: '100%',
-    height: 100,
+    paddingVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
+    backgroundColor: 'green',
   },
   tableRowColum: {
     width: '25%',

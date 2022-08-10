@@ -6,8 +6,11 @@ import Imagee from './Imagee';
 import ImageLoder from '../../lodder/imageLodder';
 import {Modal, Portal, Text, Button, Provider} from 'react-native-paper';
 import {Image} from 'moti';
-import {LocationKey} from '../../../key';
+import {LocationKey, PhotoUrl} from '../../../key';
+import {useNavigation} from '@react-navigation/native';
+
 const Pics = () => {
+  const navigation = useNavigation();
   const photo = useSelector(state => state.photo_url.photo_url);
   const [visible, setVisible] = React.useState(false);
   const [imgUrl, setImageUrl] = React.useState('');
@@ -22,13 +25,14 @@ const Pics = () => {
     padding: 15,
   };
   const renderItem = ({item}) => {
-    const url = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=500&maxheight=500&photoreference=${item.photo_reference}&key=${LocationKey}`;
+    const url = `${PhotoUrl}${item.photo_reference}&key=${LocationKey}`;
 
     return (
       <TouchableOpacity
         onPress={() => {
-          setVisible(true);
-          setImageUrl(item.photo_reference);
+          // setVisible(true);
+          // setImageUrl(item.photo_reference);
+          navigation.navigate('BackGroundCorsoul');
         }}
         style={{
           width: '48%',

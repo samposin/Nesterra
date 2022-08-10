@@ -140,12 +140,16 @@ const Orders = ({
       <TouchableOpacity
         onPress={
           () => {
-            setLodding(true);
+            // setLodding(true);
             bottomSheetRef.current.close();
-            if (!lodding) {
-              bottomSheetRefdetails.current.snapToIndex(2);
-            }
-            get_order_details(item.Inventory_ID, setLodding);
+            // if (!lodding) {
+            //   bottomSheetRefdetails.current.snapToIndex(2);
+            // }
+            get_order_details(
+              item.Inventory_ID,
+              setLodding,
+              bottomSheetRefdetails,
+            );
           }
           // navigation.navigate('OrderDetails', {
           //   inv_Id: item.Inventory_ID,
@@ -168,7 +172,7 @@ const Orders = ({
             onLongPress={() => {
               copyText(item.Order_Type);
 
-              tostalert(item.Order_Type, 'black', toast);
+              tostalert(item.Order_Type);
             }}>
             <Text style={styles.boxText1}> {item?.Order_Type}</Text>
           </TouchableOpacity>
@@ -184,7 +188,7 @@ const Orders = ({
           <TouchableOpacity
             onLongPress={() => {
               copyText(item.vendor);
-              tostalert(item.vendor, 'black', toast);
+              tostalert(item.vendor);
             }}>
             <Text style={styles.boxText1}>{item?.vendor}</Text>
           </TouchableOpacity>
@@ -199,7 +203,7 @@ const Orders = ({
           <TouchableOpacity
             onLongPress={() => {
               copyText(item.Status);
-              tostalert(item.Status, 'black', toast);
+              tostalert(item.Status);
             }}>
             <Text style={styles.boxText1}>{item?.Status}</Text>
           </TouchableOpacity>
@@ -214,7 +218,7 @@ const Orders = ({
           <TouchableOpacity
             onLongPress={() => {
               copyText(item.Inventory_ID);
-              tostalert(item.Inventory_ID, 'black', toast);
+              tostalert(item.Inventory_ID);
             }}>
             <Text style={styles.boxText1}>{item?.Inventory_ID}</Text>
           </TouchableOpacity>
@@ -229,11 +233,7 @@ const Orders = ({
           <TouchableOpacity
             onLongPress={() => {
               copyText(moment(item.Initiation_Date).format('DD-MM-YYYY'));
-              tostalert(
-                moment(item.Initiation_Date).format('DD-MM-YYYY'),
-                'black',
-                toast,
-              );
+              tostalert(moment(item.Initiation_Date).format('DD-MM-YYYY'));
             }}>
             <Text style={styles.boxText1}>
               {item?.Initiation_Date

@@ -8,8 +8,8 @@ export const tostalert = (msg, color, toast) => {
   // // const toast = useToast();
   Snackbar.show({
     text: `Copied: ${msg}`,
-    textColor: 'black',
-    backgroundColor: '#f4f4f4',
+    textColor: 'white',
+    backgroundColor: '#007aff',
     marginBottom: 100,
   });
   // return toast.show({

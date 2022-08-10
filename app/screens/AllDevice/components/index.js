@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import moment from 'moment';
 import OrderLoder from '../../../components/lodder/OrderLoder';
-const BottomSheetView = ({deviceRef}) => {
+const BottomSheetView = ({deviceRef, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.allDeviceDetails);
@@ -50,7 +50,7 @@ const BottomSheetView = ({deviceRef}) => {
         </TouchableOpacity>
       </View>
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>
-        {Object.keys(item).length > 0 ? (
+        {!lodding ? (
           <>
             {/* ===================== */}
             {item?.Device_Name ? (

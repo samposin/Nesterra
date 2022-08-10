@@ -8,13 +8,12 @@ import {
   FlatList,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
-import {useToast} from 'native-base';
 
 import {connect, useDispatch, useSelector} from 'react-redux';
 
 import OrderLoder from '../../components/lodder/OrderLoder';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+tostalert;
 import {getAllDevice} from '../../actions/AllDevice';
 import {
   ALL_DEVICES_SORT_BY_ID_ASC,
@@ -51,8 +50,6 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
     getAllDevice();
   }, []);
 
-  const toast = useToast();
-
   const randerItem = ({index, item}) => {
     return (
       <TouchableOpacity
@@ -61,7 +58,7 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
           // navigation.navigate('AllDevicesDetails', {
           //   inv_Id: item.ID,
           // })
-          // console.log('snap');
+          console.log('snap');
           const id = item.ID;
           getAllDeviceDetails(id, setLodding, deviceRef);
 
@@ -74,56 +71,65 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           marginVertical: 1,
         }}>
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(item.Device_Type);
-            tostalert('Text copied to Clipboard ', 'black', toast);
-          }}
+        <View
           style={{
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}> {item?.Device_Type}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(item.Device_Vendor);
-            tostalert('Text copied to Clipboard ', 'black', toast);
-          }}
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <Text style={styles.boxText1}>{item?.Device_Vendor}</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Device_Type);
 
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(item.Device_Status);
-            tostalert('Text copied to Clipboard ', 'black', toast);
-          }}
+              tostalert(item.Device_Type);
+            }}>
+            <Text style={styles.boxText1}> {item?.Device_Type}</Text>
+          </TouchableOpacity>
+        </View>
+        <View
           style={{
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>{item?.Device_Status}</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Device_Vendor);
+              tostalert(item.Device_Vendor);
+            }}>
+            <Text style={styles.boxText1}>{item?.Device_Vendor}</Text>
+          </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(item.ID);
-            tostalert('Text copied to  ', 'red', toast);
-          }}
+        <View
           style={{
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>{item?.ID}</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Device_Status);
+              tostalert(item.Device_Status);
+            }}>
+            <Text style={styles.boxText1}>{item?.Device_Status}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+          }}>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.ID);
+              tostalert(item.ID);
+            }}>
+            <Text style={styles.boxText1}>{item?.ID}</Text>
+          </TouchableOpacity>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -317,7 +323,7 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
           </>
         )}
         {/* ==============Summary View=========== */}
-        <BottomSheetView deviceRef={deviceRef} />
+        <BottomSheetView deviceRef={deviceRef} lodding={lodding} />
         {lodding && <Lodder lodding={lodding} />}
       </SafeAreaView>
     </>

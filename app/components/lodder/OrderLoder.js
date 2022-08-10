@@ -15,7 +15,7 @@ const OrderLoder = ({lodding}) => {
                 flexDirection: 'row',
                 alignItems: 'center',
                 marginTop: 20,
-                paddingLeft: 20,
+                paddingLeft: 10,
                 paddingRight: 20,
               }}>
               <View
