@@ -9,13 +9,14 @@ import {Image} from 'moti';
 import {LocationKey, PhotoUrl} from '../../../key';
 import {useNavigation} from '@react-navigation/native';
 
-const Pics = () => {
+const Pics = ({picRef}) => {
   const navigation = useNavigation();
   const photo = useSelector(state => state.photo_url.photo_url);
   const [visible, setVisible] = React.useState(false);
   const [imgUrl, setImageUrl] = React.useState('');
   // const showModal = () => setVisible(true);
   // const hideModal = () => setVisible(false);
+  console.log(picRef);
   const containerStyle = {
     backgroundColor: 'white',
     height: 300,
@@ -32,7 +33,8 @@ const Pics = () => {
         onPress={() => {
           // setVisible(true);
           // setImageUrl(item.photo_reference);
-          navigation.navigate('BackGroundCorsoul');
+          // navigation.navigate('BackGroundCorsoul');
+          // picRef.current.snapToIndex(2);
         }}
         style={{
           width: '48%',

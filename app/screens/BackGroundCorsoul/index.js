@@ -6,10 +6,12 @@ import {
   Image,
   Animated,
   ImageBackground,
+  SafeAreaView,
   Dimensions,
   ScrollView,
   TouchableOpacity,
   TouchableHighlight,
+  StatusBar,
 } from 'react-native';
 
 import ImageZoom from 'react-native-image-pan-zoom';
@@ -27,7 +29,9 @@ class BackGroundCorsoul extends Component {
     this.state = {
       selectedIndex: 0,
     };
+    // console.log(this.props.navigation);
   }
+
   images = this.props.photo;
   componentDidMount = () => {
     // console.log(this.data);
@@ -85,8 +89,26 @@ class BackGroundCorsoul extends Component {
     const {imag} = this.props;
     const {selectedIndex} = this.state;
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={{marginTop: StatusBar.currentHeight}}>
         <View style={styles.one}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.goBack()}
+            style={{
+              width: 28,
+              zIndex: 30,
+              height: 28,
+              position: 'absolute',
+              right: 20,
+              top: 20,
+              backgroundColor: '#007aff',
+              borderRadius: 14,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text>
+              <Entypo name="cross" size={20} color="white" />
+            </Text>
+          </TouchableOpacity>
           <ScrollView
             horizontal={true}
             pagingEnabled={true}
@@ -233,7 +255,7 @@ class BackGroundCorsoul extends Component {
             <Text>prev</Text>
           </TouchableOpacity>
         )} */}
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -245,8 +267,7 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps)(BackGroundCorsoul);
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: '100%',
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

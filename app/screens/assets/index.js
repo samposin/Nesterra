@@ -16,20 +16,7 @@ import {get_orders_for_tab} from '../../actions/orderFotTab';
 import {connect, useDispatch, useSelector} from 'react-redux';
 //
 
-import moment from 'moment';
 import OrderLoder from '../../components/lodder/OrderLoder';
-import {
-  SORT_BY_VENDOR_ASC,
-  SORT_BY_VENDOR_DES,
-  SORT_BY_STATUS_ASC,
-  SORT_BY_STATUS_DES,
-  SORT_BY_DATE_ASC,
-  SORT_BY_DATE_DES,
-  SORT_BY_INV_ID_ASC,
-  SORT_BY_INV_ID_DES,
-  SORT_BY_ORDER_TYPE_ASC,
-  SORT_BY_ORDER_TYPE_DES,
-} from '../../actions/actionType/action.OrdersForTab';
 
 import BottomSheetView1 from './components/BottomSheetView1';
 import {getAllBrachrID} from '../../actions/AllBranchID';
@@ -37,7 +24,6 @@ import {getAllCircuitID} from '../../actions/AllCircuitID';
 import {getAllSiteID} from '../../actions/AllSiteID';
 import {getAllAssets} from '../../actions/Assets';
 import {
-  ALL_ASSETS,
   ALL_ASSETS_BRANCH_ID_ASC,
   ALL_ASSETS_BRANCH_ID_DES,
   ALL_ASSETS_CIRCUIT_ID_ASC,
@@ -47,15 +33,19 @@ import {
   ALL_ASSETS_VENDOR_ASC,
   ALL_ASSETS_VENDOR_DES,
 } from '../../actions/actionType/Assets';
+import BottomSheetView from './BottomSheet';
+import {get_order_details} from '../../actions/order';
 const Assets = ({
   get_orders_for_tab,
   getAllCircuitID,
   getAllBrachrID,
   getAllSiteID,
   getAllAssets,
+  get_order_details,
   navigation,
 }) => {
   const bottomSheetRef = useRef(null);
+  const bottomSheetRefDetails = useRef(null);
   const {ordersForTab} = useSelector(state => state.ordersForTab);
   const {allAssets} = useSelector(state => state.allAssets);
   //console.log(ordersForTab[0]);
@@ -73,20 +63,30 @@ const Assets = ({
   const [name, setName] = useState('');
   const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
   const [lodding, setLodding] = useState(false);
+  const [lodding1, setLodding1] = useState(false);
   const [diplayName, setDiplayName] = useState('');
 
   useEffect(() => {
+    setLodding1(true);
     get_orders_for_tab();
-    getAllAssets();
+    getAllAssets(setLodding1);
   }, []);
 
   const randerItem = ({index, item}) => {
     return (
       <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('OrderDetails', {
-            inv_Id: item.Inventory_ID,
-          })
+        onPress={
+          () => {
+            get_order_details(
+              item.Inventory_ID,
+              setLodding,
+              bottomSheetRefDetails,
+            );
+            bottomSheetRefDetails.current.snapToIndex(2);
+          }
+          // navigation.navigate('OrderDetails', {
+          //   inv_Id: item.Inventory_ID,
+          // })
         }
         style={{
           ...styles.tableRow1,
@@ -370,7 +370,7 @@ const Assets = ({
 
         {/* ======================Table  Header======================= */}
         {/* ==============Services Category============== */}
-        {isLoding ? (
+        {lodding1 ? (
           <View style={styles.loderView}>
             <OrderLoder />
           </View>
@@ -409,6 +409,10 @@ const Assets = ({
           bottomSheetRef={bottomSheetRef}
           bottomSheetDisplay={bottomSheetDisplay}
         />
+        <BottomSheetView
+          lodding={lodding}
+          bottomSheetRefDetails={bottomSheetRefDetails}
+        />
       </SafeAreaView>
       {/* {selectedComponent()} */}
     </>
@@ -421,6 +425,7 @@ export default connect(null, {
   getAllBrachrID,
   getAllSiteID,
   getAllAssets,
+  get_order_details,
 })(Assets);
 
 const styles = StyleSheet.create({

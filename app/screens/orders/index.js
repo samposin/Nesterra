@@ -237,7 +237,7 @@ const Orders = ({
             }}>
             <Text style={styles.boxText1}>
               {item?.Initiation_Date
-                ? moment(item.Initiation_Date).format('DD-MM-YYYY')
+                ? moment(item.Initiation_Date).format('DD-MM-YY')
                 : '--'}
               {/* {moment(item.Initiation_Date).format('DD-MM-YYYY')} */}
             </Text>

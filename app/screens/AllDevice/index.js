@@ -58,7 +58,7 @@ const AllDevice = ({getAllDevice, getAllDeviceDetails, navigation}) => {
           // navigation.navigate('AllDevicesDetails', {
           //   inv_Id: item.ID,
           // })
-          console.log('snap');
+          // console.log('snap');
           const id = item.ID;
           getAllDeviceDetails(id, setLodding, deviceRef);
 

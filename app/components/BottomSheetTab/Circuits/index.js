@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
-import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
+import {BottomSheetScrollView, BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
@@ -14,8 +14,9 @@ import {
   SORT_BY_VENDOR_ASC,
   SORT_BY_VENDOR_DES,
 } from '../../../actions/actionType/circuitInventory.type';
+import {CIRCUIT_DETAILS_EXPLORE} from '../../../actions/actionType/CircuitDetailsExplore';
 
-const Circuits = ({}) => {
+const Circuits = ({cirCuitRefExplore}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [circuitType, setCircuitType] = useState(true);
@@ -23,7 +24,61 @@ const Circuits = ({}) => {
   const [categoryType, setCategoryType] = useState(true);
   const [subCat1Type, setsubCat1Type] = useState(true);
   const {cirCuitInventory} = useSelector(state => state.circuitInventory);
-  // console.log(cirCuitInventory);
+  const randerItem = ({index, item}) => {
+    // console.log(i, item);
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          //  navigation.navigate('CircuitsDetails', {item})
+          dispatch({
+            type: CIRCUIT_DETAILS_EXPLORE,
+            payload: {
+              data: item,
+            },
+          });
+          cirCuitRefExplore.current.snapToIndex(2);
+        }}
+        style={{
+          width: '100%',
+          height: 40,
+          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+          flexDirection: 'row',
+          marginVertical: 1,
+        }}>
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            borderLeftColor: 'white',
+          }}>
+          <Text style={styles.boxText1}>{item.Circuit_ID}</Text>
+        </View>
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+          }}>
+          <Text style={styles.boxText1}>{item.Vendor}</Text>
+        </View>
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+          }}>
+          <Text style={styles.boxText1}>{item.Category}</Text>
+        </View>
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+          }}>
+          <Text style={styles.boxText1}>{item.SubCat_1}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
   // console.log(cirCuitInventory.length);
   return (
     <>
@@ -174,15 +229,22 @@ const Circuits = ({}) => {
             </View>
             {/* ==============Table Header============== */}
             {/* ==============Table Body============== */}
-            <BottomSheetScrollView
+            {/* <BottomSheetScrollView
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.contentContainer}>
               {cirCuitInventory.map((item, i) => {
                 return (
                   <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate('CircuitsDetails', {item})
-                    }
+                    onPress={() => {
+                      //  navigation.navigate('CircuitsDetails', {item})
+                      dispatch({
+                        type: CIRCUIT_DETAILS_EXPLORE,
+                        payload: {
+                          data: item,
+                        },
+                      });
+                      cirCuitRefExplore.current.snapToIndex(2);
+                    }}
                     key={i}
                     style={{
                       width: '100%',
@@ -226,7 +288,12 @@ const Circuits = ({}) => {
                 );
               })}
               <View style={{height: 80}}></View>
-            </BottomSheetScrollView>
+            </BottomSheetScrollView> */}
+            <BottomSheetFlatList
+              data={cirCuitInventory}
+              keyExtractor={(item, i) => i.toString()}
+              renderItem={(item, i) => randerItem(item)}
+            />
             {/* ==============Table Body============== */}
           </>
         )}
@@ -344,4 +411,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   ///========Second table
+  //=====
+  contentContainer: {
+    backgroundColor: 'white',
+  },
 });

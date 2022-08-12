@@ -365,4 +365,9 @@ const styles = StyleSheet.create({
     top: Platform.OS === 'ios' ? 80 : 80,
     paddingHorizontal: 10,
   },
+  chipsScrollView: {
+    position: 'absolute',
+    top: Platform.OS === 'ios' ? 80 : 80,
+    paddingHorizontal: 10,
+  },
 });

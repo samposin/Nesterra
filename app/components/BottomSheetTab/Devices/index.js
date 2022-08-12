@@ -15,8 +15,8 @@ import {
   SORT_BY_DEVICE_VENDOR_ASC,
   SORT_BY_DEVICE_VENDOR_DES,
 } from '../../../actions/actionType/devicesInventory.type';
-
-const Devices = ({}) => {
+import {DEVICE_DETAILS_FOR_EXPLORE} from '../../../actions/actionType/DeviceDetailsExplore';
+const Devices = ({deviceRefExplore}) => {
   const {devicesInventory} = useSelector(state => state.devicesInventory);
   // console.log(devicesInventory);
   // console.log(devicesInventory.length);
@@ -183,9 +183,24 @@ const Devices = ({}) => {
               {devicesInventory.map((item, i) => {
                 return (
                   <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate('DevicesDetails', {item})
-                    }
+                    onPress={() => {
+                      // console.log(item);
+                      dispatch({
+                        type: DEVICE_DETAILS_FOR_EXPLORE,
+                        payload: {
+                          data: item,
+                        },
+                      });
+                      // cirCuitRefExplore.current.snapToIndex(2);
+                      // dispatch({
+                      //   type: DEVICE_DETAILS_EXPLORE,
+                      //   payload: {
+                      //     data: item,
+                      //   },
+                      // });
+                      deviceRefExplore.current.snapToIndex(2);
+                      // navigation.navigate('DevicesDetails', {item})
+                    }}
                     key={i}
                     style={{
                       width: '100%',

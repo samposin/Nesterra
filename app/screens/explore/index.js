@@ -54,11 +54,15 @@ import Lodder from '../../components/lodder';
 import {get_all_devices_inventory} from '../../actions/devicesInventory';
 import {getInventoryCircuit} from '../../actions/circuitInventory';
 import Voice from '@react-native-community/voice';
+import CircuitDetailsExplore from '../../components/BottomSheetTab/Circuits/CircuitDetailsExplore';
+import DeviceDetailsExplore from '../../components/BottomSheetTab/Devices/DeviceDetailsExplore';
+
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const ASPECT_RATIO = SCREEN_WIDTH / SCREEN_HEIGHT;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
 const Explore = ({
   navigation,
   get_coordinates,
@@ -169,6 +173,8 @@ const Explore = ({
   // console.log(coordinates);
 
   const mapRef = useRef(null);
+
+  // const picRef = useRef(null);
   const pointStart = useRef(null);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -358,7 +364,11 @@ const Explore = ({
   };
   // added by Dildar Khan start
   const bottomSheetRef = useRef(null);
+
   const bottomSheetRefImage = useRef(null);
+  const cirCuitRefExplore = useRef(null);
+  const deviceRefExplore = useRef(null);
+  const orderRefExplore = useRef(null);
 
   const handleSheetChanges = useCallback(index => {
     console.log('handleSheetChanges', index);
@@ -569,7 +579,7 @@ const Explore = ({
 
                     const lat = item.Latitude;
                     const lng = item.Longitude;
-
+                    // bottomSheetRef.current.snapToIndex(2);
                     setLatLng({lat, lng});
                     // animateToRegion(lat, lng);
                     fetchNearestPlacesFromGoogle(lat, lng);
@@ -1075,14 +1085,26 @@ const Explore = ({
         {/* =================Category=============== */}
       </View>
       {/* =================BottomSheetView=============== */}
-      <BottomSheetView bottomSheetRef={bottomSheetRef} catShow={setCatShow} />
-      <BottomSheetViewImage
+      <BottomSheetView
+        bottomSheetRef={bottomSheetRef}
+        catShow={setCatShow}
+        cirCuitRefExplore={cirCuitRefExplore}
+        deviceRefExplore={deviceRefExplore}
+      />
+
+      {/* <BottomSheetViewImage
         bottomSheetRefImage={bottomSheetRefImage}
         catShow={setCatShow}
         isLoading={isLoading}
         setIsLoading={setIsLoading}
-      />
+      /> */}
       {/* =================Setting=============== */}
+      {/* =================DetailsCircuit=============== */}
+      <CircuitDetailsExplore cirCuitRefExplore={cirCuitRefExplore} />
+
+      {/* =================DeviceDetailsExplore=============== */}
+      <DeviceDetailsExplore deviceRefExplore={deviceRefExplore} />
+      {/* =================CircuitDetailsExpolore=============== */}
       {settingView ? (
         <Setting
           settingView={settingView}

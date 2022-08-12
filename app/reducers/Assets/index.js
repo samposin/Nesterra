@@ -70,16 +70,29 @@ export default (state = initialState, action) => {
     case ALL_ASSETS_VENDOR_ASC:
       const data2 = [...state.allAssets1];
       const vendorAsc = data2.sort((a, b) => {
-        let fa = a.vendor.toLowerCase(),
-          fb = b.vendor.toLowerCase();
+        // let fa = a.vendor.toLowerCase(),
+        //   fb = b.vendor.toLowerCase();
 
-        if (fa < fb) {
-          return -1;
-        }
-        if (fa > fb) {
+        // if (fa < fb) {
+        //   return -1;
+        // }
+        // if (fa > fb) {
+        //   return 1;
+        // }
+        // return 0;
+        if (a.Vendor === null) {
           return 1;
         }
-        return 0;
+
+        if (b.Vendor === null) {
+          return -1;
+        }
+
+        if (a.Vendor === b.Vendor) {
+          return 0;
+        }
+
+        return a.Vendor < b.Vendor ? -1 : 1;
       });
 
       return {
@@ -91,16 +104,29 @@ export default (state = initialState, action) => {
       const data3 = [...state.allAssets1];
 
       const vendorDes = data3.sort((a, b) => {
-        let fa = a.vendor.toLowerCase(),
-          fb = b.vendor.toLowerCase();
+        // let fa = a.Vendor.toLowerCase(),
+        //   fb = b.Vendor.toLowerCase();
 
-        if (fb < fa) {
-          return -1;
-        }
-        if (fb > fa) {
+        // if (fb < fa) {
+        //   return -1;
+        // }
+        // if (fb > fa) {
+        //   return 1;
+        // }
+        // return 0;
+        if (a.Vendor === null) {
           return 1;
         }
-        return 0;
+
+        if (b.Vendor === null) {
+          return -1;
+        }
+
+        if (a.Vendor === b.Vendor) {
+          return 0;
+        }
+
+        return a.Vendor < b.Vendor ? 1 : -1;
       });
 
       return {
@@ -111,16 +137,29 @@ export default (state = initialState, action) => {
     case ALL_ASSETS_BRANCH_ID_ASC:
       const data4 = [...state.allAssets1];
       const catrAsc = data4.sort((a, b) => {
-        let fa = a.Branch_ID.toLowerCase(),
-          fb = b.Branch_ID.toLowerCase();
+        // let fa = a.Branch_ID.toLowerCase(),
+        //   fb = b.Branch_ID.toLowerCase();
 
-        if (fa < fb) {
-          return -1;
-        }
-        if (fa > fb) {
+        // if (fa < fb) {
+        //   return -1;
+        // }
+        // if (fa > fb) {
+        //   return 1;
+        // }
+        // return 0;
+        if (a.Branch_ID === null) {
           return 1;
         }
-        return 0;
+
+        if (b.Branch_ID === null) {
+          return -1;
+        }
+
+        if (a.Branch_ID === b.Branch_ID) {
+          return 0;
+        }
+
+        return a.Branch_ID < b.Branch_ID ? -1 : 1;
       });
 
       return {
@@ -132,16 +171,29 @@ export default (state = initialState, action) => {
       const data5 = [...state.allAssets1];
 
       const catDes = data5.sort((a, b) => {
-        let fa = a.Branch_ID.toLowerCase(),
-          fb = b.Branch_ID.toLowerCase();
+        // let fa = a.Branch_ID.toLowerCase(),
+        //   fb = b.Branch_ID.toLowerCase();
 
-        if (fb < fa) {
-          return -1;
-        }
-        if (fb > fa) {
+        // if (fb < fa) {
+        //   return -1;
+        // }
+        // if (fb > fa) {
+        //   return 1;
+        // }
+        // return 0;
+        if (a.Branch_ID === null) {
           return 1;
         }
-        return 0;
+
+        if (b.Branch_ID === null) {
+          return -1;
+        }
+
+        if (a.Branch_ID === b.Branch_ID) {
+          return 0;
+        }
+
+        return a.Branch_ID < b.Branch_ID ? 1 : -1;
       });
 
       return {

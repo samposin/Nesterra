@@ -14,11 +14,17 @@ import Circuits from '../../components/BottomSheetTab/Circuits';
 import Devices from '../../components/BottomSheetTab/Devices';
 import Orders from '../../components/BottomSheetTab/Orders';
 
-const BottomSheetView = ({bottomSheetRef, catShow}) => {
+const BottomSheetView = ({
+  bottomSheetRef,
+  deviceRefExplore,
+  cirCuitRefExplore,
+  catShow,
+}) => {
+  // console.log(cirCuitRef, bottomSheetRef,picRef );
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
   const location_data = useSelector(state => state.location_details.data);
   const myRef = useRef(null);
-
+  // console.log(picRef, 'picRef');
   const data = [
     {id: 0, name: 'INFO', isActive: true},
     {id: 1, name: 'PICS', isActive: false},
@@ -54,10 +60,10 @@ const BottomSheetView = ({bottomSheetRef, catShow}) => {
         return <Hours />;
         break;
       case item == 3:
-        return <Circuits />;
+        return <Circuits cirCuitRefExplore={cirCuitRefExplore} />;
         break;
       case item == 4:
-        return <Devices />;
+        return <Devices deviceRefExplore={deviceRefExplore} />;
         break;
       case item == 5:
         return <Orders />;
