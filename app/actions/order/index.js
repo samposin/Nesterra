@@ -21,16 +21,18 @@ export const get_order = id => dispatch => {
 };
 
 export const get_order_details =
-  (inv_Id, setLodding, bottomSheetRefdetails) => dispatch => {
+  (inv_Id, setLodding, orderRefExplore) => dispatch => {
     // const loca_Id = 'MST0007215';
     // const inv_Id = 'CZB18062';
+    // console.log(inv_Id, setLodding, orderRefExplore);
     setLodding(true);
     Axios.get(
       `${Base_url}/api/GetOrdersAlldetailsByInventoryID?InventoryID=${inv_Id}`,
     )
       .then(response => {
         if (response.data.length > 0) {
-          bottomSheetRefdetails.current.snapToIndex(2);
+          console.log(response.data);
+          orderRefExplore.current.snapToIndex(2);
           setLodding(false);
 
           dispatch({

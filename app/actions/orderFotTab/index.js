@@ -4,7 +4,7 @@ import {Base_url} from '../../key';
 
 export const get_orders_for_tab = () => dispatch => {
   Axios.get(
-    `${Base_url}/api/GetAllOrdersCustomDetails?OrderType=Disco&SmartSite=0&Tangoe=0&Carrier=0`,
+    `${Base_url}/api/GetAllOrdersCustomDetails?OrderType=0&SmartSite=0&Tangoe=0&Carrier=0&status=0&vendor=0&date=0`,
   )
     .then(response => {
       //   console.log(response);

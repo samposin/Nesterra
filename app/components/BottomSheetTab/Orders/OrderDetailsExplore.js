@@ -1,16 +1,17 @@
 import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
 import React, {useMemo} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
-
+import OrderLoder from '../../lodder/OrderLoder';
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import moment from 'moment';
-import OrderLoder from '../../../components/lodder/OrderLoder';
-const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding}) => {
+
+const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   // const {inv_Id} = route.params;
-  const {item} = useSelector(state => state.orderDetails);
-  // console.log(item);
+  const {item} = useSelector(state => state.orderDetailsExplore);
+
+  console.log(item);
 
   return (
     <BottomSheet
@@ -21,7 +22,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding}) => {
       }}
       enabledInnerScrolling={true}
       enabledContentGestureInteraction={false}
-      ref={bottomSheetRefdetails}
+      ref={orderRefExplore}
       index={-1}
       snapPoints={snapPoints}
       enablePanDownToClose={true}
@@ -34,7 +35,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding}) => {
           alignItems: 'flex-end',
           paddingRight: 25,
         }}>
-        <TouchableOpacity onPress={() => bottomSheetRefdetails.current.close()}>
+        <TouchableOpacity onPress={() => orderRefExplore.current.close()}>
           <View
             style={{
               width: 24,
@@ -50,7 +51,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding}) => {
           </View>
         </TouchableOpacity>
       </View>
-      <BottomSheetScrollView style={{paddingHorizontal: 10, marginTop: 10}}>
+      <BottomSheetScrollView style={{paddingHorizontal: 10}}>
         {!lodding ? (
           <>
             {/* ===================== */}
@@ -273,7 +274,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding}) => {
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(item.FOC_Date).format('DD-MM-YYYY')}
+                    {moment(item.FOC_Date).format('MM-DD-YY')}
                   </Text>
                 </View>
               </View>
@@ -516,7 +517,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding}) => {
   );
 };
 
-export default BottomSheetViewDetails;
+export default OrderDetailsExplore;
 
 const styles = StyleSheet.create({
   container: {

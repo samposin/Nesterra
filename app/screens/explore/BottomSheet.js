@@ -18,6 +18,7 @@ const BottomSheetView = ({
   bottomSheetRef,
   deviceRefExplore,
   cirCuitRefExplore,
+  orderRefExplore,
   catShow,
 }) => {
   // console.log(cirCuitRef, bottomSheetRef,picRef );
@@ -66,7 +67,7 @@ const BottomSheetView = ({
         return <Devices deviceRefExplore={deviceRefExplore} />;
         break;
       case item == 5:
-        return <Orders />;
+        return <Orders orderRefExplore={orderRefExplore} />;
         break;
     }
   };

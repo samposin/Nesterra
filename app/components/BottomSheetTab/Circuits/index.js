@@ -15,6 +15,7 @@ import {
   SORT_BY_VENDOR_DES,
 } from '../../../actions/actionType/circuitInventory.type';
 import {CIRCUIT_DETAILS_EXPLORE} from '../../../actions/actionType/CircuitDetailsExplore';
+import {copyText, tostalert} from '../../helper';
 
 const Circuits = ({cirCuitRefExplore}) => {
   const navigation = useNavigation();
@@ -24,6 +25,7 @@ const Circuits = ({cirCuitRefExplore}) => {
   const [categoryType, setCategoryType] = useState(true);
   const [subCat1Type, setsubCat1Type] = useState(true);
   const {cirCuitInventory} = useSelector(state => state.circuitInventory);
+
   const randerItem = ({index, item}) => {
     // console.log(i, item);
     return (
@@ -40,7 +42,7 @@ const Circuits = ({cirCuitRefExplore}) => {
         }}
         style={{
           width: '100%',
-          height: 40,
+          height: 50,
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           flexDirection: 'row',
           marginVertical: 1,
@@ -50,7 +52,14 @@ const Circuits = ({cirCuitRefExplore}) => {
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
           }}>
-          <Text style={styles.boxText1}>{item.Circuit_ID}</Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Circuit_ID);
+
+              tostalert(item.Circuit_ID);
+            }}>
+            <Text style={styles.boxText1}>{item.Circuit_ID}</Text>
+          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -58,7 +67,14 @@ const Circuits = ({cirCuitRefExplore}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>{item.Vendor}</Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Vendor);
+
+              tostalert(item.Vendor);
+            }}>
+            <Text style={styles.boxText1}>{item.Vendor}</Text>
+          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -66,7 +82,14 @@ const Circuits = ({cirCuitRefExplore}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>{item.Category}</Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Category);
+
+              tostalert(item.Category);
+            }}>
+            <Text style={styles.boxText1}>{item.Category}</Text>
+          </TouchableOpacity>
         </View>
         <View
           style={{
@@ -74,7 +97,14 @@ const Circuits = ({cirCuitRefExplore}) => {
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={styles.boxText1}>{item.SubCat_1}</Text>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.SubCat_1);
+
+              tostalert(item.SubCat_1);
+            }}>
+            <Text style={styles.boxText1}>{item.SubCat_1}</Text>
+          </TouchableOpacity>
         </View>
       </TouchableOpacity>
     );

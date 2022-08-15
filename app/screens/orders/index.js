@@ -37,7 +37,7 @@ const Category = [
   {
     id: 0,
     name: 'Order Type',
-    value: 'GetCarrierNumber',
+    value: 'GetOrderTypeNumber',
     disValue: 'OrderType',
     search: 'Order Type',
     active: false,
@@ -70,9 +70,9 @@ const Category = [
   {
     id: 4,
     name: 'Carrier',
-    value: 'GetTangoeNumber',
+    value: 'GetCarrierNumber',
     disValue: 'Carrier',
-    search: 'Status',
+    search: 'Carrier',
     active: false,
   },
 ];
@@ -232,12 +232,12 @@ const Orders = ({
           }}>
           <TouchableOpacity
             onLongPress={() => {
-              copyText(moment(item.Initiation_Date).format('DD-MM-YYYY'));
-              tostalert(moment(item.Initiation_Date).format('DD-MM-YYYY'));
+              copyText(moment(item.Initiation_Date).format('MM-DD-YY'));
+              tostalert(moment(item.Initiation_Date).format('MM-DD-YY'));
             }}>
             <Text style={styles.boxText1}>
               {item?.Initiation_Date
-                ? moment(item.Initiation_Date).format('DD-MM-YY')
+                ? moment(item.Initiation_Date).format('MM-DD-YY')
                 : '--'}
               {/* {moment(item.Initiation_Date).format('DD-MM-YYYY')} */}
             </Text>
@@ -262,22 +262,24 @@ const Orders = ({
 
             alignItems: 'center',
           }}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('Circuits');
-            }}
-            style={styles.summaryButton}>
+          <View style={styles.summaryButton}>
             <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-              Circuit
+              Summary
             </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+          </View>
+          <View style={{marginLeft: 15}}>
+            <Text style={{color: 'black', fontSize: 14}}>
+              {ordersForTab.length}
+            </Text>
+            <Text style={{color: 'black', fontSize: 14}}>Records</Text>
+          </View>
+          {/* <TouchableOpacity
             onPress={() => navigation.navigate('AllDevice')}
             style={styles.summaryButton}>
             <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
               Device
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         {/* ==============Services Category============== */}
@@ -559,7 +561,7 @@ const styles = StyleSheet.create({
     height: 70,
 
     paddingHorizontal: 20,
-    justifyContent: 'space-between',
+
     flexDirection: 'row',
   },
   ///========Summary Button

@@ -44,7 +44,7 @@ const TabNaV = ({navigation}) => {
           tabBarIcon: ({focused}) => {
             return (
               <TabButton
-                name="Explore"
+                name="Sites"
                 imagePath={tabButtonImage.imgExlore}
                 focused={focused}
               />

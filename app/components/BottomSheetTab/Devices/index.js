@@ -16,6 +16,8 @@ import {
   SORT_BY_DEVICE_VENDOR_DES,
 } from '../../../actions/actionType/devicesInventory.type';
 import {DEVICE_DETAILS_FOR_EXPLORE} from '../../../actions/actionType/DeviceDetailsExplore';
+import {copyText, tostalert} from '../../helper';
+
 const Devices = ({deviceRefExplore}) => {
   const {devicesInventory} = useSelector(state => state.devicesInventory);
   // console.log(devicesInventory);
@@ -204,7 +206,7 @@ const Devices = ({deviceRefExplore}) => {
                     key={i}
                     style={{
                       width: '100%',
-                      height: 40,
+                      height: 50,
                       backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
                       flexDirection: 'row',
                       marginVertical: 1,
@@ -214,7 +216,14 @@ const Devices = ({deviceRefExplore}) => {
                         ...styles.tableRowColum1,
                         borderLeftColor: 'white',
                       }}>
-                      <Text style={styles.boxText1}>{item.ID}</Text>
+                      <TouchableOpacity
+                        onLongPress={() => {
+                          copyText(item.ID);
+
+                          tostalert(item.ID);
+                        }}>
+                        <Text style={styles.boxText1}>{item.ID}</Text>
+                      </TouchableOpacity>
                     </View>
                     <View
                       style={{
@@ -222,9 +231,14 @@ const Devices = ({deviceRefExplore}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>
-                        {item.Device_Name.substr(1, 10)}..
-                      </Text>
+                      <TouchableOpacity
+                        onLongPress={() => {
+                          copyText(item.Device_Name);
+
+                          tostalert(item.Device_Name);
+                        }}>
+                        <Text style={styles.boxText1}>{item.Device_Name}</Text>
+                      </TouchableOpacity>
                     </View>
                     <View
                       style={{
@@ -232,7 +246,16 @@ const Devices = ({deviceRefExplore}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.Device_Status}</Text>
+                      <TouchableOpacity
+                        onLongPress={() => {
+                          copyText(item.Device_Status);
+
+                          tostalert(item.Device_Status);
+                        }}>
+                        <Text style={styles.boxText1}>
+                          {item.Device_Status}
+                        </Text>
+                      </TouchableOpacity>
                     </View>
                     <View
                       style={{
@@ -240,7 +263,16 @@ const Devices = ({deviceRefExplore}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.Device_Vendor}</Text>
+                      <TouchableOpacity
+                        onLongPress={() => {
+                          copyText(item.Device_Vendor);
+
+                          tostalert(item.Device_Vendor);
+                        }}>
+                        <Text style={styles.boxText1}>
+                          {item.Device_Vendor}
+                        </Text>
+                      </TouchableOpacity>
                     </View>
                   </TouchableOpacity>
                 );

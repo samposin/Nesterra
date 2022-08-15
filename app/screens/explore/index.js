@@ -56,6 +56,7 @@ import {getInventoryCircuit} from '../../actions/circuitInventory';
 import Voice from '@react-native-community/voice';
 import CircuitDetailsExplore from '../../components/BottomSheetTab/Circuits/CircuitDetailsExplore';
 import DeviceDetailsExplore from '../../components/BottomSheetTab/Devices/DeviceDetailsExplore';
+import OrderDetailsExplore from '../../components/BottomSheetTab/Orders/OrderDetailsExplore';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -1090,6 +1091,7 @@ const Explore = ({
         catShow={setCatShow}
         cirCuitRefExplore={cirCuitRefExplore}
         deviceRefExplore={deviceRefExplore}
+        orderRefExplore={orderRefExplore}
       />
 
       {/* <BottomSheetViewImage
@@ -1104,6 +1106,7 @@ const Explore = ({
 
       {/* =================DeviceDetailsExplore=============== */}
       <DeviceDetailsExplore deviceRefExplore={deviceRefExplore} />
+      <OrderDetailsExplore orderRefExplore={orderRefExplore} />
       {/* =================CircuitDetailsExpolore=============== */}
       {settingView ? (
         <Setting

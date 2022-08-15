@@ -7,7 +7,7 @@ import order from './order';
 
 // import location_details from './loacationDetails'
 import photo_url from './photpUrlFromMap';
-import OrderDetails from './order/OrderDetails';
+import orderDetails from './order/OrderDetails';
 import circuitInventory from './CircuitInventory';
 import devicesInventory from './devicesInventory';
 import carrierNumber from './CarrierNumber';
@@ -22,6 +22,7 @@ import allSiteID from './AllSiteID';
 import allAssets from './Assets';
 import CircuitDetailsExplore from './CircuitDetailsExplore';
 import deviceDetailsExplore from './DeviceDetailsExplore';
+import orderDetailsExplore from './OrderDetailsExplore';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -30,7 +31,7 @@ const rootReducer = combineReducers({
   location_details,
   photo_url,
   order,
-  OrderDetails,
+  orderDetails,
   circuitInventory,
   devicesInventory,
   carrierNumber,
@@ -45,5 +46,6 @@ const rootReducer = combineReducers({
   allAssets,
   CircuitDetailsExplore,
   deviceDetailsExplore,
+  orderDetailsExplore,
 });
 export default rootReducer;

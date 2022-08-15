@@ -15,18 +15,22 @@ import {
   SORT_BY_ORDER_VENDOR_ASC,
   SORT_BY_ORDER_VENDOR_DES,
 } from '../../../actions/actionType/action.Order.type';
-const Orders = ({}) => {
+import {copyText, tostalert} from '../../helper';
+
+import {getOrderDetailsExpolore} from '../../../actions/OrderDetailsExplore';
+
+const Orders = ({orderRefExplore, getOrderDetailsExpolore}) => {
   const {order} = useSelector(state => state.order);
   const {id} = useSelector(state => state.order);
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  // console.log(order[2]);
+  // console.log(id);
   // console.log(order.length);
   const [idType, setIdType] = useState(true);
   const [vendorType, setVendorType] = useState(true);
   const [statusType, setStatusType] = useState(true);
   const [orderType, setOrderType] = useState(true);
-
+  const [lodding, setLodding] = useState(true);
   return (
     <>
       {/* ==============container============== */}
@@ -184,15 +188,27 @@ const Orders = ({}) => {
                 return (
                   <TouchableOpacity
                     onPress={() => {
-                      navigation.navigate('OrderDetails', {
-                        loca_Id: id,
-                        inv_Id: item.Inventory_ID,
-                      });
+                      // console.log(item.Inventory_ID);
+                      const loca_Id = id;
+                      const inv_Id = item.Inventory_ID;
+                      //   inv_Id: item.Inventory_ID,
+                      getOrderDetailsExpolore(
+                        id,
+                        item.Inventory_ID,
+
+                        setLodding,
+                        orderRefExplore,
+                      );
+
+                      // navigation.navigate('OrderDetails', {
+                      //   loca_Id: id,
+                      //   inv_Id: item.Inventory_ID,
+                      // });
                     }}
                     key={i}
                     style={{
                       width: '100%',
-                      height: 40,
+                      height: 50,
                       backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
                       flexDirection: 'row',
                       marginVertical: 1,
@@ -202,7 +218,14 @@ const Orders = ({}) => {
                         ...styles.tableRowColum1,
                         borderLeftColor: 'white',
                       }}>
-                      <Text style={styles.boxText1}>{item.Inventory_ID}</Text>
+                      <TouchableOpacity
+                        onLongPress={() => {
+                          copyText(item.Inventory_ID);
+
+                          tostalert(item.Inventory_ID);
+                        }}>
+                        <Text style={styles.boxText1}>{item.Inventory_ID}</Text>
+                      </TouchableOpacity>
                     </View>
                     <View
                       style={{
@@ -210,7 +233,14 @@ const Orders = ({}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.vendor}</Text>
+                      <TouchableOpacity
+                        onLongPress={() => {
+                          copyText(item.vendor);
+
+                          tostalert(item.vendor);
+                        }}>
+                        <Text style={styles.boxText1}>{item.vendor}</Text>
+                      </TouchableOpacity>
                     </View>
                     <View
                       style={{
@@ -218,7 +248,14 @@ const Orders = ({}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.Order_Type}</Text>
+                      <TouchableOpacity
+                        onLongPress={() => {
+                          copyText(item.Order_Type);
+
+                          tostalert(item.Order_Type);
+                        }}>
+                        <Text style={styles.boxText1}>{item.Order_Type}</Text>
+                      </TouchableOpacity>
                     </View>
                     <View
                       style={{
@@ -226,7 +263,14 @@ const Orders = ({}) => {
                         borderLeftColor: 'white',
                         borderLeftWidth: 2,
                       }}>
-                      <Text style={styles.boxText1}>{item.Status}</Text>
+                      <TouchableOpacity
+                        onLongPress={() => {
+                          copyText(item.Status);
+
+                          tostalert(item.Status);
+                        }}>
+                        <Text style={styles.boxText1}>{item.Status}</Text>
+                      </TouchableOpacity>
                     </View>
                   </TouchableOpacity>
                 );
@@ -241,7 +285,7 @@ const Orders = ({}) => {
   );
 };
 
-export default connect(null, {})(Orders);
+export default connect(null, {getOrderDetailsExpolore})(Orders);
 
 const styles = StyleSheet.create({
   container: {

@@ -33,7 +33,7 @@ const Pics = ({picRef}) => {
         onPress={() => {
           // setVisible(true);
           // setImageUrl(item.photo_reference);
-          // navigation.navigate('BackGroundCorsoul');
+          navigation.navigate('BackGroundCorsoul');
           // picRef.current.snapToIndex(2);
         }}
         style={{

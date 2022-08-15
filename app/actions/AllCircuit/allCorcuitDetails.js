@@ -7,7 +7,7 @@ export const getAllCircuitDetails =
     Axios.get(`${Base_url}/api/GetCircuitInventoryByCircuitId?CircuitId=${id}`)
       .then(response => {
         if (response.data.length > 0) {
-          circuitRef.current.snapToIndex(1);
+          circuitRef.current.snapToIndex(2);
           setLodding(false);
 
           dispatch({

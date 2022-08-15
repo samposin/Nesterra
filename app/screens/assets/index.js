@@ -35,6 +35,9 @@ import {
 } from '../../actions/actionType/Assets';
 import BottomSheetView from './BottomSheet';
 import {get_order_details} from '../../actions/order';
+import Devices from './components/Devices';
+import Circuits from './components/Circuits';
+
 const Assets = ({
   get_orders_for_tab,
   getAllCircuitID,
@@ -44,6 +47,9 @@ const Assets = ({
   get_order_details,
   navigation,
 }) => {
+  const {deviceAllData} = useSelector(state => state.deviceAllData);
+  const {allCircuit} = useSelector(state => state.allCircuit);
+
   const bottomSheetRef = useRef(null);
   const bottomSheetRefDetails = useRef(null);
   const {ordersForTab} = useSelector(state => state.ordersForTab);
@@ -65,7 +71,16 @@ const Assets = ({
   const [lodding, setLodding] = useState(false);
   const [lodding1, setLodding1] = useState(false);
   const [diplayName, setDiplayName] = useState('');
+  const [displyCompomnet, setDisplayComponents] = useState('Circuits');
+  const ranDerView = () => {
+    switch (true) {
+      case displyCompomnet === 'Circuits':
+        return <Circuits />;
 
+      case displyCompomnet === 'Devices':
+        return <Devices />;
+    }
+  };
   useEffect(() => {
     setLodding1(true);
     get_orders_for_tab();
@@ -148,8 +163,58 @@ const Assets = ({
 
             alignItems: 'center',
           }}>
-          <View style={styles.searchViewLeft}>
-            <View style={styles.searchViewLeftLeft}>
+          <View style={{...styles.searchViewLeft, flexDirection: 'row'}}>
+            <TouchableOpacity
+              onPress={() => {
+                setDisplayComponents('Circuits');
+              }}
+              style={{
+                width: 110,
+                height: 40,
+                borderRadius: 10,
+                backgroundColor:
+                  displyCompomnet == 'Circuits' ? '#007aff' : 'transparent',
+                borderWidth: 1,
+                borderColor:
+                  displyCompomnet == 'Circuits' ? '#007aff' : 'black',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={{
+                  color: displyCompomnet == 'Circuits' ? 'white' : 'black',
+                  fontSize: 16,
+                  fontWeight: 'bold',
+                }}>
+                Circuits
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                setDisplayComponents('Devices');
+              }}
+              style={{
+                width: 110,
+                height: 40,
+                marginLeft: 15,
+                borderRadius: 10,
+                backgroundColor:
+                  displyCompomnet == 'Devices' ? '#007aff' : 'transparent',
+                borderWidth: 1,
+                borderColor: displyCompomnet == 'Devices' ? '#007aff' : 'black',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={{
+                  color: displyCompomnet == 'Devices' ? 'white' : 'black',
+                  fontSize: 16,
+                  fontWeight: 'bold',
+                }}>
+                Device
+              </Text>
+            </TouchableOpacity>
+            {/* <View style={styles.searchViewLeftLeft}>
               <View style={styles.inputView}>
                 <TextInput
                   style={{fontSize: 20, paddingLeft: 10}}
@@ -163,10 +228,14 @@ const Assets = ({
                   <Feather name="search" size={24} color="black" />
                 </TouchableOpacity>
               </View>
-            </View>
+            </View> */}
           </View>
           <View style={styles.searchViewRight}>
-            <Text style={{fontWeight: 'bold'}}>{allAssets.length}</Text>
+            <Text style={{fontWeight: 'bold'}}>
+              {displyCompomnet === 'Circuits'
+                ? allCircuit.length
+                : deviceAllData.length}
+            </Text>
             <Text style={{fontWeight: 'bold'}}>Records</Text>
           </View>
         </View>
@@ -240,168 +309,7 @@ const Assets = ({
           </View>
           <View style={styles.idViewRight}></View>
         </View>
-        {/* ======================Table  Header======================= */}
-        <View style={{...styles.tableRow}}>
-          <TouchableOpacity
-            onPress={() => {
-              if (siteId) {
-                setSiteId(!siteId);
-                dispatch({
-                  type: ALL_ASSETS_SITE_ID_OR_LOCATION_ID_ASC,
-                });
-              } else {
-                setSiteId(!siteId);
-                dispatch({
-                  type: ALL_ASSETS_SITE_ID_OR_LOCATION_ID_DES,
-                });
-              }
-            }}
-            style={{
-              ...styles.tableRowColum,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-            }}>
-            <Text style={{...styles.boxText, color: 'white'}}>Site ID</Text>
-            <Text style={{marginTop: 1, marginRight: 3}}>
-              <AntDesign
-                name={siteId ? 'caretup' : 'caretdown'}
-                size={16}
-                color="white"
-              />
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (circuitId) {
-                setCircuitId(!circuitId);
-                dispatch({
-                  type: ALL_ASSETS_CIRCUIT_ID_ASC,
-                });
-              } else {
-                setCircuitId(!circuitId);
-                dispatch({
-                  type: ALL_ASSETS_CIRCUIT_ID_DES,
-                });
-              }
-            }}
-            style={{
-              ...styles.tableRowColum,
-              flexDirection: 'row',
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-              alignItems: 'center',
-              justifyContent: 'space-around',
-            }}>
-            <Text style={{...styles.boxText, color: 'white'}}>Circuit ID</Text>
-            <Text style={{marginTop: 1, marginRight: 3}}>
-              <AntDesign
-                name={circuitId ? 'caretup' : 'caretdown'}
-                size={16}
-                color="white"
-              />
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (branchID) {
-                setBranchId(!branchID);
-                dispatch({
-                  type: ALL_ASSETS_BRANCH_ID_ASC,
-                });
-              } else {
-                setBranchId(!branchID);
-                dispatch({
-                  type: ALL_ASSETS_BRANCH_ID_DES,
-                });
-              }
-            }}
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-            }}>
-            <Text style={{...styles.boxText, color: 'white'}}>Branch ID</Text>
-            <Text style={{marginTop: 1, marginRight: 3}}>
-              <AntDesign
-                name={branchID ? 'caretup' : 'caretdown'}
-                size={16}
-                color="white"
-              />
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (vendor) {
-                setVendor(!vendor);
-                dispatch({
-                  type: ALL_ASSETS_VENDOR_ASC,
-                });
-              } else {
-                setVendor(!vendor);
-                dispatch({
-                  type: ALL_ASSETS_VENDOR_DES,
-                });
-              }
-            }}
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-            }}>
-            <Text style={{...styles.boxText, color: 'white'}}>Vendor</Text>
-            <Text style={{marginTop: 1, marginRight: 3}}>
-              <AntDesign
-                name={vendor ? 'caretup' : 'caretdown'}
-                size={16}
-                color="white"
-              />
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* ======================Table  Header======================= */}
-        {/* ==============Services Category============== */}
-        {lodding1 ? (
-          <View style={styles.loderView}>
-            <OrderLoder />
-          </View>
-        ) : (
-          <>
-            {allAssets.length == 0 ? (
-              <View
-                style={{
-                  width: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  height: 300,
-                }}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                  No Data Found
-                </Text>
-              </View>
-            ) : (
-              <>
-                <View style={styles.table}>
-                  <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={allAssets}
-                    keyExtractor={(item, i) => i.toString()}
-                    renderItem={(item, i) => randerItem(item)}
-                  />
-                </View>
-              </>
-            )}
-          </>
-        )}
+        {ranDerView()}
         {/* ==============Summary View=========== */}
         <BottomSheetView1
           lodding={lodding}
@@ -439,7 +347,7 @@ const styles = StyleSheet.create({
   searchViewLeft: {
     width: '80%',
     height: '100%',
-    justifyContent: 'center',
+
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -466,8 +374,8 @@ const styles = StyleSheet.create({
 
   searchView: {
     width: '100%',
-    height: 80,
-    paddingHorizontal: 10,
+    height: 60,
+    paddingHorizontal: 15,
     justifyContent: 'space-between',
     flexDirection: 'row',
   },
@@ -493,10 +401,11 @@ const styles = StyleSheet.create({
   ///========id View
   idView: {
     width: '100%',
-    height: 70,
+    height: 60,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
+    marginBottom: 5,
   },
   idViewLeft: {
     width: '80%',
