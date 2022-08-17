@@ -15,7 +15,7 @@ import {useDispatch} from 'react-redux';
 import {FILTER_CARRIER_NUMBERR} from '../../../actions/actionType/carrier.Number.type';
 import SerachOrderTypeSmartSite from './SerachOrderTypeSmartSite';
 import SerachOrderType from './SerachOrderType';
-import SerachVendor from './SerachVendor';
+import SerachTangor from './SerachTangor';
 import SearchStatus from './SearchStatus';
 import Carrier from './Carrier';
 
@@ -27,18 +27,17 @@ const BottomSheetView = ({bottomSheetRef, diplayName, bottomSheetDisplay}) => {
   const selectedComponent = () => {
     switch (true) {
       case bottomSheetDisplay === 'Order Type':
-        return <SerachOrderType />;
-        break;
+        return <SerachOrderType bottomSheetRef={bottomSheetRef} />;
+
       case bottomSheetDisplay === 'SmartSite#':
-        return <SerachOrderTypeSmartSite />;
-        break;
-      case bottomSheetDisplay === 'Vendor':
-        return <SerachVendor />;
+        return <SerachOrderTypeSmartSite bottomSheetRef={bottomSheetRef} />;
+
+      case bottomSheetDisplay === 'Tangor':
+        return <SerachTangor bottomSheetRef={bottomSheetRef} />;
       case bottomSheetDisplay === 'Status':
-        return <SearchStatus />;
+        return <SearchStatus bottomSheetRef={bottomSheetRef} />;
       case bottomSheetDisplay === 'Carrier':
-        return <Carrier />;
-        break;
+        return <Carrier bottomSheetRef={bottomSheetRef} />;
     }
   };
 
@@ -60,24 +59,27 @@ const BottomSheetView = ({bottomSheetRef, diplayName, bottomSheetDisplay}) => {
         enablePanDownToClose={true}
         animateOnMount
         animatedPosition={true}>
-        <View style={styles.top}>
-          <View style={styles.textView}>
-            <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
-              <Text
-                style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
-                Cancel
+        <View style={{flex: 1}}>
+          <View style={styles.top}>
+            <View style={styles.textView}>
+              <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
+                <Text
+                  style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
+                  Cancel
+                </Text>
+              </TouchableOpacity>
+              <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+                {diplayName}
               </Text>
-            </TouchableOpacity>
-            <Text style={{fontSize: 16, fontWeight: 'bold'}}>{diplayName}</Text>
-            <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
-              <Text
-                style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
-                Done
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {selectedComponent()}
-          {/* <View style={styles.searchView}>
+              <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
+                <Text
+                  style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
+                  Done
+                </Text>
+              </TouchableOpacity>
+            </View>
+            {selectedComponent()}
+            {/* <View style={styles.searchView}>
             <View style={styles.searchViewLeft}>
               
               <TextInput
@@ -93,12 +95,12 @@ const BottomSheetView = ({bottomSheetRef, diplayName, bottomSheetDisplay}) => {
               <EvilIcons name="search" size={24} color="black" />
             </View>
           </View> */}
-        </View>
-        {isLoding ? (
+          </View>
+          {/* {isLoding ? (
           <ActivityIndicator color="#007aff" size="large" />
-        ) : (
-          <BottomSheetFlatList
-            data={carrierNumber}
+        ) : (*/}
+          {/* <BottomSheetFlatList
+            data={[{id: 'Add'}, {id: 'Change'}, {id: 'Disco'}, {id: 'Move'}]}
             renderItem={({item}) => {
               return (
                 <View
@@ -114,8 +116,9 @@ const BottomSheetView = ({bottomSheetRef, diplayName, bottomSheetDisplay}) => {
               );
             }}
             keyExtractor={item => item.id}
-          />
-        )}
+          /> */}
+          {/* )} */}
+        </View>
       </BottomSheet>
     </>
   );

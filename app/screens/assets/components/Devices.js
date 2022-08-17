@@ -29,8 +29,13 @@ import {getAllDeviceDetails} from '../../../actions/AllDevice/allDeviceDetails';
 import {tostalert, copyText} from '../../../components/helper';
 import OrderLoder from '../../../components/lodder/OrderLoder';
 
-const Devices = ({getAllDevice, getAllDeviceDetails, navigation}) => {
-  const deviceRef = useRef(null);
+const Devices = ({
+  getAllDevice,
+  getAllDeviceDetails,
+  deviceRefDetails,
+
+  setLodding,
+}) => {
   const {deviceAllData} = useSelector(state => state.deviceAllData);
   const {isLoding} = useSelector(state => state.deviceAllData);
   const dispatch = useDispatch();
@@ -43,7 +48,7 @@ const Devices = ({getAllDevice, getAllDeviceDetails, navigation}) => {
 
   const [invType, setInvType] = useState(true);
   const [type, setType] = useState(true);
-  const [lodding, setLodding] = useState(false);
+  // const [lodding, setLodding] = useState(false);
 
   useEffect(() => {
     getAllDevice();
@@ -59,7 +64,7 @@ const Devices = ({getAllDevice, getAllDeviceDetails, navigation}) => {
           // })
           // console.log('snap');
           const id = item.ID;
-          getAllDeviceDetails(id, setLodding, deviceRef);
+          getAllDeviceDetails(id, setLodding, deviceRefDetails);
 
           // setTimeout(() => {
           //   deviceRef.current.snapToIndex(1);
@@ -67,6 +72,7 @@ const Devices = ({getAllDevice, getAllDeviceDetails, navigation}) => {
         }}
         style={{
           ...styles.tableRow1,
+          height: 50,
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           marginVertical: 1,
         }}>
@@ -403,7 +409,7 @@ const styles = StyleSheet.create({
   },
   tableRow: {
     width: '100%',
-    height: 40,
+    height: 50,
     backgroundColor: '#007aff',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -411,7 +417,7 @@ const styles = StyleSheet.create({
   },
   tableRow1: {
     width: '100%',
-    height: 100,
+    height: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',

@@ -23,6 +23,9 @@ import allAssets from './Assets';
 import CircuitDetailsExplore from './CircuitDetailsExplore';
 import deviceDetailsExplore from './DeviceDetailsExplore';
 import orderDetailsExplore from './OrderDetailsExplore';
+import ordersType from './OrdersType';
+import tangorNumber from './TangorNumber';
+import siteNumber from './SiteNumber';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -47,5 +50,8 @@ const rootReducer = combineReducers({
   CircuitDetailsExplore,
   deviceDetailsExplore,
   orderDetailsExplore,
+  ordersType,
+  tangorNumber,
+  siteNumber,
 });
 export default rootReducer;

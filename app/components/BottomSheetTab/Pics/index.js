@@ -16,7 +16,7 @@ const Pics = ({picRef}) => {
   const [imgUrl, setImageUrl] = React.useState('');
   // const showModal = () => setVisible(true);
   // const hideModal = () => setVisible(false);
-  console.log(picRef);
+  // console.log(picRef);
   const containerStyle = {
     backgroundColor: 'white',
     height: 300,

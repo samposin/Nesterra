@@ -1,14 +1,7 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  View,
-  TextInput,
-  ActivityIndicator,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
 import React, {useMemo, useEffect} from 'react';
 
-import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
+import BottomSheet from '@gorhom/bottom-sheet';
 import {useSelector} from 'react-redux';
 
 // import SerachOrderTypeSmartSite from './SerachOrderTypeSmartSite';
@@ -23,8 +16,6 @@ const BottomSheetView1 = ({
   bottomSheetDisplay,
 }) => {
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
-  const {carrierNumber} = useSelector(state => state.carrierNumber);
-  const {isLoding} = useSelector(state => state.carrierNumber);
 
   const selectedComponent = () => {
     switch (true) {

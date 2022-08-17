@@ -31,7 +31,7 @@ export const get_order_details =
     )
       .then(response => {
         if (response.data.length > 0) {
-          console.log(response.data);
+          // console.log(response.data);
           orderRefExplore.current.snapToIndex(2);
           setLodding(false);
 

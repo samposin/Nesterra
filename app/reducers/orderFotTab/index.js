@@ -14,6 +14,7 @@ import {
   SORT_BY_INV_ID_DES,
   SORT_BY_ORDER_TYPE_ASC,
   SORT_BY_ORDER_TYPE_DES,
+  ORDER_FILTER_BY_ORDER_TYPE,
 } from '../../actions/actionType/action.OrdersForTab';
 
 const initialState = {
@@ -113,16 +114,30 @@ export default (state = initialState, action) => {
       const datasearch5 = [...state.ordersForTab1];
 
       const ascData = datasearch5.sort((a, b) => {
-        let fa = a.vendor.toLowerCase(),
-          fb = b.vendor.toLowerCase();
+        // let fa = a.Smart_Site_Order_No.toLowerCase(),
+        //   fb = b.Smart_Site_Order_No.toLowerCase();
 
-        if (fa < fb) {
-          return -1;
-        }
-        if (fa > fb) {
+        // if (fa < fb) {
+        //   return -1;
+        // }
+        // if (fa > fb) {
+        //   return 1;
+        // }
+        // return 0;
+        // return 0;
+        if (a.Smart_Site_Order_No === null) {
           return 1;
         }
-        return 0;
+
+        if (b.Smart_Site_Order_No === null) {
+          return -1;
+        }
+
+        if (a.Smart_Site_Order_No === b.Smart_Site_Order_No) {
+          return 0;
+        }
+
+        return a.Smart_Site_Order_No < b.Smart_Site_Order_No ? -1 : 1;
       });
 
       return {
@@ -134,16 +149,29 @@ export default (state = initialState, action) => {
       const datasearch6 = [...state.ordersForTab1];
 
       const desData = datasearch6.sort((a, b) => {
-        let fa = a.vendor.toLowerCase(),
-          fb = b.vendor.toLowerCase();
+        // let fa = a.Smart_Site_Order_No.toLowerCase(),
+        //   fb = b.Smart_Site_Order_No.toLowerCase();
 
-        if (fb < fa) {
-          return -1;
-        }
-        if (fb > fa) {
+        // if (fb < fa) {
+        //   return -1;
+        // }
+        // if (fb > fa) {
+        //   return 1;
+        // }
+        // return 0;
+        if (a.Smart_Site_Order_No === null) {
           return 1;
         }
-        return 0;
+
+        if (b.Smart_Site_Order_No === null) {
+          return -1;
+        }
+
+        if (a.Smart_Site_Order_No === b.Smart_Site_Order_No) {
+          return 0;
+        }
+
+        return a.Smart_Site_Order_No < b.Smart_Site_Order_No ? 1 : -1;
       });
 
       return {
@@ -317,6 +345,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         ordersForTab: orderDes,
+      };
+    //=================FILTER
+    case ORDER_FILTER_BY_ORDER_TYPE:
+      const datasearch15 = [...state.ordersForTab1];
+
+      const filterdata = datasearch15.filter(item => {
+        // item.Order_Type == action.data;
+        const itemData = item.Order_Type.toUpperCase();
+
+        return itemData.startsWith(action.data.toUpperCase());
+      });
+
+      return {
+        ...state,
+        ordersForTab: filterdata,
       };
 
     default:

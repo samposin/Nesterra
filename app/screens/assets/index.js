@@ -9,34 +9,23 @@ import {
   TextInput,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
 
 import {get_orders_for_tab} from '../../actions/orderFotTab';
 import {connect, useDispatch, useSelector} from 'react-redux';
 //
 
-import OrderLoder from '../../components/lodder/OrderLoder';
-
 import BottomSheetView1 from './components/BottomSheetView1';
+import BottomSheetViewCircuits from './components/CircuitDetails';
+
 import {getAllBrachrID} from '../../actions/AllBranchID';
 import {getAllCircuitID} from '../../actions/AllCircuitID';
 import {getAllSiteID} from '../../actions/AllSiteID';
 import {getAllAssets} from '../../actions/Assets';
-import {
-  ALL_ASSETS_BRANCH_ID_ASC,
-  ALL_ASSETS_BRANCH_ID_DES,
-  ALL_ASSETS_CIRCUIT_ID_ASC,
-  ALL_ASSETS_CIRCUIT_ID_DES,
-  ALL_ASSETS_SITE_ID_OR_LOCATION_ID_ASC,
-  ALL_ASSETS_SITE_ID_OR_LOCATION_ID_DES,
-  ALL_ASSETS_VENDOR_ASC,
-  ALL_ASSETS_VENDOR_DES,
-} from '../../actions/actionType/Assets';
-import BottomSheetView from './BottomSheet';
+
 import {get_order_details} from '../../actions/order';
 import Devices from './components/Devices';
 import Circuits from './components/Circuits';
+import BottomSheetViewDevices from './components/DevicesDetails';
 
 const Assets = ({
   get_orders_for_tab,
@@ -50,35 +39,42 @@ const Assets = ({
   const {deviceAllData} = useSelector(state => state.deviceAllData);
   const {allCircuit} = useSelector(state => state.allCircuit);
 
+  const circuitRefDetails = useRef(null);
+  const deviceRefDetails = useRef(null);
   const bottomSheetRef = useRef(null);
   const bottomSheetRefDetails = useRef(null);
-  const {ordersForTab} = useSelector(state => state.ordersForTab);
-  const {allAssets} = useSelector(state => state.allAssets);
+
   //console.log(ordersForTab[0]);
-  const dispatch = useDispatch();
+
   // console.log(ordersForTab);
   // console.log(allAssets.length);
   const {isLoding} = useSelector(state => state.ordersForTab);
 
   // const [isLoding, setIsLoding] = useState(false);
-  const [vendor, setVendor] = useState(true);
-  const [siteId, setSiteId] = useState(true);
-  const [circuitId, setCircuitId] = useState(true);
-  const [branchID, setBranchId] = useState(true);
-  const [orderType, setOrderType] = useState(true);
-  const [name, setName] = useState('');
+
   const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
   const [lodding, setLodding] = useState(false);
   const [lodding1, setLodding1] = useState(false);
   const [diplayName, setDiplayName] = useState('');
   const [displyCompomnet, setDisplayComponents] = useState('Circuits');
+  const [cirCuitLoder, setcirCuitLoder] = useState(false);
   const ranDerView = () => {
     switch (true) {
       case displyCompomnet === 'Circuits':
-        return <Circuits />;
+        return (
+          <Circuits
+            setLodding={setLodding}
+            circuitRefDetails={circuitRefDetails}
+          />
+        );
 
       case displyCompomnet === 'Devices':
-        return <Devices />;
+        return (
+          <Devices
+            setLodding={setLodding}
+            deviceRefDetails={deviceRefDetails}
+          />
+        );
     }
   };
   useEffect(() => {
@@ -317,9 +313,17 @@ const Assets = ({
           bottomSheetRef={bottomSheetRef}
           bottomSheetDisplay={bottomSheetDisplay}
         />
-        <BottomSheetView
+        {/* <BottomSheetView
           lodding={lodding}
           bottomSheetRefDetails={bottomSheetRefDetails}
+        /> */}
+        <BottomSheetViewCircuits
+          lodding={lodding}
+          circuitRefDetails={circuitRefDetails}
+        />
+        <BottomSheetViewDevices
+          lodding={lodding}
+          deviceRefDetails={deviceRefDetails}
         />
       </SafeAreaView>
       {/* {selectedComponent()} */}

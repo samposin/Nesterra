@@ -3,11 +3,12 @@ import {Base_url} from '../../key';
 import {ALL_CIRCUIT_DETAILS} from '../actionType/AllCircuit';
 
 export const getAllCircuitDetails =
-  (id, setLodding, circuitRef) => dispatch => {
+  (id, setLodding, circuitRefDetails) => dispatch => {
+    setLodding(true);
     Axios.get(`${Base_url}/api/GetCircuitInventoryByCircuitId?CircuitId=${id}`)
       .then(response => {
         if (response.data.length > 0) {
-          circuitRef.current.snapToIndex(2);
+          circuitRefDetails.current.snapToIndex(2);
           setLodding(false);
 
           dispatch({

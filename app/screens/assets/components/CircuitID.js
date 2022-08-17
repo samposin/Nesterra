@@ -5,7 +5,7 @@ import {
   Text,
   TextInput,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
@@ -23,7 +23,6 @@ const CircuitID = ({lodding}) => {
       data: text,
     });
   };
-  useEffect(() => {}, []);
 
   return (
     <>
@@ -102,5 +101,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     paddingRight: 5,
+    margin: 3,
   },
 });

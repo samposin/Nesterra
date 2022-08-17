@@ -1,7 +1,7 @@
 import {
-  ALL_CARRIER_NUMBER,
-  ALL_CARRIER_NUMBER_FILTER,
-} from '../../actions/actionType/CarrierNumber';
+  ALL_SITE_NUMBER,
+  ALL_SITE_NUMBER_FILTER,
+} from './../../actions/actionType/SiteNumber/index';
 
 const initialState = {
   data: [],
@@ -10,21 +10,22 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ALL_CARRIER_NUMBER:
+    case ALL_SITE_NUMBER:
+      // console.log(action.payload);
       return {
         ...state,
         data: action.payload.data,
         data1: action.payload.data,
       };
-    case ALL_CARRIER_NUMBER_FILTER:
+    case ALL_SITE_NUMBER_FILTER:
       // console.log(action.payload.data, 'action.payload.data');
       const datasearch = [...state.data1];
 
       if (action.data) {
         const newData = datasearch.filter(function (item) {
-          const itemData = item.id;
+          const itemData = item.id.toLowerCase();
           // const textData = text;
-          return itemData.startsWith(action.data);
+          return itemData.startsWith(action.data.toLowerCase());
         });
         return {
           ...state,

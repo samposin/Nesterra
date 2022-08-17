@@ -1,13 +1,5 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  StatusBar,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
+import {StyleSheet, Text, View, TouchableOpacity, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
 
 import {connect, useDispatch, useSelector} from 'react-redux';
 
@@ -29,23 +21,22 @@ import {getAllCircuitDetails} from '../../../actions/AllCircuit/allCorcuitDetail
 import {tostalert, copyText} from '../../../components/helper';
 import OrderLoder from '../../../components/lodder/OrderLoder';
 
-const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
-  const circuitRef = useRef(null);
+const Circuits = ({
+  getAllCircuit,
+  circuitRefDetails,
+  getAllCircuitDetails,
 
+  setLodding,
+}) => {
   const {allCircuit} = useSelector(state => state.allCircuit);
   const {isLoding} = useSelector(state => state.allCircuit);
   const dispatch = useDispatch();
-  // console.log(allCircuit, 'dd');
-
-  // const {isLoding} = useSelector(state => state.ordersForTab);
 
   const [locType, setLocType] = useState(true);
   const [vendor, setVendor] = useState(true);
   const [cirType, setCirType] = useState(true);
 
   const [branchType, setBranchType] = useState(true);
-
-  const [lodding, setLodding] = useState(false);
 
   useEffect(() => {
     getAllCircuit();
@@ -55,11 +46,9 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          setLodding(true);
-
           // console.log('snap');
           const id = item.Circuit_ID;
-          getAllCircuitDetails(id, setLodding, circuitRef);
+          getAllCircuitDetails(id, setLodding, circuitRefDetails);
           // setTimeout(() => {
           //   deviceRef.current.snapToIndex(1);
           // }, 1200);
@@ -72,7 +61,8 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
         }}>
         <View
           style={{
-            ...styles.tableRowColum1,
+            ...styles.tableRowColum2,
+            width: '25%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
@@ -88,6 +78,7 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
         <View
           style={{
             ...styles.tableRowColum2,
+            width: '20%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
@@ -102,7 +93,8 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
         </View>
         <View
           style={{
-            ...styles.tableRowColum3,
+            ...styles.tableRowColum2,
+            width: '35%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
@@ -118,7 +110,8 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
 
         <View
           style={{
-            ...styles.tableRowColum4,
+            ...styles.tableRowColum2,
+            width: '20%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
@@ -158,10 +151,13 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
           }}
           style={{
             ...styles.tableRowColum1,
+            width: '25%',
             flexDirection: 'row',
-            justifyContent: 'space-around',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 8,
           }}>
-          <Text style={{...styles.boxText, color: 'white'}}>Location ID</Text>
+          <Text style={{...styles.boxText, color: 'white'}}>Loc ID</Text>
           <Text style={{marginTop: 1, marginRight: 3}}>
             <AntDesign
               name={locType ? 'caretup' : 'caretdown'}
@@ -185,13 +181,16 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
             }
           }}
           style={{
-            ...styles.tableRowColum2,
+            ...styles.tableRowColum1,
+            width: '20%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
             flexDirection: 'row',
-            justifyContent: 'space-around',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 8,
           }}>
-          <Text style={{...styles.boxText}}>Vendor</Text>
+          <Text style={{...styles.boxText}}>Ven</Text>
           <Text style={{marginTop: 1}}>
             <AntDesign
               name={vendor ? 'caretup' : 'caretdown'}
@@ -215,11 +214,14 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
             }
           }}
           style={{
-            ...styles.tableRowColum3,
+            ...styles.tableRowColum1,
+            width: '35%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
             flexDirection: 'row',
-            justifyContent: 'space-around',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 10,
           }}>
           <Text style={styles.boxText}>Circuit ID</Text>
           <Text style={{marginTop: 1}}>
@@ -246,11 +248,14 @@ const Circuits = ({getAllCircuit, getAllCircuitDetails, navigation}) => {
             }
           }}
           style={{
-            ...styles.tableRowColum4,
+            ...styles.tableRowColum1,
+            width: '20%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
             flexDirection: 'row',
-            justifyContent: 'space-around',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 8,
           }}>
           <Text style={styles.boxText}>Br. ID</Text>
           <Text style={{marginTop: 1}}>
@@ -420,33 +425,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
   },
   tableRowColum1: {
-    width: '25%',
     height: '100%',
     backgroundColor: '#007aff',
-
-    alignItems: 'center',
   },
   tableRowColum2: {
-    width: '20%',
     height: '100%',
     backgroundColor: '#007aff',
 
     alignItems: 'center',
   },
-  tableRowColum3: {
-    width: '40%',
-    height: '100%',
-    backgroundColor: '#007aff',
 
-    alignItems: 'center',
-  },
-  tableRowColum4: {
-    width: '15%',
-    height: '100%',
-    backgroundColor: '#007aff',
-
-    alignItems: 'center',
-  },
   tableRowColumLast: {
     width: '25%',
     marginHorizontal: 2,

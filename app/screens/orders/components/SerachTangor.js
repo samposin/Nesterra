@@ -14,12 +14,11 @@ const {height} = Dimensions.get('screen');
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {connect, useSelector, useDispatch} from 'react-redux';
 
-// import {ALL_TANGOR_NUMBER_FILTER} from '../../../actions/actionType/TangorNumber';
-import {getAllSiteNumber} from '../../../actions/SiteNumber';
-import {ALL_SITE_NUMBER_FILTER} from '../../../actions/actionType/SiteNumber';
+import {getAllTangorNumber} from '../../../actions/TangorNumber';
+import {ALL_TANGOR_NUMBER_FILTER} from '../../../actions/actionType/TangorNumber';
 
-const SerachOrderTypeSmartSite = ({getAllSiteNumber}) => {
-  const {data} = useSelector(state => state.siteNumber);
+const SerachTangor = ({getAllTangorNumber}) => {
+  const {data} = useSelector(state => state.tangorNumber);
   // console.log(data);
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
@@ -30,12 +29,12 @@ const SerachOrderTypeSmartSite = ({getAllSiteNumber}) => {
   const searchFilterFunction = text => {
     setSearch(text);
     dispatch({
-      type: ALL_SITE_NUMBER_FILTER,
+      type: ALL_TANGOR_NUMBER_FILTER,
       data: text,
     });
   };
   useEffect(() => {
-    getAllSiteNumber(setLoding);
+    getAllTangorNumber(setLoding);
   }, []);
 
   return (
@@ -96,7 +95,7 @@ const SerachOrderTypeSmartSite = ({getAllSiteNumber}) => {
   );
 };
 
-export default connect(null, {getAllSiteNumber})(SerachOrderTypeSmartSite);
+export default connect(null, {getAllTangorNumber})(SerachTangor);
 
 const styles = StyleSheet.create({
   searchView: {

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {GetCarrierNumber} from '../../actions/CarrierNumber';
+
 import {get_orders_for_tab} from '../../actions/orderFotTab';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import BottomSheetView from './components/BottomSheetView';
@@ -61,10 +61,10 @@ const Category = [
 
   {
     id: 3,
-    name: 'Tangoe',
+    name: 'Tangor',
     value: 'GetTangoeNumber',
-    disValue: 'Tangoe',
-    search: 'Vendor',
+    disValue: 'Tangor',
+    search: 'Tangor',
     active: false,
   },
   {
@@ -78,10 +78,9 @@ const Category = [
 ];
 
 const Orders = ({
-  GetCarrierNumber,
   get_order_details,
+
   get_orders_for_tab,
-  navigation,
 }) => {
   const {ordersForTab} = useSelector(state => state.ordersForTab);
   const dispatch = useDispatch();
@@ -101,7 +100,7 @@ const Orders = ({
 
   const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
   const [lodding, setLodding] = useState(false);
-
+  // console.log(ordersForTab);
   useEffect(() => {
     get_orders_for_tab();
   }, []);
@@ -164,6 +163,7 @@ const Orders = ({
         <View
           style={{
             ...styles.tableRowColum1,
+            width: '20%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
             backgroundColor: selectedComponent(item?.Status),
@@ -181,21 +181,7 @@ const Orders = ({
         <View
           style={{
             ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-            backgroundColor: selectedComponent(item?.Status),
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.vendor);
-              tostalert(item.vendor);
-            }}>
-            <Text style={styles.boxText1}>{item?.vendor}</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            ...styles.tableRowColum1,
+            width: '20%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
             backgroundColor: selectedComponent(item?.Status),
@@ -208,10 +194,27 @@ const Orders = ({
             <Text style={styles.boxText1}>{item?.Status}</Text>
           </TouchableOpacity>
         </View>
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            width: '20%',
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+            backgroundColor: selectedComponent(item?.Status),
+          }}>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.vendor);
+              tostalert(item.vendor);
+            }}>
+            <Text style={styles.boxText1}>{item?.Smart_Site_Order_No}</Text>
+          </TouchableOpacity>
+        </View>
 
         <View
           style={{
             ...styles.tableRowColum1,
+            width: '20%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
@@ -227,6 +230,7 @@ const Orders = ({
         <View
           style={{
             ...styles.tableRowColum1,
+            width: '20%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
@@ -294,7 +298,7 @@ const Orders = ({
                 <TouchableOpacity
                   key={i}
                   onPress={() => {
-                    GetCarrierNumber(item.value);
+                    // GetCarrierNumber(item.value);
                     setDisplayName(item.disValue);
                     bottomSheetRef.current.snapToIndex(1);
                     setBottomSheetDisplay(item.search);
@@ -302,6 +306,7 @@ const Orders = ({
                   }}
                   style={{
                     ...styles.categoryBottom,
+
                     backgroundColor: item.active ? '#007aff' : null,
 
                     borderWidth: item.active ? 0 : 1,
@@ -338,6 +343,7 @@ const Orders = ({
             }}
             style={{
               ...styles.tableRowColum,
+              width: '20%',
               flexDirection: 'row',
               justifyContent: 'space-around',
               alignItems: 'center',
@@ -346,6 +352,40 @@ const Orders = ({
             <Text style={{marginTop: 1, marginRight: 3}}>
               <AntDesign
                 name={orderType ? 'caretup' : 'caretdown'}
+                size={16}
+                color="white"
+              />
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (status) {
+                setStatus(!status);
+                dispatch({
+                  type: SORT_BY_STATUS_ASC,
+                });
+              } else {
+                setStatus(!status);
+                dispatch({
+                  type: SORT_BY_STATUS_DES,
+                });
+              }
+            }}
+            style={{
+              ...styles.tableRowColum,
+              width: '20%',
+              borderLeftColor: 'white',
+              borderLeftWidth: 2,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+            }}>
+            <Text style={{...styles.boxText, color: 'white'}}>Status</Text>
+            <Text style={{marginTop: 1, marginRight: 3}}>
+              <AntDesign
+                name={status ? 'caretup' : 'caretdown'}
                 size={16}
                 color="white"
               />
@@ -368,49 +408,17 @@ const Orders = ({
             }}
             style={{
               ...styles.tableRowColum,
+              width: '20%',
               flexDirection: 'row',
               borderLeftColor: 'white',
               borderLeftWidth: 2,
               alignItems: 'center',
               justifyContent: 'space-around',
             }}>
-            <Text style={{...styles.boxText, color: 'white'}}>Vendor</Text>
+            <Text style={{...styles.boxText, color: 'white'}}>Site#</Text>
             <Text style={{marginTop: 1, marginRight: 3}}>
               <AntDesign
                 name={vendor ? 'caretup' : 'caretdown'}
-                size={16}
-                color="white"
-              />
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (status) {
-                setStatus(!status);
-                dispatch({
-                  type: SORT_BY_STATUS_ASC,
-                });
-              } else {
-                setStatus(!status);
-                dispatch({
-                  type: SORT_BY_STATUS_DES,
-                });
-              }
-            }}
-            style={{
-              ...styles.tableRowColum,
-              borderLeftColor: 'white',
-              borderLeftWidth: 2,
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-            }}>
-            <Text style={{...styles.boxText, color: 'white'}}>Status</Text>
-            <Text style={{marginTop: 1, marginRight: 3}}>
-              <AntDesign
-                name={status ? 'caretup' : 'caretdown'}
                 size={16}
                 color="white"
               />
@@ -433,6 +441,7 @@ const Orders = ({
             }}
             style={{
               ...styles.tableRowColum,
+              width: '20%',
               borderLeftColor: 'white',
               borderLeftWidth: 2,
               flexDirection: 'row',
@@ -463,6 +472,7 @@ const Orders = ({
             }}
             style={{
               ...styles.tableRowColum,
+              width: '20%',
               borderLeftColor: 'white',
               borderLeftWidth: 2,
               flexDirection: 'row',
@@ -531,7 +541,6 @@ const Orders = ({
 };
 
 export default connect(null, {
-  GetCarrierNumber,
   get_order_details,
   get_orders_for_tab,
 })(Orders);
@@ -662,7 +671,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   tableRowColum: {
-    width: '20%',
     height: '100%',
     backgroundColor: '#007aff',
 
@@ -693,7 +701,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   tableRowColum1: {
-    width: '20%',
     height: '100%',
 
     justifyContent: 'center',
