@@ -9,7 +9,7 @@ import OrderLoder from '../../../components/lodder/OrderLoder';
 const BottomSheetViewCircuits = ({
   circuitRefDetails,
 
-  lodding,
+  loding,
 }) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   // const {inv_Id} = route.params;
@@ -54,7 +54,7 @@ const BottomSheetViewCircuits = ({
         </TouchableOpacity>
       </View>
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>
-        {lodding ? (
+        {loding ? (
           <OrderLoder />
         ) : (
           <>

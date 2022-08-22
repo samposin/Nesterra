@@ -8,6 +8,12 @@ import {
   ALL_DEVICES_SORT_BY_STATUS_DES,
   ALL_DEVICES_SORT_BY_VENDOR_ASC,
   ALL_DEVICES_SORT_BY_VENDOR_DES,
+  ALL_DEVICES_SEARCH_BY_VENDOR_NAME,
+  ALL_DEVICES_SEARCH_BY_DEVICE_TYPE,
+  ALL_DEVICES_FILTER_BY_VENDOR_NAME,
+  ALL_DEVICES_FILTER_BY_DEVICE_TYPE,
+  ALL_DEVICES_SEARCH_BY_DEVICE_VENDOR,
+  ALL_DEVICES_FILTER_BY_DEVICE_VENDOR,
 } from '../../actions/actionType/AllDevice';
 const initialState = {
   deviceAllData: [],
@@ -21,14 +27,122 @@ export default (state = initialState, action) => {
       return {
         deviceAllData: action.payload.data,
         deviceAllData1: action.payload.data,
+        searchData: action.payload.data,
         isLoding: action.payload.loder,
       };
+    // ==============SEARCH================
+    //  SEARCH DEVICE_NAME
+    case ALL_DEVICES_SEARCH_BY_VENDOR_NAME:
+      const DEVICE_NAME = [...state.deviceAllData1];
+      // console.log(action.data, 'dd');
+      if (action.data) {
+        const newData1 = DEVICE_NAME.filter(function (item) {
+          const itemData = item?.Device_Name.toUpperCase();
+
+          return itemData.startsWith(action.data.toUpperCase());
+        });
+        return {
+          ...state,
+          searchData: newData1,
+        };
+      } else {
+        return {
+          ...state,
+          searchData: state.deviceAllData1,
+        };
+      }
+    //  SEARCH Device_Type
+    case ALL_DEVICES_SEARCH_BY_DEVICE_TYPE:
+      const Device_Type = [...state.deviceAllData1];
+      // console.log(action.data, 'dd');
+      if (action.data) {
+        const newData1 = Device_Type.filter(function (item) {
+          const itemData = item?.Device_Type.toUpperCase();
+
+          return itemData.startsWith(action.data.toUpperCase());
+        });
+        return {
+          ...state,
+          searchData: newData1,
+        };
+      } else {
+        return {
+          ...state,
+          searchData: state.deviceAllData1,
+        };
+      }
+    //  SEARCH Device_Vendor
+    case ALL_DEVICES_SEARCH_BY_DEVICE_VENDOR:
+      const Device_Vendor = [...state.deviceAllData1];
+      // console.log(action.data, 'dd');
+      if (action.data) {
+        const newData1 = Device_Vendor.filter(function (item) {
+          const itemData = item?.Device_Vendor.toUpperCase();
+
+          return itemData.startsWith(action.data.toUpperCase());
+        });
+        return {
+          ...state,
+          searchData: newData1,
+        };
+      } else {
+        return {
+          ...state,
+          searchData: state.deviceAllData1,
+        };
+      }
+
+    // ==============SEARCH================
+    // ==============FILTER================
+    //filter  vendor name
+    case ALL_DEVICES_FILTER_BY_VENDOR_NAME:
+      const FILTER_NAME = [...state.deviceAllData1];
+      // console.log(action.data, 'dd');
+      if (action.data) {
+        const newData11 = FILTER_NAME.filter(
+          item => item.Device_Name == action.data,
+        );
+        // console.log(newData11);
+        return {
+          ...state,
+          deviceAllData: newData11,
+        };
+      }
+    //filter  DEVICE TYPE
+    case ALL_DEVICES_FILTER_BY_DEVICE_TYPE:
+      const FILTER_TYPE = [...state.deviceAllData1];
+      // console.log(action.data, 'dd');
+      if (action.data) {
+        const newData11 = FILTER_TYPE.filter(
+          item => item.Device_Type == action.data,
+        );
+        // console.log(newData11);
+        return {
+          ...state,
+          deviceAllData: newData11,
+        };
+      }
+    //filter  Device_Vendor
+    case ALL_DEVICES_FILTER_BY_DEVICE_VENDOR:
+      const Device_Vendor1 = [...state.deviceAllData1];
+      // console.log(action.data, 'dd');
+      if (action.data) {
+        const newData11 = Device_Vendor1.filter(
+          item => item.Device_Vendor == action.data,
+        );
+        // console.log(newData11);
+        return {
+          ...state,
+          deviceAllData: newData11,
+        };
+      }
+    // ==============FILTER================
     //  SORT ID ASCENDING
     case ALL_DEVICES_SORT_BY_ID_ASC:
       const data = [...state.deviceAllData1];
       const cirIdAsc = data.sort((a, b) => {
-        let fa = a.ID.toLowerCase(),
-          fb = b.ID.toLowerCase();
+        let fa = a.Device_Name.toLowerCase(),
+          fb = b.Device_Name.toLowerCase();
 
         if (fa < fb) {
           return -1;
@@ -43,13 +157,13 @@ export default (state = initialState, action) => {
         ...state,
         deviceAllData: cirIdAsc,
       };
-    //SORT ID DESCENDING
+    //SORT Device_Name DESCENDING
     case ALL_DEVICES_SORT_BY_ID_DES:
       const data1 = [...state.deviceAllData1];
 
       const cirIdDes = data1.sort((a, b) => {
-        let fa = a.ID.toLowerCase(),
-          fb = b.ID.toLowerCase();
+        let fa = a.Device_Name.toLowerCase(),
+          fb = b.Device_Name.toLowerCase();
 
         if (fb < fa) {
           return -1;

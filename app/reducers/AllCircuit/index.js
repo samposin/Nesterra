@@ -9,6 +9,9 @@ import {
   ALL_CIRCUIT_SORT_BY_BRANCH_DES,
   ALL_CIRCUIT_SORT_BY_VENDOR_ASC,
   ALL_CIRCUIT_SORT_BY_VENDOR_DES,
+  ALL_CIRCUIT_FILTER_BY_LOCATION_ID,
+  ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
+  ALL_CIRCUIT_FILTER_BY_BRANCH_ID,
 } from '../../actions/actionType/AllCircuit';
 
 const initialState = {
@@ -25,6 +28,31 @@ export default (state = initialState, action) => {
         allCircuit: action.payload.data,
         allCircuit1: action.payload.data,
         isLoding: action.payload.loder,
+      };
+
+    // FILTER BY Location_ID
+    case ALL_CIRCUIT_FILTER_BY_LOCATION_ID:
+      const fdata = [...state.allCircuit1];
+      const filterdata = fdata.filter(item => item.Location_ID == action.data);
+      return {
+        ...state,
+        allCircuit: filterdata,
+      };
+    // FILTER BY CIRCUIT_ID
+    case ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID:
+      const fdata1 = [...state.allCircuit1];
+      const cirdata = fdata1.filter(item => item.Circuit_ID == action.data);
+      return {
+        ...state,
+        allCircuit: cirdata,
+      };
+    // FILTER BY Branch Id
+    case ALL_CIRCUIT_FILTER_BY_BRANCH_ID:
+      const fdata2 = [...state.allCircuit1];
+      const cirdata2 = fdata2.filter(item => item.Branch_ID == action.data);
+      return {
+        ...state,
+        allCircuit: cirdata2,
       };
     // SORT Location_ID ASCENDING
     case ALL_CIRCUIT_SORT_BY_LOC_ID_ASC:
@@ -123,7 +151,6 @@ export default (state = initialState, action) => {
         }
         return 0;
       });
-
       return {
         ...state,
         allCircuit: catrAsc,

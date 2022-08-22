@@ -1105,7 +1105,10 @@ const Explore = ({
       <CircuitDetailsExplore cirCuitRefExplore={cirCuitRefExplore} />
 
       {/* =================DeviceDetailsExplore=============== */}
-      <DeviceDetailsExplore deviceRefExplore={deviceRefExplore} />
+      <DeviceDetailsExplore
+        bottomSheetRef={bottomSheetRef}
+        deviceRefExplore={deviceRefExplore}
+      />
       <OrderDetailsExplore orderRefExplore={orderRefExplore} />
       {/* =================CircuitDetailsExpolore=============== */}
       {settingView ? (

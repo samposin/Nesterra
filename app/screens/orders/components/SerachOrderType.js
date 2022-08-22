@@ -5,28 +5,26 @@ import {
   TouchableOpacity,
   Dimensions,
   TextInput,
+  Keyboard,
 } from 'react-native';
 import React, {useEffect, useState, useRef} from 'react';
 
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import {connect, useDispatch, useSelector} from 'react-redux';
-import {GET_ORDERS_FOR_TAB_FILTER_TYPE} from '../../../actions/actionType/action.OrdersForTab';
+import {connect, useDispatch} from 'react-redux';
+
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {ORDER_FILTER_BY_ORDER_TYPE} from '../../../actions/actionType/action.OrdersForTab';
-import {GetAllCarrierNumber} from '../../../actions/CarrierNumber';
 
 const {height} = Dimensions.get('screen');
 
-const SerachOrderType = ({bottomSheetRef, GetAllCarrierNumber}) => {
+const SerachOrderType = ({bottomSheetRef}) => {
   const dispatch = useDispatch();
 
   const [search, setSearch] = useState('');
-  const [loding, setLoding] = useState('');
 
   const data = [{id: 'Add'}, {id: 'Change'}, {id: 'Disco'}, {id: 'Move'}];
   useEffect(() => {
     //getOrdersType();
-    GetAllCarrierNumber(setLoding);
   }, []);
   const filderData = name => {
     dispatch({
@@ -50,14 +48,10 @@ const SerachOrderType = ({bottomSheetRef, GetAllCarrierNumber}) => {
         <View style={styles.searchViewRight}>
           <EvilIcons name="search" size={24} color="black" />
         </View>
-        {/* {isLoding ? (
-        <ActivityIndicator color="#007aff" size="large" />
-      ) : ( */}
-
-        {/* )} */}
       </View>
       <View style={{height: height - 180}}>
         <BottomSheetFlatList
+          keyboardShouldPersistTaps="handled"
           data={data}
           renderItem={({item}) => {
             return (
@@ -65,6 +59,7 @@ const SerachOrderType = ({bottomSheetRef, GetAllCarrierNumber}) => {
                 onPress={() => {
                   filderData(item.id);
                   bottomSheetRef.current.close();
+                  Keyboard.dismiss();
                 }}
                 style={{
                   width: '100%',
@@ -86,7 +81,7 @@ const SerachOrderType = ({bottomSheetRef, GetAllCarrierNumber}) => {
   );
 };
 
-export default connect(null, {GetAllCarrierNumber})(SerachOrderType);
+export default connect(null, {})(SerachOrderType);
 
 const styles = StyleSheet.create({
   searchView: {

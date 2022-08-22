@@ -3,18 +3,14 @@ import {Base_url} from '../../key';
 
 import {ALL_DEVICES} from '../actionType/AllDevice';
 
-export const getAllDevice = () => dispatch => {
-  Axios.get(`${Base_url}/api/GetAllDevicesInventory`)
+export const getAllDevice = setLodding1 => dispatch => {
+  setLodding1(true);
+  Axios.get(
+    `${Base_url}/api/GetAllDevicesInventory?id=0&status=0&type=0&vendor=0&DeviceName=0&BranchID=0&Function=0`,
+  )
     .then(response => {
       if (response.data.length > 0) {
-        dispatch({
-          type: ALL_DEVICES,
-          payload: {
-            data: response.data,
-            loder: false,
-          },
-        });
-      } else {
+        setLodding1(false);
         dispatch({
           type: ALL_DEVICES,
           payload: {

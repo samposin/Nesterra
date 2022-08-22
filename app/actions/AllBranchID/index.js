@@ -3,7 +3,8 @@ import {Base_url} from '../../key';
 
 import {ALL_BRANCH_ID} from '../actionType/AllBranchID';
 
-export const getAllBrachrID = setLodding => dispatch => {
+export const getAllBrachrID = setLodding1 => dispatch => {
+  setLodding1(true);
   Axios.get(`${Base_url}/api/GetCircuitInventoryBranchIds`)
     .then(response => {
       const data = response.data.sort((a, b) => {
@@ -20,7 +21,7 @@ export const getAllBrachrID = setLodding => dispatch => {
       });
       if (response.data.length > 0) {
         // console.log(response.data, 'response');
-        setLodding(false);
+        setLodding1(false);
 
         dispatch({
           type: ALL_BRANCH_ID,

@@ -2,7 +2,8 @@ import Axios from 'axios';
 import {Base_url} from '../../key';
 import {ALL_CIRCUIT_ID} from '../actionType/AllCircuitID';
 
-export const getAllCircuitID = setLodding => dispatch => {
+export const getAllCircuitID = setLodding1 => dispatch => {
+  setLodding1(true);
   Axios.get(`${Base_url}/api/GetCircuitInventoryCircuitIds`)
     .then(response => {
       const data = response.data.sort((a, b) => {
@@ -19,7 +20,7 @@ export const getAllCircuitID = setLodding => dispatch => {
       });
       if (data.length > 0) {
         // console.log(response.data, 'response');
-        setLodding(false);
+        setLodding1(false);
         dispatch({
           type: ALL_CIRCUIT_ID,
           payload: {

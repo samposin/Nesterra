@@ -2,7 +2,8 @@ import Axios from 'axios';
 import {Base_url} from '../../key';
 import {ALL_SITE_ID} from '../actionType/AllSiteID';
 
-export const getAllSiteID = setLodding => dispatch => {
+export const getAllSiteID = setLodding1 => dispatch => {
+  setLodding1(true);
   Axios.get(`${Base_url}/api/GetCircuitInventorySiteIds`)
     .then(response => {
       const data = response.data.sort((a, b) => {
@@ -18,15 +19,7 @@ export const getAllSiteID = setLodding => dispatch => {
         return 0;
       });
       if (data.length > 0) {
-        setLodding(false);
-        dispatch({
-          type: ALL_SITE_ID,
-          payload: {
-            data: data,
-            loder: false,
-          },
-        });
-      } else {
+        setLodding1(false);
         dispatch({
           type: ALL_SITE_ID,
           payload: {

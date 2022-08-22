@@ -13,6 +13,7 @@ import {
 const initialState = {
   devicesInventory: [],
   devicesInventory1: [],
+  id: '',
 };
 
 export default (state = initialState, action) => {
@@ -24,6 +25,7 @@ export default (state = initialState, action) => {
         ...state,
         devicesInventory: action.payload.data,
         devicesInventory1: action.payload.data,
+        id: action.payload.id,
       };
     //  SORT ID ASCENDING
     case SORT_BY_DEVICE_ID_ASC:

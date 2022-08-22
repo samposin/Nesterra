@@ -4,12 +4,16 @@ import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import OrderLoder from '../../../components/lodder/OrderLoder';
-const DeviceDetailsExplore = ({deviceRefExplore, lodding}) => {
+const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.deviceDetailsExplore);
+  const {id} = useSelector(state => state.deviceDetailsExplore);
+  // console.log(id, 'device');
+  // //
   // console.log(item, 'pp');
   return (
     <BottomSheet
@@ -224,6 +228,37 @@ const DeviceDetailsExplore = ({deviceRefExplore, lodding}) => {
           ) : null}
 
           {/* ===================== */}
+          {/* ===================== */}
+
+          <View style={styles.secondTableRow}>
+            <View
+              style={{
+                ...styles.secondTableColum,
+                backgroundColor: '#b7ecff',
+              }}>
+              <Text style={{fontWeight: '700', color: 'black'}}>Site ID</Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                deviceRefExplore.current.close();
+                bottomSheetRef.current.close();
+              }}
+              style={{
+                ...styles.secondTableColum,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+              }}>
+              <Text style={{fontWeight: '700', color: '#007aff'}}>{id}</Text>
+              <FontAwesome
+                name="map-marker"
+                style={{marginLeft: 6}}
+                size={24}
+                color="#007aff"
+              />
+            </TouchableOpacity>
+          </View>
+
           {/* ===================== */}
           {item?.Site_Status ? (
             <View style={styles.secondTableRow}>
@@ -1031,97 +1066,6 @@ const DeviceDetailsExplore = ({deviceRefExplore, lodding}) => {
             </View>
           ) : null}
 
-          {/* ==================== */}
-          {/* {item?.Contact_Information ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Contact Information
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Contact_Information.substr(1, 20)}...
-                  </Text>
-                </View>
-              </View>
-            ) : null} */}
-          {/* =====================  */}
-          {/* {item?.Site_Type_Concatenated_Detail ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Site Type Concatenated Detail
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Site_Type_Concatenated_Detail}
-                  </Text>
-                </View>
-              </View>
-            ) : null} */}
-          {/* ===================== */}
-          {/* {item?.Associated_Circuit ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Associated Circuit
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Associated_Circuit}
-                  </Text>
-                </View>
-              </View>
-            ) : null} */}
-
-          {/* {item?.IP_Address ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    IP Address
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.IP_Address}
-                  </Text>
-                </View>
-              </View>
-            ) : null} */}
-
-          {/* {item?.Code_Compliance ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Code Compliance
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Code_Compliance}
-                  </Text>
-                </View>
-              </View>
-            ) : null} */}
-
-          {/* ===================== */}
-          {/* {item?.Device_Function_Abrv ? (
-              <View style={styles.secondTableRow}>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Device Function Abrv
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Device_Function_Abrv}
-                  </Text>
-                </View>
-              </View>
-            ) : null} */}
           <View style={{height: 30, width: '100%', borderTopWidth: 1}}></View>
         </>
       </BottomSheetScrollView>

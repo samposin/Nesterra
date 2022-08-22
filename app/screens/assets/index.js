@@ -26,6 +26,7 @@ import {get_order_details} from '../../actions/order';
 import Devices from './components/Devices';
 import Circuits from './components/Circuits';
 import BottomSheetViewDevices from './components/DevicesDetails';
+import CircuitsNew from './components/CircuitsNew';
 
 const Assets = ({
   get_orders_for_tab,
@@ -42,7 +43,7 @@ const Assets = ({
   const circuitRefDetails = useRef(null);
   const deviceRefDetails = useRef(null);
   const bottomSheetRef = useRef(null);
-  const bottomSheetRefDetails = useRef(null);
+  // const bottomSheetRefDetails = useRef(null);
 
   //console.log(ordersForTab[0]);
 
@@ -57,12 +58,12 @@ const Assets = ({
   const [lodding1, setLodding1] = useState(false);
   const [diplayName, setDiplayName] = useState('');
   const [displyCompomnet, setDisplayComponents] = useState('Circuits');
-  const [cirCuitLoder, setcirCuitLoder] = useState(false);
+
   const ranDerView = () => {
     switch (true) {
       case displyCompomnet === 'Circuits':
         return (
-          <Circuits
+          <CircuitsNew
             setLodding={setLodding}
             circuitRefDetails={circuitRefDetails}
           />
@@ -210,21 +211,6 @@ const Assets = ({
                 Device
               </Text>
             </TouchableOpacity>
-            {/* <View style={styles.searchViewLeftLeft}>
-              <View style={styles.inputView}>
-                <TextInput
-                  style={{fontSize: 20, paddingLeft: 10}}
-                  value={name}
-                  onChangeText={text => setName(text)}
-                  placeholder="Search Site ID Here"
-                />
-              </View>
-              <View style={styles.searchIconView}>
-                <TouchableOpacity>
-                  <Feather name="search" size={24} color="black" />
-                </TouchableOpacity>
-              </View>
-            </View> */}
           </View>
           <View style={styles.searchViewRight}>
             <Text style={{fontWeight: 'bold'}}>
@@ -237,7 +223,7 @@ const Assets = ({
         </View>
         {/* ==============Search View=========== */}
         {/* ==============Services Category============== */}
-        <View style={{...styles.idView}}>
+        {/* <View style={{...styles.idView}}>
           <View style={styles.idViewLeft}>
             <TouchableOpacity
               onPress={() => {
@@ -304,7 +290,7 @@ const Assets = ({
             </TouchableOpacity>
           </View>
           <View style={styles.idViewRight}></View>
-        </View>
+        </View> */}
         {ranDerView()}
         {/* ==============Summary View=========== */}
         <BottomSheetView1
@@ -321,10 +307,11 @@ const Assets = ({
           lodding={lodding}
           circuitRefDetails={circuitRefDetails}
         />
-        <BottomSheetViewDevices
+        {/* <BottomSheetViewDevices
           lodding={lodding}
           deviceRefDetails={deviceRefDetails}
-        />
+          
+        /> */}
       </SafeAreaView>
       {/* {selectedComponent()} */}
     </>

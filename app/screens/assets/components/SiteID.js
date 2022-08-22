@@ -4,14 +4,17 @@ import {
   ActivityIndicator,
   Text,
   TextInput,
+  TouchableOpacity,
+  Keyboard,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {GET_ORDERS_FOR_TAB_FILTER_STATUS} from '../../../actions/actionType/action.OrdersForTab';
+import {FILTER_BY_LOC_ID_OR_SITE_SITE_ID} from '../../../actions/actionType/AllSiteID';
+import {ALL_CIRCUIT_FILTER_BY_LOCATION_ID} from './../../../actions/actionType/AllCircuit/index';
 
-const SiteID = ({lodding}) => {
+const SiteID = ({loding1, cirCuitRef}) => {
   const {allSiteID} = useSelector(stata => stata.allSiteID);
   // console.log(allSiteID.length, 'allBranchID');
   const dispatch = useDispatch();
@@ -19,7 +22,13 @@ const SiteID = ({lodding}) => {
   const searchFilterFunction = text => {
     setSearch(text);
     dispatch({
-      type: GET_ORDERS_FOR_TAB_FILTER_STATUS,
+      type: FILTER_BY_LOC_ID_OR_SITE_SITE_ID,
+      data: text,
+    });
+  };
+  const filterCircuitData = text => {
+    dispatch({
+      type: ALL_CIRCUIT_FILTER_BY_LOCATION_ID,
       data: text,
     });
   };
@@ -35,14 +44,14 @@ const SiteID = ({lodding}) => {
             style={{
               paddingLeft: 10,
             }}
-            // onChangeText={text => searchFilterFunction(text)}
+            onChangeText={text => searchFilterFunction(text)}
           />
         </View>
         <View style={styles.searchViewRight}>
           <EvilIcons name="search" size={24} color="black" />
         </View>
       </View>
-      {lodding ? (
+      {loding1 ? (
         <View
           style={{
             width: '100%',
@@ -54,10 +63,16 @@ const SiteID = ({lodding}) => {
         </View>
       ) : (
         <BottomSheetFlatList
+          keyboardShouldPersistTaps="handled"
           data={allSiteID}
           renderItem={({item}) => {
             return (
-              <View
+              <TouchableOpacity
+                onPress={() => {
+                  filterCircuitData(item.id);
+                  Keyboard.dismiss();
+                  cirCuitRef.current.close();
+                }}
                 style={{
                   width: '100%',
                   height: 30,
@@ -66,7 +81,7 @@ const SiteID = ({lodding}) => {
                   alignItems: 'center',
                 }}>
                 <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
-              </View>
+              </TouchableOpacity>
             );
           }}
           keyExtractor={item => item.id}

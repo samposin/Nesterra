@@ -20,7 +20,8 @@ import {copyText, tostalert} from '../../helper';
 
 const Devices = ({deviceRefExplore}) => {
   const {devicesInventory} = useSelector(state => state.devicesInventory);
-  // console.log(devicesInventory);
+  const {id} = useSelector(state => state.devicesInventory);
+  // console.log(id);
   // console.log(devicesInventory.length);
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -191,6 +192,7 @@ const Devices = ({deviceRefExplore}) => {
                         type: DEVICE_DETAILS_FOR_EXPLORE,
                         payload: {
                           data: item,
+                          id: id,
                         },
                       });
                       // cirCuitRefExplore.current.snapToIndex(2);

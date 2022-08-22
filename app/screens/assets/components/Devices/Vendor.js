@@ -3,40 +3,38 @@ import {
   View,
   ActivityIndicator,
   Text,
-  TextInput,
   TouchableOpacity,
+  TextInput,
   Keyboard,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {ALL_CIRCUIT_FILTER_BY_BRANCH_ID} from './../../../actions/actionType/AllCircuit/index';
-import {ALL_BRANCH_ID_FILTER_ID} from '../../../actions/actionType/AllBranchID';
+import {
+  ALL_DEVICES_SEARCH_BY_DEVICE_VENDOR,
+  ALL_DEVICES_FILTER_BY_DEVICE_VENDOR,
+} from './../../../../actions/actionType/AllDevice/index';
+const Vendor = ({loding1}) => {
+  const {searchData} = useSelector(state => state.deviceAllData);
 
-const BranchID = ({loding1}) => {
-  const {allBranchID} = useSelector(stata => stata.allBranchID);
-  // console.log(allBranchID.length, 'allBranchID');
-  // console.log(
-  //   allBranchID.filter(item => item.id == '10').length,
-  //   'allbraCircuit',
-  // );
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
+  //0375021122
+  //console.log(allCircuitID.filter(item => item.id == '006169232').length, 'll');
   const searchFilterFunction = text => {
     setSearch(text);
     dispatch({
-      type: ALL_BRANCH_ID_FILTER_ID,
+      type: ALL_DEVICES_SEARCH_BY_DEVICE_VENDOR,
       data: text,
     });
   };
-  const searchbranch = text => {
+  const fiterCircuitsData = text => {
     dispatch({
-      type: ALL_CIRCUIT_FILTER_BY_BRANCH_ID,
+      type: ALL_DEVICES_FILTER_BY_DEVICE_VENDOR,
       data: text,
     });
   };
-  useEffect(() => {}, []);
 
   return (
     <>
@@ -55,25 +53,26 @@ const BranchID = ({loding1}) => {
           <EvilIcons name="search" size={24} color="black" />
         </View>
       </View>
-      {loding1 ? (
-        <View
-          style={{
-            width: '100%',
-            height: 200,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <ActivityIndicator color="#007aff" size="large" />
-        </View>
-      ) : (
+      {/* {loding1 ? (
+            <View
+              style={{
+                width: '100%',
+                height: 200,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <ActivityIndicator color="#007aff" size="large" />
+            </View>
+          ) : ( */}
+      <>
         <BottomSheetFlatList
           keyboardShouldPersistTaps="handled"
-          data={allBranchID}
+          data={searchData}
           renderItem={({item}) => {
             return (
               <TouchableOpacity
                 onPress={() => {
-                  searchbranch(item.id);
+                  fiterCircuitsData(item.Device_Vendor);
                   Keyboard.dismiss();
                 }}
                 style={{
@@ -83,18 +82,19 @@ const BranchID = ({loding1}) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
+                <Text style={{fontWeight: 'bold'}}>{item.Device_Vendor}</Text>
               </TouchableOpacity>
             );
           }}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => `${item.key}${index}`}
         />
-      )}
+      </>
+      {/* )} */}
     </>
   );
 };
 
-export default BranchID;
+export default Vendor;
 
 const styles = StyleSheet.create({
   searchView: {
@@ -120,5 +120,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     paddingRight: 5,
+    margin: 3,
   },
 });

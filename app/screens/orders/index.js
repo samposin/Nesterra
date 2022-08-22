@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
+  Image,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -45,9 +46,9 @@ const Category = [
   {
     id: 1,
     name: 'Status',
-    value: 'GetSmartSiteNumber',
+    value: 'Status',
     disValue: 'Status',
-    search: 'Status#',
+    search: 'Status',
     active: false,
   },
   {
@@ -100,7 +101,7 @@ const Orders = ({
 
   const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
   const [lodding, setLodding] = useState(false);
-  // console.log(ordersForTab);
+  // console.log(ordersForTab.filter(item => item.Smart_Site_Order_No == '0186'));
   useEffect(() => {
     get_orders_for_tab();
   }, []);

@@ -1,11 +1,17 @@
-import {StyleSheet, Text, View, TouchableOpacity, FlatList} from 'react-native';
-import React, {useState, useEffect} from 'react';
-
-import {connect, useDispatch, useSelector} from 'react-redux';
-
-import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import {StyleSheet, TouchableOpacity, FlatList, Text, View} from 'react-native';
+import React, {useState, useRef, useEffect} from 'react';
+import {connect, useSelector, useDispatch} from 'react-redux';
 import {getAllCircuit} from '../../../actions/AllCircuit';
+import OrderLoder from '../../../components/lodder/OrderLoder';
+import {tostalert, copyText} from '../../../components/helper';
+// import CircuitBottomSheet from './Circuits';
+import CircuitBottomSheet from './Circuits/CircuitBottomSheet';
+import {getAllCircuitID} from '../../../actions/AllCircuitID';
+import {getAllSiteID} from '../../../actions/AllSiteID';
+import {getAllBrachrID} from '../../../actions/AllBranchID';
+import BottomSheetViewCircuits from './CircuitDetails';
+import {getAllCircuitDetails} from '../../../actions/AllCircuit/allCorcuitDetails';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {
   ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
@@ -17,34 +23,32 @@ import {
   ALL_CIRCUIT_SORT_BY_BRANCH_ASC,
   ALL_CIRCUIT_SORT_BY_BRANCH_DES,
 } from '../../../actions/actionType/AllCircuit';
-import {getAllCircuitDetails} from '../../../actions/AllCircuit/allCorcuitDetails';
-import {tostalert, copyText} from '../../../components/helper';
-import OrderLoder from '../../../components/lodder/OrderLoder';
-
-const Circuits = ({
+const CircuitsNew = ({
   getAllCircuit,
-  circuitRefDetails,
+  getAllSiteID,
+  getAllBrachrID,
+  getAllCircuitID,
   getAllCircuitDetails,
-
-  setLodding,
 }) => {
+  const cirCuitRef = useRef(null);
+  const circuitRefDetails = useRef(null);
+  const [loding1, setLodding1] = useState(false);
+  const [loding, setLodding] = useState(false);
+  const [loding3, setLodding3] = useState(false);
+  const [diplayName, setDiplayName] = useState('');
   const {allCircuit} = useSelector(state => state.allCircuit);
-  // const {isLoding} = useSelector(state => state.allCircuit);
   const dispatch = useDispatch();
 
   const [locType, setLocType] = useState(true);
   const [vendor, setVendor] = useState(true);
   const [cirType, setCirType] = useState(true);
-  const [loding, setLoding] = useState(false);
-  const [branchType, setBranchType] = useState(true);
-  // console.log(
-  //   allCircuit.filter(item => item.Branch_ID == '741').length,
-  //   'allCircuit',
-  // );
-  useEffect(() => {
-    getAllCircuit(setLoding);
-  }, []);
 
+  const [branchType, setBranchType] = useState(true);
+
+  useEffect(() => {
+    setLodding3(true);
+    getAllCircuit(setLodding3);
+  }, []);
   const randerItem = ({index, item}) => {
     return (
       <TouchableOpacity
@@ -52,6 +56,7 @@ const Circuits = ({
           // console.log('snap');
           const id = item.Circuit_ID;
           getAllCircuitDetails(id, setLodding, circuitRefDetails);
+          cirCuitRef.current.close();
           // setTimeout(() => {
           //   deviceRef.current.snapToIndex(1);
           // }, 1200);
@@ -78,26 +83,11 @@ const Circuits = ({
             <Text style={styles.boxText1}> {item?.Location_ID}</Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            ...styles.tableRowColum2,
-            width: '20%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Vendor);
 
-              tostalert(item.Vendor);
-            }}>
-            <Text style={styles.boxText1}>{item?.Vendor}</Text>
-          </TouchableOpacity>
-        </View>
         <View
           style={{
             ...styles.tableRowColum2,
-            width: '35%',
+            width: '25%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
@@ -114,7 +104,7 @@ const Circuits = ({
         <View
           style={{
             ...styles.tableRowColum2,
-            width: '20%',
+            width: '25%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
@@ -129,15 +119,94 @@ const Circuits = ({
             </Text>
           </TouchableOpacity>
         </View>
+        <View
+          style={{
+            ...styles.tableRowColum2,
+            width: '25%',
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+          }}>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Vendor);
+
+              tostalert(item.Vendor);
+            }}>
+            <Text style={styles.boxText1}>{item?.Vendor}</Text>
+          </TouchableOpacity>
+        </View>
       </TouchableOpacity>
     );
   };
   return (
     <>
-      {/* ==============container============== */}
+      {/* ========ID VIEW============= */}
+      <View style={{...styles.idView}}>
+        <View style={styles.idViewLeft}>
+          <TouchableOpacity
+            onPress={() => {
+              setDiplayName('Site ID');
 
-      {/* ======================Table  Header======================= */}
-      <View style={{...styles.tableRow}}>
+              getAllSiteID(setLodding1);
+              cirCuitRef.current.snapToIndex(1);
+            }}
+            style={{
+              ...styles.idButton,
+              borderColor: diplayName == 'Site ID' ? '#007aff' : 'black',
+            }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: diplayName == 'Site ID' ? '#007aff' : 'black',
+              }}>
+              Site ID
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setDiplayName('Circuit ID');
+              getAllCircuitID(setLodding1);
+              cirCuitRef.current.snapToIndex(1);
+            }}
+            style={{
+              ...styles.idButton,
+              borderColor: diplayName == 'Circuit ID' ? '#007aff' : 'black',
+            }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: diplayName == 'Circuit ID' ? '#007aff' : 'black',
+              }}>
+              Circuit ID
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setDiplayName('Branch ID');
+              cirCuitRef.current.snapToIndex(1);
+              getAllBrachrID(setLodding1);
+            }}
+            style={{
+              ...styles.idButton,
+              borderColor: diplayName == 'Branch ID' ? '#007aff' : 'black',
+            }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: diplayName == 'Branch ID' ? '#007aff' : 'black',
+              }}>
+              Branch ID
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.idViewRight}></View>
+      </View>
+      {/* ========ID VIEW============= */}
+      {/* ========TABLE HEADER============= */}
+      <View style={styles.tableHeader}>
         <TouchableOpacity
           onPress={() => {
             if (locType) {
@@ -154,16 +223,68 @@ const Circuits = ({
           }}
           style={{
             ...styles.tableRowColum1,
-            width: '25%',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingHorizontal: 8,
           }}>
-          <Text style={{...styles.boxText, color: 'white'}}>Loc ID</Text>
+          <Text style={{...styles.boxText, color: 'white'}}>Site ID</Text>
           <Text style={{marginTop: 1, marginRight: 3}}>
             <AntDesign
               name={locType ? 'caretup' : 'caretdown'}
+              size={16}
+              color="white"
+            />
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {
+            if (vendor) {
+              setVendor(!vendor);
+              dispatch({
+                type: ALL_CIRCUIT_SORT_BY_VENDOR_ASC,
+              });
+            } else {
+              setVendor(!vendor);
+              dispatch({
+                type: ALL_CIRCUIT_SORT_BY_VENDOR_DES,
+              });
+            }
+          }}
+          style={{
+            ...styles.tableRowColum1,
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+          }}>
+          <Text style={{...styles.boxText, color: 'white'}}>Circuit ID</Text>
+          <Text style={{marginTop: 1}}>
+            <AntDesign
+              name={cirType ? 'caretup' : 'caretdown'}
+              size={16}
+              color="white"
+            />
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            if (branchType) {
+              setBranchType(!branchType);
+              dispatch({
+                type: ALL_CIRCUIT_SORT_BY_BRANCH_ASC,
+              });
+            } else {
+              setBranchType(!branchType);
+              dispatch({
+                type: ALL_CIRCUIT_SORT_BY_BRANCH_DES,
+              });
+            }
+          }}
+          style={{
+            ...styles.tableRowColum1,
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+          }}>
+          <Text style={{...styles.boxText, color: 'white'}}>Branch ID</Text>
+          <Text style={{marginTop: 1}}>
+            <AntDesign
+              name={branchType ? 'caretup' : 'caretdown'}
               size={16}
               color="white"
             />
@@ -185,15 +306,10 @@ const Circuits = ({
           }}
           style={{
             ...styles.tableRowColum1,
-            width: '20%',
             borderLeftColor: 'white',
             borderLeftWidth: 2,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingHorizontal: 8,
           }}>
-          <Text style={{...styles.boxText}}>Ven</Text>
+          <Text style={{...styles.boxText, color: 'white'}}>Ven</Text>
           <Text style={{marginTop: 1}}>
             <AntDesign
               name={vendor ? 'caretup' : 'caretdown'}
@@ -202,81 +318,9 @@ const Circuits = ({
             />
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            if (cirType) {
-              setCirType(!cirType);
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_CIR_ID_ASC,
-              });
-            } else {
-              setCirType(!cirType);
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_CIR_ID_DES,
-              });
-            }
-          }}
-          style={{
-            ...styles.tableRowColum1,
-            width: '35%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingHorizontal: 10,
-          }}>
-          <Text style={styles.boxText}>Circuit ID</Text>
-          <Text style={{marginTop: 1}}>
-            <AntDesign
-              name={cirType ? 'caretup' : 'caretdown'}
-              size={16}
-              color="white"
-            />
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => {
-            if (branchType) {
-              setBranchType(!branchType);
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_BRANCH_ASC,
-              });
-            } else {
-              setBranchType(!branchType);
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_BRANCH_DES,
-              });
-            }
-          }}
-          style={{
-            ...styles.tableRowColum1,
-            width: '20%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingHorizontal: 8,
-          }}>
-          <Text style={styles.boxText}>Br. ID</Text>
-          <Text style={{marginTop: 1}}>
-            <AntDesign
-              name={branchType ? 'caretup' : 'caretdown'}
-              size={16}
-              color="white"
-            />
-          </Text>
-        </TouchableOpacity>
       </View>
-      {/* //===Second Header=========== */}
 
-      {/* //===Second Header=========== */}
-
-      {/* ======================Table  Header======================= */}
-      {/* ==============Services Category============== */}
-      {loding ? (
+      {loding3 ? (
         <View style={styles.loderView}>
           <OrderLoder />
         </View>
@@ -298,6 +342,7 @@ const Circuits = ({
             <>
               <View style={styles.table}>
                 <FlatList
+                  contentContainerStyle={{paddingBottom: 230}}
                   showsVerticalScrollIndicator={false}
                   data={allCircuit}
                   keyExtractor={(item, i) => i.toString()}
@@ -308,215 +353,107 @@ const Circuits = ({
           )}
         </>
       )}
-      {/* ==============Summary View=========== */}
-      {/* <BottomSheetView circuitRef={circuitRef} lodding={lodding} /> */}
-      {/* {lodding && <Lodder lodding={lodding} />} */}
+      {/* ========TABLE HEADER============= */}
+      <CircuitBottomSheet
+        diplayName={diplayName}
+        loding1={loding1}
+        cirCuitRef={cirCuitRef}
+      />
+      <BottomSheetViewCircuits
+        loding={loding}
+        circuitRefDetails={circuitRefDetails}
+      />
     </>
   );
 };
 
-export default connect(null, {getAllCircuit, getAllCircuitDetails})(Circuits);
+export default connect(null, {
+  getAllCircuit,
+  getAllSiteID,
+  getAllBrachrID,
+  getAllCircuitID,
+  getAllCircuitDetails,
+})(CircuitsNew);
 
 const styles = StyleSheet.create({
+  ///========Lodder
+
   loderView: {
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
     height: '80%',
   },
-  summaryView: {
-    width: '100%',
-    height: 70,
-
-    paddingHorizontal: 20,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
-  ///========Summary Button
-  summaryButton: {
-    width: 100,
-    height: 40,
-    backgroundColor: '#007aff',
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  ///========dropdown
-  dropDownView: {
-    width: '100%',
-    height: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  dropDownViewLeft: {
+  ///========Lodder
+  ///========id Button
+  idButton: {
     width: '30%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-  },
-  dropDownViewRight: {
-    width: 100,
     height: 40,
     borderWidth: 1,
-    borderRadius: 5,
-    borderColor: 'black',
-    marginHorizontal: 3,
-  },
-  pickerItem: {width: 200, height: 40, borderWidth: 0.5},
-  ///========dropdown
-  ///========dropdown
-  pickerBoxInner: {
-    borderWidth: 0.6,
-    borderColor: 'black',
-    borderRadius: 2,
-    overflow: 'hidden',
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    height: '100%',
-  },
-  pickerBoxIcon: {
-    position: 'absolute',
-    right: 0,
-    fontSize: 23,
-    color: 'red',
-  },
-  pickerStyle: {
-    width: '120%',
-    paddingBottom: 0,
-    paddingLeft: 0,
-    transform: [{scaleX: 0.85}, {scaleY: 0.85}],
-    left: -10,
-    position: 'absolute',
-    backgroundColor: 'transparent',
-  },
-  topView: {
-    height: 50,
-    width: '100%',
-    flexDirection: 'row',
-  },
-  topItem: {
-    width: '33.33%',
-    height: '100%',
+    borderRadius: 10,
+    margin: 3,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  topItem1: {
-    width: '33.33%',
-    height: '100%',
-    justifyContent: 'center',
   },
 
-  ///=========Table
+  ///========id View
+  idView: {
+    width: '100%',
+    height: 60,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    marginBottom: 5,
+  },
+  idViewLeft: {
+    width: '80%',
+    height: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  idViewRight: {width: '20%', height: '100%'},
+  ///========id View
+  ///========TABELE HEADER
+  tableHeader: {
+    width: '100%',
+    height: 40,
+    backgroundColor: '#007aff',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignSelf: 'center',
+  },
+  tableRowColum1: {
+    height: '100%',
+    backgroundColor: '#007aff',
+    width: '25%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 8,
+  },
+  ///========TABELE HEADER
+  ///========TABELE
   table: {
     width: '100%',
     alignSelf: 'center',
-    marginTop: 15,
-  },
-  tableRow: {
-    width: '100%',
-    height: 40,
-    backgroundColor: '#007aff',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'center',
+    marginTop: 5,
   },
   tableRow1: {
     width: '100%',
-    paddingVertical: 10,
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
     backgroundColor: 'green',
   },
-  tableRowColum1: {
-    height: '100%',
-    backgroundColor: '#007aff',
-  },
+  //   tableRowColum1: {
+  //     height: '100%',
+  //     backgroundColor: '#007aff',
+  //   },
   tableRowColum2: {
     height: '100%',
-    backgroundColor: '#007aff',
-
-    alignItems: 'center',
-  },
-
-  tableRowColumLast: {
-    width: '25%',
-    marginHorizontal: 2,
-    height: 50,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  boxText: {
-    fontWeight: '700',
-    fontSize: 16,
-    color: 'white',
-  },
-  ///=========Table
-  ///=========data row
-  tableRow1: {
-    width: '100%',
-    height: 40,
-
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-
-    alignSelf: 'center',
-  },
-  tableRowColum1: {
-    width: '25%',
-    height: '100%',
-
-    justifyContent: 'center',
-  },
-  tableRowColum2: {
-    width: '20%',
-    height: '100%',
-
-    justifyContent: 'center',
-  },
-  tableRowColum3: {
-    width: '40%',
-    height: '100%',
-
-    justifyContent: 'center',
-  },
-  tableRowColum4: {
-    width: '15%',
-    height: '100%',
-
-    justifyContent: 'center',
-  },
-
-  boxText1: {
-    fontSize: 14,
-    color: '#000000',
-    marginLeft: 7,
-  },
-  ///=========data row
-  ///========Second table
-  secondTable: {
-    width: '95%',
-
-    marginTop: 20,
-    alignSelf: 'center',
-  },
-  secondTableRow: {
-    width: '100%',
-    height: 30,
-
-    flexDirection: 'row',
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-  },
-  secondTableColum: {
-    width: '25%',
-    height: '100%',
-    borderRightColor: 'black',
-    borderRightWidth: 1,
-    paddingLeft: 10,
-    justifyContent: 'center',
-  },
-  ///========Second table
 });

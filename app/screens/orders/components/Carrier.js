@@ -6,6 +6,7 @@ import {
   TextInput,
   Text,
   ActivityIndicator,
+  Keyboard,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
@@ -16,7 +17,7 @@ import {GetAllCarrierNumber} from '../../../actions/CarrierNumber';
 
 import {ALL_CARRIER_NUMBER_FILTER} from './../../../actions/actionType/CarrierNumber/index';
 const {height} = Dimensions.get('screen');
-const Carrier = ({GetAllCarrierNumber}) => {
+const Carrier = ({GetAllCarrierNumber, bottomSheetRef}) => {
   const {data} = useSelector(state => state.carrierNumber);
   // console.log(data);
   const dispatch = useDispatch();
@@ -71,12 +72,14 @@ const Carrier = ({GetAllCarrierNumber}) => {
           </View>
         ) : (
           <BottomSheetFlatList
+            keyboardShouldPersistTaps="handled"
             data={data}
             renderItem={({item}) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
                     bottomSheetRef.current.close();
+                    Keyboard.dismiss();
                   }}
                   style={{
                     width: '100%',

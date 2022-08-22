@@ -15,6 +15,8 @@ import {
   SORT_BY_ORDER_TYPE_ASC,
   SORT_BY_ORDER_TYPE_DES,
   ORDER_FILTER_BY_ORDER_TYPE,
+  ORDER_FILTER_BY_STATUS,
+  ORDER_FILTER_BY_INV_ID,
 } from '../../actions/actionType/action.OrdersForTab';
 
 const initialState = {
@@ -33,6 +35,25 @@ export default (state = initialState, action) => {
         ordersForTab1: action.payload.data,
         isLoding: action.payload.data.loder,
       };
+    case ORDER_FILTER_BY_STATUS:
+      const datasearStatus = [...state.ordersForTab1];
+
+      if (action.data) {
+        const newData1 = datasearStatus.filter(function (item) {
+          const itemData = item.Status.toUpperCase();
+
+          return itemData.startsWith(action.data.toUpperCase());
+        });
+        return {
+          ...state,
+          ordersForTab: newData1,
+        };
+      } else {
+        return {
+          ...state,
+          ordersForTab: state.ordersForTab1,
+        };
+      }
     case GET_ORDERS_FOR_TAB_FILTER_TYPE:
       const datasearch = [...state.ordersForTab1];
 
@@ -52,12 +73,27 @@ export default (state = initialState, action) => {
           ordersForTab: state.ordersForTab1,
         };
       }
+
+    //ORDER_FILTER_BY_INV_ID
+    case ORDER_FILTER_BY_INV_ID:
+      const datasearch_INv = [...state.ordersForTab1];
+      console.log(action.data, 'data');
+
+      const newDataINV = datasearch_INv.filter(
+        item => item.Smart_Site_Order_No == action.data,
+      );
+      return {
+        ...state,
+        ordersForTab: newDataINV,
+      };
+
+    //ORDER_FILTER_BY_INV_ID
     case GET_ORDERS_FOR_TAB_FILTER_SMARTSITE:
       const datasearch1 = [...state.ordersForTab1];
 
       if (action.data) {
         const newData = datasearch1.filter(function (item) {
-          const itemData = item.Inventory_ID.toUpperCase();
+          const itemData = item?.Inventory_ID.toUpperCase();
 
           return itemData.startsWith(action.data.toUpperCase());
         });

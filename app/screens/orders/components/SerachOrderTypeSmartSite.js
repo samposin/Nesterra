@@ -6,6 +6,7 @@ import {
   TextInput,
   Text,
   ActivityIndicator,
+  Keyboard,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
@@ -17,8 +18,9 @@ import {connect, useSelector, useDispatch} from 'react-redux';
 // import {ALL_TANGOR_NUMBER_FILTER} from '../../../actions/actionType/TangorNumber';
 import {getAllSiteNumber} from '../../../actions/SiteNumber';
 import {ALL_SITE_NUMBER_FILTER} from '../../../actions/actionType/SiteNumber';
+import {ORDER_FILTER_BY_INV_ID} from '../../../actions/actionType/action.OrdersForTab';
 
-const SerachOrderTypeSmartSite = ({getAllSiteNumber}) => {
+const SerachOrderTypeSmartSite = ({getAllSiteNumber, bottomSheetRef}) => {
   const {data} = useSelector(state => state.siteNumber);
   // console.log(data);
   const dispatch = useDispatch();
@@ -31,6 +33,12 @@ const SerachOrderTypeSmartSite = ({getAllSiteNumber}) => {
     setSearch(text);
     dispatch({
       type: ALL_SITE_NUMBER_FILTER,
+      data: text,
+    });
+  };
+  const filterSiteData = text => {
+    dispatch({
+      type: ORDER_FILTER_BY_INV_ID,
       data: text,
     });
   };
@@ -68,12 +76,15 @@ const SerachOrderTypeSmartSite = ({getAllSiteNumber}) => {
           </View>
         ) : (
           <BottomSheetFlatList
+            keyboardShouldPersistTaps="handled"
             data={data}
             renderItem={({item}) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
+                    filterSiteData(item.id);
                     bottomSheetRef.current.close();
+                    Keyboard.dismiss();
                   }}
                   style={{
                     width: '100%',

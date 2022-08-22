@@ -2,6 +2,7 @@ import {DEVICE_DETAILS_FOR_EXPLORE} from '../../actions/actionType/DeviceDetails
 
 const initialState = {
   item: {},
+  id: '',
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +12,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         item: action.payload.data,
+        id: action.payload.id,
       };
 
     default:

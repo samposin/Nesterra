@@ -9,6 +9,7 @@ export const get_all_devices_inventory = id => dispatch => {
         type: GET_ALL_DEVICES_INVENTORY,
         payload: {
           data: response.data,
+          id: id,
         },
       });
     })

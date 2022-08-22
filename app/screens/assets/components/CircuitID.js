@@ -3,23 +3,34 @@ import {
   View,
   ActivityIndicator,
   Text,
+  TouchableOpacity,
   TextInput,
+  Keyboard,
 } from 'react-native';
 import React, {useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {GET_ORDERS_FOR_TAB_FILTER_STATUS} from '../../../actions/actionType/action.OrdersForTab';
 
-const CircuitID = ({lodding}) => {
+import {ALL_CIRCUITSID_FILTER_BY_CIRCUIT_ID} from '../../../actions/actionType/AllCircuitID';
+import {ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID} from '../../../actions/actionType/AllCircuit';
+const CircuitID = ({loding1}) => {
   const {allCircuitID} = useSelector(stata => stata.allCircuitID);
 
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
+  //0375021122
+  //console.log(allCircuitID.filter(item => item.id == '006169232').length, 'll');
   const searchFilterFunction = text => {
     setSearch(text);
     dispatch({
-      type: GET_ORDERS_FOR_TAB_FILTER_STATUS,
+      type: ALL_CIRCUITSID_FILTER_BY_CIRCUIT_ID,
+      data: text,
+    });
+  };
+  const fiterCircuitsData = text => {
+    dispatch({
+      type: ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
       data: text,
     });
   };
@@ -34,14 +45,14 @@ const CircuitID = ({lodding}) => {
             style={{
               paddingLeft: 10,
             }}
-            // onChangeText={text => searchFilterFunction(text)}
+            onChangeText={text => searchFilterFunction(text)}
           />
         </View>
         <View style={styles.searchViewRight}>
           <EvilIcons name="search" size={24} color="black" />
         </View>
       </View>
-      {lodding ? (
+      {loding1 ? (
         <View
           style={{
             width: '100%',
@@ -52,24 +63,31 @@ const CircuitID = ({lodding}) => {
           <ActivityIndicator color="#007aff" size="large" />
         </View>
       ) : (
-        <BottomSheetFlatList
-          data={allCircuitID}
-          renderItem={({item}) => {
-            return (
-              <View
-                style={{
-                  width: '100%',
-                  height: 30,
-                  marginVertical: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
-              </View>
-            );
-          }}
-          keyExtractor={item => item.id}
-        />
+        <>
+          <BottomSheetFlatList
+            keyboardShouldPersistTaps="handled"
+            data={allCircuitID}
+            renderItem={({item}) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    fiterCircuitsData(item.id);
+                    Keyboard.dismiss();
+                  }}
+                  style={{
+                    width: '100%',
+                    height: 30,
+                    marginVertical: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
+                </TouchableOpacity>
+              );
+            }}
+            keyExtractor={item => item.id}
+          />
+        </>
       )}
     </>
   );

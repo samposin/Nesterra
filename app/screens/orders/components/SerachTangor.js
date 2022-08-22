@@ -6,6 +6,7 @@ import {
   TextInput,
   Text,
   ActivityIndicator,
+  Keyboard,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
@@ -17,7 +18,7 @@ import {connect, useSelector, useDispatch} from 'react-redux';
 import {getAllTangorNumber} from '../../../actions/TangorNumber';
 import {ALL_TANGOR_NUMBER_FILTER} from '../../../actions/actionType/TangorNumber';
 
-const SerachTangor = ({getAllTangorNumber}) => {
+const SerachTangor = ({getAllTangorNumber, bottomSheetRef}) => {
   const {data} = useSelector(state => state.tangorNumber);
   // console.log(data);
   const dispatch = useDispatch();
@@ -67,12 +68,14 @@ const SerachTangor = ({getAllTangorNumber}) => {
           </View>
         ) : (
           <BottomSheetFlatList
+            keyboardShouldPersistTaps="handled"
             data={data}
             renderItem={({item}) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
                     bottomSheetRef.current.close();
+                    Keyboard.dismiss();
                   }}
                   style={{
                     width: '100%',
