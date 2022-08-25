@@ -16,8 +16,8 @@ import {
   ALL_DEVICES_FILTER_BY_VENDOR_NAME,
 } from './../../../../actions/actionType/AllDevice/index';
 
-const Name = ({loding1}) => {
-  const {searchData} = useSelector(state => state.deviceAllData);
+const Name = ({loding1, deviceRef}) => {
+  const {devieceName} = useSelector(state => state.deviceAllData);
 
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
@@ -69,13 +69,14 @@ const Name = ({loding1}) => {
       <>
         <BottomSheetFlatList
           keyboardShouldPersistTaps="handled"
-          data={searchData}
+          data={devieceName}
           renderItem={({item}) => {
             return (
               <TouchableOpacity
                 onPress={() => {
                   fiterCircuitsData(item.Device_Name);
                   Keyboard.dismiss();
+                  deviceRef.current.close();
                 }}
                 style={{
                   width: '100%',

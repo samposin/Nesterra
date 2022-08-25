@@ -37,9 +37,10 @@ const Devices = ({
   //  deviceRefDetails,
 }) => {
   const {deviceAllData} = useSelector(state => state.deviceAllData);
+
   // const {isLoding} = useSelector(state => state.deviceAllData);
   const dispatch = useDispatch();
-  // console.log(deviceAllData.length, 'dd');
+  // console.log(devieceType, 'dd');
   const [diplayName, setDiplayName] = useState('');
 
   // const {isLoding} = useSelector(state => state.ordersForTab);
@@ -100,6 +101,7 @@ const Devices = ({
             ...styles.tableRowColum1,
             borderLeftColor: 'white',
             borderLeftWidth: 2,
+            backgroundColor: selectedComponent(item?.Device_Status),
           }}>
           <TouchableOpacity
             onLongPress={() => {
@@ -140,6 +142,15 @@ const Devices = ({
         </View>
       </TouchableOpacity>
     );
+  };
+  const selectedComponent = item => {
+    switch (true) {
+      case item === 'Active':
+        return '#c6efcd';
+
+      case item === 'Inactive':
+        return '#ffc8ce';
+    }
   };
   return (
     <>

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   GET_ORDERS_FOR_TAB,
   GET_ORDERS_FOR_TAB_FILTER_TYPE,
@@ -17,24 +18,65 @@ import {
   ORDER_FILTER_BY_ORDER_TYPE,
   ORDER_FILTER_BY_STATUS,
   ORDER_FILTER_BY_INV_ID,
+  ORDER_FILTER_BY_DATE,
+  ORDER_SEARCH_OLLY_VENDOR,
+  ORDER_FILTER_ONLY_VENDOR,
 } from '../../actions/actionType/action.OrdersForTab';
 
 const initialState = {
   ordersForTab: [],
   ordersForTab1: [],
+  onlyVendor1: [],
+  onlyVendor: [],
   isLoding: true,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_ORDERS_FOR_TAB:
-      // console.log(action.payload.data, 'action.payload.data');
+      const result = action.payload.data.reduce((acc, {vendor}) => {
+        const entry = acc.find(i => i.vendor === vendor);
+        if (!entry) {
+          acc.push({
+            vendor,
+          });
+        } else {
+          entry.vendor = vendor;
+        }
+        return acc;
+      }, []);
+
       return {
         ...state,
         ordersForTab: action.payload.data,
         ordersForTab1: action.payload.data,
         isLoding: action.payload.data.loder,
+        onlyVendor: result,
+        onlyVendor1: result,
       };
+    //SEARCH ONLY VENDOR
+    case ORDER_SEARCH_OLLY_VENDOR:
+      const ONLYVENDOR = [...state.onlyVendor1];
+
+      if (action.data) {
+        const newData1 = ONLYVENDOR.filter(function (item) {
+          const itemData = item.vendor.toUpperCase();
+
+          return itemData.startsWith(action.data.toUpperCase());
+        });
+        return {
+          ...state,
+          onlyVendor: newData1,
+        };
+      } else {
+        return {
+          ...state,
+          onlyVendor: state.onlyVendor1,
+        };
+      }
+
+    //SEARCH ONLY VENDOR
+
     case ORDER_FILTER_BY_STATUS:
       const datasearStatus = [...state.ordersForTab1];
 
@@ -54,6 +96,36 @@ export default (state = initialState, action) => {
           ordersForTab: state.ordersForTab1,
         };
       }
+    //==================FILTER
+    //FILTER BY ONLY VENDOR
+    case ORDER_FILTER_ONLY_VENDOR:
+      const filterOnlyVendor = [...state.ordersForTab1];
+      // console.log(action.data, 'data');
+
+      const filterOnlyVendor1 = filterOnlyVendor.filter(
+        // moment(date).format('MM-DD-YY')
+        item => item.vendor == action.data,
+      );
+      return {
+        ...state,
+        ordersForTab: filterOnlyVendor1,
+      };
+
+    //FILTER BY ONLY VENDOR
+    //FIRTER BY DATE
+    case ORDER_FILTER_BY_DATE:
+      const FITERDATA = [...state.ordersForTab1];
+      // console.log(action.data, 'data');
+
+      const NEWDATAFILTER = FITERDATA.filter(
+        // moment(date).format('MM-DD-YY')
+        item => moment(item.Initiation_Date).format('MM-DD-YY') == action.data,
+      );
+      return {
+        ...state,
+        ordersForTab: NEWDATAFILTER,
+      };
+    //=========TYPE
     case GET_ORDERS_FOR_TAB_FILTER_TYPE:
       const datasearch = [...state.ordersForTab1];
 
@@ -74,6 +146,7 @@ export default (state = initialState, action) => {
         };
       }
 
+    //==================FILTER
     //ORDER_FILTER_BY_INV_ID
     case ORDER_FILTER_BY_INV_ID:
       const datasearch_INv = [...state.ordersForTab1];

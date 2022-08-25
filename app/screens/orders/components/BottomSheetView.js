@@ -20,7 +20,7 @@ import SearchStatus from './SearchStatus';
 import Carrier from './Carrier';
 
 const BottomSheetView = ({bottomSheetRef, diplayName, bottomSheetDisplay}) => {
-  const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
+  const snapPoints = useMemo(() => ['20%', '50%'], []);
   const {carrierNumber} = useSelector(state => state.carrierNumber);
   const {isLoding} = useSelector(state => state.carrierNumber);
 

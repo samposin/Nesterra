@@ -160,7 +160,12 @@ const Assets = ({
 
             alignItems: 'center',
           }}>
-          <View style={{...styles.searchViewLeft, flexDirection: 'row'}}>
+          <View
+            style={{
+              ...styles.searchViewLeft,
+
+              flexDirection: 'row',
+            }}>
             <TouchableOpacity
               onPress={() => {
                 setDisplayComponents('Circuits');

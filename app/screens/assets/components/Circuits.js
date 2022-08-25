@@ -35,7 +35,7 @@ const Circuits = ({
   const [locType, setLocType] = useState(true);
   const [vendor, setVendor] = useState(true);
   const [cirType, setCirType] = useState(true);
-  const [loding, setLoding] = useState(false);
+  const [loding, setLoding] = useState(true);
   const [branchType, setBranchType] = useState(true);
   // console.log(
   //   allCircuit.filter(item => item.Branch_ID == '741').length,

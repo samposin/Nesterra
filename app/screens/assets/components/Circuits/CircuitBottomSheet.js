@@ -6,7 +6,7 @@ import BranchID from '../BranchID';
 import SiteID from '../SiteID';
 
 const CircuitBottomSheet = ({cirCuitRef, diplayName, loding1}) => {
-  const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
+  const snapPoints = useMemo(() => ['20%', '50%'], []);
   // console.log(diplayName);
   const selectedComponent = () => {
     switch (true) {

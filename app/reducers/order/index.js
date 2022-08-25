@@ -27,6 +27,9 @@ export default (state = initialState, action) => {
         order1: action.payload.data,
         id: action.payload.id,
       };
+    //===============FILTER
+
+    //===============FILTER
     //  SORT ID ASCENDING
     case SORT_BY_ORDER_ID_ASC:
       const data = [...state.order1];

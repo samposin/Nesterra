@@ -15,9 +15,8 @@ import {
   ALL_DEVICES_SEARCH_BY_DEVICE_TYPE,
   ALL_DEVICES_FILTER_BY_DEVICE_TYPE,
 } from './../../../../actions/actionType/AllDevice/index';
-const Type = ({loding1}) => {
-  const {searchData} = useSelector(state => state.deviceAllData);
-
+const Type = ({loding1, deviceRef}) => {
+  const {devieceType} = useSelector(state => state.deviceAllData);
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   //0375021122
@@ -67,13 +66,14 @@ const Type = ({loding1}) => {
       <>
         <BottomSheetFlatList
           keyboardShouldPersistTaps="handled"
-          data={searchData}
+          data={devieceType}
           renderItem={({item}) => {
             return (
               <TouchableOpacity
                 onPress={() => {
                   fiterCircuitsData(item.Device_Type);
                   Keyboard.dismiss();
+                  deviceRef.current.close();
                 }}
                 style={{
                   width: '100%',

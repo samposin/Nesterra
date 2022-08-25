@@ -13,6 +13,7 @@ import {
 const initialState = {
   allAssets: [],
   allAssets1: [],
+  onlyName: [],
   isLoding: true,
 };
 

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
+  Keyboard,
   Image,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
@@ -16,6 +17,7 @@ import {get_orders_for_tab} from '../../actions/orderFotTab';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import BottomSheetView from './components/BottomSheetView';
 import BottomSheetViewDetails from './components/BottomSheetViewDetails';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 import moment from 'moment';
 import OrderLoder from '../../components/lodder/OrderLoder';
@@ -30,10 +32,12 @@ import {
   SORT_BY_INV_ID_DES,
   SORT_BY_ORDER_TYPE_ASC,
   SORT_BY_ORDER_TYPE_DES,
+  ORDER_FILTER_BY_DATE,
 } from '../../actions/actionType/action.OrdersForTab';
 import {tostalert, copyText} from '../../components/helper';
-import {useToast} from 'native-base';
+
 import {get_order_details} from '../../actions/order';
+import VendorBottomSheet from './components/VendorBottomSheet';
 const Category = [
   {
     id: 0,
@@ -85,11 +89,19 @@ const Orders = ({
 }) => {
   const {ordersForTab} = useSelector(state => state.ordersForTab);
   const dispatch = useDispatch();
+  // console.log(
+  //   ordersForTab.map(ite => {
+  //     return ite.vendor;
+  //   }),
+  //   'ordersForTab',
+  // );
+  const [refresh, setRefresh] = useState(false);
 
   const {isLoding} = useSelector(state => state.ordersForTab);
   const [diplayName, setDisplayName] = useState('');
   const bottomSheetRef = useRef(null);
   const bottomSheetRefdetails = useRef(null);
+  const vendorRef = useRef(null);
 
   const [vendor, setVendor] = useState(true);
   const [status, setStatus] = useState(true);
@@ -101,11 +113,31 @@ const Orders = ({
 
   const [bottomSheetDisplay, setBottomSheetDisplay] = useState('');
   const [lodding, setLodding] = useState(false);
-  // console.log(ordersForTab.filter(item => item.Smart_Site_Order_No == '0186'));
+  const [type, setType] = useState('');
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  //  console.log(ordersForTab.ma(item => item.Smart_Site_Order_No == '0186'));
   useEffect(() => {
     get_orders_for_tab();
   }, []);
-  const toast = useToast();
+  //=============Date Picker
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+  const handleConfirm = date => {
+    // console.log(moment(date).format('MM-DD-YY'));
+    dispatch({
+      type: ORDER_FILTER_BY_DATE,
+      data: moment(date).format('MM-DD-YY'),
+    });
+
+    hideDatePicker();
+  };
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+    Keyboard.dismiss();
+  };
+  // =======Date Picker
   //barckground color change
   const selectedComponent = item => {
     switch (true) {
@@ -134,12 +166,21 @@ const Orders = ({
     listData[id].active = true;
     setData(listData);
   };
+  const changeBottomColor1 = () => {
+    let listData = data.map(item => {
+      let itm = {...item, active: false};
+      return itm;
+    });
+
+    setData(listData);
+  };
   //bottom color change
   const randerItem = ({index, item}) => {
     return (
       <TouchableOpacity
         onPress={
           () => {
+            vendorRef.current.close();
             // setLodding(true);
             bottomSheetRef.current.close();
             // if (!lodding) {
@@ -148,6 +189,7 @@ const Orders = ({
             get_order_details(
               item.Inventory_ID,
               setLodding,
+
               bottomSheetRefdetails,
             );
           }
@@ -205,10 +247,12 @@ const Orders = ({
           }}>
           <TouchableOpacity
             onLongPress={() => {
-              copyText(item.vendor);
-              tostalert(item.vendor);
+              copyText(item.Smart_Site_Order_No);
+              tostalert(item.Smart_Site_Order_No);
             }}>
-            <Text style={styles.boxText1}>{item?.Smart_Site_Order_No}</Text>
+            <Text style={styles.boxText1}>
+              {item?.Smart_Site_Order_No ? item.Smart_Site_Order_No : '--'}
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -261,7 +305,7 @@ const Orders = ({
         {/* ==============container============== */}
 
         {/* ==============Summary View=========== */}
-        <View
+        {/* <View
           style={{
             ...styles.summaryView,
 
@@ -278,15 +322,58 @@ const Orders = ({
             </Text>
             <Text style={{color: 'black', fontSize: 14}}>Records</Text>
           </View>
-          {/* <TouchableOpacity
-            onPress={() => navigation.navigate('AllDevice')}
-            style={styles.summaryButton}>
-            <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-              Device
+        </View> */}
+
+        {/* ==============Vendor And Date View============== */}
+        <View style={{width: '100%', height: 60, flexDirection: 'row'}}>
+          <TouchableOpacity
+            onPress={() => {
+              setType('Vendor');
+              bottomSheetRefdetails.current.close();
+              vendorRef.current.snapToIndex(1);
+            }}
+            style={{
+              ...styles.categoryBottom,
+
+              backgroundColor: type == 'Vendor' ? '#007aff' : null,
+
+              borderWidth: type == 'Vendor' ? 0 : 1,
+            }}>
+            <Text style={{color: type == 'Vendor' ? 'white' : 'black'}}>
+              Vendor
             </Text>
-          </TouchableOpacity> */}
+            <AntDesign
+              name="caretdown"
+              size={20}
+              style={{marginLeft: 2}}
+              color={type == 'Vendor' ? 'white' : 'black'}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setType('Date');
+              showDatePicker();
+            }}
+            style={{
+              ...styles.categoryBottom,
+
+              backgroundColor: type == 'Date' ? '#007aff' : null,
+
+              borderWidth: type == 'Date' ? 0 : 1,
+            }}>
+            <Text style={{color: type == 'Date' ? 'white' : 'black'}}>
+              Date
+            </Text>
+            <AntDesign
+              name="caretdown"
+              size={20}
+              style={{marginLeft: 2}}
+              color={type == 'Date' ? 'white' : 'black'}
+            />
+          </TouchableOpacity>
         </View>
 
+        {/* ==============Vendor And Date View============== */}
         {/* ==============Services Category============== */}
         <View style={{...styles.dropDownView}}>
           <ScrollView
@@ -499,7 +586,7 @@ const Orders = ({
           </View>
         ) : (
           <>
-            {ordersForTab.length == 0 ? (
+            {/* {ordersForTab.length == 0 ? (
               <View
                 style={{
                   width: '100%',
@@ -511,18 +598,52 @@ const Orders = ({
                   No Data Found
                 </Text>
               </View>
-            ) : (
-              <>
-                <View style={styles.table}>
-                  <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={ordersForTab}
-                    keyExtractor={(item, i) => i.toString()}
-                    renderItem={(item, i) => randerItem(item)}
-                  />
-                </View>
-              </>
-            )}
+            ) : ( */}
+            <>
+              <View style={styles.table}>
+                <FlatList
+                  showsVerticalScrollIndicator={false}
+                  data={ordersForTab}
+                  keyExtractor={(item, i) => i.toString()}
+                  renderItem={(item, i) => randerItem(item)}
+                  refreshing={refresh}
+                  onRefresh={() => {
+                    setType('');
+                    changeBottomColor1();
+                    get_orders_for_tab();
+                  }}
+                  ListEmptyComponent={() => {
+                    return (
+                      <View
+                        style={{
+                          width: '100%',
+                          height: 500,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+                        <View
+                          style={{
+                            width: '100%',
+                            height: 200,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}>
+                          <Image
+                            style={{
+                              width: '100%',
+                              height: 100,
+                              resizeMode: 'contain',
+                            }}
+                            source={require('../../images/empty.png')}
+                          />
+                          <Text style={{fontSize: 25}}>No Data Found</Text>
+                        </View>
+                      </View>
+                    );
+                  }}
+                />
+              </View>
+            </>
           </>
         )}
         {/* ==============Summary View=========== */}
@@ -536,6 +657,13 @@ const Orders = ({
       <BottomSheetViewDetails
         lodding={lodding}
         bottomSheetRefdetails={bottomSheetRefdetails}
+      />
+      <VendorBottomSheet lodding={lodding} vendorRef={vendorRef} />
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
       />
     </>
   );

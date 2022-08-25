@@ -14,26 +14,73 @@ import {
   ALL_DEVICES_FILTER_BY_DEVICE_TYPE,
   ALL_DEVICES_SEARCH_BY_DEVICE_VENDOR,
   ALL_DEVICES_FILTER_BY_DEVICE_VENDOR,
+  ALL_DEVICES_ONLY_NAME,
 } from '../../actions/actionType/AllDevice';
 const initialState = {
   deviceAllData: [],
   deviceAllData1: [],
+  devieceName: [],
+  devieceName1: [],
+  devieceType: [],
+  devieceType1: [],
+  devieceVendor: [],
+  devieceVendor1: [],
   isLoding: true,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case ALL_DEVICES:
+      const result = action.payload.data.reduce((acc, {Device_Name}) => {
+        const entry = acc.find(i => i.Device_Name === Device_Name);
+        if (!entry) {
+          acc.push({
+            Device_Name,
+          });
+        } else {
+          entry.Device_Name = Device_Name;
+        }
+        return acc;
+      }, []);
+      const result1 = action.payload.data.reduce((acc, {Device_Type}) => {
+        const entry = acc.find(i => i.Device_Type === Device_Type);
+        if (!entry) {
+          acc.push({
+            Device_Type,
+          });
+        } else {
+          entry.Device_Type = Device_Type;
+        }
+        return acc;
+      }, []);
+      const result3 = action.payload.data.reduce((acc, {Device_Vendor}) => {
+        const entry = acc.find(i => i.Device_Vendor === Device_Vendor);
+        if (!entry) {
+          acc.push({
+            Device_Vendor,
+          });
+        } else {
+          entry.Device_Vendor = Device_Vendor;
+        }
+        return acc;
+      }, []);
+
       return {
         deviceAllData: action.payload.data,
         deviceAllData1: action.payload.data,
         searchData: action.payload.data,
         isLoding: action.payload.loder,
+        devieceName: result,
+        devieceName1: result,
+        devieceType: result1,
+        devieceType1: result1,
+        devieceVendor: result3,
+        devieceVendor1: result3,
       };
     // ==============SEARCH================
     //  SEARCH DEVICE_NAME
     case ALL_DEVICES_SEARCH_BY_VENDOR_NAME:
-      const DEVICE_NAME = [...state.deviceAllData1];
+      const DEVICE_NAME = [...state.devieceName1];
       // console.log(action.data, 'dd');
       if (action.data) {
         const newData1 = DEVICE_NAME.filter(function (item) {
@@ -43,18 +90,18 @@ export default (state = initialState, action) => {
         });
         return {
           ...state,
-          searchData: newData1,
+          devieceName: newData1,
         };
       } else {
         return {
           ...state,
-          searchData: state.deviceAllData1,
+          devieceName: state.devieceName1,
         };
       }
     //  SEARCH Device_Type
     case ALL_DEVICES_SEARCH_BY_DEVICE_TYPE:
-      const Device_Type = [...state.deviceAllData1];
-      // console.log(action.data, 'dd');
+      const Device_Type = [...state.devieceType1];
+      console.log(action.data, 'dd');
       if (action.data) {
         const newData1 = Device_Type.filter(function (item) {
           const itemData = item?.Device_Type.toUpperCase();
@@ -63,17 +110,17 @@ export default (state = initialState, action) => {
         });
         return {
           ...state,
-          searchData: newData1,
+          devieceType: newData1,
         };
       } else {
         return {
           ...state,
-          searchData: state.deviceAllData1,
+          devieceType: state.devieceType1,
         };
       }
     //  SEARCH Device_Vendor
     case ALL_DEVICES_SEARCH_BY_DEVICE_VENDOR:
-      const Device_Vendor = [...state.deviceAllData1];
+      const Device_Vendor = [...state.devieceVendor1];
       // console.log(action.data, 'dd');
       if (action.data) {
         const newData1 = Device_Vendor.filter(function (item) {
@@ -83,12 +130,12 @@ export default (state = initialState, action) => {
         });
         return {
           ...state,
-          searchData: newData1,
+          devieceVendor: newData1,
         };
       } else {
         return {
           ...state,
-          searchData: state.deviceAllData1,
+          searchData: state.devieceVendor1,
         };
       }
 

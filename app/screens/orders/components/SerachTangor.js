@@ -80,9 +80,7 @@ const SerachTangor = ({getAllTangorNumber, bottomSheetRef}) => {
                   style={{
                     width: '100%',
                     height: 30,
-
                     marginVertical: 1,
-
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
@@ -104,7 +102,6 @@ const styles = StyleSheet.create({
   searchView: {
     width: '90%',
     height: 50,
-
     alignSelf: 'center',
     borderColor: 'black',
     paddingLeft: 10,
@@ -122,7 +119,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-
     paddingRight: 5,
   },
 });

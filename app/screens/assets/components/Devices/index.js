@@ -6,7 +6,7 @@ import Vendor from './Vendor';
 import Type from './Type';
 
 const DevicesBottomSheet = ({deviceRef, diplayName, loding1}) => {
-  const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
+  const snapPoints = useMemo(() => ['20%', '50%'], []);
   // console.log(diplayName);
   const selectedComponent = () => {
     switch (true) {
