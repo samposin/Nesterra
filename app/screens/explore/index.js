@@ -57,6 +57,7 @@ import Voice from '@react-native-community/voice';
 import CircuitDetailsExplore from '../../components/BottomSheetTab/Circuits/CircuitDetailsExplore';
 import DeviceDetailsExplore from '../../components/BottomSheetTab/Devices/DeviceDetailsExplore';
 import OrderDetailsExplore from '../../components/BottomSheetTab/Orders/OrderDetailsExplore';
+import SerachCircuitIdBranchId from './Search/index';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -1066,7 +1067,7 @@ const Explore = ({
           </View>
         </View>
         {/* =================search=============== */}
-        <Search
+        {/* <Search
           catShow={setCatShow}
           onPress={onSearchPress}
           setModalVisible={setModalVisible}
@@ -1077,6 +1078,10 @@ const Explore = ({
           bottomSheetRefImage={bottomSheetRefImage}
           setIsLoading={setIsLoading}
           isLoading={isLoading}
+        /> */}
+        <SerachCircuitIdBranchId
+          setModalVisible={setModalVisible}
+          modalVisible={modalVisible}
         />
 
         {/* =================search=============== */}

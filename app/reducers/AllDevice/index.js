@@ -14,7 +14,9 @@ import {
   ALL_DEVICES_FILTER_BY_DEVICE_TYPE,
   ALL_DEVICES_SEARCH_BY_DEVICE_VENDOR,
   ALL_DEVICES_FILTER_BY_DEVICE_VENDOR,
-  ALL_DEVICES_ONLY_NAME,
+  GET_DEVICES_ONLY_NAME,
+  GET_DEVICES_ONLY_TYPE,
+  GET_DEVICES_ONLY_VENDORE,
 } from '../../actions/actionType/AllDevice';
 const initialState = {
   deviceAllData: [],
@@ -31,7 +33,17 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ALL_DEVICES:
-      const result = action.payload.data.reduce((acc, {Device_Name}) => {
+      return {
+        deviceAllData: action.payload.data,
+        deviceAllData1: action.payload.data,
+        searchData: action.payload.data,
+        isLoding: action.payload.loder,
+      };
+    //===============GET ONLY DATA
+    //ONLY NAME
+    case GET_DEVICES_ONLY_NAME:
+      const nameData = [...state.deviceAllData1];
+      const result = nameData.reduce((acc, {Device_Name}) => {
         const entry = acc.find(i => i.Device_Name === Device_Name);
         if (!entry) {
           acc.push({
@@ -42,7 +54,15 @@ export default (state = initialState, action) => {
         }
         return acc;
       }, []);
-      const result1 = action.payload.data.reduce((acc, {Device_Type}) => {
+      return {
+        ...state,
+        devieceName: result,
+        devieceName1: result,
+      };
+    //ONLY TYPE
+    case GET_DEVICES_ONLY_TYPE:
+      const typeData = [...state.deviceAllData1];
+      const result1 = typeData.reduce((acc, {Device_Type}) => {
         const entry = acc.find(i => i.Device_Type === Device_Type);
         if (!entry) {
           acc.push({
@@ -53,7 +73,16 @@ export default (state = initialState, action) => {
         }
         return acc;
       }, []);
-      const result3 = action.payload.data.reduce((acc, {Device_Vendor}) => {
+      return {
+        ...state,
+        devieceType: result1,
+        devieceType1: result1,
+      };
+    //ONLY VENDOR
+    case GET_DEVICES_ONLY_VENDORE:
+      const vendorData = [...state.deviceAllData1];
+
+      const result3 = vendorData.reduce((acc, {Device_Vendor}) => {
         const entry = acc.find(i => i.Device_Vendor === Device_Vendor);
         if (!entry) {
           acc.push({
@@ -64,19 +93,12 @@ export default (state = initialState, action) => {
         }
         return acc;
       }, []);
-
       return {
-        deviceAllData: action.payload.data,
-        deviceAllData1: action.payload.data,
-        searchData: action.payload.data,
-        isLoding: action.payload.loder,
-        devieceName: result,
-        devieceName1: result,
-        devieceType: result1,
-        devieceType1: result1,
+        ...state,
         devieceVendor: result3,
         devieceVendor1: result3,
       };
+    //===============GET ONLY DATA
     // ==============SEARCH================
     //  SEARCH DEVICE_NAME
     case ALL_DEVICES_SEARCH_BY_VENDOR_NAME:

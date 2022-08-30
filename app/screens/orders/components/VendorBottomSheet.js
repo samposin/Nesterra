@@ -97,6 +97,7 @@ const VendorBottomSheet = ({vendorRef}) => {
                 <TouchableOpacity
                   onPress={() => {
                     changeFilterData(item.vendor);
+                    vendorRef.current.close();
                   }}
                   style={{
                     width: '100%',

@@ -29,7 +29,9 @@ const Circuits = ({
   setLodding,
 }) => {
   const {allCircuit} = useSelector(state => state.allCircuit);
+  const loder = useSelector(state => state);
   // const {isLoding} = useSelector(state => state.allCircuit);
+
   const dispatch = useDispatch();
 
   const [locType, setLocType] = useState(true);
@@ -42,6 +44,7 @@ const Circuits = ({
   //   'allCircuit',
   // );
   useEffect(() => {
+    // console.log(allCircuit);
     getAllCircuit(setLoding);
   }, []);
 
@@ -144,6 +147,7 @@ const Circuits = ({
               setLocType(!locType);
               dispatch({
                 type: ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
+                data: true,
               });
             } else {
               setLocType(!locType);

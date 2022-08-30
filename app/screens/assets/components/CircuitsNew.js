@@ -37,6 +37,8 @@ const CircuitsNew = ({
   const [loding3, setLodding3] = useState(false);
   const [diplayName, setDiplayName] = useState('');
   const {allCircuit} = useSelector(state => state.allCircuit);
+  // const {loder} = useSelector(state => state.allCircuit);
+
   const dispatch = useDispatch();
 
   const [locType, setLocType] = useState(true);
@@ -211,6 +213,7 @@ const CircuitsNew = ({
           onPress={() => {
             if (locType) {
               setLocType(!locType);
+
               dispatch({
                 type: ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
               });
@@ -309,7 +312,7 @@ const CircuitsNew = ({
             borderLeftColor: 'white',
             borderLeftWidth: 2,
           }}>
-          <Text style={{...styles.boxText, color: 'white'}}>Ven</Text>
+          <Text style={{...styles.boxText, color: 'white'}}>Vendor</Text>
           <Text style={{marginTop: 1}}>
             <AntDesign
               name={vendor ? 'caretup' : 'caretdown'}

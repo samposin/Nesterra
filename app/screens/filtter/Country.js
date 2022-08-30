@@ -42,4 +42,8 @@ const Country = ({getlist, is_selected}) => {
 
 export default connect(null, {getlist, is_selected})(Country);
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  width: 100,
+  height: 500,
+  backgroundColor: 'red',
+});

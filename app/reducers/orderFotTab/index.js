@@ -21,6 +21,7 @@ import {
   ORDER_FILTER_BY_DATE,
   ORDER_SEARCH_OLLY_VENDOR,
   ORDER_FILTER_ONLY_VENDOR,
+  GET_ONLY_VENDOR,
 } from '../../actions/actionType/action.OrdersForTab';
 
 const initialState = {
@@ -34,7 +35,17 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_ORDERS_FOR_TAB:
-      const result = action.payload.data.reduce((acc, {vendor}) => {
+      return {
+        ...state,
+        ordersForTab: action.payload.data,
+        ordersForTab1: action.payload.data,
+        isLoding: action.payload.data.loder,
+      };
+    // =========GET ONLY  DATA======
+    case GET_ONLY_VENDOR:
+      const ONLYVENDOR1 = [...state.ordersForTab1];
+
+      const result = ONLYVENDOR1.reduce((acc, {vendor}) => {
         const entry = acc.find(i => i.vendor === vendor);
         if (!entry) {
           acc.push({
@@ -45,15 +56,12 @@ export default (state = initialState, action) => {
         }
         return acc;
       }, []);
-
       return {
         ...state,
-        ordersForTab: action.payload.data,
-        ordersForTab1: action.payload.data,
-        isLoding: action.payload.data.loder,
         onlyVendor: result,
         onlyVendor1: result,
       };
+    // =========GET ONLY  DATA======
     //SEARCH ONLY VENDOR
     case ORDER_SEARCH_OLLY_VENDOR:
       const ONLYVENDOR = [...state.onlyVendor1];

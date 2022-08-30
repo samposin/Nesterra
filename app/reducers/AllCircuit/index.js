@@ -56,6 +56,8 @@ export default (state = initialState, action) => {
       };
     // SORT Location_ID ASCENDING
     case ALL_CIRCUIT_SORT_BY_LOC_ID_ASC:
+      // const aa = action.lo;
+      // console.log(aa);
       const data = [...state.allCircuit1];
       const cirIdAsc = data.sort((a, b) => {
         let fa = a.Location_ID.toLowerCase(),
@@ -74,10 +76,10 @@ export default (state = initialState, action) => {
         ...state,
         allCircuit: cirIdAsc,
       };
+
     //SORT Location_ID DESCENDING
     case ALL_CIRCUIT_SORT_BY_LOC_ID_DES:
       const data1 = [...state.allCircuit1];
-
       const cirIdDes = data1.sort((a, b) => {
         let fa = a.Location_ID.toLowerCase(),
           fb = b.Location_ID.toLowerCase();
@@ -95,6 +97,7 @@ export default (state = initialState, action) => {
         ...state,
         allCircuit: cirIdDes,
       };
+
     //  SORT VENDOR ASCENDING
     case ALL_CIRCUIT_SORT_BY_VENDOR_ASC:
       const data2 = [...state.allCircuit1];

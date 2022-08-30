@@ -1,4 +1,8 @@
-import {SITE_STATUS_COORDINATES} from '../../actions/action.coordinate.type';
+import {
+  SITE_STATUS_COORDINATES,
+  SEARCH_BY_SITE_ID,
+  SEARCH_BY_BRANCH_ID,
+} from '../../actions/action.coordinate.type';
 import {GET_COORDINATES, MARKER_IS_SELECTED} from '../../actions/action.type';
 import {FILTER_MARKER} from '../../actions/actionType/action.Coordinatefilter.type';
 
@@ -25,6 +29,46 @@ export default (state = initialState, action) => {
         lngg: action.payload.lng,
         error: null,
       };
+    //==============SEARCH
+    case SEARCH_BY_SITE_ID:
+      // console.log(action.data, 'action.data');
+      const searchData = [...state.coordinates1];
+      if (action.data) {
+        const newData1 = searchData.filter(function (item) {
+          const itemData = item?.Location_ID.toUpperCase();
+
+          return itemData.startsWith(action.data.toUpperCase());
+        });
+        return {
+          ...state,
+          coordinates: newData1,
+        };
+      } else {
+        return {
+          ...state,
+          coordinates: state.coordinates1,
+        };
+      }
+    case SEARCH_BY_BRANCH_ID:
+      // console.log(action.data, 'action.data');
+      const searchData1 = [...state.coordinates1];
+      if (action.data) {
+        const newData1 = searchData1.filter(function (item) {
+          const itemData = item?.Branch_ID.toUpperCase();
+
+          return itemData.startsWith(action.data.toUpperCase());
+        });
+        return {
+          ...state,
+          coordinates: newData1,
+        };
+      } else {
+        return {
+          ...state,
+          coordinates: state.coordinates1,
+        };
+      }
+    //==============SEARCH
     case SITE_STATUS_COORDINATES:
       let data = action.payload.data.map(item => {
         return {...item, isChecked: false};

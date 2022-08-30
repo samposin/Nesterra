@@ -430,7 +430,7 @@ const BottomSheetViewCircuits = ({
               </View>
             ) : null}
 
-            <View style={{height: 30, width: '100%', borderTopWidth: 1}}></View>
+            <View style={{height: 70, width: '100%', borderTopWidth: 1}}></View>
           </>
         )}
       </BottomSheetScrollView>

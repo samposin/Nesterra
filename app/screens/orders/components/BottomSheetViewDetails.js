@@ -481,7 +481,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding}) => {
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    $ {item.Monthly_Recurring_Cost}
+                    ${item.Monthly_Recurring_Cost}
                   </Text>
                 </View>
               </View>
@@ -500,7 +500,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding}) => {
                 </View>
                 <View style={styles.secondTableColum}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    $ {item.Annual_Cost}
+                    ${item.Annual_Cost}
                   </Text>
                 </View>
               </View>

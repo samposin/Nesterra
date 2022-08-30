@@ -33,11 +33,13 @@ import {
   SORT_BY_ORDER_TYPE_ASC,
   SORT_BY_ORDER_TYPE_DES,
   ORDER_FILTER_BY_DATE,
+  GET_ONLY_VENDOR,
 } from '../../actions/actionType/action.OrdersForTab';
 import {tostalert, copyText} from '../../components/helper';
 
 import {get_order_details} from '../../actions/order';
 import VendorBottomSheet from './components/VendorBottomSheet';
+
 const Category = [
   {
     id: 0,
@@ -328,6 +330,9 @@ const Orders = ({
         <View style={{width: '100%', height: 60, flexDirection: 'row'}}>
           <TouchableOpacity
             onPress={() => {
+              dispatch({
+                type: GET_ONLY_VENDOR,
+              });
               setType('Vendor');
               bottomSheetRefdetails.current.close();
               vendorRef.current.snapToIndex(1);
@@ -862,13 +867,6 @@ const styles = StyleSheet.create({
     borderRightWidth: 1,
     paddingLeft: 10,
     justifyContent: 'center',
-  },
-  secondTableColum: {
-    width: '50',
-    height: '100',
-    borderRightColor: 'black',
-    borderRightWidth: 1,
-    paddingLeft: 'center',
   },
 
   ///========Second table

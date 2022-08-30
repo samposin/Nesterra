@@ -1046,7 +1046,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, lodding}) => {
               {/* ==================== */}
 
               <View
-                style={{height: 30, width: '100%', borderTopWidth: 1}}></View>
+                style={{height: 80, width: '100%', borderTopWidth: 1}}></View>
             </>
           )}
         </>

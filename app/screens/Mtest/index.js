@@ -4,14 +4,7 @@ import React from 'react';
 const Mtest = () => {
   return (
     <>
-      <View
-        style={{
-          width: '100%',
-          height: 100,
-          backgroundColor: 'grey',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <View style={styles.caontainer}>
         <Text>Mtest</Text>
       </View>
       {/* ============Seconde View============== */}
@@ -57,4 +50,25 @@ const Mtest = () => {
 
 export default Mtest;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  caontainer: {
+    width: '100%',
+    height: 100,
+    backgroundColor: 'grey',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  caontane: {
+    width: 100,
+    height: 200,
+    barckGroungColor: 'poine',
+    borderBottomRadious: 20,
+    borderRadius: 10,
+    borderLeftColor: 'red',
+  },
+  conta: {
+    borderBottomColor: 'red',
+    borderRadius: 10,
+  },
+  leftView: {},
+});

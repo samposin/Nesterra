@@ -22,6 +22,9 @@ import {
   ALL_DEVICES_SORT_BY_VENDOR_DES,
   ALL_DEVICES_SORT_BY_TYPE_ASC,
   ALL_DEVICES_SORT_BY_TYPE_DES,
+  GET_DEVICES_ONLY_NAME,
+  GET_DEVICES_ONLY_TYPE,
+  GET_DEVICES_ONLY_VENDORE,
 } from '../../../actions/actionType/AllDevice';
 
 import {getAllDeviceDetails} from '../../../actions/AllDevice/allDeviceDetails';
@@ -40,7 +43,7 @@ const Devices = ({
 
   // const {isLoding} = useSelector(state => state.deviceAllData);
   const dispatch = useDispatch();
-  // console.log(devieceType, 'dd');
+  // console.log(deviceAllData, 'dd');
   const [diplayName, setDiplayName] = useState('');
 
   // const {isLoding} = useSelector(state => state.ordersForTab);
@@ -161,6 +164,9 @@ const Devices = ({
         <View style={styles.idViewLeft}>
           <TouchableOpacity
             onPress={() => {
+              dispatch({
+                type: GET_DEVICES_ONLY_NAME,
+              });
               setDiplayName('Name');
               deviceRef.current.snapToIndex(1);
             }}
@@ -186,6 +192,9 @@ const Devices = ({
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
+              dispatch({
+                type: GET_DEVICES_ONLY_TYPE,
+              });
               setDiplayName('Type');
               deviceRef.current.snapToIndex(1);
             }}
@@ -211,6 +220,9 @@ const Devices = ({
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
+              dispatch({
+                type: GET_DEVICES_ONLY_VENDORE,
+              });
               setDiplayName('Vendor');
               deviceRef.current.snapToIndex(1);
             }}
