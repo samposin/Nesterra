@@ -4,12 +4,7 @@ import Voice from '@react-native-community/voice';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-const SearchIcon = ({
-  setModalVisible,
-  circuitSearch,
-  iconShow,
-  setIconShow,
-}) => {
+const SiteIcon = ({setModalVisible, searchBranch, iconShow, setIconShow}) => {
   // console.log(iconShow);
   const onSpeechStartHandler = e => {
     console.log('start handler==>>>', e);
@@ -25,7 +20,7 @@ const SearchIcon = ({
   };
 
   const onSpeechResultsHandler = e => {
-    circuitSearch(e.value[0]);
+    searchBranch(e.value[0]);
   };
 
   const startRecording = async () => {
@@ -81,6 +76,6 @@ const SearchIcon = ({
   );
 };
 
-export default SearchIcon;
+export default SiteIcon;
 
 const styles = StyleSheet.create({});

@@ -12,7 +12,7 @@ import {getAllBrachrID} from '../../../actions/AllBranchID';
 import BottomSheetViewCircuits from './CircuitDetails';
 import {getAllCircuitDetails} from '../../../actions/AllCircuit/allCorcuitDetails';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import ThirdRow from './ThirdRow/index';
 import {
   ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
   ALL_CIRCUIT_SORT_BY_LOC_ID_DES,
@@ -143,6 +143,7 @@ const CircuitsNew = ({
   return (
     <>
       {/* ========ID VIEW============= */}
+
       <View style={{...styles.idView}}>
         <View style={styles.idViewLeft}>
           <TouchableOpacity
@@ -206,6 +207,7 @@ const CircuitsNew = ({
         </View>
         <View style={styles.idViewRight}></View>
       </View>
+      <ThirdRow />
       {/* ========ID VIEW============= */}
       {/* ========TABLE HEADER============= */}
       <View style={styles.tableHeader}>
@@ -356,6 +358,7 @@ const CircuitsNew = ({
           )}
         </>
       )}
+
       {/* ========TABLE HEADER============= */}
       <CircuitBottomSheet
         diplayName={diplayName}

@@ -3,20 +3,19 @@ import React, {useState} from 'react';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
-import {SEARCH_BY_SITE_ID} from '../../../actions/action.coordinate.type';
-import SearchIcon from './SearchIcon';
+// import {SEARCH_BY_BRANCH_ID} from '../../../actions/action.coordinate.type';
+import DeviceIcon from './DeviceIcon';
 
-const CircuitSearch = ({setModalVisible}) => {
+const DeviceId = ({setModalVisible}) => {
   const dispatch = useDispatch();
-  const [search, setsearch] = useState('');
+  const [search, setSearch] = useState('');
   const [iconShow, setIconShow] = useState(false);
-  // console.log(iconShow);
-  const circuitSearch = text => {
-    setsearch(text);
-    dispatch({
-      type: SEARCH_BY_SITE_ID,
-      data: text,
-    });
+  const searchBranch = text => {
+    setSearch(text);
+    // dispatch({
+    //   type: SEARCH_BY_BRANCH_ID,
+    //   data: text,
+    // });
   };
   return (
     <>
@@ -38,14 +37,14 @@ const CircuitSearch = ({setModalVisible}) => {
         <TextInput
           value={search}
           style={{color: 'black'}}
-          placeholder="Search Site ID"
+          placeholder="Search Device Id"
           placeholderTextColor="black"
-          onChangeText={text => circuitSearch(text)}
+          onChangeText={text => searchBranch(text)}
         />
       </View>
-      <SearchIcon
+      <DeviceIcon
         setModalVisible={setModalVisible}
-        circuitSearch={circuitSearch}
+        searchBranch={searchBranch}
         iconShow={iconShow}
         setIconShow={setIconShow}
       />
@@ -53,6 +52,6 @@ const CircuitSearch = ({setModalVisible}) => {
   );
 };
 
-export default CircuitSearch;
+export default DeviceId;
 
 const styles = StyleSheet.create({});

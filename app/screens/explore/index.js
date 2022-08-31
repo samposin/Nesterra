@@ -14,7 +14,7 @@ import {
 import BottomSheetView from './BottomSheet';
 import MapView from 'react-native-map-clustering';
 import {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import Search from './Search';
+// import Search from './Search';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import MapViewDirections from 'react-native-maps-directions';
@@ -57,7 +57,10 @@ import Voice from '@react-native-community/voice';
 import CircuitDetailsExplore from '../../components/BottomSheetTab/Circuits/CircuitDetailsExplore';
 import DeviceDetailsExplore from '../../components/BottomSheetTab/Devices/DeviceDetailsExplore';
 import OrderDetailsExplore from '../../components/BottomSheetTab/Orders/OrderDetailsExplore';
-import SerachCircuitIdBranchId from './Search/index';
+// import SerachCircuitIdBranchId from './components/Search';
+// import SerachCircuitIdBranchId from './Search/index';
+// import SerachCircuitIdBranchId from '../../components/Search';
+import SearchComponet from './components/Search/SearchComponet';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -1079,10 +1082,8 @@ const Explore = ({
           setIsLoading={setIsLoading}
           isLoading={isLoading}
         /> */}
-        <SerachCircuitIdBranchId
-          setModalVisible={setModalVisible}
-          modalVisible={modalVisible}
-        />
+        {/* <Search /> */}
+        <SearchComponet />
 
         {/* =================search=============== */}
         {/* =================Category=============== */}

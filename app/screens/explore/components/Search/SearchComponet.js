@@ -9,22 +9,40 @@ import React, {useState} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import DropDownView from './DropDownView';
-import BranchSearch from './BranchSearch';
-import CircuitSearch from './CircuitSearch';
+// import BranchSearch from './BranchSearch';
+// import CircuitSearch from './CircuitSearch';
+import CircuitId from './CircuitId/index';
+import BranchId from './BranchId';
+import DeviceId from './DeviceId';
+import SiteId from './SiteId';
 
-const SerachCircuitIdBranchId = ({setModalVisible}) => {
+const SearchComponet = ({setModalVisible}) => {
   const [dropDownShow, seTDropDownShow] = useState(false);
-  const [searchView, setSearchView] = useState('Branch');
-
+  const [searchView, setSearchView] = useState('CircuitId');
+  // console.log(searchView);
+  const ranDerView = () => {
+    switch (true) {
+      case searchView === 'CircuitId':
+        return <CircuitId />;
+      case searchView === 'BranchId':
+        return <BranchId />;
+      case searchView === 'DeviceId':
+        return <DeviceId />;
+      case searchView === 'SiteId':
+        return <SiteId />;
+    }
+  };
   return (
     <>
       <View style={styles.container}>
         <View style={styles.leftView}>
-          {searchView == 'Branch' ? (
-            <BranchSearch setModalVisible={setModalVisible} />
-          ) : (
-            <CircuitSearch setModalVisible={setModalVisible} />
-          )}
+          {ranDerView()}
+          {/* <CircuitId /> */}
+          {/* {searchView == 'Branch' ? (
+                <BranchSearch setModalVisible={setModalVisible} />
+              ) : (
+                <CircuitSearch setModalVisible={setModalVisible} />
+              )} */}
         </View>
         <TouchableOpacity
           onPress={() => {
@@ -59,7 +77,7 @@ const SerachCircuitIdBranchId = ({setModalVisible}) => {
   );
 };
 
-export default SerachCircuitIdBranchId;
+export default SearchComponet;
 
 const styles = StyleSheet.create({
   container: {

@@ -24,8 +24,7 @@ import {getAllAssets} from '../../actions/Assets';
 
 import {get_order_details} from '../../actions/order';
 import Devices from './components/Devices';
-import Circuits from './components/Circuits';
-import BottomSheetViewDevices from './components/DevicesDetails';
+
 import CircuitsNew from './components/CircuitsNew';
 
 const Assets = ({
@@ -297,6 +296,7 @@ const Assets = ({
           <View style={styles.idViewRight}></View>
         </View> */}
         {ranDerView()}
+
         {/* ==============Summary View=========== */}
         <BottomSheetView1
           lodding={lodding}
