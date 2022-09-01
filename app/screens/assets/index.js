@@ -5,9 +5,9 @@ import {
   SafeAreaView,
   StatusBar,
   TouchableOpacity,
-  FlatList,
-  TextInput,
+  Dimensions,
 } from 'react-native';
+const {width} = Dimensions.get('screen');
 import React, {useState, useEffect, useRef} from 'react';
 
 import {get_orders_for_tab} from '../../actions/orderFotTab';
@@ -170,9 +170,10 @@ const Assets = ({
                 setDisplayComponents('Circuits');
               }}
               style={{
-                width: 110,
+                width: 90,
                 height: 40,
                 borderRadius: 10,
+                marginRight: 10,
                 backgroundColor:
                   displyCompomnet == 'Circuits' ? '#007aff' : 'transparent',
                 borderWidth: 1,
@@ -195,9 +196,9 @@ const Assets = ({
                 setDisplayComponents('Devices');
               }}
               style={{
-                width: 110,
+                width: 90,
                 height: 40,
-                marginLeft: 15,
+
                 borderRadius: 10,
                 backgroundColor:
                   displyCompomnet == 'Devices' ? '#007aff' : 'transparent',
@@ -224,6 +225,29 @@ const Assets = ({
             </Text>
             <Text style={{fontWeight: 'bold'}}>Records</Text>
           </View>
+        </View>
+        <View
+          style={{
+            width: 130,
+            height: 55,
+            backgroundColor: '#007aff',
+            position: 'absolute',
+            bottom: 60,
+            zIndex: 1,
+            left: width / 2 - 65,
+            borderRadius: 15,
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'row',
+          }}>
+          <Text style={{fontWeight: 'bold', color: 'white'}}>
+            {displyCompomnet === 'Circuits'
+              ? allCircuit.length
+              : deviceAllData.length}
+          </Text>
+          <Text style={{fontWeight: 'bold', color: 'white', marginLeft: 12}}>
+            {displyCompomnet === 'Circuits' ? 'Circuits' : 'Devices'}
+          </Text>
         </View>
         {/* ==============Search View=========== */}
         {/* ==============Services Category============== */}
@@ -333,12 +357,6 @@ export default connect(null, {
 })(Assets);
 
 const styles = StyleSheet.create({
-  loderView: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '80%',
-  },
   //searchView
   searchViewLeft: {
     width: '80%',
@@ -347,20 +365,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  searchViewLeftLeft: {
-    width: '100%',
-    height: '80%',
-    borderWidth: 1.5,
-    borderRadius: 10,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  inputView: {
-    width: '80%',
-    height: '100%',
 
-    justifyContent: 'center',
-  },
   searchViewRight: {
     width: '20%',
     height: '100%',
@@ -371,132 +376,12 @@ const styles = StyleSheet.create({
   searchView: {
     width: '100%',
     height: 60,
-    paddingHorizontal: 15,
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
-  searchIconView: {
-    width: '20%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  //searchView
-  ///========id Button
-  idButton: {
-    width: '30%',
-    height: 40,
-    borderWidth: 1,
-
-    borderRadius: 10,
-    margin: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  ///========id View
-  idView: {
-    width: '100%',
-    height: 60,
-    flexDirection: 'row',
-    alignItems: 'center',
     paddingHorizontal: 10,
-    marginBottom: 5,
-  },
-  idViewLeft: {
-    width: '80%',
-    height: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
+    flexDirection: 'row',
   },
-  idViewRight: {width: '20%', height: '100%'},
-  ///========id View
 
-  ///=========Table
-  table: {
-    width: '100%',
-    alignSelf: 'center',
-    marginTop: 15,
-  },
-  tableRow: {
-    width: '100%',
-    height: 40,
-    backgroundColor: '#007aff',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'center',
-  },
-  tableRow1: {
-    width: '100%',
-    height: 100,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'center',
-  },
-  tableRowColum: {
-    width: '25%',
-    height: '100%',
-    backgroundColor: '#007aff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  tableRowColumLast: {
-    width: '25%',
-    marginHorizontal: 2,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  boxText: {
-    fontWeight: '700',
-    fontSize: 16,
-    color: 'white',
-  },
-  ///=========Table
+  //searchView
+
   ///=========data row
-  tableRow1: {
-    width: '100%',
-    height: 55,
-
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-
-    alignSelf: 'center',
-  },
-  tableRowColum1: {
-    width: '25%',
-    height: '100%',
-    justifyContent: 'center',
-  },
-
-  boxText1: {
-    fontSize: 14,
-    color: '#000000',
-    marginLeft: 7,
-  },
-  ///=========data row
-  ///========Second table
-  secondTable: {
-    width: '95%',
-    marginTop: 20,
-    alignSelf: 'center',
-  },
-  secondTableRow: {
-    width: '100%',
-    height: 30,
-
-    flexDirection: 'row',
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-  },
-  secondTableColum: {
-    width: '50%',
-    height: '100%',
-    borderRightColor: 'black',
-    borderRightWidth: 1,
-    paddingLeft: 10,
-    justifyContent: 'center',
-  },
-  ///========Second table
 });

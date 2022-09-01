@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {get_orders_for_tab} from '../../actions/orderFotTab';
 import {connect, useDispatch, useSelector} from 'react-redux';
@@ -347,10 +348,14 @@ const Orders = ({
             <Text style={{color: type == 'Vendor' ? 'white' : 'black'}}>
               Vendor
             </Text>
-            <AntDesign
-              name="caretdown"
-              size={20}
-              style={{marginLeft: 2}}
+            <FontAwesome5
+              name="eject"
+              size={14}
+              style={{
+                transform: [{rotate: '180deg'}],
+                marginLeft: 10,
+                marginTop: 3,
+              }}
               color={type == 'Vendor' ? 'white' : 'black'}
             />
           </TouchableOpacity>
@@ -369,10 +374,15 @@ const Orders = ({
             <Text style={{color: type == 'Date' ? 'white' : 'black'}}>
               Date
             </Text>
-            <AntDesign
-              name="caretdown"
-              size={20}
-              style={{marginLeft: 2}}
+
+            <FontAwesome5
+              name="eject"
+              size={14}
+              style={{
+                transform: [{rotate: '180deg'}],
+                marginLeft: 10,
+                marginTop: 3,
+              }}
               color={type == 'Date' ? 'white' : 'black'}
             />
           </TouchableOpacity>
@@ -407,10 +417,14 @@ const Orders = ({
                   <Text style={{color: item.active ? 'white' : 'black'}}>
                     {item.name}
                   </Text>
-                  <AntDesign
-                    name="caretdown"
-                    size={20}
-                    style={{marginLeft: 2}}
+                  <FontAwesome5
+                    name="eject"
+                    size={14}
+                    style={{
+                      transform: [{rotate: '180deg'}],
+                      marginLeft: 10,
+                      marginTop: 3,
+                    }}
                     color={item.active ? 'white' : 'black'}
                   />
                 </TouchableOpacity>

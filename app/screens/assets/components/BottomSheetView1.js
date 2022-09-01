@@ -7,7 +7,10 @@ import {useSelector} from 'react-redux';
 // import SerachOrderTypeSmartSite from './SerachOrderTypeSmartSite';
 import BranchID from './BranchID';
 import SiteID from './SiteID';
-import CircuitID from './CircuitID';
+import Status from './Status';
+import Vendor from './ThirdRow/Vendor/index';
+import Type from './ThirdRow/Type/index';
+import SubType from './ThirdRow/SubType/index';
 
 const BottomSheetView1 = ({
   bottomSheetRef,
@@ -21,14 +24,19 @@ const BottomSheetView1 = ({
     switch (true) {
       case bottomSheetDisplay === 'SiteID':
         return <SiteID lodding={lodding} />;
-        break;
-      case bottomSheetDisplay === 'CircuitID':
-        return <CircuitID lodding={lodding} />;
-        break;
+
+      case bottomSheetDisplay === 'Status':
+        return <Status lodding={lodding} />;
 
       case bottomSheetDisplay === 'BranchID':
         return <BranchID lodding={lodding} />;
-        break;
+
+      case bottomSheetDisplay === 'Vendor':
+        return <Vendor lodding={lodding} />;
+      case bottomSheetDisplay === 'Type':
+        return <Type lodding={lodding} />;
+      case bottomSheetDisplay === 'Sub Type':
+        return <SubType lodding={lodding} />;
     }
   };
 

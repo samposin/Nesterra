@@ -12,11 +12,15 @@ import {
   ALL_CIRCUIT_FILTER_BY_LOCATION_ID,
   ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
   ALL_CIRCUIT_FILTER_BY_BRANCH_ID,
+  ALL_CIRCUIT_SORT_BY_STATUS,
+  ALL_CIRCUIT_FILTER_BY_STATUS,
 } from '../../actions/actionType/AllCircuit';
 
 const initialState = {
   allCircuit: [],
   allCircuit1: [],
+  allStatus: [],
+  allStatus1: [],
   isLoding: true,
 };
 
@@ -30,13 +34,41 @@ export default (state = initialState, action) => {
         isLoding: action.payload.loder,
       };
 
-    // FILTER BY Location_ID
+    // SORT BY STATUS
+    case ALL_CIRCUIT_SORT_BY_STATUS:
+      const STATUS = [...state.allCircuit1];
+      const statusData = STATUS.reduce((acc, {Circuit_Status}) => {
+        const entry = acc.find(i => i.Circuit_Status === Circuit_Status);
+        if (!entry) {
+          acc.push({
+            Circuit_Status,
+          });
+        } else {
+          entry.Circuit_Status = Circuit_Status;
+        }
+        return acc;
+      }, []);
+      return {
+        ...state,
+        allStatus: statusData,
+        allStatus1: statusData,
+      };
     case ALL_CIRCUIT_FILTER_BY_LOCATION_ID:
       const fdata = [...state.allCircuit1];
       const filterdata = fdata.filter(item => item.Location_ID == action.data);
       return {
         ...state,
         allCircuit: filterdata,
+      };
+    // FILTER BY STATUS
+    case ALL_CIRCUIT_FILTER_BY_STATUS:
+      const filterStatus = [...state.allCircuit1];
+      const filterStatusData = filterStatus.filter(
+        item => item.Circuit_Status == action.data,
+      );
+      return {
+        ...state,
+        allCircuit: filterStatusData,
       };
     // FILTER BY CIRCUIT_ID
     case ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID:

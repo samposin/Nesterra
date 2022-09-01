@@ -13,9 +13,13 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {ALL_CIRCUITSID_FILTER_BY_CIRCUIT_ID} from '../../../actions/actionType/AllCircuitID';
-import {ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID} from '../../../actions/actionType/AllCircuit';
-const CircuitID = ({loding1}) => {
-  const {allCircuitID} = useSelector(stata => stata.allCircuitID);
+import {
+  ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
+  ALL_CIRCUIT_FILTER_BY_STATUS,
+} from '../../../actions/actionType/AllCircuit';
+const Status = ({loding1}) => {
+  const {allStatus} = useSelector(stata => stata.allCircuit);
+  // console.log(allStatus);
 
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
@@ -30,7 +34,7 @@ const CircuitID = ({loding1}) => {
   };
   const fiterCircuitsData = text => {
     dispatch({
-      type: ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
+      type: ALL_CIRCUIT_FILTER_BY_STATUS,
       data: text,
     });
   };
@@ -66,12 +70,12 @@ const CircuitID = ({loding1}) => {
         <>
           <BottomSheetFlatList
             keyboardShouldPersistTaps="handled"
-            data={allCircuitID}
+            data={allStatus}
             renderItem={({item}) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    fiterCircuitsData(item.id);
+                    fiterCircuitsData(item.Circuit_Status);
                     Keyboard.dismiss();
                   }}
                   style={{
@@ -81,11 +85,13 @@ const CircuitID = ({loding1}) => {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
+                  <Text style={{fontWeight: 'bold'}}>
+                    {item.Circuit_Status}
+                  </Text>
                 </TouchableOpacity>
               );
             }}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.Circuit_Status}
           />
         </>
       )}
@@ -93,7 +99,7 @@ const CircuitID = ({loding1}) => {
   );
 };
 
-export default CircuitID;
+export default Status;
 
 const styles = StyleSheet.create({
   searchView: {

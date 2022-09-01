@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useMemo} from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
-import CircuitID from '../CircuitID';
+import Status from '../Status';
 import BranchID from '../BranchID';
 import SiteID from '../SiteID';
 
@@ -13,8 +13,8 @@ const CircuitBottomSheet = ({cirCuitRef, diplayName, loding1}) => {
       case diplayName === 'Site ID':
         return <SiteID cirCuitRef={cirCuitRef} loding1={loding1} />;
 
-      case diplayName === 'Circuit ID':
-        return <CircuitID cirCuitRef={cirCuitRef} loding1={loding1} />;
+      case diplayName === 'Status':
+        return <Status cirCuitRef={cirCuitRef} loding1={loding1} />;
 
       case diplayName === 'Branch ID':
         return <BranchID cirCuitRef={cirCuitRef} loding1={loding1} />;

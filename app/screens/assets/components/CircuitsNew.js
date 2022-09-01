@@ -12,7 +12,9 @@ import {getAllBrachrID} from '../../../actions/AllBranchID';
 import BottomSheetViewCircuits from './CircuitDetails';
 import {getAllCircuitDetails} from '../../../actions/AllCircuit/allCorcuitDetails';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ThirdRow from './ThirdRow/index';
+
 import {
   ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
   ALL_CIRCUIT_SORT_BY_LOC_ID_DES,
@@ -22,7 +24,9 @@ import {
   ALL_CIRCUIT_SORT_BY_CIR_ID_DES,
   ALL_CIRCUIT_SORT_BY_BRANCH_ASC,
   ALL_CIRCUIT_SORT_BY_BRANCH_DES,
+  ALL_CIRCUIT_SORT_BY_STATUS,
 } from '../../../actions/actionType/AllCircuit';
+
 const CircuitsNew = ({
   getAllCircuit,
   getAllSiteID,
@@ -31,6 +35,7 @@ const CircuitsNew = ({
   getAllCircuitDetails,
 }) => {
   const cirCuitRef = useRef(null);
+  const thirdRowRef = useRef(null);
   const circuitRefDetails = useRef(null);
   const [loding1, setLodding1] = useState(false);
   const [loding, setLodding] = useState(false);
@@ -38,7 +43,7 @@ const CircuitsNew = ({
   const [diplayName, setDiplayName] = useState('');
   const {allCircuit} = useSelector(state => state.allCircuit);
   // const {loder} = useSelector(state => state.allCircuit);
-
+  // console.log(allCircuit);
   const dispatch = useDispatch();
 
   const [locType, setLocType] = useState(true);
@@ -140,6 +145,13 @@ const CircuitsNew = ({
       </TouchableOpacity>
     );
   };
+  const searchFilterDatataByStatus = () => {
+    setDiplayName('Status');
+    dispatch({
+      type: ALL_CIRCUIT_SORT_BY_STATUS,
+    });
+    cirCuitRef.current.snapToIndex(1);
+  };
   return (
     <>
       {/* ========ID VIEW============= */}
@@ -155,36 +167,30 @@ const CircuitsNew = ({
             }}
             style={{
               ...styles.idButton,
+              flexDirection: 'row',
+              marginRight: 10,
               borderColor: diplayName == 'Site ID' ? '#007aff' : 'black',
             }}>
             <Text
               style={{
-                fontSize: 18,
+                fontSize: 15,
                 fontWeight: 'bold',
                 color: diplayName == 'Site ID' ? '#007aff' : 'black',
               }}>
               Site ID
             </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              setDiplayName('Circuit ID');
-              getAllCircuitID(setLodding1);
-              cirCuitRef.current.snapToIndex(1);
-            }}
-            style={{
-              ...styles.idButton,
-              borderColor: diplayName == 'Circuit ID' ? '#007aff' : 'black',
-            }}>
-            <Text
+            <FontAwesome5
+              name="eject"
+              size={15}
               style={{
-                fontSize: 18,
-                fontWeight: 'bold',
-                color: diplayName == 'Circuit ID' ? '#007aff' : 'black',
-              }}>
-              Circuit ID
-            </Text>
+                transform: [{rotate: '180deg'}],
+                marginLeft: 5,
+                marginTop: 3,
+              }}
+              color={diplayName == 'Site ID' ? '#007aff' : 'black'}
+            />
           </TouchableOpacity>
+
           <TouchableOpacity
             onPress={() => {
               setDiplayName('Branch ID');
@@ -193,21 +199,62 @@ const CircuitsNew = ({
             }}
             style={{
               ...styles.idButton,
+              flexDirection: 'row',
+              marginRight: 10,
               borderColor: diplayName == 'Branch ID' ? '#007aff' : 'black',
             }}>
             <Text
               style={{
-                fontSize: 18,
+                fontSize: 15,
                 fontWeight: 'bold',
                 color: diplayName == 'Branch ID' ? '#007aff' : 'black',
               }}>
               Branch ID
             </Text>
+            <FontAwesome5
+              name="eject"
+              size={15}
+              style={{
+                transform: [{rotate: '180deg'}],
+                marginLeft: 2,
+                marginTop: 3,
+              }}
+              color={diplayName == 'Branch ID' ? '#007aff' : 'black'}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              searchFilterDatataByStatus();
+            }}
+            style={{
+              ...styles.idButton,
+              marginRight: 10,
+              flexDirection: 'row',
+              borderColor: diplayName == 'Status' ? '#007aff' : 'black',
+            }}>
+            <Text
+              style={{
+                fontSize: 15,
+                fontWeight: 'bold',
+                color: diplayName == 'Status' ? '#007aff' : 'black',
+              }}>
+              Status
+            </Text>
+            <FontAwesome5
+              name="eject"
+              size={15}
+              style={{
+                transform: [{rotate: '180deg'}],
+                marginLeft: 2,
+                marginTop: 3,
+              }}
+              color={diplayName == 'Status' ? '#007aff' : 'black'}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.idViewRight}></View>
       </View>
-      <ThirdRow />
+      <ThirdRow setDiplayName={setDiplayName} cirCuitRef={cirCuitRef} />
       {/* ========ID VIEW============= */}
       {/* ========TABLE HEADER============= */}
       <View style={styles.tableHeader}>
@@ -393,11 +440,11 @@ const styles = StyleSheet.create({
   ///========Lodder
   ///========id Button
   idButton: {
-    width: '30%',
+    width: 90,
     height: 40,
     borderWidth: 1,
     borderRadius: 10,
-    margin: 3,
+
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -416,7 +463,6 @@ const styles = StyleSheet.create({
     height: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
   },
   idViewRight: {width: '20%', height: '100%'},
   ///========id View

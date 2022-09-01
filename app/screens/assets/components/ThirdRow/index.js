@@ -1,18 +1,35 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-const Button = () => {
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
+const Button = ({tittle, setDiplayName, cirCuitRef}) => {
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => {
+        setDiplayName(tittle);
+        cirCuitRef.current.snapToIndex(1);
+      }}
       style={{
-        width: 95,
+        width: 90,
         height: 40,
         marginRight: 10,
         borderRadius: 10,
-        backgroundColor: 'yellowgreen',
-      }}></View>
+        borderWidth: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+      }}>
+      <Text style={{fontWeight: '600', color: 'black'}}>{tittle}</Text>
+      <FontAwesome5
+        name="eject"
+        size={15}
+        style={{transform: [{rotate: '180deg'}], marginLeft: 2, marginTop: 3}}
+        color={'black'}
+      />
+    </TouchableOpacity>
   );
 };
-const ThirdRow = () => {
+const ThirdRow = ({setDiplayName, cirCuitRef}) => {
   return (
     <View
       style={{
@@ -21,10 +38,27 @@ const ThirdRow = () => {
         paddingLeft: 10,
         flexDirection: 'row',
       }}>
-      <Button />
-      <Button />
-      <Button />
-      <Button />
+      <Button
+        tittle="Vendor"
+        setDiplayName={setDiplayName}
+        cirCuitRef={cirCuitRef}
+      />
+      <Button
+        tittle="Type"
+        setDiplayName={setDiplayName}
+        cirCuitRef={cirCuitRef}
+      />
+      <Button
+        tittle="Sub Type"
+        setDiplayName={setDiplayName}
+        cirCuitRef={cirCuitRef}
+      />
+
+      <Button
+        tittle="Circuit ID"
+        setDiplayName={setDiplayName}
+        cirCuitRef={cirCuitRef}
+      />
     </View>
   );
 };
