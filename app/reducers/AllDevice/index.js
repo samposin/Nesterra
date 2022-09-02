@@ -17,6 +17,8 @@ import {
   GET_DEVICES_ONLY_NAME,
   GET_DEVICES_ONLY_TYPE,
   GET_DEVICES_ONLY_VENDORE,
+  GET_DEVICES_SORT_INACTIVE,
+  GET_DEVICES_SORT_ACTIVE,
 } from '../../actions/actionType/AllDevice';
 const initialState = {
   deviceAllData: [],
@@ -40,6 +42,29 @@ export default (state = initialState, action) => {
         isLoding: action.payload.loder,
       };
     //===============GET ONLY DATA
+    //Acative
+    case GET_DEVICES_SORT_INACTIVE:
+      const inactiveData = [...state.deviceAllData1];
+      const inactive = inactiveData.filter(
+        item => item.Device_Status == 'Inactive',
+      );
+      // console.log(inactive.length, 'in');
+      return {
+        ...state,
+        deviceAllData: inactive,
+      };
+    //Acative
+    case GET_DEVICES_SORT_ACTIVE:
+      const activedata = [...state.deviceAllData1];
+      const active = activedata.filter(item => item.Device_Status == 'Active');
+      // console.log(active.length, 'ac');
+      return {
+        ...state,
+        deviceAllData: active,
+      };
+
+    //===============SORT DATA
+    //===============SORT DATA
     //ONLY NAME
     case GET_DEVICES_ONLY_NAME:
       const nameData = [...state.deviceAllData1];
@@ -123,7 +148,7 @@ export default (state = initialState, action) => {
     //  SEARCH Device_Type
     case ALL_DEVICES_SEARCH_BY_DEVICE_TYPE:
       const Device_Type = [...state.devieceType1];
-      console.log(action.data, 'dd');
+      // console.log(action.data, 'dd');
       if (action.data) {
         const newData1 = Device_Type.filter(function (item) {
           const itemData = item?.Device_Type.toUpperCase();

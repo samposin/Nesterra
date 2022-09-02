@@ -48,6 +48,7 @@ const Assets = ({
 
   // console.log(ordersForTab);
   // console.log(allAssets.length);
+
   const {isLoding} = useSelector(state => state.ordersForTab);
 
   // const [isLoding, setIsLoding] = useState(false);
@@ -217,38 +218,9 @@ const Assets = ({
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.searchViewRight}>
-            <Text style={{fontWeight: 'bold'}}>
-              {displyCompomnet === 'Circuits'
-                ? allCircuit.length
-                : deviceAllData.length}
-            </Text>
-            <Text style={{fontWeight: 'bold'}}>Records</Text>
-          </View>
+          <View style={styles.searchViewRight}></View>
         </View>
-        <View
-          style={{
-            width: 130,
-            height: 55,
-            backgroundColor: '#007aff',
-            position: 'absolute',
-            bottom: 60,
-            zIndex: 1,
-            left: width / 2 - 65,
-            borderRadius: 15,
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'row',
-          }}>
-          <Text style={{fontWeight: 'bold', color: 'white'}}>
-            {displyCompomnet === 'Circuits'
-              ? allCircuit.length
-              : deviceAllData.length}
-          </Text>
-          <Text style={{fontWeight: 'bold', color: 'white', marginLeft: 12}}>
-            {displyCompomnet === 'Circuits' ? 'Circuits' : 'Devices'}
-          </Text>
-        </View>
+
         {/* ==============Search View=========== */}
         {/* ==============Services Category============== */}
         {/* <View style={{...styles.idView}}>

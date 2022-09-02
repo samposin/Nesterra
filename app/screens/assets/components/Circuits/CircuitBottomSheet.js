@@ -4,6 +4,11 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import Status from '../Status';
 import BranchID from '../BranchID';
 import SiteID from '../SiteID';
+import Type from './../ThirdRow/Type/index';
+import SubType from '../ThirdRow/SubType';
+
+import Vendor from './../ThirdRow/Vendor/index';
+import CircuitId from '../ThirdRow/CircuitId';
 
 const CircuitBottomSheet = ({cirCuitRef, diplayName, loding1}) => {
   const snapPoints = useMemo(() => ['20%', '50%'], []);
@@ -18,6 +23,14 @@ const CircuitBottomSheet = ({cirCuitRef, diplayName, loding1}) => {
 
       case diplayName === 'Branch ID':
         return <BranchID cirCuitRef={cirCuitRef} loding1={loding1} />;
+      case diplayName === 'Type':
+        return <Type cirCuitRef={cirCuitRef} loding1={loding1} />;
+      case diplayName === 'Sub Type':
+        return <SubType cirCuitRef={cirCuitRef} loding1={loding1} />;
+      case diplayName === 'Vendor':
+        return <Vendor cirCuitRef={cirCuitRef} loding1={loding1} />;
+      case diplayName === 'Circuit ID':
+        return <CircuitId cirCuitRef={cirCuitRef} loding1={loding1} />;
     }
   };
   return (

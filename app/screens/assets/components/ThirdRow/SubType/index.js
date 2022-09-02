@@ -13,7 +13,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
 
 const SubType = ({loding1}) => {
-  const {allBranchID} = useSelector(stata => stata.allBranchID);
+  const {allSubType} = useSelector(stata => stata.allCircuit);
   // console.log(allBranchID.length, 'allBranchID');
   // console.log(
   //   allBranchID.filter(item => item.id == '10').length,
@@ -53,6 +53,43 @@ const SubType = ({loding1}) => {
           <EvilIcons name="search" size={24} color="black" />
         </View>
       </View>
+      {loding1 ? (
+        <View
+          style={{
+            width: '100%',
+            height: 200,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <ActivityIndicator color="#007aff" size="large" />
+        </View>
+      ) : (
+        <>
+          <BottomSheetFlatList
+            keyboardShouldPersistTaps="handled"
+            data={allSubType}
+            renderItem={({item}) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    // fiterCircuitsData(item.Vendor);
+                    Keyboard.dismiss();
+                  }}
+                  style={{
+                    width: '100%',
+                    height: 30,
+                    marginVertical: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{fontWeight: 'bold'}}>{item.SubCat}</Text>
+                </TouchableOpacity>
+              );
+            }}
+            keyExtractor={item => item.SubCat}
+          />
+        </>
+      )}
     </>
   );
 };

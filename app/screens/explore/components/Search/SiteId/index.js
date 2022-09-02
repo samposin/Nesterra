@@ -3,8 +3,8 @@ import React, {useState} from 'react';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
-// import {SEARCH_BY_BRANCH_ID} from '../../../actions/action.coordinate.type';
 import SiteIcon from './SiteIcon';
+import {SEARCH_BY_SITE_ID} from '../../../../../actions/action.coordinate.type';
 
 const SiteId = ({setModalVisible}) => {
   const dispatch = useDispatch();
@@ -12,10 +12,10 @@ const SiteId = ({setModalVisible}) => {
   const [iconShow, setIconShow] = useState(false);
   const searchBranch = text => {
     setSearch(text);
-    // dispatch({
-    //   type: SEARCH_BY_BRANCH_ID,
-    //   data: text,
-    // });
+    dispatch({
+      type: SEARCH_BY_SITE_ID,
+      data: text,
+    });
   };
   return (
     <>

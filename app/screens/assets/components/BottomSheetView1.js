@@ -11,6 +11,7 @@ import Status from './Status';
 import Vendor from './ThirdRow/Vendor/index';
 import Type from './ThirdRow/Type/index';
 import SubType from './ThirdRow/SubType/index';
+import CircuitId from './ThirdRow/CircuitId';
 
 const BottomSheetView1 = ({
   bottomSheetRef,
@@ -37,6 +38,8 @@ const BottomSheetView1 = ({
         return <Type lodding={lodding} />;
       case bottomSheetDisplay === 'Sub Type':
         return <SubType lodding={lodding} />;
+      case bottomSheetDisplay === 'Circuit ID':
+        return <CircuitId lodding={lodding} />;
     }
   };
 

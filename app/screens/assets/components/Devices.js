@@ -2,10 +2,9 @@ import {
   StyleSheet,
   Text,
   View,
-  SafeAreaView,
-  StatusBar,
   TouchableOpacity,
   FlatList,
+  Dimensions,
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -25,6 +24,8 @@ import {
   GET_DEVICES_ONLY_NAME,
   GET_DEVICES_ONLY_TYPE,
   GET_DEVICES_ONLY_VENDORE,
+  GET_DEVICES_SORT_ACTIVE,
+  GET_DEVICES_SORT_INACTIVE,
 } from '../../../actions/actionType/AllDevice';
 
 import {getAllDeviceDetails} from '../../../actions/AllDevice/allDeviceDetails';
@@ -33,6 +34,9 @@ import {tostalert, copyText} from '../../../components/helper';
 import OrderLoder from '../../../components/lodder/OrderLoder';
 import BottomSheetViewDevices from './DevicesDetails';
 import DevicesBottomSheet from './Devices/index';
+const {width} = Dimensions.get('screen');
+import ToggleSwitch from 'toggle-switch-react-native';
+import Filtter from './../../filtter/index';
 
 const Devices = ({
   getAllDevice,
@@ -43,7 +47,8 @@ const Devices = ({
 
   // const {isLoding} = useSelector(state => state.deviceAllData);
   const dispatch = useDispatch();
-  // console.log(deviceAllData, 'dd');
+  const id = deviceAllData.filter(item => item.Device_Status == 'Active');
+  // console.log(id.length);
   const [diplayName, setDiplayName] = useState('');
 
   // const {isLoding} = useSelector(state => state.ordersForTab);
@@ -57,6 +62,8 @@ const Devices = ({
   const [lodding1, setLodding1] = useState(true);
   const deviceRefDetails = useRef(null);
   const deviceRef = useRef(null);
+  const [isOn, setIsSwitchOn] = React.useState(false);
+  const [deviveView, setDeviveView] = React.useState(true);
 
   useEffect(() => {
     setLodding1(true);
@@ -74,6 +81,7 @@ const Devices = ({
           // console.log('snap');
           const id = item.ID;
           getAllDeviceDetails(id, setLodding, deviceRefDetails);
+          setDeviveView(false);
 
           // setTimeout(() => {
           //   deviceRef.current.snapToIndex(1);
@@ -155,271 +163,349 @@ const Devices = ({
         return '#ffc8ce';
     }
   };
+  const FiltterActive = () => {
+    dispatch({
+      type: GET_DEVICES_SORT_ACTIVE,
+    });
+  };
+  const FiltterInActive = () => {
+    dispatch({
+      type: GET_DEVICES_SORT_INACTIVE,
+    });
+  };
+
   return (
     <>
-      {/* ==============container============== */}
-
-      {/* ========ID VIEW============= */}
-      <View style={{...styles.idView}}>
-        <View style={styles.idViewLeft}>
-          <TouchableOpacity
-            onPress={() => {
-              dispatch({
-                type: GET_DEVICES_ONLY_NAME,
-              });
-              setDiplayName('Name');
-              deviceRef.current.snapToIndex(1);
-            }}
-            style={{
-              ...styles.idButton,
-              flexDirection: 'row',
-              borderColor: diplayName == 'Name' ? '#007aff' : 'black',
-            }}>
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: 'bold',
-                color: diplayName == 'Name' ? '#007aff' : 'black',
-              }}>
-              Name
-            </Text>
-            <AntDesign
-              name="caretdown"
-              size={20}
-              style={{marginLeft: 5}}
-              color={diplayName == 'Name' ? '#007aff' : 'black'}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              dispatch({
-                type: GET_DEVICES_ONLY_TYPE,
-              });
-              setDiplayName('Type');
-              deviceRef.current.snapToIndex(1);
-            }}
-            style={{
-              ...styles.idButton,
-              flexDirection: 'row',
-              borderColor: diplayName == 'Type' ? '#007aff' : 'black',
-            }}>
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: 'bold',
-                color: diplayName == 'Type' ? '#007aff' : 'black',
-              }}>
-              Type
-            </Text>
-            <AntDesign
-              name="caretdown"
-              size={20}
-              style={{marginLeft: 5}}
-              color={diplayName == 'Type' ? '#007aff' : 'black'}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              dispatch({
-                type: GET_DEVICES_ONLY_VENDORE,
-              });
-              setDiplayName('Vendor');
-              deviceRef.current.snapToIndex(1);
-            }}
-            style={{
-              ...styles.idButton,
-              flexDirection: 'row',
-              borderColor: diplayName == 'Vendor' ? '#007aff' : 'black',
-            }}>
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: 'bold',
-                color: diplayName == 'Vendor' ? '#007aff' : 'black',
-              }}>
-              Vendor
-            </Text>
-            <AntDesign
-              name="caretdown"
-              size={20}
-              style={{marginLeft: 5}}
-              color={diplayName == 'Vendor' ? '#007aff' : 'black'}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.idViewRight}></View>
-      </View>
-      {/* ========ID VIEW============= */}
-
-      {/* ======================Table  Header======================= */}
-      <View style={{...styles.tableRow}}>
-        <TouchableOpacity
-          onPress={() => {
-            if (invType) {
-              setInvType(!invType);
-              dispatch({
-                type: ALL_DEVICES_SORT_BY_ID_ASC,
-              });
-            } else {
-              setInvType(!invType);
-              dispatch({
-                type: ALL_DEVICES_SORT_BY_ID_DES,
-              });
-            }
-          }}
-          style={{
-            ...styles.tableRowColum,
-
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}>
-          <Text style={styles.boxText}>Name</Text>
-          <Text style={{marginTop: 1}}>
-            <AntDesign
-              name={invType ? 'caretup' : 'caretdown'}
-              size={16}
-              color="white"
-            />
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            if (status) {
-              setStatus(!status);
-              dispatch({
-                type: ALL_DEVICES_SORT_BY_STATUS_ASC,
-              });
-            } else {
-              setStatus(!status);
-              dispatch({
-                type: ALL_DEVICES_SORT_BY_STATUS_DES,
-              });
-            }
-          }}
-          style={{
-            ...styles.tableRowColum,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}>
-          <Text style={styles.boxText}>Status</Text>
-          <Text style={{marginTop: 1}}>
-            <AntDesign
-              name={status ? 'caretup' : 'caretdown'}
-              size={16}
-              color="white"
-            />
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            if (type) {
-              setType(!type);
-              dispatch({
-                type: ALL_DEVICES_SORT_BY_TYPE_ASC,
-              });
-            } else {
-              setType(!type);
-              dispatch({
-                type: ALL_DEVICES_SORT_BY_TYPE_DES,
-              });
-            }
-          }}
-          style={{
-            ...styles.tableRowColum,
-            flexDirection: 'row',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-            justifyContent: 'space-around',
-          }}>
-          <Text style={{...styles.boxText, color: 'white'}}>Type</Text>
-          <Text style={{marginTop: 1, marginRight: 3}}>
-            <AntDesign
-              name={type ? 'caretup' : 'caretdown'}
-              size={16}
-              color="white"
-            />
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            if (vendor) {
-              setVendor(!vendor);
-              dispatch({
-                type: ALL_DEVICES_SORT_BY_VENDOR_ASC,
-              });
-            } else {
-              setVendor(!vendor);
-              dispatch({
-                type: ALL_DEVICES_SORT_BY_VENDOR_DES,
-              });
-            }
-          }}
-          style={{
-            ...styles.tableRowColum,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}>
-          <Text style={{...styles.boxText}}>Vendor</Text>
-          <Text style={{marginTop: 1}}>
-            <AntDesign
-              name={vendor ? 'caretup' : 'caretdown'}
-              size={16}
-              color="white"
-            />
-          </Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* ======================Table  Header======================= */}
-      {/* ==============Services Category============== */}
       {lodding1 ? (
         <View style={styles.loderView}>
           <OrderLoder />
         </View>
       ) : (
         <>
-          {deviceAllData.length == 0 ? (
+          {/* ==============container============== */}
+
+          {/* ========ID VIEW============= */}
+          <View style={{...styles.idView}}>
+            <View style={styles.idViewLeft}>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch({
+                    type: GET_DEVICES_ONLY_NAME,
+                  });
+                  setDiplayName('Name');
+                  deviceRef.current.snapToIndex(1);
+                }}
+                style={{
+                  ...styles.idButton,
+                  flexDirection: 'row',
+                  borderColor: diplayName == 'Name' ? '#007aff' : 'black',
+                }}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    color: diplayName == 'Name' ? '#007aff' : 'black',
+                  }}>
+                  Name
+                </Text>
+                <AntDesign
+                  name="caretdown"
+                  size={20}
+                  style={{marginLeft: 5}}
+                  color={diplayName == 'Name' ? '#007aff' : 'black'}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch({
+                    type: GET_DEVICES_ONLY_TYPE,
+                  });
+                  setDiplayName('Type');
+                  deviceRef.current.snapToIndex(1);
+                }}
+                style={{
+                  ...styles.idButton,
+                  flexDirection: 'row',
+                  borderColor: diplayName == 'Type' ? '#007aff' : 'black',
+                }}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    color: diplayName == 'Type' ? '#007aff' : 'black',
+                  }}>
+                  Type
+                </Text>
+                <AntDesign
+                  name="caretdown"
+                  size={20}
+                  style={{marginLeft: 5}}
+                  color={diplayName == 'Type' ? '#007aff' : 'black'}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch({
+                    type: GET_DEVICES_ONLY_VENDORE,
+                  });
+                  setDiplayName('Vendor');
+                  deviceRef.current.snapToIndex(1);
+                }}
+                style={{
+                  ...styles.idButton,
+                  flexDirection: 'row',
+                  borderColor: diplayName == 'Vendor' ? '#007aff' : 'black',
+                }}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    color: diplayName == 'Vendor' ? '#007aff' : 'black',
+                  }}>
+                  Vendor
+                </Text>
+                <AntDesign
+                  name="caretdown"
+                  size={20}
+                  style={{marginLeft: 5}}
+                  color={diplayName == 'Vendor' ? '#007aff' : 'black'}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.idViewRight}></View>
+          </View>
+          {/* ========ID VIEW============= */}
+
+          {/* ======================Table  Header======================= */}
+          <View style={{...styles.tableRow}}>
+            <TouchableOpacity
+              onPress={() => {
+                if (invType) {
+                  setInvType(!invType);
+                  dispatch({
+                    type: ALL_DEVICES_SORT_BY_ID_ASC,
+                  });
+                } else {
+                  setInvType(!invType);
+                  dispatch({
+                    type: ALL_DEVICES_SORT_BY_ID_DES,
+                  });
+                }
+              }}
+              style={{
+                ...styles.tableRowColum,
+
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}>
+              <Text style={styles.boxText}>Name</Text>
+              <Text style={{marginTop: 1}}>
+                <AntDesign
+                  name={invType ? 'caretup' : 'caretdown'}
+                  size={16}
+                  color="white"
+                />
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                if (status) {
+                  setStatus(!status);
+                  dispatch({
+                    type: ALL_DEVICES_SORT_BY_STATUS_ASC,
+                  });
+                } else {
+                  setStatus(!status);
+                  dispatch({
+                    type: ALL_DEVICES_SORT_BY_STATUS_DES,
+                  });
+                }
+              }}
+              style={{
+                ...styles.tableRowColum,
+                borderLeftColor: 'white',
+                borderLeftWidth: 2,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}>
+              <Text style={styles.boxText}>Status</Text>
+              <Text style={{marginTop: 1}}>
+                <AntDesign
+                  name={status ? 'caretup' : 'caretdown'}
+                  size={16}
+                  color="white"
+                />
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                if (type) {
+                  setType(!type);
+                  dispatch({
+                    type: ALL_DEVICES_SORT_BY_TYPE_ASC,
+                  });
+                } else {
+                  setType(!type);
+                  dispatch({
+                    type: ALL_DEVICES_SORT_BY_TYPE_DES,
+                  });
+                }
+              }}
+              style={{
+                ...styles.tableRowColum,
+                flexDirection: 'row',
+                borderLeftColor: 'white',
+                borderLeftWidth: 2,
+                justifyContent: 'space-around',
+              }}>
+              <Text style={{...styles.boxText, color: 'white'}}>Type</Text>
+              <Text style={{marginTop: 1, marginRight: 3}}>
+                <AntDesign
+                  name={type ? 'caretup' : 'caretdown'}
+                  size={16}
+                  color="white"
+                />
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                if (vendor) {
+                  setVendor(!vendor);
+                  dispatch({
+                    type: ALL_DEVICES_SORT_BY_VENDOR_ASC,
+                  });
+                } else {
+                  setVendor(!vendor);
+                  dispatch({
+                    type: ALL_DEVICES_SORT_BY_VENDOR_DES,
+                  });
+                }
+              }}
+              style={{
+                ...styles.tableRowColum,
+                borderLeftColor: 'white',
+                borderLeftWidth: 2,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}>
+              <Text style={{...styles.boxText}}>Vendor</Text>
+              <Text style={{marginTop: 1}}>
+                <AntDesign
+                  name={vendor ? 'caretup' : 'caretdown'}
+                  size={16}
+                  color="white"
+                />
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* ======================Table  Header======================= */}
+          {/* ==============Services Category============== */}
+
+          <>
+            {deviceAllData.length == 0 ? (
+              <View
+                style={{
+                  width: '100%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: 300,
+                }}>
+                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                  No Data Found
+                </Text>
+              </View>
+            ) : (
+              <>
+                <View style={styles.table}>
+                  <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={deviceAllData}
+                    keyExtractor={(item, i) => i.toString()}
+                    renderItem={(item, i) => randerItem(item)}
+                  />
+                </View>
+              </>
+            )}
+          </>
+
+          {/* ==============Summary View=========== */}
+          <BottomSheetViewDevices
+            lodding={lodding}
+            setDeviveView={setDeviveView}
+            deviceRefDetails={deviceRefDetails}
+          />
+          <DevicesBottomSheet
+            lodding1={lodding1}
+            diplayName={diplayName}
+            deviceRef={deviceRef}
+          />
+          {/* <BottomSheetView deviceRef={deviceRef} lodding={lodding} />
+        {lodding && <Lodder lodding={lodding} />} */}
+          {/* ============TOOGLE=========== */}
+          {deviveView ? (
             <View
               style={{
-                width: '100%',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: 300,
+                width: (width / 3) * 2.2,
+                height: 60,
+
+                position: 'absolute',
+                bottom: 55,
+                right: 0,
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                paddingHorizontal: 10,
+                zIndex: 100,
               }}>
-              <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                No Data Found
-              </Text>
-            </View>
-          ) : (
-            <>
-              <View style={styles.table}>
-                <FlatList
-                  showsVerticalScrollIndicator={false}
-                  data={deviceAllData}
-                  keyExtractor={(item, i) => i.toString()}
-                  renderItem={(item, i) => randerItem(item)}
+              <View
+                style={{
+                  width: '48%',
+                  height: '100%',
+                  backgroundColor: '#007aff',
+                  borderRadius: 10,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>
+                  {deviceAllData.length} Devices
+                </Text>
+              </View>
+              <View
+                style={{
+                  width: '48%',
+                  height: '100%',
+                  backgroundColor: '#007aff',
+                  borderRadius: 10,
+                  flexDirection: 'row',
+                  paddingHorizontal: 5,
+
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>
+                  {isOn ? 'Active' : 'InActive'}
+                </Text>
+                <ToggleSwitch
+                  isOn={isOn}
+                  onColor="#34c759"
+                  offColor="#b3b8b4"
+                  labelStyle={{color: 'black', fontWeight: '500'}}
+                  size="large"
+                  onToggle={isOn => {
+                    setIsSwitchOn(isOn);
+                    if (isOn) {
+                      FiltterActive();
+                    } else {
+                      FiltterInActive();
+                    }
+                  }}
                 />
               </View>
-            </>
-          )}
+            </View>
+          ) : null}
+          {/* ============TOOGLE=========== */}
         </>
       )}
-      {/* ==============Summary View=========== */}
-      <BottomSheetViewDevices
-        lodding={lodding}
-        deviceRefDetails={deviceRefDetails}
-      />
-      <DevicesBottomSheet
-        lodding1={lodding1}
-        diplayName={diplayName}
-        deviceRef={deviceRef}
-      />
-      {/* <BottomSheetView deviceRef={deviceRef} lodding={lodding} />
-        {lodding && <Lodder lodding={lodding} />} */}
     </>
   );
 };

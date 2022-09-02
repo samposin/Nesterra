@@ -14,6 +14,14 @@ import {
   ALL_CIRCUIT_FILTER_BY_BRANCH_ID,
   ALL_CIRCUIT_SORT_BY_STATUS,
   ALL_CIRCUIT_FILTER_BY_STATUS,
+
+  //=========ONLY DATA
+  ALL_CIRCUIT_ONLY_SUBTYPE,
+  ALL_CIRCUIT_ONLY_TYPE,
+  ALL_CIRCUIT_ONLY_VENDOR,
+  ALL_CIRCUIT_ONLY_CIRCUITID,
+
+  //=========
 } from '../../actions/actionType/AllCircuit';
 
 const initialState = {
@@ -21,6 +29,14 @@ const initialState = {
   allCircuit1: [],
   allStatus: [],
   allStatus1: [],
+  allVendor: [],
+  allVendor1: [],
+  allType: [],
+  allType1: [],
+  allSubType: [],
+  allSubType1: [],
+  allCircuitId: [],
+  allCircuitId1: [],
   isLoding: true,
 };
 
@@ -33,8 +49,90 @@ export default (state = initialState, action) => {
         allCircuit1: action.payload.data,
         isLoding: action.payload.loder,
       };
+    // =====================only data============
+    //VENDOR
+    case ALL_CIRCUIT_ONLY_VENDOR:
+      const VENDOR = [...state.allCircuit1];
+      const vendor = VENDOR.reduce((acc, {Vendor}) => {
+        const entry = acc.find(i => i.Vendor === Vendor);
+        if (!entry) {
+          acc.push({
+            Vendor,
+          });
+        } else {
+          entry.Vendor = Vendor;
+        }
+        return acc;
+      }, []);
+      // console.log(vendor);
 
-    // SORT BY STATUS
+      return {
+        ...state,
+        allVendor: vendor,
+        allVendor1: statusData,
+      };
+    //Type
+    case ALL_CIRCUIT_ONLY_TYPE:
+      const type = [...state.allCircuit1];
+      const typeData = type.reduce((acc, {SubCat}) => {
+        const entry = acc.find(i => i.SubCat === SubCat);
+        if (!entry) {
+          acc.push({
+            SubCat,
+          });
+        } else {
+          entry.SubCat = SubCat;
+        }
+        return acc;
+      }, []);
+
+      return {
+        ...state,
+        allType: typeData,
+        allType1: typeData,
+      };
+    //SUB  TYPE OR CAT
+    case ALL_CIRCUIT_ONLY_SUBTYPE:
+      const SUBCAT = [...state.allCircuit1];
+      const subtypeData = SUBCAT.reduce((acc, {SubCat}) => {
+        const entry = acc.find(i => i.SubCat === SubCat);
+        if (!entry) {
+          acc.push({
+            SubCat,
+          });
+        } else {
+          entry.SubCat = SubCat;
+        }
+        return acc;
+      }, []);
+
+      return {
+        ...state,
+        allSubType: subtypeData,
+        allSubType1: subtypeData,
+      };
+    //CIRCUIT DATA
+    case ALL_CIRCUIT_ONLY_CIRCUITID:
+      const CIRCUITID = [...state.allCircuit1];
+      const circuitData = CIRCUITID.reduce((acc, {Circuit_ID}) => {
+        const entry = acc.find(i => i.Circuit_ID === Circuit_ID);
+        if (!entry) {
+          acc.push({
+            Circuit_ID,
+          });
+        } else {
+          entry.Circuit_ID = Circuit_ID;
+        }
+        return acc;
+      }, []);
+
+      return {
+        ...state,
+        allCircuitId: circuitData,
+        allCircuitId1: circuitData,
+      };
+
+    // Only STATUS data
     case ALL_CIRCUIT_SORT_BY_STATUS:
       const STATUS = [...state.allCircuit1];
       const statusData = STATUS.reduce((acc, {Circuit_Status}) => {
@@ -53,6 +151,8 @@ export default (state = initialState, action) => {
         allStatus: statusData,
         allStatus1: statusData,
       };
+
+    // =====================only data============
     case ALL_CIRCUIT_FILTER_BY_LOCATION_ID:
       const fdata = [...state.allCircuit1];
       const filterdata = fdata.filter(item => item.Location_ID == action.data);

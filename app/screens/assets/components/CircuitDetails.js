@@ -8,6 +8,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import OrderLoder from '../../../components/lodder/OrderLoder';
 const BottomSheetViewCircuits = ({
   circuitRefDetails,
+  setSwitchView,
 
   loding,
 }) => {
@@ -37,7 +38,11 @@ const BottomSheetViewCircuits = ({
           alignItems: 'flex-end',
           paddingRight: 25,
         }}>
-        <TouchableOpacity onPress={() => circuitRefDetails.current.close()}>
+        <TouchableOpacity
+          onPress={() => {
+            setSwitchView(true);
+            circuitRefDetails.current.close();
+          }}>
           <View
             style={{
               width: 24,

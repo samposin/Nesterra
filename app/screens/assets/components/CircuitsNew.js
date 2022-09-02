@@ -1,4 +1,11 @@
-import {StyleSheet, TouchableOpacity, FlatList, Text, View} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+  FlatList,
+  Text,
+  View,
+} from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {getAllCircuit} from '../../../actions/AllCircuit';
@@ -14,7 +21,8 @@ import {getAllCircuitDetails} from '../../../actions/AllCircuit/allCorcuitDetail
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ThirdRow from './ThirdRow/index';
-
+import ToggleSwitch from 'toggle-switch-react-native';
+const {width} = Dimensions.get('screen');
 import {
   ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
   ALL_CIRCUIT_SORT_BY_LOC_ID_DES,
@@ -26,7 +34,10 @@ import {
   ALL_CIRCUIT_SORT_BY_BRANCH_DES,
   ALL_CIRCUIT_SORT_BY_STATUS,
 } from '../../../actions/actionType/AllCircuit';
-
+import {
+  ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
+  ALL_CIRCUIT_FILTER_BY_STATUS,
+} from '../../../actions/actionType/AllCircuit';
 const CircuitsNew = ({
   getAllCircuit,
   getAllSiteID,
@@ -35,15 +46,19 @@ const CircuitsNew = ({
   getAllCircuitDetails,
 }) => {
   const cirCuitRef = useRef(null);
-  const thirdRowRef = useRef(null);
+
   const circuitRefDetails = useRef(null);
   const [loding1, setLodding1] = useState(false);
   const [loding, setLodding] = useState(false);
   const [loding3, setLodding3] = useState(false);
   const [diplayName, setDiplayName] = useState('');
   const {allCircuit} = useSelector(state => state.allCircuit);
+
+  const [isOn, setIsSwitchOn] = React.useState(false);
+  const [switchView, setSwitchView] = useState(true);
+
   // const {loder} = useSelector(state => state.allCircuit);
-  // console.log(allCircuit);
+  // console.log(allCircuit, 'aa');
   const dispatch = useDispatch();
 
   const [locType, setLocType] = useState(true);
@@ -63,6 +78,7 @@ const CircuitsNew = ({
           // console.log('snap');
           const id = item.Circuit_ID;
           getAllCircuitDetails(id, setLodding, circuitRefDetails);
+          setSwitchView(false);
           cirCuitRef.current.close();
           // setTimeout(() => {
           //   deviceRef.current.snapToIndex(1);
@@ -145,6 +161,7 @@ const CircuitsNew = ({
       </TouchableOpacity>
     );
   };
+
   const searchFilterDatataByStatus = () => {
     setDiplayName('Status');
     dispatch({
@@ -152,270 +169,360 @@ const CircuitsNew = ({
     });
     cirCuitRef.current.snapToIndex(1);
   };
+  const fiterCircuitsActive = () => {
+    dispatch({
+      type: ALL_CIRCUIT_FILTER_BY_STATUS,
+      data: 'Active',
+    });
+  };
+  const fiterCircuitsInActive = () => {
+    dispatch({
+      type: ALL_CIRCUIT_FILTER_BY_STATUS,
+      data: 'Inactive',
+    });
+  };
+
   return (
     <>
-      {/* ========ID VIEW============= */}
-
-      <View style={{...styles.idView}}>
-        <View style={styles.idViewLeft}>
-          <TouchableOpacity
-            onPress={() => {
-              setDiplayName('Site ID');
-
-              getAllSiteID(setLodding1);
-              cirCuitRef.current.snapToIndex(1);
-            }}
-            style={{
-              ...styles.idButton,
-              flexDirection: 'row',
-              marginRight: 10,
-              borderColor: diplayName == 'Site ID' ? '#007aff' : 'black',
-            }}>
-            <Text
-              style={{
-                fontSize: 15,
-                fontWeight: 'bold',
-                color: diplayName == 'Site ID' ? '#007aff' : 'black',
-              }}>
-              Site ID
-            </Text>
-            <FontAwesome5
-              name="eject"
-              size={15}
-              style={{
-                transform: [{rotate: '180deg'}],
-                marginLeft: 5,
-                marginTop: 3,
-              }}
-              color={diplayName == 'Site ID' ? '#007aff' : 'black'}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => {
-              setDiplayName('Branch ID');
-              cirCuitRef.current.snapToIndex(1);
-              getAllBrachrID(setLodding1);
-            }}
-            style={{
-              ...styles.idButton,
-              flexDirection: 'row',
-              marginRight: 10,
-              borderColor: diplayName == 'Branch ID' ? '#007aff' : 'black',
-            }}>
-            <Text
-              style={{
-                fontSize: 15,
-                fontWeight: 'bold',
-                color: diplayName == 'Branch ID' ? '#007aff' : 'black',
-              }}>
-              Branch ID
-            </Text>
-            <FontAwesome5
-              name="eject"
-              size={15}
-              style={{
-                transform: [{rotate: '180deg'}],
-                marginLeft: 2,
-                marginTop: 3,
-              }}
-              color={diplayName == 'Branch ID' ? '#007aff' : 'black'}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              searchFilterDatataByStatus();
-            }}
-            style={{
-              ...styles.idButton,
-              marginRight: 10,
-              flexDirection: 'row',
-              borderColor: diplayName == 'Status' ? '#007aff' : 'black',
-            }}>
-            <Text
-              style={{
-                fontSize: 15,
-                fontWeight: 'bold',
-                color: diplayName == 'Status' ? '#007aff' : 'black',
-              }}>
-              Status
-            </Text>
-            <FontAwesome5
-              name="eject"
-              size={15}
-              style={{
-                transform: [{rotate: '180deg'}],
-                marginLeft: 2,
-                marginTop: 3,
-              }}
-              color={diplayName == 'Status' ? '#007aff' : 'black'}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.idViewRight}></View>
-      </View>
-      <ThirdRow setDiplayName={setDiplayName} cirCuitRef={cirCuitRef} />
-      {/* ========ID VIEW============= */}
-      {/* ========TABLE HEADER============= */}
-      <View style={styles.tableHeader}>
-        <TouchableOpacity
-          onPress={() => {
-            if (locType) {
-              setLocType(!locType);
-
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
-              });
-            } else {
-              setLocType(!locType);
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_LOC_ID_DES,
-              });
-            }
-          }}
-          style={{
-            ...styles.tableRowColum1,
-          }}>
-          <Text style={{...styles.boxText, color: 'white'}}>Site ID</Text>
-          <Text style={{marginTop: 1, marginRight: 3}}>
-            <AntDesign
-              name={locType ? 'caretup' : 'caretdown'}
-              size={16}
-              color="white"
-            />
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => {
-            if (vendor) {
-              setVendor(!vendor);
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_VENDOR_ASC,
-              });
-            } else {
-              setVendor(!vendor);
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_VENDOR_DES,
-              });
-            }
-          }}
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <Text style={{...styles.boxText, color: 'white'}}>Circuit ID</Text>
-          <Text style={{marginTop: 1}}>
-            <AntDesign
-              name={cirType ? 'caretup' : 'caretdown'}
-              size={16}
-              color="white"
-            />
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            if (branchType) {
-              setBranchType(!branchType);
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_BRANCH_ASC,
-              });
-            } else {
-              setBranchType(!branchType);
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_BRANCH_DES,
-              });
-            }
-          }}
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <Text style={{...styles.boxText, color: 'white'}}>Branch ID</Text>
-          <Text style={{marginTop: 1}}>
-            <AntDesign
-              name={branchType ? 'caretup' : 'caretdown'}
-              size={16}
-              color="white"
-            />
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            if (vendor) {
-              setVendor(!vendor);
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_VENDOR_ASC,
-              });
-            } else {
-              setVendor(!vendor);
-              dispatch({
-                type: ALL_CIRCUIT_SORT_BY_VENDOR_DES,
-              });
-            }
-          }}
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <Text style={{...styles.boxText, color: 'white'}}>Vendor</Text>
-          <Text style={{marginTop: 1}}>
-            <AntDesign
-              name={vendor ? 'caretup' : 'caretdown'}
-              size={16}
-              color="white"
-            />
-          </Text>
-        </TouchableOpacity>
-      </View>
-
       {loding3 ? (
         <View style={styles.loderView}>
           <OrderLoder />
         </View>
       ) : (
         <>
-          {allCircuit.length == 0 ? (
-            <View
+          {/* ========ID VIEW============= */}
+
+          <View style={{...styles.idView}}>
+            <View style={styles.idViewLeft}>
+              <TouchableOpacity
+                onPress={() => {
+                  setDiplayName('Site ID');
+
+                  getAllSiteID(setLodding1);
+                  cirCuitRef.current.snapToIndex(1);
+                }}
+                style={{
+                  ...styles.idButton,
+                  flexDirection: 'row',
+                  marginRight: 10,
+                  borderColor: diplayName == 'Site ID' ? '#007aff' : 'black',
+                }}>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    fontWeight: 'bold',
+                    color: diplayName == 'Site ID' ? '#007aff' : 'black',
+                  }}>
+                  Site ID
+                </Text>
+                <FontAwesome5
+                  name="eject"
+                  size={15}
+                  style={{
+                    transform: [{rotate: '180deg'}],
+                    marginLeft: 6,
+                    marginTop: 3,
+                  }}
+                  color={diplayName == 'Site ID' ? '#007aff' : 'black'}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  setDiplayName('Branch ID');
+                  cirCuitRef.current.snapToIndex(1);
+                  getAllBrachrID(setLodding1);
+                }}
+                style={{
+                  ...styles.idButton,
+                  flexDirection: 'row',
+                  marginRight: 10,
+                  borderColor: diplayName == 'Branch ID' ? '#007aff' : 'black',
+                }}>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    fontWeight: 'bold',
+                    color: diplayName == 'Branch ID' ? '#007aff' : 'black',
+                  }}>
+                  Branch ID
+                </Text>
+                <FontAwesome5
+                  name="eject"
+                  size={15}
+                  style={{
+                    transform: [{rotate: '180deg'}],
+                    marginLeft: 5,
+                    marginTop: 3,
+                  }}
+                  color={diplayName == 'Branch ID' ? '#007aff' : 'black'}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  searchFilterDatataByStatus();
+                }}
+                style={{
+                  ...styles.idButton,
+                  marginRight: 10,
+                  flexDirection: 'row',
+                  borderColor: diplayName == 'Status' ? '#007aff' : 'black',
+                }}>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    fontWeight: 'bold',
+                    color: diplayName == 'Status' ? '#007aff' : 'black',
+                  }}>
+                  Status
+                </Text>
+                <FontAwesome5
+                  name="eject"
+                  size={15}
+                  style={{
+                    transform: [{rotate: '180deg'}],
+                    marginLeft: 5,
+                    marginTop: 3,
+                  }}
+                  color={diplayName == 'Status' ? '#007aff' : 'black'}
+                />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.idViewRight}></View>
+          </View>
+          <ThirdRow
+            diplayName={diplayName}
+            setDiplayName={setDiplayName}
+            cirCuitRef={cirCuitRef}
+          />
+          {/* ========ID VIEW============= */}
+          {/* ========TABLE HEADER============= */}
+          <View style={styles.tableHeader}>
+            <TouchableOpacity
+              onPress={() => {
+                if (locType) {
+                  setLocType(!locType);
+
+                  dispatch({
+                    type: ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
+                  });
+                } else {
+                  setLocType(!locType);
+                  dispatch({
+                    type: ALL_CIRCUIT_SORT_BY_LOC_ID_DES,
+                  });
+                }
+              }}
               style={{
-                width: '100%',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: 300,
+                ...styles.tableRowColum1,
               }}>
-              <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                No Data Found
+              <Text style={{...styles.boxText, color: 'white'}}>Site ID</Text>
+              <Text style={{marginTop: 1, marginRight: 3}}>
+                <AntDesign
+                  name={locType ? 'caretup' : 'caretdown'}
+                  size={16}
+                  color="white"
+                />
               </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                if (vendor) {
+                  setVendor(!vendor);
+                  dispatch({
+                    type: ALL_CIRCUIT_SORT_BY_VENDOR_ASC,
+                  });
+                } else {
+                  setVendor(!vendor);
+                  dispatch({
+                    type: ALL_CIRCUIT_SORT_BY_VENDOR_DES,
+                  });
+                }
+              }}
+              style={{
+                ...styles.tableRowColum1,
+                borderLeftColor: 'white',
+                borderLeftWidth: 2,
+              }}>
+              <Text style={{...styles.boxText, color: 'white'}}>
+                Circuit ID
+              </Text>
+              <Text style={{marginTop: 1}}>
+                <AntDesign
+                  name={cirType ? 'caretup' : 'caretdown'}
+                  size={16}
+                  color="white"
+                />
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                if (branchType) {
+                  setBranchType(!branchType);
+                  dispatch({
+                    type: ALL_CIRCUIT_SORT_BY_BRANCH_ASC,
+                  });
+                } else {
+                  setBranchType(!branchType);
+                  dispatch({
+                    type: ALL_CIRCUIT_SORT_BY_BRANCH_DES,
+                  });
+                }
+              }}
+              style={{
+                ...styles.tableRowColum1,
+                borderLeftColor: 'white',
+                borderLeftWidth: 2,
+              }}>
+              <Text style={{...styles.boxText, color: 'white'}}>Branch ID</Text>
+              <Text style={{marginTop: 1}}>
+                <AntDesign
+                  name={branchType ? 'caretup' : 'caretdown'}
+                  size={16}
+                  color="white"
+                />
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                if (vendor) {
+                  setVendor(!vendor);
+                  dispatch({
+                    type: ALL_CIRCUIT_SORT_BY_VENDOR_ASC,
+                  });
+                } else {
+                  setVendor(!vendor);
+                  dispatch({
+                    type: ALL_CIRCUIT_SORT_BY_VENDOR_DES,
+                  });
+                }
+              }}
+              style={{
+                ...styles.tableRowColum1,
+                borderLeftColor: 'white',
+                borderLeftWidth: 2,
+              }}>
+              <Text style={{...styles.boxText, color: 'white'}}>Vendor</Text>
+              <Text style={{marginTop: 1}}>
+                <AntDesign
+                  name={vendor ? 'caretup' : 'caretdown'}
+                  size={16}
+                  color="white"
+                />
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {loding3 ? (
+            <View style={styles.loderView}>
+              <OrderLoder />
             </View>
           ) : (
             <>
-              <View style={styles.table}>
-                <FlatList
-                  contentContainerStyle={{paddingBottom: 230}}
-                  showsVerticalScrollIndicator={false}
-                  data={allCircuit}
-                  keyExtractor={(item, i) => i.toString()}
-                  renderItem={(item, i) => randerItem(item)}
-                />
-              </View>
+              {allCircuit.length == 0 ? (
+                <View
+                  style={{
+                    width: '100%',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 300,
+                  }}>
+                  <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+                    No Data Found
+                  </Text>
+                </View>
+              ) : (
+                <>
+                  <View style={styles.table}>
+                    <FlatList
+                      contentContainerStyle={{paddingBottom: 230}}
+                      showsVerticalScrollIndicator={false}
+                      data={allCircuit}
+                      keyExtractor={(item, i) => i.toString()}
+                      renderItem={(item, i) => randerItem(item)}
+                    />
+                  </View>
+                </>
+              )}
             </>
           )}
+
+          {/* ========TABLE HEADER============= */}
+          <CircuitBottomSheet
+            diplayName={diplayName}
+            loding1={loding1}
+            cirCuitRef={cirCuitRef}
+          />
+          <BottomSheetViewCircuits
+            loding={loding}
+            setSwitchView={setSwitchView}
+            circuitRefDetails={circuitRefDetails}
+          />
+          {/* ============TOOGLE=========== */}
+          {switchView ? (
+            <View
+              style={{
+                width: (width / 3) * 2.2,
+                height: 55,
+
+                position: 'absolute',
+                bottom: 60,
+                right: 0,
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                paddingHorizontal: 10,
+                zIndex: 1,
+              }}>
+              <View
+                style={{
+                  width: '48%',
+                  height: '100%',
+                  backgroundColor: '#007aff',
+                  borderRadius: 10,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>
+                  {allCircuit.length} Circuit
+                </Text>
+              </View>
+              <View
+                style={{
+                  width: '48%',
+                  height: '100%',
+                  backgroundColor: '#007aff',
+                  borderRadius: 10,
+                  flexDirection: 'row',
+                  paddingHorizontal: 5,
+
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>
+                  {isOn ? 'Active' : 'InActive'}
+                </Text>
+                <ToggleSwitch
+                  isOn={isOn}
+                  onColor="#34c759"
+                  offColor="#b3b8b4"
+                  labelStyle={{color: 'black', fontWeight: '500'}}
+                  size="large"
+                  onToggle={isOn => {
+                    setIsSwitchOn(isOn);
+                    if (isOn) {
+                      fiterCircuitsActive();
+                    } else {
+                      fiterCircuitsInActive();
+                    }
+                  }}
+                />
+              </View>
+            </View>
+          ) : null}
+          {/* ============TOOGLE=========== */}
         </>
       )}
-
-      {/* ========TABLE HEADER============= */}
-      <CircuitBottomSheet
-        diplayName={diplayName}
-        loding1={loding1}
-        cirCuitRef={cirCuitRef}
-      />
-      <BottomSheetViewCircuits
-        loding={loding}
-        circuitRefDetails={circuitRefDetails}
-      />
     </>
   );
 };

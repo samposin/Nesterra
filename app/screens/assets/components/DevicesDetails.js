@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import moment from 'moment';
 import OrderLoder from '../../../components/lodder/OrderLoder';
-const BottomSheetViewDevices = ({deviceRefDetails, lodding}) => {
+const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.allDeviceDetails);
@@ -33,7 +33,12 @@ const BottomSheetViewDevices = ({deviceRefDetails, lodding}) => {
           alignItems: 'flex-end',
           paddingRight: 15,
         }}>
-        <TouchableOpacity onPress={() => deviceRefDetails.current.close()}>
+        <TouchableOpacity
+          onPress={() => {
+            setDeviveView(true);
+
+            deviceRefDetails.current.close();
+          }}>
           <View
             style={{
               width: 24,

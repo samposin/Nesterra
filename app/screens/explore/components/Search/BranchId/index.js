@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
 // import {SEARCH_BY_BRANCH_ID} from '../../../actions/action.coordinate.type';
+import {SEARCH_BY_BRANCH_ID} from '../../../../../actions/action.coordinate.type';
 import SearchBranchIcon from './SearchBranchIcon';
 
 const BranchId = ({setModalVisible}) => {
@@ -12,10 +13,10 @@ const BranchId = ({setModalVisible}) => {
   const [iconShow, setIconShow] = useState(false);
   const searchBranch = text => {
     setSearch(text);
-    // dispatch({
-    //   type: SEARCH_BY_BRANCH_ID,
-    //   data: text,
-    // });
+    dispatch({
+      type: SEARCH_BY_BRANCH_ID,
+      data: text,
+    });
   };
   return (
     <>

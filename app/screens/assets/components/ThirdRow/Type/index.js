@@ -13,8 +13,8 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
 
 const Type = ({loding1}) => {
-  const {allBranchID} = useSelector(stata => stata.allBranchID);
-  // console.log(allBranchID.length, 'allBranchID');
+  const {allType} = useSelector(state => state.allCircuit);
+  // console.log(allType, 'allType');
   // console.log(
   //   allBranchID.filter(item => item.id == '10').length,
   //   'allbraCircuit',

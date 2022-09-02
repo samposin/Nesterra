@@ -13,8 +13,8 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
 
 const Vendor = ({loding1}) => {
-  const {allBranchID} = useSelector(stata => stata.allBranchID);
-  // console.log(allBranchID.length, 'allBranchID');
+  const {allVendor} = useSelector(stata => stata.allCircuit);
+
   // console.log(
   //   allBranchID.filter(item => item.id == '10').length,
   //   'allbraCircuit',
@@ -34,7 +34,6 @@ const Vendor = ({loding1}) => {
       data: text,
     });
   };
-  useEffect(() => {}, []);
 
   return (
     <>
@@ -53,6 +52,43 @@ const Vendor = ({loding1}) => {
           <EvilIcons name="search" size={24} color="black" />
         </View>
       </View>
+      {loding1 ? (
+        <View
+          style={{
+            width: '100%',
+            height: 200,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <ActivityIndicator color="#007aff" size="large" />
+        </View>
+      ) : (
+        <>
+          <BottomSheetFlatList
+            keyboardShouldPersistTaps="handled"
+            data={allVendor}
+            renderItem={({item}) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    // fiterCircuitsData(item.Vendor);
+                    Keyboard.dismiss();
+                  }}
+                  style={{
+                    width: '100%',
+                    height: 30,
+                    marginVertical: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{fontWeight: 'bold'}}>{item.Vendor}</Text>
+                </TouchableOpacity>
+              );
+            }}
+            keyExtractor={item => item.Vendor}
+          />
+        </>
+      )}
     </>
   );
 };
