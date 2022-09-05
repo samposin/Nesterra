@@ -14,6 +14,13 @@ import {
   ALL_CIRCUIT_FILTER_BY_BRANCH_ID,
   ALL_CIRCUIT_SORT_BY_STATUS,
   ALL_CIRCUIT_FILTER_BY_STATUS,
+  ALL_CIRCUIT_SEARCH_ONLY_VENDOR,
+  ALL_CIRCUIT_FILTER_BY_VENDOR,
+  ALL_CIRCUIT_FILTER_BY_SUBTYPE,
+  //=== FILTER
+
+  //=== ONLY DATA SERACT
+  ALL_CIRCUIT_SEARCH_ONLY_SUBTYPE,
 
   //=========ONLY DATA
   ALL_CIRCUIT_ONLY_SUBTYPE,
@@ -69,7 +76,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allVendor: vendor,
-        allVendor1: statusData,
+        allVendor1: vendor,
       };
     //Type
     case ALL_CIRCUIT_ONLY_TYPE:
@@ -125,7 +132,7 @@ export default (state = initialState, action) => {
         }
         return acc;
       }, []);
-
+      console.log(circuitData);
       return {
         ...state,
         allCircuitId: circuitData,
@@ -153,12 +160,66 @@ export default (state = initialState, action) => {
       };
 
     // =====================only data============
+    // =====================only SEARCH  data============
+    case ALL_CIRCUIT_SEARCH_ONLY_VENDOR:
+      const VendorSearch = [...state.allVendor1];
+      // console.log(VendorSearch);
+
+      if (action.data) {
+        const serachdata = VendorSearch.filter(function (item) {
+          const itemData = item?.Vendor.toUpperCase();
+
+          return itemData.startsWith(action.data.toUpperCase());
+        });
+        return {
+          ...state,
+          allVendor: serachdata,
+        };
+      } else {
+        return {
+          ...state,
+          allVendor: state.allVendor1,
+        };
+      }
+    //serach subtype
+    case ALL_CIRCUIT_SEARCH_ONLY_SUBTYPE:
+      const subtypve = [...state.allSubType1];
+      // console.log(VendorSearch);
+
+      if (action.data) {
+        const subdata = subtypve.filter(function (item) {
+          const itemData = item?.SubCat.toUpperCase();
+
+          return itemData.startsWith(action.data.toUpperCase());
+        });
+        return {
+          ...state,
+          allSubType: subdata,
+        };
+      } else {
+        return {
+          ...state,
+          allSubType: state.allSubType1,
+        };
+      }
+
+    // =====================only SEARCH data============
+    // =====================FILTER  data============
+
     case ALL_CIRCUIT_FILTER_BY_LOCATION_ID:
       const fdata = [...state.allCircuit1];
       const filterdata = fdata.filter(item => item.Location_ID == action.data);
       return {
         ...state,
         allCircuit: filterdata,
+      };
+    //============= FILTER SUBTYPE
+    case ALL_CIRCUIT_FILTER_BY_SUBTYPE:
+      const SUBTYPE = [...state.allCircuit1];
+      const subdata = SUBTYPE.filter(item => item.SubCat == action.data);
+      return {
+        ...state,
+        allCircuit: subdata,
       };
     // FILTER BY STATUS
     case ALL_CIRCUIT_FILTER_BY_STATUS:
@@ -186,6 +247,14 @@ export default (state = initialState, action) => {
         ...state,
         allCircuit: cirdata2,
       };
+    case ALL_CIRCUIT_FILTER_BY_VENDOR:
+      const venfdat = [...state.allCircuit1];
+      const filvenData = venfdat.filter(item => item.Vendor == action.data);
+      return {
+        ...state,
+        allCircuit: filvenData,
+      };
+    // =====================FILTER  data============
     // SORT Location_ID ASCENDING
     case ALL_CIRCUIT_SORT_BY_LOC_ID_ASC:
       // const aa = action.lo;

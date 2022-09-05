@@ -17,7 +17,7 @@ import {
   ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
   ALL_CIRCUIT_FILTER_BY_STATUS,
 } from '../../../actions/actionType/AllCircuit';
-const Status = ({loding1}) => {
+const Status = ({loding1, cirCuitRef, setSwitchView}) => {
   const {allStatus} = useSelector(stata => stata.allCircuit);
   // console.log(allStatus);
 
@@ -77,6 +77,8 @@ const Status = ({loding1}) => {
                   onPress={() => {
                     fiterCircuitsData(item.Circuit_Status);
                     Keyboard.dismiss();
+                    setSwitchView(true);
+                    cirCuitRef.current.close();
                   }}
                   style={{
                     width: '100%',

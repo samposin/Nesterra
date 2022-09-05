@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 const {width} = Dimensions.get('screen');
-import {Switch} from 'react-native-paper';
+
 import React, {useState, useEffect, useRef} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -98,7 +98,7 @@ const Orders = ({
   const dispatch = useDispatch();
 
   // const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
-
+  console.log(ordersForTab);
   ///
   const [refresh, setRefresh] = useState(false);
 
@@ -686,29 +686,27 @@ const Orders = ({
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
-      {/* <View
-          style={{
-            width: 130,
-            height: 45,
-            backgroundColor: '#007aff',
-            position: 'absolute',
-            bottom: 55,
-            zIndex: 1,
-            left: width / 2 - 65,
-            borderRadius: 15,
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'row',
-          }}>
-          <Text style={{fontWeight: 'bold', color: 'white'}}>
-            {displyCompomnet === 'Circuits'
-              ? allCircuit.length
-              : deviceAllData.length}
-          </Text>
-          <Text style={{fontWeight: 'bold', color: 'white', marginLeft: 12}}>
-            {displyCompomnet === 'Circuits' ? 'Circuits' : 'Devices'}
-          </Text>
-        </View> */}
+      <View
+        style={{
+          width: 130,
+          height: 45,
+          backgroundColor: '#007aff',
+          position: 'absolute',
+          bottom: 55,
+          zIndex: 1,
+          left: width / 2 - 65,
+          borderRadius: 15,
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'row',
+        }}>
+        <Text style={{fontWeight: 'bold', color: 'white'}}>
+          {ordersForTab.length}
+        </Text>
+        <Text style={{fontWeight: 'bold', color: 'white', marginLeft: 12}}>
+          Orders
+        </Text>
+      </View>
     </>
   );
 };

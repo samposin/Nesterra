@@ -11,26 +11,29 @@ import React, {useEffect, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
+import {ALL_CIRCUITSID_FILTER_BY_CIRCUIT_ID} from '../../../../../actions/actionType/AllCircuitID';
+import {ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID} from '../../../../../actions/actionType/AllCircuit';
 
-const CircuitId = ({loding1}) => {
-  const {allCircuitId} = useSelector(stata => stata.allCircuit);
+const CircuitId = ({loding1, cirCuitRef, setSwitchView}) => {
+  const {allCircuitID} = useSelector(stata => stata.allCircuitID);
   // console.log(allBranchID.length, 'allBranchID');
   // console.log(
   //   allBranchID.filter(item => item.id == '10').length,
   //   'allbraCircuit',
   // );
+  // console.log(allCircuitID);
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const searchFilterFunction = text => {
     setSearch(text);
     dispatch({
-      type: ALL_BRANCH_ID_FILTER_ID,
+      type: ALL_CIRCUITSID_FILTER_BY_CIRCUIT_ID,
       data: text,
     });
   };
   const searchbranch = text => {
     dispatch({
-      type: ALL_CIRCUIT_FILTER_BY_BRANCH_ID,
+      type: ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
       data: text,
     });
   };
@@ -46,7 +49,7 @@ const CircuitId = ({loding1}) => {
             style={{
               paddingLeft: 10,
             }}
-            // onChangeText={text => searchFilterFunction(text)}
+            onChangeText={text => searchFilterFunction(text)}
           />
         </View>
         <View style={styles.searchViewRight}>
@@ -67,13 +70,15 @@ const CircuitId = ({loding1}) => {
         <>
           <BottomSheetFlatList
             keyboardShouldPersistTaps="handled"
-            data={allCircuitId}
+            data={allCircuitID}
             renderItem={({item}) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    // fiterCircuitsData(item.Vendor);
+                    searchbranch(item.id);
                     Keyboard.dismiss();
+                    setSwitchView(true);
+                    cirCuitRef.current.close();
                   }}
                   style={{
                     width: '100%',
@@ -82,11 +87,11 @@ const CircuitId = ({loding1}) => {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Text style={{fontWeight: 'bold'}}>{item.Circuit_ID}</Text>
+                  <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
                 </TouchableOpacity>
               );
             }}
-            keyExtractor={item => item.Circuit_ID}
+            keyExtractor={item => item.id}
           />
         </>
       )}

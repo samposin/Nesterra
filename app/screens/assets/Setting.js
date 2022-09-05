@@ -1,17 +1,9 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Animated,
-  ScrollView,
-  useRef,
-  Image,
-} from 'react-native';
+import {StyleSheet, View, Animated, Image} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Modal, Portal, Text, Button, Provider} from 'react-native-paper';
+import {Modal, Portal, Text} from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {list} from '../../utils/Constants';

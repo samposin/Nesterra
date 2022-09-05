@@ -11,10 +11,14 @@ import React, {useEffect, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
+import {
+  ALL_CIRCUIT_SEARCH_ONLY_SUBTYPE,
+  ALL_CIRCUIT_FILTER_BY_SUBTYPE,
+} from './../../../../../actions/actionType/AllCircuit/index';
 
-const SubType = ({loding1}) => {
+const SubType = ({loding1, cirCuitRef, setSwitchView}) => {
   const {allSubType} = useSelector(stata => stata.allCircuit);
-  // console.log(allBranchID.length, 'allBranchID');
+  // console.log(allSubType, 'allBranchID');
   // console.log(
   //   allBranchID.filter(item => item.id == '10').length,
   //   'allbraCircuit',
@@ -24,13 +28,13 @@ const SubType = ({loding1}) => {
   const searchFilterFunction = text => {
     setSearch(text);
     dispatch({
-      type: ALL_BRANCH_ID_FILTER_ID,
+      type: ALL_CIRCUIT_SEARCH_ONLY_SUBTYPE,
       data: text,
     });
   };
-  const searchbranch = text => {
+  const searchSYBTYPE = text => {
     dispatch({
-      type: ALL_CIRCUIT_FILTER_BY_BRANCH_ID,
+      type: ALL_CIRCUIT_FILTER_BY_SUBTYPE,
       data: text,
     });
   };
@@ -46,7 +50,7 @@ const SubType = ({loding1}) => {
             style={{
               paddingLeft: 10,
             }}
-            // onChangeText={text => searchFilterFunction(text)}
+            onChangeText={text => searchFilterFunction(text)}
           />
         </View>
         <View style={styles.searchViewRight}>
@@ -72,8 +76,10 @@ const SubType = ({loding1}) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    // fiterCircuitsData(item.Vendor);
+                    searchSYBTYPE(item.SubCat);
                     Keyboard.dismiss();
+                    setSwitchView(true);
+                    cirCuitRef.current.close();
                   }}
                   style={{
                     width: '100%',

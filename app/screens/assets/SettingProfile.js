@@ -54,7 +54,6 @@ const SettingProfile = () => {
             style={{
               width: '90%',
               height: 50,
-
               borderTopColor: 'black',
               borderTopWidth: 0.5,
               alignSelf: 'center',

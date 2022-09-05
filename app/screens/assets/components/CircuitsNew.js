@@ -5,6 +5,7 @@ import {
   FlatList,
   Text,
   View,
+  Image,
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import {connect, useSelector, useDispatch} from 'react-redux';
@@ -56,11 +57,16 @@ const CircuitsNew = ({
 
   const [isOn, setIsSwitchOn] = React.useState(false);
   const [switchView, setSwitchView] = useState(true);
+  const [acdata, setAcData] = useState(allCircuit);
 
   // const {loder} = useSelector(state => state.allCircuit);
   // console.log(allCircuit, 'aa');
+  // console.log(
+  //   allBranchID.filter(item => item.S == '10').length,
+  //   'allbraCircuit',
+  // )
   const dispatch = useDispatch();
-
+  const [refresh, setRefresh] = useState(false);
   const [locType, setLocType] = useState(true);
   const [vendor, setVendor] = useState(true);
   const [cirType, setCirType] = useState(true);
@@ -181,7 +187,14 @@ const CircuitsNew = ({
       data: 'Inactive',
     });
   };
-
+  const activefilter = () => {
+    const data = allCircuit.filter(item => item.Circuit_Status == 'Active');
+    setAcData(data);
+  };
+  const inactivefilter = () => {
+    const data = allCircuit.filter(item => item.Circuit_Status == 'Inactive');
+    setAcData(data);
+  };
   return (
     <>
       {loding3 ? (
@@ -196,8 +209,8 @@ const CircuitsNew = ({
             <View style={styles.idViewLeft}>
               <TouchableOpacity
                 onPress={() => {
+                  setSwitchView(false);
                   setDiplayName('Site ID');
-
                   getAllSiteID(setLodding1);
                   cirCuitRef.current.snapToIndex(1);
                 }}
@@ -229,6 +242,7 @@ const CircuitsNew = ({
 
               <TouchableOpacity
                 onPress={() => {
+                  setSwitchView(false);
                   setDiplayName('Branch ID');
                   cirCuitRef.current.snapToIndex(1);
                   getAllBrachrID(setLodding1);
@@ -260,6 +274,7 @@ const CircuitsNew = ({
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
+                  setSwitchView(false);
                   searchFilterDatataByStatus();
                 }}
                 style={{
@@ -290,10 +305,12 @@ const CircuitsNew = ({
             </View>
             <View style={styles.idViewRight}></View>
           </View>
+          {/* ========ThirdRow Component============= */}
           <ThirdRow
             diplayName={diplayName}
             setDiplayName={setDiplayName}
             cirCuitRef={cirCuitRef}
+            setSwitchView={setSwitchView}
           />
           {/* ========ID VIEW============= */}
           {/* ========TABLE HEADER============= */}
@@ -302,7 +319,6 @@ const CircuitsNew = ({
               onPress={() => {
                 if (locType) {
                   setLocType(!locType);
-
                   dispatch({
                     type: ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
                   });
@@ -420,7 +436,7 @@ const CircuitsNew = ({
             </View>
           ) : (
             <>
-              {allCircuit.length == 0 ? (
+              {/* {acdata.length == 0 ? (
                 <View
                   style={{
                     width: '100%',
@@ -432,19 +448,54 @@ const CircuitsNew = ({
                     No Data Found
                   </Text>
                 </View>
-              ) : (
-                <>
-                  <View style={styles.table}>
-                    <FlatList
-                      contentContainerStyle={{paddingBottom: 230}}
-                      showsVerticalScrollIndicator={false}
-                      data={allCircuit}
-                      keyExtractor={(item, i) => i.toString()}
-                      renderItem={(item, i) => randerItem(item)}
-                    />
-                  </View>
-                </>
-              )}
+              ) : ( */}
+              <>
+                <View style={styles.table}>
+                  <FlatList
+                    contentContainerStyle={{paddingBottom: 230}}
+                    showsVerticalScrollIndicator={false}
+                    data={allCircuit}
+                    keyExtractor={(item, i) => i.toString()}
+                    renderItem={(item, i) => randerItem(item)}
+                    refreshing={refresh}
+                    onRefresh={() => {
+                      setDiplayName('');
+
+                      getAllCircuit(setLodding3);
+                    }}
+                    ListEmptyComponent={() => {
+                      return (
+                        <View
+                          style={{
+                            width: '100%',
+                            height: 500,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}>
+                          <View
+                            style={{
+                              width: '100%',
+                              height: 200,
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}>
+                            <Image
+                              style={{
+                                width: '100%',
+                                height: 100,
+                                resizeMode: 'contain',
+                              }}
+                              source={require('../../../images/empty.png')}
+                            />
+                            <Text style={{fontSize: 25}}>No Data Found</Text>
+                          </View>
+                        </View>
+                      );
+                    }}
+                  />
+                </View>
+              </>
+              {/* // )} */}
             </>
           )}
 
@@ -453,6 +504,7 @@ const CircuitsNew = ({
             diplayName={diplayName}
             loding1={loding1}
             cirCuitRef={cirCuitRef}
+            setSwitchView={setSwitchView}
           />
           <BottomSheetViewCircuits
             loding={loding}
@@ -465,7 +517,6 @@ const CircuitsNew = ({
               style={{
                 width: (width / 3) * 2.2,
                 height: 55,
-
                 position: 'absolute',
                 bottom: 60,
                 right: 0,
@@ -495,7 +546,6 @@ const CircuitsNew = ({
                   borderRadius: 10,
                   flexDirection: 'row',
                   paddingHorizontal: 5,
-
                   justifyContent: 'space-between',
                   alignItems: 'center',
                 }}>
@@ -512,8 +562,10 @@ const CircuitsNew = ({
                     setIsSwitchOn(isOn);
                     if (isOn) {
                       fiterCircuitsActive();
+                      // activefilter();
                     } else {
                       fiterCircuitsInActive();
+                      // inactivefilter();
                     }
                   }}
                 />

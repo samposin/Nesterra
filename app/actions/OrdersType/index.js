@@ -8,5 +8,5 @@ export const getOrdersType = () => dispatch => {
   //     },
   //   });
   // }
-  console.log('first');
+  // console.log('first');
 };

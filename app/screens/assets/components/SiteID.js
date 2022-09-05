@@ -14,7 +14,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {FILTER_BY_LOC_ID_OR_SITE_SITE_ID} from '../../../actions/actionType/AllSiteID';
 import {ALL_CIRCUIT_FILTER_BY_LOCATION_ID} from './../../../actions/actionType/AllCircuit/index';
 
-const SiteID = ({loding1, cirCuitRef}) => {
+const SiteID = ({loding1, setSwitchView, cirCuitRef}) => {
   const {allSiteID} = useSelector(stata => stata.allSiteID);
   // console.log(allSiteID.length, 'allBranchID');
   const dispatch = useDispatch();
@@ -69,6 +69,7 @@ const SiteID = ({loding1, cirCuitRef}) => {
             return (
               <TouchableOpacity
                 onPress={() => {
+                  setSwitchView(true);
                   filterCircuitData(item.id);
                   Keyboard.dismiss();
                   cirCuitRef.current.close();

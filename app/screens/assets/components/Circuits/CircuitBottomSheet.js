@@ -10,27 +10,68 @@ import SubType from '../ThirdRow/SubType';
 import Vendor from './../ThirdRow/Vendor/index';
 import CircuitId from '../ThirdRow/CircuitId';
 
-const CircuitBottomSheet = ({cirCuitRef, diplayName, loding1}) => {
+const CircuitBottomSheet = ({
+  cirCuitRef,
+  diplayName,
+  setSwitchView,
+  loding1,
+}) => {
   const snapPoints = useMemo(() => ['20%', '50%'], []);
   // console.log(diplayName);
   const selectedComponent = () => {
     switch (true) {
       case diplayName === 'Site ID':
-        return <SiteID cirCuitRef={cirCuitRef} loding1={loding1} />;
+        return (
+          <SiteID
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+            loding1={loding1}
+          />
+        );
 
       case diplayName === 'Status':
-        return <Status cirCuitRef={cirCuitRef} loding1={loding1} />;
+        return (
+          <Status
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+            loding1={loding1}
+          />
+        );
 
       case diplayName === 'Branch ID':
-        return <BranchID cirCuitRef={cirCuitRef} loding1={loding1} />;
+        return (
+          <BranchID
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+            loding1={loding1}
+          />
+        );
       case diplayName === 'Type':
         return <Type cirCuitRef={cirCuitRef} loding1={loding1} />;
       case diplayName === 'Sub Type':
-        return <SubType cirCuitRef={cirCuitRef} loding1={loding1} />;
+        return (
+          <SubType
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+            loding1={loding1}
+          />
+        );
       case diplayName === 'Vendor':
-        return <Vendor cirCuitRef={cirCuitRef} loding1={loding1} />;
+        return (
+          <Vendor
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+            loding1={loding1}
+          />
+        );
       case diplayName === 'Circuit ID':
-        return <CircuitId cirCuitRef={cirCuitRef} loding1={loding1} />;
+        return (
+          <CircuitId
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+            loding1={loding1}
+          />
+        );
     }
   };
   return (
@@ -50,13 +91,21 @@ const CircuitBottomSheet = ({cirCuitRef, diplayName, loding1}) => {
       animatedPosition={true}>
       <View style={styles.top}>
         <View style={styles.textView}>
-          <TouchableOpacity onPress={() => cirCuitRef.current.close()}>
+          <TouchableOpacity
+            onPress={() => {
+              setSwitchView(true);
+              cirCuitRef.current.close();
+            }}>
             <Text style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
               Cancel
             </Text>
           </TouchableOpacity>
           <Text style={{fontSize: 16, fontWeight: 'bold'}}>{diplayName}</Text>
-          <TouchableOpacity onPress={() => cirCuitRef.current.close()}>
+          <TouchableOpacity
+            onPress={() => {
+              cirCuitRef.current.close();
+              setSwitchView(true);
+            }}>
             <Text style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
               Done
             </Text>

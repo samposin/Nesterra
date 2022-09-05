@@ -15,7 +15,7 @@ import {
   ALL_DEVICES_SEARCH_BY_DEVICE_TYPE,
   ALL_DEVICES_FILTER_BY_DEVICE_TYPE,
 } from './../../../../actions/actionType/AllDevice/index';
-const Type = ({loding1, deviceRef}) => {
+const Type = ({loding1, setDeviveView, deviceRef}) => {
   const {devieceType} = useSelector(state => state.deviceAllData);
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
@@ -74,6 +74,7 @@ const Type = ({loding1, deviceRef}) => {
                   fiterCircuitsData(item.Device_Type);
                   Keyboard.dismiss();
                   deviceRef.current.close();
+                  setDeviveView(true);
                 }}
                 style={{
                   width: '100%',

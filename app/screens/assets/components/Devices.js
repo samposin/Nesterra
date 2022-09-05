@@ -194,6 +194,7 @@ const Devices = ({
                   });
                   setDiplayName('Name');
                   deviceRef.current.snapToIndex(1);
+                  setDeviveView(false);
                 }}
                 style={{
                   ...styles.idButton,
@@ -221,6 +222,7 @@ const Devices = ({
                     type: GET_DEVICES_ONLY_TYPE,
                   });
                   setDiplayName('Type');
+                  setDeviveView(false);
                   deviceRef.current.snapToIndex(1);
                 }}
                 style={{
@@ -250,6 +252,7 @@ const Devices = ({
                   });
                   setDiplayName('Vendor');
                   deviceRef.current.snapToIndex(1);
+                  setDeviveView(false);
                 }}
                 style={{
                   ...styles.idButton,
@@ -436,6 +439,7 @@ const Devices = ({
             deviceRefDetails={deviceRefDetails}
           />
           <DevicesBottomSheet
+            setDeviveView={setDeviveView}
             lodding1={lodding1}
             diplayName={diplayName}
             deviceRef={deviceRef}

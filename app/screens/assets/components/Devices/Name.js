@@ -16,7 +16,7 @@ import {
   ALL_DEVICES_FILTER_BY_VENDOR_NAME,
 } from './../../../../actions/actionType/AllDevice/index';
 
-const Name = ({loding1, deviceRef}) => {
+const Name = ({loding1, setDeviveView, deviceRef}) => {
   const {devieceName} = useSelector(state => state.deviceAllData);
 
   const dispatch = useDispatch();
@@ -77,6 +77,7 @@ const Name = ({loding1, deviceRef}) => {
                   fiterCircuitsData(item.Device_Name);
                   Keyboard.dismiss();
                   deviceRef.current.close();
+                  setDeviveView(true);
                 }}
                 style={{
                   width: '100%',

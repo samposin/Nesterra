@@ -23,7 +23,6 @@ export default (state = initialState, action) => {
       if (action.data) {
         const newData1 = data.filter(function (item) {
           const itemData = item?.id.toUpperCase();
-
           return itemData.startsWith(action.data.toUpperCase());
         });
         return {

@@ -5,19 +5,42 @@ import Name from './Name';
 import Vendor from './Vendor';
 import Type from './Type';
 
-const DevicesBottomSheet = ({deviceRef, diplayName, loding1}) => {
+const DevicesBottomSheet = ({
+  deviceRef,
+  setDeviveView,
+  diplayName,
+  loding1,
+}) => {
   const snapPoints = useMemo(() => ['20%', '50%'], []);
   // console.log(diplayName);
   const selectedComponent = () => {
     switch (true) {
       case diplayName === 'Name':
-        return <Name deviceRef={deviceRef} loding1={loding1} />;
+        return (
+          <Name
+            setDeviveView={setDeviveView}
+            deviceRef={deviceRef}
+            loding1={loding1}
+          />
+        );
 
       case diplayName === 'Vendor':
-        return <Vendor deviceRef={deviceRef} loding1={loding1} />;
+        return (
+          <Vendor
+            deviceRef={deviceRef}
+            setDeviveView={setDeviveView}
+            loding1={loding1}
+          />
+        );
 
       case diplayName === 'Type':
-        return <Type deviceRef={deviceRef} loding1={loding1} />;
+        return (
+          <Type
+            setDeviveView={setDeviveView}
+            deviceRef={deviceRef}
+            loding1={loding1}
+          />
+        );
     }
   };
   return (
@@ -37,13 +60,22 @@ const DevicesBottomSheet = ({deviceRef, diplayName, loding1}) => {
       animatedPosition={true}>
       <View style={styles.top}>
         <View style={styles.textView}>
-          <TouchableOpacity onPress={() => deviceRef.current.close()}>
+          <TouchableOpacity
+            onPress={() => {
+              setDeviveView(true);
+              deviceRef.current.close();
+            }}>
             <Text style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
               Cancel
             </Text>
           </TouchableOpacity>
           <Text style={{fontSize: 16, fontWeight: 'bold'}}>{diplayName}</Text>
-          <TouchableOpacity onPress={() => deviceRef.current.close()}>
+          <TouchableOpacity
+            onPress={() => {
+              setDeviveView(true);
+
+              deviceRef.current.close();
+            }}>
             <Text style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
               Done
             </Text>

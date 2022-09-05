@@ -1,21 +1,31 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {useDispatch} from 'react-redux';
+import {useDispatch, connect} from 'react-redux';
 import {
   ALL_CIRCUIT_ONLY_TYPE,
   ALL_CIRCUIT_ONLY_VENDOR,
   ALL_CIRCUIT_ONLY_SUBTYPE,
   ALL_CIRCUIT_ONLY_CIRCUITID,
 } from './../../../../actions/actionType/AllCircuit/index';
+import {getAllCircuitID} from '../../../../actions/AllCircuitID';
+import {getAllCircuitDetails} from '../../../../actions/AllCircuit/allCorcuitDetails';
 
-const Button = ({tittle, opPress, setDiplayName, diplayName, cirCuitRef}) => {
+const Button = ({
+  tittle,
+  opPress,
+  setDiplayName,
+  setSwitchView,
+  diplayName,
+  cirCuitRef,
+}) => {
   return (
     <TouchableOpacity
       onPress={() => {
         setDiplayName(tittle);
         cirCuitRef.current.snapToIndex(1);
         opPress();
+        setSwitchView(false);
       }}
       style={{
         width: 90,
@@ -44,8 +54,16 @@ const Button = ({tittle, opPress, setDiplayName, diplayName, cirCuitRef}) => {
     </TouchableOpacity>
   );
 };
-const ThirdRow = ({setDiplayName, diplayName, cirCuitRef}) => {
+const ThirdRow = ({
+  setDiplayName,
+  getAllCircuitID,
+  setSwitchView,
+  diplayName,
+  cirCuitRef,
+}) => {
   const dispatch = useDispatch();
+  const [lodding1, setLodding1] = React.useState(false);
+
   const vendorfil = () => {
     // alert('madan');
     dispatch({
@@ -70,6 +88,10 @@ const ThirdRow = ({setDiplayName, diplayName, cirCuitRef}) => {
       type: ALL_CIRCUIT_ONLY_CIRCUITID,
     });
   };
+  const getCircuitId = () => {
+    // alert('ddadsfsd');
+    getAllCircuitID(setLodding1);
+  };
   return (
     <View
       style={{
@@ -80,6 +102,7 @@ const ThirdRow = ({setDiplayName, diplayName, cirCuitRef}) => {
       }}>
       <Button
         tittle="Vendor"
+        setSwitchView={setSwitchView}
         opPress={vendorfil}
         diplayName={diplayName}
         setDiplayName={setDiplayName}
@@ -88,11 +111,13 @@ const ThirdRow = ({setDiplayName, diplayName, cirCuitRef}) => {
       <Button
         tittle="Type"
         opPress={typefil}
+        setSwitchView={setSwitchView}
         diplayName={diplayName}
         setDiplayName={setDiplayName}
         cirCuitRef={cirCuitRef}
       />
       <Button
+        setSwitchView={setSwitchView}
         tittle="Sub Type"
         opPress={subtypefil}
         diplayName={diplayName}
@@ -101,7 +126,8 @@ const ThirdRow = ({setDiplayName, diplayName, cirCuitRef}) => {
       />
 
       <Button
-        opPress={circuitFil}
+        setSwitchView={setSwitchView}
+        opPress={getCircuitId}
         tittle="Circuit ID"
         diplayName={diplayName}
         setDiplayName={setDiplayName}
@@ -111,6 +137,6 @@ const ThirdRow = ({setDiplayName, diplayName, cirCuitRef}) => {
   );
 };
 
-export default ThirdRow;
+export default connect(null, {getAllCircuitID})(ThirdRow);
 
 const styles = StyleSheet.create({});

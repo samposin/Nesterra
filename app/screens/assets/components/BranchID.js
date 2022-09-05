@@ -14,7 +14,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {ALL_CIRCUIT_FILTER_BY_BRANCH_ID} from './../../../actions/actionType/AllCircuit/index';
 import {ALL_BRANCH_ID_FILTER_ID} from '../../../actions/actionType/AllBranchID';
 
-const BranchID = ({loding1}) => {
+const BranchID = ({loding1, cirCuitRef, setSwitchView}) => {
   const {allBranchID} = useSelector(stata => stata.allBranchID);
   // console.log(allBranchID.length, 'allBranchID');
   // console.log(
@@ -73,8 +73,10 @@ const BranchID = ({loding1}) => {
             return (
               <TouchableOpacity
                 onPress={() => {
+                  setSwitchView(true);
                   searchbranch(item.id);
                   Keyboard.dismiss();
+                  cirCuitRef.current.close();
                 }}
                 style={{
                   width: '100%',

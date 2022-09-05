@@ -11,8 +11,12 @@ import React, {useEffect, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
+import {
+  ALL_CIRCUIT_SEARCH_ONLY_VENDOR,
+  ALL_CIRCUIT_FILTER_BY_VENDOR,
+} from '../../../../../actions/actionType/AllCircuit';
 
-const Vendor = ({loding1}) => {
+const Vendor = ({loding1, setSwitchView, cirCuitRef}) => {
   const {allVendor} = useSelector(stata => stata.allCircuit);
 
   // console.log(
@@ -24,13 +28,13 @@ const Vendor = ({loding1}) => {
   const searchFilterFunction = text => {
     setSearch(text);
     dispatch({
-      type: ALL_BRANCH_ID_FILTER_ID,
+      type: ALL_CIRCUIT_SEARCH_ONLY_VENDOR,
       data: text,
     });
   };
   const searchbranch = text => {
     dispatch({
-      type: ALL_CIRCUIT_FILTER_BY_BRANCH_ID,
+      type: ALL_CIRCUIT_FILTER_BY_VENDOR,
       data: text,
     });
   };
@@ -45,7 +49,7 @@ const Vendor = ({loding1}) => {
             style={{
               paddingLeft: 10,
             }}
-            // onChangeText={text => searchFilterFunction(text)}
+            onChangeText={text => searchFilterFunction(text)}
           />
         </View>
         <View style={styles.searchViewRight}>
@@ -71,8 +75,10 @@ const Vendor = ({loding1}) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    // fiterCircuitsData(item.Vendor);
+                    searchbranch(item.Vendor);
                     Keyboard.dismiss();
+                    cirCuitRef.current.close();
+                    setSwitchView(true);
                   }}
                   style={{
                     width: '100%',

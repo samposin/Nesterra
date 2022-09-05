@@ -498,7 +498,7 @@ import React from 'react';
 
 const Saved = () => {
   const click = async () => {
-    console.log('first');
+    // console.log('first');
     const TaskSchema = {
       name: 'Book',
       properties: {
