@@ -1,14 +1,20 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useMemo} from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
-import Status from '../Status';
+// import Status from '../Status';
 import BranchID from '../BranchID';
 import SiteID from '../SiteID';
-import Type from './../ThirdRow/Type/index';
+import Project from './../ThirdRow/Project/index';
 import SubType from '../ThirdRow/SubType';
-
 import Vendor from './../ThirdRow/Vendor/index';
 import CircuitId from '../ThirdRow/CircuitId';
+import Status from '../ThirdRow/Status';
+//================
+import OrderType from './../SecondRow/OrderType/index';
+import SmartSite from './../SecondRow/SmartSite/index';
+import Tangoe from './../SecondRow/Tangoe/index';
+import Carrier from './../SecondRow/Carrier/index';
+import Item from './../SecondRow/Item/index';
 
 const CircuitBottomSheet = ({
   cirCuitRef,
@@ -20,6 +26,46 @@ const CircuitBottomSheet = ({
   // console.log(diplayName);
   const selectedComponent = () => {
     switch (true) {
+      case diplayName === 'Order Type':
+        return (
+          <OrderType
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+            loding1={loding1}
+          />
+        );
+      case diplayName === 'SmartSite#':
+        return (
+          <SmartSite
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+            loding1={loding1}
+          />
+        );
+      case diplayName === 'Tangoe#':
+        return (
+          <Tangoe
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+            loding1={loding1}
+          />
+        );
+      case diplayName === 'Carrier#':
+        return (
+          <Carrier
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+            loding1={loding1}
+          />
+        );
+      case diplayName === 'Item#':
+        return (
+          <Item
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+            loding1={loding1}
+          />
+        );
       case diplayName === 'Site ID':
         return (
           <SiteID
@@ -46,8 +92,8 @@ const CircuitBottomSheet = ({
             loding1={loding1}
           />
         );
-      case diplayName === 'Type':
-        return <Type cirCuitRef={cirCuitRef} loding1={loding1} />;
+      case diplayName === 'Project':
+        return <Project cirCuitRef={cirCuitRef} loding1={loding1} />;
       case diplayName === 'Sub Type':
         return (
           <SubType

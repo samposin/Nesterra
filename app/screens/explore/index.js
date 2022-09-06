@@ -117,7 +117,7 @@ const Explore = ({
     // setModalVisible1(false)
     //alert(123)
     clearTimeout(startTimeOute);
-    console.log('sec');
+    // console.log('sec');
     // clearTimeout(startTimeOute)
     // startTimeOute()
     timer = null;
@@ -128,7 +128,7 @@ const Explore = ({
         setModalVisible1(true);
         setlocationText('');
         // setModalVisible(false)
-        console.log('object');
+        // console.log('object');
       }
     }, 10000);
   };
@@ -235,7 +235,7 @@ const Explore = ({
   /// arrow rotated
   // get start points
   const startPoint = (lat, lng) => {
-    console.log(lat, lng, 'lat, lng');
+    // console.log(lat, lng, 'lat, lng');
     const startPoints = {
       latitude: lat,
       longitude: lng,
@@ -244,7 +244,7 @@ const Explore = ({
   };
   // get destination points
   const destination = (lat, lng) => {
-    console.log(lat, lng, 'f');
+    // console.log(lat, lng, 'f');
     const destinationPoints = {
       latitude: lat,
       longitude: lng,

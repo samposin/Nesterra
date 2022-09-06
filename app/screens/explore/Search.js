@@ -46,7 +46,7 @@ const Search = ({
   };
 
   const onSpeechResultsHandler = e => {
-    console.log(modalVisible, 'dd');
+    // console.log(modalVisible, 'dd');
     setlocationText(e.value[0]);
 
     find(e.value[0]);

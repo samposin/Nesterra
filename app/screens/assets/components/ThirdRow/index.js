@@ -7,6 +7,7 @@ import {
   ALL_CIRCUIT_ONLY_VENDOR,
   ALL_CIRCUIT_ONLY_SUBTYPE,
   ALL_CIRCUIT_ONLY_CIRCUITID,
+  ALL_CIRCUIT_SORT_BY_STATUS,
 } from './../../../../actions/actionType/AllCircuit/index';
 import {getAllCircuitID} from '../../../../actions/AllCircuitID';
 import {getAllCircuitDetails} from '../../../../actions/AllCircuit/allCorcuitDetails';
@@ -92,6 +93,11 @@ const ThirdRow = ({
     // alert('ddadsfsd');
     getAllCircuitID(setLodding1);
   };
+  const getStatus = () => {
+    dispatch({
+      type: ALL_CIRCUIT_SORT_BY_STATUS,
+    });
+  };
   return (
     <View
       style={{
@@ -109,7 +115,7 @@ const ThirdRow = ({
         cirCuitRef={cirCuitRef}
       />
       <Button
-        tittle="Type"
+        tittle="Project"
         opPress={typefil}
         setSwitchView={setSwitchView}
         diplayName={diplayName}
@@ -118,21 +124,41 @@ const ThirdRow = ({
       />
       <Button
         setSwitchView={setSwitchView}
-        tittle="Sub Type"
-        opPress={subtypefil}
+        tittle="Status"
+        opPress={getStatus}
         diplayName={diplayName}
         setDiplayName={setDiplayName}
         cirCuitRef={cirCuitRef}
       />
-
-      <Button
-        setSwitchView={setSwitchView}
-        opPress={getCircuitId}
-        tittle="Circuit ID"
-        diplayName={diplayName}
-        setDiplayName={setDiplayName}
-        cirCuitRef={cirCuitRef}
-      />
+      <TouchableOpacity
+        onPress={() => {
+          setDiplayName('Date');
+        }}
+        style={{
+          width: 90,
+          height: 40,
+          marginRight: 10,
+          borderRadius: 10,
+          borderWidth: 1,
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          borderColor: diplayName == 'Date' ? '#007aff' : 'black',
+        }}>
+        <Text
+          style={{
+            fontWeight: '600',
+            color: diplayName == 'Date' ? '#007aff' : 'black',
+          }}>
+          Date
+        </Text>
+        <FontAwesome5
+          name="eject"
+          size={15}
+          style={{transform: [{rotate: '180deg'}], marginLeft: 2, marginTop: 3}}
+          color={diplayName == 'Date' ? '#007aff' : 'black'}
+        />
+      </TouchableOpacity>
     </View>
   );
 };

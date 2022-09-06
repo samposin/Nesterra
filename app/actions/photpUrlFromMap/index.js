@@ -2,7 +2,7 @@ import {LocationKey} from '../../key';
 import {GET_PHOTO_URL_FROM_MAP} from '../actionType/action.photoMapurl.type';
 
 export const photo_url_from_map = (lat, lng) => dispatch => {
-  console.log(lat, lng, 'lat,lng');
+  // console.log(lat, lng, 'lat,lng');
 
   let radMetter = 20 * 1000; // Search withing 2 KM radius
 

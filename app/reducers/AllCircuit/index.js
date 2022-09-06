@@ -132,7 +132,7 @@ export default (state = initialState, action) => {
         }
         return acc;
       }, []);
-      console.log(circuitData);
+      // console.log(circuitData);
       return {
         ...state,
         allCircuitId: circuitData,

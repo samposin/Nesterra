@@ -22,6 +22,7 @@ import {getAllCircuitDetails} from '../../../actions/AllCircuit/allCorcuitDetail
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ThirdRow from './ThirdRow/index';
+
 import ToggleSwitch from 'toggle-switch-react-native';
 const {width} = Dimensions.get('screen');
 import {
@@ -39,6 +40,7 @@ import {
   ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
   ALL_CIRCUIT_FILTER_BY_STATUS,
 } from '../../../actions/actionType/AllCircuit';
+import SecondRow from './SecondRow';
 const CircuitsNew = ({
   getAllCircuit,
   getAllSiteID,
@@ -203,9 +205,15 @@ const CircuitsNew = ({
         </View>
       ) : (
         <>
-          {/* ========ID VIEW============= */}
+          {/* ========Second Row============= */}
+          <SecondRow
+            diplayName={diplayName}
+            setDiplayName={setDiplayName}
+            cirCuitRef={cirCuitRef}
+            setSwitchView={setSwitchView}
+          />
 
-          <View style={{...styles.idView}}>
+          {/* <View style={{...styles.idView}}>
             <View style={styles.idViewLeft}>
               <TouchableOpacity
                 onPress={() => {
@@ -304,7 +312,7 @@ const CircuitsNew = ({
               </TouchableOpacity>
             </View>
             <View style={styles.idViewRight}></View>
-          </View>
+          </View> */}
           {/* ========ThirdRow Component============= */}
           <ThirdRow
             diplayName={diplayName}

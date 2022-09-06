@@ -98,7 +98,7 @@ const Orders = ({
   const dispatch = useDispatch();
 
   // const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
-  console.log(ordersForTab);
+  // console.log(ordersForTab);
   ///
   const [refresh, setRefresh] = useState(false);
 
