@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
   searchView: {
     width: '90%',
     height: 50,
-
     alignSelf: 'center',
     borderColor: 'black',
     paddingLeft: 10,
@@ -123,7 +122,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-
     paddingRight: 5,
   },
 });

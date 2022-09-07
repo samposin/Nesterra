@@ -65,7 +65,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     Circuit ID
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Circuit_ID}
                   </Text>
@@ -88,6 +93,8 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
                     backgroundColor:
                       item.Circuit_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
                   }}>
@@ -110,7 +117,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     Assoc ID
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Associated_ID}
                   </Text>
@@ -131,7 +143,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     LEC ID
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.LEC_ID}
                   </Text>
@@ -152,7 +169,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     Full Address
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Address}
                   </Text>
@@ -173,7 +195,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     Vendor
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Vendor}
                   </Text>
@@ -192,7 +219,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     Category
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Category}
                   </Text>
@@ -217,7 +249,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     SubCat1
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.SubCat_1}
                   </Text>
@@ -241,6 +278,8 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.SubCat_2}
@@ -262,6 +301,8 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.SubCat_3}
@@ -286,6 +327,8 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Whitelist_Use_Type}
@@ -307,7 +350,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     Vendor Account
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Vendor_Account_Number}
                   </Text>
@@ -326,7 +374,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     Summary Account
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Summary_Account_Number}
                   </Text>
@@ -343,7 +396,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>Mbps</Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Mbps}
                   </Text>
@@ -362,7 +420,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     Circuit Cost(M)
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     ${item.circuit_charge}
                   </Text>
@@ -380,7 +443,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>GL</Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.GL}
                   </Text>
@@ -398,7 +466,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>RC</Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.RC}
                   </Text>
@@ -417,7 +490,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     B-End Location
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Location_B_End}
                   </Text>
@@ -425,7 +503,7 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
               </View>
             ) : null}
 
-            <View style={{height: 30, width: '100%', borderTopWidth: 1}}></View>
+            {/* <View style={{height: 30, width: '100%', borderTopWidth: 1}}></View> */}
           </>
         ) : (
           <OrderLoder />
@@ -540,12 +618,12 @@ const styles = StyleSheet.create({
     height: 50,
 
     flexDirection: 'row',
-    borderTopColor: 'black',
-    borderTopWidth: 1,
+    // borderTopColor: 'black',
+    borderBottomWidth: 1,
     borderBottomColor: 'black',
 
     borderLeftColor: 'black',
-    borderLeftWidth: 1,
+    // borderLeftWidth: 1,
   },
   secondTableRow1: {
     width: '100%',
@@ -555,8 +633,7 @@ const styles = StyleSheet.create({
   secondTableColum: {
     width: '50%',
     height: '100%',
-    borderRightColor: 'black',
-    borderRightWidth: 1,
+
     paddingLeft: 10,
     justifyContent: 'center',
   },

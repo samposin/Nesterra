@@ -67,7 +67,13 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Device Name
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Device_Name}
                 </Text>
@@ -90,6 +96,8 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
               <View
                 style={{
                   ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
                   backgroundColor:
                     item.Device_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
                 }}>
@@ -112,7 +120,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Device Vendor
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Device_Vendor}
                 </Text>
@@ -133,7 +146,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Device Type
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Device_Type}
                 </Text>
@@ -154,7 +172,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Device Function
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Device_Function}
                 </Text>
@@ -175,7 +198,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Device Layer
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Device_Layer}
                 </Text>
@@ -194,7 +222,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Device Details
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Device_Details}
                 </Text>
@@ -219,7 +252,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Branch ID
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Branch_ID}
                 </Text>
@@ -238,6 +276,7 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
               }}>
               <Text style={{fontWeight: '700', color: 'black'}}>Site ID</Text>
             </View>
+
             <TouchableOpacity
               onPress={() => {
                 deviceRefExplore.current.close();
@@ -245,6 +284,8 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
               }}
               style={{
                 ...styles.secondTableColum,
+                borderLeftColor: 'black',
+                borderLeftWidth: 0.7,
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'flex-start',
@@ -274,6 +315,8 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
               <View
                 style={{
                   ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
                   backgroundColor: item.Site_Status ? '#c6efcd' : '#e7c4b5',
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
@@ -299,6 +342,8 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
               <View
                 style={{
                   ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Site_Type_Concatenated_Detail}
@@ -320,7 +365,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Service ID
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Service_ID}
                 </Text>
@@ -337,7 +387,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>Domain</Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Domain}
                 </Text>
@@ -356,7 +411,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Loopback Address
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Loopback_Address}
                 </Text>
@@ -375,7 +435,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Serial Number
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Serial_Number}
                 </Text>
@@ -393,7 +458,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>Model</Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Model.substr(1, 20)}...
                 </Text>
@@ -411,7 +481,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>MAC ID</Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.MAC_ID}
                 </Text>
@@ -430,7 +505,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Hardware Version
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Hardware_Version}
                 </Text>
@@ -448,7 +528,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Software Version
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Software_Version}
                 </Text>
@@ -468,7 +553,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Management Interface
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Management_Interface}
                 </Text>
@@ -488,7 +578,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Associated Circuit
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Associated_Circuit}
                 </Text>
@@ -507,7 +602,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   System Description
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.System_Description.substr(1, 22)}...
                 </Text>
@@ -526,7 +626,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Config Compliance
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Config_Compliance}
                 </Text>
@@ -545,7 +650,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Code Compliance
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Code_Compliance}
                 </Text>
@@ -564,7 +674,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Responsible Engineer
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Responsible_Engineer.substr(1, 20)}...
                 </Text>
@@ -584,7 +699,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Responsible Engineer Validation Date
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {moment(item.Responsible_Engineer_Validation_Date).format(
                     'DD-MM-YYYY',
@@ -607,7 +727,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Last Polled
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Last_Polled_or_Discovery}
                 </Text>
@@ -626,7 +751,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Maint Plan
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Maintenance_Coverage_Plan.substr(1, 20)}...
                 </Text>
@@ -645,7 +775,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Maint Cost(M)
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Maintenance_M}
                 </Text>
@@ -664,7 +799,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   License Cost(M)
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.License_M}
                 </Text>
@@ -683,7 +823,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Resale Value
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Resale_Value}
                 </Text>
@@ -702,7 +847,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Purchase Date
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {moment(item.Purchase_Date).format('DD-MM-YYYY')}
                 </Text>
@@ -721,7 +871,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Decom_Date
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {moment(item.Decom_Date).format('DD-MM-YYYY')}
                 </Text>
@@ -740,7 +895,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   EOL Date
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {moment(item.EOL_Date).format('DD-MM-YYYY')}
                 </Text>
@@ -760,7 +920,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   EOS Date
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {moment(item.EOS_Date).format('DD-MM-YYYY')}
                 </Text>
@@ -780,7 +945,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   LDoS Date
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {moment(item.LDoS_Date).format('DD-MM-YYYY')}
                 </Text>
@@ -799,7 +969,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   LDoS Date
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {moment(item.Last_Patch_Date).format('DD-MM-YYYY')}
                 </Text>
@@ -818,7 +993,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   EOL Count
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.EOL_Count}
                 </Text>
@@ -838,7 +1018,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Upgraded Code
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Upgraded_Code}
                 </Text>
@@ -857,7 +1042,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Compliant
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Compliant}
                 </Text>
@@ -876,7 +1066,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Non Compliant
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Non_Compliant}
                 </Text>
@@ -897,7 +1092,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   In Progress
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.In_Progress}
                 </Text>
@@ -917,7 +1117,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Vulnerability SLA Target
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {moment(item.Vulnerability_SLA_Achievement_Target).format(
                     'YYYY-MM-DD',
@@ -938,7 +1143,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Prod Rel Team
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.Prod_Rel_Team}
                 </Text>
@@ -957,7 +1167,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Compiled
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text
                   style={{
                     fontWeight: '700',
@@ -981,7 +1196,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Alt System Description
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text
                   style={{
                     fontWeight: '700',
@@ -1005,7 +1225,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   Alt Device Name
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text
                   style={{
                     fontWeight: '700',
@@ -1029,7 +1254,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   NB First Discovery Time
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text
                   style={{
                     fontWeight: '700',
@@ -1053,7 +1283,12 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
                   NB Last Discovery Time
                 </Text>
               </View>
-              <View style={styles.secondTableColum}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  borderLeftColor: 'black',
+                  borderLeftWidth: 0.7,
+                }}>
                 <Text
                   style={{
                     fontWeight: '700',
@@ -1066,7 +1301,7 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
             </View>
           ) : null}
 
-          <View style={{height: 30, width: '100%', borderTopWidth: 1}}></View>
+          {/* <View style={{height: 30, width: '100%', borderTopWidth: 1}}></View> */}
         </>
       </BottomSheetScrollView>
     </BottomSheet>
@@ -1179,11 +1414,11 @@ const styles = StyleSheet.create({
 
     flexDirection: 'row',
     borderTopColor: 'black',
-    borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderBottomColor: 'black',
 
-    borderLeftColor: 'black',
-    borderLeftWidth: 1,
+    // borderLeftColor: 'black',
+    // borderLeftWidth: 1,
   },
   secondTableRow1: {
     width: '100%',
@@ -1193,8 +1428,9 @@ const styles = StyleSheet.create({
   secondTableColum: {
     width: '50%',
     height: '100%',
-    borderRightColor: 'black',
-    borderRightWidth: 1,
+
+    // borderRightColor: 'black',
+    // borderRightWidth: 1,
     paddingLeft: 10,
     justifyContent: 'center',
   },

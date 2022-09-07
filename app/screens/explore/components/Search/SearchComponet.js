@@ -52,18 +52,18 @@ const SearchComponet = ({setModalVisible}) => {
           <View
             style={{
               width: 2,
-              height: '70%',
+              height: '50%',
               backgroundColor: 'black',
               position: 'absolute',
-              top: 8,
+              top: 15,
               left: 0,
             }}></View>
-          <Text style={{color: 'black', fontWeight: 'bold'}}>Address</Text>
+          <Text style={{color: '#898989', fontWeight: '500'}}>Address</Text>
           <AntDesign
             name="caretdown"
-            size={20}
+            size={15}
             style={{marginLeft: 2}}
-            color={'black'}
+            color={'#898989'}
           />
         </TouchableOpacity>
       </View>
@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
     zIndex: 0,
     marginTop: 80,
     height: 50,
-    borderWidth: 2,
+    // borderWidth: 2,
     // zIndex: -1,
     backgroundColor: 'white',
-    borderRadius: 5,
+    borderRadius: 22,
     shadowColor: '#000',
     shadowOffset: {
       width: 2,

@@ -66,7 +66,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     SmartSites#
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Smart_Site_Order_No}
                   </Text>
@@ -83,7 +88,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>PON</Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.PON}
                   </Text>
@@ -102,7 +112,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     Order Number
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Order_Number}
                   </Text>
@@ -125,6 +140,8 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
                     backgroundColor:
                       item.Order_Type == 'Add' ? '#c6efcd' : '#e7c4b5',
                   }}>
@@ -149,6 +166,8 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Inventory_ID}
@@ -171,6 +190,9 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+
                     backgroundColor:
                       item.Status == 'Completed' ? '#c6efcd' : '#e7c4b5',
                   }}>
@@ -192,7 +214,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     Address
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Address}
                   </Text>
@@ -212,7 +239,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     Branch ID
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Branch_ID}
                   </Text>
@@ -232,7 +264,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     Initiation Date
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {moment(item.Initiation_Date).format('MM-DD-YY')}
                   </Text>
@@ -252,7 +289,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     Creation Date
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {moment(item.Creation_Date).format('MM-DD-YY')}
                   </Text>
@@ -272,7 +314,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     FOC Date
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {moment(item.FOC_Date).format('MM-DD-YY')}
                   </Text>
@@ -292,7 +339,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     Completion_Date
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {moment(item.Order_Completion_Date).format('MM-DD-YY')}
                   </Text>
@@ -312,7 +364,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     Bill Stop Date
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {moment(item.Bill_Stop_Date).format('MM-DD-YY')}
                   </Text>
@@ -332,7 +389,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     Vendor
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Vendor}
                   </Text>
@@ -351,7 +413,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     Category
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Category}
                   </Text>
@@ -376,7 +443,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     SubCat1
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.SubCat_1}
                   </Text>
@@ -400,6 +472,8 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.SubCat_2}
@@ -422,6 +496,8 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.SubCat_3}
@@ -442,7 +518,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>RC</Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.RC}
                   </Text>
@@ -461,7 +542,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>GL</Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.GL}
                   </Text>
@@ -480,7 +566,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     Monthly Cost
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     $ {item.Monthly_Recurring_Cost}
                   </Text>
@@ -499,7 +590,12 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
                     Annual Cost
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     $ {item.Annual_Cost}
                   </Text>
@@ -507,7 +603,7 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
               </View>
             ) : null}
 
-            <View style={{height: 70, width: '100%', borderTopWidth: 1}}></View>
+            {/* <View style={{height: 70, width: '100%', borderTopWidth: 1}}></View> */}
           </>
         ) : (
           <OrderLoder />
@@ -623,11 +719,11 @@ const styles = StyleSheet.create({
 
     flexDirection: 'row',
     borderTopColor: 'black',
-    borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderBottomColor: 'black',
 
-    borderLeftColor: 'black',
-    borderLeftWidth: 1,
+    // borderLeftColor: 'black',
+    // borderLeftWidth: 1,
   },
   secondTableRow1: {
     width: '100%',
@@ -637,8 +733,9 @@ const styles = StyleSheet.create({
   secondTableColum: {
     width: '50%',
     height: '100%',
-    borderRightColor: 'black',
-    borderRightWidth: 1,
+
+    // borderRightColor: 'black',
+    // borderRightWidth: 1,
     paddingLeft: 10,
     justifyContent: 'center',
   },

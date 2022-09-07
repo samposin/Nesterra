@@ -24,7 +24,7 @@ const ButtonView = ({id, setSearchView, seTDropDownShow, title}) => {
 
         justifyContent: 'center',
       }}>
-      <Text style={{color: 'black', fontWeight: '900'}}>{title}</Text>
+      <Text style={{color: 'black', fontWeight: '500'}}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: w2,
     paddingVertical: 10,
+    borderColor: '#898989',
 
-    borderWidth: 2,
+    borderWidth: 1,
   },
 });

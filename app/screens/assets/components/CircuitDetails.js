@@ -58,7 +58,7 @@ const BottomSheetViewCircuits = ({
           </View>
         </TouchableOpacity>
       </View>
-      <BottomSheetScrollView style={{paddingHorizontal: 10}}>
+      <BottomSheetScrollView style={{paddingHorizontal: 0}}>
         {loding ? (
           <OrderLoder />
         ) : (
@@ -435,7 +435,7 @@ const BottomSheetViewCircuits = ({
               </View>
             ) : null}
 
-            <View style={{height: 70, width: '100%', borderTopWidth: 1}}></View>
+            {/* <View style={{height: 70, width: '100%', borderTopWidth: 1}}></View> */}
           </>
         )}
       </BottomSheetScrollView>
@@ -448,11 +448,11 @@ export default BottomSheetViewCircuits;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 1,
+    // borderWidth: 0.5,
     borderColor: '#000000',
     margin: 10,
     marginBottom: 5,
-    borderBottomWidth: 0,
+    // borderBottomWidth: 0,
     borderRadius: 5,
   },
   topView: {
@@ -499,7 +499,7 @@ const styles = StyleSheet.create({
     height: '100%',
     marginHorizontal: 2,
     borderBottomColor: '#73c0b8',
-    borderBottomWidth: 1,
+    // borderBottomWidth: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -549,11 +549,11 @@ const styles = StyleSheet.create({
 
     flexDirection: 'row',
     borderTopColor: 'black',
-    borderTopWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: 'black',
 
     borderLeftColor: 'black',
-    borderLeftWidth: 1,
+    // borderLeftWidth: 1,
   },
   secondTableRow1: {
     width: '100%',
@@ -564,7 +564,7 @@ const styles = StyleSheet.create({
     width: '50%',
     height: '100%',
     borderRightColor: 'black',
-    borderRightWidth: 1,
+    borderRightWidth: 0.5,
     paddingLeft: 10,
     justifyContent: 'center',
   },

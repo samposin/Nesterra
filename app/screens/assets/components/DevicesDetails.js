@@ -72,7 +72,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Device Name
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Device_Name}
                     </Text>
@@ -94,7 +94,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                   </View>
                   <View
                     style={{
-                      ...styles.secondTableColum,
+                      ...styles.tt,
                       backgroundColor:
                         item.Device_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
                     }}>
@@ -117,7 +117,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Device Vendor
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Device_Vendor}
                     </Text>
@@ -138,7 +138,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Device Type
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Device_Type}
                     </Text>
@@ -159,7 +159,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Device Function
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Device_Function}
                     </Text>
@@ -180,7 +180,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Device Layer
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Device_Layer}
                     </Text>
@@ -199,7 +199,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Device Details
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Device_Details}
                     </Text>
@@ -224,7 +224,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Branch ID
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Branch_ID}
                     </Text>
@@ -247,7 +247,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                   </View>
                   <View
                     style={{
-                      ...styles.secondTableColum,
+                      ...styles.tt,
                       backgroundColor: item.Site_Status ? '#c6efcd' : '#e7c4b5',
                     }}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
@@ -272,7 +272,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                   </View>
                   <View
                     style={{
-                      ...styles.secondTableColum,
+                      ...styles.tt,
                     }}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Site_Type_Concatenated_Detail}
@@ -294,7 +294,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Service ID
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Service_ID}
                     </Text>
@@ -313,7 +313,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Domain
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Domain}
                     </Text>
@@ -332,7 +332,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Loopback Address
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Loopback_Address}
                     </Text>
@@ -351,7 +351,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Serial Number
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Serial_Number}
                     </Text>
@@ -371,7 +371,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Model
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Model.substr(1, 20)}...
                     </Text>
@@ -391,7 +391,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       MAC ID
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.MAC_ID}
                     </Text>
@@ -410,7 +410,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Hardware Version
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Hardware_Version}
                     </Text>
@@ -428,7 +428,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Software Version
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Software_Version}
                     </Text>
@@ -448,7 +448,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Management Interface
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Management_Interface}
                     </Text>
@@ -468,7 +468,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Associated Circuit
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Associated_Circuit}
                     </Text>
@@ -487,7 +487,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       System Description
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.System_Description.substr(1, 22)}...
                     </Text>
@@ -506,7 +506,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Config Compliance
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Config_Compliance}
                     </Text>
@@ -525,7 +525,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Code Compliance
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Code_Compliance}
                     </Text>
@@ -544,7 +544,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Responsible Engineer
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Responsible_Engineer.substr(1, 20)}...
                     </Text>
@@ -564,7 +564,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Responsible Engineer Validation Date
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {moment(item.Responsible_Engineer_Validation_Date).format(
                         'DD-MM-YYYY',
@@ -587,7 +587,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Last Polled
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Last_Polled_or_Discovery}
                     </Text>
@@ -606,7 +606,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Maint Plan
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Maintenance_Coverage_Plan.substr(1, 20)}...
                     </Text>
@@ -625,7 +625,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Maint Cost(M)
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Maintenance_M}
                     </Text>
@@ -644,7 +644,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       License Cost(M)
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.License_M}
                     </Text>
@@ -663,7 +663,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Resale Value
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Resale_Value}
                     </Text>
@@ -682,7 +682,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Purchase Date
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {moment(item.Purchase_Date).format('DD-MM-YYYY')}
                     </Text>
@@ -701,7 +701,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Decom_Date
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {moment(item.Decom_Date).format('DD-MM-YYYY')}
                     </Text>
@@ -720,7 +720,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       EOL Date
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {moment(item.EOL_Date).format('DD-MM-YYYY')}
                     </Text>
@@ -740,7 +740,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       EOS Date
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {moment(item.EOS_Date).format('DD-MM-YYYY')}
                     </Text>
@@ -760,7 +760,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       LDoS Date
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {moment(item.LDoS_Date).format('DD-MM-YYYY')}
                     </Text>
@@ -779,7 +779,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       LDoS Date
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {moment(item.Last_Patch_Date).format('DD-MM-YYYY')}
                     </Text>
@@ -798,7 +798,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       EOL Count
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.EOL_Count}
                     </Text>
@@ -818,7 +818,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Upgraded Code
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Upgraded_Code}
                     </Text>
@@ -837,7 +837,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Compliant
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Compliant}
                     </Text>
@@ -856,7 +856,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Non Compliant
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Non_Compliant}
                     </Text>
@@ -877,7 +877,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       In Progress
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.In_Progress}
                     </Text>
@@ -897,7 +897,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Vulnerability SLA Target
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {moment(item.Vulnerability_SLA_Achievement_Target).format(
                         'YYYY-MM-DD',
@@ -918,7 +918,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Prod Rel Team
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       {item.Prod_Rel_Team}
                     </Text>
@@ -937,7 +937,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Compiled
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text
                       style={{
                         fontWeight: '700',
@@ -961,7 +961,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Alt System Description
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text
                       style={{
                         fontWeight: '700',
@@ -985,7 +985,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       Alt Device Name
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text
                       style={{
                         fontWeight: '700',
@@ -1009,7 +1009,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       NB First Discovery Time
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text
                       style={{
                         fontWeight: '700',
@@ -1026,16 +1026,12 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
               {/* ==================== */}
               {item?.NB_Last_Discovery_Time ? (
                 <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
+                  <View style={styles.tt}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
                       NB Last Discovery Time
                     </Text>
                   </View>
-                  <View style={styles.secondTableColum}>
+                  <View style={styles.tt}>
                     <Text
                       style={{
                         fontWeight: '700',
@@ -1051,7 +1047,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
               {/* ==================== */}
 
               <View
-                style={{height: 80, width: '100%', borderTopWidth: 1}}></View>
+                style={{height: 80, width: '100%', borderTopWidth: 0}}></View>
             </>
           )}
         </>
@@ -1067,7 +1063,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 1,
     borderColor: '#000000',
-    margin: 10,
+    margin: 0,
     marginBottom: 5,
     borderBottomWidth: 0,
     borderRadius: 5,
@@ -1156,7 +1152,7 @@ const styles = StyleSheet.create({
   ///=========data row
   ///========Second table
   secondTable: {
-    width: '95%',
+    width: '100%',
     marginTop: 20,
     alignSelf: 'center',
   },
@@ -1165,12 +1161,13 @@ const styles = StyleSheet.create({
     height: 50,
 
     flexDirection: 'row',
-    borderTopColor: 'black',
-    borderTopWidth: 1,
+    // borderTopColor: 'black',
+    // borderTopWidth: 1,
     borderBottomColor: 'black',
+    borderBottomWidth: 0.8,
 
-    borderLeftColor: 'black',
-    borderLeftWidth: 1,
+    // borderLeftColor: 'black',
+    // borderLeftWidth: 1,
   },
   secondTableRow1: {
     width: '100%',
@@ -1180,8 +1177,24 @@ const styles = StyleSheet.create({
   secondTableColum: {
     width: '50%',
     height: '100%',
-    borderRightColor: 'black',
-    borderRightWidth: 1,
+
+    paddingLeft: 10,
+    justifyContent: 'center',
+  },
+  secondTableColum2: {
+    width: '50%',
+    height: '100%',
+
+    paddingLeft: 10,
+    justifyContent: 'center',
+  },
+  tt: {
+    width: '50%',
+    height: '100%',
+    backgroundColor: '#deebf7',
+    borderLeftColor: 'black',
+    borderLeftWidth: 0.5,
+
     paddingLeft: 10,
     justifyContent: 'center',
   },

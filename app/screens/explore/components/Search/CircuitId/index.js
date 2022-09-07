@@ -26,9 +26,10 @@ const CircuitId = ({setModalVisible}) => {
           height: '100%',
 
           justifyContent: 'center',
-          alignItems: 'center',
+          paddingRight: 2,
+          alignItems: 'flex-end',
         }}>
-        <FontAwesome name="search" size={24} color="black" />
+        <FontAwesome name="search" size={20} color="#898989" />
       </View>
       <View
         style={{
@@ -39,7 +40,7 @@ const CircuitId = ({setModalVisible}) => {
           value={search}
           style={{color: 'black'}}
           placeholder="Search Circuit ID"
-          placeholderTextColor="black"
+          placeholderTextColor="#5c5b5b"
           onChangeText={text => circuitSearch(text)}
         />
       </View>
