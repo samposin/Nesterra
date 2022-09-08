@@ -62,7 +62,7 @@ const CircuitsNew = ({
   const [acdata, setAcData] = useState(allCircuit);
 
   // const {loder} = useSelector(state => state.allCircuit);
-  // console.log(allCircuit, 'aa');
+  console.log(allCircuit, 'aa');
   // console.log(
   //   allBranchID.filter(item => item.S == '10').length,
   //   'allbraCircuit',

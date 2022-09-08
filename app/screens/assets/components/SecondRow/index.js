@@ -71,6 +71,7 @@ const SecondRow = ({
   const getTangoe = () => {
     getAllTangorNumber();
   };
+
   return (
     <View
       style={{
@@ -82,7 +83,7 @@ const SecondRow = ({
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <Button
           tittle="Order Type"
-          onPress={() => alert('ddd')}
+          onPress={() => {}}
           //  opPress={typefil} SmartSite
           setSwitchView={setSwitchView}
           diplayName={diplayName}
@@ -91,7 +92,7 @@ const SecondRow = ({
         />
         <Button
           tittle="SmartSite#"
-          onPress={() => alert('ddd')}
+          onPress={() => {}}
           setSwitchView={setSwitchView}
           diplayName={diplayName}
           setDiplayName={setDiplayName}
@@ -116,7 +117,7 @@ const SecondRow = ({
         />
         <Button
           tittle="Item#"
-          onPress={() => alert('ddd')}
+          onPress={() => {}}
           setSwitchView={setSwitchView}
           diplayName={diplayName}
           setDiplayName={setDiplayName}
