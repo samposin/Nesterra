@@ -12,6 +12,7 @@ const TabButton = ({focused, imagePath, name}) => {
 
           alignItems: 'center',
           justifyContent: 'center',
+          paddingVertical: 3,
         }}>
         {/* <View
           style={{
@@ -27,7 +28,8 @@ const TabButton = ({focused, imagePath, name}) => {
           style={{
             tintColor: focused ? '#0A7AFF' : 'gray',
             resizeMode: 'contain',
-            marginVertical: 2,
+            // marginVertical: 2,
+            // marginTop: 2,
             width: 20,
             height: 20,
           }}

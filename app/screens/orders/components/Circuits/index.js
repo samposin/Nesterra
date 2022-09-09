@@ -1,40 +1,232 @@
-import {StyleSheet, Dimensions, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {
+  StyleSheet,
+  Dimensions,
+  Image,
+  FlatList,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
 import SecondRow from './SecondRow';
 import ThirdRow from './ThirdRow';
 const {width} = Dimensions.get('screen');
-import {connect} from 'react-redux';
+
 import {copyText, tostalert} from '../../../../components/helper';
 import {get_orders_for_tab} from './../../../../actions/orderFotTab/index';
 import OrderLoder from './../../../../components/lodder/OrderLoder';
 import ToggleSwitch from 'toggle-switch-react-native';
-import {
-  SORT_BY_VENDOR_ASC,
-  SORT_BY_VENDOR_DES,
-  SORT_BY_STATUS_ASC,
-  SORT_BY_STATUS_DES,
-  SORT_BY_DATE_ASC,
-  SORT_BY_DATE_DES,
-  SORT_BY_INV_ID_ASC,
-  SORT_BY_INV_ID_DES,
-  SORT_BY_ORDER_TYPE_ASC,
-  SORT_BY_ORDER_TYPE_DES,
-  ORDER_FILTER_BY_DATE,
-  GET_ONLY_VENDOR,
-} from '../../../../actions/actionType/action.OrdersForTab';
+import {connect, useDispatch, useSelector} from 'react-redux';
+import Tableheader from './TableHeader/index';
 
-const Circuits = ({get_orders_for_tab}) => {
-  const [loding3, setLodding3] = useState(false);
+import moment from 'moment';
+import BottomSheetViewDetails from './BottomSheetViewDetails';
+import {get_order_details} from '../../../../actions/order';
+
+const Circuits = ({get_orders_for_tab, get_order_details}) => {
+  const {ordersForTab} = useSelector(state => state.ordersForTab);
+  // console.log(ordersForTab[0]);
+
+  const [refresh, setRefresh] = useState(false);
+  const [loding, setLodding] = useState(false);
+  const [lodding1, setLodding1] = useState(false);
   const [switchView, setSwitchView] = useState(true);
   const [isOn, setIsSwitchOn] = React.useState(false);
+  const bottomSheetRefdetails = useRef(null);
+
   useEffect(() => {
-    get_orders_for_tab();
+    get_orders_for_tab(setLodding);
   }, []);
 
+  //barckground color change
+  const selectedComponent = item => {
+    switch (true) {
+      case item === 'In Progress':
+        return '#ffffbf';
+
+      case item === 'Initiated':
+        return '#ffc8ce';
+
+      case item === 'Cancelled':
+        return '#ffc8ce';
+
+      case item === 'Completed':
+        return '#c6efcd';
+    }
+  };
+  //barckground color change
+  const randerItem = ({index, item}) => {
+    return (
+      <TouchableOpacity
+        onPress={
+          () => {
+            // vendorRef.current.close();
+            // setLodding(true);
+            //  bottomSheetRef.current.close();
+            // if (!lodding) {
+            //   bottomSheetRefdetails.current.snapToIndex(2);
+            // }
+            get_order_details(
+              item.Inventory_ID,
+              setLodding1,
+              bottomSheetRefdetails,
+            );
+          }
+          // navigation.navigate('OrderDetails', {
+          //   inv_Id: item.Inventory_ID,
+          // })
+        }
+        style={{
+          ...styles.tableRow1,
+          height: 60,
+          // backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+          marginVertical: 1,
+          backgroundColor: '#ffffff',
+        }}>
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            width: '20%',
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+            backgroundColor: selectedComponent(item?.Status),
+          }}>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Order_Type);
+
+              tostalert(item.Order_Type);
+            }}>
+            <Text style={styles.boxText1}> {item?.Order_Type}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            width: '20%',
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+          }}>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.vendor);
+              tostalert(item.vendor);
+            }}>
+            <Text style={styles.boxText1}>{item?.vendor}</Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            width: '20%',
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+            backgroundColor: selectedComponent(item?.Status),
+          }}>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Status);
+              tostalert(item.Status);
+            }}>
+            <Text style={styles.boxText1}>{item?.Status}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            width: '20%',
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+          }}>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(moment(item.Creation_Date).format('MM/DD/YY'));
+              tostalert(moment(item.Creation_Date).format('MM/DD/YY'));
+            }}>
+            <Text style={styles.boxText1}>
+              {moment(item?.Creation_Date).format('MM/DD/YY')}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            ...styles.tableRowColum1,
+            width: '20%',
+            borderLeftColor: 'white',
+            borderLeftWidth: 2,
+          }}>
+          <TouchableOpacity
+            onLongPress={() => {
+              copyText(item.Inventory_ID);
+              tostalert(item.Inventory_ID);
+            }}>
+            <Text style={styles.boxText1}>
+              {item?.Inventory_ID}
+              {/* {moment(item.Initiation_Date).format('DD-MM-YYYY')} */}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
+    );
+  };
   return (
     <>
       <SecondRow />
       <ThirdRow />
+      <Tableheader />
+      {loding ? (
+        <View style={styles.loderView}>
+          <OrderLoder />
+        </View>
+      ) : (
+        <View style={styles.table}>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={ordersForTab}
+            keyExtractor={(item, i) => i.toString()}
+            renderItem={(item, i) => randerItem(item)}
+            refreshing={refresh}
+            onRefresh={() => {
+              // setType('');
+              // changeBottomColor1();
+              get_orders_for_tab(setLodding);
+            }}
+            ListEmptyComponent={() => {
+              return (
+                <View
+                  style={{
+                    width: '100%',
+                    height: 500,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <View
+                    style={{
+                      width: '100%',
+                      height: 200,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Image
+                      style={{
+                        width: '100%',
+                        height: 100,
+                        resizeMode: 'contain',
+                      }}
+                      source={require('../../../../images/empty.png')}
+                    />
+                    <Text style={{fontSize: 25}}>No Data Found</Text>
+                  </View>
+                </View>
+              );
+            }}
+          />
+        </View>
+      )}
+
       {/* ==================data View============== */}
       {/* ==================data View============== */}
 
@@ -97,11 +289,15 @@ const Circuits = ({get_orders_for_tab}) => {
         ) : null}
         {/* ============TOOGLE=========== */}
       </>
+      <BottomSheetViewDetails
+        lodding1={lodding1}
+        bottomSheetRefdetails={bottomSheetRefdetails}
+      />
     </>
   );
 };
 
-export default connect(null, {get_orders_for_tab})(Circuits);
+export default connect(null, {get_orders_for_tab, get_order_details})(Circuits);
 
 const styles = StyleSheet.create({
   loderView: {
@@ -150,7 +346,7 @@ const styles = StyleSheet.create({
   },
   tableRowColum1: {
     height: '100%',
-    backgroundColor: '#007aff',
+    // backgroundColor: '#007aff',
     width: '25%',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -170,7 +366,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
-    backgroundColor: 'green',
+    borderBottomColor: 'black',
+    // borderBottomWidth: 0.7,
+    // backgroundColor: 'green',
   },
   //   tableRowColum1: {
   //     height: '100%',
@@ -180,5 +378,11 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  boxText1: {
+    fontSize: 12,
+    color: '#000000',
+
+    fontWeight: '700',
   },
 });

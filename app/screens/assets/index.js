@@ -79,8 +79,8 @@ const Assets = ({
     }
   };
   useEffect(() => {
-    setLodding1(true);
-    get_orders_for_tab();
+    // setLodding1(true);
+    // get_orders_for_tab();
     getAllAssets(setLodding1);
   }, []);
 

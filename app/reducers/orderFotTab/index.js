@@ -231,30 +231,30 @@ export default (state = initialState, action) => {
       const datasearch5 = [...state.ordersForTab1];
 
       const ascData = datasearch5.sort((a, b) => {
-        // let fa = a.Smart_Site_Order_No.toLowerCase(),
-        //   fb = b.Smart_Site_Order_No.toLowerCase();
+        let fa = a.vendor.toLowerCase(),
+          fb = b.vendor.toLowerCase();
 
-        // if (fa < fb) {
-        //   return -1;
-        // }
-        // if (fa > fb) {
-        //   return 1;
-        // }
-        // return 0;
-        // return 0;
-        if (a.Smart_Site_Order_No === null) {
-          return 1;
-        }
-
-        if (b.Smart_Site_Order_No === null) {
+        if (fa < fb) {
           return -1;
         }
-
-        if (a.Smart_Site_Order_No === b.Smart_Site_Order_No) {
-          return 0;
+        if (fa > fb) {
+          return 1;
         }
+        return 0;
 
-        return a.Smart_Site_Order_No < b.Smart_Site_Order_No ? -1 : 1;
+        // if (a.Smart_Site_Order_No === null) {
+        //   return 1;
+        // }
+
+        // if (b.Smart_Site_Order_No === null) {
+        //   return -1;
+        // }
+
+        // if (a.Smart_Site_Order_No === b.Smart_Site_Order_No) {
+        //   return 0;
+        // }
+
+        // return a.Smart_Site_Order_No < b.Smart_Site_Order_No ? -1 : 1;
       });
 
       return {
@@ -266,29 +266,29 @@ export default (state = initialState, action) => {
       const datasearch6 = [...state.ordersForTab1];
 
       const desData = datasearch6.sort((a, b) => {
-        // let fa = a.Smart_Site_Order_No.toLowerCase(),
-        //   fb = b.Smart_Site_Order_No.toLowerCase();
+        let fa = a.vendor.toLowerCase(),
+          fb = b.vendor.toLowerCase();
 
-        // if (fb < fa) {
-        //   return -1;
-        // }
-        // if (fb > fa) {
-        //   return 1;
-        // }
-        // return 0;
-        if (a.Smart_Site_Order_No === null) {
-          return 1;
-        }
-
-        if (b.Smart_Site_Order_No === null) {
+        if (fb < fa) {
           return -1;
         }
-
-        if (a.Smart_Site_Order_No === b.Smart_Site_Order_No) {
-          return 0;
+        if (fb > fa) {
+          return 1;
         }
+        return 0;
+        // if (a.Smart_Site_Order_No === null) {
+        //   return 1;
+        // }
 
-        return a.Smart_Site_Order_No < b.Smart_Site_Order_No ? 1 : -1;
+        // if (b.Smart_Site_Order_No === null) {
+        //   return -1;
+        // }
+
+        // if (a.Smart_Site_Order_No === b.Smart_Site_Order_No) {
+        //   return 0;
+        // }
+
+        // return a.Smart_Site_Order_No < b.Smart_Site_Order_No ? 1 : -1;
       });
 
       return {
@@ -342,8 +342,9 @@ export default (state = initialState, action) => {
       const datasearch9 = [...state.ordersForTab1];
 
       const dateAsc = datasearch9.sort((a, b) => {
-        let fa = new Date(a.Initiation_Date),
-          fb = new Date(b.Initiation_Date);
+        // console.log(a);
+        let fa = new Date(a.Creation_Date),
+          fb = new Date(b.Creation_Date);
         return fa - fb;
         // if (fa < fb) {
         //   return -1;
@@ -360,11 +361,12 @@ export default (state = initialState, action) => {
       };
     //SORT DATE DESCENDING
     case SORT_BY_DATE_DES:
+      // alert('no');
       const datasearch10 = [...state.ordersForTab1];
 
       const dateDes = datasearch10.sort((a, b) => {
-        let fa = new Date(a.Initiation_Date),
-          fb = new Date(b.Initiation_Date);
+        let fa = new Date(a.Creation_Date),
+          fb = new Date(b.Creation_Date);
         return fb - fa;
         // if (fb < fa) {
         //   return -1;
@@ -395,7 +397,7 @@ export default (state = initialState, action) => {
         }
         return 0;
       });
-
+      console.log(invAsc[0]);
       return {
         ...state,
         ordersForTab: invAsc,
@@ -416,7 +418,7 @@ export default (state = initialState, action) => {
         }
         return 0;
       });
-
+      console.log(invDes[0]);
       return {
         ...state,
         ordersForTab: invDes,

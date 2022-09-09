@@ -57,7 +57,7 @@ const Category = ({third_party_filter}) => {
                 <Text
                   style={{
                     color: item.isActive ? 'white' : 'black',
-                    fontWeight: '800',
+                    fontWeight: '500',
                   }}>
                   {item.name}
                 </Text>
