@@ -14,21 +14,34 @@ import {
   SORT_BY_DEVICE_STATUS_DES,
   SORT_BY_DEVICE_VENDOR_ASC,
   SORT_BY_DEVICE_VENDOR_DES,
+  ALL_DATA,
+  FILTER_BY_STATUS_ACTIVE,
 } from '../../../actions/actionType/devicesInventory.type';
 import {DEVICE_DETAILS_FOR_EXPLORE} from '../../../actions/actionType/DeviceDetailsExplore';
 import {copyText, tostalert} from '../../helper';
+import ToggleView from './../ToggleView';
 
 const Devices = ({deviceRefExplore}) => {
   const {devicesInventory} = useSelector(state => state.devicesInventory);
   const {id} = useSelector(state => state.devicesInventory);
   // console.log(id);
-  // console.log(devicesInventory.length);
+  // console.log(devicesInventory[0]);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [idType, setIdType] = useState(true);
   const [vendorType, setVendorType] = useState(true);
   const [statusType, setStatusType] = useState(true);
   const [nameType, setNameType] = useState(true);
+  const activeFilter = () => {
+    dispatch({
+      type: FILTER_BY_STATUS_ACTIVE,
+    });
+  };
+  const alldata = () => {
+    dispatch({
+      type: ALL_DATA,
+    });
+  };
   return (
     <>
       {/* ==============container============== */}
@@ -283,6 +296,13 @@ const Devices = ({deviceRefExplore}) => {
             {/* ==============Table Body============== */}
           </>
         )}
+        {devicesInventory.length > 0 ? (
+          <ToggleView
+            length={devicesInventory.length}
+            alldata={alldata}
+            activeFilter={activeFilter}
+          />
+        ) : null}
       </View>
       {/* ==============container============== */}
     </>

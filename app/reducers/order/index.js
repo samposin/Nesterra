@@ -8,6 +8,8 @@ import {
   SORT_BY_ORDER_STATUS_DES,
   SORT_BY_ORDER_VENDOR_ASC,
   SORT_BY_ORDER_VENDOR_DES,
+  FILTER_BY_STATUS_ACTIVE,
+  ALL_DATA,
 } from '../../actions/actionType/action.Order.type';
 
 const initialState = {
@@ -28,9 +30,25 @@ export default (state = initialState, action) => {
         id: action.payload.id,
       };
     //===============FILTER
+    case FILTER_BY_STATUS_ACTIVE:
+      const FILTERDATA = [...state.order1];
+      const fdata = FILTERDATA.filter(item => item.Status == 'Completed');
+
+      return {
+        ...state,
+        order: fdata,
+      };
+    case ALL_DATA:
+      const adata = [...state.order1];
+
+      return {
+        ...state,
+        order: adata,
+      };
 
     //===============FILTER
     //  SORT ID ASCENDING
+
     case SORT_BY_ORDER_ID_ASC:
       const data = [...state.order1];
       const cirIdAsc = data.sort((a, b) => {

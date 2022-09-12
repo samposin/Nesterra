@@ -25,6 +25,9 @@ import CustomClusteredMarkers from './components/CustomClusteredMarkers';
 import {LogBox} from 'react-native';
 import {get_order} from '../../actions/order';
 
+// import Sound from 'react-native-sound';
+var Sound = require('react-native-sound');
+
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 
 LogBox.ignoreLogs([
@@ -61,6 +64,7 @@ import OrderDetailsExplore from '../../components/BottomSheetTab/Orders/OrderDet
 // import SerachCircuitIdBranchId from './Search/index';
 // import SerachCircuitIdBranchId from '../../components/Search';
 import SearchComponet from './components/Search/SearchComponet';
+import {soundePlay} from '../../components/helper/soundHelper';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -79,6 +83,28 @@ const Explore = ({
 
   getInventoryCircuit,
 }) => {
+  // Sound.setCategory('Playback');
+  // const mu = require('../../images/first.wav');
+  // const soundePlay = mu => {
+  //   //   alert('ddsffsda');
+
+  //   const soundVar = new Sound(mu, Sound.MAIN_BUNDLE, error => {
+  //     if (error) {
+  //       console.log(error);
+  //       console.log('NOT ABLE TO PLAY SOUND');
+  //     }
+  //   });
+
+  //   soundVar.play(success => {
+  //     if (success) {
+  //       console.log('successfully finished playing');
+  //     } else {
+  //       console.log('playback failed due to audio decoding errors');
+  //     }
+  //   });
+  //   soundVar.release();
+  // };
+
   const [modalVisible1, setModalVisible1] = useState(false);
 
   //voice
@@ -555,6 +581,9 @@ const Explore = ({
           showsUserLocation={true}
           userLocationPriority={'high'}
           mapType={satellite}
+          onPress={() => {
+            soundePlay();
+          }}
           onLayout={onLayoutMap}>
           {coordinates &&
             coordinates.map((item, i) => {
@@ -589,7 +618,7 @@ const Explore = ({
                     // animateToRegion(lat, lng);
                     fetchNearestPlacesFromGoogle(lat, lng);
                   }}>
-                  <CustomMarker officeType={item.SubLocationType} />
+                  <CustomMarker officeType={item.HierarchyLocationType} />
                 </Marker.Animated>
               );
             })}

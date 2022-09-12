@@ -14,23 +14,35 @@ import {
   SORT_BY_ORDER_TYPE_DES,
   SORT_BY_ORDER_VENDOR_ASC,
   SORT_BY_ORDER_VENDOR_DES,
+  FILTER_BY_STATUS_ACTIVE,
+  ALL_DATA,
 } from '../../../actions/actionType/action.Order.type';
 import {copyText, tostalert} from '../../helper';
 
 import {getOrderDetailsExpolore} from '../../../actions/OrderDetailsExplore';
-
+import ToggleView from './../ToggleView';
 const Orders = ({orderRefExplore, getOrderDetailsExpolore}) => {
   const {order} = useSelector(state => state.order);
   const {id} = useSelector(state => state.order);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   // console.log(id);
-  // console.log(order.length);
+  // console.log(order);
   const [idType, setIdType] = useState(true);
   const [vendorType, setVendorType] = useState(true);
   const [statusType, setStatusType] = useState(true);
   const [orderType, setOrderType] = useState(true);
   const [lodding, setLodding] = useState(true);
+  const activeFilter = () => {
+    dispatch({
+      type: FILTER_BY_STATUS_ACTIVE,
+    });
+  };
+  const alldata = () => {
+    dispatch({
+      type: ALL_DATA,
+    });
+  };
   return (
     <>
       {/* ==============container============== */}
@@ -279,6 +291,13 @@ const Orders = ({orderRefExplore, getOrderDetailsExpolore}) => {
             {/* ==============Table Body============== */}
           </>
         )}
+        {order.length > 0 ? (
+          <ToggleView
+            length={order.length}
+            alldata={alldata}
+            activeFilter={activeFilter}
+          />
+        ) : null}
       </View>
       {/* ==============container============== */}
     </>

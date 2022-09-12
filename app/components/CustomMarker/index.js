@@ -2,6 +2,7 @@ import {Image} from 'react-native';
 import React from 'react';
 
 const CustomMarker = ({isChecked, officeType}) => {
+  // console.log(officeType);
   const getImage = value => {
     // console.log(officeType);
     switch (true) {
@@ -19,13 +20,12 @@ const CustomMarker = ({isChecked, officeType}) => {
 
       case value === 'Data Center':
         return require('../../images/dc.png');
+      case value === '3rd Party':
+        return require('../../images/3rdd.png');
     }
   };
   return (
-    <Image
-      style={{width: 35, height: 35}}
-      source={require('../../images/office.png')}
-    />
+    <Image style={{width: 35, height: 35}} source={getImage(officeType)} />
   );
 };
 export default CustomMarker;

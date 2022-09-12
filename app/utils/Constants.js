@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const data = [
-  {id: 0, name: 'Offices', isActive: true, value: 'Office'},
+  {id: 0, name: 'Offices', isActive: false, value: 'Office'},
   {id: 1, name: 'Branches', isActive: false, value: 'Branch'},
   {id: 2, name: 'ATMs', isActive: false, value: 'ATM'},
   {id: 3, name: '3rd Partys', isActive: false, value: '3rd Party'},

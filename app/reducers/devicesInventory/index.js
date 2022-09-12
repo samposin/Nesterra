@@ -8,6 +8,8 @@ import {
   SORT_BY_DEVICE_STATUS_DES,
   SORT_BY_DEVICE_VENDOR_ASC,
   SORT_BY_DEVICE_VENDOR_DES,
+  ALL_DATA,
+  FILTER_BY_STATUS_ACTIVE,
 } from '../../actions/actionType/devicesInventory.type';
 
 const initialState = {
@@ -28,6 +30,23 @@ export default (state = initialState, action) => {
         id: action.payload.id,
       };
     //  SORT ID ASCENDING
+    // FITER status active
+    case FILTER_BY_STATUS_ACTIVE:
+      const filterData = [...state.devicesInventory1];
+      const fdata = filterData.filter(item => item.Device_Status == 'Active');
+      return {
+        ...state,
+        devicesInventory: fdata,
+      };
+    // =========all
+    case ALL_DATA:
+      const alldata = [...state.devicesInventory1];
+
+      return {
+        ...state,
+        devicesInventory: alldata,
+      };
+    // FITER
     case SORT_BY_DEVICE_ID_ASC:
       const data = [...state.devicesInventory1];
       const cirIdAsc = data.sort((a, b) => {

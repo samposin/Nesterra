@@ -7,15 +7,17 @@ import {
   StatusBar,
   ScrollView,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useRef} from 'react';
 import {data} from '../../utils/Constants';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+
 import {third_party_filter} from '../../actions/coordinates';
 import {connect} from 'react-redux';
 
 const Category = ({third_party_filter}) => {
   const [allItem, setAllItem] = React.useState(data);
+  const [setectItem, setsetectItem] = React.useState(true);
   const myRef = useRef(null);
   const actiText = id => {
     let listData = allItem.map(item => {

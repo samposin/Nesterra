@@ -8,6 +8,8 @@ import {
   SORT_BY_SUBCAT_1_DES,
   SORT_BY_VENDOR_ASC,
   SORT_BY_VENDOR_DES,
+  FILTER_BY_STATUS_ACTIVE,
+  ALL_DATA,
 } from '../../actions/actionType/circuitInventory.type';
 
 const initialState = {
@@ -26,6 +28,26 @@ export default (state = initialState, action) => {
         cirCuitInventory: action.payload.data,
         cirCuitInventory1: action.payload.data,
       };
+    //  FILTER
+    //================ STATUS ACTIVE
+    case FILTER_BY_STATUS_ACTIVE:
+      const filterData = [...state.cirCuitInventory1];
+      const fdata = filterData.filter(Item => Item.Circuit_Status == 'Active');
+      return {
+        ...state,
+        cirCuitInventory: fdata,
+      };
+
+    //  ALL DATA
+    case ALL_DATA:
+      const alldata = [...state.cirCuitInventory1];
+
+      return {
+        ...state,
+        cirCuitInventory: alldata,
+      };
+
+    //  FILTER
     //  SORT CIRCUIT_ID ASCENDING
     case SORT_BY_CIRCUIT_ID_ASC:
       const data = [...state.cirCuitInventory1];

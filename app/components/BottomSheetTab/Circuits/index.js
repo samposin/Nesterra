@@ -13,9 +13,12 @@ import {
   SORT_BY_SUBCAT_1_DES,
   SORT_BY_VENDOR_ASC,
   SORT_BY_VENDOR_DES,
+  FILTER_BY_STATUS_ACTIVE,
+  ALL_DATA,
 } from '../../../actions/actionType/circuitInventory.type';
 import {CIRCUIT_DETAILS_EXPLORE} from '../../../actions/actionType/CircuitDetailsExplore';
 import {copyText, tostalert} from '../../helper';
+import ToggleView from './../ToggleView';
 
 const Circuits = ({cirCuitRefExplore}) => {
   const navigation = useNavigation();
@@ -25,7 +28,7 @@ const Circuits = ({cirCuitRefExplore}) => {
   const [categoryType, setCategoryType] = useState(true);
   const [subCat1Type, setsubCat1Type] = useState(true);
   const {cirCuitInventory} = useSelector(state => state.circuitInventory);
-
+  // console.log(cirCuitInventory[0], 'pp');
   const randerItem = ({index, item}) => {
     // console.log(i, item);
     return (
@@ -110,6 +113,16 @@ const Circuits = ({cirCuitRefExplore}) => {
     );
   };
   // console.log(cirCuitInventory.length);
+  const activeFilter = () => {
+    dispatch({
+      type: FILTER_BY_STATUS_ACTIVE,
+    });
+  };
+  const alldata = () => {
+    dispatch({
+      type: ALL_DATA,
+    });
+  };
   return (
     <>
       {/* ==============container============== */}
@@ -327,7 +340,16 @@ const Circuits = ({cirCuitRefExplore}) => {
             {/* ==============Table Body============== */}
           </>
         )}
+        {/* ==============Toggle View============== */}
+        {cirCuitInventory.length > 0 ? (
+          <ToggleView
+            length={cirCuitInventory.length}
+            alldata={alldata}
+            activeFilter={activeFilter}
+          />
+        ) : null}
       </View>
+      {/* ==============Toggle View============== */}
       {/* ==============container============== */}
     </>
   );
