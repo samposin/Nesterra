@@ -22,6 +22,8 @@ import {
   ORDER_SEARCH_OLLY_VENDOR,
   ORDER_FILTER_ONLY_VENDOR,
   GET_ONLY_VENDOR,
+  FILTER_STATUS_BY_COMPLETED,
+  ALL_DATA,
 } from '../../actions/actionType/action.OrdersForTab';
 
 const initialState = {
@@ -35,9 +37,13 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_ORDERS_FOR_TAB:
+      const completedData = action.payload.data.filter(
+        item => item.Status == 'Completed',
+      );
+
       return {
         ...state,
-        ordersForTab: action.payload.data,
+        ordersForTab: completedData,
         ordersForTab1: action.payload.data,
         isLoding: action.payload.data.loder,
       };
@@ -84,7 +90,6 @@ export default (state = initialState, action) => {
       }
 
     //SEARCH ONLY VENDOR
-
     case ORDER_FILTER_BY_STATUS:
       const datasearStatus = [...state.ordersForTab1];
 
@@ -105,7 +110,16 @@ export default (state = initialState, action) => {
         };
       }
     //==================FILTER
+
+    //ALL DATA
+    case ALL_DATA:
+      const allData = [...state.ordersForTab1];
+      return {
+        ...state,
+        ordersForTab: allData,
+      };
     //FILTER BY ONLY VENDOR
+
     case ORDER_FILTER_ONLY_VENDOR:
       const filterOnlyVendor = [...state.ordersForTab1];
       // console.log(action.data, 'data');
@@ -155,10 +169,19 @@ export default (state = initialState, action) => {
       }
 
     //==================FILTER
+    //STATUS COMPLETED
+    case FILTER_STATUS_BY_COMPLETED:
+      const comptedtedata = [...state.ordersForTab1];
+      const comdata = comptedtedata.filter(item => item.Status == 'Completed');
+      return {
+        ...state,
+        ordersForTab: comdata,
+      };
+
     //ORDER_FILTER_BY_INV_ID
     case ORDER_FILTER_BY_INV_ID:
       const datasearch_INv = [...state.ordersForTab1];
-      console.log(action.data, 'data');
+      // console.log(action.data, 'data');
 
       const newDataINV = datasearch_INv.filter(
         item => item.Smart_Site_Order_No == action.data,

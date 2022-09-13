@@ -22,9 +22,9 @@ export default (state = initialState, action) => {
 
       if (action.data) {
         const newData = datasearch.filter(function (item) {
-          const itemData = item.id;
+          const itemData = item.id.toLowerCase();
           // const textData = text;
-          return itemData.startsWith(action.data);
+          return itemData.startsWith(action.data.toLowerCase());
         });
         return {
           ...state,

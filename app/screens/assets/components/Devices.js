@@ -26,6 +26,7 @@ import {
   GET_DEVICES_ONLY_VENDORE,
   GET_DEVICES_SORT_ACTIVE,
   GET_DEVICES_SORT_INACTIVE,
+  ALL_DATA,
 } from '../../../actions/actionType/AllDevice';
 
 import {getAllDeviceDetails} from '../../../actions/AllDevice/allDeviceDetails';
@@ -34,9 +35,8 @@ import {tostalert, copyText} from '../../../components/helper';
 import OrderLoder from '../../../components/lodder/OrderLoder';
 import BottomSheetViewDevices from './DevicesDetails';
 import DevicesBottomSheet from './Devices/index';
+import ToggleView from './../../../components/ToggleView/index';
 const {width} = Dimensions.get('screen');
-import ToggleSwitch from 'toggle-switch-react-native';
-import Filtter from './../../filtter/index';
 
 const Devices = ({
   getAllDevice,
@@ -62,7 +62,7 @@ const Devices = ({
   const [lodding1, setLodding1] = useState(true);
   const deviceRefDetails = useRef(null);
   const deviceRef = useRef(null);
-  const [isOn, setIsSwitchOn] = React.useState(false);
+
   const [deviveView, setDeviveView] = React.useState(true);
 
   useEffect(() => {
@@ -173,6 +173,11 @@ const Devices = ({
       type: GET_DEVICES_SORT_INACTIVE,
     });
   };
+  const allData = () => {
+    dispatch({
+      type: ALL_DATA,
+    });
+  };
 
   return (
     <>
@@ -209,6 +214,7 @@ const Devices = ({
                   }}>
                   Name
                 </Text>
+
                 <AntDesign
                   name="caretdown"
                   size={20}
@@ -448,64 +454,15 @@ const Devices = ({
         {lodding && <Lodder lodding={lodding} />} */}
           {/* ============TOOGLE=========== */}
           {deviveView ? (
-            <View
-              style={{
-                width: (width / 3) * 2.2,
-                height: 60,
-
-                position: 'absolute',
-                bottom: 55,
-                right: 0,
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                paddingHorizontal: 10,
-                zIndex: 100,
-              }}>
-              <View
-                style={{
-                  width: '48%',
-                  height: '100%',
-                  backgroundColor: '#007aff',
-                  borderRadius: 10,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}>
-                  {deviceAllData.length} Devices
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: '48%',
-                  height: '100%',
-                  backgroundColor: '#007aff',
-                  borderRadius: 10,
-                  flexDirection: 'row',
-                  paddingHorizontal: 5,
-
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}>
-                  {isOn ? 'Active' : 'InActive'}
-                </Text>
-                <ToggleSwitch
-                  isOn={isOn}
-                  onColor="#34c759"
-                  offColor="#b3b8b4"
-                  labelStyle={{color: 'black', fontWeight: '500'}}
-                  size="large"
-                  onToggle={isOn => {
-                    setIsSwitchOn(isOn);
-                    if (isOn) {
-                      FiltterActive();
-                    } else {
-                      FiltterInActive();
-                    }
-                  }}
-                />
-              </View>
-            </View>
+            <>
+              <ToggleView
+                name="Devices"
+                size={'medium'}
+                length={deviceAllData.length}
+                alldata={allData}
+                activeFilter={FiltterActive}
+              />
+            </>
           ) : null}
           {/* ============TOOGLE=========== */}
         </>

@@ -11,20 +11,16 @@ import React, {useEffect, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
-
+import {ALL_TANGOR_NUMBER_FILTER} from '../../../../../actions/actionType/TangorNumber';
 const Tangoe = ({loding1, cirCuitRef, setSwitchView}) => {
   const {data} = useSelector(state => state.tangorNumber);
-  // console.log(allSubType, 'allBranchID');
-  // console.log(
-  //   allBranchID.filter(item => item.id == '10').length,
-  //   'allbraCircuit',
-  // );
+
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const searchFilterFunction = text => {
     setSearch(text);
     dispatch({
-      type: ALL_CIRCUIT_SEARCH_ONLY_SUBTYPE,
+      type: ALL_TANGOR_NUMBER_FILTER,
       data: text,
     });
   };
@@ -46,7 +42,7 @@ const Tangoe = ({loding1, cirCuitRef, setSwitchView}) => {
             style={{
               paddingLeft: 10,
             }}
-            //onChangeText={text => searchFilterFunction(text)}
+            onChangeText={text => searchFilterFunction(text)}
           />
         </View>
         <View style={styles.searchViewRight}>
@@ -72,7 +68,7 @@ const Tangoe = ({loding1, cirCuitRef, setSwitchView}) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    // searchSYBTYPE(item.SubCat);
+                    // searchSYBTYPE(item.id);
                     Keyboard.dismiss();
                     setSwitchView(true);
                     cirCuitRef.current.close();

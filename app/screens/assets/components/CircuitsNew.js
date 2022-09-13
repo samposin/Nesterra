@@ -35,12 +35,15 @@ import {
   ALL_CIRCUIT_SORT_BY_BRANCH_ASC,
   ALL_CIRCUIT_SORT_BY_BRANCH_DES,
   ALL_CIRCUIT_SORT_BY_STATUS,
-} from '../../../actions/actionType/AllCircuit';
-import {
-  ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
+  ALL_DATA,
   ALL_CIRCUIT_FILTER_BY_STATUS,
 } from '../../../actions/actionType/AllCircuit';
+// import {
+//   ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
+//   ,
+// } from '../../../actions/actionType/AllCircuit';
 import SecondRow from './SecondRow';
+import ToggleView from './../../../components/ToggleView/index';
 const CircuitsNew = ({
   getAllCircuit,
   getAllSiteID,
@@ -53,11 +56,10 @@ const CircuitsNew = ({
   const circuitRefDetails = useRef(null);
   const [loding1, setLodding1] = useState(false);
   const [loding, setLodding] = useState(false);
-  const [loding3, setLodding3] = useState(false);
+  const [loding3, setLodding3] = useState(true);
   const [diplayName, setDiplayName] = useState('');
   const {allCircuit} = useSelector(state => state.allCircuit);
 
-  const [isOn, setIsSwitchOn] = React.useState(false);
   const [switchView, setSwitchView] = useState(true);
   const [acdata, setAcData] = useState(allCircuit);
 
@@ -72,6 +74,7 @@ const CircuitsNew = ({
   const [locType, setLocType] = useState(true);
   const [vendor, setVendor] = useState(true);
   const [cirType, setCirType] = useState(true);
+  const [bootSheetLodder, setbootSheetLodder] = useState(false);
 
   const [branchType, setBranchType] = useState(true);
 
@@ -183,10 +186,9 @@ const CircuitsNew = ({
       data: 'Active',
     });
   };
-  const fiterCircuitsInActive = () => {
+  const allData = () => {
     dispatch({
-      type: ALL_CIRCUIT_FILTER_BY_STATUS,
-      data: 'Inactive',
+      type: ALL_DATA,
     });
   };
   const activefilter = () => {
@@ -211,6 +213,7 @@ const CircuitsNew = ({
             setDiplayName={setDiplayName}
             cirCuitRef={cirCuitRef}
             setSwitchView={setSwitchView}
+            setLodding1={setLodding1}
           />
 
           {/* <View style={{...styles.idView}}>
@@ -521,64 +524,15 @@ const CircuitsNew = ({
           />
           {/* ============TOOGLE=========== */}
           {switchView ? (
-            <View
-              style={{
-                width: (width / 3) * 2.2,
-                height: 55,
-                position: 'absolute',
-                bottom: 60,
-                right: 0,
-                justifyContent: 'space-between',
-                flexDirection: 'row',
-                paddingHorizontal: 10,
-                zIndex: 1,
-              }}>
-              <View
-                style={{
-                  width: '48%',
-                  height: '100%',
-                  backgroundColor: '#007aff',
-                  borderRadius: 10,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}>
-                  {allCircuit.length} Circuit
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: '48%',
-                  height: '100%',
-                  backgroundColor: '#007aff',
-                  borderRadius: 10,
-                  flexDirection: 'row',
-                  paddingHorizontal: 5,
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
-                <Text style={{color: 'white', fontWeight: 'bold'}}>
-                  {isOn ? 'Active' : 'InActive'}
-                </Text>
-                <ToggleSwitch
-                  isOn={isOn}
-                  onColor="#34c759"
-                  offColor="#b3b8b4"
-                  labelStyle={{color: 'black', fontWeight: '500'}}
-                  size="large"
-                  onToggle={isOn => {
-                    setIsSwitchOn(isOn);
-                    if (isOn) {
-                      fiterCircuitsActive();
-                      // activefilter();
-                    } else {
-                      fiterCircuitsInActive();
-                      // inactivefilter();
-                    }
-                  }}
-                />
-              </View>
-            </View>
+            <>
+              <ToggleView
+                name="Circuits"
+                size={'medium'}
+                length={allCircuit.length}
+                alldata={allData}
+                activeFilter={fiterCircuitsActive}
+              />
+            </>
           ) : null}
           {/* ============TOOGLE=========== */}
         </>

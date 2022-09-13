@@ -15,17 +15,22 @@ const {width} = Dimensions.get('screen');
 import {copyText, tostalert} from '../../../../components/helper';
 import {get_orders_for_tab} from './../../../../actions/orderFotTab/index';
 import OrderLoder from './../../../../components/lodder/OrderLoder';
-import ToggleSwitch from 'toggle-switch-react-native';
+
 import {connect, useDispatch, useSelector} from 'react-redux';
 import Tableheader from './TableHeader/index';
 
 import moment from 'moment';
 import BottomSheetViewDetails from './BottomSheetViewDetails';
 import {get_order_details} from '../../../../actions/order';
+import ToggleView from './../../../../components/ToggleView/index';
+import {
+  FILTER_STATUS_BY_COMPLETED,
+  ALL_DATA,
+} from '../../../../actions/actionType/action.OrdersForTab';
 
 const Circuits = ({get_orders_for_tab, get_order_details}) => {
   const {ordersForTab} = useSelector(state => state.ordersForTab);
-  // console.log(ordersForTab[0]);
+  const dispatch = useDispatch();
 
   const [refresh, setRefresh] = useState(false);
   const [loding, setLodding] = useState(false);
@@ -172,6 +177,19 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
       </TouchableOpacity>
     );
   };
+
+  const allData = () => {
+    //
+    dispatch({
+      type: ALL_DATA,
+    });
+  };
+  const fiterCircuitsActive = () => {
+    //
+    dispatch({
+      type: FILTER_STATUS_BY_COMPLETED,
+    });
+  };
   return (
     <>
       <SecondRow />
@@ -233,59 +251,13 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
       <>
         {/* ============TOOGLE=========== */}
         {switchView ? (
-          <View
-            style={{
-              width: (width / 3) * 2.2,
-              height: 55,
-              position: 'absolute',
-              bottom: 60,
-              right: 0,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              paddingHorizontal: 10,
-              zIndex: 1,
-            }}>
-            <View
-              style={{
-                width: '48%',
-                height: '100%',
-                backgroundColor: '#007aff',
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: 'white', fontWeight: 'bold'}}></Text>
-            </View>
-            <View
-              style={{
-                width: '48%',
-                height: '100%',
-                backgroundColor: '#007aff',
-                borderRadius: 10,
-                flexDirection: 'row',
-                paddingHorizontal: 5,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: 'white', fontWeight: 'bold'}}>
-                {isOn ? 'Active' : 'InActive'}
-              </Text>
-              <ToggleSwitch
-                isOn={isOn}
-                onColor="#34c759"
-                offColor="#b3b8b4"
-                labelStyle={{color: 'black', fontWeight: '500'}}
-                size="large"
-                onToggle={isOn => {
-                  if (isOn) {
-                    alert('ddfsd');
-                  } else {
-                    alert('ddfsd');
-                  }
-                }}
-              />
-            </View>
-          </View>
+          <ToggleView
+            name="Circuits"
+            size={'medium'}
+            length={ordersForTab.length}
+            alldata={allData}
+            activeFilter={fiterCircuitsActive}
+          />
         ) : null}
         {/* ============TOOGLE=========== */}
       </>

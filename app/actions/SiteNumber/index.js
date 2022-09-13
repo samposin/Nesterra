@@ -3,8 +3,8 @@ import {Base_url} from '../../key';
 
 import {ALL_SITE_NUMBER} from '../actionType/SiteNumber';
 
-export const getAllSiteNumber = setLoding => dispatch => {
-  setLoding(true);
+export const getAllSiteNumber = setLodding1 => dispatch => {
+  setLodding1(true);
   Axios.get(`${Base_url}/api/GetSmartSiteNumber`)
     .then(response => {
       if (response.data.length > 0) {
@@ -16,7 +16,7 @@ export const getAllSiteNumber = setLoding => dispatch => {
             data: response.data,
           },
         });
-        setLoding(false);
+        setLodding1(false);
       }
     })
     .catch(error => {

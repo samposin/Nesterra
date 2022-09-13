@@ -11,20 +11,17 @@ import React, {useEffect, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
+import {ALL_SITE_NUMBER_FILTER} from '../../../../../actions/actionType/SiteNumber';
 
 const SmartSite = ({loding1, cirCuitRef, setSwitchView}) => {
-  const {allSubType} = useSelector(stata => stata.allCircuit);
-  // console.log(allSubType, 'allBranchID');
-  // console.log(
-  //   allBranchID.filter(item => item.id == '10').length,
-  //   'allbraCircuit',
-  // );
+  const {data} = useSelector(stata => stata.siteNumber);
+
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const searchFilterFunction = text => {
     setSearch(text);
     dispatch({
-      type: ALL_CIRCUIT_SEARCH_ONLY_SUBTYPE,
+      type: ALL_SITE_NUMBER_FILTER,
       data: text,
     });
   };
@@ -46,14 +43,14 @@ const SmartSite = ({loding1, cirCuitRef, setSwitchView}) => {
             style={{
               paddingLeft: 10,
             }}
-            //onChangeText={text => searchFilterFunction(text)}
+            onChangeText={text => searchFilterFunction(text)}
           />
         </View>
         <View style={styles.searchViewRight}>
           <EvilIcons name="search" size={24} color="black" />
         </View>
       </View>
-      {/* {loding1 ? (
+      {loding1 ? (
         <View
           style={{
             width: '100%',
@@ -67,12 +64,12 @@ const SmartSite = ({loding1, cirCuitRef, setSwitchView}) => {
         <>
           <BottomSheetFlatList
             keyboardShouldPersistTaps="handled"
-            data={allSubType}
+            data={data}
             renderItem={({item}) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    searchSYBTYPE(item.SubCat);
+                    // searchSYBTYPE(item.SubCat);
                     Keyboard.dismiss();
                     setSwitchView(true);
                     cirCuitRef.current.close();
@@ -84,14 +81,14 @@ const SmartSite = ({loding1, cirCuitRef, setSwitchView}) => {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Text style={{fontWeight: 'bold'}}>{item.SubCat}</Text>
+                  <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
                 </TouchableOpacity>
               );
             }}
-            keyExtractor={item => item.SubCat}
+            keyExtractor={item => item.id}
           />
         </>
-      )} */}
+      )}
     </>
   );
 };

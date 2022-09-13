@@ -19,6 +19,7 @@ import {
   GET_DEVICES_ONLY_VENDORE,
   GET_DEVICES_SORT_INACTIVE,
   GET_DEVICES_SORT_ACTIVE,
+  ALL_DATA,
 } from '../../actions/actionType/AllDevice';
 const initialState = {
   deviceAllData: [],
@@ -35,8 +36,13 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ALL_DEVICES:
+      const activeDAT = action.payload.data.filter(
+        item => item.Device_Status == 'Active',
+      );
+      // console.log(activeDAT.length, 'acc');
+      // console.log(action.payload.data.length, 'accc');
       return {
-        deviceAllData: action.payload.data,
+        deviceAllData: activeDAT,
         deviceAllData1: action.payload.data,
         searchData: action.payload.data,
         isLoding: action.payload.loder,
@@ -231,6 +237,12 @@ export default (state = initialState, action) => {
         };
       }
     // ==============FILTER================
+    case ALL_DATA:
+      const allData = [...state.deviceAllData1];
+      return {
+        ...state,
+        deviceAllData: allData,
+      };
     //  SORT ID ASCENDING
     case ALL_DEVICES_SORT_BY_ID_ASC:
       const data = [...state.deviceAllData1];

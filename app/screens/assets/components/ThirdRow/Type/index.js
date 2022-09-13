@@ -53,6 +53,31 @@ const Type = ({loding1}) => {
           <EvilIcons name="search" size={24} color="black" />
         </View>
       </View>
+      <BottomSheetFlatList
+        keyboardShouldPersistTaps="handled"
+        data={allType}
+        renderItem={({item}) => {
+          return (
+            <TouchableOpacity
+              onPress={() => {
+                // searchSYBTYPE(item.id);
+                Keyboard.dismiss();
+                setSwitchView(true);
+                cirCuitRef.current.close();
+              }}
+              style={{
+                width: '100%',
+                height: 30,
+                marginVertical: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{fontWeight: 'bold'}}>{item.Type}</Text>
+            </TouchableOpacity>
+          );
+        }}
+        keyExtractor={item => item.id}
+      />
     </>
   );
 };

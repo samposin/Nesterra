@@ -10,6 +10,8 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useDispatch, connect} from 'react-redux';
 import {GetAllCarrierNumber} from './../../../../actions/CarrierNumber/index';
 import {getAllTangorNumber} from './../../../../actions/TangorNumber/index';
+import {getAllSiteNumber} from '../../../../actions/SiteNumber';
+import {ALL_CIRCUIT_ONLY_TYPE} from './../../../../actions/actionType/AllCircuit/index';
 
 const Button = ({
   tittle,
@@ -57,19 +59,29 @@ const Button = ({
 const SecondRow = ({
   setDiplayName,
   GetAllCarrierNumber,
+  getAllSiteNumber,
   setSwitchView,
   diplayName,
   cirCuitRef,
   getAllTangorNumber,
+  setLodding1,
 }) => {
   const dispatch = useDispatch();
   const [loding, setLoding] = React.useState(false);
+  const getOnlyTypeData = () => {
+    dispatch({
+      type: ALL_CIRCUIT_ONLY_TYPE,
+    });
+  };
   const getCarrirer = () => {
     // setLoding(true)
-    GetAllCarrierNumber(setLoding);
+    GetAllCarrierNumber(setLodding1);
   };
   const getTangoe = () => {
-    getAllTangorNumber();
+    getAllTangorNumber(setLodding1);
+  };
+  const getAllSite = () => {
+    getAllSiteNumber(setLodding1);
   };
 
   return (
@@ -83,7 +95,7 @@ const SecondRow = ({
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <Button
           tittle="Order Type"
-          onPress={() => {}}
+          onPress={getOnlyTypeData}
           //  opPress={typefil} SmartSite
           setSwitchView={setSwitchView}
           diplayName={diplayName}
@@ -92,7 +104,7 @@ const SecondRow = ({
         />
         <Button
           tittle="SmartSite#"
-          onPress={() => {}}
+          onPress={getAllSite}
           setSwitchView={setSwitchView}
           diplayName={diplayName}
           setDiplayName={setDiplayName}
@@ -128,8 +140,10 @@ const SecondRow = ({
   );
 };
 
-export default connect(null, {GetAllCarrierNumber, getAllTangorNumber})(
-  SecondRow,
-);
+export default connect(null, {
+  GetAllCarrierNumber,
+  getAllSiteNumber,
+  getAllTangorNumber,
+})(SecondRow);
 
 const styles = StyleSheet.create({});

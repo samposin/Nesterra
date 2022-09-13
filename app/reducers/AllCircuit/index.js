@@ -13,11 +13,14 @@ import {
   ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
   ALL_CIRCUIT_FILTER_BY_BRANCH_ID,
   ALL_CIRCUIT_SORT_BY_STATUS,
+  //=== FILTER
   ALL_CIRCUIT_FILTER_BY_STATUS,
   ALL_CIRCUIT_SEARCH_ONLY_VENDOR,
   ALL_CIRCUIT_FILTER_BY_VENDOR,
   ALL_CIRCUIT_FILTER_BY_SUBTYPE,
+  ALL_CIRCUIT_FILTER_BY_TYPE,
   //=== FILTER
+  ALL_DATA,
 
   //=== ONLY DATA SERACT
   ALL_CIRCUIT_SEARCH_ONLY_SUBTYPE,
@@ -50,12 +53,25 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ALL_CIRCUIT:
+      // console.log(action.payload.data.length);
+      const dataa = action.payload.data.filter(
+        item => item.Circuit_Status == 'Active',
+      );
       return {
         ...state,
-        allCircuit: action.payload.data,
+        allCircuit: dataa,
         allCircuit1: action.payload.data,
         isLoding: action.payload.loder,
       };
+    // =====================allData data============
+    case ALL_DATA:
+      const allData = [...state.allCircuit1];
+      // console.log(allData);
+      return {
+        ...state,
+        allCircuit: allData,
+      };
+    // =====================allData data============
     // =====================only data============
     //VENDOR
     case ALL_CIRCUIT_ONLY_VENDOR:
@@ -81,14 +97,14 @@ export default (state = initialState, action) => {
     //Type
     case ALL_CIRCUIT_ONLY_TYPE:
       const type = [...state.allCircuit1];
-      const typeData = type.reduce((acc, {SubCat}) => {
-        const entry = acc.find(i => i.SubCat === SubCat);
+      const typeData = type.reduce((acc, {Type}) => {
+        const entry = acc.find(i => i.Type === Type);
         if (!entry) {
           acc.push({
-            SubCat,
+            Type,
           });
         } else {
-          entry.SubCat = SubCat;
+          entry.Type = Type;
         }
         return acc;
       }, []);
@@ -213,7 +229,14 @@ export default (state = initialState, action) => {
         ...state,
         allCircuit: filterdata,
       };
-    //============= FILTER SUBTYPE
+    //============= FILTER TYPE
+    case ALL_CIRCUIT_FILTER_BY_TYPE:
+      const TYPE = [...state.allCircuit1];
+      const typdata = TYPE.filter(item => item.Type == action.data);
+      return {
+        ...state,
+        allCircuit: typdata,
+      };
     case ALL_CIRCUIT_FILTER_BY_SUBTYPE:
       const SUBTYPE = [...state.allCircuit1];
       const subdata = SUBTYPE.filter(item => item.SubCat == action.data);

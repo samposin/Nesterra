@@ -11,9 +11,10 @@ import React, {useEffect, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
+import {ALL_CIRCUIT_FILTER_BY_TYPE} from '../../../../../actions/actionType/AllCircuit';
 
 const OrderType = ({loding1, cirCuitRef, setSwitchView}) => {
-  const {allSubType} = useSelector(stata => stata.allCircuit);
+  const {allType} = useSelector(state => state.allCircuit);
   // console.log(allSubType, 'allBranchID');
   // console.log(
   //   allBranchID.filter(item => item.id == '10').length,
@@ -30,7 +31,7 @@ const OrderType = ({loding1, cirCuitRef, setSwitchView}) => {
   };
   const searchSYBTYPE = text => {
     dispatch({
-      type: ALL_CIRCUIT_FILTER_BY_SUBTYPE,
+      type: ALL_CIRCUIT_FILTER_BY_TYPE,
       data: text,
     });
   };
@@ -41,7 +42,7 @@ const OrderType = ({loding1, cirCuitRef, setSwitchView}) => {
       <View style={styles.searchView}>
         <View style={styles.searchViewLeft}>
           <TextInput
-            value={search}
+            // value={search}
             placeholder="Search Here"
             style={{
               paddingLeft: 10,
@@ -53,45 +54,31 @@ const OrderType = ({loding1, cirCuitRef, setSwitchView}) => {
           <EvilIcons name="search" size={24} color="black" />
         </View>
       </View>
-      {/* {loding1 ? (
-        <View
-          style={{
-            width: '100%',
-            height: 200,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <ActivityIndicator color="#007aff" size="large" />
-        </View>
-      ) : (
-        <>
-          <BottomSheetFlatList
-            keyboardShouldPersistTaps="handled"
-            data={allSubType}
-            renderItem={({item}) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    searchSYBTYPE(item.SubCat);
-                    Keyboard.dismiss();
-                    setSwitchView(true);
-                    cirCuitRef.current.close();
-                  }}
-                  style={{
-                    width: '100%',
-                    height: 30,
-                    marginVertical: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <Text style={{fontWeight: 'bold'}}>{item.SubCat}</Text>
-                </TouchableOpacity>
-              );
-            }}
-            keyExtractor={item => item.SubCat}
-          />
-        </>
-      )} */}
+      <BottomSheetFlatList
+        keyboardShouldPersistTaps="handled"
+        data={allType}
+        renderItem={({item}) => {
+          return (
+            <TouchableOpacity
+              onPress={() => {
+                searchSYBTYPE(item.Type);
+                Keyboard.dismiss();
+                setSwitchView(true);
+                cirCuitRef.current.close();
+              }}
+              style={{
+                width: '100%',
+                height: 30,
+                marginVertical: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{fontWeight: 'bold'}}>{item.Type}</Text>
+            </TouchableOpacity>
+          );
+        }}
+        keyExtractor={item => item.Type}
+      />
     </>
   );
 };

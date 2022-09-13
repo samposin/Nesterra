@@ -14,6 +14,7 @@ import Assets from '../screens/assets';
 import Search from '../screens/search';
 import ExploreStack from './ExploreStack';
 import Extra from '../screens/NEW';
+import VoiceScreen from '../screens/VoiceScreen';
 
 const Tab = createBottomTabNavigator();
 const TabNaV = ({navigation}) => {
@@ -82,6 +83,21 @@ const TabNaV = ({navigation}) => {
           },
         }}
       />
+      {/* <Tab.Screen
+        name="VoiceScreen"
+        component={VoiceScreen}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <TabButton
+                name="voice"
+                imagePath={tabButtonImage.imgStats}
+                focused={focused}
+              />
+            );
+          },
+        }}
+      /> */}
       {/* <Tab.Screen
         name="Login"
         component={Login}

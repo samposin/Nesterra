@@ -2,14 +2,14 @@ import Axios from 'axios';
 import {Base_url} from '../../key';
 import {ALL_CARRIER_NUMBER} from '../actionType/CarrierNumber';
 
-export const GetAllCarrierNumber = () => dispatch => {
+export const GetAllCarrierNumber = setLodding1 => dispatch => {
   // console.log(name);
-  // setLoding(true);
+  setLodding1(true);
   Axios.get(`${Base_url}/api/GetCarrierNumber`)
     .then(response => {
       if (response.data.length > 0) {
         // console.log(response.data);
-        // setLoding(false);
+        setLodding1(false);
         dispatch({
           type: ALL_CARRIER_NUMBER,
           payload: {
