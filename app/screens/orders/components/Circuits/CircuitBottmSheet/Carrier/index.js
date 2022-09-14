@@ -11,17 +11,17 @@ import React, {useEffect, useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {ALL_SITE_NUMBER_FILTER} from '../../../../../actions/actionType/SiteNumber';
+import {ALL_CARRIER_NUMBER_FILTER} from '../../../../../../actions/actionType/CarrierNumber';
 
-const SmartSite = ({loding1, cirCuitRef, bootSheetLodder, setSwitchView}) => {
-  const {data} = useSelector(stata => stata.siteNumber);
+const Carrier = ({bottomSheetLodder, cirCuitRef, setSwitchView}) => {
+  const {data} = useSelector(state => state.carrierNumber);
 
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const searchFilterFunction = text => {
     setSearch(text);
     dispatch({
-      type: ALL_SITE_NUMBER_FILTER,
+      type: ALL_CARRIER_NUMBER_FILTER,
       data: text,
     });
   };
@@ -50,7 +50,7 @@ const SmartSite = ({loding1, cirCuitRef, bootSheetLodder, setSwitchView}) => {
           <EvilIcons name="search" size={24} color="black" />
         </View>
       </View>
-      {bootSheetLodder ? (
+      {bottomSheetLodder ? (
         <View
           style={{
             width: '100%',
@@ -69,7 +69,7 @@ const SmartSite = ({loding1, cirCuitRef, bootSheetLodder, setSwitchView}) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    // searchSYBTYPE(item.SubCat);
+                    // searchSYBTYPE(item.id);
                     Keyboard.dismiss();
                     setSwitchView(true);
                     cirCuitRef.current.close();
@@ -93,7 +93,7 @@ const SmartSite = ({loding1, cirCuitRef, bootSheetLodder, setSwitchView}) => {
   );
 };
 
-export default SmartSite;
+export default Carrier;
 
 const styles = StyleSheet.create({
   searchView: {

@@ -74,7 +74,7 @@ const CircuitsNew = ({
   const [locType, setLocType] = useState(true);
   const [vendor, setVendor] = useState(true);
   const [cirType, setCirType] = useState(true);
-  const [bootSheetLodder, setbootSheetLodder] = useState(false);
+  const [bootSheetLodder, setbootSheetLodder] = useState(true);
 
   const [branchType, setBranchType] = useState(true);
 
@@ -191,14 +191,7 @@ const CircuitsNew = ({
       type: ALL_DATA,
     });
   };
-  const activefilter = () => {
-    const data = allCircuit.filter(item => item.Circuit_Status == 'Active');
-    setAcData(data);
-  };
-  const inactivefilter = () => {
-    const data = allCircuit.filter(item => item.Circuit_Status == 'Inactive');
-    setAcData(data);
-  };
+
   return (
     <>
       {loding3 ? (
@@ -214,6 +207,7 @@ const CircuitsNew = ({
             cirCuitRef={cirCuitRef}
             setSwitchView={setSwitchView}
             setLodding1={setLodding1}
+            setbootSheetLodder={setbootSheetLodder}
           />
 
           {/* <View style={{...styles.idView}}>
@@ -516,6 +510,7 @@ const CircuitsNew = ({
             loding1={loding1}
             cirCuitRef={cirCuitRef}
             setSwitchView={setSwitchView}
+            bootSheetLodder={bootSheetLodder}
           />
           <BottomSheetViewCircuits
             loding={loding}

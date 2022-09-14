@@ -65,9 +65,10 @@ const SecondRow = ({
   cirCuitRef,
   getAllTangorNumber,
   setLodding1,
+  setbootSheetLodder,
 }) => {
   const dispatch = useDispatch();
-  const [loding, setLoding] = React.useState(false);
+
   const getOnlyTypeData = () => {
     dispatch({
       type: ALL_CIRCUIT_ONLY_TYPE,
@@ -75,13 +76,13 @@ const SecondRow = ({
   };
   const getCarrirer = () => {
     // setLoding(true)
-    GetAllCarrierNumber(setLodding1);
+    GetAllCarrierNumber(setbootSheetLodder);
   };
   const getTangoe = () => {
-    getAllTangorNumber(setLodding1);
+    getAllTangorNumber(setbootSheetLodder);
   };
   const getAllSite = () => {
-    getAllSiteNumber(setLodding1);
+    getAllSiteNumber(setbootSheetLodder);
   };
 
   return (

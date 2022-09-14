@@ -23,6 +23,9 @@ import moment from 'moment';
 import BottomSheetViewDetails from './BottomSheetViewDetails';
 import {get_order_details} from '../../../../actions/order';
 import ToggleView from './../../../../components/ToggleView/index';
+
+import CircuitBottmSheet from './CircuitBottmSheet/index';
+
 import {
   FILTER_STATUS_BY_COMPLETED,
   ALL_DATA,
@@ -31,12 +34,16 @@ import {
 const Circuits = ({get_orders_for_tab, get_order_details}) => {
   const {ordersForTab} = useSelector(state => state.ordersForTab);
   const dispatch = useDispatch();
-
+  const cirCuitRef = useRef(null);
   const [refresh, setRefresh] = useState(false);
-  const [loding, setLodding] = useState(false);
+  const [loding, setLodding] = useState(true);
   const [lodding1, setLodding1] = useState(false);
+
+  const [bottomSheetLodder, setbootSheetLodder] = useState(true);
+
   const [switchView, setSwitchView] = useState(true);
-  const [isOn, setIsSwitchOn] = React.useState(false);
+  const [diplayName, setDiplayName] = useState('');
+
   const bottomSheetRefdetails = useRef(null);
 
   useEffect(() => {
@@ -192,79 +199,96 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
   };
   return (
     <>
-      <SecondRow />
-      <ThirdRow />
-      <Tableheader />
       {loding ? (
         <View style={styles.loderView}>
           <OrderLoder />
         </View>
       ) : (
-        <View style={styles.table}>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={ordersForTab}
-            keyExtractor={(item, i) => i.toString()}
-            renderItem={(item, i) => randerItem(item)}
-            refreshing={refresh}
-            onRefresh={() => {
-              // setType('');
-              // changeBottomColor1();
-              get_orders_for_tab(setLodding);
-            }}
-            ListEmptyComponent={() => {
-              return (
-                <View
-                  style={{
-                    width: '100%',
-                    height: 500,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
+        <>
+          <SecondRow
+            diplayName={diplayName}
+            setDiplayName={setDiplayName}
+            cirCuitRef={cirCuitRef}
+            setSwitchView={setSwitchView}
+            setbootSheetLodder={setbootSheetLodder}
+          />
+          <ThirdRow
+            diplayName={diplayName}
+            setDiplayName={setDiplayName}
+            cirCuitRef={cirCuitRef}
+            setSwitchView={setSwitchView}
+          />
+          <Tableheader />
+
+          <View style={styles.table}>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={ordersForTab}
+              keyExtractor={(item, i) => i.toString()}
+              renderItem={(item, i) => randerItem(item)}
+              refreshing={refresh}
+              onRefresh={() => {
+                // setType('');
+                // changeBottomColor1();
+                get_orders_for_tab(setLodding);
+              }}
+              ListEmptyComponent={() => {
+                return (
                   <View
                     style={{
                       width: '100%',
-                      height: 200,
+                      height: 500,
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}>
-                    <Image
+                    <View
                       style={{
                         width: '100%',
-                        height: 100,
-                        resizeMode: 'contain',
-                      }}
-                      source={require('../../../../images/empty.png')}
-                    />
-                    <Text style={{fontSize: 25}}>No Data Found</Text>
+                        height: 200,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Image
+                        style={{
+                          width: '100%',
+                          height: 100,
+                          resizeMode: 'contain',
+                        }}
+                        source={require('../../../../images/empty.png')}
+                      />
+                      <Text style={{fontSize: 25}}>No Data Found</Text>
+                    </View>
                   </View>
-                </View>
-              );
-            }}
+                );
+              }}
+            />
+          </View>
+
+          <>
+            {/* ============TOOGLE=========== */}
+            {switchView ? (
+              <ToggleView
+                name="Circuits"
+                size={'medium'}
+                length={ordersForTab.length}
+                alldata={allData}
+                activeFilter={fiterCircuitsActive}
+              />
+            ) : null}
+            {/* ============TOOGLE=========== */}
+          </>
+          <BottomSheetViewDetails
+            lodding1={lodding1}
+            bottomSheetRefdetails={bottomSheetRefdetails}
           />
-        </View>
+          <CircuitBottmSheet
+            diplayName={diplayName}
+            bottomSheetLodder={bottomSheetLodder}
+            cirCuitRef={cirCuitRef}
+            setSwitchView={setSwitchView}
+          />
+        </>
       )}
-
-      {/* ==================data View============== */}
-      {/* ==================data View============== */}
-
-      <>
-        {/* ============TOOGLE=========== */}
-        {switchView ? (
-          <ToggleView
-            name="Circuits"
-            size={'medium'}
-            length={ordersForTab.length}
-            alldata={allData}
-            activeFilter={fiterCircuitsActive}
-          />
-        ) : null}
-        {/* ============TOOGLE=========== */}
-      </>
-      <BottomSheetViewDetails
-        lodding1={lodding1}
-        bottomSheetRefdetails={bottomSheetRefdetails}
-      />
     </>
   );
 };

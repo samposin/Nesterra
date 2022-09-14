@@ -1,4 +1,11 @@
-import {StyleSheet, Text, Keyboard, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  ScrollView,
+  Keyboard,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useDispatch, connect} from 'react-redux';
@@ -25,10 +32,7 @@ const Button = ({
   return (
     <TouchableOpacity
       onPress={() => {
-        setDiplayName(tittle);
-        cirCuitRef.current.snapToIndex(1);
         opPress();
-        setSwitchView(false);
       }}
       style={{
         width: 90,
@@ -67,13 +71,23 @@ const ThirdRow = ({
   const dispatch = useDispatch();
   const [lodding1, setLodding1] = React.useState(false);
   const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
+  const [isDatePickerVisible1, setDatePickerVisibility1] =
+    React.useState(false);
   const vendorfil = () => {
+    setDiplayName('Vendor');
+    cirCuitRef.current.snapToIndex(1);
+
+    setSwitchView(false);
     // alert('madan');
     dispatch({
       type: ALL_CIRCUIT_ONLY_VENDOR,
     });
   };
   const typefil = () => {
+    setDiplayName('Project');
+    cirCuitRef.current.snapToIndex(1);
+
+    setSwitchView(false);
     // alert('madan');
     dispatch({
       type: ALL_CIRCUIT_ONLY_TYPE,
@@ -96,6 +110,10 @@ const ThirdRow = ({
     getAllCircuitID(setLodding1);
   };
   const getStatus = () => {
+    setDiplayName('Status');
+    cirCuitRef.current.snapToIndex(1);
+
+    setSwitchView(false);
     dispatch({
       type: ALL_CIRCUIT_SORT_BY_STATUS,
     });
@@ -105,19 +123,41 @@ const ThirdRow = ({
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
+  const hideDatePicker1 = () => {
+    setDatePickerVisibility1(false);
+  };
   const handleConfirm = date => {
-    // console.log(moment(date).format('MM-DD-YY'));
-    dispatch({
-      type: ORDER_FILTER_BY_DATE,
-      data: moment(date).format('MM-DD-YY'),
-    });
+    console.log(date);
+    // dispatch({
+    //   type: ORDER_FILTER_BY_DATE,
+    //   data: moment(date).format('MM-DD-YY'),
+    // });
 
     hideDatePicker();
   };
+  const handleConfirm1 = date => {
+    console.log(date, 'DA');
+
+    hideDatePicker1();
+  };
+
   const showDatePicker = () => {
     setDatePickerVisibility(true);
     Keyboard.dismiss();
+    setDiplayName('State Date');
+
+    cirCuitRef.current.close();
+    setSwitchView(false);
   };
+  const showDatePicker1 = () => {
+    setDatePickerVisibility1(true);
+    Keyboard.dismiss();
+    setDiplayName('End Date');
+
+    cirCuitRef.current.close();
+    setSwitchView(false);
+  };
+
   // =======Date Picker
   return (
     <>
@@ -128,70 +168,60 @@ const ThirdRow = ({
           paddingLeft: 10,
           flexDirection: 'row',
         }}>
-        <Button
-          tittle="Vendor"
-          setSwitchView={setSwitchView}
-          opPress={vendorfil}
-          diplayName={diplayName}
-          setDiplayName={setDiplayName}
-          cirCuitRef={cirCuitRef}
-        />
-        <Button
-          tittle="Project"
-          opPress={typefil}
-          setSwitchView={setSwitchView}
-          diplayName={diplayName}
-          setDiplayName={setDiplayName}
-          cirCuitRef={cirCuitRef}
-        />
-        <Button
-          setSwitchView={setSwitchView}
-          tittle="Status"
-          opPress={getStatus}
-          diplayName={diplayName}
-          setDiplayName={setDiplayName}
-          cirCuitRef={cirCuitRef}
-        />
-        <TouchableOpacity
-          onPress={() => {
-            setDiplayName('Date');
-            showDatePicker();
-          }}
-          style={{
-            width: 90,
-            height: 40,
-            marginRight: 10,
-            borderRadius: 10,
-            borderWidth: 1,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            borderColor: diplayName == 'Date' ? '#007aff' : 'black',
-          }}>
-          <Text
-            style={{
-              fontWeight: '600',
-              color: diplayName == 'Date' ? '#007aff' : 'black',
-            }}>
-            Date
-          </Text>
-          <FontAwesome5
-            name="eject"
-            size={15}
-            style={{
-              transform: [{rotate: '180deg'}],
-              marginLeft: 2,
-              marginTop: 3,
-            }}
-            color={diplayName == 'Date' ? '#007aff' : 'black'}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <Button
+            tittle="Vendor"
+            setSwitchView={setSwitchView}
+            opPress={vendorfil}
+            diplayName={diplayName}
+            setDiplayName={setDiplayName}
+            cirCuitRef={cirCuitRef}
           />
-        </TouchableOpacity>
+          <Button
+            tittle="Project"
+            opPress={typefil}
+            setSwitchView={setSwitchView}
+            diplayName={diplayName}
+            setDiplayName={setDiplayName}
+            cirCuitRef={cirCuitRef}
+          />
+          <Button
+            setSwitchView={setSwitchView}
+            tittle="Status"
+            opPress={getStatus}
+            diplayName={diplayName}
+            setDiplayName={setDiplayName}
+            cirCuitRef={cirCuitRef}
+          />
+          <Button
+            setSwitchView={setSwitchView}
+            tittle="State Date"
+            opPress={showDatePicker}
+            diplayName={diplayName}
+            setDiplayName={setDiplayName}
+            cirCuitRef={cirCuitRef}
+          />
+          <Button
+            setSwitchView={setSwitchView}
+            tittle="End Date"
+            opPress={showDatePicker1}
+            diplayName={diplayName}
+            setDiplayName={setDiplayName}
+            cirCuitRef={cirCuitRef}
+          />
+        </ScrollView>
       </View>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
+      />
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible1}
+        mode="date"
+        onConfirm={handleConfirm1}
+        onCancel={hideDatePicker1}
       />
     </>
   );

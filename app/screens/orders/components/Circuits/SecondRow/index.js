@@ -8,24 +8,19 @@ import {
 import React from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useDispatch, connect} from 'react-redux';
-// import {GetAllCarrierNumber} from './../../../../actions/CarrierNumber/index';
-// import {getAllTangorNumber} from './../../../../actions/TangorNumber/index';
+import {GetAllCarrierNumber} from '../../../../../actions/CarrierNumber/index';
+import {getAllTangorNumber} from '../../../../../actions/TangorNumber/index';
 
 const Button = ({
   tittle,
-  // onPress,
-  // setDiplayName,
-  // setSwitchView,
-  // diplayName,
-  // cirCuitRef,
+  onPress,
+
+  diplayName,
 }) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        // setDiplayName(tittle);
-        // cirCuitRef.current.snapToIndex(1);
-        // onPress();
-        // setSwitchView(false);
+        onPress();
       }}
       style={{
         width: 110,
@@ -36,12 +31,12 @@ const Button = ({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        // borderColor: diplayName == tittle ? '#007aff' : 'black',
+        borderColor: diplayName == tittle ? '#007aff' : 'black',
       }}>
       <Text
         style={{
           fontWeight: '600',
-          // color: diplayName == tittle ? '#007aff' : 'black',
+          color: diplayName == tittle ? '#007aff' : 'black',
         }}>
         {tittle}
       </Text>
@@ -49,23 +44,23 @@ const Button = ({
         name="eject"
         size={15}
         style={{transform: [{rotate: '180deg'}], marginLeft: 2, marginTop: 3}}
-        // color={diplayName == tittle ? '#007aff' : 'black'}
+        color={diplayName == tittle ? '#007aff' : 'black'}
       />
     </TouchableOpacity>
   );
 };
-const SecondRow = (
-  {
-    // setDiplayName,
-    // GetAllCarrierNumber,
-    // setSwitchView,
-    // diplayName,
-    // cirCuitRef,
-    // getAllTangorNumber,
-  },
-) => {
+const SecondRow = ({
+  setDiplayName,
+  getAllTangorNumber,
+  GetAllCarrierNumber,
+  setSwitchView,
+  diplayName,
+  cirCuitRef,
+
+  setbootSheetLodder,
+}) => {
   const dispatch = useDispatch();
-  const [loding, setLoding] = React.useState(false);
+  // const [loding, setLoding] = React.useState(false);
   // const getCarrirer = () => {
   //   // setLoding(true)
   //   GetAllCarrierNumber(setLoding);
@@ -73,7 +68,26 @@ const SecondRow = (
   // const getTangoe = () => {
   //   getAllTangorNumber();
   // };
+  const orderType = () => {
+    setDiplayName('Order Type');
+    cirCuitRef.current.snapToIndex(1);
 
+    setSwitchView(false);
+  };
+  const smartSite = () => {
+    setDiplayName('SmartSite#');
+    cirCuitRef.current.snapToIndex(1);
+    setSwitchView(false);
+  };
+  const getCarrier = () => {
+    GetAllCarrierNumber(setbootSheetLodder);
+    setDiplayName('Carrier#');
+    cirCuitRef.current.snapToIndex(1);
+    setSwitchView(false);
+  };
+  const getTanoe = () => {
+    getAllTangorNumber(setbootSheetLodder);
+  };
   return (
     <View
       style={{
@@ -85,16 +99,15 @@ const SecondRow = (
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <Button
           tittle="Order Type"
-          // onPress={() => {}}
-
+          onPress={orderType}
           // setSwitchView={setSwitchView}
-          // diplayName={diplayName}
+          diplayName={diplayName}
           // setDiplayName={setDiplayName}
           // cirCuitRef={cirCuitRef}
         />
         <Button
           tittle="SmartSite#"
-          // onPress={() => {}}
+          onPress={smartSite}
           // setSwitchView={setSwitchView}
           // diplayName={diplayName}
           // setDiplayName={setDiplayName}
@@ -102,7 +115,7 @@ const SecondRow = (
         />
         <Button
           tittle="Tangoe#"
-          // onPress={getTangoe}
+          onPress={() => alert('ddd')}
           // setSwitchView={setSwitchView}
           // diplayName={diplayName}
           // setDiplayName={setDiplayName}
@@ -111,11 +124,8 @@ const SecondRow = (
 
         <Button
           tittle="Carrier#"
-          // onPress={getCarrirer}
-          // setSwitchView={setSwitchView}
-          // diplayName={diplayName}
-          // setDiplayName={setDiplayName}
-          // cirCuitRef={cirCuitRef}
+          onPress={getCarrier}
+          diplayName={diplayName}
         />
         <Button
           tittle="Item#"
@@ -130,6 +140,8 @@ const SecondRow = (
   );
 };
 
-export default connect(null, {})(SecondRow);
+export default connect(null, {getAllTangorNumber, GetAllCarrierNumber})(
+  SecondRow,
+);
 
 const styles = StyleSheet.create({});

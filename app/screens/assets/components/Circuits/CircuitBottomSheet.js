@@ -21,6 +21,7 @@ const CircuitBottomSheet = ({
   diplayName,
   setSwitchView,
   loding1,
+  bootSheetLodder,
 }) => {
   const snapPoints = useMemo(() => ['20%', '50%'], []);
   // console.log(diplayName);
@@ -32,6 +33,7 @@ const CircuitBottomSheet = ({
             setSwitchView={setSwitchView}
             cirCuitRef={cirCuitRef}
             loding1={loding1}
+            bootSheetLodder={bootSheetLodder}
           />
         );
       case diplayName === 'SmartSite#':
@@ -40,6 +42,7 @@ const CircuitBottomSheet = ({
             setSwitchView={setSwitchView}
             cirCuitRef={cirCuitRef}
             loding1={loding1}
+            bootSheetLodder={bootSheetLodder}
           />
         );
       case diplayName === 'Tangoe#':
@@ -48,6 +51,7 @@ const CircuitBottomSheet = ({
             setSwitchView={setSwitchView}
             cirCuitRef={cirCuitRef}
             loding1={loding1}
+            bootSheetLodder={bootSheetLodder}
           />
         );
       case diplayName === 'Carrier#':
@@ -56,6 +60,7 @@ const CircuitBottomSheet = ({
             setSwitchView={setSwitchView}
             cirCuitRef={cirCuitRef}
             loding1={loding1}
+            bootSheetLodder={bootSheetLodder}
           />
         );
       case diplayName === 'Item#':

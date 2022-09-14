@@ -2,8 +2,8 @@ import Axios from 'axios';
 import {Base_url} from '../../key';
 import {GET_ALL_TANGOR_NUMBER} from '../actionType/TangorNumber';
 
-export const getAllTangorNumber = setLodding1 => dispatch => {
-  setLodding1(true);
+export const getAllTangorNumber = setbootSheetLodder => dispatch => {
+  setbootSheetLodder(true);
   Axios.get(`${Base_url}/api/GetTangoeNumber`)
     .then(response => {
       if (response.data.length > 0) {
@@ -15,7 +15,7 @@ export const getAllTangorNumber = setLodding1 => dispatch => {
             data: response.data,
           },
         });
-        setLodding1(false);
+        setbootSheetLodder(false);
       }
     })
     .catch(error => {

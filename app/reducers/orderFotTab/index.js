@@ -21,9 +21,10 @@ import {
   ORDER_FILTER_BY_DATE,
   ORDER_SEARCH_OLLY_VENDOR,
   ORDER_FILTER_ONLY_VENDOR,
-  GET_ONLY_VENDOR,
+  ORDER_GET_ONLY_VENDOR,
   FILTER_STATUS_BY_COMPLETED,
   ALL_DATA,
+  //===
 } from '../../actions/actionType/action.OrdersForTab';
 
 const initialState = {
@@ -48,7 +49,7 @@ export default (state = initialState, action) => {
         isLoding: action.payload.data.loder,
       };
     // =========GET ONLY  DATA======
-    case GET_ONLY_VENDOR:
+    case ORDER_GET_ONLY_VENDOR:
       const ONLYVENDOR1 = [...state.ordersForTab1];
 
       const result = ONLYVENDOR1.reduce((acc, {vendor}) => {
@@ -89,7 +90,7 @@ export default (state = initialState, action) => {
         };
       }
 
-    //SEARCH ONLY VENDOR
+    //SEARCH ONLY Status
     case ORDER_FILTER_BY_STATUS:
       const datasearStatus = [...state.ordersForTab1];
 
@@ -230,25 +231,31 @@ export default (state = initialState, action) => {
           ordersForTab: state.ordersForTab1,
         };
       }
+    //FILTER DATA BY STATUS
     case GET_ORDERS_FOR_TAB_FILTER_STATUS:
       const datasearch4 = [...state.ordersForTab1];
+      const newData = datasearch4.filter(item => item.Status === action.data);
 
-      if (action.data) {
-        const newData = datasearch4.filter(function (item) {
-          const itemData = item.Status.toUpperCase();
+      return {
+        ...state,
+        ordersForTab: newData,
+      };
+    // if (action.data) {
+    //   const newData = datasearch4.filter(function (item) {
+    //     const itemData = item.Status.toUpperCase();
 
-          return itemData.startsWith(action.data.toUpperCase());
-        });
-        return {
-          ...state,
-          ordersForTab: newData,
-        };
-      } else {
-        return {
-          ...state,
-          ordersForTab: state.ordersForTab1,
-        };
-      }
+    //     return itemData.startsWith(action.data.toUpperCase());
+    //   });
+    //   return {
+    //     ...state,
+    //     ordersForTab: newData,
+    //   };
+    // } else {
+    //   return {
+    //     ...state,
+    //     ordersForTab: state.ordersForTab1,
+    //   };
+    // }
     //SORT VENDOR ASCENDING
     case SORT_BY_VENDOR_ASC:
       const datasearch5 = [...state.ordersForTab1];
@@ -492,12 +499,9 @@ export default (state = initialState, action) => {
     case ORDER_FILTER_BY_ORDER_TYPE:
       const datasearch15 = [...state.ordersForTab1];
 
-      const filterdata = datasearch15.filter(item => {
-        // item.Order_Type == action.data;
-        const itemData = item.Order_Type.toUpperCase();
-
-        return itemData.startsWith(action.data.toUpperCase());
-      });
+      const filterdata = datasearch15.filter(
+        item => item.Order_Type === action.data,
+      );
 
       return {
         ...state,

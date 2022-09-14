@@ -13,13 +13,9 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {ALL_CARRIER_NUMBER_FILTER} from '../../../../../actions/actionType/CarrierNumber';
 
-const Carrier = ({loding1, cirCuitRef, setSwitchView}) => {
+const Carrier = ({cirCuitRef, bootSheetLodder, setSwitchView}) => {
   const {data} = useSelector(state => state.carrierNumber);
-  // console.log(allSubType, 'allBranchID');
-  // console.log(
-  //   allBranchID.filter(item => item.id == '10').length,
-  //   'allbraCircuit',
-  // );
+
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const searchFilterFunction = text => {
@@ -54,7 +50,7 @@ const Carrier = ({loding1, cirCuitRef, setSwitchView}) => {
           <EvilIcons name="search" size={24} color="black" />
         </View>
       </View>
-      {loding1 ? (
+      {bootSheetLodder ? (
         <View
           style={{
             width: '100%',

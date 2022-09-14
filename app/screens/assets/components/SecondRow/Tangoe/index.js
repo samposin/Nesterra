@@ -12,7 +12,7 @@ import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {ALL_TANGOR_NUMBER_FILTER} from '../../../../../actions/actionType/TangorNumber';
-const Tangoe = ({loding1, cirCuitRef, setSwitchView}) => {
+const Tangoe = ({loding1, cirCuitRef, bootSheetLodder, setSwitchView}) => {
   const {data} = useSelector(state => state.tangorNumber);
 
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const Tangoe = ({loding1, cirCuitRef, setSwitchView}) => {
           <EvilIcons name="search" size={24} color="black" />
         </View>
       </View>
-      {loding1 ? (
+      {bootSheetLodder ? (
         <View
           style={{
             width: '100%',

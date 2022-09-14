@@ -8,24 +8,14 @@ import {
 import React from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useDispatch, connect} from 'react-redux';
-// import {GetAllCarrierNumber} from './../../../../actions/CarrierNumber/index';
-// import {getAllTangorNumber} from './../../../../actions/TangorNumber/index';
 
-const Button = ({
-  tittle,
-  // onPress,
-  // setDiplayName,
-  // setSwitchView,
-  // diplayName,
-  // cirCuitRef,
-}) => {
+import {ORDER_GET_ONLY_VENDOR} from '../../../../../actions/actionType/action.OrdersForTab';
+
+const Button = ({tittle, onPress, diplayName}) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        // setDiplayName(tittle);
-        // cirCuitRef.current.snapToIndex(1);
-        // onPress();
-        // setSwitchView(false);
+        onPress();
       }}
       style={{
         width: 100,
@@ -36,12 +26,12 @@ const Button = ({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        // borderColor: diplayName == tittle ? '#007aff' : 'black',
+        borderColor: diplayName == tittle ? '#007aff' : 'black',
       }}>
       <Text
         style={{
           fontWeight: '600',
-          // color: diplayName == tittle ? '#007aff' : 'black',
+          color: diplayName == tittle ? '#007aff' : 'black',
         }}>
         {tittle}
       </Text>
@@ -49,30 +39,32 @@ const Button = ({
         name="eject"
         size={15}
         style={{transform: [{rotate: '180deg'}], marginLeft: 2, marginTop: 3}}
-        // color={diplayName == tittle ? '#007aff' : 'black'}
+        color={diplayName == tittle ? '#007aff' : 'black'}
       />
     </TouchableOpacity>
   );
 };
-const ThirdRow = (
-  {
-    // setDiplayName,
-    // GetAllCarrierNumber,
-    // setSwitchView,
-    // diplayName,
-    // cirCuitRef,
-    // getAllTangorNumber,
-  },
-) => {
+const ThirdRow = ({
+  setDiplayName,
+
+  setSwitchView,
+  diplayName,
+  cirCuitRef,
+}) => {
   const dispatch = useDispatch();
-  const [loding, setLoding] = React.useState(false);
-  // const getCarrirer = () => {
-  //   // setLoding(true)
-  //   GetAllCarrierNumber(setLoding);
-  // };
-  // const getTangoe = () => {
-  //   getAllTangorNumber();
-  // };
+  const vendor = () => {
+    dispatch({
+      type: ORDER_GET_ONLY_VENDOR,
+    });
+    setDiplayName('Vendor');
+    cirCuitRef.current.snapToIndex(1);
+    setSwitchView(false);
+  };
+  const status = () => {
+    setDiplayName('Status');
+    cirCuitRef.current.snapToIndex(1);
+    setSwitchView(false);
+  };
 
   return (
     <View
@@ -83,40 +75,11 @@ const ThirdRow = (
         flexDirection: 'row',
       }}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <Button
-          tittle="Vendor"
-          // onPress={() => {}}
+        <Button tittle="Vendor" onPress={vendor} diplayName={diplayName} />
+        <Button tittle="Project" onPress={vendor} diplayName={diplayName} />
+        <Button tittle="Status" onPress={status} diplayName={diplayName} />
 
-          // setSwitchView={setSwitchView}
-          // diplayName={diplayName}
-          // setDiplayName={setDiplayName}
-          // cirCuitRef={cirCuitRef}
-        />
-        <Button
-          tittle="Project"
-          // onPress={() => {}}
-          // setSwitchView={setSwitchView}
-          // diplayName={diplayName}
-          // setDiplayName={setDiplayName}
-          // cirCuitRef={cirCuitRef}
-        />
-        <Button
-          tittle="Status"
-          // onPress={getTangoe}
-          // setSwitchView={setSwitchView}
-          // diplayName={diplayName}
-          // setDiplayName={setDiplayName}
-          // cirCuitRef={cirCuitRef}
-        />
-
-        <Button
-          tittle="Date"
-          // onPress={getCarrirer}
-          // setSwitchView={setSwitchView}
-          // diplayName={diplayName}
-          // setDiplayName={setDiplayName}
-          // cirCuitRef={cirCuitRef}
-        />
+        <Button tittle="Date" onPress={vendor} diplayName={diplayName} />
       </ScrollView>
     </View>
   );
