@@ -12,50 +12,8 @@ import {GetAllCarrierNumber} from './../../../../actions/CarrierNumber/index';
 import {getAllTangorNumber} from './../../../../actions/TangorNumber/index';
 import {getAllSiteNumber} from '../../../../actions/SiteNumber';
 import {ALL_CIRCUIT_ONLY_TYPE} from './../../../../actions/actionType/AllCircuit/index';
+import FilterButton from '../../../../components/FilterButton';
 
-const Button = ({
-  tittle,
-  onPress,
-  setDiplayName,
-  setSwitchView,
-  diplayName,
-  cirCuitRef,
-}) => {
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        setDiplayName(tittle);
-        cirCuitRef.current.snapToIndex(1);
-        onPress();
-        setSwitchView(false);
-      }}
-      style={{
-        width: 110,
-        height: 40,
-        marginRight: 10,
-        borderRadius: 10,
-        borderWidth: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        borderColor: diplayName == tittle ? '#007aff' : 'black',
-      }}>
-      <Text
-        style={{
-          fontWeight: '600',
-          color: diplayName == tittle ? '#007aff' : 'black',
-        }}>
-        {tittle}
-      </Text>
-      <FontAwesome5
-        name="eject"
-        size={15}
-        style={{transform: [{rotate: '180deg'}], marginLeft: 2, marginTop: 3}}
-        color={diplayName == tittle ? '#007aff' : 'black'}
-      />
-    </TouchableOpacity>
-  );
-};
 const SecondRow = ({
   setDiplayName,
   GetAllCarrierNumber,
@@ -77,14 +35,33 @@ const SecondRow = ({
   const getCarrirer = () => {
     // setLoding(true)
     GetAllCarrierNumber(setbootSheetLodder);
+    setDiplayName('Carrier#');
+    cirCuitRef.current.snapToIndex(1);
+
+    setSwitchView(false);
   };
   const getTangoe = () => {
     getAllTangorNumber(setbootSheetLodder);
-  };
-  const getAllSite = () => {
-    getAllSiteNumber(setbootSheetLodder);
+    setDiplayName('Tangoe#');
+    cirCuitRef.current.snapToIndex(1);
+
+    setSwitchView(false);
   };
 
+  const OrderType = () => {
+    dispatch({
+      type: ALL_CIRCUIT_ONLY_TYPE,
+    });
+    setDiplayName('Order Type');
+    cirCuitRef.current.snapToIndex(1);
+    setSwitchView(false);
+  };
+  const getSmartSite = () => {
+    setDiplayName('SmartSite#');
+    cirCuitRef.current.snapToIndex(1);
+    getAllSiteNumber(setbootSheetLodder);
+    setSwitchView(false);
+  };
   return (
     <View
       style={{
@@ -94,48 +71,35 @@ const SecondRow = ({
         flexDirection: 'row',
       }}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <Button
-          tittle="Order Type"
-          onPress={getOnlyTypeData}
-          //  opPress={typefil} SmartSite
-          setSwitchView={setSwitchView}
+        <FilterButton
           diplayName={diplayName}
-          setDiplayName={setDiplayName}
-          cirCuitRef={cirCuitRef}
+          onPress={OrderType}
+          title="Order Type"
         />
-        <Button
-          tittle="SmartSite#"
-          onPress={getAllSite}
-          setSwitchView={setSwitchView}
+        <FilterButton
           diplayName={diplayName}
-          setDiplayName={setDiplayName}
-          cirCuitRef={cirCuitRef}
+          onPress={getSmartSite}
+          title="SmartSite#"
         />
-        <Button
-          tittle="Tangoe#"
+        <FilterButton
+          diplayName={diplayName}
           onPress={getTangoe}
-          setSwitchView={setSwitchView}
+          title="Tangoe#"
+        />
+        <FilterButton
           diplayName={diplayName}
-          setDiplayName={setDiplayName}
-          cirCuitRef={cirCuitRef}
+          onPress={getCarrirer}
+          title="Carrier#"
         />
 
-        <Button
-          tittle="Carrier#"
-          onPress={getCarrirer}
-          setSwitchView={setSwitchView}
-          diplayName={diplayName}
-          setDiplayName={setDiplayName}
-          cirCuitRef={cirCuitRef}
-        />
-        <Button
+        {/* <Button
           tittle="Item#"
           onPress={() => {}}
           setSwitchView={setSwitchView}
           diplayName={diplayName}
           setDiplayName={setDiplayName}
           cirCuitRef={cirCuitRef}
-        />
+        /> */}
       </ScrollView>
     </View>
   );

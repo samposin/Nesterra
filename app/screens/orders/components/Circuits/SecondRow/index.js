@@ -1,54 +1,11 @@
-import {
-  StyleSheet,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, ScrollView, View} from 'react-native';
 import React from 'react';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {useDispatch, connect} from 'react-redux';
-import {GetAllCarrierNumber} from '../../../../../actions/CarrierNumber/index';
-import {getAllTangorNumber} from '../../../../../actions/TangorNumber/index';
+import {connect} from 'react-redux';
+import {GetAllCarrierNumber} from '../../../../../actions/CarrierNumber';
+import {getAllTangorNumber} from '../../../../../actions/TangorNumber';
+import {getAllSiteNumber} from '../../../../../actions/SiteNumber';
+import FilterButton from '../../../../../components/FilterButton';
 
-const Button = ({
-  tittle,
-  onPress,
-
-  diplayName,
-}) => {
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        onPress();
-      }}
-      style={{
-        width: 110,
-        height: 40,
-        marginRight: 10,
-        borderRadius: 10,
-        borderWidth: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        borderColor: diplayName == tittle ? '#007aff' : 'black',
-      }}>
-      <Text
-        style={{
-          fontWeight: '600',
-          color: diplayName == tittle ? '#007aff' : 'black',
-        }}>
-        {tittle}
-      </Text>
-      <FontAwesome5
-        name="eject"
-        size={15}
-        style={{transform: [{rotate: '180deg'}], marginLeft: 2, marginTop: 3}}
-        color={diplayName == tittle ? '#007aff' : 'black'}
-      />
-    </TouchableOpacity>
-  );
-};
 const SecondRow = ({
   setDiplayName,
   getAllTangorNumber,
@@ -56,18 +13,10 @@ const SecondRow = ({
   setSwitchView,
   diplayName,
   cirCuitRef,
+  getAllSiteNumber,
 
   setbootSheetLodder,
 }) => {
-  const dispatch = useDispatch();
-  // const [loding, setLoding] = React.useState(false);
-  // const getCarrirer = () => {
-  //   // setLoding(true)
-  //   GetAllCarrierNumber(setLoding);
-  // };
-  // const getTangoe = () => {
-  //   getAllTangorNumber();
-  // };
   const orderType = () => {
     setDiplayName('Order Type');
     cirCuitRef.current.snapToIndex(1);
@@ -75,6 +24,7 @@ const SecondRow = ({
     setSwitchView(false);
   };
   const smartSite = () => {
+    getAllSiteNumber(setbootSheetLodder);
     setDiplayName('SmartSite#');
     cirCuitRef.current.snapToIndex(1);
     setSwitchView(false);
@@ -87,6 +37,9 @@ const SecondRow = ({
   };
   const getTanoe = () => {
     getAllTangorNumber(setbootSheetLodder);
+    setDiplayName('Tangoe#');
+    cirCuitRef.current.snapToIndex(1);
+    setSwitchView(false);
   };
   return (
     <View
@@ -97,51 +50,35 @@ const SecondRow = ({
         flexDirection: 'row',
       }}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <Button
-          tittle="Order Type"
+        <FilterButton
+          title="Order Type"
           onPress={orderType}
-          // setSwitchView={setSwitchView}
           diplayName={diplayName}
-          // setDiplayName={setDiplayName}
-          // cirCuitRef={cirCuitRef}
         />
-        <Button
-          tittle="SmartSite#"
+        <FilterButton
+          title="SmartSite#"
           onPress={smartSite}
-          // setSwitchView={setSwitchView}
-          // diplayName={diplayName}
-          // setDiplayName={setDiplayName}
-          // cirCuitRef={cirCuitRef}
+          diplayName={diplayName}
         />
-        <Button
-          tittle="Tangoe#"
-          onPress={() => alert('ddd')}
-          // setSwitchView={setSwitchView}
-          // diplayName={diplayName}
-          // setDiplayName={setDiplayName}
-          // cirCuitRef={cirCuitRef}
+        <FilterButton
+          title="Tangoe#"
+          onPress={getTanoe}
+          diplayName={diplayName}
         />
-
-        <Button
-          tittle="Carrier#"
+        <FilterButton
+          title="Carrier#"
           onPress={getCarrier}
           diplayName={diplayName}
-        />
-        <Button
-          tittle="Item#"
-          // onPress={() => {}}
-          // setSwitchView={setSwitchView}
-          // diplayName={diplayName}
-          // setDiplayName={setDiplayName}
-          // cirCuitRef={cirCuitRef}
         />
       </ScrollView>
     </View>
   );
 };
 
-export default connect(null, {getAllTangorNumber, GetAllCarrierNumber})(
-  SecondRow,
-);
+export default connect(null, {
+  getAllTangorNumber,
+  getAllSiteNumber,
+  GetAllCarrierNumber,
+})(SecondRow);
 
 const styles = StyleSheet.create({});

@@ -4,6 +4,7 @@ import {
   TextInput,
   Text,
   View,
+  Keyboard,
 } from 'react-native';
 import React, {useMemo} from 'react';
 
@@ -15,6 +16,7 @@ import SmartSite from './SmartSite';
 import Vendor from './Vendor';
 import Status from './Status';
 import Carrier from './Carrier';
+import Tangoe from './Tangoe';
 
 const CircuitBottmSheet = ({
   cirCuitRef,
@@ -35,7 +37,19 @@ const CircuitBottmSheet = ({
         return <Item setSwitchView={setSwitchView} cirCuitRef={cirCuitRef} />;
       case diplayName === 'SmartSite#':
         return (
-          <SmartSite setSwitchView={setSwitchView} cirCuitRef={cirCuitRef} />
+          <SmartSite
+            bottomSheetLodder={bottomSheetLodder}
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+          />
+        );
+      case diplayName === 'Tangoe#':
+        return (
+          <Tangoe
+            bottomSheetLodder={bottomSheetLodder}
+            setSwitchView={setSwitchView}
+            cirCuitRef={cirCuitRef}
+          />
         );
       case diplayName === 'Vendor':
         return <Vendor setSwitchView={setSwitchView} cirCuitRef={cirCuitRef} />;
@@ -76,6 +90,7 @@ const CircuitBottmSheet = ({
                 onPress={() => {
                   setSwitchView(true);
                   cirCuitRef.current.close();
+                  Keyboard.dismiss();
                 }}>
                 <Text
                   style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>
@@ -89,6 +104,7 @@ const CircuitBottmSheet = ({
                 onPress={() => {
                   setSwitchView(true);
                   cirCuitRef.current.close();
+                  Keyboard.dismiss();
                 }}>
                 <Text
                   style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>

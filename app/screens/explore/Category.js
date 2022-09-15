@@ -58,8 +58,9 @@ const Category = ({third_party_filter}) => {
                 }}>
                 <Text
                   style={{
+                    fontSize: 15,
                     color: item.isActive ? 'white' : 'black',
-                    fontWeight: '500',
+                    fontWeight: 'bold',
                   }}>
                   {item.name}
                 </Text>
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
     // padding: 7,
     paddingHorizontal: 15,
     marginHorizontal: 5,
-    height: 35,
+    height: 40,
     shadowColor: '#ccc',
     shadowOffset: {width: 0, height: 3},
     shadowOpacity: 0.5,

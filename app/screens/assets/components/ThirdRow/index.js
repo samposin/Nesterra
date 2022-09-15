@@ -20,47 +20,8 @@ import {
 } from './../../../../actions/actionType/AllCircuit/index';
 import {getAllCircuitID} from '../../../../actions/AllCircuitID';
 import {getAllCircuitDetails} from '../../../../actions/AllCircuit/allCorcuitDetails';
+import FilterButton from './../../../../components/FilterButton/index';
 
-const Button = ({
-  tittle,
-  opPress,
-  setDiplayName,
-  setSwitchView,
-  diplayName,
-  cirCuitRef,
-}) => {
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        opPress();
-      }}
-      style={{
-        width: 90,
-        height: 40,
-        marginRight: 10,
-        borderRadius: 10,
-        borderWidth: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        borderColor: diplayName == tittle ? '#007aff' : 'black',
-      }}>
-      <Text
-        style={{
-          fontWeight: '600',
-          color: diplayName == tittle ? '#007aff' : 'black',
-        }}>
-        {tittle}
-      </Text>
-      <FontAwesome5
-        name="eject"
-        size={15}
-        style={{transform: [{rotate: '180deg'}], marginLeft: 2, marginTop: 3}}
-        color={diplayName == tittle ? '#007aff' : 'black'}
-      />
-    </TouchableOpacity>
-  );
-};
 const ThirdRow = ({
   setDiplayName,
   getAllCircuitID,
@@ -169,45 +130,31 @@ const ThirdRow = ({
           flexDirection: 'row',
         }}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <Button
-            tittle="Vendor"
-            setSwitchView={setSwitchView}
-            opPress={vendorfil}
+          <FilterButton
+            title="Vendor"
+            onPress={vendorfil}
             diplayName={diplayName}
-            setDiplayName={setDiplayName}
-            cirCuitRef={cirCuitRef}
           />
-          <Button
-            tittle="Project"
-            opPress={typefil}
-            setSwitchView={setSwitchView}
+
+          <FilterButton
+            title="Project"
+            onPress={typefil}
             diplayName={diplayName}
-            setDiplayName={setDiplayName}
-            cirCuitRef={cirCuitRef}
           />
-          <Button
-            setSwitchView={setSwitchView}
-            tittle="Status"
-            opPress={getStatus}
+          <FilterButton
+            title="Status"
+            onPress={getStatus}
             diplayName={diplayName}
-            setDiplayName={setDiplayName}
-            cirCuitRef={cirCuitRef}
           />
-          <Button
-            setSwitchView={setSwitchView}
-            tittle="State Date"
-            opPress={showDatePicker}
+          <FilterButton
+            title="State Date"
+            onPress={showDatePicker}
             diplayName={diplayName}
-            setDiplayName={setDiplayName}
-            cirCuitRef={cirCuitRef}
           />
-          <Button
-            setSwitchView={setSwitchView}
-            tittle="End Date"
-            opPress={showDatePicker1}
+          <FilterButton
+            title="End Date"
+            onPress={showDatePicker1}
             diplayName={diplayName}
-            setDiplayName={setDiplayName}
-            cirCuitRef={cirCuitRef}
           />
         </ScrollView>
       </View>

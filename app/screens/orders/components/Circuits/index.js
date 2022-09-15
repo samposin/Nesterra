@@ -45,7 +45,7 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
   const [diplayName, setDiplayName] = useState('');
 
   const bottomSheetRefdetails = useRef(null);
-
+  console.log(ordersForTab.length);
   useEffect(() => {
     get_orders_for_tab(setLodding);
   }, []);

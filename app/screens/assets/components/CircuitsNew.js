@@ -210,106 +210,6 @@ const CircuitsNew = ({
             setbootSheetLodder={setbootSheetLodder}
           />
 
-          {/* <View style={{...styles.idView}}>
-            <View style={styles.idViewLeft}>
-              <TouchableOpacity
-                onPress={() => {
-                  setSwitchView(false);
-                  setDiplayName('Site ID');
-                  getAllSiteID(setLodding1);
-                  cirCuitRef.current.snapToIndex(1);
-                }}
-                style={{
-                  ...styles.idButton,
-                  flexDirection: 'row',
-                  marginRight: 10,
-                  borderColor: diplayName == 'Site ID' ? '#007aff' : 'black',
-                }}>
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    color: diplayName == 'Site ID' ? '#007aff' : 'black',
-                  }}>
-                  Site ID
-                </Text>
-                <FontAwesome5
-                  name="eject"
-                  size={15}
-                  style={{
-                    transform: [{rotate: '180deg'}],
-                    marginLeft: 6,
-                    marginTop: 3,
-                  }}
-                  color={diplayName == 'Site ID' ? '#007aff' : 'black'}
-                />
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => {
-                  setSwitchView(false);
-                  setDiplayName('Branch ID');
-                  cirCuitRef.current.snapToIndex(1);
-                  getAllBrachrID(setLodding1);
-                }}
-                style={{
-                  ...styles.idButton,
-                  flexDirection: 'row',
-                  marginRight: 10,
-                  borderColor: diplayName == 'Branch ID' ? '#007aff' : 'black',
-                }}>
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    color: diplayName == 'Branch ID' ? '#007aff' : 'black',
-                  }}>
-                  Branch ID
-                </Text>
-                <FontAwesome5
-                  name="eject"
-                  size={15}
-                  style={{
-                    transform: [{rotate: '180deg'}],
-                    marginLeft: 5,
-                    marginTop: 3,
-                  }}
-                  color={diplayName == 'Branch ID' ? '#007aff' : 'black'}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setSwitchView(false);
-                  searchFilterDatataByStatus();
-                }}
-                style={{
-                  ...styles.idButton,
-                  marginRight: 10,
-                  flexDirection: 'row',
-                  borderColor: diplayName == 'Status' ? '#007aff' : 'black',
-                }}>
-                <Text
-                  style={{
-                    fontSize: 15,
-                    fontWeight: 'bold',
-                    color: diplayName == 'Status' ? '#007aff' : 'black',
-                  }}>
-                  Status
-                </Text>
-                <FontAwesome5
-                  name="eject"
-                  size={15}
-                  style={{
-                    transform: [{rotate: '180deg'}],
-                    marginLeft: 5,
-                    marginTop: 3,
-                  }}
-                  color={diplayName == 'Status' ? '#007aff' : 'black'}
-                />
-              </TouchableOpacity>
-            </View>
-            <View style={styles.idViewRight}></View>
-          </View> */}
           {/* ========ThirdRow Component============= */}
           <ThirdRow
             diplayName={diplayName}
@@ -441,19 +341,6 @@ const CircuitsNew = ({
             </View>
           ) : (
             <>
-              {/* {acdata.length == 0 ? (
-                <View
-                  style={{
-                    width: '100%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: 300,
-                  }}>
-                  <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                    No Data Found
-                  </Text>
-                </View>
-              ) : ( */}
               <>
                 <View style={styles.table}>
                   <FlatList
