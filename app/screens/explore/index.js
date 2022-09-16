@@ -1116,7 +1116,7 @@ const Explore = ({
 
         {/* =================search=============== */}
         {/* =================Category=============== */}
-        {catShow && <Category />}
+        {catShow && <Category get_coordinates={get_coordinates} />}
 
         {/* =================Category=============== */}
       </View>

@@ -14,6 +14,7 @@ import Devices from './components/Devices';
 
 import Circuits from './components/Circuits';
 import {connect} from 'react-redux';
+import Button from '../../components/button/Button';
 
 const Orders = ({}) => {
   const circuitRefDetails = useRef(null);
@@ -42,8 +43,12 @@ const Orders = ({}) => {
         );
     }
   };
-  useEffect(() => {}, []);
-
+  const setComponentCircuit = () => {
+    setDisplayComponents('Circuits');
+  };
+  const setComponentDeives = () => {
+    setDisplayComponents('Devices');
+  };
   return (
     <>
       <SafeAreaView
@@ -66,57 +71,16 @@ const Orders = ({}) => {
 
               flexDirection: 'row',
             }}>
-            <TouchableOpacity
-              onPress={() => {
-                setDisplayComponents('Circuits');
-              }}
-              style={{
-                width: 90,
-                height: 40,
-                borderRadius: 10,
-                marginRight: 10,
-                backgroundColor:
-                  displyCompomnet == 'Circuits' ? '#007aff' : 'transparent',
-                borderWidth: 1,
-                borderColor:
-                  displyCompomnet == 'Circuits' ? '#007aff' : 'black',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  color: displyCompomnet == 'Circuits' ? 'white' : 'black',
-                  fontSize: 16,
-                  fontWeight: 'bold',
-                }}>
-                Circuits
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                setDisplayComponents('Devices');
-              }}
-              style={{
-                width: 90,
-                height: 40,
-
-                borderRadius: 10,
-                backgroundColor:
-                  displyCompomnet == 'Devices' ? '#007aff' : 'transparent',
-                borderWidth: 1,
-                borderColor: displyCompomnet == 'Devices' ? '#007aff' : 'black',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  color: displyCompomnet == 'Devices' ? 'white' : 'black',
-                  fontSize: 16,
-                  fontWeight: 'bold',
-                }}>
-                Device
-              </Text>
-            </TouchableOpacity>
+            <Button
+              onPress={setComponentCircuit}
+              displyCompomnet={displyCompomnet}
+              title="Circuits"
+            />
+            <Button
+              onPress={setComponentDeives}
+              displyCompomnet={displyCompomnet}
+              title="Devices"
+            />
           </View>
           <View style={styles.searchViewRight}></View>
         </View>

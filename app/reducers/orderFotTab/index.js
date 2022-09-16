@@ -122,20 +122,16 @@ export default (state = initialState, action) => {
       };
     //FILTER BY BETWEEN DATE
     case ORDER_FILTER_BY_BETWEEN_DATE:
-      // console.log('first');
       const BT = [...state.ordersForTab1];
-      const stD = moment(action.startDate, 'YYYYMMDD').valueOf();
-      const end = moment(action.endDate, 'YYYYMMDD').valueOf();
+      const start = moment(action.startDate).format('YYYY-MM-DD');
+
+      const end = moment(action.endDate).format('YYYY-MM-DD');
 
       const btd = BT.filter(item => {
-        // console.log(stD, 'std');
-        // console.log(end, 'end');
-        console.log(item.Creation_Date);
-        const dd = moment(item.Creation_Date, 'YYYYMMDD').valueOf();
-        // console.log(dd, 'ddsf');
-        dd >= stD && dd <= end;
+        const dd = moment(item.Creation_Date).format('YYYY-MM-DD');
+        return dd >= start && dd <= end;
       });
-      // console.log(btd);
+
       return {
         ...state,
         ordersForTab: btd,

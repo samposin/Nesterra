@@ -26,7 +26,8 @@ import {get_order_details} from '../../actions/order';
 import Devices from './components/Devices';
 
 import CircuitsNew from './components/CircuitsNew';
-
+import Button from '../../components/button/Button';
+Button;
 const Assets = ({
   get_orders_for_tab,
   getAllCircuitID,
@@ -77,6 +78,12 @@ const Assets = ({
           />
         );
     }
+  };
+  const setComponentCircuit = () => {
+    setDisplayComponents('Circuits');
+  };
+  const setComponentDeives = () => {
+    setDisplayComponents('Devices');
   };
   useEffect(() => {
     // setLodding1(true);
@@ -166,131 +173,23 @@ const Assets = ({
 
               flexDirection: 'row',
             }}>
-            <TouchableOpacity
-              onPress={() => {
-                setDisplayComponents('Circuits');
-              }}
-              style={{
-                width: 90,
-                height: 40,
-                borderRadius: 10,
-                marginRight: 10,
-                backgroundColor:
-                  displyCompomnet == 'Circuits' ? '#007aff' : 'transparent',
-                borderWidth: 1,
-                borderColor:
-                  displyCompomnet == 'Circuits' ? '#007aff' : 'black',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  color: displyCompomnet == 'Circuits' ? 'white' : 'black',
-                  fontSize: 16,
-                  fontWeight: 'bold',
-                }}>
-                Circuits
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                setDisplayComponents('Devices');
-              }}
-              style={{
-                width: 90,
-                height: 40,
-
-                borderRadius: 10,
-                backgroundColor:
-                  displyCompomnet == 'Devices' ? '#007aff' : 'transparent',
-                borderWidth: 1,
-                borderColor: displyCompomnet == 'Devices' ? '#007aff' : 'black',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  color: displyCompomnet == 'Devices' ? 'white' : 'black',
-                  fontSize: 16,
-                  fontWeight: 'bold',
-                }}>
-                Device
-              </Text>
-            </TouchableOpacity>
+            <Button
+              onPress={setComponentCircuit}
+              displyCompomnet={displyCompomnet}
+              title="Circuits"
+            />
+            <Button
+              onPress={setComponentDeives}
+              displyCompomnet={displyCompomnet}
+              title="Devices"
+            />
           </View>
           <View style={styles.searchViewRight}></View>
         </View>
 
         {/* ==============Search View=========== */}
         {/* ==============Services Category============== */}
-        {/* <View style={{...styles.idView}}>
-          <View style={styles.idViewLeft}>
-            <TouchableOpacity
-              onPress={() => {
-                setLodding(true);
-                setBottomSheetDisplay('SiteID');
-                setDiplayName('Site ID');
-                getAllSiteID(setLodding);
-                bottomSheetRef.current.snapToIndex(1);
-              }}
-              style={{
-                ...styles.idButton,
-                borderColor: diplayName == 'Site ID' ? '#007aff' : 'black',
-              }}>
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: 'bold',
-                  color: diplayName == 'Site ID' ? '#007aff' : 'black',
-                }}>
-                Site ID
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                setLodding(true);
-                setBottomSheetDisplay('CircuitID');
-                getAllCircuitID(setLodding);
-                setDiplayName('Circuit ID');
-                bottomSheetRef.current.snapToIndex(1);
-              }}
-              style={{
-                ...styles.idButton,
-                borderColor: diplayName == 'Circuit ID' ? '#007aff' : 'black',
-              }}>
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: 'bold',
-                  color: diplayName == 'Circuit ID' ? '#007aff' : 'black',
-                }}>
-                Circuit ID
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                setLodding(true);
-                getAllBrachrID(setLodding);
-                setBottomSheetDisplay('BranchID');
-                setDiplayName('Branch ID');
-                bottomSheetRef.current.snapToIndex(1);
-              }}
-              style={{
-                ...styles.idButton,
-                borderColor: diplayName == 'Branch ID' ? '#007aff' : 'black',
-              }}>
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: 'bold',
-                  color: diplayName == 'Branch ID' ? '#007aff' : 'black',
-                }}>
-                Branch ID
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.idViewRight}></View>
-        </View> */}
+
         {ranDerView()}
 
         {/* ==============Summary View=========== */}

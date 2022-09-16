@@ -20,10 +20,9 @@ import {getAllBrachrID} from '../../../actions/AllBranchID';
 import BottomSheetViewCircuits from './CircuitDetails';
 import {getAllCircuitDetails} from '../../../actions/AllCircuit/allCorcuitDetails';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 import ThirdRow from './ThirdRow/index';
 
-import ToggleSwitch from 'toggle-switch-react-native';
 const {width} = Dimensions.get('screen');
 import {
   ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
@@ -61,7 +60,6 @@ const CircuitsNew = ({
   const {allCircuit} = useSelector(state => state.allCircuit);
 
   const [switchView, setSwitchView] = useState(true);
-  const [acdata, setAcData] = useState(allCircuit);
 
   // const {loder} = useSelector(state => state.allCircuit);
   // console.log(allCircuit, 'aa');

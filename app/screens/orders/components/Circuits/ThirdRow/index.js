@@ -9,6 +9,7 @@ import {
 } from '../../../../../actions/actionType/action.OrdersForTab';
 import DatePickerView from './../../../../../components/DatePickerView/index';
 import moment from 'moment';
+import {warinng} from '../../../../../components/helper';
 
 const ThirdRow = ({
   setDiplayName,
@@ -20,7 +21,8 @@ const ThirdRow = ({
   const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
   const [isDatePickerVisible1, setDatePickerVisibility1] =
     React.useState(false);
-  const [stdata, setStdat] = React.useState(0);
+  const [startDate, setStdat] = React.useState(0);
+
   // console.log(typeof stdata);
   const dispatch = useDispatch();
   const vendor = () => {
@@ -41,8 +43,8 @@ const ThirdRow = ({
     cirCuitRef.current.close();
     setSwitchView(false);
   };
-  const getStartData = date => {
-    console.log(date);
+  const getStartDate = date => {
+    // console.log(date);
     const d = moment(date, 'MMDDYYYY').valueOf();
     setStdat(date);
     // console.log(typeof stdata, 'ddd');
@@ -50,18 +52,22 @@ const ThirdRow = ({
     // // console.log(d, 'd');
     setDatePickerVisibility(false);
   };
-  const getEndtData = date => {
-    console.log(date);
+  const getEndtDate = date => {
+    setDiplayName('');
+    if (stdata == '') {
+      warinng('Select First Start Date');
+    }
     dispatch({
       type: ORDER_FILTER_BY_BETWEEN_DATE,
-      startDate: stdata,
+      startDate: startDate,
       endDate: date,
     });
-    console.log(date, 'end');
+
     setDatePickerVisibility1(false);
     setSwitchView(true);
   };
   const enddatePick = () => {
+    setDiplayName('');
     setDatePickerVisibility1(true);
     cirCuitRef.current.close();
     setSwitchView(false);
@@ -106,12 +112,12 @@ const ThirdRow = ({
         </ScrollView>
       </View>
       <DatePickerView
-        getDate={getStartData}
+        getDate={getStartDate}
         isDatePickerVisible={isDatePickerVisible}
         setDatePickerVisibility={setDatePickerVisibility}
       />
       <DatePickerView
-        getDate={getEndtData}
+        getDate={getEndtDate}
         isDatePickerVisible={isDatePickerVisible1}
         setDatePickerVisibility={setDatePickerVisibility1}
       />

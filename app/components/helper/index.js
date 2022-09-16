@@ -3,6 +3,7 @@ import React from 'react';
 import {Text, View, Dimensions} from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Snackbar from 'react-native-snackbar';
+
 const {width} = Dimensions.get('screen');
 export const tostalert = (msg, color, toast) => {
   // // const toast = useToast();
@@ -10,7 +11,8 @@ export const tostalert = (msg, color, toast) => {
     text: `Copied: ${msg}`,
     textColor: 'white',
     backgroundColor: '#007aff',
-    marginBottom: 100,
+    // marginBottom: 100,
+    placement: 'top',
   });
   // return toast.show({
   //   duration: 1500,
@@ -33,6 +35,15 @@ export const tostalert = (msg, color, toast) => {
   //     );
   //   },
   // });
+};
+export const warinng = msg => {
+  Snackbar.show({
+    text: `${msg}`,
+    textColor: 'white',
+    backgroundColor: 'red',
+    // marginBottom: 100,
+    placement: 'top',
+  });
 };
 export const copyText = text => {
   Clipboard.setString(text);
