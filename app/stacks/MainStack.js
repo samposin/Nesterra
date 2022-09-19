@@ -17,6 +17,7 @@ import AllDevice from '../screens/AllDevice/index.js';
 import AllDevicesDetails from '../screens/AllDevice/AllDevicesDetails.js';
 import Circuits from '../screens/circuits/index.js';
 import BackGroundCorsoul from '../screens/BackGroundCorsoul/index.js';
+import Stats from '../screens/stats';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,7 @@ const MainStack = () => {
           headerShown: false,
         }}>
         <Stack.Screen name="TabNaV" component={TabNaV} />
+        <Stack.Screen name="Stats" component={Stats} />
         <Stack.Screen name="OtpReceive" component={OtpReceive} />
         <Stack.Screen name="AllDevice" component={AllDevice} />
         <Stack.Screen name="Circuits" component={Circuits} />

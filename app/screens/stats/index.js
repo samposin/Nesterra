@@ -1,5 +1,13 @@
-import React from 'react';
-import {StyleSheet, View, Text, Image, LogBox} from 'react-native';
+import React, {useRef} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  LogBox,
+  StatusBar,
+} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 LogBox.ignoreLogs(['Require cycle: node_modules/victory']);
 
@@ -26,44 +34,57 @@ import AnualCircuitSpend from './AnualCircuitSpend';
 import CirCuitCount from './CirCuitCount';
 
 import NationalOverView from './NationalOverView';
+import FilterArea from './../../components/DataCharts/FilterArea';
+import BottomSheetView from './BottomSheetView/index';
 
 const Stats = () => {
+  const bottomRef = useRef(null);
+  const [diplayName, setDiplayName] = React.useState('');
+
   return (
-    <View style={styles.container}>
-      <ScrollView
-        nestedScrollEnabled={true}
-        showsVerticalScrollIndicator={false}>
-        {/* <Header /> */}
-        <NationalOverView />
+    <>
+      <SafeAreaView
+        style={{
+          marginTop: StatusBar.currentHeight,
+          flex: 1,
+        }}>
+        <ScrollView
+          nestedScrollEnabled={true}
+          showsVerticalScrollIndicator={false}>
+          {/* <Header /> */}
+          <FilterArea bottomRef={bottomRef} setDiplayName={setDiplayName} />
+          <NationalOverView />
 
-        <InventoryDetails />
-        <View style={{width: '100%', height: 280}}>
-          <Chart
-            data={indventory}
-            total={indventoryTotal}
-            color={indventoryColor}
-          />
-        </View>
-        <AnualCircuitSpend />
+          <InventoryDetails />
+          <View style={{width: '100%', height: 280}}>
+            <Chart
+              data={indventory}
+              total={indventoryTotal}
+              color={indventoryColor}
+            />
+          </View>
+          <AnualCircuitSpend />
 
-        <View style={{width: '100%', height: 280}}>
-          <AnnualCircuit
-            data={annualData}
-            total={annualTotal}
-            color={annualColor}
-          />
-        </View>
-        <CirCuitCount />
-        <View style={{width: '100%', height: 250}}>
-          <CircuitChart
-            data={circuitData}
-            total={circuitTotal}
-            color={circuitColor}
-          />
-        </View>
-        <ChartBarView />
-      </ScrollView>
-    </View>
+          <View style={{width: '100%', height: 280}}>
+            <AnnualCircuit
+              data={annualData}
+              total={annualTotal}
+              color={annualColor}
+            />
+          </View>
+          <CirCuitCount />
+          <View style={{width: '100%', height: 250}}>
+            <CircuitChart
+              data={circuitData}
+              total={circuitTotal}
+              color={circuitColor}
+            />
+          </View>
+          <ChartBarView />
+        </ScrollView>
+      </SafeAreaView>
+      <BottomSheetView diplayName={diplayName} bottomRef={bottomRef} />
+    </>
   );
 };
 

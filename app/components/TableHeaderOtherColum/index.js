@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-const TableHeaderOtherColum = ({title, type, onPress}) => {
+const TableHeaderOtherColum = ({title, width, type, onPress}) => {
   const active = true;
 
   return (
@@ -11,7 +11,7 @@ const TableHeaderOtherColum = ({title, type, onPress}) => {
       }}
       style={{
         ...styles.tableRowColum,
-        width: '20%',
+        width: width,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',

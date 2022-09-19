@@ -169,11 +169,31 @@ const Tableheader = () => {
   return (
     <>
       <View style={{...styles.tableRow}}>
-        <HeaderButtonFirst active={orderType} onPress={typeSort} />
-        <HeaderButton title="Vendor" active={vendor} onPress={vendorSort} />
-        <HeaderButton title="Status" active={status} onPress={statusSort} />
-        <HeaderButton title="Initation" active={dateType} onPress={dateSort} />
-        <HeaderButton title="Item#" active={invType} onPress={itemSort} />
+        <HeaderButtonFirst active={orderType} width="20%" onPress={typeSort} />
+        <HeaderButton
+          width="20%"
+          title="Vendor"
+          active={vendor}
+          onPress={vendorSort}
+        />
+        <HeaderButton
+          width="20%"
+          title="Status"
+          active={status}
+          onPress={statusSort}
+        />
+        <HeaderButton
+          width="20%"
+          title="Initation"
+          active={dateType}
+          onPress={dateSort}
+        />
+        <HeaderButton
+          width="20%"
+          title="Item#"
+          active={invType}
+          onPress={itemSort}
+        />
       </View>
     </>
   );

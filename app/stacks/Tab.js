@@ -11,10 +11,12 @@ import Notification from '../screens/Notification';
 import OtpReceive from '../screens/OtpReceive';
 // import Saved from '../screens/saved';
 import Assets from '../screens/assets';
+// import Stats from '../screens/stats';
 import Search from '../screens/search';
 import ExploreStack from './ExploreStack';
 import Extra from '../screens/NEW';
 import VoiceScreen from '../screens/VoiceScreen';
+import Chart from './../components/DataCharts/index';
 
 const Tab = createBottomTabNavigator();
 const TabNaV = ({navigation}) => {
@@ -83,6 +85,21 @@ const TabNaV = ({navigation}) => {
           },
         }}
       />
+      {/* <Tab.Screen
+        name="Stats"
+        component={Stats}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <TabButton
+                name="Stats"
+                imagePath={tabButtonImage.imgStats}
+                focused={focused}
+              />
+            );
+          },
+        }}
+      /> */}
       {/* <Tab.Screen
         name="VoiceScreen"
         component={VoiceScreen}

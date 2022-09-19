@@ -11,37 +11,43 @@ import {data} from '../../utils/Constants';
 
 import {third_party_filter} from '../../actions/coordinates';
 import {connect} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
 
 const Category = ({third_party_filter, get_coordinates}) => {
+  const navigation = useNavigation();
   const [allItem, setAllItem] = React.useState(data);
   const [setectItem, setsetectItem] = React.useState('');
   const myRef = useRef(null);
   const actiText = (id, value) => {
-    let listData;
-    const entry = allItem.find(i => i.isActive === true);
-    if (entry == undefined) {
-      listData = allItem.map(item => {
-        let itm = {...item, isActive: false};
-        return itm;
-      });
-      third_party_filter(value);
-      listData[id].isActive = true;
-      setAllItem(listData);
-    } else if (entry.id == id) {
-      listData = allItem.map(item => {
-        let itm = {...item, isActive: false};
-        return itm;
-      });
-      get_coordinates();
-      setAllItem(listData);
+    if (id == 6) {
+      navigation.navigate('Stats');
     } else {
-      listData = allItem.map(item => {
-        let itm = {...item, isActive: false};
-        return itm;
-      });
-      third_party_filter(value);
-      listData[id].isActive = true;
-      setAllItem(listData);
+      let listData;
+      const entry = allItem.find(i => i.isActive === true);
+      if (entry == undefined) {
+        listData = allItem.map(item => {
+          let itm = {...item, isActive: false};
+          return itm;
+        });
+        third_party_filter(value);
+        listData[id].isActive = true;
+        setAllItem(listData);
+      } else if (entry.id == id) {
+        listData = allItem.map(item => {
+          let itm = {...item, isActive: false};
+          return itm;
+        });
+        get_coordinates();
+        setAllItem(listData);
+      } else {
+        listData = allItem.map(item => {
+          let itm = {...item, isActive: false};
+          return itm;
+        });
+        third_party_filter(value);
+        listData[id].isActive = true;
+        setAllItem(listData);
+      }
     }
   };
   const centerTab = i => {

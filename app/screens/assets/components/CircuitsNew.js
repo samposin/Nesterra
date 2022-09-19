@@ -43,6 +43,9 @@ import {
 // } from '../../../actions/actionType/AllCircuit';
 import SecondRow from './SecondRow';
 import ToggleView from './../../../components/ToggleView/index';
+import TableHeaderFirstColum from './../../../components/TableHeaderFirstColum';
+import TableHeaderOtherColum from './../../../components/TableHeaderOtherColum/index';
+
 const CircuitsNew = ({
   getAllCircuit,
   getAllSiteID,
@@ -189,6 +192,58 @@ const CircuitsNew = ({
       type: ALL_DATA,
     });
   };
+  const typeClick = () => {
+    if (locType) {
+      setLocType(!locType);
+      dispatch({
+        type: ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
+      });
+    } else {
+      setLocType(!locType);
+      dispatch({
+        type: ALL_CIRCUIT_SORT_BY_LOC_ID_DES,
+      });
+    }
+  };
+  const circuitClick = () => {
+    if (vendor) {
+      setVendor(!vendor);
+      dispatch({
+        type: ALL_CIRCUIT_SORT_BY_VENDOR_ASC,
+      });
+    } else {
+      setVendor(!vendor);
+      dispatch({
+        type: ALL_CIRCUIT_SORT_BY_VENDOR_DES,
+      });
+    }
+  };
+  const BranchIdClick = () => {
+    if (branchType) {
+      setBranchType(!branchType);
+      dispatch({
+        type: ALL_CIRCUIT_SORT_BY_BRANCH_ASC,
+      });
+    } else {
+      setBranchType(!branchType);
+      dispatch({
+        type: ALL_CIRCUIT_SORT_BY_BRANCH_DES,
+      });
+    }
+  };
+  const vendorClick = () => {
+    if (vendor) {
+      setVendor(!vendor);
+      dispatch({
+        type: ALL_CIRCUIT_SORT_BY_VENDOR_ASC,
+      });
+    } else {
+      setVendor(!vendor);
+      dispatch({
+        type: ALL_CIRCUIT_SORT_BY_VENDOR_DES,
+      });
+    }
+  };
 
   return (
     <>
@@ -218,119 +273,31 @@ const CircuitsNew = ({
           {/* ========ID VIEW============= */}
           {/* ========TABLE HEADER============= */}
           <View style={styles.tableHeader}>
-            <TouchableOpacity
-              onPress={() => {
-                if (locType) {
-                  setLocType(!locType);
-                  dispatch({
-                    type: ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
-                  });
-                } else {
-                  setLocType(!locType);
-                  dispatch({
-                    type: ALL_CIRCUIT_SORT_BY_LOC_ID_DES,
-                  });
-                }
-              }}
-              style={{
-                ...styles.tableRowColum1,
-              }}>
-              <Text style={{...styles.boxText, color: 'white'}}>Site ID</Text>
-              <Text style={{marginTop: 1, marginRight: 3}}>
-                <AntDesign
-                  name={locType ? 'caretup' : 'caretdown'}
-                  size={16}
-                  color="white"
-                />
-              </Text>
-            </TouchableOpacity>
+            <TableHeaderFirstColum
+              onPress={typeClick}
+              title="Site ID"
+              type={locType}
+              width="25%"
+            />
 
-            <TouchableOpacity
-              onPress={() => {
-                if (vendor) {
-                  setVendor(!vendor);
-                  dispatch({
-                    type: ALL_CIRCUIT_SORT_BY_VENDOR_ASC,
-                  });
-                } else {
-                  setVendor(!vendor);
-                  dispatch({
-                    type: ALL_CIRCUIT_SORT_BY_VENDOR_DES,
-                  });
-                }
-              }}
-              style={{
-                ...styles.tableRowColum1,
-                borderLeftColor: 'white',
-                borderLeftWidth: 2,
-              }}>
-              <Text style={{...styles.boxText, color: 'white'}}>
-                Circuit ID
-              </Text>
-              <Text style={{marginTop: 1}}>
-                <AntDesign
-                  name={cirType ? 'caretup' : 'caretdown'}
-                  size={16}
-                  color="white"
-                />
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                if (branchType) {
-                  setBranchType(!branchType);
-                  dispatch({
-                    type: ALL_CIRCUIT_SORT_BY_BRANCH_ASC,
-                  });
-                } else {
-                  setBranchType(!branchType);
-                  dispatch({
-                    type: ALL_CIRCUIT_SORT_BY_BRANCH_DES,
-                  });
-                }
-              }}
-              style={{
-                ...styles.tableRowColum1,
-                borderLeftColor: 'white',
-                borderLeftWidth: 2,
-              }}>
-              <Text style={{...styles.boxText, color: 'white'}}>Branch ID</Text>
-              <Text style={{marginTop: 1}}>
-                <AntDesign
-                  name={branchType ? 'caretup' : 'caretdown'}
-                  size={16}
-                  color="white"
-                />
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                if (vendor) {
-                  setVendor(!vendor);
-                  dispatch({
-                    type: ALL_CIRCUIT_SORT_BY_VENDOR_ASC,
-                  });
-                } else {
-                  setVendor(!vendor);
-                  dispatch({
-                    type: ALL_CIRCUIT_SORT_BY_VENDOR_DES,
-                  });
-                }
-              }}
-              style={{
-                ...styles.tableRowColum1,
-                borderLeftColor: 'white',
-                borderLeftWidth: 2,
-              }}>
-              <Text style={{...styles.boxText, color: 'white'}}>Vendor</Text>
-              <Text style={{marginTop: 1}}>
-                <AntDesign
-                  name={vendor ? 'caretup' : 'caretdown'}
-                  size={16}
-                  color="white"
-                />
-              </Text>
-            </TouchableOpacity>
+            <TableHeaderOtherColum
+              onPress={circuitClick}
+              title="Circuit ID"
+              type={vendor}
+              width="25%"
+            />
+            <TableHeaderOtherColum
+              onPress={BranchIdClick}
+              title="Branch ID"
+              type={branchType}
+              width="25%"
+            />
+            <TableHeaderOtherColum
+              onPress={vendorClick}
+              title="Vendor"
+              type={vendor}
+              width="25%"
+            />
           </View>
 
           {loding3 ? (

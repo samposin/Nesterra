@@ -30,6 +30,8 @@ import {
 } from '../../../actions/actionType/AllDevice';
 
 import {getAllDeviceDetails} from '../../../actions/AllDevice/allDeviceDetails';
+import TableHeaderFirstColum from './../../../components/TableHeaderFirstColum';
+import TableHeaderOtherColum from './../../../components/TableHeaderOtherColum';
 
 import {tostalert, copyText} from '../../../components/helper';
 import OrderLoder from '../../../components/lodder/OrderLoder';
@@ -178,7 +180,58 @@ const Devices = ({
       type: ALL_DATA,
     });
   };
-
+  const nameHeaderClick = () => {
+    if (invType) {
+      setInvType(!invType);
+      dispatch({
+        type: ALL_DEVICES_SORT_BY_ID_ASC,
+      });
+    } else {
+      setInvType(!invType);
+      dispatch({
+        type: ALL_DEVICES_SORT_BY_ID_DES,
+      });
+    }
+  };
+  const statusClick = () => {
+    if (status) {
+      setStatus(!status);
+      dispatch({
+        type: ALL_DEVICES_SORT_BY_STATUS_ASC,
+      });
+    } else {
+      setStatus(!status);
+      dispatch({
+        type: ALL_DEVICES_SORT_BY_STATUS_DES,
+      });
+    }
+  };
+  const typeClick = () => {
+    if (type) {
+      setType(!type);
+      dispatch({
+        type: ALL_DEVICES_SORT_BY_TYPE_ASC,
+      });
+    } else {
+      setType(!type);
+      dispatch({
+        type: ALL_DEVICES_SORT_BY_TYPE_DES,
+      });
+    }
+  };
+  const vendorClick = () => {
+    if (vendor) {
+      setVendor(!vendor);
+      dispatch({
+        type: ALL_DEVICES_SORT_BY_VENDOR_ASC,
+      });
+    } else {
+      setVendor(!vendor);
+      dispatch({
+        type: ALL_DEVICES_SORT_BY_VENDOR_DES,
+      });
+    }
+  };
   return (
     <>
       {lodding1 ? (
@@ -287,125 +340,31 @@ const Devices = ({
 
           {/* ======================Table  Header======================= */}
           <View style={{...styles.tableRow}}>
-            <TouchableOpacity
-              onPress={() => {
-                if (invType) {
-                  setInvType(!invType);
-                  dispatch({
-                    type: ALL_DEVICES_SORT_BY_ID_ASC,
-                  });
-                } else {
-                  setInvType(!invType);
-                  dispatch({
-                    type: ALL_DEVICES_SORT_BY_ID_DES,
-                  });
-                }
-              }}
-              style={{
-                ...styles.tableRowColum,
+            <TableHeaderFirstColum
+              onPress={nameHeaderClick}
+              title="Name"
+              type={invType}
+              width="25%"
+            />
 
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-              }}>
-              <Text style={styles.boxText}>Name</Text>
-              <Text style={{marginTop: 1}}>
-                <AntDesign
-                  name={invType ? 'caretup' : 'caretdown'}
-                  size={16}
-                  color="white"
-                />
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                if (status) {
-                  setStatus(!status);
-                  dispatch({
-                    type: ALL_DEVICES_SORT_BY_STATUS_ASC,
-                  });
-                } else {
-                  setStatus(!status);
-                  dispatch({
-                    type: ALL_DEVICES_SORT_BY_STATUS_DES,
-                  });
-                }
-              }}
-              style={{
-                ...styles.tableRowColum,
-                borderLeftColor: 'white',
-                borderLeftWidth: 2,
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-              }}>
-              <Text style={styles.boxText}>Status</Text>
-              <Text style={{marginTop: 1}}>
-                <AntDesign
-                  name={status ? 'caretup' : 'caretdown'}
-                  size={16}
-                  color="white"
-                />
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                if (type) {
-                  setType(!type);
-                  dispatch({
-                    type: ALL_DEVICES_SORT_BY_TYPE_ASC,
-                  });
-                } else {
-                  setType(!type);
-                  dispatch({
-                    type: ALL_DEVICES_SORT_BY_TYPE_DES,
-                  });
-                }
-              }}
-              style={{
-                ...styles.tableRowColum,
-                flexDirection: 'row',
-                borderLeftColor: 'white',
-                borderLeftWidth: 2,
-                justifyContent: 'space-around',
-              }}>
-              <Text style={{...styles.boxText, color: 'white'}}>Type</Text>
-              <Text style={{marginTop: 1, marginRight: 3}}>
-                <AntDesign
-                  name={type ? 'caretup' : 'caretdown'}
-                  size={16}
-                  color="white"
-                />
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                if (vendor) {
-                  setVendor(!vendor);
-                  dispatch({
-                    type: ALL_DEVICES_SORT_BY_VENDOR_ASC,
-                  });
-                } else {
-                  setVendor(!vendor);
-                  dispatch({
-                    type: ALL_DEVICES_SORT_BY_VENDOR_DES,
-                  });
-                }
-              }}
-              style={{
-                ...styles.tableRowColum,
-                borderLeftColor: 'white',
-                borderLeftWidth: 2,
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-              }}>
-              <Text style={{...styles.boxText}}>Vendor</Text>
-              <Text style={{marginTop: 1}}>
-                <AntDesign
-                  name={vendor ? 'caretup' : 'caretdown'}
-                  size={16}
-                  color="white"
-                />
-              </Text>
-            </TouchableOpacity>
+            <TableHeaderOtherColum
+              onPress={statusClick}
+              title="Status"
+              type={status}
+              width="25%"
+            />
+            <TableHeaderOtherColum
+              onPress={typeClick}
+              title="Type"
+              type={type}
+              width="25%"
+            />
+            <TableHeaderOtherColum
+              onPress={vendorClick}
+              title="Vendor"
+              type={vendor}
+              width="25%"
+            />
           </View>
 
           {/* ======================Table  Header======================= */}
