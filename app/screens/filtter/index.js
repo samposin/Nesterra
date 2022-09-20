@@ -114,7 +114,11 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
   // useEffect(() => {}, []);
   return (
     <SafeAreaView>
-      <StatusBar backgroundColor="#1b5a90" barStyle="light-content" />
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
+      />
       <View style={{...styles.header, marginTop: StatusBar.currentHeight}}>
         <Heading size="sm">Filters</Heading>
         <TouchableOpacity

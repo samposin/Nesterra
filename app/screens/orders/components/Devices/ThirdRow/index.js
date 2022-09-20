@@ -17,6 +17,7 @@ const ThirdRow = () => {
         <FilterButton diplayName="title" onPress={checkType} title="Project" />
         <FilterButton diplayName="title" onPress={checkType} title="Status" />
         <FilterButton diplayName="title" onPress={checkType} title="Date" />
+        <FilterButton diplayName="title" onPress={checkType} title="Address" />
       </ScrollView>
     </View>
   );

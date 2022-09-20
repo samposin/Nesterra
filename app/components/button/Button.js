@@ -23,7 +23,7 @@ const Button = ({displyCompomnet, title, onPress}) => {
           style={{
             color: displyCompomnet == title ? 'white' : 'black',
             fontSize: 16,
-            fontWeight: 'bold',
+            fontWeight: '600',
           }}>
           {title}
         </Text>

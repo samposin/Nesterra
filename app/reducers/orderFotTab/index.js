@@ -24,8 +24,11 @@ import {
   ORDER_GET_ONLY_VENDOR,
   FILTER_STATUS_BY_COMPLETED,
   ALL_DATA,
+  CHECK_VENDOR,
+
   //===
   ORDER_FILTER_BY_BETWEEN_DATE,
+  FILTER_BY_VENDOR,
 } from '../../actions/actionType/action.OrdersForTab';
 
 const initialState = {
@@ -33,6 +36,7 @@ const initialState = {
   ordersForTab1: [],
   onlyVendor1: [],
   onlyVendor: [],
+  checkList: [],
   isLoding: true,
 };
 
@@ -50,24 +54,62 @@ export default (state = initialState, action) => {
         isLoding: action.payload.data.loder,
       };
     // =========GET ONLY  DATA======
+    //filter by vendor
+    case FILTER_BY_VENDOR:
+      const filterByVendor = [...state.ordersForTab1];
+      const result11 = filterByVendor.filter(item => {
+        return action.data.find(i => {
+          return i.vendor === item.vendor;
+        });
+      });
+
+      // console.log(result11, 'result11');
+
+      return {
+        ...state,
+        ordersForTab: result11,
+      };
+
     case ORDER_GET_ONLY_VENDOR:
       const ONLYVENDOR1 = [...state.ordersForTab1];
 
       const result = ONLYVENDOR1.reduce((acc, {vendor}) => {
         const entry = acc.find(i => i.vendor === vendor);
+
         if (!entry) {
           acc.push({
             vendor,
+            isChecked: false,
           });
         } else {
           entry.vendor = vendor;
+          entry.isChecked = false;
         }
         return acc;
       }, []);
+
       return {
         ...state,
         onlyVendor: result,
         onlyVendor1: result,
+        checkList: [],
+      };
+    //CHECK LIST
+    case CHECK_VENDOR:
+      // console.log(action.id);
+      let d = state.onlyVendor.map(item => {
+        if (action.id === item.vendor) {
+          item.isChecked = !item.isChecked;
+        }
+        return item;
+      });
+
+      const seletedData = d.filter(item => item.isChecked);
+      return {
+        ...state,
+        onlyVendor: d,
+
+        checkList: seletedData,
       };
     // =========GET ONLY  DATA======
     //SEARCH ONLY VENDOR
@@ -155,12 +197,14 @@ export default (state = initialState, action) => {
     //FIRTER BY DATE
     case ORDER_FILTER_BY_DATE:
       const FITERDATA = [...state.ordersForTab1];
-      // console.log(action.data, 'data');
 
-      const NEWDATAFILTER = FITERDATA.filter(
-        // moment(date).format('MM-DD-YY')
-        item => moment(item.Initiation_Date).format('MM-DD-YY') == action.data,
-      );
+      const NEWDATAFILTER = FITERDATA.filter(item => {
+        return (
+          moment(item.Creation_Date).format('YYYY-MM-DD') ==
+          moment(action.data).format('YYYY-MM-DD')
+        );
+      });
+
       return {
         ...state,
         ordersForTab: NEWDATAFILTER,

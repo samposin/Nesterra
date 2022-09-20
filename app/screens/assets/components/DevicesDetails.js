@@ -61,151 +61,147 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
           ) : (
             <>
               {/* ===================== */}
-              {item?.Device_Name ? (
-                <View style={{...styles.secondTableRow}}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Device Name
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Device_Name}
-                    </Text>
-                  </View>
+
+              <View style={{...styles.secondTableRow}}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Device Name
+                  </Text>
                 </View>
-              ) : null}
-              {/* ===================== */}
-              {/* ===================== */}
-              {item?.Device_Status ? (
-                <View style={{...styles.secondTableRow}}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: item.Device_Name ? '#deebf7' : 'red',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Device Status
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      ...styles.tt,
-                      backgroundColor:
-                        item.Device_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Device_Status}
-                    </Text>
-                  </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Device_Name}
+                  </Text>
                 </View>
-              ) : null}
-              {/* ===================== */}
-              {/* ===================== */}
-              {item?.Device_Vendor ? (
-                <View style={{...styles.secondTableRow}}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#fbe5d6',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Device Vendor
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Device_Vendor}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
+              </View>
 
               {/* ===================== */}
               {/* ===================== */}
-              {item?.Device_Type ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#fbe5d6',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Device Type
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Device_Type}
-                    </Text>
-                  </View>
+
+              <View style={{...styles.secondTableRow}}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: item?.Device_Name ? '#deebf7' : 'red',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Device Status
+                  </Text>
                 </View>
-              ) : null}
+                <View
+                  style={{
+                    ...styles.tt,
+                    backgroundColor:
+                      item?.Device_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Device_Status}
+                  </Text>
+                </View>
+              </View>
 
               {/* ===================== */}
               {/* ===================== */}
-              {item?.Device_Function ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#fbe5d6',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Device Function
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Device_Function}
-                    </Text>
-                  </View>
+
+              <View style={{...styles.secondTableRow}}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#fbe5d6',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Device Vendor
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item.Device_Vendor}
+                  </Text>
+                </View>
+              </View>
 
               {/* ===================== */}
               {/* ===================== */}
-              {item?.Device_Layer ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#fbe5d6',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Device Layer
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Device_Layer}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#fbe5d6',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Device Type
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Device_Type}
+                  </Text>
+                </View>
+              </View>
+
               {/* ===================== */}
-              {item?.Device_Details ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#fbe5d6',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Device Details
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Device_Details}
-                    </Text>
-                  </View>
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#fbe5d6',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Device Function
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Device_Function}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#fbe5d6',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Device Layer
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Device_Layer}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#fbe5d6',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Device Details
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Device_Details}
+                  </Text>
+                </View>
+              </View>
 
               {/* ===================== */}
               {/* ===================== */}
@@ -213,836 +209,843 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
               {/* ============== Second Table Row============== */}
               {/* ============== Second Table Row============== */}
               {/* ===================== */}
-              {item?.Branch_ID ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#b7ecff',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Branch ID
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Branch_ID}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#b7ecff',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Branch ID
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Branch_ID}
+                  </Text>
+                </View>
+              </View>
 
               {/* ===================== */}
               {/* ===================== */}
-              {item?.Site_Status ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#b7ecff',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Site Status
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      ...styles.tt,
-                      backgroundColor: item.Site_Status ? '#c6efcd' : '#e7c4b5',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Site_Status}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#b7ecff',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Site Status
+                  </Text>
                 </View>
-              ) : null}
+                <View
+                  style={{
+                    ...styles.tt,
+                    backgroundColor: item?.Site_Status ? '#c6efcd' : '#e7c4b5',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Site_Status}
+                  </Text>
+                </View>
+              </View>
 
               {/* ===================== */}
               {/* ===================== */}
-              {item?.Site_Type_Concatenated_Detail ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#b7ecff',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Site Type Concatenated Detail
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      ...styles.tt,
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Site_Type_Concatenated_Detail}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#b7ecff',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Site Type Concatenated Detail
+                  </Text>
                 </View>
-              ) : null}
+                <View
+                  style={{
+                    ...styles.tt,
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Site_Type_Concatenated_Detail}
+                  </Text>
+                </View>
+              </View>
 
               {/* ===================== */}
               {/* ===================== */}
-              {item?.Service_ID ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Service ID
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Service_ID}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Service ID
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Service_ID}
+                  </Text>
+                </View>
+              </View>
+
               {/* ===================== */}
-              {item?.Domain ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Domain
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Domain}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Domain
+                  </Text>
                 </View>
-              ) : null}
-              {/* ====================== */}
-              {item?.Loopback_Address ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Loopback Address
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Loopback_Address}
-                    </Text>
-                  </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Domain}
+                  </Text>
                 </View>
-              ) : null}
-              {/* ====================== */}
-              {item?.Serial_Number ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Serial Number
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Serial_Number}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
-              {/* ====================== */}
-              {/* ====================== */}
-              {item?.Model ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Model
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Model.substr(1, 20)}...
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
+              </View>
 
               {/* ====================== */}
-              {item?.MAC_ID ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      MAC ID
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.MAC_ID}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Loopback Address
+                  </Text>
                 </View>
-              ) : null}
-              {/* ====================== */}
-              {item?.Hardware_Version ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Hardware Version
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Hardware_Version}
-                    </Text>
-                  </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Loopback_Address}
+                  </Text>
                 </View>
-              ) : null}
-              {item?.Software_Version ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Software Version
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Software_Version}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
+              </View>
 
               {/* ====================== */}
-              {item?.Management_Interface ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Management Interface
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Management_Interface}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Serial Number
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Serial_Number}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ====================== */}
+              {/* ====================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>Model</Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Model}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ====================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    MAC ID
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.MAC_ID}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ====================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Hardware Version
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Hardware_Version}
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Software Version
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Software_Version}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ====================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Management Interface
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Management_Interface}
+                  </Text>
+                </View>
+              </View>
+
               {/* ====================== */}
               {/* ===================== */}
-              {item?.Associated_Circuit ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Associated Circuit
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Associated_Circuit}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Associated Circuit
+                  </Text>
                 </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.System_Description ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      System Description
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.System_Description.substr(1, 22)}...
-                    </Text>
-                  </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Associated_Circuit}
+                  </Text>
                 </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.Config_Compliance ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Config Compliance
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Config_Compliance}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.Code_Compliance ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Code Compliance
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Code_Compliance}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.Responsible_Engineer ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Responsible Engineer
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Responsible_Engineer.substr(1, 20)}...
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
+              </View>
 
               {/* ===================== */}
-              {item?.Responsible_Engineer_Validation_Date ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Responsible Engineer Validation Date
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {moment(item.Responsible_Engineer_Validation_Date).format(
-                        'DD-MM-YYYY',
-                      )}
-                      ...
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    System Description
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.System_Description?.substr(1, 22)}...
+                  </Text>
+                </View>
+              </View>
 
               {/* ===================== */}
-              {item?.Last_Polled_or_Discovery ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Last Polled
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Last_Polled_or_Discovery}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Config Compliance
+                  </Text>
                 </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.Maintenance_Coverage_Plan ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#e2f0d9',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Maint Plan
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Maintenance_Coverage_Plan.substr(1, 20)}...
-                    </Text>
-                  </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Config_Compliance}
+                  </Text>
                 </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.Maintenance_M ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#e2f0d9',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Maint Cost(M)
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Maintenance_M}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.License_M ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#e2f0d9',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      License Cost(M)
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.License_M}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.Resale_Value ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#e2f0d9',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Resale Value
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Resale_Value}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.Purchase_Date ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#ffffcc',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Purchase Date
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {moment(item.Purchase_Date).format('DD-MM-YYYY')}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.Decom_Date ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#ffffcc',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Decom_Date
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {moment(item.Decom_Date).format('DD-MM-YYYY')}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.EOL_Date ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#ffffcc',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      EOL Date
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {moment(item.EOL_Date).format('DD-MM-YYYY')}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
+              </View>
 
               {/* ===================== */}
-              {item?.EOS_Date ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#ffffcc',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      EOS Date
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {moment(item.EOS_Date).format('DD-MM-YYYY')}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Code Compliance
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Code_Compliance}
+                  </Text>
+                </View>
+              </View>
 
               {/* ===================== */}
-              {item?.LDoS_Date ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#ffffcc',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      LDoS Date
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {moment(item.LDoS_Date).format('DD-MM-YYYY')}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Responsible Engineer
+                  </Text>
                 </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.Last_Patch_Date ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#ffffcc',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      LDoS Date
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {moment(item.Last_Patch_Date).format('DD-MM-YYYY')}
-                    </Text>
-                  </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Responsible_Engineer?.substr(1, 20)}...
+                  </Text>
                 </View>
-              ) : null}
-              {/* ===================== */}
-              {item?.EOL_Count ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      EOL Count
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.EOL_Count}
-                    </Text>
-                  </View>
-                </View>
-              ) : null}
+              </View>
 
               {/* ===================== */}
-              {item?.Upgraded_Code ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Upgraded Code
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Upgraded_Code}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Responsible Engineer Validation Date
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Responsible_Engineer_Validation_Date
+                      ? moment(
+                          item?.Responsible_Engineer_Validation_Date,
+                        ).format('DD-MM-YYYY')
+                      : '--'}
+                  </Text>
+                </View>
+              </View>
+
               {/* ===================== */}
-              {item?.Compliant ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Compliant
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Compliant}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Last Polled
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Last_Polled_or_Discovery}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#e2f0d9',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Maint Plan
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Maintenance_Coverage_Plan?.substr(1, 20)}...
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#e2f0d9',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Maint Cost(M)
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Maintenance_M}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#e2f0d9',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    License Cost(M)
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.License_M}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#e2f0d9',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Resale Value
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Resale_Value}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#ffffcc',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Purchase Date
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Purchase_Date
+                      ? moment(item?.Purchase_Date).format('DD-MM-YYYY')
+                      : '--'}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#ffffcc',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Decom_Date
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Decom_Date
+                      ? moment(item?.Decom_Date).format('DD-MM-YYYY')
+                      : '--'}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#ffffcc',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    EOL Date
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.EOL_Date
+                      ? moment(item?.EOL_Date).format('DD-MM-YYYY')
+                      : '--'}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#ffffcc',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    EOS Date
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.EOS_Date
+                      ? moment(item?.EOS_Date).format('DD-MM-YYYY')
+                      : '--'}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#ffffcc',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    LDoS Date
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.LDoS_Date
+                      ? moment(item?.LDoS_Date).format('DD-MM-YYYY')
+                      : '--'}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#ffffcc',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    LDoS Date
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Last_Patch_Date
+                      ? moment(item?.Last_Patch_Date).format('DD-MM-YYYY')
+                      : '--'}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    EOL Count
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.EOL_Count}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Upgraded Code
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Upgraded_Code}
+                  </Text>
+                </View>
+              </View>
+
+              {/* ===================== */}
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Compliant
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Compliant}
+                  </Text>
+                </View>
+              </View>
+
               {/* ===================== 01/08/ */}
-              {item?.Non_Compliant ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#dedbf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Non Compliant
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Non_Compliant}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#dedbf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Non Compliant
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Non_Compliant}
+                  </Text>
+                </View>
+              </View>
 
               {/* ==================== */}
               {/* ===================== */}
-              {item?.In_Progress ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      In Progress
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.In_Progress}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    In Progress
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.In_Progress}
+                  </Text>
+                </View>
+              </View>
 
               {/* ==================== */}
-              {item?.Vulnerability_SLA_Achievement_Target ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Vulnerability SLA Target
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {moment(item.Vulnerability_SLA_Achievement_Target).format(
-                        'YYYY-MM-DD',
-                      )}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Vulnerability SLA Target
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Vulnerability_SLA_Achievement_Target
+                      ? moment(
+                          item?.Vulnerability_SLA_Achievement_Target,
+                        ).format('YYYY-MM-DD')
+                      : '--'}
+                  </Text>
+                </View>
+              </View>
+
               {/* ==================== */}
-              {item?.Prod_Rel_Team ? (
-                <View style={styles.secondTableRow}>
-                  <View
-                    style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
-                    }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Prod Rel Team
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Prod_Rel_Team}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Prod Rel Team
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item?.Prod_Rel_Team}
+                  </Text>
+                </View>
+              </View>
+
               {/* ==================== */}
-              {item?.Compiled ? (
-                <View style={styles.secondTableRow}>
-                  <View
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Compiled
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text
                     style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
+                      fontWeight: '700',
+                      color: 'black',
+                      marginVertical: 3,
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Compiled
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text
-                      style={{
-                        fontWeight: '700',
-                        color: 'black',
-                        marginVertical: 3,
-                      }}>
-                      {moment(item.Compiled).format('YYYY-MM-DD')}
-                    </Text>
-                  </View>
+                    {item?.Compiled
+                      ? moment(item?.Compiled).format('YYYY-MM-DD')
+                      : '--'}
+                  </Text>
                 </View>
-              ) : null}
+              </View>
+
               {/* ==================== */}
-              {item?.Alternate_System_Description ? (
-                <View style={styles.secondTableRow}>
-                  <View
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Alt System Description
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text
                     style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
+                      fontWeight: '700',
+                      color: 'black',
+                      marginVertical: 3,
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Alt System Description
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text
-                      style={{
-                        fontWeight: '700',
-                        color: 'black',
-                        marginVertical: 3,
-                      }}>
-                      {item.Alternate_System_Description.substr(1, 20)}...
-                    </Text>
-                  </View>
+                    {item?.Alternate_System_Description?.substr(1, 20)}...
+                  </Text>
                 </View>
-              ) : null}
+              </View>
+
               {/* ==================== */}
-              {item?.Alternative_Device_Name ? (
-                <View style={styles.secondTableRow}>
-                  <View
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Alt Device Name
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text
                     style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
+                      fontWeight: '700',
+                      color: 'black',
+                      marginVertical: 3,
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Alt Device Name
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text
-                      style={{
-                        fontWeight: '700',
-                        color: 'black',
-                        marginVertical: 3,
-                      }}>
-                      {item.Alternative_Device_Name}
-                    </Text>
-                  </View>
+                    {item?.Alternative_Device_Name}
+                  </Text>
                 </View>
-              ) : null}
+              </View>
+
               {/* ==================== */}
-              {item?.NB_First_Discovery_Time ? (
-                <View style={styles.secondTableRow}>
-                  <View
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    NB First Discovery Time
+                  </Text>
+                </View>
+                <View style={styles.tt}>
+                  <Text
                     style={{
-                      ...styles.secondTableColum,
-                      backgroundColor: '#deebf7',
+                      fontWeight: '700',
+                      color: 'black',
+                      marginVertical: 3,
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      NB First Discovery Time
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text
-                      style={{
-                        fontWeight: '700',
-                        color: 'black',
-                        marginVertical: 3,
-                      }}>
-                      {moment(item.NB_First_Discovery_Time).format(
-                        'YYYY-MM-DD',
-                      )}
-                    </Text>
-                  </View>
+                    {item?.NB_First_Discovery_Time
+                      ? moment(item?.NB_First_Discovery_Time).format(
+                          'YYYY-MM-DD',
+                        )
+                      : '--'}
+                  </Text>
                 </View>
-              ) : null}
+              </View>
+
               {/* ==================== */}
-              {item?.NB_Last_Discovery_Time ? (
-                <View style={styles.secondTableRow}>
-                  <View style={styles.tt}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      NB Last Discovery Time
-                    </Text>
-                  </View>
-                  <View style={styles.tt}>
-                    <Text
-                      style={{
-                        fontWeight: '700',
-                        color: 'black',
-                        marginVertical: 3,
-                      }}>
-                      {moment(item.NB_Last_Discovery_Time).format('YYYY-MM-DD')}
-                    </Text>
-                  </View>
+
+              <View style={styles.secondTableRow}>
+                <View style={styles.tt}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    NB Last Discovery Time
+                  </Text>
                 </View>
-              ) : null}
+                <View style={styles.tt}>
+                  <Text
+                    style={{
+                      fontWeight: '700',
+                      color: 'black',
+                      marginVertical: 3,
+                    }}>
+                    {item?.NB_Last_Discovery_Time
+                      ? moment(item?.NB_Last_Discovery_Time).format(
+                          'YYYY-MM-DD',
+                        )
+                      : '--'}
+                  </Text>
+                </View>
+              </View>
 
               {/* ==================== */}
 

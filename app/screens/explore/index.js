@@ -65,6 +65,7 @@ import OrderDetailsExplore from '../../components/BottomSheetTab/Orders/OrderDet
 // import SerachCircuitIdBranchId from '../../components/Search';
 import SearchComponet from './components/Search/SearchComponet';
 import {soundePlay} from '../../components/helper/soundHelper';
+import {getAllAtms} from './../../actions/ATMS/index';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -73,6 +74,7 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const Explore = ({
+  getAllAtms,
   navigation,
   get_coordinates,
   get_order,
@@ -608,6 +610,7 @@ const Explore = ({
                     });
                     marker_seleted(i);
                     get_order(item.Location_ID);
+                    getAllAtms(item.Location_ID);
                     getInventoryCircuit(item.Location_ID);
                     get_all_devices_inventory(item.Location_ID);
 
@@ -1167,6 +1170,7 @@ export default connect(null, {
   get_all_devices_inventory,
   get_order,
   getInventoryCircuit,
+  getAllAtms,
 })(Explore);
 
 const styles = StyleSheet.create({

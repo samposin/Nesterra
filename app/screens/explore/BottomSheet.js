@@ -13,6 +13,7 @@ import Info from '../../components/BottomSheetTab/Info';
 import Circuits from '../../components/BottomSheetTab/Circuits';
 import Devices from '../../components/BottomSheetTab/Devices';
 import Orders from '../../components/BottomSheetTab/Orders';
+import Atms from '../../components/BottomSheetTab/Atms';
 
 const BottomSheetView = ({
   bottomSheetRef,
@@ -30,9 +31,10 @@ const BottomSheetView = ({
     {id: 0, name: 'INFO', isActive: true},
     {id: 1, name: 'PICS', isActive: false},
     {id: 2, name: 'HOURS', isActive: false},
-    {id: 3, name: 'CIRCUITS', isActive: false},
-    {id: 4, name: 'DEVICES', isActive: false},
-    {id: 5, name: 'ORDERS', isActive: false},
+    {id: 3, name: 'ATMS', isActive: false},
+    {id: 4, name: 'CIRCUITS', isActive: false},
+    {id: 5, name: 'DEVICES', isActive: false},
+    {id: 6, name: 'ORDERS', isActive: false},
   ];
   const [item, setItem] = useState(0);
   const [data1, setData1] = useState(data);
@@ -53,22 +55,23 @@ const BottomSheetView = ({
     switch (true) {
       case item == 0:
         return <Info />;
-        break;
+
       case item == 1:
         return <Pics />;
-        break;
+
       case item == 2:
         return <Hours />;
-        break;
+
       case item == 3:
-        return <Circuits cirCuitRefExplore={cirCuitRefExplore} />;
-        break;
+        return <Atms />;
       case item == 4:
-        return <Devices deviceRefExplore={deviceRefExplore} />;
-        break;
+        return <Circuits cirCuitRefExplore={cirCuitRefExplore} />;
+
       case item == 5:
+        return <Devices deviceRefExplore={deviceRefExplore} />;
+
+      case item == 6:
         return <Orders orderRefExplore={orderRefExplore} />;
-        break;
     }
   };
   useEffect(() => {

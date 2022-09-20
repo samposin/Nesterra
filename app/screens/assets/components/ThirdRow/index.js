@@ -147,6 +147,16 @@ const ThirdRow = ({
             diplayName={diplayName}
           />
           <FilterButton
+            title="Date"
+            onPress={showDatePicker}
+            diplayName={diplayName}
+          />
+          <FilterButton
+            title="Address"
+            onPress={showDatePicker}
+            diplayName={diplayName}
+          />
+          {/* <FilterButton
             title="State Date"
             onPress={showDatePicker}
             diplayName={diplayName}
@@ -155,7 +165,7 @@ const ThirdRow = ({
             title="End Date"
             onPress={showDatePicker1}
             diplayName={diplayName}
-          />
+          /> */}
         </ScrollView>
       </View>
       <DateTimePickerModal

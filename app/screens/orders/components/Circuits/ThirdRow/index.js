@@ -6,6 +6,7 @@ import FilterButton from '../../../../../components/FilterButton';
 import {
   ORDER_FILTER_BY_BETWEEN_DATE,
   ORDER_GET_ONLY_VENDOR,
+  ORDER_FILTER_BY_DATE,
 } from '../../../../../actions/actionType/action.OrdersForTab';
 import DatePickerView from './../../../../../components/DatePickerView/index';
 import moment from 'moment';
@@ -44,13 +45,20 @@ const ThirdRow = ({
     setSwitchView(false);
   };
   const getStartDate = date => {
+    const d = moment(date).format('YYYY-MM-DD');
+    // console.log(d);
+
+    dispatch({
+      type: ORDER_FILTER_BY_DATE,
+      data: d,
+    });
+    setSwitchView(false);
     // console.log(date);
-    const d = moment(date, 'MMDDYYYY').valueOf();
-    setStdat(date);
-    // console.log(typeof stdata, 'ddd');
-    // // console.log(date, 'start');
-    // // console.log(d, 'd');
-    setDatePickerVisibility(false);
+
+    // const d = moment(date, 'MMDDYYYY').valueOf();
+    // setStdat(date);
+
+    // setDatePickerVisibility(false);
   };
   const getEndtDate = date => {
     setDiplayName('');
@@ -100,15 +108,20 @@ const ThirdRow = ({
           />
 
           <FilterButton
-            title="Start Date"
+            title=" Date"
             onPress={startdatePick}
             diplayName={diplayName}
           />
           <FilterButton
+            title="Address"
+            onPress={() => console.log('first')}
+            diplayName={diplayName}
+          />
+          {/* <FilterButton
             title="End Date"
             onPress={enddatePick}
             diplayName={diplayName}
-          />
+          /> */}
         </ScrollView>
       </View>
       <DatePickerView

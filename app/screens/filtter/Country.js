@@ -32,7 +32,7 @@ const Country = ({getlist, is_selected}) => {
               key={i}
               handleChange={handleChange}
               value={item.isChecked}
-              item={item}
+              item={item.txt}
             />
           );
         })}
