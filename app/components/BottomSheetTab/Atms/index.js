@@ -4,6 +4,7 @@ import React from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import NoDataViewFlatList from './../../NoDataViewFlatList/index';
 import {useSelector} from 'react-redux';
+import {copyText, tostalert} from '../../helper';
 const TableHeaderFirstColum = ({title, color}) => {
   return (
     <View
@@ -14,7 +15,13 @@ const TableHeaderFirstColum = ({title, color}) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Text style={{...styles.boxText1, color: color}}>{title}</Text>
+      <TouchableOpacity
+        onLongPress={() => {
+          copyText(title);
+          tostalert(title);
+        }}>
+        <Text style={{...styles.boxText1, color: color}}>{title}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -30,21 +37,18 @@ const TableHeaderOtherColum = ({title, color}) => {
         borderLeftColor: 'white',
         borderLeftWidth: 2,
       }}>
-      <Text style={{...styles.boxText1, color: color}}>{title}</Text>
+      <TouchableOpacity
+        onLongPress={() => {
+          copyText(title);
+          tostalert(title);
+        }}>
+        <Text style={{...styles.boxText1, color: color}}>{title}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const Atms = ({index, item}) => {
-  const data = [
-    {id: 0, name: 'dsfsdaf'},
-    {id: 0, name: 'dsfsdaf'},
-    {id: 0, name: 'dsfsdaf'},
-    {id: 0, name: 'dsfsdaf'},
-    {id: 0, name: 'dsfsdaf'},
-    {id: 0, name: 'dsfsdaf'},
-  ];
-
   const {allAtms} = useSelector(state => state.allAtms);
   // console.log(allAtms);
   const randerItem = ({index, item}) => {
@@ -58,8 +62,8 @@ const Atms = ({index, item}) => {
         }}>
         <TableHeaderFirstColum color="black" title={item.ATM_ID} />
         <TableHeaderOtherColum color="black" title={item.ATM_Status} />
-        <TableHeaderOtherColum color="black" title={item.Model} />
         <TableHeaderOtherColum color="black" title={item.Vendor} />
+        <TableHeaderOtherColum color="black" title={item.Model} />
       </View>
     );
   };
@@ -68,8 +72,8 @@ const Atms = ({index, item}) => {
       <View style={styles.tableRow}>
         <TableHeaderFirstColum color="white" title="ATM ID" />
         <TableHeaderOtherColum color="white" title="Status" />
-        <TableHeaderOtherColum color="white" title="Model" />
         <TableHeaderOtherColum color="white" title="Vendor" />
+        <TableHeaderOtherColum color="white" title="Model" />
       </View>
       <BottomSheetFlatList
         showsVerticalScrollIndicator={false}

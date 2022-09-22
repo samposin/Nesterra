@@ -14,11 +14,13 @@ const SecondRow = ({
   diplayName,
   cirCuitRef,
   getAllSiteNumber,
+  vendorRef,
 
   setbootSheetLodder,
 }) => {
   const orderType = () => {
     setDiplayName('Order Type');
+    vendorRef.current.close();
     cirCuitRef.current.snapToIndex(1);
 
     setSwitchView(false);
@@ -26,18 +28,21 @@ const SecondRow = ({
   const smartSite = () => {
     getAllSiteNumber(setbootSheetLodder);
     setDiplayName('SmartSite#');
+    vendorRef.current.close();
     cirCuitRef.current.snapToIndex(1);
     setSwitchView(false);
   };
   const getCarrier = () => {
     GetAllCarrierNumber(setbootSheetLodder);
     setDiplayName('Carrier#');
+    vendorRef.current.close();
     cirCuitRef.current.snapToIndex(1);
     setSwitchView(false);
   };
   const getTanoe = () => {
     getAllTangorNumber(setbootSheetLodder);
     setDiplayName('Tangoe#');
+    vendorRef.current.close();
     cirCuitRef.current.snapToIndex(1);
     setSwitchView(false);
   };

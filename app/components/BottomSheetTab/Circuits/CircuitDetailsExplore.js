@@ -4,6 +4,7 @@ import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import OrderLoder from '../../lodder/OrderLoder';
 const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
@@ -124,7 +125,7 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                   borderLeftWidth: 1,
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Associated_ID}
+                  {item.Associated_ID ? item.Associated_ID : '--'}
                 </Text>
               </View>
             </View>
@@ -148,6 +149,31 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
                   {item.LEC_ID}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>Site ID</Text>
+              </View>
+              <View
+                style={{
+                  borderRightColor: 'black',
+                  borderLeftWidth: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  paddingLeft: 10,
+                }}>
+                <Text style={{fontWeight: '700', color: '#007aff'}}>
+                  {item.Location_ID}
+                </Text>
+                <Text style={{marginLeft: 5}}>
+                  <FontAwesome name="map-marker" size={22} color="#007aff" />
                 </Text>
               </View>
             </View>
@@ -269,7 +295,7 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                   borderLeftWidth: 1,
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.SubCat_2}
+                  {item.SubCat_2 ? item.SubCat_2 : '--'}
                 </Text>
               </View>
             </View>
@@ -289,7 +315,7 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                   borderLeftWidth: 1,
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.SubCat_3}
+                  {item.SubCat_3 ? tem.SubCat_3 : '--'}
                 </Text>
               </View>
             </View>
@@ -314,7 +340,7 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                   borderLeftWidth: 1,
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Whitelist_Use_Type}
+                  {item.Whitelist_Use_Type ? item.Whitelist_Use_Type : '--'}
                 </Text>
               </View>
             </View>
@@ -339,7 +365,9 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                   borderLeftWidth: 1,
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Vendor_Account_Number}
+                  {item.Vendor_Account_Number
+                    ? item.Vendor_Account_Number
+                    : '--'}
                 </Text>
               </View>
             </View>
@@ -363,7 +391,9 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                   borderLeftWidth: 1,
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Summary_Account_Number}
+                  {item.Summary_Account_Number
+                    ? item.Summary_Account_Number
+                    : '--'}
                 </Text>
               </View>
             </View>
@@ -385,7 +415,7 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                   borderLeftWidth: 1,
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Mbps}
+                  {item.Mbps ? item.Mbps : '--'}
                 </Text>
               </View>
             </View>
@@ -478,12 +508,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                   borderLeftWidth: 1,
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Location_B_End}
+                  {item.Location_B_End ? item.Location_B_End : '--'}
                 </Text>
               </View>
             </View>
 
-            {/* <View style={{height: 30, width: '100%', borderTopWidth: 1}}></View> */}
+            <View style={{height: 100, width: '100%'}}></View>
           </>
         ) : (
           <OrderLoder />

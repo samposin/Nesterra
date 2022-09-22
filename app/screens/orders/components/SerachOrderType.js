@@ -16,10 +16,8 @@ import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {ORDER_FILTER_BY_ORDER_TYPE} from '../../../actions/actionType/action.OrdersForTab';
 
 const {height} = Dimensions.get('screen');
-
 const SerachOrderType = ({bottomSheetRef}) => {
   const dispatch = useDispatch();
-
   const [search, setSearch] = useState('');
 
   const data = [{id: 'Add'}, {id: 'Change'}, {id: 'Disco'}, {id: 'Move'}];

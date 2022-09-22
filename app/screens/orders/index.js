@@ -62,13 +62,11 @@ const Orders = ({}) => {
         <View
           style={{
             ...styles.searchView,
-
             alignItems: 'center',
           }}>
           <View
             style={{
               ...styles.searchViewLeft,
-
               flexDirection: 'row',
             }}>
             <Button
@@ -84,7 +82,6 @@ const Orders = ({}) => {
           </View>
           <View style={styles.searchViewRight}></View>
         </View>
-
         {/* ==============Search View=========== */}
 
         {ranDerView()}

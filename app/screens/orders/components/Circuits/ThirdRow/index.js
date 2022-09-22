@@ -8,13 +8,13 @@ import {
   ORDER_GET_ONLY_VENDOR,
   ORDER_FILTER_BY_DATE,
 } from '../../../../../actions/actionType/action.OrdersForTab';
-import DatePickerView from './../../../../../components/DatePickerView/index';
+import DatePickerView from './../../../../../components/DatePickerView';
 import moment from 'moment';
 import {warinng} from '../../../../../components/helper';
 
 const ThirdRow = ({
   setDiplayName,
-
+  vendorRef,
   setSwitchView,
   diplayName,
   cirCuitRef,
@@ -31,7 +31,8 @@ const ThirdRow = ({
       type: ORDER_GET_ONLY_VENDOR,
     });
     setDiplayName('Vendor');
-    cirCuitRef.current.snapToIndex(1);
+    vendorRef.current.snapToIndex(1);
+    cirCuitRef.current.close();
     setSwitchView(false);
   };
   const status = () => {
@@ -108,7 +109,7 @@ const ThirdRow = ({
           />
 
           <FilterButton
-            title=" Date"
+            title="Creation Date"
             onPress={startdatePick}
             diplayName={diplayName}
           />

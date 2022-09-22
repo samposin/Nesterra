@@ -19,7 +19,6 @@ const Devices = () => {
         <TableHeaderOtherColum onPress={typeSet} type={type} title="Vendor" />
         <TableHeaderOtherColum onPress={typeSet} type={type} title="Status" />
         <TableHeaderOtherColum onPress={typeSet} type={type} title="Create" />
-        <TableHeaderOtherColum onPress={typeSet} type={type} title="Item" />
       </View>
     </>
   );

@@ -583,9 +583,6 @@ const Explore = ({
           showsUserLocation={true}
           userLocationPriority={'high'}
           mapType={satellite}
-          onPress={() => {
-            soundePlay();
-          }}
           onLayout={onLayoutMap}>
           {coordinates &&
             coordinates.map((item, i) => {

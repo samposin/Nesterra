@@ -51,8 +51,8 @@ const CircuitBottmSheet = ({
             cirCuitRef={cirCuitRef}
           />
         );
-      case diplayName === 'Vendor':
-        return <Vendor setSwitchView={setSwitchView} cirCuitRef={cirCuitRef} />;
+      // case diplayName === 'Vendor':
+      //   return <Vendor setSwitchView={setSwitchView} cirCuitRef={cirCuitRef} />;
       case diplayName === 'Status':
         return <Status setSwitchView={setSwitchView} cirCuitRef={cirCuitRef} />;
 

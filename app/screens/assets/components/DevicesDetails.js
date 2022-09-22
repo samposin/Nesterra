@@ -1026,7 +1026,11 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
               {/* ==================== */}
 
               <View style={styles.secondTableRow}>
-                <View style={styles.tt}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     NB Last Discovery Time
                   </Text>

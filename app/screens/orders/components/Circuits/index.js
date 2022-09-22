@@ -1,40 +1,31 @@
-import {
-  StyleSheet,
-  Dimensions,
-  Image,
-  FlatList,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, FlatList, Text, View, TouchableOpacity} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import SecondRow from './SecondRow';
 import ThirdRow from './ThirdRow';
-const {width} = Dimensions.get('screen');
 
 import {copyText, tostalert} from '../../../../components/helper';
-import {get_orders_for_tab} from './../../../../actions/orderFotTab/index';
+import {get_orders_for_tab} from './../../../../actions/orderFotTab';
 import OrderLoder from './../../../../components/lodder/OrderLoder';
 
 import {connect, useDispatch, useSelector} from 'react-redux';
 import Tableheader from './TableHeader/index';
-
 import moment from 'moment';
 import BottomSheetViewDetails from './BottomSheetViewDetails';
 import {get_order_details} from '../../../../actions/order';
-import ToggleView from './../../../../components/ToggleView/index';
-
-import CircuitBottmSheet from './CircuitBottmSheet/index';
-
+import ToggleView from './../../../../components/ToggleView';
+import CircuitBottmSheet from './CircuitBottmSheet';
 import {
   FILTER_STATUS_BY_COMPLETED,
   ALL_DATA,
 } from '../../../../actions/actionType/action.OrdersForTab';
+import NoDataViewFlatList from '../../../../components/NoDataViewFlatList';
+import VendorButtonSheet from './VendorButtonSheet';
 
 const Circuits = ({get_orders_for_tab, get_order_details}) => {
   const {ordersForTab} = useSelector(state => state.ordersForTab);
   const dispatch = useDispatch();
   const cirCuitRef = useRef(null);
+  const vendorRef = useRef(null);
   const [refresh, setRefresh] = useState(false);
   const [loding, setLodding] = useState(true);
   const [lodding1, setLodding1] = useState(false);
@@ -55,132 +46,78 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
     switch (true) {
       case item === 'In Progress':
         return '#ffffbf';
-
       case item === 'Initiated':
         return '#ffc8ce';
-
       case item === 'Cancelled':
         return '#ffc8ce';
-
       case item === 'Completed':
         return '#c6efcd';
     }
   };
   //barckground color change
+  const FlatListColum = ({item, title}) => {
+    return (
+      <View
+        style={{
+          ...styles.tableRowColum1,
+          width: '20%',
+          borderLeftColor: 'white',
+          borderLeftWidth: 2,
+          backgroundColor: selectedComponent(item?.Status),
+        }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            copyText(title);
+            tostalert(title);
+          }}>
+          <Text style={styles.boxText1}> {title}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  const FlatListColumOther = ({item, title}) => {
+    return (
+      <View
+        style={{
+          ...styles.tableRowColum1,
+          width: '20%',
+          borderLeftColor: 'white',
+          borderLeftWidth: 2,
+        }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            copyText(title);
+            tostalert(title);
+          }}>
+          <Text style={styles.boxText1}>{title}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
   const randerItem = ({index, item}) => {
     return (
       <TouchableOpacity
-        onPress={
-          () => {
-            // vendorRef.current.close();
-            // setLodding(true);
-            //  bottomSheetRef.current.close();
-            // if (!lodding) {
-            //   bottomSheetRefdetails.current.snapToIndex(2);
-            // }
-            get_order_details(
-              item.Inventory_ID,
-              setLodding1,
-              bottomSheetRefdetails,
-            );
-          }
-          // navigation.navigate('OrderDetails', {
-          //   inv_Id: item.Inventory_ID,
-          // })
-        }
+        onPress={() => {
+          get_order_details(
+            item.Inventory_ID,
+            setLodding1,
+            bottomSheetRefdetails,
+          );
+        }}
         style={{
           ...styles.tableRow1,
           height: 60,
-          // backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           marginVertical: 1,
           backgroundColor: '#ffffff',
         }}>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            width: '20%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-            backgroundColor: selectedComponent(item?.Status),
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Order_Type);
-
-              tostalert(item.Order_Type);
-            }}>
-            <Text style={styles.boxText1}> {item?.Order_Type}</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            width: '20%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.vendor);
-              tostalert(item.vendor);
-            }}>
-            <Text style={styles.boxText1}>{item?.vendor}</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            width: '20%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-            backgroundColor: selectedComponent(item?.Status),
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Status);
-              tostalert(item.Status);
-            }}>
-            <Text style={styles.boxText1}>{item?.Status}</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            width: '20%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(moment(item.Creation_Date).format('MM/DD/YY'));
-              tostalert(moment(item.Creation_Date).format('MM/DD/YY'));
-            }}>
-            <Text style={styles.boxText1}>
-              {moment(item?.Creation_Date).format('MM/DD/YY')}
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            width: '20%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Inventory_ID);
-              tostalert(item.Inventory_ID);
-            }}>
-            <Text style={styles.boxText1}>
-              {item?.Inventory_ID}
-              {/* {moment(item.Initiation_Date).format('DD-MM-YYYY')} */}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <FlatListColum item={item} title={item.Order_Type} />
+        <FlatListColumOther item={item} title={item.vendor} />
+        <FlatListColum item={item} title={item.Status} />
+        <FlatListColumOther
+          item={item}
+          title={moment(item.Creation_Date).format('MM/DD/YY')}
+        />
+        <FlatListColumOther item={item} title={item.Inventory_ID} />
       </TouchableOpacity>
     );
   };
@@ -209,6 +146,7 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
             diplayName={diplayName}
             setDiplayName={setDiplayName}
             cirCuitRef={cirCuitRef}
+            vendorRef={vendorRef}
             setSwitchView={setSwitchView}
             setbootSheetLodder={setbootSheetLodder}
           />
@@ -216,6 +154,7 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
             diplayName={diplayName}
             setDiplayName={setDiplayName}
             cirCuitRef={cirCuitRef}
+            vendorRef={vendorRef}
             setSwitchView={setSwitchView}
           />
           <Tableheader />
@@ -233,33 +172,7 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
                 get_orders_for_tab(setLodding);
               }}
               ListEmptyComponent={() => {
-                return (
-                  <View
-                    style={{
-                      width: '100%',
-                      height: 500,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <View
-                      style={{
-                        width: '100%',
-                        height: 200,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}>
-                      <Image
-                        style={{
-                          width: '100%',
-                          height: 100,
-                          resizeMode: 'contain',
-                        }}
-                        source={require('../../../../images/empty.png')}
-                      />
-                      <Text style={{fontSize: 25}}>No Data Found</Text>
-                    </View>
-                  </View>
-                );
+                return <NoDataViewFlatList />;
               }}
             />
           </View>
@@ -285,6 +198,13 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
             diplayName={diplayName}
             bottomSheetLodder={bottomSheetLodder}
             cirCuitRef={cirCuitRef}
+            setSwitchView={setSwitchView}
+          />
+          <VendorButtonSheet
+            setDiplayName={setDiplayName}
+            diplayName={diplayName}
+            bottomSheetLodder={bottomSheetLodder}
+            vendorRef={vendorRef}
             setSwitchView={setSwitchView}
           />
         </>

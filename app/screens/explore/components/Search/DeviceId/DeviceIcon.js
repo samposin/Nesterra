@@ -55,7 +55,7 @@ const DeviceIcon = ({setModalVisible, searchBranch, iconShow, setIconShow}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Entypo name="cross" size={24} color="black" />
+          <Entypo name="cross" size={20} color="#898989" />
         </TouchableOpacity>
       ) : (
         <TouchableOpacity
@@ -69,7 +69,7 @@ const DeviceIcon = ({setModalVisible, searchBranch, iconShow, setIconShow}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <FontAwesome name={'microphone'} size={30} color="black" />
+          <FontAwesome name={'microphone'} size={24} color="#898989" />
         </TouchableOpacity>
       )}
     </>

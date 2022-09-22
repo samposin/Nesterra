@@ -15,7 +15,23 @@ const BottomSheetViewCircuits = ({
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.allCircuitDetails);
-
+  console.log(item);
+  const TabeRow = ({title, data}) => {
+    return (
+      <View style={{...styles.secondTableRow}}>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            backgroundColor: '#deebf7',
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+        </View>
+        <View style={styles.secondTableColum}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{data}</Text>
+        </View>
+      </View>
+    );
+  };
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -64,151 +80,173 @@ const BottomSheetViewCircuits = ({
         ) : (
           <>
             {/* ===================== */}
-            {item?.Circuit_ID ? (
-              <View style={{...styles.secondTableRow}}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Circuit ID
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Circuit_ID}
-                  </Text>
-                </View>
+            <TabeRow title=" Circuit ID" data={item?.Circuit_ID} />
+            {/* <View style={{...styles.secondTableRow}}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Circuit ID
+                </Text>
               </View>
-            ) : null}
-            {/* ===================== */}
-            {/* ===================== */}
-            {item?.Circuit_Status ? (
-              <View style={{...styles.secondTableRow}}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Circuit Status
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor:
-                      item.Circuit_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Circuit_Status}
-                  </Text>
-                </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.Circuit_ID}
+                </Text>
               </View>
-            ) : null}
-            {/* ===================== */}
-            {/* ===================== */}
-            {item?.Associated_ID ? (
-              <View style={{...styles.secondTableRow}}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Assoc ID
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Associated_ID}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
+            </View> */}
 
             {/* ===================== */}
             {/* ===================== */}
-            {item?.LEC_ID ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    LEC ID
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.LEC_ID}
-                  </Text>
-                </View>
+
+            <View style={{...styles.secondTableRow}}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Circuit Status
+                </Text>
               </View>
-            ) : null}
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor:
+                    item.Circuit_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.Circuit_Status}
+                </Text>
+              </View>
+            </View>
 
             {/* ===================== */}
             {/* ===================== */}
-            {item?.Address ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#b7ecff',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Full Address
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Address}
-                  </Text>
-                </View>
+
+            <View style={{...styles.secondTableRow}}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Assoc ID
+                </Text>
               </View>
-            ) : null}
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.Associated_ID}
+                </Text>
+              </View>
+            </View>
 
             {/* ===================== */}
             {/* ===================== */}
-            {item?.Vendor ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Vendor
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Vendor}
-                  </Text>
-                </View>
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>LEC ID</Text>
               </View>
-            ) : null}
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.LEC_ID}
+                </Text>
+              </View>
+            </View>
             {/* ===================== */}
-            {item?.Category ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Category
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Category}
-                  </Text>
-                </View>
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>Site ID</Text>
               </View>
-            ) : null}
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.Location_ID}
+                </Text>
+              </View>
+            </View>
+            {/* ===================== */}
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Contact Site Types
+                </Text>
+              </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}></Text>
+              </View>
+            </View>
+
+            {/* ===================== */}
+            {/* ===================== */}
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#b7ecff',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Full Address
+                </Text>
+              </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.Address}
+                </Text>
+              </View>
+            </View>
+
+            {/* ===================== */}
+            {/* ===================== */}
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#fbe5d6',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>Vendor</Text>
+              </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.Vendor}
+                </Text>
+              </View>
+            </View>
+
+            {/* ===================== */}
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#fbe5d6',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Category
+                </Text>
+              </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.Category}
+                </Text>
+              </View>
+            </View>
 
             {/* ===================== */}
             {/* ===================== */}
@@ -216,172 +254,176 @@ const BottomSheetViewCircuits = ({
             {/* ============== Second Table Row============== */}
             {/* ============== Second Table Row============== */}
             {/* ===================== */}
-            {item?.SubCat_1 ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    SubCat1
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.SubCat_1}
-                  </Text>
-                </View>
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#fbe5d6',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>SubCat1</Text>
               </View>
-            ) : null}
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.SubCat_1}
+                </Text>
+              </View>
+            </View>
 
             {/* ===================== */}
             {/* ===================== */}
-            {item?.SubCat_2 ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    SubCat2
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.SubCat_2}
-                  </Text>
-                </View>
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#fbe5d6',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>SubCat2</Text>
               </View>
-            ) : null}
-            {item?.SubCat_3 ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    SubCat3
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.SubCat_3}
-                  </Text>
-                </View>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.SubCat_2}
+                </Text>
               </View>
-            ) : null}
+            </View>
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#fbe5d6',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>SubCat3</Text>
+              </View>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.SubCat_3}
+                </Text>
+              </View>
+            </View>
 
             {/* ===================== */}
             {/* ===================== */}
-            {item?.Whitelist_Use_Type ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Whitelist Type
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Whitelist_Use_Type}
-                  </Text>
-                </View>
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#fbe5d6',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Whitelist Type
+                </Text>
               </View>
-            ) : null}
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item?.Whitelist_Use_Type}
+                </Text>
+              </View>
+            </View>
 
             {/* ===================== */}
             {/* ===================== */}
-            {item?.Vendor_Account_Number ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Vendor Account
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Vendor_Account_Number}
-                  </Text>
-                </View>
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Vendor Account
+                </Text>
               </View>
-            ) : null}
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item?.Vendor_Account_Number}
+                </Text>
+              </View>
+            </View>
+
             {/* ===================== */}
-            {item?.Summary_Account_Number ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Summary Account
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Summary_Account_Number}
-                  </Text>
-                </View>
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Summary Account
+                </Text>
               </View>
-            ) : null}
-            {/* ====================== */}
-            {item?.Mbps ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>Mbps</Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Mbps}
-                  </Text>
-                </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item?.Summary_Account_Number}
+                </Text>
               </View>
-            ) : null}
+            </View>
+
             {/* ====================== */}
-            {item?.circuit_charge ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#e2f0d9',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Circuit Cost(M)
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    ${item.circuit_charge}
-                  </Text>
-                </View>
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>Mbps</Text>
               </View>
-            ) : null}
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.Mbps ? item.Mbps : '--'}
+                </Text>
+              </View>
+            </View>
+
+            {/* ====================== */}
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#e2f0d9',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Circuit Cost(M)
+                </Text>
+              </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  ${item?.circuit_charge}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#e2f0d9',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Circuit Cost(Y)
+                </Text>
+              </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}></Text>
+              </View>
+            </View>
+
             {/* ====================== */}
             {/* ====================== */}
-            {item?.GL ? (
+            {/* {item?.GL ? (
               <View style={styles.secondTableRow}>
                 <View
                   style={{
@@ -396,46 +438,89 @@ const BottomSheetViewCircuits = ({
                   </Text>
                 </View>
               </View>
-            ) : null}
+            ) : null} */}
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#e2f0d9',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>GL</Text>
+              </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item?.GL}
+                </Text>
+              </View>
+            </View>
 
             {/* ====================== */}
-            {item?.RC ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#e2f0d9',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>RC</Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.RC}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ====================== */}
-            {item?.Location_B_End ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    B-End Location
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Location_B_End}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
 
-            {/* <View style={{height: 70, width: '100%', borderTopWidth: 1}}></View> */}
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#e2f0d9',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>RC</Text>
+              </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item?.RC}
+                </Text>
+              </View>
+            </View>
+
+            {/* ====================== */}
+
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  B-End Location
+                </Text>
+              </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item?.Location_B_End}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  B-End Address
+                </Text>
+              </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}></Text>
+              </View>
+            </View>
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#deebf7',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Underlying Carrrier
+                </Text>
+              </View>
+              <View style={styles.secondTableColum}>
+                <Text style={{fontWeight: '700', color: 'black'}}></Text>
+              </View>
+            </View>
+
+            <View
+              style={{height: 100, width: '100%', borderTopWidth: 1}}></View>
           </>
         )}
       </BottomSheetScrollView>
@@ -567,5 +652,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 0.5,
     paddingLeft: 10,
     justifyContent: 'center',
+    borderBottomColor: 'black',
+    borderBottomtWidth: 0.5,
   },
 });

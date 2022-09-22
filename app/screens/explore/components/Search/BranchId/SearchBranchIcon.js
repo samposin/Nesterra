@@ -74,7 +74,7 @@ const SearchBranchIcon = ({
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <FontAwesome name={'microphone'} size={30} color="black" />
+          <FontAwesome name={'microphone'} size={24} color="#898989" />
         </TouchableOpacity>
       )}
     </>

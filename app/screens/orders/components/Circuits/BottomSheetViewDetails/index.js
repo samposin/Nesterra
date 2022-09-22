@@ -66,7 +66,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     SmartSites#
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Smart_Site_Order_No}
                   </Text>
@@ -83,7 +83,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>PON</Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.PON}
                   </Text>
@@ -102,7 +102,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     Order Number
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Order_Number}
                   </Text>
@@ -124,7 +124,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                 </View>
                 <View
                   style={{
-                    ...styles.secondTableColum,
+                    ...styles.secondTableColum1,
                     backgroundColor:
                       item.Order_Type == 'Add' ? '#c6efcd' : '#e7c4b5',
                   }}>
@@ -148,7 +148,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                 </View>
                 <View
                   style={{
-                    ...styles.secondTableColum,
+                    ...styles.secondTableColum1,
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Inventory_ID}
@@ -170,7 +170,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                 </View>
                 <View
                   style={{
-                    ...styles.secondTableColum,
+                    ...styles.secondTableColum1,
                     backgroundColor:
                       item.Status == 'Completed' ? '#c6efcd' : '#e7c4b5',
                   }}>
@@ -192,7 +192,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     Address
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Address}
                   </Text>
@@ -212,7 +212,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     Branch ID
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Branch_ID}
                   </Text>
@@ -232,9 +232,9 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     Initiation Date
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(item.Initiation_Date).format('MM-DD-YY')}
+                    {moment(item.Initiation_Date).format('MM/DD/YY')}
                   </Text>
                 </View>
               </View>
@@ -252,9 +252,9 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     Creation Date
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(item.Creation_Date).format('MM-DD-YY')}
+                    {moment(item.Creation_Date).format('MM/DD/YY')}
                   </Text>
                 </View>
               </View>
@@ -272,9 +272,9 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     FOC Date
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(item.FOC_Date).format('DD-MM-YYYY')}
+                    {moment(item.FOC_Date).format('DD/MM/YYYY')}
                   </Text>
                 </View>
               </View>
@@ -292,9 +292,9 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     Completion_Date
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(item.Order_Completion_Date).format('MM-DD-YY')}
+                    {moment(item.Order_Completion_Date).format('MM/DD/YY')}
                   </Text>
                 </View>
               </View>
@@ -312,9 +312,9 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     Bill Stop Date
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(item.Bill_Stop_Date).format('MM-DD-YY')}
+                    {moment(item.Bill_Stop_Date).format('MM/DD/YY')}
                   </Text>
                 </View>
               </View>
@@ -332,7 +332,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     Vendor
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Vendor}
                   </Text>
@@ -351,7 +351,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     Category
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.Category}
                   </Text>
@@ -376,7 +376,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     SubCat1
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.SubCat_1}
                   </Text>
@@ -399,7 +399,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                 </View>
                 <View
                   style={{
-                    ...styles.secondTableColum,
+                    ...styles.secondTableColum1,
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.SubCat_2}
@@ -421,7 +421,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                 </View>
                 <View
                   style={{
-                    ...styles.secondTableColum,
+                    ...styles.secondTableColum1,
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.SubCat_3}
@@ -442,7 +442,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>RC</Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.RC}
                   </Text>
@@ -461,7 +461,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>GL</Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     {item.GL}
                   </Text>
@@ -480,7 +480,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     Monthly Cost
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     ${item.Monthly_Recurring_Cost}
                   </Text>
@@ -499,7 +499,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                     Annual Cost
                   </Text>
                 </View>
-                <View style={styles.secondTableColum}>
+                <View style={styles.secondTableColum1}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     ${item.Annual_Cost}
                   </Text>
@@ -507,7 +507,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
               </View>
             ) : null}
 
-            <View style={{height: 70, width: '100%', borderTopWidth: 1}}></View>
+            <View style={{height: 70, width: '100%'}}></View>
           </>
         ) : (
           <OrderLoder />
@@ -622,12 +622,9 @@ const styles = StyleSheet.create({
     height: 50,
 
     flexDirection: 'row',
-    borderTopColor: 'black',
-    borderTopWidth: 1,
-    borderBottomColor: 'black',
 
-    borderLeftColor: 'black',
-    borderLeftWidth: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: 'black',
   },
   secondTableRow1: {
     width: '100%',
@@ -637,8 +634,16 @@ const styles = StyleSheet.create({
   secondTableColum: {
     width: '50%',
     height: '100%',
-    borderRightColor: 'black',
-    borderRightWidth: 1,
+
+    paddingLeft: 10,
+    justifyContent: 'center',
+  },
+  secondTableColum1: {
+    width: '50%',
+    height: '100%',
+    borderLeftColor: 'black',
+    borderLeftWidth: 0.7,
+
     paddingLeft: 10,
     justifyContent: 'center',
   },

@@ -4,7 +4,14 @@ import Voice from '@react-native-community/voice';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-const SiteIcon = ({setModalVisible, searchBranch, iconShow, setIconShow}) => {
+const IconView = (
+  {
+    // setModalVisible,
+    // searchBranch,
+    // iconShow,
+    // setIconShow
+  },
+) => {
   // console.log(iconShow);
   const onSpeechStartHandler = e => {
     console.log('start handler==>>>', e);
@@ -43,7 +50,7 @@ const SiteIcon = ({setModalVisible, searchBranch, iconShow, setIconShow}) => {
   }, []);
   return (
     <>
-      {iconShow ? (
+      {/* {iconShow ? (
         <TouchableOpacity
           onPress={() => {
             setIconShow(false);
@@ -57,25 +64,25 @@ const SiteIcon = ({setModalVisible, searchBranch, iconShow, setIconShow}) => {
           }}>
           <Entypo name="cross" size={20} color="#898989" />
         </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          onPress={() => {
-            startRecording();
-          }}
-          style={{
-            width: '15%',
-            height: '100%',
+      ) : ( */}
+      <TouchableOpacity
+        onPress={() => {
+          startRecording();
+        }}
+        style={{
+          width: '15%',
+          height: '100%',
 
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <FontAwesome name={'microphone'} size={24} color="#898989" />
-        </TouchableOpacity>
-      )}
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <FontAwesome name={'microphone'} size={24} color="#898989" />
+      </TouchableOpacity>
+      {/* )} */}
     </>
   );
 };
 
-export default SiteIcon;
+export default IconView;
 
 const styles = StyleSheet.create({});
