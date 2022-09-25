@@ -4,6 +4,7 @@ import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import OrderLoder from '../../../components/lodder/OrderLoder';
 const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
@@ -11,6 +12,111 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.allDeviceDetails);
   // console.log(item, 'pp');
+  const GrewRow = ({title, value}) => {
+    return (
+      <View style={{...styles.secondTableRow}}>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            backgroundColor: '#fbe5d6',
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+        </View>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            borderLeftColor: 'black',
+            borderLeftWidth: 0.7,
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+        </View>
+      </View>
+    );
+  };
+  const SkyRow = ({title, value}) => {
+    return (
+      <View style={{...styles.secondTableRow}}>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            backgroundColor: '#b7ecff',
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+        </View>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            borderLeftColor: 'black',
+            borderLeftWidth: 0.7,
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+        </View>
+      </View>
+    );
+  };
+  const GrewLightRow = ({title, value}) => {
+    return (
+      <View style={{...styles.secondTableRow}}>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            backgroundColor: '#deebf7',
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+        </View>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            borderLeftColor: 'black',
+            borderLeftWidth: 0.7,
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+        </View>
+      </View>
+    );
+  };
+  const YellowDarkRow = ({title, value}) => {
+    return (
+      <View style={{...styles.secondTableRow}}>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            backgroundColor: '#e2f0d9',
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+        </View>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            borderLeftColor: 'black',
+            borderLeftWidth: 0.7,
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+        </View>
+      </View>
+    );
+  };
+  const YellowRow = ({title, value}) => {
+    return (
+      <View style={{...styles.secondTableRow}}>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            backgroundColor: '#ffffcc',
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+        </View>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            borderLeftColor: 'black',
+            borderLeftWidth: 0.7,
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+        </View>
+      </View>
+    );
+  };
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -72,9 +178,15 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                     Device Name
                   </Text>
                 </View>
-                <View style={styles.tt}>
+
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                  }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Device_Name}
+                    {item.Device_Name}
                   </Text>
                 </View>
               </View>
@@ -86,7 +198,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                 <View
                   style={{
                     ...styles.secondTableColum,
-                    backgroundColor: item?.Device_Name ? '#deebf7' : 'red',
+                    backgroundColor: item.Device_Name ? '#deebf7' : 'white',
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
                     Device Status
@@ -94,121 +206,33 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                 </View>
                 <View
                   style={{
-                    ...styles.tt,
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
                     backgroundColor:
-                      item?.Device_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
+                      item.Device_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Device_Status}
+                    {item.Device_Status}
                   </Text>
                 </View>
               </View>
 
               {/* ===================== */}
               {/* ===================== */}
-
-              <View style={{...styles.secondTableRow}}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Device Vendor
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Device_Vendor}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Device Type
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Device_Type}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Device Function
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Device_Function}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Device Layer
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Device_Layer}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Device Details
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Device_Details}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-              {/* ===================== */}
-
-              {/* ============== Second Table Row============== */}
-              {/* ============== Second Table Row============== */}
-              {/* ===================== */}
+              <GrewRow title="Vendor" value={item.Device_Vendor} />
+              <GrewRow title="Device Type" value={item.Device_Type} />
+              <GrewRow title="Environment" value={item.Device_Environment} />
+              <GrewRow title="Device Function" value={item.Device_Function} />
+              <GrewRow title="Device Layer" value={item.Device_Layer} />
+              <GrewRow
+                title="Device Details"
+                value={item.Device_Details ? item.Device_Details : '--'}
+              />
+              <SkyRow
+                title="Branch ID"
+                value={item.Branch_ID ? item.Branch_ID : '--'}
+              />
 
               <View style={styles.secondTableRow}>
                 <View
@@ -217,17 +241,35 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                     backgroundColor: '#b7ecff',
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Branch ID
+                    Site ID
                   </Text>
                 </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Branch_ID}
+
+                <TouchableOpacity
+                  onPress={() => {
+                    deviceRefExplore.current.close();
+                    bottomSheetRef.current.close();
+                  }}
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                  }}>
+                  <Text style={{fontWeight: '700', color: '#007aff'}}>
+                    {item.Site_ID}
                   </Text>
-                </View>
+                  <FontAwesome
+                    name="map-marker"
+                    style={{marginLeft: 6}}
+                    size={24}
+                    color="#007aff"
+                  />
+                </TouchableOpacity>
               </View>
 
-              {/* ===================== */}
               {/* ===================== */}
 
               <View style={styles.secondTableRow}>
@@ -242,819 +284,256 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                 </View>
                 <View
                   style={{
-                    ...styles.tt,
-                    backgroundColor: item?.Site_Status ? '#c6efcd' : '#e7c4b5',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Site_Status}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
                     ...styles.secondTableColum,
-                    backgroundColor: '#b7ecff',
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+                    backgroundColor: item.Site_Status ? '#c6efcd' : '#e7c4b5',
                   }}>
                   <Text style={{fontWeight: '700', color: 'black'}}>
-                    Site Type Concatenated Detail
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.tt,
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Site_Type_Concatenated_Detail}
+                    {item.Site_Status}
                   </Text>
                 </View>
               </View>
-
-              {/* ===================== */}
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Service ID
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Service_ID}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Domain
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Domain}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ====================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Loopback Address
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Loopback_Address}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ====================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Serial Number
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Serial_Number}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ====================== */}
-              {/* ====================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>Model</Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Model}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ====================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    MAC ID
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.MAC_ID}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ====================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Hardware Version
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Hardware_Version}
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Software Version
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Software_Version}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ====================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Management Interface
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Management_Interface}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ====================== */}
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Associated Circuit
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Associated_Circuit}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    System Description
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.System_Description?.substr(1, 22)}...
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Config Compliance
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Config_Compliance}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Code Compliance
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Code_Compliance}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Responsible Engineer
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Responsible_Engineer?.substr(1, 20)}...
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Responsible Engineer Validation Date
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Responsible_Engineer_Validation_Date
-                      ? moment(
-                          item?.Responsible_Engineer_Validation_Date,
-                        ).format('DD-MM-YYYY')
-                      : '--'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Last Polled
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Last_Polled_or_Discovery}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#e2f0d9',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Maint Plan
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Maintenance_Coverage_Plan?.substr(1, 20)}...
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#e2f0d9',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Maint Cost(M)
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Maintenance_M}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#e2f0d9',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    License Cost(M)
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.License_M}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#e2f0d9',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Resale Value
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Resale_Value}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#ffffcc',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Purchase Date
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Purchase_Date
-                      ? moment(item?.Purchase_Date).format('DD-MM-YYYY')
-                      : '--'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#ffffcc',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Decom_Date
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Decom_Date
-                      ? moment(item?.Decom_Date).format('DD-MM-YYYY')
-                      : '--'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#ffffcc',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    EOL Date
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.EOL_Date
-                      ? moment(item?.EOL_Date).format('DD-MM-YYYY')
-                      : '--'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#ffffcc',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    EOS Date
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.EOS_Date
-                      ? moment(item?.EOS_Date).format('DD-MM-YYYY')
-                      : '--'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#ffffcc',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    LDoS Date
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.LDoS_Date
-                      ? moment(item?.LDoS_Date).format('DD-MM-YYYY')
-                      : '--'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#ffffcc',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    LDoS Date
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Last_Patch_Date
-                      ? moment(item?.Last_Patch_Date).format('DD-MM-YYYY')
-                      : '--'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    EOL Count
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.EOL_Count}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Upgraded Code
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Upgraded_Code}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Compliant
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Compliant}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ===================== 01/08/ */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#dedbf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Non Compliant
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Non_Compliant}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ==================== */}
-              {/* ===================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    In Progress
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.In_Progress}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ==================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Vulnerability SLA Target
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Vulnerability_SLA_Achievement_Target
-                      ? moment(
-                          item?.Vulnerability_SLA_Achievement_Target,
-                        ).format('YYYY-MM-DD')
-                      : '--'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ==================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Prod Rel Team
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item?.Prod_Rel_Team}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ==================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Compiled
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text
-                    style={{
-                      fontWeight: '700',
-                      color: 'black',
-                      marginVertical: 3,
-                    }}>
-                    {item?.Compiled
-                      ? moment(item?.Compiled).format('YYYY-MM-DD')
-                      : '--'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ==================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Alt System Description
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text
-                    style={{
-                      fontWeight: '700',
-                      color: 'black',
-                      marginVertical: 3,
-                    }}>
-                    {item?.Alternate_System_Description?.substr(1, 20)}...
-                  </Text>
-                </View>
-              </View>
-
-              {/* ==================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Alt Device Name
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text
-                    style={{
-                      fontWeight: '700',
-                      color: 'black',
-                      marginVertical: 3,
-                    }}>
-                    {item?.Alternative_Device_Name}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ==================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    NB First Discovery Time
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text
-                    style={{
-                      fontWeight: '700',
-                      color: 'black',
-                      marginVertical: 3,
-                    }}>
-                    {item?.NB_First_Discovery_Time
-                      ? moment(item?.NB_First_Discovery_Time).format(
-                          'YYYY-MM-DD',
-                        )
-                      : '--'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ==================== */}
-
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    NB Last Discovery Time
-                  </Text>
-                </View>
-                <View style={styles.tt}>
-                  <Text
-                    style={{
-                      fontWeight: '700',
-                      color: 'black',
-                      marginVertical: 3,
-                    }}>
-                    {item?.NB_Last_Discovery_Time
-                      ? moment(item?.NB_Last_Discovery_Time).format(
-                          'YYYY-MM-DD',
-                        )
-                      : '--'}
-                  </Text>
-                </View>
-              </View>
-
-              {/* ==================== */}
-
-              <View
-                style={{height: 80, width: '100%', borderTopWidth: 0}}></View>
+              <SkyRow
+                title="Site Type Primary"
+                value={
+                  item.Site_Type_Hierarchical
+                    ? item.Site_Type_Hierarchical
+                    : '--'
+                }
+              />
+              <SkyRow
+                title="Site Type Detail"
+                value={
+                  item.Site_Type_Concatenated_Detail
+                    ? item.Site_Type_Concatenated_Detail
+                    : '--'
+                }
+              />
+              <SkyRow
+                title="Address"
+                value={item.SmartSite_Address ? item.SmartSite_Address : '--'}
+              />
+              <GrewLightRow title="Circuits" value={'--'} />
+              <GrewLightRow
+                title="Service ID"
+                value={item.Service_ID ? item.Service_ID : '--'}
+              />
+              <GrewLightRow
+                title="Domain"
+                value={item.Domain ? item.Domain : '--'}
+              />
+              <GrewLightRow
+                title="Mgmt Interface"
+                value={
+                  item.Management_Interface ? item.Management_Interface : '--'
+                }
+              />
+
+              <GrewLightRow
+                title="Loopback Address"
+                value={item.Loopback_Address ? item.Loopback_Address : '--'}
+              />
+              <GrewLightRow
+                title="Serial Number"
+                value={item.Serial_Number ? item.Serial_Number : '--'}
+              />
+              <GrewLightRow
+                title="Model"
+                value={item.Model ? item.Model : '--'}
+              />
+              <GrewLightRow
+                title="MAC ID"
+                value={item.MAC_ID ? item.MAC_ID : '--'}
+              />
+              <GrewLightRow
+                title="Hardware Version"
+                value={item.Hardware_Version ? item.Hardware_Version : '--'}
+              />
+              <GrewLightRow
+                title="Software Version"
+                value={item.Software_Version ? item.Software_Version : '--'}
+              />
+              <GrewLightRow
+                title="System Description"
+                value={item.System_Description ? item.System_Description : '--'}
+              />
+              <GrewLightRow
+                title="Config Compliance"
+                value={item.Config_Compliance ? item.Config_Compliance : '--'}
+              />
+              <GrewLightRow
+                title="Code Compliance"
+                value={item.Code_Compliance ? item.Code_Compliance : '--'}
+              />
+              <GrewLightRow
+                title="Contact Info"
+                value={
+                  item.Contact_Information ? item.Contact_Information : '--'
+                }
+              />
+              <GrewLightRow
+                title="Responsible Engineer"
+                value={
+                  item.Responsible_Engineer ? item.Responsible_Engineer : '--'
+                }
+              />
+              <GrewLightRow
+                title="Re Validation Date"
+                value={
+                  item.Responsible_Engineer_Validation_Date
+                    ? moment(item.Responsible_Engineer_Validation_Date).format(
+                        'MM-DD-YY',
+                      )
+                    : '--'
+                }
+              />
+              <GrewLightRow
+                title="Last Polled"
+                value={
+                  item.Last_Polled_or_Discovery
+                    ? item.Last_Polled_or_Discovery
+                    : '--'
+                }
+              />
+              <YellowDarkRow title="Maint Plan" value={'--'} />
+              <YellowDarkRow
+                title="Maint Cost(M)"
+                value={item.License_M ? item.License_M : `$${0}`}
+              />
+              <YellowDarkRow
+                title="License Cost(M)"
+                value={
+                  item.Maintenance_Coverage_Plan
+                    ? `$${item.Maintenance_Coverage_Plan}`
+                    : '$ 0'
+                }
+              />
+              <YellowDarkRow title="Replacement Cost(M)" value={'$ 0'} />
+              <YellowDarkRow
+                title="ReSale Value"
+                value={item.Resale_Value ? `$${item.Resale_Value}` : `$${0}`}
+              />
+              <YellowDarkRow
+                title="Overhead Cost(M)"
+                value={item.Overhead_M ? `$${item.Overhead_M}` : `$${0}`}
+              />
+              <YellowRow
+                title="Purchase Date"
+                value={
+                  item.Purchase_Date
+                    ? moment(item.Purchase_Date).format('MM-DD-YY')
+                    : '--'
+                }
+              />
+              <YellowRow
+                title="EOL Date"
+                value={
+                  item.EOL_Date
+                    ? moment(item.EOL_Date).format('MM-DD-YY')
+                    : '--'
+                }
+              />
+              <YellowRow
+                title="EOS Date"
+                value={
+                  item.EOS_Date
+                    ? moment(item.EOS_Date).format('MM-DD-YY')
+                    : '--'
+                }
+              />
+              <YellowRow
+                title="LDoS Date"
+                value={
+                  item.LDoS_Date
+                    ? moment(item.LDoS_Date).format('MM-DD-YY')
+                    : '--'
+                }
+              />
+              <YellowRow
+                title="Last Patch Date"
+                value={
+                  item.LDoS_Date
+                    ? moment(item.Last_Patch_Date).format('MM-DD-YY')
+                    : '--'
+                }
+              />
+              <GrewLightRow
+                title="EOL Count"
+                value={item.EOL_Count ? item.EOL_Count : '--'}
+              />
+              <GrewLightRow
+                title="Upgraded Code"
+                value={item.Upgraded_Code ? item.Upgraded_Code : '--'}
+              />
+              <GrewLightRow
+                title="Compliant"
+                value={item.Compliant ? item.Compliant : '--'}
+              />
+              <GrewLightRow
+                title="Compliant"
+                value={item.Compliant ? item.Compliant : '--'}
+              />
+              <GrewLightRow
+                title="Non Compliant"
+                value={item.Non_Compliant ? item.Non_Compliant : '--'}
+              />
+              <GrewLightRow
+                title="In Progress"
+                value={item.In_Progress ? item.In_Progress : '--'}
+              />
+              <GrewLightRow
+                title="Vulnerability SLA Target"
+                value={
+                  item.Vulnerability_SLA_Achievement_Target
+                    ? moment(item.Vulnerability_SLA_Achievement_Target).format(
+                        'YYYY-MM-DD',
+                      )
+                    : '--'
+                }
+              />
+              <GrewLightRow
+                title="Prod Rel Team"
+                value={item.Prod_Rel_Team ? item.Prod_Rel_Team : '--'}
+              />
+              <GrewLightRow
+                title="Compiled"
+                value={item.Compiled ? item.Compiled : '--'}
+              />
+              <GrewLightRow
+                title="Alt System Description"
+                value={
+                  item.Alternate_System_Description
+                    ? item.Alternate_System_Description
+                    : '--'
+                }
+              />
+              <GrewLightRow
+                title="Alt Device Name"
+                value={
+                  item.Alternative_Device_Name
+                    ? item.Alternative_Device_Name
+                    : '--'
+                }
+              />
+              <GrewLightRow
+                title="NB First Discovery Time"
+                value={
+                  item.NB_First_Discovery_Time
+                    ? moment(item.NB_First_Discovery_Time).format('YYYY-MM-DD')
+                    : '--'
+                }
+              />
+              <GrewLightRow
+                title="NB Last Discovery Time"
+                value={
+                  item.NB_Last_Discovery_Time
+                    ? moment(item.NB_Last_Discovery_Time).format('YYYY-MM-DD')
+                    : '--'
+                }
+              />
+
+              <View style={{height: 60, width: '100%'}}></View>
             </>
           )}
         </>

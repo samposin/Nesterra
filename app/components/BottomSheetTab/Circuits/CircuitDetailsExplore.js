@@ -9,10 +9,30 @@ import moment from 'moment';
 import OrderLoder from '../../lodder/OrderLoder';
 const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
-  // const {inv_Id} = route.params;
+
   const {item} = useSelector(state => state.CircuitDetailsExplore);
   // console.log(item);
-
+  const LightGrewRow = ({title, value, bgcolor}) => {
+    return (
+      <View style={{...styles.secondTableRow}}>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            backgroundColor: bgcolor,
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+        </View>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            borderRightColor: 'black',
+            borderLeftWidth: 1,
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+        </View>
+      </View>
+    );
+  };
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -55,31 +75,11 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
         {!lodding ? (
           <>
             {/* ===================== */}
-
-            <View style={{...styles.secondTableRow}}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#deebf7',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  Circuit ID
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Circuit_ID}
-                </Text>
-              </View>
-            </View>
-
-            {/* ===================== */}
-            {/* ===================== */}
+            <LightGrewRow
+              bgcolor="#deebf7"
+              title="Circuit ID"
+              value={item.Circuit_ID}
+            />
 
             <View style={{...styles.secondTableRow}}>
               <View
@@ -105,58 +105,22 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
               </View>
             </View>
 
-            {/* ===================== */}
-            {/* ===================== */}
-
-            <View style={{...styles.secondTableRow}}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#deebf7',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  Assoc ID
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Associated_ID ? item.Associated_ID : '--'}
-                </Text>
-              </View>
-            </View>
-
-            {/* ===================== */}
-            {/* ===================== */}
+            <LightGrewRow
+              title="Assoc ID"
+              bgcolor="#deebf7"
+              value={item.Associated_ID ? item.Associated_ID : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#deebf7"
+              title="LEC ID"
+              value={item.LEC_ID ? item.LEC_ID : '--'}
+            />
 
             <View style={styles.secondTableRow}>
               <View
                 style={{
                   ...styles.secondTableColum,
-                  backgroundColor: '#deebf7',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>LEC ID</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.LEC_ID}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#deebf7',
+                  backgroundColor: '#b7ecff',
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>Site ID</Text>
               </View>
@@ -180,338 +144,90 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
 
             {/* ===================== */}
             {/* ===================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#b7ecff',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  Full Address
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Address}
-                </Text>
-              </View>
-            </View>
-
-            {/* ===================== */}
-            {/* ===================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#fbe5d6',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>Vendor</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Vendor}
-                </Text>
-              </View>
-            </View>
-
-            {/* ===================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#fbe5d6',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  Category
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Category}
-                </Text>
-              </View>
-            </View>
-
-            {/* ===================== */}
-            {/* ===================== */}
-
-            {/* ============== Second Table Row============== */}
-            {/* ============== Second Table Row============== */}
-            {/* ===================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#fbe5d6',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>SubCat1</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.SubCat_1}
-                </Text>
-              </View>
-            </View>
-
-            {/* ===================== */}
-            {/* ===================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#fbe5d6',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>SubCat2</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.SubCat_2 ? item.SubCat_2 : '--'}
-                </Text>
-              </View>
-            </View>
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#fbe5d6',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>SubCat3</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.SubCat_3 ? tem.SubCat_3 : '--'}
-                </Text>
-              </View>
-            </View>
-
-            {/* ===================== */}
-            {/* ===================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#fbe5d6',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  Whitelist Type
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Whitelist_Use_Type ? item.Whitelist_Use_Type : '--'}
-                </Text>
-              </View>
-            </View>
-
-            {/* ===================== */}
-            {/* ===================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#deebf7',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  Vendor Account
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Vendor_Account_Number
-                    ? item.Vendor_Account_Number
-                    : '--'}
-                </Text>
-              </View>
-            </View>
-
-            {/* ===================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#deebf7',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  Summary Account
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Summary_Account_Number
-                    ? item.Summary_Account_Number
-                    : '--'}
-                </Text>
-              </View>
-            </View>
-
-            {/* ====================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#deebf7',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>Mbps</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Mbps ? item.Mbps : '--'}
-                </Text>
-              </View>
-            </View>
-
-            {/* ====================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#e2f0d9',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  Circuit Cost(M)
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  ${item.circuit_charge}
-                </Text>
-              </View>
-            </View>
-
-            {/* ====================== */}
-            {/* ====================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#e2f0d9',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>GL</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.GL}
-                </Text>
-              </View>
-            </View>
-
-            {/* ====================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#e2f0d9',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>RC</Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.RC}
-                </Text>
-              </View>
-            </View>
-
-            {/* ====================== */}
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#deebf7',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  B-End Location
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Location_B_End ? item.Location_B_End : '--'}
-                </Text>
-              </View>
-            </View>
+            <LightGrewRow
+              bgcolor="#b7ecff"
+              title="Constact Site Types"
+              value={'--'}
+            />
+            <LightGrewRow
+              bgcolor="#b7ecff"
+              title="Full Address"
+              value={item.Address ? item.Address : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#fbe5d6"
+              title="Vendor"
+              value={item.Vendor ? item.Vendor : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#fbe5d6"
+              title="Category"
+              value={item.Category ? item.Category : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#fbe5d6"
+              title="SubCat1"
+              value={item.SubCat_1 ? item.SubCat_1 : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#fbe5d6"
+              title="SubCat2"
+              value={item.SubCat_2 ? item.SubCat_2 : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#fbe5d6"
+              title="SubCat3"
+              value={item.SubCat_3 ? item.SubCat_3 : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#fbe5d6"
+              title="Whitelist Type"
+              value={item.Whitelist_Use_Type ? item.Whitelist_Use_Type : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#deebf7"
+              title="Vendor Account"
+              value={
+                item.Vendor_Account_Number ? item.Vendor_Account_Number : '--'
+              }
+            />
+            <LightGrewRow
+              bgcolor="#deebf7"
+              title="Summary Account"
+              value={
+                item.Summary_Account_Number ? item.Summary_Account_Number : '--'
+              }
+            />
+            <LightGrewRow
+              bgcolor="#deebf7"
+              title="Mbps"
+              value={item.Mbps ? item.Mbps : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#e2f0d9"
+              title="Circuit Cost(M)"
+              value={item.circuit_charge ? `$${item.circuit_charge}` : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#e2f0d9"
+              title="Circuit Cost(Y)"
+              value={item.circuit_charge ? `$${item.circuit_charge}` : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#e2f0d9"
+              title="GL"
+              value={item.GL ? item.GL : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#e2f0d9"
+              title="RC"
+              value={item.RC ? item.RC : '--'}
+            />
+            <LightGrewRow
+              bgcolor="#deebf7"
+              title="B-End Location"
+              value={item.Location_B_End ? item.Location_B_End : '--'}
+            />
 
             <View style={{height: 100, width: '100%'}}></View>
           </>

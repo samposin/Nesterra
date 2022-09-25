@@ -11,7 +11,27 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding}) => {
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.orderDetails);
   // console.log(item);
-
+  const DarkYellow = ({title, value, bgClor}) => {
+    return (
+      <View style={{...styles.secondTableRow}}>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            backgroundColor: '#e2f0d9',
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+        </View>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            borderLeftColor: 'black',
+            borderLeftWidth: 0.7,
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+        </View>
+      </View>
+    );
+  };
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -53,6 +73,7 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding}) => {
       <BottomSheetScrollView style={{paddingHorizontal: 10, marginTop: 10}}>
         {!lodding ? (
           <>
+            <DarkYellow title="SmartSites#" value={item.Smart_Site_Order_No} />
             {/* ===================== */}
             {item?.Smart_Site_Order_No ? (
               <View style={{...styles.secondTableRow}}>
@@ -61,14 +82,10 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding}) => {
                     ...styles.secondTableColum,
                     backgroundColor: '#deebf7',
                   }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    SmartSites#
-                  </Text>
+                  <Text style={{fontWeight: '700', color: 'black'}}></Text>
                 </View>
                 <View style={styles.secondTableColum}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Smart_Site_Order_No}
-                  </Text>
+                  <Text style={{fontWeight: '700', color: 'black'}}>{}</Text>
                 </View>
               </View>
             ) : null}

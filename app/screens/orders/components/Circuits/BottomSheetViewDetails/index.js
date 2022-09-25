@@ -12,7 +12,27 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.orderDetails);
   // console.log(item);
-
+  const DarkYellow = ({title, value, bgClor}) => {
+    return (
+      <View style={{...styles.secondTableRow}}>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            backgroundColor: bgClor,
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+        </View>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            borderLeftColor: 'black',
+            borderLeftWidth: 0.7,
+          }}>
+          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+        </View>
+      </View>
+    );
+  };
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -55,457 +75,172 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
         {!lodding1 ? (
           <>
             {/* ===================== */}
-            {item?.Smart_Site_Order_No ? (
-              <View style={{...styles.secondTableRow}}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    SmartSites#
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Smart_Site_Order_No}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ===================== */}
-            {item?.PON ? (
-              <View style={{...styles.secondTableRow}}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>PON</Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.PON}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ===================== */}
-            {item?.Order_Number ? (
-              <View style={{...styles.secondTableRow}}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Order Number
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Order_Number}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
+            <DarkYellow
+              title="SmartSites#"
+              bgClor="#deebf7"
+              value={item.Smart_Site_Order_No}
+            />
 
-            {/* ===================== */}
-            {item?.Order_Type ? (
-              <View style={{...styles.secondTableRow}}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#f2f2f2',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Order Type
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.secondTableColum1,
-                    backgroundColor:
-                      item.Order_Type == 'Add' ? '#c6efcd' : '#e7c4b5',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Order_Type}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ===================== */}
-            {item?.Inventory_ID ? (
-              <View style={{...styles.secondTableRow}}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#f2f2f2',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Inventory ID
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.secondTableColum1,
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Inventory_ID}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ===================== */}
-            {item?.Status ? (
-              <View style={{...styles.secondTableRow}}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#f2f2f2',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Status
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.secondTableColum1,
-                    backgroundColor:
-                      item.Status == 'Completed' ? '#c6efcd' : '#e7c4b5',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Status}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ===================== */}
-            {item?.Address ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#b7ecff',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Address
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Address}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
+            <DarkYellow title="Tangoe#" bgClor="#deebf7" value={'--'} />
+            <DarkYellow title="Carrier#" bgClor="#deebf7" value={'--'} />
+            <DarkYellow
+              title=" Project Assignment "
+              bgClor="#f2f2f2"
+              value={item.Project ? item.Project : '--'}
+            />
+            <DarkYellow
+              title="Technical Contact"
+              bgClor="#f2f2f2"
+              value={
+                item.Technical_Contact_Name ? item.Technical_Contact_Name : '--'
+              }
+            />
 
-            {/* ===================== */}
-            {item?.Branch_ID ? (
-              <View style={{...styles.secondTableRow}}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#deebf7',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Branch ID
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Branch_ID}
-                  </Text>
-                </View>
+            <View style={{...styles.secondTableRow}}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#f2f2f2',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  Order Type
+                </Text>
               </View>
-            ) : null}
+              <View
+                style={{
+                  ...styles.secondTableColum1,
+                  backgroundColor:
+                    item.Order_Type == 'Add' ? '#c6efcd' : '#e7c4b5',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.Order_Type}
+                </Text>
+              </View>
+            </View>
+            <DarkYellow
+              title="Inventory ID"
+              bgClor="#f2f2f2"
+              value={item.Inventory_ID ? item.Inventory_ID : '--'}
+            />
 
-            {/* ===================== */}
-            {item?.Initiation_Date ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#ffffcc',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Initiation Date
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(item.Initiation_Date).format('MM/DD/YY')}
-                  </Text>
-                </View>
+            <View style={{...styles.secondTableRow}}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#f2f2f2',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>Status</Text>
               </View>
-            ) : null}
-            {/* ===================== */}
-
-            {item?.Creation_Date ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#ffffcc',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Creation Date
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(item.Creation_Date).format('MM/DD/YY')}
-                  </Text>
-                </View>
+              <View
+                style={{
+                  ...styles.secondTableColum1,
+                  backgroundColor:
+                    item.Status == 'Completed' ? '#c6efcd' : '#e7c4b5',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>
+                  {item.Status}
+                </Text>
               </View>
-            ) : null}
-            {/* ===================== */}
-
-            {item?.FOC_Date ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#ffffcc',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    FOC Date
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(item.FOC_Date).format('DD/MM/YYYY')}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ===================== */}
-
-            {item?.Order_Completion_Date ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#ffffcc',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Completion_Date
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(item.Order_Completion_Date).format('MM/DD/YY')}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ===================== */}
-
-            {item?.Bill_Stop_Date ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#ffffcc',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Bill Stop Date
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {moment(item.Bill_Stop_Date).format('MM/DD/YY')}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
-            {item?.Vendor ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Vendor
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Vendor}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ===================== */}
-            {item?.Category ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Category
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.Category}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
-            {/* ===================== */}
-
-            {/* ============== Second Table Row============== */}
-            {/* ============== Second Table Row============== */}
-            {/* ===================== */}
-            {item?.SubCat_1 ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    SubCat1
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.SubCat_1}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
-            {/* ===================== */}
-            {item?.SubCat_2 ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    SubCat2
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.secondTableColum1,
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.SubCat_2}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ===================== */}
-            {item?.SubCat_3 ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#fbe5d6',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    SubCat3
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.secondTableColum1,
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.SubCat_3}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-
-            {/* ===================== */}
-
-            {/* ====================== */}
-            {item?.RC ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#e2f0d9',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>RC</Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.RC}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ====================== */}
-
-            {/* ====================== */}
-            {item?.GL ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#e2f0d9',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>GL</Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    {item.GL}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ====================== */}
-            {item?.Monthly_Recurring_Cost ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#e2f0d9',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Monthly Cost
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    ${item.Monthly_Recurring_Cost}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
-            {/* ====================== */}
-            {item?.Annual_Cost ? (
-              <View style={styles.secondTableRow}>
-                <View
-                  style={{
-                    ...styles.secondTableColum,
-                    backgroundColor: '#e2f0d9',
-                  }}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    Annual Cost
-                  </Text>
-                </View>
-                <View style={styles.secondTableColum1}>
-                  <Text style={{fontWeight: '700', color: 'black'}}>
-                    ${item.Annual_Cost}
-                  </Text>
-                </View>
-              </View>
-            ) : null}
+            </View>
+            <DarkYellow
+              title="Site ID"
+              bgClor="#b7ecff"
+              value={item.Location_ID ? item.Location_ID : '--'}
+            />
+            <DarkYellow
+              title="Address"
+              bgClor="#b7ecff"
+              value={item.Address ? item.Address : '--'}
+            />
+            <DarkYellow
+              title="Branch ID"
+              bgClor="#b7ecff"
+              value={item.Branch_ID ? item.Branch_ID : '--'}
+            />
+            <DarkYellow
+              title="Initiation Date"
+              bgClor="#ffffcc"
+              value={
+                moment(item.Initiation_Date).format('MM/DD/YY')
+                  ? moment(item.Initiation_Date).format('MM/DD/YY')
+                  : '--'
+              }
+            />
+            <DarkYellow
+              title="Creation Date"
+              bgClor="#ffffcc"
+              value={
+                moment(item.Creation_Date).format('MM/DD/YY')
+                  ? moment(item.Creation_Date).format('MM/DD/YY')
+                  : '--'
+              }
+            />
+            <DarkYellow
+              title="FOC Date"
+              bgClor="#ffffcc"
+              value={
+                moment(item.FOC_Date).format('MM/DD/YY')
+                  ? moment(item.FOC_Date).format('MM/DD/YY')
+                  : '--'
+              }
+            />
+            <DarkYellow
+              title="Completion Date"
+              bgClor="#ffffcc"
+              value={
+                moment(item.Order_Completion_Date).format('MM/DD/YY')
+                  ? moment(item.Order_Completion_Date).format('MM/DD/YY')
+                  : '--'
+              }
+            />
+            <DarkYellow
+              title="Bill Stop Date"
+              bgClor="#ffffcc"
+              value={
+                moment(item.Bill_Stop_Date).format('MM/DD/YY')
+                  ? moment(item.Bill_Stop_Date).format('MM/DD/YY')
+                  : '--'
+              }
+            />
+            <DarkYellow
+              title="Vendor"
+              bgClor="#fbe5d6"
+              value={item.Vendor ? item.Vendor : '--'}
+            />
+            <DarkYellow
+              title="Category"
+              bgClor="#fbe5d6"
+              value={item.Category ? item.Category : '--'}
+            />
+            <DarkYellow
+              title="Sub Category"
+              bgClor="#fbe5d6"
+              value={item.Subcat_1 ? item.Subcat_1 : '--'}
+            />
+            <DarkYellow
+              title="RC"
+              bgClor="#e2f0d9"
+              value={item.RC ? item.RC : '--'}
+            />
+            <DarkYellow
+              title="GL"
+              bgClor="#e2f0d9"
+              value={item.GL ? item.GL : '--'}
+            />
+            <DarkYellow
+              title="Monthly Cost"
+              bgClor="#e2f0d9"
+              value={
+                item.Monthly_Recurring_Cost
+                  ? `$${item.Monthly_Recurring_Cost}`
+                  : `$${0}`
+              }
+            />
+            <DarkYellow
+              title="Annual Cost"
+              bgClor="#e2f0d9"
+              value={item.Annual_Cost ? `$${item.Annual_Cost}` : `$${0}`}
+            />
 
             <View style={{height: 70, width: '100%'}}></View>
           </>

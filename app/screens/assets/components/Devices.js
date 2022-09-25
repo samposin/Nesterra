@@ -49,7 +49,7 @@ const Devices = ({
 
   // const {isLoding} = useSelector(state => state.deviceAllData);
   const dispatch = useDispatch();
-  const id = deviceAllData.filter(item => item.Device_Status == 'Active');
+  // const id = deviceAllData.filter(item => item.Device_Status == 'Active');
   // console.log(id.length);
   const [diplayName, setDiplayName] = useState('');
 
