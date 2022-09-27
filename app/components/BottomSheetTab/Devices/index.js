@@ -42,6 +42,107 @@ const Devices = ({deviceRefExplore}) => {
       type: ALL_DATA,
     });
   };
+  const HeaderColum = ({type, title, onPress}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          onPress();
+        }}
+        style={{
+          ...styles.tableRowColum,
+          borderLeftColor: 'white',
+          flexDirection: 'row',
+
+          justifyContent: 'space-around',
+        }}>
+        <Text style={styles.boxText}>{title}</Text>
+        <Text style={{marginTop: 1, marginRight: 3}}>
+          <AntDesign
+            name={type ? 'caretup' : 'caretdown'}
+            size={16}
+            color="white"
+          />
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+  const HeaderColumSecond = ({type, title, onPress}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          onPress();
+        }}
+        style={{
+          ...styles.tableRowColum,
+          borderLeftColor: 'white',
+          borderLeftWidth: 2,
+          flexDirection: 'row',
+          paddingHorizontal: 5,
+          justifyContent: 'space-around',
+        }}>
+        <Text style={styles.boxText}>{title} </Text>
+        <Text style={{marginTop: 1, marginRight: 3}}>
+          <AntDesign
+            name={type ? 'caretup' : 'caretdown'}
+            size={16}
+            color="white"
+          />
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+  const deviceSort = () => {
+    if (idType) {
+      setIdType(!idType);
+      dispatch({
+        type: SORT_BY_DEVICE_ID_ASC,
+      });
+    } else {
+      setIdType(!idType);
+      dispatch({
+        type: SORT_BY_DEVICE_ID_DES,
+      });
+    }
+  };
+  const deviceNameSort = () => {
+    if (nameType) {
+      setNameType(!nameType);
+      dispatch({
+        type: SORT_BY_DEVICE_NAME_ASC,
+      });
+    } else {
+      setNameType(!nameType);
+      dispatch({
+        type: SORT_BY_DEVICE_NAME_DES,
+      });
+    }
+  };
+  const deviceStatusSort = () => {
+    if (statusType) {
+      setStatusType(!statusType);
+      dispatch({
+        type: SORT_BY_DEVICE_STATUS_ASC,
+      });
+    } else {
+      setStatusType(!statusType);
+      dispatch({
+        type: SORT_BY_DEVICE_STATUS_DES,
+      });
+    }
+  };
+  const deviceVendorSort = () => {
+    if (vendorType) {
+      setVendorType(!vendorType);
+      dispatch({
+        type: SORT_BY_DEVICE_VENDOR_ASC,
+      });
+    } else {
+      setVendorType(!vendorType);
+      dispatch({
+        type: SORT_BY_DEVICE_VENDOR_DES,
+      });
+    }
+  };
   return (
     <>
       {/* ==============container============== */}
@@ -68,128 +169,26 @@ const Devices = ({deviceRefExplore}) => {
 
                 flexDirection: 'row',
               }}>
-              <TouchableOpacity
-                onPress={() => {
-                  if (idType) {
-                    setIdType(!idType);
-                    dispatch({
-                      type: SORT_BY_DEVICE_ID_ASC,
-                    });
-                  } else {
-                    setIdType(!idType);
-                    dispatch({
-                      type: SORT_BY_DEVICE_ID_DES,
-                    });
-                  }
-                }}
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  flexDirection: 'row',
-
-                  justifyContent: 'space-around',
-                }}>
-                <Text style={styles.boxText}>Devices ID</Text>
-                <Text style={{marginTop: 1, marginRight: 3}}>
-                  <AntDesign
-                    name={idType ? 'caretup' : 'caretdown'}
-                    size={16}
-                    color="white"
-                  />
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  if (nameType) {
-                    setNameType(!nameType);
-                    dispatch({
-                      type: SORT_BY_DEVICE_NAME_ASC,
-                    });
-                  } else {
-                    setNameType(!nameType);
-                    dispatch({
-                      type: SORT_BY_DEVICE_NAME_DES,
-                    });
-                  }
-                }}
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                  flexDirection: 'row',
-                  paddingHorizontal: 5,
-                  justifyContent: 'space-around',
-                }}>
-                <Text style={styles.boxText}>Device Name </Text>
-                <Text style={{marginTop: 1, marginRight: 3}}>
-                  <AntDesign
-                    name={nameType ? 'caretup' : 'caretdown'}
-                    size={16}
-                    color="white"
-                  />
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  if (statusType) {
-                    setStatusType(!statusType);
-                    dispatch({
-                      type: SORT_BY_DEVICE_STATUS_ASC,
-                    });
-                  } else {
-                    setStatusType(!statusType);
-                    dispatch({
-                      type: SORT_BY_DEVICE_STATUS_DES,
-                    });
-                  }
-                }}
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                  flexDirection: 'row',
-                  paddingHorizontal: 2,
-                  justifyContent: 'space-around',
-                }}>
-                <Text style={styles.boxText}>Device Status</Text>
-                <Text style={{marginTop: 1, marginRight: 3}}>
-                  <AntDesign
-                    name={statusType ? 'caretup' : 'caretdown'}
-                    size={16}
-                    color="white"
-                  />
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  if (vendorType) {
-                    setVendorType(!vendorType);
-                    dispatch({
-                      type: SORT_BY_DEVICE_VENDOR_ASC,
-                    });
-                  } else {
-                    setVendorType(!vendorType);
-                    dispatch({
-                      type: SORT_BY_DEVICE_VENDOR_DES,
-                    });
-                  }
-                }}
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                }}>
-                <Text style={styles.boxText}>Device Vendor</Text>
-                <Text style={{marginTop: 1, marginRight: 3}}>
-                  <AntDesign
-                    name={vendorType ? 'caretup' : 'caretdown'}
-                    size={16}
-                    color="white"
-                  />
-                </Text>
-              </TouchableOpacity>
+              <HeaderColum
+                title="Devices ID"
+                type={idType}
+                onPress={deviceSort}
+              />
+              <HeaderColumSecond
+                title="Device Name"
+                type={nameType}
+                onPress={deviceNameSort}
+              />
+              <HeaderColumSecond
+                title="Device Status"
+                type={statusType}
+                onPress={deviceStatusSort}
+              />
+              <HeaderColumSecond
+                title="Device Vendor"
+                type={vendorType}
+                onPress={deviceVendorSort}
+              />
             </View>
             {/* ==============Table Header============== */}
             {/* ==============Table Body============== */}

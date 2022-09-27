@@ -11,6 +11,7 @@ const {width} = Dimensions.get('screen');
 const w1 = width - 50;
 const w2 = (w1 / 100) * 30;
 const ButtonView = ({id, setSearchView, seTDropDownShow, title}) => {
+  // console.log(id);
   return (
     <TouchableOpacity
       onPress={() => {

@@ -142,6 +142,26 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
         </View>
       ) : (
         <>
+          <TouchableOpacity
+            onPress={() => {
+              bottomSheetRefdetails.current.close();
+              cirCuitRef.current.close();
+              setDiplayName('');
+              get_orders_for_tab(setLodding);
+            }}
+            style={{
+              width: 100,
+              height: 40,
+              borderRadius: 10,
+              backgroundColor: '#d1e7ff',
+              position: 'absolute',
+              top: 7,
+              right: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{color: '#007aff'}}>Clear Search</Text>
+          </TouchableOpacity>
           <SecondRow
             diplayName={diplayName}
             setDiplayName={setDiplayName}

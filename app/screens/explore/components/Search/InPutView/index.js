@@ -4,10 +4,12 @@ import React, {useState} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
 
-const InPutView = ({}) => {
-  const dispatch = useDispatch();
+const InPutView = ({placeHolder, onSearch}) => {
   const [search, setSearch] = useState('');
-
+  const onChange = text => {
+    setSearch(text);
+    onSearch(text);
+  };
   return (
     <>
       <View
@@ -28,9 +30,9 @@ const InPutView = ({}) => {
         <TextInput
           value={search}
           style={{color: 'black'}}
-          placeholder="Search Site  Id"
+          placeholder={placeHolder}
           placeholderTextColor="#5c5b5b"
-          onChangeText={text => setSearch(text)}
+          onChangeText={text => onChange(text)}
         />
       </View>
     </>

@@ -6,6 +6,7 @@ import {
   Text,
   View,
   Image,
+  StatusBar,
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import {connect, useSelector, useDispatch} from 'react-redux';
@@ -253,6 +254,26 @@ const CircuitsNew = ({
         </View>
       ) : (
         <>
+          <TouchableOpacity
+            onPress={() => {
+              circuitRefDetails.current.close();
+              cirCuitRef.current.close();
+              setDiplayName('');
+              getAllCircuit(setLodding3);
+            }}
+            style={{
+              width: 100,
+              height: 40,
+              borderRadius: 10,
+              backgroundColor: '#d1e7ff',
+              position: 'absolute',
+              top: 7,
+              right: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{color: '#007aff'}}>Clear Search</Text>
+          </TouchableOpacity>
           {/* ========Second Row============= */}
           <SecondRow
             diplayName={diplayName}

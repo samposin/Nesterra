@@ -64,9 +64,12 @@ import InPutView from '../InPutView';
 import IconView from '../IconView';
 
 const CircuitID = () => {
+  const searchId = data => {
+    console.log('first', data);
+  };
   return (
     <>
-      <InPutView />
+      <InPutView placeHolder="Search Circuit  Id" onSearch={searchId} />
       <IconView />
     </>
   );

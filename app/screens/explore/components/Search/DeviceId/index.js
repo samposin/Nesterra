@@ -62,9 +62,12 @@ import InPutView from '../InPutView';
 import IconView from '../IconView/index';
 
 const DeviceId = () => {
+  const searchId = data => {
+    console.log('first', data);
+  };
   return (
     <>
-      <InPutView />
+      <InPutView placeHolder="Search Device Id" onSearch={searchId} />
       <IconView />
     </>
   );

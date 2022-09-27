@@ -4,6 +4,7 @@ import {BottomSheetScrollView, BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
+import NoDataViewFlatList from './../../NoDataViewFlatList/index';
 import {
   SORT_BY_CATEGORY_ASC,
   SORT_BY_CATEGORY_DES,
@@ -123,6 +124,83 @@ const Circuits = ({cirCuitRefExplore}) => {
       type: ALL_DATA,
     });
   };
+  const HeaderColum = ({title, onPress, border, type}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          onPress();
+        }}
+        style={{
+          ...styles.tableRowColum,
+          flexDirection: 'row',
+          borderLeftColor: 'white',
+          justifyContent: 'space-around',
+
+          borderLeftWidth: border,
+        }}>
+        <Text style={{...styles.boxText, color: 'white'}}>{title} </Text>
+        <Text style={{marginTop: 1, marginRight: 3}}>
+          <AntDesign
+            name={type ? 'caretup' : 'caretdown'}
+            size={16}
+            color="white"
+          />
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+  const sorrByCId = () => {
+    if (circuitType) {
+      setCircuitType(!circuitType);
+      dispatch({
+        type: SORT_BY_CIRCUIT_ID_ASC,
+      });
+    } else {
+      setCircuitType(!circuitType);
+      dispatch({
+        type: SORT_BY_CIRCUIT_ID_DES,
+      });
+    }
+  };
+  const sorrByVendor = () => {
+    if (vendorType) {
+      setVendorType(!vendorType);
+      dispatch({
+        type: SORT_BY_VENDOR_ASC,
+      });
+    } else {
+      setVendorType(!vendorType);
+      dispatch({
+        type: SORT_BY_VENDOR_DES,
+      });
+    }
+  };
+  const sorrByCategory = () => {
+    if (categoryType) {
+      setCategoryType(!categoryType);
+      dispatch({
+        type: SORT_BY_CATEGORY_ASC,
+      });
+    } else {
+      setCategoryType(!categoryType);
+      dispatch({
+        type: SORT_BY_CATEGORY_DES,
+      });
+    }
+  };
+  const sorrBySubCategory = () => {
+    if (subCat1Type) {
+      setsubCat1Type(!subCat1Type);
+      dispatch({
+        type: SORT_BY_SUBCAT_1_ASC,
+      });
+    } else {
+      setsubCat1Type(!subCat1Type);
+      dispatch({
+        type: SORT_BY_SUBCAT_1_DES,
+      });
+    }
+  };
   return (
     <>
       {/* ==============container============== */}
@@ -148,194 +226,43 @@ const Circuits = ({cirCuitRefExplore}) => {
                 height: 50,
                 flexDirection: 'row',
               }}>
-              <TouchableOpacity
-                onPress={() => {
-                  if (circuitType) {
-                    setCircuitType(!circuitType);
-                    dispatch({
-                      type: SORT_BY_CIRCUIT_ID_ASC,
-                    });
-                  } else {
-                    setCircuitType(!circuitType);
-                    dispatch({
-                      type: SORT_BY_CIRCUIT_ID_DES,
-                    });
-                  }
-                }}
-                style={{
-                  ...styles.tableRowColum,
-                  flexDirection: 'row',
-                  borderLeftColor: 'white',
-                  justifyContent: 'space-around',
-                }}>
-                <Text style={{...styles.boxText, color: 'white'}}>
-                  Circuit ID
-                </Text>
-                <Text style={{marginTop: 1, marginRight: 3}}>
-                  <AntDesign
-                    name={circuitType ? 'caretup' : 'caretdown'}
-                    size={16}
-                    color="white"
-                  />
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  if (vendorType) {
-                    setVendorType(!vendorType);
-                    dispatch({
-                      type: SORT_BY_VENDOR_ASC,
-                    });
-                  } else {
-                    setVendorType(!vendorType);
-                    dispatch({
-                      type: SORT_BY_VENDOR_DES,
-                    });
-                  }
-                }}
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                }}>
-                <Text style={styles.boxText}>Vendor</Text>
-                <Text style={{marginTop: 1, marginRight: 3}}>
-                  <AntDesign
-                    name={vendorType ? 'caretup' : 'caretdown'}
-                    size={16}
-                    color="white"
-                  />
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  if (categoryType) {
-                    setCategoryType(!categoryType);
-                    dispatch({
-                      type: SORT_BY_CATEGORY_ASC,
-                    });
-                  } else {
-                    setCategoryType(!categoryType);
-                    dispatch({
-                      type: SORT_BY_CATEGORY_DES,
-                    });
-                  }
-                }}
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                }}>
-                <Text style={styles.boxText}>Category</Text>
-                <Text style={{marginTop: 1, marginRight: 3}}>
-                  <AntDesign
-                    name={categoryType ? 'caretup' : 'caretdown'}
-                    size={16}
-                    color="white"
-                  />
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  if (subCat1Type) {
-                    setsubCat1Type(!subCat1Type);
-                    dispatch({
-                      type: SORT_BY_SUBCAT_1_ASC,
-                    });
-                  } else {
-                    setsubCat1Type(!subCat1Type);
-                    dispatch({
-                      type: SORT_BY_SUBCAT_1_DES,
-                    });
-                  }
-                }}
-                style={{
-                  ...styles.tableRowColum,
-                  borderLeftColor: 'white',
-                  borderLeftWidth: 2,
-                  flexDirection: 'row',
-                  justifyContent: 'space-around',
-                }}>
-                <Text style={styles.boxText}>Sub Cat 1</Text>
-                <Text style={{marginTop: 1, marginRight: 3}}>
-                  <AntDesign
-                    name={subCat1Type ? 'caretup' : 'caretdown'}
-                    size={16}
-                    color="white"
-                  />
-                </Text>
-              </TouchableOpacity>
+              <HeaderColum
+                title="Circuit ID"
+                type={circuitType}
+                onPress={sorrByCId}
+                border={0}
+              />
+              <HeaderColum
+                title="Vendor"
+                type={vendorType}
+                onPress={sorrByVendor}
+                border={2}
+              />
+              <HeaderColum
+                title="Category"
+                type={categoryType}
+                onPress={sorrByCategory}
+                border={2}
+              />
+              <HeaderColum
+                title="Sub Cat 1"
+                type={subCat1Type}
+                onPress={sorrBySubCategory}
+                border={2}
+              />
             </View>
-            {/* ==============Table Header============== */}
-            {/* ==============Table Body============== */}
-            {/* <BottomSheetScrollView
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={styles.contentContainer}>
-              {cirCuitInventory.map((item, i) => {
-                return (
-                  <TouchableOpacity
-                    onPress={() => {
-                      //  navigation.navigate('CircuitsDetails', {item})
-                      dispatch({
-                        type: CIRCUIT_DETAILS_EXPLORE,
-                        payload: {
-                          data: item,
-                        },
-                      });
-                      cirCuitRefExplore.current.snapToIndex(2);
-                    }}
-                    key={i}
-                    style={{
-                      width: '100%',
-                      height: 40,
-                      backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
-                      flexDirection: 'row',
-                      marginVertical: 1,
-                    }}>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                      }}>
-                      <Text style={styles.boxText1}>{item.Circuit_ID}</Text>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>{item.Vendor}</Text>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>{item.Category}</Text>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <Text style={styles.boxText1}>{item.SubCat_1}</Text>
-                    </View>
-                  </TouchableOpacity>
-                );
-              })}
-              <View style={{height: 80}}></View>
-            </BottomSheetScrollView> */}
+
             <BottomSheetFlatList
               data={cirCuitInventory}
               keyExtractor={(item, i) => i.toString()}
               renderItem={(item, i) => randerItem(item)}
+              ListEmptyComponent={() => {
+                return (
+                  <>
+                    <NoDataViewFlatList />
+                  </>
+                );
+              }}
             />
             {/* ==============Table Body============== */}
           </>

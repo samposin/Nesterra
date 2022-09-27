@@ -510,5 +510,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     justifyContent: 'center',
   },
+
   ///========Second table
 });

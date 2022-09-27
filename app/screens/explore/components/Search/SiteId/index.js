@@ -60,11 +60,20 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import IconView from '../IconView';
 import InPutView from '../InPutView';
+import {useDispatch} from 'react-redux';
+import {SEARCH_BY_SITE_ID} from '../../../../../actions/action.coordinate.type';
 
 const SiteId = () => {
+  const dispatch = useDispatch();
+  const searchId = data => {
+    dispatch({
+      type: SEARCH_BY_SITE_ID,
+      data: data,
+    });
+  };
   return (
     <>
-      <InPutView />
+      <InPutView placeHolder="Search Site Id" onSearch={searchId} />
       <IconView />
     </>
   );
