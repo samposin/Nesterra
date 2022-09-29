@@ -15,21 +15,28 @@ import CircuitId from './CircuitId/index';
 import BranchId from './BranchId';
 import DeviceId from './DeviceId';
 import SiteId from './SiteId';
+import Address from './Address';
+
+import AtmsId from './AtmsId';
 
 const SearchComponet = ({setModalVisible}) => {
   const [dropDownShow, seTDropDownShow] = useState(false);
-  const [searchView, setSearchView] = useState('CircuitId');
+  const [searchView, setSearchView] = useState('Address');
   // console.log(searchView);
   const ranDerView = () => {
     switch (true) {
-      case searchView === 'CircuitId':
+      case searchView === 'Circuit ID':
         return <CircuitId />;
-      case searchView === 'BranchId':
+      case searchView === 'Branch ID':
         return <BranchId />;
-      case searchView === 'DeviceId':
+      case searchView === 'Device ID':
         return <DeviceId />;
-      case searchView === 'SiteId':
+      case searchView === 'Site ID':
         return <SiteId />;
+      case searchView === 'ATM ID':
+        return <AtmsId />;
+      case searchView === 'Address':
+        return <Address />;
     }
   };
   return (
@@ -58,7 +65,9 @@ const SearchComponet = ({setModalVisible}) => {
               top: 15,
               left: 0,
             }}></View>
-          <Text style={{color: '#898989', fontWeight: '500'}}>Address</Text>
+          <Text style={{color: '#898989', fontWeight: '500'}}>
+            {searchView}
+          </Text>
           <AntDesign
             name="caretdown"
             size={15}

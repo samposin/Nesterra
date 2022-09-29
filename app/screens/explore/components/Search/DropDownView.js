@@ -15,7 +15,7 @@ const ButtonView = ({id, setSearchView, seTDropDownShow, title}) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        setSearchView(id);
+        setSearchView(title);
         seTDropDownShow(false);
       }}
       style={{
@@ -33,6 +33,18 @@ const ButtonView = ({id, setSearchView, seTDropDownShow, title}) => {
 const DropDownView = ({setSearchView, seTDropDownShow}) => {
   return (
     <View style={styles.rightVies1}>
+      <ButtonView
+        setSearchView={setSearchView}
+        seTDropDownShow={seTDropDownShow}
+        id={'Address'}
+        title="Address"
+      />
+      <ButtonView
+        setSearchView={setSearchView}
+        seTDropDownShow={seTDropDownShow}
+        id={'AtmsId'}
+        title="ATM ID"
+      />
       <ButtonView
         setSearchView={setSearchView}
         seTDropDownShow={seTDropDownShow}

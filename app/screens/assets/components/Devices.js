@@ -240,7 +240,7 @@ const Devices = ({
         </View>
       ) : (
         <>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               deviceRef.current.close();
               deviceRefDetails.current.close();
@@ -259,7 +259,7 @@ const Devices = ({
               alignItems: 'center',
             }}>
             <Text style={{color: '#007aff'}}>Clear Search</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           {/* ==============container============== */}
 
           {/* ========ID VIEW============= */}
@@ -418,17 +418,7 @@ const Devices = ({
           </>
 
           {/* ==============Summary View=========== */}
-          <BottomSheetViewDevices
-            lodding={lodding}
-            setDeviveView={setDeviveView}
-            deviceRefDetails={deviceRefDetails}
-          />
-          <DevicesBottomSheet
-            setDeviveView={setDeviveView}
-            lodding1={lodding1}
-            diplayName={diplayName}
-            deviceRef={deviceRef}
-          />
+
           {/* <BottomSheetView deviceRef={deviceRef} lodding={lodding} />
         {lodding && <Lodder lodding={lodding} />} */}
           {/* ============TOOGLE=========== */}
@@ -446,6 +436,17 @@ const Devices = ({
           {/* ============TOOGLE=========== */}
         </>
       )}
+      <BottomSheetViewDevices
+        lodding={lodding}
+        setDeviveView={setDeviveView}
+        deviceRefDetails={deviceRefDetails}
+      />
+      <DevicesBottomSheet
+        setDeviveView={setDeviveView}
+        lodding1={lodding1}
+        diplayName={diplayName}
+        deviceRef={deviceRef}
+      />
     </>
   );
 };

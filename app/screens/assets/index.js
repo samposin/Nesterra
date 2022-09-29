@@ -24,10 +24,11 @@ import {getAllAssets} from '../../actions/Assets';
 
 import {get_order_details} from '../../actions/order';
 import Devices from './components/Devices';
+import Atm from './components/Atm';
 
 import CircuitsNew from './components/CircuitsNew';
 import Button from '../../components/button/Button';
-Button;
+
 const Assets = ({
   get_orders_for_tab,
   getAllCircuitID,
@@ -77,6 +78,10 @@ const Assets = ({
             deviceRefDetails={deviceRefDetails}
           />
         );
+      case displyCompomnet === 'ATM':
+        return (
+          <Atm setLodding={setLodding} deviceRefDetails={deviceRefDetails} />
+        );
     }
   };
   const setComponentCircuit = () => {
@@ -84,6 +89,9 @@ const Assets = ({
   };
   const setComponentDeives = () => {
     setDisplayComponents('Devices');
+  };
+  const setComponentATM = () => {
+    setDisplayComponents('ATM');
   };
   useEffect(() => {
     // setLodding1(true);
@@ -164,13 +172,11 @@ const Assets = ({
         <View
           style={{
             ...styles.searchView,
-
             alignItems: 'center',
           }}>
           <View
             style={{
               ...styles.searchViewLeft,
-
               flexDirection: 'row',
             }}>
             <Button
@@ -182,6 +188,11 @@ const Assets = ({
               onPress={setComponentDeives}
               displyCompomnet={displyCompomnet}
               title="Devices"
+            />
+            <Button
+              onPress={setComponentATM}
+              displyCompomnet={displyCompomnet}
+              title="ATM"
             />
           </View>
           <View style={styles.searchViewRight}></View>

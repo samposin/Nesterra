@@ -46,6 +46,7 @@ import SecondRow from './SecondRow';
 import ToggleView from './../../../components/ToggleView/index';
 import TableHeaderFirstColum from './../../../components/TableHeaderFirstColum';
 import TableHeaderOtherColum from './../../../components/TableHeaderOtherColum/index';
+import NoDataViewFlatList from '../../../components/NoDataViewFlatList';
 
 const CircuitsNew = ({
   getAllCircuit,
@@ -84,18 +85,34 @@ const CircuitsNew = ({
     setLodding3(true);
     getAllCircuit(setLodding3);
   }, []);
+  const DataColum = ({title}) => {
+    return (
+      <View
+        style={{
+          ...styles.tableRowColum2,
+          width: '25%',
+          borderLeftColor: 'white',
+          borderLeftWidth: 2,
+        }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            copyText(title);
+
+            tostalert(title);
+          }}>
+          <Text style={styles.boxText1}> {title}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
   const randerItem = ({index, item}) => {
     return (
       <TouchableOpacity
         onPress={() => {
-          // console.log('snap');
           const id = item.Circuit_ID;
           getAllCircuitDetails(id, setLodding, circuitRefDetails);
           setSwitchView(false);
           cirCuitRef.current.close();
-          // setTimeout(() => {
-          //   deviceRef.current.snapToIndex(1);
-          // }, 1200);
         }}
         style={{
           ...styles.tableRow1,
@@ -103,74 +120,10 @@ const CircuitsNew = ({
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           marginVertical: 1,
         }}>
-        <View
-          style={{
-            ...styles.tableRowColum2,
-            width: '25%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Location_ID);
-
-              tostalert(item.Location_ID);
-            }}>
-            <Text style={styles.boxText1}> {item?.Location_ID}</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View
-          style={{
-            ...styles.tableRowColum2,
-            width: '25%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Circuit_ID);
-
-              tostalert(item.Circuit_ID);
-            }}>
-            <Text style={styles.boxText1}>{item?.Circuit_ID}</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View
-          style={{
-            ...styles.tableRowColum2,
-            width: '25%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Branch_ID);
-
-              tostalert(item.Branch_ID);
-            }}>
-            <Text style={styles.boxText1}>
-              {item?.Branch_ID ? item.Branch_ID : '--'}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            ...styles.tableRowColum2,
-            width: '25%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Vendor);
-
-              tostalert(item.Vendor);
-            }}>
-            <Text style={styles.boxText1}>{item?.Vendor}</Text>
-          </TouchableOpacity>
-        </View>
+        <DataColum title={item?.Location_ID} />
+        <DataColum title={item?.Circuit_ID} />
+        <DataColum title={item?.Branch_ID ? item.Branch_ID : '--'} />
+        <DataColum title={item?.Vendor} />
       </TouchableOpacity>
     );
   };
@@ -254,7 +207,7 @@ const CircuitsNew = ({
         </View>
       ) : (
         <>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               circuitRefDetails.current.close();
               cirCuitRef.current.close();
@@ -273,7 +226,7 @@ const CircuitsNew = ({
               alignItems: 'center',
             }}>
             <Text style={{color: '#007aff'}}>Clear Search</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           {/* ========Second Row============= */}
           <SecondRow
             diplayName={diplayName}
@@ -342,33 +295,7 @@ const CircuitsNew = ({
                       getAllCircuit(setLodding3);
                     }}
                     ListEmptyComponent={() => {
-                      return (
-                        <View
-                          style={{
-                            width: '100%',
-                            height: 500,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                          }}>
-                          <View
-                            style={{
-                              width: '100%',
-                              height: 200,
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                            }}>
-                            <Image
-                              style={{
-                                width: '100%',
-                                height: 100,
-                                resizeMode: 'contain',
-                              }}
-                              source={require('../../../images/empty.png')}
-                            />
-                            <Text style={{fontSize: 25}}>No Data Found</Text>
-                          </View>
-                        </View>
-                      );
+                      return <NoDataViewFlatList />;
                     }}
                   />
                 </View>

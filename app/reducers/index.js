@@ -27,6 +27,7 @@ import ordersType from './OrdersType';
 import tangorNumber from './TangorNumber';
 import siteNumber from './SiteNumber';
 import allAtms from './ATMS';
+import AtmsAssets from './AtmsAssets';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -55,5 +56,6 @@ const rootReducer = combineReducers({
   tangorNumber,
   siteNumber,
   allAtms,
+  AtmsAssets,
 });
 export default rootReducer;
