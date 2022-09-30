@@ -2,112 +2,34 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useMemo} from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 // import Status from '../Status';
-
+import SiteID from './SiteID/index';
+import BranchID from './BranchID';
+import Vendor from './Vendor';
+import Type from './Type';
+import Model from './Model';
+import AtmID from './AtmID';
 //================
 
-const BottoSheetView = ({atmRef, diplayName}) => {
-  const snapPoints = useMemo(() => ['20%', '50%'], []);
+const BottoSheetView = ({atmRef, diplayName, bottomSheetLoder}) => {
+  const snapPoints = useMemo(() => ['20%', '70%'], []);
   // console.log(diplayName);
-  //   const selectedComponent = () => {
-  //     switch (true) {
-  //       case diplayName === 'Order Type':
-  //         return (
-  //           <OrderType
-  //             setSwitchView={setSwitchView}
-  //             cirCuitRef={cirCuitRef}
-  //             loding1={loding1}
-  //             bootSheetLodder={bootSheetLodder}
-  //           />
-  //         );
-  //       case diplayName === 'SmartSite#':
-  //         return (
-  //           <SmartSite
-  //             setSwitchView={setSwitchView}
-  //             cirCuitRef={cirCuitRef}
-  //             loding1={loding1}
-  //             bootSheetLodder={bootSheetLodder}
-  //           />
-  //         );
-  //       case diplayName === 'Tangoe#':
-  //         return (
-  //           <Tangoe
-  //             setSwitchView={setSwitchView}
-  //             cirCuitRef={cirCuitRef}
-  //             loding1={loding1}
-  //             bootSheetLodder={bootSheetLodder}
-  //           />
-  //         );
-  //       case diplayName === 'Carrier#':
-  //         return (
-  //           <Carrier
-  //             setSwitchView={setSwitchView}
-  //             cirCuitRef={cirCuitRef}
-  //             loding1={loding1}
-  //             bootSheetLodder={bootSheetLodder}
-  //           />
-  //         );
-  //       case diplayName === 'Item#':
-  //         return (
-  //           <Item
-  //             setSwitchView={setSwitchView}
-  //             cirCuitRef={cirCuitRef}
-  //             loding1={loding1}
-  //           />
-  //         );
-  //       case diplayName === 'Site ID':
-  //         return (
-  //           <SiteID
-  //             setSwitchView={setSwitchView}
-  //             cirCuitRef={cirCuitRef}
-  //             loding1={loding1}
-  //           />
-  //         );
+  const selectedComponent = () => {
+    switch (true) {
+      case diplayName === 'Site ID':
+        return <SiteID atmRef={atmRef} />;
 
-  //       case diplayName === 'Status':
-  //         return (
-  //           <Status
-  //             setSwitchView={setSwitchView}
-  //             cirCuitRef={cirCuitRef}
-  //             loding1={loding1}
-  //           />
-  //         );
-
-  //       case diplayName === 'Branch ID':
-  //         return (
-  //           <BranchID
-  //             setSwitchView={setSwitchView}
-  //             cirCuitRef={cirCuitRef}
-  //             loding1={loding1}
-  //           />
-  //         );
-  //       case diplayName === 'Project':
-  //         return <Project cirCuitRef={cirCuitRef} loding1={loding1} />;
-  //       case diplayName === 'Sub Type':
-  //         return (
-  //           <SubType
-  //             setSwitchView={setSwitchView}
-  //             cirCuitRef={cirCuitRef}
-  //             loding1={loding1}
-  //           />
-  //         );
-  //       case diplayName === 'Vendor':
-  //         return (
-  //           <Vendor
-  //             setSwitchView={setSwitchView}
-  //             cirCuitRef={cirCuitRef}
-  //             loding1={loding1}
-  //           />
-  //         );
-  //       case diplayName === 'Circuit ID':
-  //         return (
-  //           <CircuitId
-  //             setSwitchView={setSwitchView}
-  //             cirCuitRef={cirCuitRef}
-  //             loding1={loding1}
-  //           />
-  //         );
-  //     }
-  //   };
+      case diplayName === 'Branch ID':
+        return <BranchID atmRef={atmRef} />;
+      case diplayName === 'Vendor':
+        return <Vendor bottomSheetLoder={bottomSheetLoder} atmRef={atmRef} />;
+      case diplayName === 'Type':
+        return <Type bottomSheetLoder={bottomSheetLoder} atmRef={atmRef} />;
+      case diplayName === 'Model':
+        return <Model bottomSheetLoder={bottomSheetLoder} atmRef={atmRef} />;
+      case diplayName === 'ATM ID':
+        return <AtmID bottomSheetLoder={bottomSheetLoder} atmRef={atmRef} />;
+    }
+  };
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -145,7 +67,7 @@ const BottoSheetView = ({atmRef, diplayName}) => {
           </TouchableOpacity>
         </View>
       </View>
-      {/* {selectedComponent()} */}
+      {selectedComponent()}
     </BottomSheet>
   );
 };

@@ -1,8 +1,44 @@
 import {StyleSheet, ScrollView, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import FilterButton from '../../../../../components/FilterButton';
-const ThirdRow = ({diplayName, setDiplayName}) => {
-  const siteidChabge = () => {};
+import {connect} from 'react-redux';
+import {
+  GetAllAtmType,
+  GetAllAtmVendor,
+  GetAllAtmModel,
+  GetAllAtmAtmId,
+} from './../../../../../actions/AtmsAssets/index';
+
+const ThirdRow = ({
+  diplayName,
+  atmRef,
+  setDiplayName,
+  setBottomSheetLoder,
+  GetAllAtmVendor,
+  GetAllAtmType,
+  GetAllAtmModel,
+  GetAllAtmAtmId,
+}) => {
+  const vendorChange = () => {
+    setDiplayName('Vendor');
+    GetAllAtmVendor(setBottomSheetLoder);
+    atmRef.current.snapToIndex(1);
+  };
+  const changetype = () => {
+    setDiplayName('Type');
+    GetAllAtmType(setBottomSheetLoder);
+    atmRef.current.snapToIndex(1);
+  };
+  const changeModel = () => {
+    setDiplayName('Model');
+    GetAllAtmModel(setBottomSheetLoder);
+    atmRef.current.snapToIndex(1);
+  };
+  const changeAtm = () => {
+    setDiplayName('ATM ID');
+    GetAllAtmAtmId(setBottomSheetLoder);
+    atmRef.current.snapToIndex(1);
+  };
   const branchIdChabge = () => {};
   return (
     <>
@@ -16,22 +52,22 @@ const ThirdRow = ({diplayName, setDiplayName}) => {
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <FilterButton
             diplayName={diplayName}
-            onPress={siteidChabge}
+            onPress={vendorChange}
             title="Vendor"
           />
           <FilterButton
             diplayName={diplayName}
-            onPress={branchIdChabge}
+            onPress={changetype}
             title="Type"
           />
           <FilterButton
             diplayName={diplayName}
-            onPress={branchIdChabge}
+            onPress={changeModel}
             title="Model"
           />
           <FilterButton
             diplayName={diplayName}
-            onPress={branchIdChabge}
+            onPress={changeAtm}
             title="ATM ID"
           />
         </ScrollView>
@@ -40,6 +76,11 @@ const ThirdRow = ({diplayName, setDiplayName}) => {
   );
 };
 
-export default ThirdRow;
+export default connect(null, {
+  GetAllAtmVendor,
+  GetAllAtmAtmId,
+  GetAllAtmModel,
+  GetAllAtmType,
+})(ThirdRow);
 
 const styles = StyleSheet.create({});

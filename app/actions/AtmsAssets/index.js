@@ -1,6 +1,14 @@
 import Axios from 'axios';
 import {Base_url} from '../../key';
-import {ALL_ATMS} from './../actionType/AtmsAssets/index';
+import {
+  ALL_ATMS,
+  ATMS_ALL_BRANCH_ID,
+  ATMS_ALL_MODEL,
+  ATMS_ALL_SITE_ID,
+  ATMS_ALL_TYPE,
+  ATMS_ALL_VENDOR,
+  ATMS_ALL_ATM_ID,
+} from './../actionType/AtmsAssets/index';
 
 export const GetAllAtmNumber = setLoder => dispatch => {
   // console.log(name);
@@ -27,13 +35,13 @@ export const GetAllAtmNumber = setLoder => dispatch => {
     });
 };
 
-export const GetAllAtmVendor = setLoder => dispatch => {
+export const GetAllAtmSiteId = setLoder => dispatch => {
   // console.log(name);
   setLoder(true);
   Axios.get(`${Base_url}/api/GetAtmVendorsList`)
     .then(response => {
       if (response.data.length > 0) {
-        console.log(response.data.length, '[dfds');
+        // console.log(response.data.length, '[dfds');
         setLoder(false);
         dispatch({
           type: ALL_ATMS,
@@ -43,6 +51,94 @@ export const GetAllAtmVendor = setLoder => dispatch => {
         });
       } else {
         setLoder(false);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+export const GetAllAtmVendor = setBottomSheetLoder => dispatch => {
+  // console.log(name);
+  setBottomSheetLoder(true);
+  Axios.get(`${Base_url}/api/GetAtmVendorsList`)
+    .then(response => {
+      if (response.data.length > 0) {
+        // console.log(response.data.length, '[dfds');
+        setBottomSheetLoder(false);
+        dispatch({
+          type: ATMS_ALL_VENDOR,
+          payload: {
+            data: response.data,
+          },
+        });
+      } else {
+        setBottomSheetLoder(false);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+export const GetAllAtmType = setBottomSheetLoder => dispatch => {
+  // console.log(name);
+  setBottomSheetLoder(true);
+  Axios.get(`${Base_url}/api/getatmtypelist`)
+    .then(response => {
+      if (response.data.length > 0) {
+        // console.log(response.data.length, 'type');
+        setBottomSheetLoder(false);
+        dispatch({
+          type: ATMS_ALL_TYPE,
+          payload: {
+            data: response.data,
+          },
+        });
+      } else {
+        setBottomSheetLoder(false);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+export const GetAllAtmModel = setBottomSheetLoder => dispatch => {
+  // console.log(name);
+  setBottomSheetLoder(true);
+  Axios.get(`${Base_url}/api/GetAtmModelsList`)
+    .then(response => {
+      if (response.data.length > 0) {
+        // console.log(response.data.length);
+        setBottomSheetLoder(false);
+        dispatch({
+          type: ATMS_ALL_MODEL,
+          payload: {
+            data: response.data,
+          },
+        });
+      } else {
+        setBottomSheetLoder(false);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+export const GetAllAtmAtmId = setBottomSheetLoder => dispatch => {
+  // console.log(name);
+  setBottomSheetLoder(true);
+  Axios.get(`${Base_url}/api/GetAtmIds`)
+    .then(response => {
+      if (response.data.length > 0) {
+        // console.log(response.data.length, 'AAAA');
+        setBottomSheetLoder(false);
+        dispatch({
+          type: ATMS_ALL_ATM_ID,
+          payload: {
+            data: response.data,
+          },
+        });
+      } else {
+        setBottomSheetLoder(false);
       }
     })
     .catch(error => {

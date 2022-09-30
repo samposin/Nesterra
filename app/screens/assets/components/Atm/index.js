@@ -22,6 +22,8 @@ const Atm = ({GetAllAtmNumber}) => {
   const {data} = useSelector(state => state.AtmsAssets);
   const [refresh, setRefresh] = useState(false);
   const [switchView, setSwitchView] = useState(true);
+  const [bottomSheetLoder, setBottomSheetLoder] = useState(true);
+
   const dispatch = useDispatch();
   const atmRef = useRef(null);
   const DataColum = ({title}) => {
@@ -106,7 +108,12 @@ const Atm = ({GetAllAtmNumber}) => {
             atmRef={atmRef}
             diplayName={diplayName}
           />
-          <ThirdRow setDiplayName={setDiplayName} diplayName={diplayName} />
+          <ThirdRow
+            atmRef={atmRef}
+            setDiplayName={setDiplayName}
+            setBottomSheetLoder={setBottomSheetLoder}
+            diplayName={diplayName}
+          />
           <TableHeader />
           <View style={styles.table}>
             <FlatList
@@ -136,7 +143,11 @@ const Atm = ({GetAllAtmNumber}) => {
               />
             </>
           ) : null}
-          <BottoSheetView atmRef={atmRef} diplayName={diplayName} />
+          <BottoSheetView
+            atmRef={atmRef}
+            bottomSheetLoder={bottomSheetLoder}
+            diplayName={diplayName}
+          />
         </>
       )}
     </>

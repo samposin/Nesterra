@@ -28,6 +28,10 @@ import tangorNumber from './TangorNumber';
 import siteNumber from './SiteNumber';
 import allAtms from './ATMS';
 import AtmsAssets from './AtmsAssets';
+import AssetsAtmVendor from './AssetsAtmVendor';
+import AssetsAtmType from './AssetsAtmType';
+import AssetsAtmModel from './AssetsAtmModel';
+import AssetsAtmATMID from './AssetsAtmATMID';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -57,5 +61,9 @@ const rootReducer = combineReducers({
   siteNumber,
   allAtms,
   AtmsAssets,
+  AssetsAtmVendor,
+  AssetsAtmType,
+  AssetsAtmModel,
+  AssetsAtmATMID,
 });
 export default rootReducer;

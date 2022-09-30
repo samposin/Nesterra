@@ -7,7 +7,10 @@ const SecondRow = ({diplayName, atmRef, setDiplayName}) => {
     atmRef.current.snapToIndex(1);
     setDiplayName('Site ID');
   };
-  const branchIdChabge = () => {};
+  const branchIdChabge = () => {
+    atmRef.current.snapToIndex(1);
+    setDiplayName('Branch ID');
+  };
   return (
     <>
       <View
