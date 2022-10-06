@@ -7,6 +7,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import OrderLoder from '../../lodder/OrderLoder';
+
 const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
 

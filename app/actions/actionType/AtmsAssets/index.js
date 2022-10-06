@@ -25,3 +25,5 @@ export const ATMS_ALL_ATM_ID_SEARCH = 'ATMS_ALL_ATM_ID_SEARCH';
 //===============
 export const ATMS_ALL_VENDOR = 'ATMS_ALL_VENDOR';
 export const ATMS_ALL_VENDOR_SEARCH = 'ATMS_ALL_VENDOR_SEARCH';
+//=============
+export const ATMS_ALL_DETAILS = 'ATMS_ALL_DETAILS';

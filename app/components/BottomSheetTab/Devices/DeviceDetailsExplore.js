@@ -5,8 +5,11 @@ import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import moment from 'moment';
-import OrderLoder from '../../../components/lodder/OrderLoder';
+import {tostalert} from '../../helper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   // const {inv_Id} = route.params;
@@ -120,6 +123,41 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
       </View>
     );
   };
+  const addToList = async item1 => {
+    // console.log(item1);
+    try {
+      const seasonToAdd = {
+        id: item.Device_Name,
+      };
+      const storedValue = await AsyncStorage.getItem('@device_List');
+      const prevList = await JSON.parse(storedValue);
+      // console.log(typeof prevList)
+      if (!prevList) {
+        const newList = [seasonToAdd];
+
+        await AsyncStorage.setItem('@device_List', JSON.stringify(newList));
+      } else {
+        const dd = prevList.find(i => i.id === item1);
+        console.log(prevList, dd);
+        if (dd) {
+          tostalert('Already Added');
+        } else {
+          prevList.push(seasonToAdd);
+          await AsyncStorage.setItem('@device_List', JSON.stringify(prevList));
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // const getList = async () => {
+  //   const storedValue = await AsyncStorage.getItem('@device_List');
+  //   if (!storedValue) {
+  //     setListOfSeasons([]);
+  //   }
+  //   const list = JSON.parse(storedValue);
+  //   setListOfSeasons(list);
+  // };
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -156,6 +194,23 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
               <Entypo name="cross" size={20} color="white" />
             </Text>
           </View>
+        </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 60,
+          alignItems: 'flex-end',
+          paddingRight: 15,
+          justifyContent: 'center',
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            addToList(item.Device_Name);
+          }}>
+          <Text>
+            <EvilIcons name="heart" size={30} color="#007aff" />
+          </Text>
         </TouchableOpacity>
       </View>
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>

@@ -32,6 +32,7 @@ import AssetsAtmVendor from './AssetsAtmVendor';
 import AssetsAtmType from './AssetsAtmType';
 import AssetsAtmModel from './AssetsAtmModel';
 import AssetsAtmATMID from './AssetsAtmATMID';
+import AssetsAtmsDetails from './AssetsAtmsDetails';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -65,5 +66,6 @@ const rootReducer = combineReducers({
   AssetsAtmType,
   AssetsAtmModel,
   AssetsAtmATMID,
+  AssetsAtmsDetails,
 });
 export default rootReducer;

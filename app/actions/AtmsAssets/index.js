@@ -8,6 +8,7 @@ import {
   ATMS_ALL_TYPE,
   ATMS_ALL_VENDOR,
   ATMS_ALL_ATM_ID,
+  ATMS_ALL_DETAILS,
 } from './../actionType/AtmsAssets/index';
 
 export const GetAllAtmNumber = setLoder => dispatch => {
@@ -145,6 +146,31 @@ export const GetAllAtmAtmId = setBottomSheetLoder => dispatch => {
       console.log(error);
     });
 };
+//===============ATM DETAILS
+export const GetAllAtmdETAILS =
+  (id, atmdDetailsRef, setDetailsLoder) => dispatch => {
+    // console.log(name);
+    setDetailsLoder(true);
+    Axios.get(`${Base_url}/api//GetAllATMDetailsByATMId?atmid=${id}`)
+      .then(response => {
+        if (response.data.length > 0) {
+          setDetailsLoder(false);
+          dispatch({
+            type: ATMS_ALL_DETAILS,
+            payload: {
+              data: response.data,
+            },
+          });
+          atmdDetailsRef.current.snapToIndex(2);
+        } else {
+          setDetailsLoder(false);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
 //https://citizenmobileapi-dev.azurewebsites.net/api/getatmtypelist
 //https://citizenmobileapi-dev.azurewebsites.net/api/GetAtmIds
 //https://citizenmobileapi-dev.azurewebsites.net/api/GetAtmVendorsList

@@ -9,7 +9,7 @@ import Orders from '../screens/orders';
 import Login from '../screens/Login';
 import Notification from '../screens/Notification';
 import OtpReceive from '../screens/OtpReceive';
-// import Saved from '../screens/saved';
+import Saved from '../screens/saved';
 import Assets from '../screens/assets';
 // import Stats from '../screens/stats';
 import Search from '../screens/search';
@@ -85,21 +85,21 @@ const TabNaV = ({navigation}) => {
           },
         }}
       />
-      {/* <Tab.Screen
-        name="Stats"
-        component={Stats}
+      <Tab.Screen
+        name="Saved"
+        component={Saved}
         options={{
           tabBarIcon: ({focused}) => {
             return (
               <TabButton
-                name="Stats"
-                imagePath={tabButtonImage.imgStats}
+                name="Saved"
+                imagePath={tabButtonImage.bookmark}
                 focused={focused}
               />
             );
           },
         }}
-      /> */}
+      />
       {/* <Tab.Screen
         name="VoiceScreen"
         component={VoiceScreen}

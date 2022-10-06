@@ -1,13 +1,4 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-  FlatList,
-  Text,
-  View,
-  Image,
-  StatusBar,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, FlatList, Text, View} from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {getAllCircuit} from '../../../actions/AllCircuit';
@@ -20,28 +11,21 @@ import {getAllSiteID} from '../../../actions/AllSiteID';
 import {getAllBrachrID} from '../../../actions/AllBranchID';
 import BottomSheetViewCircuits from './CircuitDetails';
 import {getAllCircuitDetails} from '../../../actions/AllCircuit/allCorcuitDetails';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import ThirdRow from './ThirdRow/index';
 
-const {width} = Dimensions.get('screen');
 import {
   ALL_CIRCUIT_SORT_BY_LOC_ID_ASC,
   ALL_CIRCUIT_SORT_BY_LOC_ID_DES,
   ALL_CIRCUIT_SORT_BY_VENDOR_ASC,
   ALL_CIRCUIT_SORT_BY_VENDOR_DES,
-  ALL_CIRCUIT_SORT_BY_CIR_ID_ASC,
-  ALL_CIRCUIT_SORT_BY_CIR_ID_DES,
   ALL_CIRCUIT_SORT_BY_BRANCH_ASC,
   ALL_CIRCUIT_SORT_BY_BRANCH_DES,
   ALL_CIRCUIT_SORT_BY_STATUS,
   ALL_DATA,
   ALL_CIRCUIT_FILTER_BY_STATUS,
 } from '../../../actions/actionType/AllCircuit';
-// import {
-//   ALL_CIRCUIT_FILTER_BY_CIRCUITS_ID,
-//   ,
-// } from '../../../actions/actionType/AllCircuit';
+
 import SecondRow from './SecondRow';
 import ToggleView from './../../../components/ToggleView/index';
 import TableHeaderFirstColum from './../../../components/TableHeaderFirstColum';
@@ -50,9 +34,7 @@ import NoDataViewFlatList from '../../../components/NoDataViewFlatList';
 
 const CircuitsNew = ({
   getAllCircuit,
-  getAllSiteID,
-  getAllBrachrID,
-  getAllCircuitID,
+
   getAllCircuitDetails,
 }) => {
   const cirCuitRef = useRef(null);
@@ -67,11 +49,7 @@ const CircuitsNew = ({
   const [switchView, setSwitchView] = useState(true);
 
   // const {loder} = useSelector(state => state.allCircuit);
-  // console.log(allCircuit, 'aa');
-  // console.log(
-  //   allBranchID.filter(item => item.S == '10').length,
-  //   'allbraCircuit',
-  // )
+
   const dispatch = useDispatch();
   const [refresh, setRefresh] = useState(false);
   const [locType, setLocType] = useState(true);

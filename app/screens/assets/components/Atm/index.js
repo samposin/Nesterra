@@ -1,9 +1,12 @@
 import {StyleSheet, TouchableOpacity, Text, FlatList, View} from 'react-native';
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useMemo, useRef} from 'react';
 import SecondRow from './SecondRow';
 import ThirdRow from './ThirdRow';
 import TableHeader from './TabbleHeader';
-import {GetAllAtmNumber} from './../../../../actions/AtmsAssets/index';
+import {
+  GetAllAtmNumber,
+  GetAllAtmdETAILS,
+} from './../../../../actions/AtmsAssets';
 import {connect, useSelector, useDispatch} from 'react-redux';
 import OrderLoder from '../../../../components/lodder/OrderLoder';
 import {copyText, tostalert} from '../../../../components/helper';
@@ -15,25 +18,30 @@ import {
   FILTER_BY_ACTIVE,
 } from '../../../../actions/actionType/AtmsAssets';
 import BottoSheetView from './BottoSheetView';
+import BottomSheetDetails from './BottomSheetDetails';
 
-const Atm = ({GetAllAtmNumber}) => {
-  const [loder, setLoder] = useState(false);
+const Atm = ({GetAllAtmNumber, GetAllAtmdETAILS}) => {
+  const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
+  const [loder, setLoder] = useState(true);
   const [diplayName, setDiplayName] = useState('');
   const {data} = useSelector(state => state.AtmsAssets);
   const [refresh, setRefresh] = useState(false);
   const [switchView, setSwitchView] = useState(true);
   const [bottomSheetLoder, setBottomSheetLoder] = useState(true);
+  const [detailsLoder, setDetailsLoder] = useState(true);
 
   const dispatch = useDispatch();
   const atmRef = useRef(null);
-  const DataColum = ({title}) => {
+  const atmdDetailsRef = useRef(null);
+
+  const DataColum = ({title, border}) => {
     return (
       <View
         style={{
           ...styles.tableRowColum2,
           width: '25%',
           borderLeftColor: 'white',
-          borderLeftWidth: 2,
+          borderLeftWidth: border,
         }}>
         <TouchableOpacity
           onLongPress={() => {
@@ -52,6 +60,8 @@ const Atm = ({GetAllAtmNumber}) => {
       <TouchableOpacity
         onPress={() => {
           //
+
+          GetAllAtmdETAILS(item.ATM_ID, atmdDetailsRef, setDetailsLoder);
         }}
         style={{
           ...styles.tableRow1,
@@ -59,7 +69,7 @@ const Atm = ({GetAllAtmNumber}) => {
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           marginVertical: 1,
         }}>
-        <DataColum title={item.ATM_ID} />
+        <DataColum title={item.ATM_ID} border={0} />
         <View
           style={{
             ...styles.tableRowColum2,
@@ -79,8 +89,8 @@ const Atm = ({GetAllAtmNumber}) => {
           </TouchableOpacity>
         </View>
 
-        <DataColum title={item.Model} />
-        <DataColum title={item.Vendor} />
+        <DataColum title={item.Model} border={2} />
+        <DataColum title={item.Vendor} border={2} />
       </TouchableOpacity>
     );
   };
@@ -148,13 +158,18 @@ const Atm = ({GetAllAtmNumber}) => {
             bottomSheetLoder={bottomSheetLoder}
             diplayName={diplayName}
           />
+          <BottomSheetDetails
+            snapPoints={snapPoints}
+            atmdDetailsRef={atmdDetailsRef}
+            detailsLoder={detailsLoder}
+          />
         </>
       )}
     </>
   );
 };
 
-export default connect(null, {GetAllAtmNumber})(Atm);
+export default connect(null, {GetAllAtmNumber, GetAllAtmdETAILS})(Atm);
 
 const styles = StyleSheet.create({
   ///========Lodder

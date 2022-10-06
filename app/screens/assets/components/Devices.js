@@ -38,7 +38,7 @@ import OrderLoder from '../../../components/lodder/OrderLoder';
 import BottomSheetViewDevices from './DevicesDetails';
 import DevicesBottomSheet from './Devices/index';
 import ToggleView from './../../../components/ToggleView/index';
-const {width} = Dimensions.get('screen');
+import FilterButton from '../../../components/FilterButton';
 
 const Devices = ({
   getAllDevice,
@@ -71,23 +71,33 @@ const Devices = ({
     setLodding1(true);
     getAllDevice(setLodding1);
   }, []);
-
+  const Flatrow = ({title}) => {
+    return (
+      <View
+        style={{
+          ...styles.tableRowColum1,
+          borderLeftColor: 'white',
+          borderLeftWidth: 2,
+        }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            copyText(title);
+            tostalert(title);
+          }}>
+          <Text style={styles.boxText1}>{title}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
   const randerItem = ({index, item}) => {
     return (
       <TouchableOpacity
         onPress={() => {
           setLodding(true);
-          // navigation.navigate('AllDevicesDetails', {
-          //   inv_Id: item.ID,
-          // })
-          // console.log('snap');
+
           const id = item.ID;
           getAllDeviceDetails(id, setLodding, deviceRefDetails);
           setDeviveView(false);
-
-          // setTimeout(() => {
-          //   deviceRef.current.snapToIndex(1);
-          // }, 1200);
         }}
         style={{
           ...styles.tableRow1,
@@ -95,20 +105,8 @@ const Devices = ({
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           marginVertical: 1,
         }}>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Device_Name);
-              tostalert(item.Device_Name);
-            }}>
-            <Text style={styles.boxText1}>{item?.Device_Name}</Text>
-          </TouchableOpacity>
-        </View>
+        <Flatrow title={item?.Device_Name} />
+
         <View
           style={{
             ...styles.tableRowColum1,
@@ -124,35 +122,9 @@ const Devices = ({
             <Text style={styles.boxText1}>{item?.Device_Status}</Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Device_Type);
+        <Flatrow title={item?.Device_Type} />
 
-              tostalert(item.Device_Type);
-            }}>
-            <Text style={styles.boxText1}> {item?.Device_Type}</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Device_Vendor);
-              tostalert(item.Device_Vendor);
-            }}>
-            <Text style={styles.boxText1}>{item?.Device_Vendor}</Text>
-          </TouchableOpacity>
-        </View>
+        <Flatrow title={item?.Device_Vendor} />
       </TouchableOpacity>
     );
   };
@@ -232,6 +204,30 @@ const Devices = ({
       });
     }
   };
+  const nameFilter = () => {
+    dispatch({
+      type: GET_DEVICES_ONLY_NAME,
+    });
+    setDiplayName('Name');
+    deviceRef.current.snapToIndex(1);
+    setDeviveView(false);
+  };
+  const typeFilter = () => {
+    dispatch({
+      type: GET_DEVICES_ONLY_TYPE,
+    });
+    setDiplayName('Type');
+    setDeviveView(false);
+    deviceRef.current.snapToIndex(1);
+  };
+  const vendorFilter = () => {
+    dispatch({
+      type: GET_DEVICES_ONLY_VENDORE,
+    });
+    setDiplayName('Vendor');
+    deviceRef.current.snapToIndex(1);
+    setDeviveView(false);
+  };
   return (
     <>
       {lodding1 ? (
@@ -265,94 +261,21 @@ const Devices = ({
           {/* ========ID VIEW============= */}
           <View style={{...styles.idView}}>
             <View style={styles.idViewLeft}>
-              <TouchableOpacity
-                onPress={() => {
-                  dispatch({
-                    type: GET_DEVICES_ONLY_NAME,
-                  });
-                  setDiplayName('Name');
-                  deviceRef.current.snapToIndex(1);
-                  setDeviveView(false);
-                }}
-                style={{
-                  ...styles.idButton,
-                  flexDirection: 'row',
-                  borderColor: diplayName == 'Name' ? '#007aff' : 'black',
-                }}>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                    color: diplayName == 'Name' ? '#007aff' : 'black',
-                  }}>
-                  Name
-                </Text>
-
-                <AntDesign
-                  name="caretdown"
-                  size={20}
-                  style={{marginLeft: 5}}
-                  color={diplayName == 'Name' ? '#007aff' : 'black'}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  dispatch({
-                    type: GET_DEVICES_ONLY_TYPE,
-                  });
-                  setDiplayName('Type');
-                  setDeviveView(false);
-                  deviceRef.current.snapToIndex(1);
-                }}
-                style={{
-                  ...styles.idButton,
-                  flexDirection: 'row',
-                  borderColor: diplayName == 'Type' ? '#007aff' : 'black',
-                }}>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                    color: diplayName == 'Type' ? '#007aff' : 'black',
-                  }}>
-                  Type
-                </Text>
-                <AntDesign
-                  name="caretdown"
-                  size={20}
-                  style={{marginLeft: 5}}
-                  color={diplayName == 'Type' ? '#007aff' : 'black'}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  dispatch({
-                    type: GET_DEVICES_ONLY_VENDORE,
-                  });
-                  setDiplayName('Vendor');
-                  deviceRef.current.snapToIndex(1);
-                  setDeviveView(false);
-                }}
-                style={{
-                  ...styles.idButton,
-                  flexDirection: 'row',
-                  borderColor: diplayName == 'Vendor' ? '#007aff' : 'black',
-                }}>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                    color: diplayName == 'Vendor' ? '#007aff' : 'black',
-                  }}>
-                  Vendor
-                </Text>
-                <AntDesign
-                  name="caretdown"
-                  size={20}
-                  style={{marginLeft: 5}}
-                  color={diplayName == 'Vendor' ? '#007aff' : 'black'}
-                />
-              </TouchableOpacity>
+              <FilterButton
+                title="Name"
+                onPress={nameFilter}
+                diplayName={diplayName}
+              />
+              <FilterButton
+                title="Type"
+                onPress={typeFilter}
+                diplayName={diplayName}
+              />
+              <FilterButton
+                title="Vendor"
+                onPress={vendorFilter}
+                diplayName={diplayName}
+              />
             </View>
             <View style={styles.idViewRight}></View>
           </View>

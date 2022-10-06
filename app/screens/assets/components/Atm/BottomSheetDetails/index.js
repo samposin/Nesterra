@@ -1,39 +1,39 @@
 import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
-import React, {useMemo} from 'react';
+import React, {useMemo, useState} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import OrderLoder from '../../../../../components/lodder/OrderLoder';
+import moment from 'moment/moment';
 
-import OrderLoder from '../../../components/lodder/OrderLoder';
-const BottomSheetDetails = ({
-  circuitRefDetails,
-  setSwitchView,
-
-  loding,
-}) => {
-  const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
-  // const {inv_Id} = route.params;
-
-  // console.log(item);
-  const TabeRow = ({title, data}) => {
+const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
+  const {item} = useSelector(state => state.AssetsAtmsDetails);
+  const [loding, setloding] = useState(false);
+  console.log(item);
+  const TabeRow = ({title, data, bgcolor}) => {
     return (
       <View style={{...styles.secondTableRow}}>
         <View
           style={{
             ...styles.secondTableColum,
-            backgroundColor: '#deebf7',
+            backgroundColor: bgcolor,
           }}>
           <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
         </View>
-        <View style={styles.secondTableColum}>
+        <View
+          style={{
+            ...styles.secondTableColum,
+            backgroundColor: bgcolor,
+            borderLeftWidth: 0.7,
+          }}>
           <Text style={{fontWeight: '700', color: 'black'}}>{data}</Text>
         </View>
       </View>
     );
   };
-  const LightGrewRow = ({title, value, bgcolor}) => {
+  const DATArow = ({title, value, bgcolor}) => {
     return (
       <View style={{...styles.secondTableRow}}>
         <View
@@ -47,7 +47,7 @@ const BottomSheetDetails = ({
           style={{
             ...styles.secondTableColum,
             borderRightColor: 'black',
-            borderLeftWidth: 1,
+            borderLeftWidth: 0.7,
           }}>
           <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
         </View>
@@ -64,7 +64,7 @@ const BottomSheetDetails = ({
       style={{paddingHorizontal: 10}}
       enabledInnerScrolling={true}
       enabledContentGestureInteraction={false}
-      ref={circuitRefDetails}
+      ref={atmdDetailsRef}
       index={-1}
       snapPoints={snapPoints}
       enablePanDownToClose={true}
@@ -79,8 +79,7 @@ const BottomSheetDetails = ({
         }}>
         <TouchableOpacity
           onPress={() => {
-            setSwitchView(true);
-            circuitRefDetails.current.close();
+            atmdDetailsRef.current.close();
           }}>
           <View
             style={{
@@ -98,50 +97,123 @@ const BottomSheetDetails = ({
         </TouchableOpacity>
       </View>
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>
-        {loding ? (
+        {detailsLoder ? (
           <OrderLoder />
         ) : (
           <>
-            {/* <LightGrewRow
-              bgcolor="#deebf7"
-              title="Circuit ID"
-              value={item.Circuit_ID}
-            />
-
             <View style={{...styles.secondTableRow}}>
               <View
                 style={{
                   ...styles.secondTableColum,
-                  backgroundColor: '#deebf7',
+                  backgroundColor: '#ace2ff',
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
-                  Circuit Status
+                  ATM_Status
                 </Text>
               </View>
               <View
                 style={{
                   ...styles.secondTableColum,
                   borderRightColor: 'black',
-                  borderLeftWidth: 1,
+                  borderLeftWidth: 0.7,
                   backgroundColor:
-                    item.Circuit_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
+                    item.ATM_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
                 }}>
                 <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Circuit_Status}
+                  {item.ATM_Status}
                 </Text>
               </View>
             </View>
+            <TabeRow
+              bgcolor="#ffff00"
+              title="ATM ID"
+              value={item.ATM_ID ? item.ATM_ID : '--'}
+            />
 
-            <LightGrewRow
-              title="Assoc ID"
-              bgcolor="#deebf7"
-              value={item.Associated_ID ? item.Associated_ID : '--'}
+            <DATArow
+              bgcolor="#ace2ff"
+              title="Site ID"
+              value={item.ATM_Type ? item.ATM_Type : '--'}
             />
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="LEC ID"
-              value={item.LEC_ID ? item.LEC_ID : '--'}
+            <DATArow bgcolor="#ace2ff" title="Site Name" value={'--'} />
+            <DATArow
+              bgcolor="#ace2ff"
+              title="Address"
+              value={item.Address_1 ? item.Address_1 : '--'}
             />
+            <DATArow bgcolor="#deebf7" title="Arrangement" value={'--'} />
+            <DATArow
+              bgcolor="#deebf7"
+              title="ATM_Type"
+              value={item.ATM_Type ? item.ATM_Type : '--'}
+            />
+            <DATArow
+              bgcolor="#deebf7"
+              title="ATM_Function"
+              value={item.ATM_Function ? item.ATM_Function : '--'}
+            />
+            <DATArow
+              bgcolor="#deebf7"
+              title="Connection"
+              value={item.Connection ? item.Connection : '--'}
+            />
+            <DATArow
+              bgcolor="#deebf7"
+              title="Date_Installed"
+              value={
+                item.Date_Installed
+                  ? moment(item.Date_Installed).format('MM/DD/YY')
+                  : '--'
+              }
+            />
+            <DATArow
+              bgcolor="#fbe5d6"
+              title="Vendor"
+              value={item.Vendor ? item.Vendor : '--'}
+            />
+            <DATArow
+              bgcolor="#fbe5d6"
+              title="Model"
+              value={item.Model ? item.Model : '--'}
+            />
+            <DATArow
+              bgcolor="#fbe5d6"
+              title="Processor"
+              value={item.Processor ? item.Processor : '--'}
+            />
+            <DATArow
+              bgcolor="#fbe5d6"
+              title="Serial_Number"
+              value={item.Serial_Number ? item.Serial_Number : '--'}
+            />
+            <DATArow bgcolor="#ffffcc" title="ATM IP#" value={'--'} />
+            <DATArow bgcolor="#ffffcc" title="Router IP#" value={'--'} />
+            <DATArow bgcolor="#ffffcc" title="Host" value={'--'} />
+            <DATArow bgcolor="#f2f2f2" title="Software Level" value={'--'} />
+
+            <DATArow
+              bgcolor="#f2f2f2"
+              title="Ref_ID"
+              value={item.Ref_ID ? item.Ref_ID : '--'}
+            />
+            <DATArow
+              bgcolor="#f2f2f2"
+              title="TLS Port"
+              value={item.TLS_Port ? item.TLS_Port : '--'}
+            />
+            <DATArow
+              bgcolor="#f2f2f2"
+              title="NFC Capable"
+              value={item.Card_Reader ? item.Card_Reader : '--'}
+            />
+            <DATArow bgcolor="#f2f2f2" title="NFC Enabled" value={'--'} />
+            <DATArow
+              bgcolor="#f2f2f2"
+              title="Comments"
+              value={item.Comments ? item.Comments : '--'}
+            />
+
+            {/* 
 
             <View style={styles.secondTableRow}>
               <View
@@ -170,16 +242,7 @@ const BottomSheetDetails = ({
             </View>
 
             
-            <LightGrewRow
-              bgcolor="#b7ecff"
-              title="Contact Site Types"
-              value={'--'}
-            />
-            <LightGrewRow
-              bgcolor="#b7ecff"
-              title="Full Address"
-              value={item.Address ? item.Address : '--'}
-            />
+           
             
              */}
 
@@ -297,7 +360,7 @@ const styles = StyleSheet.create({
 
     flexDirection: 'row',
     // borderTopColor: 'black',
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.7,
     borderBottomColor: 'black',
 
     borderLeftColor: 'black',
