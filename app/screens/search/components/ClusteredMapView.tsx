@@ -77,7 +77,7 @@ const ClusteredMapView = forwardRef<MapClusteringProps & MapViewProps, any>(
       [children],
     );
     const onSearchPress = (lat, lng) => {
-      console.log(lat, lng);
+      // console.log(lat, lng);
       // setLatLng({lat, lng});
       const regid = {
         latitude: lat,

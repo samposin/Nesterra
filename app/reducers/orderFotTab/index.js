@@ -488,7 +488,7 @@ export default (state = initialState, action) => {
         }
         return 0;
       });
-      console.log(invAsc[0]);
+      // console.log(invAsc[0]);
       return {
         ...state,
         ordersForTab: invAsc,
@@ -509,7 +509,7 @@ export default (state = initialState, action) => {
         }
         return 0;
       });
-      console.log(invDes[0]);
+      // console.log(invDes[0]);
       return {
         ...state,
         ordersForTab: invDes,

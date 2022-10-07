@@ -64,7 +64,7 @@ const Extra = ({navigation, get_order}) => {
     );
   };
   const _onRegionChange = mapRegion => {
-    console.log(mapRegion);
+    // console.log(mapRegion);
 
     setCurrentRegion({
       latitude: mapRegion.latitude,
@@ -85,7 +85,7 @@ const Extra = ({navigation, get_order}) => {
     setCurrentRegion(region);
   };
   const che = () => {
-    console.log(currentRegion);
+    // console.log(currentRegion);
   };
   useEffect(() => {
     // getLocation();
@@ -123,7 +123,7 @@ const Extra = ({navigation, get_order}) => {
           return (
             <Marker
               onPress={() => {
-                console.log(item.Location_ID);
+                // console.log(item.Location_ID);
                 get_order(item.Location_ID);
                 navigation.navigate('Orders', {
                   location_ID: item.Location_ID,

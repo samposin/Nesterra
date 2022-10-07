@@ -18,7 +18,7 @@ const data = [
 
 const SiteType = ({getlist, select_all, is_selected}) => {
   const list = useSelector(state => state);
-  console.log(JSON.stringify(list.checkList), 'filter site type');
+  // console.log(JSON.stringify(list.checkList), 'filter site type');
 
   const [checked1, setChecked] = React.useState(false);
 

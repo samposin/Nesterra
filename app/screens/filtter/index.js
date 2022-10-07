@@ -35,14 +35,14 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
   const list = useSelector(state => state);
   const list1 = useSelector(state => state.selectList);
   //
-  console.log(list1.checkList, 'filter');
+  // console.log(list1.checkList, 'filter');
   const get_filterdata = () => {
     let data = [];
     const data1 = list1.checkList.map((item, i) => {
       const a = item.txt;
       return data.push(a);
     });
-    console.log(data.toString());
+    // console.log(data.toString());
 
     console.log(encodeURIComponent(JSON.stringify(data)));
 

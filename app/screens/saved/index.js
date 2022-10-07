@@ -10,21 +10,13 @@ import React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import imgg from '../../components/imageLink/saveTabImage';
+import {useSelector} from 'react-redux';
 
 const Saved = () => {
   const [sitdata, setSiteData] = useState([]);
-  const getList = async () => {
-    const storedValue = await AsyncStorage.getItem('@device_List');
-    if (!storedValue) {
-      siteData([]);
-    }
-    const list = JSON.parse(storedValue);
-    // console.log(list, 'list');
-    setSiteData(list);
-  };
-  useEffect(() => {
-    getList();
-  }, []);
+  const {circuitItems} = useSelector(state => state.CircuitsItems);
+  const {devicestItems} = useSelector(state => state.DevicesItems);
+
   const ListItem = ({source, title, item}) => {
     return (
       <View
@@ -32,8 +24,8 @@ const Saved = () => {
           width: '100%',
           height: 60,
           borderBottomColor: 'black',
-          borderBottomWidth: 1,
-          marginVertical: 2,
+          borderBottomWidth: 0.8,
+
           flexDirection: 'row',
         }}>
         <View style={{width: '15%', height: '100%', justifyContent: 'center'}}>
@@ -63,9 +55,17 @@ const Saved = () => {
         </Text>
         <ListItem source={imgg.imgAtm} title="ATMS" item={0} />
         <ListItem source={imgg.imgBranche} title="Branches" item={0} />
-        <ListItem source={imgg.imgCircuits} title="Circuits" item={0} />
-        <ListItem source={imgg.imgDevices} title="Devices" item={0} />
-        <ListItem source={imgg.imgSite} title="Sites" item={sitdata.length} />
+        <ListItem
+          source={imgg.imgCircuits}
+          title="Circuits"
+          item={circuitItems.length}
+        />
+        <ListItem
+          source={imgg.imgDevices}
+          title="Devices"
+          item={devicestItems.length}
+        />
+        <ListItem source={imgg.imgSite} title="Sites" item={0} />
       </View>
     </SafeAreaView>
   );

@@ -53,7 +53,7 @@ const ClusteredMapView = forwardRef(
     },
     ref,
   ) => {
-    console.log(clusterColor);
+    // console.log(clusterColor);
     const {lat, lng} = useSelector(state => state.setLatLang);
 
     const [markers, updateMarkers] = useState([]);

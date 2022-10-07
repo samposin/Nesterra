@@ -66,6 +66,7 @@ import OrderDetailsExplore from '../../components/BottomSheetTab/Orders/OrderDet
 import SearchComponet from './components/Search/SearchComponet';
 import {soundePlay} from '../../components/helper/soundHelper';
 import {getAllAtms} from './../../actions/ATMS/index';
+import MapTypeAndFilterButtom from './components/MapTypeAndFilterButtom/index';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -124,7 +125,7 @@ const Explore = ({
   };
   const onSpeechResultsHandler = e => {
     // console.log(modalVisible, 'dd');
-    console.log(e, 'loctaion');
+    // console.log(e, 'loctaion');
     setlocationText(e.value[0]);
 
     const voiceText = find(e.value[0]);
@@ -1154,6 +1155,7 @@ const Explore = ({
         />
       ) : null}
       {isLoading && <Lodder lodding={isLoading} />}
+      <MapTypeAndFilterButtom />
     </>
   );
 };

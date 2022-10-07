@@ -2,17 +2,45 @@ import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
 import React, {useMemo} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import OrderLoder from '../../lodder/OrderLoder';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import {CIRCUITS_ITEM} from '../../../actions/actionType/CircuitsItems';
+import {warinng, success} from '../../helper';
 
 const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
-
+  const dispatch = useDispatch();
   const {item} = useSelector(state => state.CircuitDetailsExplore);
-  // console.log(item);
+  const {circuitItems} = useSelector(state => state.CircuitsItems);
+
+  const addList = item1 => {
+    if (circuitItems.length == 0) {
+      const dd = {
+        id: item1,
+      };
+      dispatch({
+        type: CIRCUITS_ITEM,
+        data: dd,
+      });
+      success('Item Added Successfully');
+    } else if (circuitItems.find(i => i.id === item1)) {
+      warinng('Already Added');
+    } else {
+      const dd = {
+        id: item1,
+      };
+      dispatch({
+        type: CIRCUITS_ITEM,
+        data: dd,
+      });
+      success('Item Added Successfully');
+    }
+  };
+
   const LightGrewRow = ({title, value, bgcolor}) => {
     return (
       <View style={{...styles.secondTableRow}}>
@@ -70,6 +98,23 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
               <Entypo name="cross" size={20} color="white" />
             </Text>
           </View>
+        </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 60,
+          alignItems: 'flex-end',
+          paddingRight: 15,
+          justifyContent: 'center',
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            addList(item.Circuit_ID);
+          }}>
+          <Text>
+            <EvilIcons name="heart" size={30} color="#007aff" />
+          </Text>
         </TouchableOpacity>
       </View>
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>

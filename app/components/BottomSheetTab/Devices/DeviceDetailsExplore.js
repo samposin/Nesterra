@@ -2,22 +2,47 @@ import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
 import React, {useMemo} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import moment from 'moment';
 import {tostalert} from '../../helper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {warinng, success} from '../../helper';
+import {DEVICES_ITEM} from '../../../actions/actionType/DevicesItems';
 
 const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
-  // const {inv_Id} = route.params;
+  const dispatch = useDispatch();
   const {item} = useSelector(state => state.deviceDetailsExplore);
   const {id} = useSelector(state => state.deviceDetailsExplore);
-  // console.log(id, 'device');
-  // //
-  // console.log(item, 'pp');
+  const {devicestItems} = useSelector(state => state.DevicesItems);
+
+  const addList = item1 => {
+    if (devicestItems.length == 0) {
+      const dd = {
+        id: item1,
+      };
+      dispatch({
+        type: DEVICES_ITEM,
+        data: dd,
+      });
+      success('Item Added Successfully');
+    } else if (devicestItems.find(i => i.id === item1)) {
+      warinng('Already Added');
+    } else {
+      const dd = {
+        id: item1,
+      };
+      dispatch({
+        type: DEVICES_ITEM,
+        data: dd,
+      });
+      success('Item Added Successfully');
+    }
+  };
+
   const GrewRow = ({title, value}) => {
     return (
       <View style={{...styles.secondTableRow}}>
@@ -124,21 +149,20 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
     );
   };
   const addToList = async item1 => {
-    // console.log(item1);
     try {
       const seasonToAdd = {
         id: item.Device_Name,
       };
       const storedValue = await AsyncStorage.getItem('@device_List');
       const prevList = await JSON.parse(storedValue);
-      // console.log(typeof prevList)
+
       if (!prevList) {
         const newList = [seasonToAdd];
 
         await AsyncStorage.setItem('@device_List', JSON.stringify(newList));
       } else {
         const dd = prevList.find(i => i.id === item1);
-        console.log(prevList, dd);
+
         if (dd) {
           tostalert('Already Added');
         } else {
@@ -150,14 +174,7 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
       console.log(error);
     }
   };
-  // const getList = async () => {
-  //   const storedValue = await AsyncStorage.getItem('@device_List');
-  //   if (!storedValue) {
-  //     setListOfSeasons([]);
-  //   }
-  //   const list = JSON.parse(storedValue);
-  //   setListOfSeasons(list);
-  // };
+
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -206,7 +223,7 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            addToList(item.Device_Name);
+            addList(item.Device_Name);
           }}>
           <Text>
             <EvilIcons name="heart" size={30} color="#007aff" />

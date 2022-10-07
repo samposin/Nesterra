@@ -14,33 +14,21 @@ export const tostalert = (msg, color, toast) => {
     // marginBottom: 100,
     placement: 'top',
   });
-  // return toast.show({
-  //   duration: 1500,
-  //   placement: 'bottom',
-
-  //   render: () => {
-  //     return (
-  //       <view>   //         style={{
-  //           height: 50,
-  //           padding: 10,
-  //           justifyContent: 'center',
-  //           alignItems: 'center',
-  //           borderRadius: 10,
-  //           backgroundColor: color,
-  //           width: width,
-  //           backgroundColor: '#ded9df',
-  //         }}>
-  //         <Text style={{color: 'white', fontSize: 16}}>{msg}</Text>
-  //       </view>
-  //     );
-  //   },
-  // });
 };
 export const warinng = msg => {
   Snackbar.show({
     text: `${msg}`,
     textColor: 'white',
     backgroundColor: 'red',
+    // marginBottom: 100,
+    placement: 'top',
+  });
+};
+export const success = msg => {
+  Snackbar.show({
+    text: `${msg}`,
+    textColor: 'white',
+    backgroundColor: '#4DD637',
     // marginBottom: 100,
     placement: 'top',
   });

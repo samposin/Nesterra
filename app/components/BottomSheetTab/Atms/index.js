@@ -50,7 +50,8 @@ const TableHeaderOtherColum = ({title, color}) => {
 
 const Atms = ({index, item}) => {
   const {allAtms} = useSelector(state => state.allAtms);
-  // console.log(allAtms);
+  const {atmsItem} = useSelector(state => state.AtmsItem);
+  // console.log(atmsItem);
   const randerItem = ({index, item}) => {
     return (
       <View

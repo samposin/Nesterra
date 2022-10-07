@@ -10,8 +10,7 @@ import moment from 'moment/moment';
 
 const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
   const {item} = useSelector(state => state.AssetsAtmsDetails);
-  const [loding, setloding] = useState(false);
-  console.log(item);
+
   const TabeRow = ({title, data, bgcolor}) => {
     return (
       <View style={{...styles.secondTableRow}}>
