@@ -14,6 +14,7 @@ import Circuits from '../../components/BottomSheetTab/Circuits';
 import Devices from '../../components/BottomSheetTab/Devices';
 import Orders from '../../components/BottomSheetTab/Orders';
 import Atms from '../../components/BottomSheetTab/Atms';
+import Notes from '../../components/BottomSheetTab/Notes';
 
 const BottomSheetView = ({
   bottomSheetRef,
@@ -35,6 +36,7 @@ const BottomSheetView = ({
     {id: 4, name: 'CIRCUITS', isActive: false},
     {id: 5, name: 'DEVICES', isActive: false},
     {id: 6, name: 'ORDERS', isActive: false},
+    {id: 7, name: 'Notes', isActive: false},
   ];
   const [item, setItem] = useState(0);
   const [data1, setData1] = useState(data);
@@ -72,6 +74,8 @@ const BottomSheetView = ({
 
       case item == 6:
         return <Orders orderRefExplore={orderRefExplore} />;
+      case item == 7:
+        return <Notes orderRefExplore={orderRefExplore} />;
     }
   };
   useEffect(() => {

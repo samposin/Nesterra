@@ -143,6 +143,25 @@ const Devices = ({deviceRefExplore}) => {
       });
     }
   };
+  const FlatColum = ({title, border}) => {
+    return (
+      <View
+        style={{
+          ...styles.tableRowColum1,
+          borderLeftColor: 'white',
+          borderLeftWidth: border,
+        }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            copyText(title);
+
+            tostalert(title);
+          }}>
+          <Text style={styles.boxText1}>{title}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
   return (
     <>
       {/* ==============container============== */}
@@ -225,69 +244,10 @@ const Devices = ({deviceRefExplore}) => {
                       flexDirection: 'row',
                       marginVertical: 1,
                     }}>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                      }}>
-                      <TouchableOpacity
-                        onLongPress={() => {
-                          copyText(item.ID);
-
-                          tostalert(item.ID);
-                        }}>
-                        <Text style={styles.boxText1}>{item.ID}</Text>
-                      </TouchableOpacity>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <TouchableOpacity
-                        onLongPress={() => {
-                          copyText(item.Device_Name);
-
-                          tostalert(item.Device_Name);
-                        }}>
-                        <Text style={styles.boxText1}>{item.Device_Name}</Text>
-                      </TouchableOpacity>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <TouchableOpacity
-                        onLongPress={() => {
-                          copyText(item.Device_Status);
-
-                          tostalert(item.Device_Status);
-                        }}>
-                        <Text style={styles.boxText1}>
-                          {item.Device_Status}
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                    <View
-                      style={{
-                        ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 2,
-                      }}>
-                      <TouchableOpacity
-                        onLongPress={() => {
-                          copyText(item.Device_Vendor);
-
-                          tostalert(item.Device_Vendor);
-                        }}>
-                        <Text style={styles.boxText1}>
-                          {item.Device_Vendor}
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
+                    <FlatColum title={item.ID} border={0} />
+                    <FlatColum title={item.Device_Name} border={2} />
+                    <FlatColum title={item.Device_Status} border={2} />
+                    <FlatColum title={item.Device_Vendor} border={2} />
                   </TouchableOpacity>
                 );
               })}

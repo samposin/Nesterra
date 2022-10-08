@@ -86,6 +86,7 @@ const Explore = ({
 
   getInventoryCircuit,
 }) => {
+  const {mapType} = useSelector(state => state.MapType);
   // Sound.setCategory('Playback');
   // const mu = require('../../images/first.wav');
   // const soundePlay = mu => {
@@ -583,7 +584,7 @@ const Explore = ({
           preserveClusterPressBehavior={true}
           showsUserLocation={true}
           userLocationPriority={'high'}
-          mapType={satellite}
+          mapType={mapType}
           onLayout={onLayoutMap}>
           {coordinates &&
             coordinates.map((item, i) => {
@@ -644,6 +645,7 @@ const Explore = ({
           ) : null} */}
         </MapView>
         {/* ===========get Current position=== */}
+        <MapTypeAndFilterButtom />
         <TouchableOpacity onPress={getLocation} style={styles.currentLocation}>
           <MaterialCommunityIcons name="target" size={26} color="black" />
         </TouchableOpacity>
@@ -662,7 +664,7 @@ const Explore = ({
         {/* ===========Direction=== */}
         {/* ===========find Direction=== */}
         {/* <FindeDirection animatioValOff={animatioValOff} /> */}
-        <Animated.View
+        {/* <Animated.View
           style={{
             width: SCREEN_WIDTH,
             height: findDirection,
@@ -825,7 +827,6 @@ const Explore = ({
                 <TouchableOpacity
                   onPress={() => {
                     setInputRotate(!inputRotate);
-                    //  rotatedIconchange();
                   }}>
                   <Animated.View
                     style={{
@@ -835,13 +836,6 @@ const Explore = ({
                       alignItems: 'center',
                       transform: [{rotate: spin}],
                     }}>
-                    {/* <AntDesign
-                      name="arrowdown"
-                      size={24}
-                      style={{backgroundColor: 'red'}}
-                      color="black"
-                    />
-                    <AntDesign name="arrowup" size={24} color="black" /> */}
                     <Image
                       style={{width: 40, height: 40}}
                       source={require('../../images/rotated.png')}
@@ -851,10 +845,10 @@ const Explore = ({
               </View>
             </>
           ) : null}
-        </Animated.View>
+        </Animated.View> */}
         {/* ===========find Direction=== */}
         {/* =================Map Type Change=============== */}
-        {animatioVal ? (
+        {/* {animatioVal ? (
           <TouchableOpacity
             onPress={() => {
               setanimatioVal(false);
@@ -871,9 +865,9 @@ const Explore = ({
 
               zIndex: 1,
             }}></TouchableOpacity>
-        ) : null}
+        ) : null} */}
 
-        <Animated.View
+        {/* <Animated.View
           style={{
             position: 'absolute',
             top: 200,
@@ -891,8 +885,6 @@ const Explore = ({
               setanimatioVal(true);
               settIndexZ(2);
               animationChange();
-
-              //navigation.navigate('Filtter');
             }}>
             {!animatioVal ? (
               <Ionicons
@@ -903,7 +895,6 @@ const Explore = ({
             ) : (
               <>
                 <View style={styles.mapTypeView}>
-                  {/* ============map Type view============= */}
                   <View
                     style={{
                       ...styles.mapTypeViewUpper,
@@ -1013,7 +1004,6 @@ const Explore = ({
                       </TouchableOpacity>
                     </View>
                   </View>
-                  {/* ============map Type view============= */}
 
                   <View style={{...styles.mapTypeViewUpper, paddingTop: 10}}>
                     <View
@@ -1056,8 +1046,8 @@ const Explore = ({
               </>
             )}
           </TouchableOpacity>
-        </Animated.View>
-        {/* =================Map Type Change=============== */}
+        </Animated.View> */}
+        {/*         
 
         <View
           style={{
@@ -1098,7 +1088,7 @@ const Explore = ({
               style={{width: '90%', height: 25, resizeMode: 'contain'}}
             />
           </View>
-        </View>
+        </View> */}
         {/* =================search=============== */}
         {/* <Search
           catShow={setCatShow}
@@ -1155,7 +1145,6 @@ const Explore = ({
         />
       ) : null}
       {isLoading && <Lodder lodding={isLoading} />}
-      <MapTypeAndFilterButtom />
     </>
   );
 };

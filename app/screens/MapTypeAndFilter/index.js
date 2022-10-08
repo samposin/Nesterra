@@ -12,7 +12,9 @@ import Status from './Components/Status';
 import Type from './Components/Type';
 import {Heading, VStack} from 'native-base';
 const {height, width} = Dimensions.get('screen');
-const MapTypeAndFilter = () => {
+const MapTypeAndFilter = ({}) => {
+  // console.log(route.params, 'route');
+
   const [setetedView, setSeletedView] = React.useState('Map Type');
   const selectedComponent = () => {
     switch (true) {

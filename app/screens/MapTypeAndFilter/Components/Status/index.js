@@ -9,16 +9,66 @@ import {
 } from 'react-native';
 import React from 'react';
 
-import {Heading, VStack} from 'native-base';
-import CheckBoxComponet from '../../../../components/checkBox';
+import {Heading} from 'native-base';
+
+import CheckBoxView from './../CheckBoxView/index';
+import {useNavigation} from '@react-navigation/native';
 const {height, width} = Dimensions.get('screen');
+import {warinng} from '../../../../components/helper';
+import {
+  FILTER_BY_INACTIVE,
+  FILTER_BY_ACTIVE,
+  FILTER_BY_ALL,
+} from './../../../../actions/action.coordinate.type';
+import {useDispatch} from 'react-redux';
+
 const data = [
-  {id: 1, txt: 'Active', isChecked: false},
-  {id: 2, txt: 'Inactive', isChecked: false},
+  {id: 0, txt: 'Active', name: 'Active', isChecked: false},
+  {id: 1, txt: 'Inactive', name: 'Inactive', isChecked: false},
+  {id: 2, txt: 'All', name: 'All', isChecked: false},
 ];
 const Status = () => {
-  const handleChange = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [checkdata, setCheckData] = React.useState(data);
+  const [seletedValue, setSeletedValue] = React.useState('');
+  const seletedColor = id => {
+    let listData = checkdata.map(item => {
+      let itm = {...item, isChecked: false};
+      return itm;
+    });
+
+    listData[id].isChecked = true;
+    setCheckData(listData);
+  };
+  const handleChange = (id, name) => {
+    seletedColor(id);
+
+    setSeletedValue(name);
     //
+  };
+  const apply = () => {
+    if (seletedValue == '') {
+      warinng('Select A Value');
+    } else {
+      if (seletedValue === 'Active') {
+        dispatch({
+          type: FILTER_BY_ACTIVE,
+        });
+        navigation.navigate('Explore');
+      }
+      if (seletedValue === 'Inactive') {
+        dispatch({
+          type: FILTER_BY_INACTIVE,
+        });
+        navigation.navigate('Explore');
+      } else {
+        dispatch({
+          type: FILTER_BY_ALL,
+        });
+        navigation.navigate('Explore');
+      }
+    }
   };
   return (
     <>
@@ -48,7 +98,39 @@ const Status = () => {
             style={{
               width: '80%',
               height: '100%',
-            }}></View>
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: 15,
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Explore');
+              }}
+              style={{
+                width: '45%',
+                height: 45,
+                backgroundColor: '#007aff',
+                borderRadius: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{color: 'white', fontSize: 18}}>Close</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                apply();
+              }}
+              style={{
+                width: '45%',
+                height: 45,
+                backgroundColor: '#e0dfe5',
+                borderRadius: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{color: '#007aff', fontSize: 18}}>Apply</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.mainContainer}>
           <View
@@ -65,9 +147,9 @@ const Status = () => {
               height: '100%',
               backgroundColor: '#ffffff',
             }}>
-            {data.map((item, i) => {
+            {checkdata.map((item, i) => {
               return (
-                <CheckBoxComponet
+                <CheckBoxView
                   key={i}
                   handleChange={handleChange}
                   value={item.isChecked}

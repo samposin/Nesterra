@@ -1,10 +1,6 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-
-import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
-import NoDataViewFlatList from './../../NoDataViewFlatList/index';
-import {useSelector} from 'react-redux';
-import {copyText, tostalert} from '../../helper';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 const TableHeaderFirstColum = ({title, color}) => {
   return (
     <View
@@ -36,52 +32,34 @@ const TableHeaderOtherColum = ({title, color}) => {
   );
 };
 
-const Atms = ({index, item}) => {
-  const {allAtms} = useSelector(state => state.allAtms);
-  const {atmsItem} = useSelector(state => state.AtmsItem);
-  // console.log(atmsItem);
-  const randerItem = ({index, item}) => {
-    return (
+const Notes = ({index, item}) => {
+  return (
+    <View style={{flex: 1}}>
+      <View style={styles.tableRow}>
+        <TableHeaderFirstColum color="white" title="Notes" />
+        <TableHeaderOtherColum color="white" title="Site ID" />
+        <TableHeaderOtherColum color="white" title="Created" />
+        <TableHeaderOtherColum color="white" title="UserName" />
+      </View>
       <View
         style={{
-          ...styles.tableRow1,
-          height: 55,
-          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-          marginVertical: 1,
+          width: 60,
+          height: 30,
+          borderRadius: 10,
+          position: 'absolute',
+          right: 20,
+          bottom: 60,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#007aff',
         }}>
-        <TableHeaderFirstColum color="black" title={item.ATM_ID} />
-        <TableHeaderOtherColum color="black" title={item.ATM_Status} />
-        <TableHeaderOtherColum color="black" title={item.Vendor} />
-        <TableHeaderOtherColum color="black" title={item.Model} />
+        <AntDesign name="plus" size={24} color="white" />
       </View>
-    );
-  };
-  return (
-    <>
-      <View style={styles.tableRow}>
-        <TableHeaderFirstColum color="white" title="ATM ID" />
-        <TableHeaderOtherColum color="white" title="Status" />
-        <TableHeaderOtherColum color="white" title="Vendor" />
-        <TableHeaderOtherColum color="white" title="Model" />
-      </View>
-      <BottomSheetFlatList
-        showsVerticalScrollIndicator={false}
-        data={allAtms}
-        keyExtractor={(item, i) => i.toString()}
-        renderItem={(item, i) => randerItem(item)}
-        ListEmptyComponent={() => {
-          return (
-            <>
-              <NoDataViewFlatList />
-            </>
-          );
-        }}
-      />
-    </>
+    </View>
   );
 };
 
-export default Atms;
+export default Notes;
 
 const styles = StyleSheet.create({
   tableRow: {

@@ -2,6 +2,9 @@ import {
   SITE_STATUS_COORDINATES,
   SEARCH_BY_SITE_ID,
   SEARCH_BY_BRANCH_ID,
+  FILTER_BY_ACTIVE,
+  FILTER_BY_ALL,
+  FILTER_BY_INACTIVE,
 } from '../../actions/action.coordinate.type';
 import {GET_COORDINATES, MARKER_IS_SELECTED} from '../../actions/action.type';
 import {FILTER_MARKER} from '../../actions/actionType/action.Coordinatefilter.type';
@@ -113,6 +116,48 @@ export default (state = initialState, action) => {
       return {
         ...state,
         coordinates: fdata,
+        latt: 0,
+        lngg: 0,
+        error: null,
+      };
+    //==============FILTER BY ACTIOVE
+    case FILTER_BY_ACTIVE:
+      // let marker = state.coordinates.map(item => {
+      //   let itm = {...item, isChecked: false};
+      //   return itm;
+      // });
+      // marker[action.payload.id].isChecked = true;
+      let adata = [...state.coordinates1];
+
+      const afdata = adata.filter(item => item.LocationStatusDesc === 'Active');
+
+      return {
+        ...state,
+        coordinates: afdata,
+        latt: 0,
+        lngg: 0,
+        error: null,
+      };
+    case FILTER_BY_INACTIVE:
+      let iadata = [...state.coordinates1];
+
+      const iafdata = iadata.filter(
+        item => item.LocationStatusDesc === 'Inactive',
+      );
+
+      return {
+        ...state,
+        coordinates: iafdata,
+        latt: 0,
+        lngg: 0,
+        error: null,
+      };
+    case FILTER_BY_ALL:
+      let alldata = [...state.coordinates1];
+
+      return {
+        ...state,
+        coordinates: alldata,
         latt: 0,
         lngg: 0,
         error: null,
