@@ -60,6 +60,7 @@ import Voice from '@react-native-community/voice';
 import CircuitDetailsExplore from '../../components/BottomSheetTab/Circuits/CircuitDetailsExplore';
 import DeviceDetailsExplore from '../../components/BottomSheetTab/Devices/DeviceDetailsExplore';
 import OrderDetailsExplore from '../../components/BottomSheetTab/Orders/OrderDetailsExplore';
+import AtmsDetails from '../../components/BottomSheetTab/Atms/AtmsDetails';
 // import SerachCircuitIdBranchId from './components/Search';
 // import SerachCircuitIdBranchId from './Search/index';
 // import SerachCircuitIdBranchId from '../../components/Search';
@@ -67,6 +68,7 @@ import SearchComponet from './components/Search/SearchComponet';
 import {soundePlay} from '../../components/helper/soundHelper';
 import {getAllAtms} from './../../actions/ATMS/index';
 import MapTypeAndFilterButtom from './components/MapTypeAndFilterButtom/index';
+import Atms from './../../components/BottomSheetTab/Atms/index';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -86,6 +88,7 @@ const Explore = ({
 
   getInventoryCircuit,
 }) => {
+  const atmdDetailsRef = useRef(null);
   const {mapType} = useSelector(state => state.MapType);
   // Sound.setCategory('Playback');
   // const mu = require('../../images/first.wav');
@@ -211,7 +214,7 @@ const Explore = ({
 
   // const picRef = useRef(null);
   const pointStart = useRef(null);
-
+  const [detailsLoder, setDetailsLoder] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [locationText, setlocationText] = useState('');
@@ -1118,6 +1121,8 @@ const Explore = ({
         cirCuitRefExplore={cirCuitRefExplore}
         deviceRefExplore={deviceRefExplore}
         orderRefExplore={orderRefExplore}
+        atmdDetailsRef={atmdDetailsRef}
+        setDetailsLoder={setDetailsLoder}
       />
 
       {/* <BottomSheetViewImage
@@ -1136,6 +1141,10 @@ const Explore = ({
         deviceRefExplore={deviceRefExplore}
       />
       <OrderDetailsExplore orderRefExplore={orderRefExplore} />
+      <AtmsDetails
+        atmdDetailsRef={atmdDetailsRef}
+        detailsLoder={detailsLoder}
+      />
       {/* =================CircuitDetailsExpolore=============== */}
       {settingView ? (
         <Setting

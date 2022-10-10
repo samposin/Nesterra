@@ -22,6 +22,9 @@ const BottomSheetView = ({
   cirCuitRefExplore,
   orderRefExplore,
   catShow,
+  atmdDetailsRef,
+  bottomSheetLoder,
+  setDetailsLoder,
 }) => {
   // console.log(cirCuitRef, bottomSheetRef,picRef );
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
@@ -65,7 +68,12 @@ const BottomSheetView = ({
         return <Hours />;
 
       case item == 3:
-        return <Atms />;
+        return (
+          <Atms
+            setDetailsLoder={setDetailsLoder}
+            atmdDetailsRef={atmdDetailsRef}
+          />
+        );
       case item == 4:
         return <Circuits cirCuitRefExplore={cirCuitRefExplore} />;
 

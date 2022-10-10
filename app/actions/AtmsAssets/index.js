@@ -147,29 +147,27 @@ export const GetAllAtmAtmId = setBottomSheetLoder => dispatch => {
     });
 };
 //===============ATM DETAILS
-export const GetAllAtmdETAILS =
-  (id, atmdDetailsRef, setDetailsLoder) => dispatch => {
-    // console.log(name);
-    setDetailsLoder(true);
-    Axios.get(`${Base_url}/api//GetAllATMDetailsByATMId?atmid=${id}`)
-      .then(response => {
-        if (response.data.length > 0) {
-          setDetailsLoder(false);
-          dispatch({
-            type: ATMS_ALL_DETAILS,
-            payload: {
-              data: response.data,
-            },
-          });
-          atmdDetailsRef.current.snapToIndex(2);
-        } else {
-          setDetailsLoder(false);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
+export const GetAllAtmdETAILS = (id, setDetailsLoder) => dispatch => {
+  // console.log(name);
+  setDetailsLoder(true);
+  Axios.get(`${Base_url}/api//GetAllATMDetailsByATMId?atmid=${id}`)
+    .then(response => {
+      if (response.data.length > 0) {
+        setDetailsLoder(false);
+        dispatch({
+          type: ATMS_ALL_DETAILS,
+          payload: {
+            data: response.data,
+          },
+        });
+      } else {
+        setDetailsLoder(false);
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
 
 //https://citizenmobileapi-dev.azurewebsites.net/api/getatmtypelist
 //https://citizenmobileapi-dev.azurewebsites.net/api/GetAtmIds

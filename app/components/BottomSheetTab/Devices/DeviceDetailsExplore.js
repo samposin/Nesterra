@@ -19,25 +19,22 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
   const {id} = useSelector(state => state.deviceDetailsExplore);
   const {devicestItems} = useSelector(state => state.DevicesItems);
 
-  const addList = item1 => {
+  const addList = item => {
     if (devicestItems.length == 0) {
-      const dd = {
-        id: item1,
-      };
       dispatch({
         type: DEVICES_ITEM,
-        data: dd,
+        data: item,
       });
       success('Item Added Successfully');
-    } else if (devicestItems.find(i => i.id === item1)) {
+    } else if (devicestItems.find(i => i.Device_Name === item.Device_Name)) {
       warinng('Already Added');
     } else {
       const dd = {
-        id: item1,
+        id: item,
       };
       dispatch({
         type: DEVICES_ITEM,
-        data: dd,
+        data: item,
       });
       success('Item Added Successfully');
     }
@@ -223,7 +220,7 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            addList(item.Device_Name);
+            addList(item);
           }}>
           <Text>
             <EvilIcons name="heart" size={30} color="#007aff" />

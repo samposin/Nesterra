@@ -1,4 +1,10 @@
-import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+  InteractionManager,
+} from 'react-native';
 import React, {useMemo} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
@@ -17,25 +23,19 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
   const {item} = useSelector(state => state.CircuitDetailsExplore);
   const {circuitItems} = useSelector(state => state.CircuitsItems);
 
-  const addList = item1 => {
+  const addList = item => {
     if (circuitItems.length == 0) {
-      const dd = {
-        id: item1,
-      };
       dispatch({
         type: CIRCUITS_ITEM,
-        data: dd,
+        data: item,
       });
       success('Item Added Successfully');
-    } else if (circuitItems.find(i => i.id === item1)) {
+    } else if (circuitItems.find(i => i.Circuit_ID === item.Circuit_ID)) {
       warinng('Already Added');
     } else {
-      const dd = {
-        id: item1,
-      };
       dispatch({
         type: CIRCUITS_ITEM,
-        data: dd,
+        data: item,
       });
       success('Item Added Successfully');
     }
@@ -110,7 +110,7 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            addList(item.Circuit_ID);
+            addList(item);
           }}>
           <Text>
             <EvilIcons name="heart" size={30} color="#007aff" />

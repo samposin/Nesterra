@@ -1,16 +1,20 @@
 import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
-import React, {useMemo, useState} from 'react';
+import React, {useMemo, useRef, useState} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
-
-import {useSelector} from 'react-redux';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import {useSelector, useDispatch} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-import OrderLoder from '../../../../../components/lodder/OrderLoder';
+import OrderLoder from '././../../../components/lodder/OrderLoder';
 import moment from 'moment/moment';
+import {ATMS_ITEM} from '../../../actions/actionType/AtmsItem';
+import {warinng, success} from '../../helper';
+const AtmsDetails = ({atmdDetailsRef, detailsLoder}) => {
+  const dispatch = useDispatch();
 
-const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
   const {item} = useSelector(state => state.AssetsAtmsDetails);
-
+  const {atmsItem} = useSelector(state => state.AtmsItem);
+  const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   const TabeRow = ({title, data, bgcolor}) => {
     return (
       <View style={{...styles.secondTableRow}}>
@@ -53,6 +57,23 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
       </View>
     );
   };
+  const addList = it => {
+    if (atmsItem.length == 0) {
+      dispatch({
+        type: ATMS_ITEM,
+        data: it,
+      });
+      success('Item Added Successfully');
+    } else if (atmsItem.find(i => i.ATM_ID === it.ATM_ID)) {
+      warinng('Already Added');
+    } else {
+      dispatch({
+        type: ATMS_ITEM,
+        data: it,
+      });
+      success('Item Added Successfully');
+    }
+  };
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -60,7 +81,6 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
         height: 2.5,
         opacity: 0.5,
       }}
-      style={{paddingHorizontal: 10}}
       enabledInnerScrolling={true}
       enabledContentGestureInteraction={false}
       ref={atmdDetailsRef}
@@ -76,10 +96,7 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
           alignItems: 'flex-end',
           paddingRight: 25,
         }}>
-        <TouchableOpacity
-          onPress={() => {
-            atmdDetailsRef.current.close();
-          }}>
+        <TouchableOpacity onPress={() => atmdDetailsRef.current.close()}>
           <View
             style={{
               width: 24,
@@ -93,6 +110,23 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
               <Entypo name="cross" size={20} color="white" />
             </Text>
           </View>
+        </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 60,
+          alignItems: 'flex-end',
+          paddingRight: 15,
+          justifyContent: 'center',
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            addList(item);
+          }}>
+          <Text>
+            <EvilIcons name="heart" size={30} color="#007aff" />
+          </Text>
         </TouchableOpacity>
       </View>
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>
@@ -220,7 +254,7 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
   );
 };
 
-export default BottomSheetDetails;
+export default AtmsDetails;
 
 const styles = StyleSheet.create({
   container: {

@@ -5,21 +5,27 @@ import {
   StatusBar,
   Text,
   View,
+  TouchableOpacity,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, {useState, useRef, useEffect} from 'react';
 
 import imgg from '../../components/imageLink/saveTabImage';
 import {useSelector} from 'react-redux';
+import Details from './Details';
 
 const Saved = () => {
-  const [sitdata, setSiteData] = useState([]);
   const {circuitItems} = useSelector(state => state.CircuitsItems);
   const {devicestItems} = useSelector(state => state.DevicesItems);
 
-  const ListItem = ({source, title, item}) => {
+  const {atmsItem} = useSelector(state => state.AtmsItem);
+  const detailsRef = useRef(null);
+  const [displayView, setDisplayView] = useState('Atms');
+  const ListItem = ({source, title, item, onPress}) => {
     return (
-      <View
+      <TouchableOpacity
+        onPress={() => {
+          onPress();
+        }}
         style={{
           width: '100%',
           height: 60,
@@ -40,34 +46,66 @@ const Saved = () => {
           </Text>
           <Text>{item} Items</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
+  const atmsDetails = () => {
+    setDisplayView('Atms');
+    detailsRef.current.snapToIndex(2);
+  };
+  const devicesDetails = () => {
+    setDisplayView('Devices');
+    detailsRef.current.snapToIndex(2);
+  };
+  const circuitsDetails = () => {
+    setDisplayView('Circuits');
+    detailsRef.current.snapToIndex(2);
+  };
   return (
-    <SafeAreaView
-      style={{
-        marginTop: StatusBar.currentHeight,
-        flex: 1,
-      }}>
-      <View style={styles.container}>
-        <Text style={{fontSize: 30, color: 'black', fontWeight: 'bold'}}>
-          Saved
-        </Text>
-        <ListItem source={imgg.imgAtm} title="ATMS" item={0} />
-        <ListItem source={imgg.imgBranche} title="Branches" item={0} />
-        <ListItem
-          source={imgg.imgCircuits}
-          title="Circuits"
-          item={circuitItems.length}
-        />
-        <ListItem
-          source={imgg.imgDevices}
-          title="Devices"
-          item={devicestItems.length}
-        />
-        <ListItem source={imgg.imgSite} title="Sites" item={0} />
-      </View>
-    </SafeAreaView>
+    <>
+      <SafeAreaView
+        style={{
+          marginTop: StatusBar.currentHeight,
+          flex: 1,
+        }}>
+        <View style={styles.container}>
+          <Text style={{fontSize: 30, color: 'black', fontWeight: 'bold'}}>
+            Saved
+          </Text>
+          <ListItem
+            source={imgg.imgAtm}
+            title="ATMS"
+            item={atmsItem.length}
+            onPress={atmsDetails}
+          />
+          <ListItem
+            source={imgg.imgBranche}
+            title="Branches"
+            item={0}
+            onPress={devicesDetails}
+          />
+          <ListItem
+            source={imgg.imgCircuits}
+            title="Circuits"
+            item={circuitItems.length}
+            onPress={circuitsDetails}
+          />
+          <ListItem
+            source={imgg.imgDevices}
+            title="Devices"
+            item={devicestItems.length}
+            onPress={devicesDetails}
+          />
+          <ListItem
+            source={imgg.imgSite}
+            title="Sites"
+            item={0}
+            onPress={atmsDetails}
+          />
+        </View>
+      </SafeAreaView>
+      <Details detailsRef={detailsRef} displayView={displayView} />
+    </>
   );
 };
 

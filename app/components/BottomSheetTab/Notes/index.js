@@ -34,28 +34,30 @@ const TableHeaderOtherColum = ({title, color}) => {
 
 const Notes = ({index, item}) => {
   return (
-    <View style={{flex: 1}}>
-      <View style={styles.tableRow}>
-        <TableHeaderFirstColum color="white" title="Notes" />
-        <TableHeaderOtherColum color="white" title="Site ID" />
-        <TableHeaderOtherColum color="white" title="Created" />
-        <TableHeaderOtherColum color="white" title="UserName" />
+    <>
+      <View style={{flex: 1}}>
+        <View style={styles.tableRow}>
+          <TableHeaderFirstColum color="white" title="Notes" />
+          <TableHeaderOtherColum color="white" title="Site ID" />
+          <TableHeaderOtherColum color="white" title="Created" />
+          <TableHeaderOtherColum color="white" title="UserName" />
+        </View>
+        <View
+          style={{
+            width: 60,
+            height: 30,
+            borderRadius: 10,
+            position: 'absolute',
+            right: 20,
+            bottom: 60,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#007aff',
+          }}>
+          <AntDesign name="plus" size={24} color="white" />
+        </View>
       </View>
-      <View
-        style={{
-          width: 60,
-          height: 30,
-          borderRadius: 10,
-          position: 'absolute',
-          right: 20,
-          bottom: 60,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#007aff',
-        }}>
-        <AntDesign name="plus" size={24} color="white" />
-      </View>
-    </View>
+    </>
   );
 };
 

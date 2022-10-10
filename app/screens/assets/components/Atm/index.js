@@ -61,7 +61,8 @@ const Atm = ({GetAllAtmNumber, GetAllAtmdETAILS}) => {
         onPress={() => {
           //
 
-          GetAllAtmdETAILS(item.ATM_ID, atmdDetailsRef, setDetailsLoder);
+          GetAllAtmdETAILS(item.ATM_ID, setDetailsLoder);
+          atmdDetailsRef.current.snapToIndex(2);
         }}
         style={{
           ...styles.tableRow1,

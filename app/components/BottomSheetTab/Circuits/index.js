@@ -30,6 +30,25 @@ const Circuits = ({cirCuitRefExplore}) => {
   const [subCat1Type, setsubCat1Type] = useState(true);
   const {cirCuitInventory} = useSelector(state => state.circuitInventory);
   // console.log(cirCuitInventory[0], 'pp');
+  const RanderColum = ({title, border}) => {
+    return (
+      <View
+        style={{
+          ...styles.tableRowColum1,
+          borderLeftColor: 'white',
+          borderLeftWidth: border,
+        }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            copyText(title);
+
+            tostalert(title);
+          }}>
+          <Text style={styles.boxText1}>{title}</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
   const randerItem = ({index, item}) => {
     // console.log(i, item);
     return (
@@ -51,65 +70,10 @@ const Circuits = ({cirCuitRefExplore}) => {
           flexDirection: 'row',
           marginVertical: 1,
         }}>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Circuit_ID);
-
-              tostalert(item.Circuit_ID);
-            }}>
-            <Text style={styles.boxText1}>{item.Circuit_ID}</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Vendor);
-
-              tostalert(item.Vendor);
-            }}>
-            <Text style={styles.boxText1}>{item.Vendor}</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Category);
-
-              tostalert(item.Category);
-            }}>
-            <Text style={styles.boxText1}>{item.Category}</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.SubCat_1);
-
-              tostalert(item.SubCat_1);
-            }}>
-            <Text style={styles.boxText1}>{item.SubCat_1}</Text>
-          </TouchableOpacity>
-        </View>
+        <RanderColum title={item.Circuit_ID} border={0} />
+        <RanderColum title={item.Vendor} border={2} />
+        <RanderColum title={item.Category} border={2} />
+        <RanderColum title={item.SubCat_1} border={2} />
       </TouchableOpacity>
     );
   };
