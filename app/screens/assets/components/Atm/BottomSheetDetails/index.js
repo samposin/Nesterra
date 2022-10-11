@@ -5,7 +5,7 @@ import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-import OrderLoder from '../../../../../components/lodder/OrderLoder';
+import DataLoder from '../../../../../components/lodder/DataLoder';
 import moment from 'moment/moment';
 
 const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
@@ -53,6 +53,11 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
       </View>
     );
   };
+  const Back = () => {
+    return (
+      <View style={{width: 50, height: 50, backgroundColor: 'red'}}></View>
+    );
+  };
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -97,7 +102,15 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
       </View>
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>
         {detailsLoder ? (
-          <OrderLoder />
+          <View
+            style={{
+              width: '100%',
+              height: 500,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <DataLoder />
+          </View>
         ) : (
           <>
             <View style={{...styles.secondTableRow}}>

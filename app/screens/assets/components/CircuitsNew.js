@@ -3,6 +3,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {getAllCircuit} from '../../../actions/AllCircuit';
 import OrderLoder from '../../../components/lodder/OrderLoder';
+import DataLoder from '../../../components/lodder/DataLoder';
 import {tostalert, copyText} from '../../../components/helper';
 // import CircuitBottomSheet from './Circuits';
 import CircuitBottomSheet from './Circuits/CircuitBottomSheet';
@@ -181,7 +182,7 @@ const CircuitsNew = ({
     <>
       {loding3 ? (
         <View style={styles.loderView}>
-          <OrderLoder />
+          <DataLoder />
         </View>
       ) : (
         <>

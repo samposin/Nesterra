@@ -1,12 +1,17 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useRef, useState, useMemo} from 'react';
-
+import ToggleView from './../ToggleView';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import NoDataViewFlatList from './../../NoDataViewFlatList/index';
-import {connect, useSelector} from 'react-redux';
+import {connect, useSelector, useDispatch} from 'react-redux';
 import {copyText, tostalert} from '../../helper';
 import AtmsDetails from './AtmsDetails';
 import {GetAllAtmdETAILS} from '../../../actions/AtmsAssets';
+import {
+  ALL_ATMS_FILTER_BY_ACTIVE,
+  ALL_ATMS_ALL,
+} from '../../../actions/actionType/ATMS';
+
 const TableHeaderFirstColum = ({title, color}) => {
   return (
     <View
@@ -49,7 +54,7 @@ const Atms = ({
   const {atmsItem} = useSelector(state => state.AtmsItem);
   // console.log(allAtms);
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
-
+  const dispatch = useDispatch();
   const randerItem = ({index, item}) => {
     return (
       <TouchableOpacity
@@ -69,6 +74,16 @@ const Atms = ({
         <TableHeaderOtherColum color="black" title={item.Model} />
       </TouchableOpacity>
     );
+  };
+  const activeFilter = () => {
+    dispatch({
+      type: ALL_ATMS_FILTER_BY_ACTIVE,
+    });
+  };
+  const alldata = () => {
+    dispatch({
+      type: ALL_ATMS_ALL,
+    });
   };
   return (
     <>
@@ -92,6 +107,13 @@ const Atms = ({
             );
           }}
         />
+        {allAtms.length > 0 ? (
+          <ToggleView
+            length={allAtms.length}
+            alldata={alldata}
+            activeFilter={activeFilter}
+          />
+        ) : null}
       </View>
     </>
   );

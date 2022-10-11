@@ -78,7 +78,7 @@ const Assets = ({
             deviceRefDetails={deviceRefDetails}
           />
         );
-      case displyCompomnet === 'ATM':
+      case displyCompomnet === 'ATMS':
         return (
           <Atm setLodding={setLodding} deviceRefDetails={deviceRefDetails} />
         );
@@ -91,7 +91,7 @@ const Assets = ({
     setDisplayComponents('Devices');
   };
   const setComponentATM = () => {
-    setDisplayComponents('ATM');
+    setDisplayComponents('ATMS');
   };
   useEffect(() => {
     // setLodding1(true);
@@ -192,7 +192,7 @@ const Assets = ({
             <Button
               onPress={setComponentATM}
               displyCompomnet={displyCompomnet}
-              title="ATM"
+              title="ATMS"
             />
           </View>
           <View style={styles.searchViewRight}></View>

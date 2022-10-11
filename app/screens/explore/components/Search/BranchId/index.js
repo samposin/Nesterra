@@ -74,8 +74,14 @@ const BranchId = () => {
   };
   return (
     <>
-      <InPutView placeHolder="Search Branch  Id" onSearch={searchId} />
-      <IconView />
+      <View style={{width: '100%', flexDirection: 'row'}}>
+        <View style={{width: '80%', height: '100%'}}>
+          <InPutView placeHolder="Search Branch  Id" onSearch={searchId} />
+        </View>
+        <View style={{width: '20%', height: '100%'}}>
+          <IconView />
+        </View>
+      </View>
     </>
   );
 };

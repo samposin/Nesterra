@@ -1,4 +1,4 @@
-import {StyleSheet, TextInput, Text, View} from 'react-native';
+import {StyleSheet, TextInput, Text, View, Image} from 'react-native';
 import React, {useState} from 'react';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -14,26 +14,40 @@ const InPutView = ({placeHolder, onSearch}) => {
     <>
       <View
         style={{
-          width: '15%',
           height: '100%',
 
-          justifyContent: 'center',
-          alignItems: 'center',
+          flexDirection: 'row',
         }}>
-        <FontAwesome name="search" size={20} color="#898989" />
-      </View>
-      <View
-        style={{
-          width: '70%',
-          height: '100%',
-        }}>
-        <TextInput
-          value={search}
-          style={{color: 'black'}}
-          placeholder={placeHolder}
-          placeholderTextColor="#5c5b5b"
-          onChangeText={text => onChange(text)}
-        />
+        <View
+          style={{
+            width: '20%',
+            height: '100%',
+
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Image
+            source={require('../../../../../images/logo.png')}
+            style={{
+              width: 30,
+              height: 30,
+              resizeMode: 'cover',
+            }}
+          />
+        </View>
+        <View
+          style={{
+            width: '80%',
+            height: '100%',
+          }}>
+          <TextInput
+            value={search}
+            style={{color: 'black'}}
+            placeholder={placeHolder}
+            placeholderTextColor="#5c5b5b"
+            onChangeText={text => onChange(text)}
+          />
+        </View>
       </View>
     </>
   );

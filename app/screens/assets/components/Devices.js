@@ -34,7 +34,7 @@ import TableHeaderFirstColum from './../../../components/TableHeaderFirstColum';
 import TableHeaderOtherColum from './../../../components/TableHeaderOtherColum';
 
 import {tostalert, copyText} from '../../../components/helper';
-import OrderLoder from '../../../components/lodder/OrderLoder';
+import DataLoder from '../../../components/lodder/DataLoder';
 import BottomSheetViewDevices from './DevicesDetails';
 import DevicesBottomSheet from './Devices/index';
 import ToggleView from './../../../components/ToggleView/index';
@@ -232,7 +232,7 @@ const Devices = ({
     <>
       {lodding1 ? (
         <View style={styles.loderView}>
-          <OrderLoder />
+          <DataLoder />
         </View>
       ) : (
         <>

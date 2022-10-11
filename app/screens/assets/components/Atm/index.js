@@ -8,7 +8,7 @@ import {
   GetAllAtmdETAILS,
 } from './../../../../actions/AtmsAssets';
 import {connect, useSelector, useDispatch} from 'react-redux';
-import OrderLoder from '../../../../components/lodder/OrderLoder';
+import DataLoder from '../../../../components/lodder/DataLoder';
 import {copyText, tostalert} from '../../../../components/helper';
 import NoDataViewFlatList from '../../../../components/NoDataViewFlatList';
 import ToggleView from '../../../../components/ToggleView';
@@ -33,6 +33,7 @@ const Atm = ({GetAllAtmNumber, GetAllAtmdETAILS}) => {
   const dispatch = useDispatch();
   const atmRef = useRef(null);
   const atmdDetailsRef = useRef(null);
+  const atmdDetailsRef1 = useRef(null);
 
   const DataColum = ({title, border}) => {
     return (
@@ -111,7 +112,7 @@ const Atm = ({GetAllAtmNumber, GetAllAtmdETAILS}) => {
   return (
     <>
       {loder ? (
-        <OrderLoder />
+        <DataLoder />
       ) : (
         <>
           <SecondRow
@@ -159,6 +160,7 @@ const Atm = ({GetAllAtmNumber, GetAllAtmdETAILS}) => {
             bottomSheetLoder={bottomSheetLoder}
             diplayName={diplayName}
           />
+
           <BottomSheetDetails
             snapPoints={snapPoints}
             atmdDetailsRef={atmdDetailsRef}

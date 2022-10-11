@@ -10,6 +10,7 @@ import {
 import React from 'react';
 import Status from './Components/Status';
 import Type from './Components/Type';
+import Genealogy from './Components/Genealogy';
 import {Heading, VStack} from 'native-base';
 const {height, width} = Dimensions.get('screen');
 const MapTypeAndFilter = ({}) => {
@@ -23,6 +24,8 @@ const MapTypeAndFilter = ({}) => {
 
       case setetedView === 'Status':
         return <Status />;
+      case setetedView === 'Genealogy':
+        return <Genealogy />;
     }
   };
   return (
@@ -51,6 +54,7 @@ const MapTypeAndFilter = ({}) => {
             style={{
               color: setetedView === 'Map Type' ? '#1c7dce' : '#757575',
               fontWeight: 'bold',
+              marginVertical: 10,
             }}>
             Map Type
           </Text>
@@ -60,8 +64,19 @@ const MapTypeAndFilter = ({}) => {
             style={{
               color: setetedView === 'Status' ? '#1c7dce' : '#757575',
               fontWeight: 'bold',
+              marginVertical: 10,
             }}>
             Status
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setSeletedView('Genealogy')}>
+          <Text
+            style={{
+              color: setetedView === 'Genealogy' ? '#1c7dce' : '#757575',
+              fontWeight: 'bold',
+              marginVertical: 10,
+            }}>
+            Genealogy
           </Text>
         </TouchableOpacity>
       </View>

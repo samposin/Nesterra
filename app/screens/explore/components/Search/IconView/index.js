@@ -70,7 +70,7 @@ const IconView = (
           startRecording();
         }}
         style={{
-          width: '15%',
+          width: '100%',
           height: '100%',
 
           justifyContent: 'center',
@@ -78,7 +78,6 @@ const IconView = (
         }}>
         <FontAwesome name={'microphone'} size={24} color="#898989" />
       </TouchableOpacity>
-      {/* )} */}
     </>
   );
 };

@@ -15,8 +15,14 @@ const Address = () => {
   };
   return (
     <>
-      <InPutView placeHolder="Search Address" onSearch={searchId} />
-      <IconView />
+      <View style={{width: '100%', flexDirection: 'row'}}>
+        <View style={{width: '80%', height: '100%'}}>
+          <InPutView placeHolder="Search Address" onSearch={searchId} />
+        </View>
+        <View style={{width: '20%', height: '100%'}}>
+          <IconView />
+        </View>
+      </View>
     </>
   );
 };

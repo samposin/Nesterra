@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import DropDownView from './DropDownView';
 // import BranchSearch from './BranchSearch';
 // import CircuitSearch from './CircuitSearch';
@@ -68,11 +68,21 @@ const SearchComponet = ({setModalVisible}) => {
           <Text style={{color: '#898989', fontWeight: '500'}}>
             {searchView}
           </Text>
-          <AntDesign
+          {/* <AntDesign
             name="caretdown"
             size={15}
             style={{marginLeft: 2}}
             color={'#898989'}
+          /> */}
+          <FontAwesome5
+            name="eject"
+            size={15}
+            style={{
+              transform: [{rotate: '180deg'}],
+              marginLeft: 2,
+              marginTop: 3,
+            }}
+            color={'#007aff'}
           />
         </TouchableOpacity>
       </View>
@@ -92,7 +102,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     position: 'absolute',
-    width: Dimensions.get('screen').width - 50,
+    width: Dimensions.get('screen').width - 30,
     alignSelf: 'center',
     zIndex: 0,
     marginTop: 80,
@@ -100,7 +110,7 @@ const styles = StyleSheet.create({
     // borderWidth: 2,
     // zIndex: -1,
     backgroundColor: 'white',
-    borderRadius: 22,
+    borderRadius: 25,
     shadowColor: '#000',
     shadowOffset: {
       width: 2,

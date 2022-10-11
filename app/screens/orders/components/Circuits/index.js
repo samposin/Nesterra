@@ -5,7 +5,7 @@ import ThirdRow from './ThirdRow';
 
 import {copyText, tostalert} from '../../../../components/helper';
 import {get_orders_for_tab} from './../../../../actions/orderFotTab';
-import OrderLoder from './../../../../components/lodder/OrderLoder';
+import DataLoder from './../../../../components/lodder/DataLoder';
 
 import {connect, useDispatch, useSelector} from 'react-redux';
 import Tableheader from './TableHeader/index';
@@ -138,7 +138,7 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
     <>
       {loding ? (
         <View style={styles.loderView}>
-          <OrderLoder />
+          <DataLoder />
         </View>
       ) : (
         <>
