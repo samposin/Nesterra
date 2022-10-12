@@ -1,8 +1,10 @@
 import {Image} from 'react-native';
 import React from 'react';
 
-const CustomMarker = ({isChecked, officeType}) => {
-  // console.log(officeType);
+const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
+  // console.log(marKerType, 'typeof');
+  // console.log('ttt', mark);
+  // console.log(typeof mark);
   const getImage = value => {
     // console.log(officeType);
     switch (true) {
@@ -25,7 +27,20 @@ const CustomMarker = ({isChecked, officeType}) => {
     }
   };
   return (
-    <Image style={{width: 35, height: 35}} source={getImage(officeType)} />
+    <Image
+      style={{width: 35, height: 35}}
+      source={
+        marKerType === mark
+          ? require('../../images/14.png')
+          : getImage(officeType)
+      }
+    />
   );
 };
 export default CustomMarker;
+
+// source={
+//   marKerType === mark
+//     ? require('../../images/14.png')
+//     : getImage(officeType)
+// }

@@ -4,6 +4,7 @@ import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 import OrderLoder from '../../lodder/OrderLoder';
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import moment from 'moment';
 
 const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
@@ -176,9 +177,16 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
     <BottomSheet
       handleIndicatorStyle={{
         backgroundColor: '#757575',
-        height: 2.5,
+        height: 0,
         opacity: 0.5,
       }}
+      handleComponent={() => (
+        <View style={styles.closeLineContainer}>
+          <View style={styles.closeLine}>
+            <SimpleLineIcons name="arrow-up" size={20} color="black" />
+          </View>
+        </View>
+      )}
       enabledInnerScrolling={true}
       enabledContentGestureInteraction={false}
       ref={orderRefExplore}
@@ -470,5 +478,17 @@ const styles = StyleSheet.create({
     // borderRightWidth: 1,
     paddingLeft: 10,
     justifyContent: 'center',
+  },
+  closeLineContainer: {
+    alignSelf: 'center',
+  },
+  closeLine: {
+    width: 30,
+    height: 30,
+    borderRadius: 3,
+    marginTop: 9,
+
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
 });

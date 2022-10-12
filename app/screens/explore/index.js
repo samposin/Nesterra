@@ -501,6 +501,7 @@ const Explore = ({
     });
   };
   const [indexZ, settIndexZ] = useState(2);
+  const [marKerType, setMarkerType] = useState('');
   return (
     <>
       {inputRotate ? rotatedIconAntichange() : rotatedIconchange()}
@@ -622,8 +623,13 @@ const Explore = ({
                     setLatLng({lat, lng});
                     // animateToRegion(lat, lng);
                     fetchNearestPlacesFromGoogle(lat, lng);
+                    setMarkerType(`${item.Latitude}_${item.Longitude}`);
                   }}>
-                  <CustomMarker officeType={item.HierarchyLocationType} />
+                  <CustomMarker
+                    mark={`${item.Latitude}_${item.Longitude}`}
+                    marKerType={marKerType}
+                    officeType={item.HierarchyLocationType}
+                  />
                 </Marker.Animated>
               );
             })}

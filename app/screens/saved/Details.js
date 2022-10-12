@@ -2,6 +2,7 @@ import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
 import React, {useMemo} from 'react';
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 import moment from 'moment/moment';
@@ -31,10 +32,16 @@ const Details = ({detailsRef, displayView}) => {
     <BottomSheet
       handleIndicatorStyle={{
         backgroundColor: '#757575',
-        height: 2.5,
+        height: 0,
         opacity: 0.5,
       }}
-      style={{}}
+      handleComponent={() => (
+        <View style={styles.closeLineContainer}>
+          <View style={styles.closeLine}>
+            <SimpleLineIcons name="arrow-up" size={20} color="black" />
+          </View>
+        </View>
+      )}
       enabledInnerScrolling={true}
       enabledContentGestureInteraction={false}
       ref={detailsRef}
@@ -77,4 +84,17 @@ const Details = ({detailsRef, displayView}) => {
 
 export default Details;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  closeLineContainer: {
+    alignSelf: 'center',
+  },
+  closeLine: {
+    width: 30,
+    height: 30,
+    borderRadius: 3,
+    marginTop: 9,
+
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+});

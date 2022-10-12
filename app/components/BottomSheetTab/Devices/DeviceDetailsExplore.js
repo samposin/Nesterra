@@ -6,6 +6,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import moment from 'moment';
 import {tostalert} from '../../helper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,6 +19,7 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
   const {item} = useSelector(state => state.deviceDetailsExplore);
   const {id} = useSelector(state => state.deviceDetailsExplore);
   const {devicestItems} = useSelector(state => state.DevicesItems);
+  const dataa = devicestItems.find(i => i.Device_Name === item.Device_Name);
 
   const addList = item => {
     if (devicestItems.length == 0) {
@@ -145,40 +147,21 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
       </View>
     );
   };
-  const addToList = async item1 => {
-    try {
-      const seasonToAdd = {
-        id: item.Device_Name,
-      };
-      const storedValue = await AsyncStorage.getItem('@device_List');
-      const prevList = await JSON.parse(storedValue);
-
-      if (!prevList) {
-        const newList = [seasonToAdd];
-
-        await AsyncStorage.setItem('@device_List', JSON.stringify(newList));
-      } else {
-        const dd = prevList.find(i => i.id === item1);
-
-        if (dd) {
-          tostalert('Already Added');
-        } else {
-          prevList.push(seasonToAdd);
-          await AsyncStorage.setItem('@device_List', JSON.stringify(prevList));
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <BottomSheet
       handleIndicatorStyle={{
         backgroundColor: '#757575',
-        height: 2.5,
+        height: 0,
         opacity: 0.5,
       }}
+      handleComponent={() => (
+        <View style={styles.closeLineContainer}>
+          <View style={styles.closeLine}>
+            <SimpleLineIcons name="arrow-up" size={20} color="black" />
+          </View>
+        </View>
+      )}
       enabledInnerScrolling={true}
       enabledContentGestureInteraction={false}
       ref={deviceRefExplore}
@@ -218,14 +201,19 @@ const DeviceDetailsExplore = ({deviceRefExplore, bottomSheetRef, lodding}) => {
           paddingRight: 15,
           justifyContent: 'center',
         }}>
-        <TouchableOpacity
-          onPress={() => {
-            addList(item);
-          }}>
-          <Text>
-            <EvilIcons name="heart" size={30} color="#007aff" />
-          </Text>
-        </TouchableOpacity>
+        {dataa ? (
+          <Entypo name="heart" size={24} color="#c338b5" />
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              addList(item);
+            }}>
+            <Text>
+              <EvilIcons name="heart" size={30} color="#007aff" />
+              {/* <Entypo name="heart" size={24} color="#c338b5" /> */}
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>
         <>
@@ -703,5 +691,17 @@ const styles = StyleSheet.create({
     // borderRightWidth: 1,
     paddingLeft: 10,
     justifyContent: 'center',
+  },
+  closeLineContainer: {
+    alignSelf: 'center',
+  },
+  closeLine: {
+    width: 30,
+    height: 30,
+    borderRadius: 3,
+    marginTop: 9,
+
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
 });

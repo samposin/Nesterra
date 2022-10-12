@@ -51,7 +51,7 @@ const Atms = ({
   setDetailsLoder,
 }) => {
   const {allAtms} = useSelector(state => state.allAtms);
-  const {atmsItem} = useSelector(state => state.AtmsItem);
+
   // console.log(allAtms);
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   const dispatch = useDispatch();

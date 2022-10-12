@@ -10,6 +10,7 @@ import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {useSelector, useDispatch} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import OrderLoder from '../../lodder/OrderLoder';
@@ -22,7 +23,7 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
   const dispatch = useDispatch();
   const {item} = useSelector(state => state.CircuitDetailsExplore);
   const {circuitItems} = useSelector(state => state.CircuitsItems);
-
+  const dataa = circuitItems.find(i => i.Circuit_ID === item.Circuit_ID);
   const addList = item => {
     if (circuitItems.length == 0) {
       dispatch({
@@ -66,9 +67,16 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
     <BottomSheet
       handleIndicatorStyle={{
         backgroundColor: '#757575',
-        height: 2.5,
+        height: 0,
         opacity: 0.5,
       }}
+      handleComponent={() => (
+        <View style={styles.closeLineContainer}>
+          <View style={styles.closeLine}>
+            <SimpleLineIcons name="arrow-up" size={20} color="black" />
+          </View>
+        </View>
+      )}
       enabledInnerScrolling={true}
       enabledContentGestureInteraction={false}
       ref={cirCuitRefExplore}
@@ -105,17 +113,22 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
           width: '100%',
           height: 60,
           alignItems: 'flex-end',
-          paddingRight: 15,
+          paddingRight: 20,
           justifyContent: 'center',
         }}>
-        <TouchableOpacity
-          onPress={() => {
-            addList(item);
-          }}>
-          <Text>
-            <EvilIcons name="heart" size={30} color="#007aff" />
-          </Text>
-        </TouchableOpacity>
+        {dataa ? (
+          <Entypo name="heart" size={24} color="#c338b5" />
+        ) : (
+          <TouchableOpacity
+            onPress={() => {
+              addList(item);
+            }}>
+            <Text>
+              <EvilIcons name="heart" size={30} color="#007aff" />
+              {/* <Entypo name="heart" size={24} color="#c338b5" /> */}
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>
         {!lodding ? (
@@ -408,5 +421,17 @@ const styles = StyleSheet.create({
 
     paddingLeft: 10,
     justifyContent: 'center',
+  },
+  closeLineContainer: {
+    alignSelf: 'center',
+  },
+  closeLine: {
+    width: 30,
+    height: 30,
+    borderRadius: 3,
+    marginTop: 9,
+
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
 });

@@ -63,7 +63,7 @@ import IconView from '../IconView/index';
 
 const DeviceId = () => {
   const searchId = data => {
-    console.log('first', data);
+    // console.log('first', data);
   };
   return (
     <>

@@ -4,8 +4,9 @@ import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import moment from 'moment';
-import OrderLoder from '../../../../../components/lodder/OrderLoder';
+import DataLoder from '../../../../../components/lodder/DataLoder';
 
 const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
@@ -37,9 +38,16 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
     <BottomSheet
       handleIndicatorStyle={{
         backgroundColor: '#757575',
-        height: 2.5,
+        height: 0,
         opacity: 0.5,
       }}
+      handleComponent={() => (
+        <View style={styles.closeLineContainer}>
+          <View style={styles.closeLine}>
+            <SimpleLineIcons name="arrow-up" size={20} color="black" />
+          </View>
+        </View>
+      )}
       enabledInnerScrolling={true}
       enabledContentGestureInteraction={false}
       ref={bottomSheetRefdetails}
@@ -245,7 +253,15 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
             <View style={{height: 70, width: '100%'}}></View>
           </>
         ) : (
-          <OrderLoder />
+          <View
+            style={{
+              width: '100%',
+              height: 500,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <DataLoder />
+          </View>
         )}
       </BottomSheetScrollView>
     </BottomSheet>
@@ -381,5 +397,17 @@ const styles = StyleSheet.create({
 
     paddingLeft: 10,
     justifyContent: 'center',
+  },
+  closeLineContainer: {
+    alignSelf: 'center',
+  },
+  closeLine: {
+    width: 30,
+    height: 30,
+    borderRadius: 3,
+    marginTop: 9,
+
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
 });
