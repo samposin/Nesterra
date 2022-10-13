@@ -19,7 +19,7 @@ const Category = ({third_party_filter, get_coordinates}) => {
   const [setectItem, setsetectItem] = React.useState('');
   const myRef = useRef(null);
   const actiText = (id, value) => {
-    if (id == 6) {
+    if (id == 7) {
       navigation.navigate('Stats');
     } else {
       let listData;

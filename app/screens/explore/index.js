@@ -15,10 +15,9 @@ import BottomSheetView from './BottomSheet';
 import MapView from 'react-native-map-clustering';
 import {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 // import Search from './Search';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
+
 import MapViewDirections from 'react-native-maps-directions';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Geolocation from 'react-native-geolocation-service';
 import CustomClusteredMarkers from './components/CustomClusteredMarkers';
@@ -69,6 +68,8 @@ import {soundePlay} from '../../components/helper/soundHelper';
 import {getAllAtms} from './../../actions/ATMS/index';
 import MapTypeAndFilterButtom from './components/MapTypeAndFilterButtom/index';
 import Atms from './../../components/BottomSheetTab/Atms/index';
+
+import {dataMar} from '../../utils/MarkerData1';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -206,10 +207,10 @@ const Explore = ({
   //voice
 
   const dispatch = useDispatch();
-  const {coordinates} = useSelector(state => state.coordinates);
+  // const {coordinates} = useSelector(state => state.coordinates);
   const {lat, lng} = useSelector(state => state.setLatLang);
-  // console.log(coordinates);
-
+  // console.log(coordinates, 'ddd');
+  const [cord, setCord] = useState([]);
   const mapRef = useRef(null);
 
   // const picRef = useRef(null);
@@ -432,9 +433,9 @@ const Explore = ({
       mapRef.current.animateToRegion(region, 500);
     });
   };
-  useEffect(() => {
-    get_coordinates();
-  }, []);
+  // useEffect(() => {
+  //   get_coordinates();
+  // }, []);
 
   const animateToRegion = region => {
     mapRef.current.animateToRegion(region, 2000);
@@ -501,7 +502,30 @@ const Explore = ({
     });
   };
   const [indexZ, settIndexZ] = useState(2);
-  const [marKerType, setMarkerType] = useState('');
+  const [marKerType, setMarkerType] = useState(false);
+
+  const markerChange = id => {
+    // cord, setCord
+    console.log(id);
+    let lisdata = cord.map(item => {
+      let itm = {...item, isChecked: false};
+      return itm;
+    });
+    lisdata[id].isChecked = true;
+    setCord(lisdata);
+  };
+  const getChange = marker => {
+    let marker1 = marker.map(item => {
+      let itm = {...item, isChecked: false};
+      return itm;
+    });
+
+    setCord(marker1);
+  };
+  useEffect(() => {
+    getChange(dataMar);
+  }, []);
+
   return (
     <>
       {inputRotate ? rotatedIconAntichange() : rotatedIconchange()}
@@ -590,8 +614,8 @@ const Explore = ({
           userLocationPriority={'high'}
           mapType={mapType}
           onLayout={onLayoutMap}>
-          {coordinates &&
-            coordinates.map((item, i) => {
+          {cord &&
+            cord.map((item, i) => {
               // console.log(item.SubLocationType);
               return (
                 <Marker.Animated
@@ -600,7 +624,7 @@ const Explore = ({
                     latitude: item.Latitude,
                     longitude: item.Longitude,
                   }}
-                  tracksViewChanges={false}
+                  tracksViewChanges={true}
                   onPress={() => {
                     markerZoom(item.Latitude, item.Longitude);
                     settIndexZ(0);
@@ -623,10 +647,11 @@ const Explore = ({
                     setLatLng({lat, lng});
                     // animateToRegion(lat, lng);
                     fetchNearestPlacesFromGoogle(lat, lng);
-                    setMarkerType(`${item.Latitude}_${item.Longitude}`);
+
+                    markerChange(i);
                   }}>
                   <CustomMarker
-                    mark={`${item.Latitude}_${item.Longitude}`}
+                    mark={item.isChecked}
                     marKerType={marKerType}
                     officeType={item.HierarchyLocationType}
                   />
@@ -1129,6 +1154,8 @@ const Explore = ({
         orderRefExplore={orderRefExplore}
         atmdDetailsRef={atmdDetailsRef}
         setDetailsLoder={setDetailsLoder}
+        setMarkerType={setMarkerType}
+        marKerType={marKerType}
       />
 
       {/* <BottomSheetViewImage

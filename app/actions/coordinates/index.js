@@ -13,9 +13,9 @@ export const get_coordinates = () => dispatch => {
   dispatch({
     type: GET_COORDINATES,
     payload: {
-      data: dataMar,
-      lat: dataMar[2].Latitude,
-      lng: dataMar[2].Longitude,
+      data: markardata,
+      lat: markardata[2].Latitude,
+      lng: markardata[2].Longitude,
     },
   });
   // Axios.get(`${Base_url}/citizenapi/api/GetLocationDataByCoordinates?limit=100`)

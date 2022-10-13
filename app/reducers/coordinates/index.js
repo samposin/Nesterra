@@ -20,14 +20,14 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_COORDINATES:
-      // let data1 = action.payload.data.map(item => {
-      //   return {...item, isChecked: false};
-      // });
+      let data1 = action.payload.data.map(item => {
+        return {...item, isChecked: false};
+      });
       // console.log(data1, 'data1');
       return {
         ...state,
-        coordinates: action.payload.data,
-        coordinates1: action.payload.data,
+        coordinates: data1,
+        coordinates1: data1,
         latt: action.payload.lat,
         lngg: action.payload.lng,
         error: null,
@@ -84,20 +84,16 @@ export default (state = initialState, action) => {
         lngg: action.payload.lng,
         error: null,
       };
-    case MARKER_IS_SELECTED:
-      let marker = state.coordinates.map(item => {
-        let itm = {...item, isChecked: false};
-        return itm;
-      });
-      marker[action.payload.id].isChecked = true;
+    //==========
+    // case MARKER_IS_SELECTED:
+    //   let coord1 = [...state.coordinates1];
 
-      return {
-        ...state,
-        coordinates: marker,
-        latt: 0,
-        lngg: 0,
-        error: null,
-      };
+    //   const dataa = (coord1[action.data].isChecked = true);
+
+    //   return {
+    //     ...state,
+    //     coordinates: dataa,
+    //   };
     case FILTER_MARKER:
       // let marker = state.coordinates.map(item => {
       //   let itm = {...item, isChecked: false};

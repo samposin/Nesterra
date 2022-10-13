@@ -2,9 +2,7 @@ import {Image} from 'react-native';
 import React from 'react';
 
 const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
-  // console.log(marKerType, 'typeof');
-  // console.log('ttt', mark);
-  // console.log(typeof mark);
+  // console.log(mark);
   const getImage = value => {
     // console.log(officeType);
     switch (true) {
@@ -24,16 +22,24 @@ const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
         return require('../../images/dc.png');
       case value === '3rd Party':
         return require('../../images/3rdd.png');
+      case value === 'ITM Kiosk':
+        return require('../../images/itm.png');
+    }
+  };
+  const getMar = officeType => {
+    if (mark && marKerType) {
+      return require('../../images/green.png');
+    } else if (mark) {
+      return require('../../images/red.png');
+    } else {
+      return getImage(officeType);
     }
   };
   return (
     <Image
       style={{width: 35, height: 35}}
-      source={
-        marKerType === mark
-          ? require('../../images/14.png')
-          : getImage(officeType)
-      }
+      // source={mark ? require('../../images/14.png') : getImage(officeType)}
+      source={getMar(officeType)}
     />
   );
 };

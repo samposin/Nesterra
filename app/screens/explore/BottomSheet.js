@@ -26,6 +26,8 @@ const BottomSheetView = ({
   atmdDetailsRef,
   bottomSheetLoder,
   setDetailsLoder,
+  setMarkerType,
+  marKerType,
 }) => {
   // console.log(cirCuitRef, bottomSheetRef,picRef );
   const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
@@ -187,6 +189,16 @@ const BottomSheetView = ({
                   : 'red',
                 borderRadius: 10,
               }}></View>
+            <TouchableOpacity
+              onPress={() => {
+                setMarkerType(!marKerType);
+              }}
+              style={{
+                width: 30,
+                height: 30,
+                backgroundColor: 'red',
+                borderRadius: 10,
+              }}></TouchableOpacity>
           </View>
 
           <BottomSheetFlatList

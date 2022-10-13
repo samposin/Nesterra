@@ -3,11 +3,13 @@ import React from 'react';
 export const data = [
   {id: 0, name: 'Offices', isActive: false, value: 'Office'},
   {id: 1, name: 'Branches', isActive: false, value: 'Branch'},
-  {id: 2, name: 'ATMs', isActive: false, value: 'ATM'},
-  {id: 3, name: '3rd Partys', isActive: false, value: '3rd Party'},
-  {id: 4, name: 'Other', isActive: false, value: 'Other'},
-  {id: 5, name: 'Data Center', isActive: false, value: 'Data Center'},
-  {id: 6, name: 'Statistics', isActive: false, value: 'Statistics'},
+  {id: 2, name: 'ITM', isActive: false, value: 'ITM Kiosk'},
+  {id: 3, name: 'ATMs', isActive: false, value: 'ATM'},
+  {id: 4, name: '3rd Partys', isActive: false, value: '3rd Party'},
+  {id: 5, name: 'Other', isActive: false, value: 'Other'},
+  {id: 6, name: 'Data Center', isActive: false, value: 'Data Center'},
+
+  {id: 7, name: 'Statistics', isActive: false, value: 'Statistics'},
 ];
 
 const cluster1 = require('../images/m1.png');
