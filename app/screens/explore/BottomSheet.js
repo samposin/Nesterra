@@ -3,8 +3,9 @@ import React, {useMemo, useRef, useEffect, useCallback} from 'react';
 
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 import {useState} from 'react';
@@ -16,6 +17,10 @@ import Devices from '../../components/BottomSheetTab/Devices';
 import Orders from '../../components/BottomSheetTab/Orders';
 import Atms from '../../components/BottomSheetTab/Atms';
 import Notes from '../../components/BottomSheetTab/Notes';
+import {
+  SITE_ITEM,
+  SITE_ITEM_REMOVE,
+} from './../../actions/actionType/SiteItem/index';
 
 const BottomSheetView = ({
   bottomSheetRef,
@@ -30,8 +35,12 @@ const BottomSheetView = ({
   marKerType,
 }) => {
   // console.log(cirCuitRef, bottomSheetRef,picRef );
-  const snapPoints = useMemo(() => ['20%', '50%', '95%'], []);
+  const snapPoints = useMemo(() => ['20%', '40%', '95%'], []);
   const location_data = useSelector(state => state.location_details.data);
+  const {siteItem} = useSelector(state => state.SiteItem);
+  const dataa = siteItem.find(i => i.id === location_data.Location_ID);
+  // console.log(dataa, 'det');
+  const dispatch = useDispatch();
   const myRef = useRef(null);
   // console.log(picRef, 'picRef');
   const data = [
@@ -88,6 +97,32 @@ const BottomSheetView = ({
       case item == 7:
         return <Notes orderRefExplore={orderRefExplore} />;
     }
+  };
+  const remove = id => {
+    dispatch({
+      type: SITE_ITEM_REMOVE,
+      data: id,
+    });
+  };
+  const addList = id => {
+    const dd = {
+      id: id,
+    };
+    dispatch({
+      type: SITE_ITEM,
+      data: dd,
+    });
+
+    // if (dataa) {
+    //   dispatch({
+    //     type: SITE_ITEM,
+    //     data: dd,
+    //   });
+
+    //   setMarkerType(!marKerType);
+    // } else {
+    //   alert('no');
+    // }
   };
   useEffect(() => {
     // ranDerView(0);
@@ -174,31 +209,52 @@ const BottomSheetView = ({
             style={{
               width: '100%',
               height: 30,
+              marginVertical: 5,
               flexDirection: 'row',
               alignItems: 'center',
             }}>
-            <Text style={{fontSize: 16, marginLeft: 10, color: 'black'}}>
-              Sity Status:{' '}
-            </Text>
+            <View style={{width: '50%', height: '100%', flexDirection: 'row'}}>
+              <Text style={{fontSize: 16, marginLeft: 10, color: 'black'}}>
+                Sity Status:{' '}
+              </Text>
+              <View
+                style={{
+                  width: 20,
+                  height: 20,
+                  backgroundColor: location_data?.LocationStatusDesc
+                    ? '#56ff00'
+                    : 'red',
+                  borderRadius: 10,
+                }}></View>
+            </View>
             <View
               style={{
-                width: 20,
-                height: 20,
-                backgroundColor: location_data?.LocationStatusDesc
-                  ? '#56ff00'
-                  : 'red',
-                borderRadius: 10,
-              }}></View>
-            <TouchableOpacity
-              onPress={() => {
-                setMarkerType(!marKerType);
-              }}
-              style={{
-                width: 30,
-                height: 30,
-                backgroundColor: 'red',
-                borderRadius: 10,
-              }}></TouchableOpacity>
+                width: '50%',
+                height: '100%',
+                paddingRight: 25,
+                justifyContent: 'flex-end',
+                flexDirection: 'row',
+              }}>
+              {dataa ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    remove(location_data?.Location_ID);
+                  }}>
+                  <Text>
+                    <Entypo name="heart" size={24} color="#c338b5" />
+                  </Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => {
+                    addList(location_data?.Location_ID);
+                  }}>
+                  <Text>
+                    <EvilIcons name="heart" size={30} color="#c338b5" />
+                  </Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
 
           <BottomSheetFlatList

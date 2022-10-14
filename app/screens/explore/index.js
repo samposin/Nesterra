@@ -506,13 +506,14 @@ const Explore = ({
 
   const markerChange = id => {
     // cord, setCord
-    console.log(id);
+
     let lisdata = cord.map(item => {
       let itm = {...item, isChecked: false};
       return itm;
     });
     lisdata[id].isChecked = true;
     setCord(lisdata);
+    setMarkerType(false);
   };
   const getChange = marker => {
     let marker1 = marker.map(item => {
@@ -521,6 +522,15 @@ const Explore = ({
     });
 
     setCord(marker1);
+  };
+  const filterData = data => {
+    const fdata = dataMar.filter(function (item) {
+      return item.HierarchyLocationType.toLowerCase() === data.toLowerCase();
+    });
+    setCord(fdata);
+  };
+  const allDataa = () => {
+    getChange(dataMar);
   };
   useEffect(() => {
     getChange(dataMar);
@@ -1141,7 +1151,13 @@ const Explore = ({
 
         {/* =================search=============== */}
         {/* =================Category=============== */}
-        {catShow && <Category get_coordinates={get_coordinates} />}
+        {catShow && (
+          <Category
+            get_coordinates={get_coordinates}
+            allDataa={allDataa}
+            filterData={filterData}
+          />
+        )}
 
         {/* =================Category=============== */}
       </View>

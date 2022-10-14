@@ -17,7 +17,7 @@ export const get_location_details =
             },
           });
           setIsLoading(false);
-          bottomSheetRef.current.snapToIndex(0);
+          bottomSheetRef.current.snapToIndex(1);
         }
       })
       .catch(error => {

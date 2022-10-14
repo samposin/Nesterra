@@ -59,7 +59,7 @@ const AtmsDetails = ({atmdDetailsRef, detailsLoder}) => {
     );
   };
   const dataa = atmsItem.find(i => i.ATM_ID === item.ATM_ID);
-
+  // console.log(dataa, 'atm');
   const addList = it => {
     if (atmsItem.length == 0) {
       dispatch({

@@ -18,6 +18,7 @@ const Saved = () => {
   const {devicestItems} = useSelector(state => state.DevicesItems);
 
   const {atmsItem} = useSelector(state => state.AtmsItem);
+  const {siteItem} = useSelector(state => state.SiteItem);
   const detailsRef = useRef(null);
   const [displayView, setDisplayView] = useState('Atms');
   const ListItem = ({source, title, item, onPress}) => {
@@ -99,7 +100,7 @@ const Saved = () => {
           <ListItem
             source={imgg.imgSite}
             title="Sites"
-            item={0}
+            item={siteItem.length}
             onPress={atmsDetails}
           />
         </View>

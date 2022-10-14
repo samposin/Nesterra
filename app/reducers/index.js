@@ -37,6 +37,7 @@ import AtmsItem from './AtmsItem';
 import CircuitsItems from './CircuitsItems';
 import DevicesItems from './DevicesItems';
 import MapType from './MapType';
+import SiteItem from './SiteItem';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -75,5 +76,6 @@ const rootReducer = combineReducers({
   AtmsItem,
   DevicesItems,
   MapType,
+  SiteItem,
 });
 export default rootReducer;
