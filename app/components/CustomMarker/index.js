@@ -114,7 +114,7 @@ const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
             justifyContent: 'center',
             alignItems: 'center',
             borderWidth: mark ? 1.5 : 0,
-            borderColor: mark ? '#c338b5' : '#55fe01',
+            borderColor: mark ? '#59ff02' : '#55fe01',
           }}>
           <Text style={{color: 'black', fontWeight: 'bold'}}>
             {getText(officeType)}

@@ -10,12 +10,16 @@ import DataLoder from '././../../../components/lodder/DataLoder';
 import moment from 'moment/moment';
 import {ATMS_ITEM} from '../../../actions/actionType/AtmsItem';
 import {warinng, success} from '../../helper';
+import CheckBoxView from './../CheckBoxView';
+import ShortView from './ShortView';
+
 const AtmsDetails = ({atmdDetailsRef, detailsLoder}) => {
   const dispatch = useDispatch();
 
   const {item} = useSelector(state => state.AssetsAtmsDetails);
   const {atmsItem} = useSelector(state => state.AtmsItem);
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
+  const [allView, setAllView] = useState(false);
   const TabeRow = ({title, data, bgcolor}) => {
     return (
       <View style={{...styles.secondTableRow}}>
@@ -103,46 +107,58 @@ const AtmsDetails = ({atmdDetailsRef, detailsLoder}) => {
         style={{
           width: '100%',
           height: 30,
-          alignItems: 'flex-end',
-          paddingRight: 25,
+          marginBottom: 10,
+          flexDirection: 'row',
         }}>
-        <TouchableOpacity onPress={() => atmdDetailsRef.current.close()}>
-          <View
-            style={{
-              width: 24,
-              height: 24,
-              borderRadius: 12,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: '#007aff',
-            }}>
-            <Text>
-              <Entypo name="cross" size={20} color="white" />
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          width: '100%',
-          height: 60,
-          alignItems: 'flex-end',
-          paddingRight: 25,
-          justifyContent: 'center',
-        }}>
-        {dataa ? (
-          <Entypo name="heart" size={24} color="#c338b5" />
-        ) : (
-          <TouchableOpacity
-            onPress={() => {
-              addList(item);
-            }}>
-            <Text>
-              <EvilIcons name="heart" size={30} color="#007aff" />
-            </Text>
+        <View
+          style={{
+            width: '50%',
+            height: '100%',
+          }}>
+          <CheckBoxView allView={allView} setAllView={setAllView} />
+        </View>
+        <View
+          style={{
+            width: '50%',
+            height: '100%',
+
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            paddingRight: 15,
+            alignItems: 'center',
+          }}>
+          {dataa ? (
+            <Entypo name="heart" size={24} color="#c338b5" />
+          ) : (
+            <TouchableOpacity
+              onPress={() => {
+                addList(item);
+              }}>
+              <Text>
+                <EvilIcons name="heart" size={30} color="#c338b5" />
+              </Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity onPress={() => atmdDetailsRef.current.close()}>
+            <View
+              style={{
+                width: 24,
+                height: 24,
+                borderRadius: 12,
+                justifyContent: 'center',
+
+                alignItems: 'center',
+                backgroundColor: '#007aff',
+                marginLeft: 15,
+              }}>
+              <Text>
+                <Entypo name="cross" size={20} color="white" />
+              </Text>
+            </View>
           </TouchableOpacity>
-        )}
+        </View>
       </View>
+
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>
         {detailsLoder ? (
           <View
@@ -154,6 +170,8 @@ const AtmsDetails = ({atmdDetailsRef, detailsLoder}) => {
             }}>
             <DataLoder />
           </View>
+        ) : !allView ? (
+          <ShortView />
         ) : (
           <>
             <View style={{...styles.secondTableRow}}>
@@ -199,12 +217,12 @@ const AtmsDetails = ({atmdDetailsRef, detailsLoder}) => {
             <DATArow bgcolor="#deebf7" title="Arrangement" value={'--'} />
             <DATArow
               bgcolor="#deebf7"
-              title="ATM_Type"
+              title="ATM Type"
               value={item.ATM_Type ? item.ATM_Type : '--'}
             />
             <DATArow
               bgcolor="#deebf7"
-              title="ATM_Function"
+              title="ATM Function"
               value={item.ATM_Function ? item.ATM_Function : '--'}
             />
             <DATArow
@@ -214,7 +232,7 @@ const AtmsDetails = ({atmdDetailsRef, detailsLoder}) => {
             />
             <DATArow
               bgcolor="#deebf7"
-              title="Date_Installed"
+              title="Date Installed"
               value={
                 item.Date_Installed
                   ? moment(item.Date_Installed).format('MM/DD/YY')
@@ -238,7 +256,7 @@ const AtmsDetails = ({atmdDetailsRef, detailsLoder}) => {
             />
             <DATArow
               bgcolor="#fbe5d6"
-              title="Serial_Number"
+              title="Serial Number"
               value={item.Serial_Number ? item.Serial_Number : '--'}
             />
             <DATArow bgcolor="#ffffcc" title="ATM IP#" value={'--'} />
@@ -248,7 +266,7 @@ const AtmsDetails = ({atmdDetailsRef, detailsLoder}) => {
 
             <DATArow
               bgcolor="#f2f2f2"
-              title="Ref_ID"
+              title="Ref ID"
               value={item.Ref_ID ? item.Ref_ID : '--'}
             />
             <DATArow

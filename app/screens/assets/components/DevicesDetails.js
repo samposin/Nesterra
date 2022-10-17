@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native';
 import React, {useMemo} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
@@ -277,11 +277,14 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                   <Text style={{fontWeight: '700', color: '#007aff'}}>
                     {item.Site_ID}
                   </Text>
-                  <FontAwesome
-                    name="map-marker"
-                    style={{marginLeft: 6}}
-                    size={24}
-                    color="#007aff"
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: 'center',
+                      marginLeft: 5,
+                    }}
+                    source={require('../../../images/location.png')}
                   />
                 </TouchableOpacity>
               </View>

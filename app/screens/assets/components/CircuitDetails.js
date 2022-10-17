@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, Text, Image, View} from 'react-native';
 import React, {useMemo} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
@@ -178,9 +178,15 @@ const BottomSheetViewCircuits = ({
                 <Text style={{fontWeight: '700', color: '#007aff'}}>
                   {item.Location_ID}
                 </Text>
-                <Text style={{marginLeft: 5}}>
-                  <FontAwesome name="map-marker" size={22} color="#007aff" />
-                </Text>
+                <Image
+                  style={{
+                    width: 20,
+                    height: 20,
+                    resizeMode: 'center',
+                    marginLeft: 5,
+                  }}
+                  source={require('../../../images/location.png')}
+                />
               </View>
             </View>
 

@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native';
 import React, {useMemo} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
@@ -150,11 +150,42 @@ const BottomSheetViewDetails = ({bottomSheetRefdetails, lodding1}) => {
                 </Text>
               </View>
             </View>
-            <DarkYellow
+            {/* <DarkYellow
               title="Site ID"
               bgClor="#b7ecff"
               value={item.Location_ID ? item.Location_ID : '--'}
-            />
+            /> */}
+            <View style={styles.secondTableRow}>
+              <View
+                style={{
+                  ...styles.secondTableColum,
+                  backgroundColor: '#b7ecff',
+                }}>
+                <Text style={{fontWeight: '700', color: 'black'}}>Site ID</Text>
+              </View>
+              <View
+                style={{
+                  borderRightColor: 'black',
+                  borderLeftWidth: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  paddingLeft: 10,
+                }}>
+                <Text style={{fontWeight: '700', color: '#007aff'}}>
+                  {item.Location_ID}
+                </Text>
+                <Image
+                  style={{
+                    width: 20,
+                    height: 20,
+                    resizeMode: 'center',
+                    marginLeft: 5,
+                  }}
+                  source={require('../../../../../images/location.png')}
+                />
+              </View>
+            </View>
             <DarkYellow
               title="Address"
               bgClor="#b7ecff"

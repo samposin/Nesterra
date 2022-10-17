@@ -3,9 +3,10 @@ import {
   TouchableOpacity,
   Text,
   View,
+  Image,
   InteractionManager,
 } from 'react-native';
-import React, {useMemo} from 'react';
+import React, {useMemo, useState} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 
 import {useSelector, useDispatch} from 'react-redux';
@@ -17,6 +18,8 @@ import OrderLoder from '../../lodder/OrderLoder';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {CIRCUITS_ITEM} from '../../../actions/actionType/CircuitsItems';
 import {warinng, success} from '../../helper';
+import CheckBoxView from './../CheckBoxView';
+import ShortView from './ShortView';
 
 const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
@@ -24,6 +27,8 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
   const {item} = useSelector(state => state.CircuitDetailsExplore);
   const {circuitItems} = useSelector(state => state.CircuitsItems);
   const dataa = circuitItems.find(i => i.Circuit_ID === item.Circuit_ID);
+  const [allView, setAllView] = useState(false);
+
   const addList = item => {
     if (circuitItems.length == 0) {
       dispatch({
@@ -85,7 +90,28 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
       enablePanDownToClose={true}
       animateOnMount
       animatedPosition={true}>
-      <View
+      {/* <View
+        style={{
+          width: '100%',
+          height: 30,
+          backgroundColor: 'red',
+          flexDirection: 'row',
+        }}>
+        <View
+          style={{
+            width: '50%',
+            height: '100%',
+            backgroundColor: 'yellow',
+          }}></View>
+        <View
+          style={{
+            width: '50%',
+            height: '100%',
+            backgroundColor: 'yellowgreen',
+          }}></View>
+      </View> */}
+
+      {/* <View
         style={{
           width: '100%',
           height: 30,
@@ -107,8 +133,8 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
             </Text>
           </View>
         </TouchableOpacity>
-      </View>
-      <View
+      </View> */}
+      {/* <View
         style={{
           width: '100%',
           height: 60,
@@ -124,172 +150,241 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
               addList(item);
             }}>
             <Text>
-              <EvilIcons name="heart" size={30} color="#007aff" />
-              {/* <Entypo name="heart" size={24} color="#c338b5" /> */}
+              <EvilIcons name="heart" size={30} color="#c338b5" />
+              
             </Text>
           </TouchableOpacity>
         )}
+      </View> */}
+      <View
+        style={{
+          width: '100%',
+          height: 30,
+          marginBottom: 10,
+          flexDirection: 'row',
+        }}>
+        <View
+          style={{
+            width: '50%',
+            height: '100%',
+          }}>
+          <CheckBoxView allView={allView} setAllView={setAllView} />
+        </View>
+        <View
+          style={{
+            width: '50%',
+            height: '100%',
+
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            paddingRight: 15,
+            alignItems: 'center',
+          }}>
+          {dataa ? (
+            <Entypo name="heart" size={24} color="#c338b5" />
+          ) : (
+            <TouchableOpacity
+              onPress={() => {
+                addList(item);
+              }}>
+              <Text>
+                <EvilIcons name="heart" size={30} color="#c338b5" />
+              </Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity onPress={() => cirCuitRefExplore.current.close()}>
+            <View
+              style={{
+                width: 24,
+                height: 24,
+                borderRadius: 12,
+                justifyContent: 'center',
+
+                alignItems: 'center',
+                backgroundColor: '#007aff',
+                marginLeft: 15,
+              }}>
+              <Text>
+                <Entypo name="cross" size={20} color="white" />
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>
         {!lodding ? (
-          <>
-            {/* ===================== */}
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="Circuit ID"
-              value={item.Circuit_ID}
-            />
+          !allView ? (
+            <ShortView />
+          ) : (
+            <>
+              {/* ===================== */}
+              <LightGrewRow
+                bgcolor="#deebf7"
+                title="Circuit ID"
+                value={item.Circuit_ID}
+              />
 
-            <View style={{...styles.secondTableRow}}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#deebf7',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  Circuit Status
-                </Text>
+              <View style={{...styles.secondTableRow}}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#deebf7',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Circuit Status
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                    backgroundColor:
+                      item.Circuit_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item.Circuit_Status}
+                  </Text>
+                </View>
               </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                  backgroundColor:
-                    item.Circuit_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Circuit_Status}
-                </Text>
+
+              <LightGrewRow
+                title="Assoc ID"
+                bgcolor="#deebf7"
+                value={item.Associated_ID ? item.Associated_ID : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#deebf7"
+                title="LEC ID"
+                value={item.LEC_ID ? item.LEC_ID : '--'}
+              />
+
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#b7ecff',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Site ID
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    paddingLeft: 10,
+                  }}>
+                  <Text style={{fontWeight: '700', color: '#007aff'}}>
+                    {item.Location_ID}
+                  </Text>
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: 'center',
+                      marginLeft: 5,
+                    }}
+                    source={require('../../../images/location.png')}
+                  />
+                </View>
               </View>
-            </View>
 
-            <LightGrewRow
-              title="Assoc ID"
-              bgcolor="#deebf7"
-              value={item.Associated_ID ? item.Associated_ID : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="LEC ID"
-              value={item.LEC_ID ? item.LEC_ID : '--'}
-            />
+              {/* ===================== */}
+              {/* ===================== */}
+              <LightGrewRow
+                bgcolor="#b7ecff"
+                title="Constact Site Types"
+                value={'--'}
+              />
+              <LightGrewRow
+                bgcolor="#b7ecff"
+                title="Full Address"
+                value={item.Address ? item.Address : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#fbe5d6"
+                title="Vendor"
+                value={item.Vendor ? item.Vendor : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#fbe5d6"
+                title="Category"
+                value={item.Category ? item.Category : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#fbe5d6"
+                title="SubCat1"
+                value={item.SubCat_1 ? item.SubCat_1 : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#fbe5d6"
+                title="SubCat2"
+                value={item.SubCat_2 ? item.SubCat_2 : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#fbe5d6"
+                title="SubCat3"
+                value={item.SubCat_3 ? item.SubCat_3 : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#fbe5d6"
+                title="Whitelist Type"
+                value={item.Whitelist_Use_Type ? item.Whitelist_Use_Type : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#deebf7"
+                title="Vendor Account"
+                value={
+                  item.Vendor_Account_Number ? item.Vendor_Account_Number : '--'
+                }
+              />
+              <LightGrewRow
+                bgcolor="#deebf7"
+                title="Summary Account"
+                value={
+                  item.Summary_Account_Number
+                    ? item.Summary_Account_Number
+                    : '--'
+                }
+              />
+              <LightGrewRow
+                bgcolor="#deebf7"
+                title="Mbps"
+                value={item.Mbps ? item.Mbps : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#e2f0d9"
+                title="Circuit Cost(M)"
+                value={item.circuit_charge ? `$${item.circuit_charge}` : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#e2f0d9"
+                title="Circuit Cost(Y)"
+                value={item.circuit_charge ? `$${item.circuit_charge}` : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#e2f0d9"
+                title="GL"
+                value={item.GL ? item.GL : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#e2f0d9"
+                title="RC"
+                value={item.RC ? item.RC : '--'}
+              />
+              <LightGrewRow
+                bgcolor="#deebf7"
+                title="B-End Location"
+                value={item.Location_B_End ? item.Location_B_End : '--'}
+              />
 
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#b7ecff',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>Site ID</Text>
-              </View>
-              <View
-                style={{
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  paddingLeft: 10,
-                }}>
-                <Text style={{fontWeight: '700', color: '#007aff'}}>
-                  {item.Location_ID}
-                </Text>
-                <Text style={{marginLeft: 5}}>
-                  <FontAwesome name="map-marker" size={22} color="#007aff" />
-                </Text>
-              </View>
-            </View>
-
-            {/* ===================== */}
-            {/* ===================== */}
-            <LightGrewRow
-              bgcolor="#b7ecff"
-              title="Constact Site Types"
-              value={'--'}
-            />
-            <LightGrewRow
-              bgcolor="#b7ecff"
-              title="Full Address"
-              value={item.Address ? item.Address : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="Vendor"
-              value={item.Vendor ? item.Vendor : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="Category"
-              value={item.Category ? item.Category : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="SubCat1"
-              value={item.SubCat_1 ? item.SubCat_1 : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="SubCat2"
-              value={item.SubCat_2 ? item.SubCat_2 : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="SubCat3"
-              value={item.SubCat_3 ? item.SubCat_3 : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="Whitelist Type"
-              value={item.Whitelist_Use_Type ? item.Whitelist_Use_Type : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="Vendor Account"
-              value={
-                item.Vendor_Account_Number ? item.Vendor_Account_Number : '--'
-              }
-            />
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="Summary Account"
-              value={
-                item.Summary_Account_Number ? item.Summary_Account_Number : '--'
-              }
-            />
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="Mbps"
-              value={item.Mbps ? item.Mbps : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#e2f0d9"
-              title="Circuit Cost(M)"
-              value={item.circuit_charge ? `$${item.circuit_charge}` : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#e2f0d9"
-              title="Circuit Cost(Y)"
-              value={item.circuit_charge ? `$${item.circuit_charge}` : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#e2f0d9"
-              title="GL"
-              value={item.GL ? item.GL : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#e2f0d9"
-              title="RC"
-              value={item.RC ? item.RC : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="B-End Location"
-              value={item.Location_B_End ? item.Location_B_End : '--'}
-            />
-
-            <View style={{height: 100, width: '100%'}}></View>
-          </>
+              <View style={{height: 100, width: '100%'}}></View>
+            </>
+          )
         ) : (
           <OrderLoder />
         )}
