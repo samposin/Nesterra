@@ -7,13 +7,19 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import DataLoder from '../../../components/lodder/DataLoder';
+import {useNavigation} from '@react-navigation/native';
+import CheckBoxView from '../../../components/checkBox/CheckBoxView';
+import ShortView from './Circuits/ShortView';
+
 const BottomSheetViewCircuits = ({
   circuitRefDetails,
   setSwitchView,
 
   loding,
 }) => {
+  const navigation = useNavigation();
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
+  const [allView, setAllView] = React.useState(false);
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.allCircuitDetails);
   // console.log(item);
@@ -55,56 +61,29 @@ const BottomSheetViewCircuits = ({
     );
   };
   return (
-    <BottomSheet
-      handleIndicatorStyle={{
-        backgroundColor: '#757575',
-        height: 0,
-        opacity: 0.5,
-      }}
-      handleComponent={() => (
-        <View style={styles.closeLineContainer}>
-          <View style={styles.closeLine}>
-            <SimpleLineIcons name="arrow-up" size={20} color="black" />
+    <>
+      <BottomSheet
+        handleIndicatorStyle={{
+          backgroundColor: '#757575',
+          height: 0,
+          opacity: 0.5,
+        }}
+        handleComponent={() => (
+          <View style={styles.closeLineContainer}>
+            <View style={styles.closeLine}>
+              <SimpleLineIcons name="arrow-up" size={20} color="black" />
+            </View>
           </View>
-        </View>
-      )}
-      style={{paddingHorizontal: 10}}
-      enabledInnerScrolling={true}
-      enabledContentGestureInteraction={false}
-      ref={circuitRefDetails}
-      index={-1}
-      snapPoints={snapPoints}
-      enablePanDownToClose={true}
-      animateOnMount
-      animatedPosition={true}>
-      <View
-        style={{
-          width: '100%',
-          height: 30,
-          alignItems: 'flex-end',
-          paddingRight: 25,
-        }}>
-        <TouchableOpacity
-          onPress={() => {
-            setSwitchView(true);
-            circuitRefDetails.current.close();
-          }}>
-          <View
-            style={{
-              width: 24,
-              height: 24,
-              borderRadius: 12,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: '#007aff',
-            }}>
-            <Text>
-              <Entypo name="cross" size={20} color="white" />
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <BottomSheetScrollView style={{paddingHorizontal: 10}}>
+        )}
+        style={{paddingHorizontal: 5}}
+        enabledInnerScrolling={true}
+        enabledContentGestureInteraction={false}
+        ref={circuitRefDetails}
+        index={-1}
+        snapPoints={snapPoints}
+        enablePanDownToClose={true}
+        animateOnMount
+        animatedPosition={true}>
         {loding ? (
           <View
             style={{
@@ -117,171 +96,239 @@ const BottomSheetViewCircuits = ({
           </View>
         ) : (
           <>
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="Circuit ID"
-              value={item.Circuit_ID}
-            />
+            <View
+              style={{
+                width: '100%',
+                height: 30,
 
-            <View style={{...styles.secondTableRow}}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#deebf7',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  Circuit Status
-                </Text>
+                paddingRight: 25,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginBottom: 10,
+              }}>
+              <View style={{width: '50%', height: '100%'}}>
+                <CheckBoxView allView={allView} setAllView={setAllView} />
               </View>
               <View
                 style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
-                  backgroundColor:
-                    item.Circuit_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Circuit_Status}
-                </Text>
-              </View>
-            </View>
-
-            <LightGrewRow
-              title="Assoc ID"
-              bgcolor="#deebf7"
-              value={item.Associated_ID ? item.Associated_ID : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="LEC ID"
-              value={item.LEC_ID ? item.LEC_ID : '--'}
-            />
-
-            <View style={styles.secondTableRow}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#b7ecff',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>Site ID</Text>
-              </View>
-              <View
-                style={{
-                  borderRightColor: 'black',
-                  borderLeftWidth: 1,
+                  width: '50%',
+                  height: '100%',
                   flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  paddingLeft: 10,
+                  justifyContent: 'flex-end',
                 }}>
-                <Text style={{fontWeight: '700', color: '#007aff'}}>
-                  {item.Location_ID}
-                </Text>
-                <Image
-                  style={{
-                    width: 20,
-                    height: 20,
-                    resizeMode: 'center',
-                    marginLeft: 5,
-                  }}
-                  source={require('../../../images/location.png')}
-                />
+                <TouchableOpacity
+                  onPress={() => {
+                    setSwitchView(true);
+                    circuitRefDetails.current.close();
+                  }}>
+                  <View
+                    style={{
+                      width: 24,
+                      height: 24,
+                      borderRadius: 12,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: '#007aff',
+                    }}>
+                    <Text>
+                      <Entypo name="cross" size={20} color="white" />
+                    </Text>
+                  </View>
+                </TouchableOpacity>
               </View>
             </View>
+            <BottomSheetScrollView style={{paddingHorizontal: 10}}>
+              {!allView ? (
+                <ShortView />
+              ) : (
+                <>
+                  <LightGrewRow
+                    bgcolor="#deebf7"
+                    title="Circuit ID"
+                    value={item.Circuit_ID}
+                  />
 
-            {/* ===================== */}
-            {/* ===================== */}
-            <LightGrewRow
-              bgcolor="#b7ecff"
-              title="Contact Site Types"
-              value={'--'}
-            />
-            <LightGrewRow
-              bgcolor="#b7ecff"
-              title="Full Address"
-              value={item.Address ? item.Address : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="Vendor"
-              value={item.Vendor ? item.Vendor : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="Category"
-              value={item.Category ? item.Category : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="SubCat1"
-              value={item.SubCat_1 ? item.SubCat_1 : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="SubCat2"
-              value={item.SubCat_2 ? item.SubCat_2 : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="SubCat3"
-              value={item.SubCat_3 ? item.SubCat_3 : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#fbe5d6"
-              title="Whitelist Type"
-              value={item.Whitelist_Use_Type ? item.Whitelist_Use_Type : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="Vendor Account"
-              value={
-                item.Vendor_Account_Number ? item.Vendor_Account_Number : '--'
-              }
-            />
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="Summary Account"
-              value={
-                item.Summary_Account_Number ? item.Summary_Account_Number : '--'
-              }
-            />
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="Mbps"
-              value={item.Mbps ? item.Mbps : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#e2f0d9"
-              title="Circuit Cost(M)"
-              value={item.circuit_charge ? `$${item.circuit_charge}` : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#e2f0d9"
-              title="Circuit Cost(Y)"
-              value={item.circuit_charge ? `$${item.circuit_charge}` : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#e2f0d9"
-              title="GL"
-              value={item.GL ? item.GL : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#e2f0d9"
-              title="RC"
-              value={item.RC ? item.RC : '--'}
-            />
-            <LightGrewRow
-              bgcolor="#deebf7"
-              title="B-End Location"
-              value={item.Location_B_End ? item.Location_B_End : '--'}
-            />
+                  <View style={{...styles.secondTableRow}}>
+                    <View
+                      style={{
+                        ...styles.secondTableColum,
+                        backgroundColor: '#deebf7',
+                      }}>
+                      <Text style={{fontWeight: '700', color: 'black'}}>
+                        Circuit Status
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        ...styles.secondTableColum,
+                        borderRightColor: 'black',
+                        borderLeftWidth: 1,
+                        backgroundColor:
+                          item.Circuit_Status == 'Active'
+                            ? '#c6efcd'
+                            : '#e7c4b5',
+                      }}>
+                      <Text style={{fontWeight: '700', color: 'black'}}>
+                        {item.Circuit_Status}
+                      </Text>
+                    </View>
+                  </View>
 
-            <View style={{height: 100, width: '100%'}}></View>
+                  <LightGrewRow
+                    title="Assoc ID"
+                    bgcolor="#deebf7"
+                    value={item.Associated_ID ? item.Associated_ID : '--'}
+                  />
+                  <LightGrewRow
+                    bgcolor="#deebf7"
+                    title="LEC ID"
+                    value={item.LEC_ID ? item.LEC_ID : '--'}
+                  />
+
+                  <View style={styles.secondTableRow}>
+                    <View
+                      style={{
+                        ...styles.secondTableColum,
+                        backgroundColor: '#b7ecff',
+                      }}>
+                      <Text style={{fontWeight: '700', color: 'black'}}>
+                        Site ID
+                      </Text>
+                    </View>
+
+                    <TouchableOpacity
+                      onPress={() => {
+                        circuitRefDetails.current.close();
+                        navigation.navigate('Explore');
+                      }}
+                      style={{
+                        borderRightColor: 'black',
+                        borderLeftWidth: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        paddingLeft: 10,
+                      }}>
+                      <Text style={{fontWeight: '700', color: '#007aff'}}>
+                        {item.Location_ID}
+                      </Text>
+                      <Image
+                        style={{
+                          width: 20,
+                          height: 20,
+                          resizeMode: 'center',
+                          marginLeft: 5,
+                        }}
+                        source={require('../../../images/location.png')}
+                      />
+                    </TouchableOpacity>
+                  </View>
+
+                  {/* ===================== */}
+                  {/* ===================== */}
+                  <LightGrewRow
+                    bgcolor="#b7ecff"
+                    title="Contact Site Types"
+                    value={'--'}
+                  />
+                  <LightGrewRow
+                    bgcolor="#b7ecff"
+                    title="Full Address"
+                    value={item.Address ? item.Address : '--'}
+                  />
+                  <LightGrewRow
+                    bgcolor="#fbe5d6"
+                    title="Vendor"
+                    value={item.Vendor ? item.Vendor : '--'}
+                  />
+                  <LightGrewRow
+                    bgcolor="#fbe5d6"
+                    title="Category"
+                    value={item.Category ? item.Category : '--'}
+                  />
+                  <LightGrewRow
+                    bgcolor="#fbe5d6"
+                    title="SubCat1"
+                    value={item.SubCat_1 ? item.SubCat_1 : '--'}
+                  />
+                  <LightGrewRow
+                    bgcolor="#fbe5d6"
+                    title="SubCat2"
+                    value={item.SubCat_2 ? item.SubCat_2 : '--'}
+                  />
+                  <LightGrewRow
+                    bgcolor="#fbe5d6"
+                    title="SubCat3"
+                    value={item.SubCat_3 ? item.SubCat_3 : '--'}
+                  />
+                  <LightGrewRow
+                    bgcolor="#fbe5d6"
+                    title="Whitelist Type"
+                    value={
+                      item.Whitelist_Use_Type ? item.Whitelist_Use_Type : '--'
+                    }
+                  />
+                  <LightGrewRow
+                    bgcolor="#deebf7"
+                    title="Vendor Account"
+                    value={
+                      item.Vendor_Account_Number
+                        ? item.Vendor_Account_Number
+                        : '--'
+                    }
+                  />
+                  <LightGrewRow
+                    bgcolor="#deebf7"
+                    title="Summary Account"
+                    value={
+                      item.Summary_Account_Number
+                        ? item.Summary_Account_Number
+                        : '--'
+                    }
+                  />
+                  <LightGrewRow
+                    bgcolor="#deebf7"
+                    title="Mbps"
+                    value={item.Mbps ? item.Mbps : '--'}
+                  />
+                  <LightGrewRow
+                    bgcolor="#e2f0d9"
+                    title="Circuit Cost(M)"
+                    value={
+                      item.circuit_charge ? `$${item.circuit_charge}` : '--'
+                    }
+                  />
+                  <LightGrewRow
+                    bgcolor="#e2f0d9"
+                    title="Circuit Cost(Y)"
+                    value={
+                      item.circuit_charge ? `$${item.circuit_charge}` : '--'
+                    }
+                  />
+                  <LightGrewRow
+                    bgcolor="#e2f0d9"
+                    title="GL"
+                    value={item.GL ? item.GL : '--'}
+                  />
+                  <LightGrewRow
+                    bgcolor="#e2f0d9"
+                    title="RC"
+                    value={item.RC ? item.RC : '--'}
+                  />
+                  <LightGrewRow
+                    bgcolor="#deebf7"
+                    title="B-End Location"
+                    value={item.Location_B_End ? item.Location_B_End : '--'}
+                  />
+
+                  <View style={{height: 100, width: '100%'}}></View>
+                </>
+              )}
+            </BottomSheetScrollView>
           </>
         )}
-      </BottomSheetScrollView>
-    </BottomSheet>
+      </BottomSheet>
+    </>
   );
 };
 

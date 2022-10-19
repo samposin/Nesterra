@@ -87,7 +87,12 @@ const BottomSheetView = ({
           />
         );
       case item == 4:
-        return <Circuits cirCuitRefExplore={cirCuitRefExplore} />;
+        return (
+          <Circuits
+            cirCuitRefExplore={cirCuitRefExplore}
+            bottomSheetRef={bottomSheetRef}
+          />
+        );
 
       case item == 5:
         return <Devices deviceRefExplore={deviceRefExplore} />;

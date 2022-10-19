@@ -21,7 +21,11 @@ import {warinng, success} from '../../helper';
 import CheckBoxView from './../CheckBoxView';
 import ShortView from './ShortView';
 
-const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
+const CircuitDetailsExplore = ({
+  cirCuitRefExplore,
+  bottomSheetRef,
+  lodding,
+}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   const dispatch = useDispatch();
   const {item} = useSelector(state => state.CircuitDetailsExplore);
@@ -269,7 +273,12 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     Site ID
                   </Text>
                 </View>
-                <View
+
+                <TouchableOpacity
+                  onPress={() => {
+                    cirCuitRefExplore.current.close();
+                    bottomSheetRef.current.close();
+                  }}
                   style={{
                     borderRightColor: 'black',
                     borderLeftWidth: 1,
@@ -290,7 +299,7 @@ const CircuitDetailsExplore = ({cirCuitRefExplore, lodding}) => {
                     }}
                     source={require('../../../images/location.png')}
                   />
-                </View>
+                </TouchableOpacity>
               </View>
 
               {/* ===================== */}

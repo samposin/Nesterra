@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
-  // console.log(marKerType, 'marKerType');
+  // console.log(mark, 'marKerType');
 
   const getImage = value => {
     // console.log(officeType);

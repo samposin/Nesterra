@@ -662,7 +662,6 @@ const Explore = ({
                   }}>
                   <CustomMarker
                     mark={item.isChecked}
-                    marKerType={marKerType}
                     officeType={item.HierarchyLocationType}
                   />
                 </Marker.Animated>
@@ -1182,14 +1181,20 @@ const Explore = ({
       /> */}
       {/* =================Setting=============== */}
       {/* =================DetailsCircuit=============== */}
-      <CircuitDetailsExplore cirCuitRefExplore={cirCuitRefExplore} />
+      <CircuitDetailsExplore
+        cirCuitRefExplore={cirCuitRefExplore}
+        bottomSheetRef={bottomSheetRef}
+      />
 
       {/* =================DeviceDetailsExplore=============== */}
       <DeviceDetailsExplore
         bottomSheetRef={bottomSheetRef}
         deviceRefExplore={deviceRefExplore}
       />
-      <OrderDetailsExplore orderRefExplore={orderRefExplore} />
+      <OrderDetailsExplore
+        bottomSheetRef={bottomSheetRef}
+        orderRefExplore={orderRefExplore}
+      />
       <AtmsDetails
         atmdDetailsRef={atmdDetailsRef}
         detailsLoder={detailsLoder}

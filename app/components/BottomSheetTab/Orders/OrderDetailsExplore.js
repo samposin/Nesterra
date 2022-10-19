@@ -1,17 +1,20 @@
-import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
-import React, {useMemo} from 'react';
+import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native';
+import React, {useMemo, useState} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 import OrderLoder from '../../lodder/OrderLoder';
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import moment from 'moment';
-
-const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
+import ShortView from './ShortView';
+import CheckBoxView from './../CheckBoxView';
+const OrderDetailsExplore = ({orderRefExplore, bottomSheetRef, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.orderDetailsExplore);
-
+  const [allView, setAllView] = useState(false);
+  const dataa = false;
   // console.log(item);
   const selectedComponent = item => {
     // console.log(item);
@@ -195,7 +198,7 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
       enablePanDownToClose={true}
       animateOnMount
       animatedPosition={true}>
-      <View
+      {/* <View
         style={{
           width: '100%',
           height: 30,
@@ -217,134 +220,230 @@ const OrderDetailsExplore = ({orderRefExplore, lodding}) => {
             </Text>
           </View>
         </TouchableOpacity>
+      </View> */}
+      <View
+        style={{
+          width: '100%',
+          height: 30,
+          marginBottom: 10,
+          flexDirection: 'row',
+        }}>
+        <View
+          style={{
+            width: '50%',
+            height: '100%',
+          }}>
+          <CheckBoxView allView={allView} setAllView={setAllView} />
+        </View>
+        <View
+          style={{
+            width: '50%',
+            height: '100%',
+
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            paddingRight: 15,
+            alignItems: 'center',
+          }}>
+          {dataa ? (
+            <Entypo name="heart" size={24} color="#c338b5" />
+          ) : (
+            <TouchableOpacity
+              onPress={() => {
+                // addList(item);
+              }}>
+              <Text>
+                <EvilIcons name="heart" size={30} color="#c338b5" />
+              </Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity onPress={() => orderRefExplore.current.close()}>
+            <View
+              style={{
+                width: 24,
+                height: 24,
+                borderRadius: 12,
+                justifyContent: 'center',
+
+                alignItems: 'center',
+                backgroundColor: '#007aff',
+                marginLeft: 15,
+              }}>
+              <Text>
+                <Entypo name="cross" size={20} color="white" />
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
       <BottomSheetScrollView style={{paddingHorizontal: 10}}>
         {!lodding ? (
-          <>
-            <LightSkyRow title="SmartSites#" value={item.Smart_Site_Order_No} />
-            <LightSkyRow title="Tangoe#" value={'--'} />
-            <LightSkyRow title="Carrier#" value={'--'} />
-            {/* <LightSkyRow title="PON" value={item.PON} />
+          !allView ? (
+            <ShortView />
+          ) : (
+            <>
+              <LightSkyRow
+                title="SmartSites#"
+                value={item.Smart_Site_Order_No}
+              />
+              <LightSkyRow title="Tangoe#" value={'--'} />
+              <LightSkyRow title="Carrier#" value={'--'} />
+              {/* <LightSkyRow title="PON" value={item.PON} />
             <LightSkyRow title="Order Number" value={item.Order_Number} /> */}
-            <LightGrewRow title="Project Assignment" value={item.Project} />
-            <LightGrewRow
-              title="Technical Contact"
-              value={item.Technical_Contact_Name}
-            />
-            <View style={{...styles.secondTableRow}}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#f2f2f2',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  Order Type
-                </Text>
+              <LightGrewRow title="Project Assignment" value={item.Project} />
+              <LightGrewRow
+                title="Technical Contact"
+                value={item.Technical_Contact_Name}
+              />
+              <View style={{...styles.secondTableRow}}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#f2f2f2',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Order Type
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+
+                    backgroundColor: selectedComponent(item.Order_Type),
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item.Order_Type}
+                  </Text>
+                </View>
               </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderLeftColor: 'black',
-                  borderLeftWidth: 0.7,
 
-                  backgroundColor: selectedComponent(item.Order_Type),
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Order_Type}
-                </Text>
+              {/* <LightGrewRow title="Order Type" value={item.Order_Type} /> */}
+              <LightGrewRow title="Inventory ID" value={item.Inventory_ID} />
+
+              {/* ===================== */}
+
+              <View style={{...styles.secondTableRow}}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#f2f2f2',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Status
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    borderLeftColor: 'black',
+                    borderLeftWidth: 0.7,
+
+                    backgroundColor:
+                      item.Status == 'Completed' ? '#c6efcd' : '#e7c4b5',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    {item.Status}
+                  </Text>
+                </View>
               </View>
-            </View>
 
-            {/* <LightGrewRow title="Order Type" value={item.Order_Type} /> */}
-            <LightGrewRow title="Inventory ID" value={item.Inventory_ID} />
-
-            {/* ===================== */}
-
-            <View style={{...styles.secondTableRow}}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#f2f2f2',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>Status</Text>
+              {/* ===================== */}
+              <View style={styles.secondTableRow}>
+                <View
+                  style={{
+                    ...styles.secondTableColum,
+                    backgroundColor: '#b7ecff',
+                  }}>
+                  <Text style={{fontWeight: '700', color: 'black'}}>
+                    Site ID
+                  </Text>
+                </View>
+                <TouchableOpacity
+                  onPress={() => {
+                    bottomSheetRef.current.close();
+                    orderRefExplore.current.close();
+                  }}
+                  style={{
+                    borderRightColor: 'black',
+                    borderLeftWidth: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    paddingLeft: 10,
+                  }}>
+                  <Text style={{fontWeight: '700', color: '#007aff'}}>
+                    {item.Location_ID}
+                  </Text>
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                      resizeMode: 'center',
+                      marginLeft: 5,
+                    }}
+                    source={require('../../../images/location.png')}
+                  />
+                </TouchableOpacity>
               </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderLeftColor: 'black',
-                  borderLeftWidth: 0.7,
+              <SkyRow title="Address" value={item.Address} />
+              <SkyRow title="Branch ID" value={item.Branch_ID} />
 
-                  backgroundColor:
-                    item.Status == 'Completed' ? '#c6efcd' : '#e7c4b5',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.Status}
-                </Text>
-              </View>
-            </View>
+              <YellowRow
+                title="Initiation Date"
+                value={moment(item.Initiation_Date).format('MM/DD/YY')}
+              />
+              <YellowRow
+                title="Creation Date"
+                value={moment(item.Creation_Date).format('MM/DD/YY')}
+              />
+              <YellowRow
+                title="FOC Date"
+                value={moment(item.FOC_Date).format('MM/DD/YY')}
+              />
+              <YellowRow
+                title="Completion Date"
+                value={moment(item.Order_Completion_Date).format('MM/DD/YY')}
+              />
+              <YellowRow
+                title="Bill Stop Date"
+                value={
+                  item.Bill_Stop_Date
+                    ? moment(item.Bill_Stop_Date).format('MM/DD/YY')
+                    : '--'
+                }
+              />
+              <OrangeLightRow
+                title="Vendor"
+                value={item.Vendor ? item.Vendor : '--'}
+              />
+              <OrangeLightRow
+                title="Category"
+                value={item.Category ? item.Category : '--'}
+              />
+              <OrangeLightRow
+                title="Sub Category"
+                value={item.Subcat_1 ? item.Subcat_1 : '--'}
+              />
+              <DarkYellow title="RC" value={item.RC ? item.RC : '--'} />
+              <DarkYellow title="GL" value={item.GL ? item.GL : '--'} />
+              <DarkYellow
+                title="Monthly Cost"
+                value={
+                  item.Monthly_Recurring_Cost
+                    ? `$${item.Monthly_Recurring_Cost}`
+                    : '--'
+                }
+              />
+              <DarkYellow
+                title="Annual Cost"
+                value={item.Annual_Cost ? `$${item.Annual_Cost}` : '--'}
+              />
 
-            {/* ===================== */}
-            <SkyRow title="Site Id" value={item.Location_ID} />
-            <SkyRow title="Address" value={item.Address} />
-            <SkyRow title="Branch ID" value={item.Branch_ID} />
-
-            <YellowRow
-              title="Initiation Date"
-              value={moment(item.Initiation_Date).format(
-                'YYYY/MM/DD HH:mm:ss A',
-              )}
-            />
-            <YellowRow
-              title="Creation Date"
-              value={moment(item.Creation_Date).format('YYYY/MM/DD HH:mm:ss A')}
-            />
-            <YellowRow
-              title="FOC Date"
-              value={moment(item.FOC_Date).format('YYYY/MM/DD HH:mm:ss A')}
-            />
-            <YellowRow
-              title="Completion Date"
-              value={moment(item.Order_Completion_Date).format(
-                'YYYY/MM/DD HH:mm:ss A',
-              )}
-            />
-            <YellowRow
-              title="Bill Stop Date"
-              value={
-                item.Bill_Stop_Date
-                  ? moment(item.Bill_Stop_Date).format('YYYY/MM/DD HH:mm:ss A')
-                  : '--'
-              }
-            />
-            <OrangeLightRow
-              title="Vendor"
-              value={item.Vendor ? item.Vendor : '--'}
-            />
-            <OrangeLightRow
-              title="Category"
-              value={item.Category ? item.Category : '--'}
-            />
-            <OrangeLightRow
-              title="Sub Category"
-              value={item.Subcat_1 ? item.Subcat_1 : '--'}
-            />
-            <DarkYellow title="RC" value={item.RC ? item.RC : '--'} />
-            <DarkYellow title="GL" value={item.GL ? item.GL : '--'} />
-            <DarkYellow
-              title="Monthly Cost"
-              value={
-                item.Monthly_Recurring_Cost
-                  ? `$${item.Monthly_Recurring_Cost}`
-                  : '--'
-              }
-            />
-            <DarkYellow
-              title="Annual Cost"
-              value={item.Annual_Cost ? `$${item.Annual_Cost}` : '--'}
-            />
-
-            <View style={{height: 70, width: '100%'}}></View>
-          </>
+              <View style={{height: 70, width: '100%'}}></View>
+            </>
+          )
         ) : (
           <OrderLoder />
         )}

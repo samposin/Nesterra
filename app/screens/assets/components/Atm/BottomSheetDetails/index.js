@@ -8,10 +8,12 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 import DataLoder from '../../../../../components/lodder/DataLoder';
 import moment from 'moment/moment';
+import CheckBoxView from '../../../../../components/checkBox/CheckBoxView';
+import ShortView from '../ShortView';
 
 const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
   const {item} = useSelector(state => state.AssetsAtmsDetails);
-
+  const [allView, setAllView] = React.useState(false);
   const TabeRow = ({title, data, bgcolor}) => {
     return (
       <View style={{...styles.secondTableRow}}>
@@ -82,161 +84,185 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
       enablePanDownToClose={true}
       animateOnMount
       animatedPosition={true}>
-      <View
-        style={{
-          width: '100%',
-          height: 30,
-          alignItems: 'flex-end',
-          paddingRight: 25,
-        }}>
-        <TouchableOpacity
-          onPress={() => {
-            atmdDetailsRef.current.close();
+      {detailsLoder ? (
+        <View
+          style={{
+            width: '100%',
+            height: 500,
+            justifyContent: 'center',
+            alignItems: 'center',
           }}>
-          <View
-            style={{
-              width: 24,
-              height: 24,
-              borderRadius: 12,
-              justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: '#007aff',
-            }}>
-            <Text>
-              <Entypo name="cross" size={20} color="white" />
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-      <BottomSheetScrollView style={{paddingHorizontal: 10}}>
-        {detailsLoder ? (
+          <DataLoder />
+        </View>
+      ) : (
+        <>
           <View
             style={{
               width: '100%',
-              height: 500,
-              justifyContent: 'center',
-              alignItems: 'center',
+              height: 30,
+              flexDirection: 'row',
+
+              marginBottom: 5,
             }}>
-            <DataLoder />
-          </View>
-        ) : (
-          <>
-            <View style={{...styles.secondTableRow}}>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  backgroundColor: '#ace2ff',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  ATM_Status
-                </Text>
-              </View>
-              <View
-                style={{
-                  ...styles.secondTableColum,
-                  borderRightColor: 'black',
-                  borderLeftWidth: 0.7,
-                  backgroundColor:
-                    item.ATM_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
-                }}>
-                <Text style={{fontWeight: '700', color: 'black'}}>
-                  {item.ATM_Status}
-                </Text>
-              </View>
+            <View style={{width: '50%', height: '100%'}}>
+              <CheckBoxView allView={allView} setAllView={setAllView} />
             </View>
-            <TabeRow
-              bgcolor="#ffff00"
-              title="ATM ID"
-              value={item.ATM_ID ? item.ATM_ID : '--'}
-            />
+            <View
+              style={{
+                width: '50%',
+                height: '100%',
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                paddingRight: 5,
+                alignItems: 'center',
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  atmdDetailsRef.current.close();
+                }}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: '#007aff',
+                  }}>
+                  <Text>
+                    <Entypo name="cross" size={20} color="white" />
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <BottomSheetScrollView style={{paddingHorizontal: 10}}>
+            {!allView ? (
+              <ShortView />
+            ) : (
+              <>
+                <View style={{...styles.secondTableRow}}>
+                  <View
+                    style={{
+                      ...styles.secondTableColum,
+                      backgroundColor: '#ace2ff',
+                    }}>
+                    <Text style={{fontWeight: '700', color: 'black'}}>
+                      ATM_Status
+                    </Text>
+                  </View>
+                  <View
+                    style={{
+                      ...styles.secondTableColum,
+                      borderRightColor: 'black',
+                      borderLeftWidth: 0.7,
+                      backgroundColor:
+                        item.ATM_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
+                    }}>
+                    <Text style={{fontWeight: '700', color: 'black'}}>
+                      {item.ATM_Status}
+                    </Text>
+                  </View>
+                </View>
+                <TabeRow
+                  bgcolor="#ffff00"
+                  title="ATM ID"
+                  value={item.ATM_ID ? item.ATM_ID : '--'}
+                />
 
-            <DATArow
-              bgcolor="#ace2ff"
-              title="Site ID"
-              value={item.ATM_Type ? item.ATM_Type : '--'}
-            />
-            <DATArow bgcolor="#ace2ff" title="Site Name" value={'--'} />
-            <DATArow
-              bgcolor="#ace2ff"
-              title="Address"
-              value={item.Address_1 ? item.Address_1 : '--'}
-            />
-            <DATArow bgcolor="#deebf7" title="Arrangement" value={'--'} />
-            <DATArow
-              bgcolor="#deebf7"
-              title="ATM_Type"
-              value={item.ATM_Type ? item.ATM_Type : '--'}
-            />
-            <DATArow
-              bgcolor="#deebf7"
-              title="ATM_Function"
-              value={item.ATM_Function ? item.ATM_Function : '--'}
-            />
-            <DATArow
-              bgcolor="#deebf7"
-              title="Connection"
-              value={item.Connection ? item.Connection : '--'}
-            />
-            <DATArow
-              bgcolor="#deebf7"
-              title="Date_Installed"
-              value={
-                item.Date_Installed
-                  ? moment(item.Date_Installed).format('MM/DD/YY')
-                  : '--'
-              }
-            />
-            <DATArow
-              bgcolor="#fbe5d6"
-              title="Vendor"
-              value={item.Vendor ? item.Vendor : '--'}
-            />
-            <DATArow
-              bgcolor="#fbe5d6"
-              title="Model"
-              value={item.Model ? item.Model : '--'}
-            />
-            <DATArow
-              bgcolor="#fbe5d6"
-              title="Processor"
-              value={item.Processor ? item.Processor : '--'}
-            />
-            <DATArow
-              bgcolor="#fbe5d6"
-              title="Serial_Number"
-              value={item.Serial_Number ? item.Serial_Number : '--'}
-            />
-            <DATArow bgcolor="#ffffcc" title="ATM IP#" value={'--'} />
-            <DATArow bgcolor="#ffffcc" title="Router IP#" value={'--'} />
-            <DATArow bgcolor="#ffffcc" title="Host" value={'--'} />
-            <DATArow bgcolor="#f2f2f2" title="Software Level" value={'--'} />
+                <DATArow
+                  bgcolor="#ace2ff"
+                  title="Site ID"
+                  value={item.ATM_Type ? item.ATM_Type : '--'}
+                />
+                <DATArow bgcolor="#ace2ff" title="Site Name" value={'--'} />
+                <DATArow
+                  bgcolor="#ace2ff"
+                  title="Address"
+                  value={item.Address_1 ? item.Address_1 : '--'}
+                />
+                <DATArow bgcolor="#deebf7" title="Arrangement" value={'--'} />
+                <DATArow
+                  bgcolor="#deebf7"
+                  title="ATM_Type"
+                  value={item.ATM_Type ? item.ATM_Type : '--'}
+                />
+                <DATArow
+                  bgcolor="#deebf7"
+                  title="ATM_Function"
+                  value={item.ATM_Function ? item.ATM_Function : '--'}
+                />
+                <DATArow
+                  bgcolor="#deebf7"
+                  title="Connection"
+                  value={item.Connection ? item.Connection : '--'}
+                />
+                <DATArow
+                  bgcolor="#deebf7"
+                  title="Date_Installed"
+                  value={
+                    item.Date_Installed
+                      ? moment(item.Date_Installed).format('MM/DD/YY')
+                      : '--'
+                  }
+                />
+                <DATArow
+                  bgcolor="#fbe5d6"
+                  title="Vendor"
+                  value={item.Vendor ? item.Vendor : '--'}
+                />
+                <DATArow
+                  bgcolor="#fbe5d6"
+                  title="Model"
+                  value={item.Model ? item.Model : '--'}
+                />
+                <DATArow
+                  bgcolor="#fbe5d6"
+                  title="Processor"
+                  value={item.Processor ? item.Processor : '--'}
+                />
+                <DATArow
+                  bgcolor="#fbe5d6"
+                  title="Serial_Number"
+                  value={item.Serial_Number ? item.Serial_Number : '--'}
+                />
+                <DATArow bgcolor="#ffffcc" title="ATM IP#" value={'--'} />
+                <DATArow bgcolor="#ffffcc" title="Router IP#" value={'--'} />
+                <DATArow bgcolor="#ffffcc" title="Host" value={'--'} />
+                <DATArow
+                  bgcolor="#f2f2f2"
+                  title="Software Level"
+                  value={'--'}
+                />
 
-            <DATArow
-              bgcolor="#f2f2f2"
-              title="Ref_ID"
-              value={item.Ref_ID ? item.Ref_ID : '--'}
-            />
-            <DATArow
-              bgcolor="#f2f2f2"
-              title="TLS Port"
-              value={item.TLS_Port ? item.TLS_Port : '--'}
-            />
-            <DATArow
-              bgcolor="#f2f2f2"
-              title="NFC Capable"
-              value={item.Card_Reader ? item.Card_Reader : '--'}
-            />
-            <DATArow bgcolor="#f2f2f2" title="NFC Enabled" value={'--'} />
-            <DATArow
-              bgcolor="#f2f2f2"
-              title="Comments"
-              value={item.Comments ? item.Comments : '--'}
-            />
+                <DATArow
+                  bgcolor="#f2f2f2"
+                  title="Ref_ID"
+                  value={item.Ref_ID ? item.Ref_ID : '--'}
+                />
+                <DATArow
+                  bgcolor="#f2f2f2"
+                  title="TLS Port"
+                  value={item.TLS_Port ? item.TLS_Port : '--'}
+                />
+                <DATArow
+                  bgcolor="#f2f2f2"
+                  title="NFC Capable"
+                  value={item.Card_Reader ? item.Card_Reader : '--'}
+                />
+                <DATArow bgcolor="#f2f2f2" title="NFC Enabled" value={'--'} />
+                <DATArow
+                  bgcolor="#f2f2f2"
+                  title="Comments"
+                  value={item.Comments ? item.Comments : '--'}
+                />
 
-            <View style={{height: 100, width: '100%'}}></View>
-          </>
-        )}
-      </BottomSheetScrollView>
+                <View style={{height: 100, width: '100%'}}></View>
+              </>
+            )}
+          </BottomSheetScrollView>
+        </>
+      )}
     </BottomSheet>
   );
 };
