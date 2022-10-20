@@ -454,11 +454,11 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                 <YellowDarkRow title="Replacement Cost(M)" value={'$ 0'} />
                 <YellowDarkRow
                   title="ReSale Value"
-                  value={item.Resale_Value ? `$${item.Resale_Value}` : `$${0}`}
+                  value={item.Resale_Value ? `$ ${item.Resale_Value}` : `$${0}`}
                 />
                 <YellowDarkRow
                   title="Overhead Cost(M)"
-                  value={item.Overhead_M ? `$${item.Overhead_M}` : `$${0}`}
+                  value={item.Overhead_M ? `$ ${item.Overhead_M}` : `$${0}`}
                 />
                 <YellowRow
                   title="Purchase Date"

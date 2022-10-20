@@ -20,6 +20,7 @@ const Saved = () => {
   const {atmsItem} = useSelector(state => state.AtmsItem);
   const {siteItem} = useSelector(state => state.SiteItem);
   const detailsRef = useRef(null);
+  const DetailsOneRef = useRef(null);
   const [displayView, setDisplayView] = useState('Atms');
   const ListItem = ({source, title, item, onPress}) => {
     return (
@@ -62,6 +63,10 @@ const Saved = () => {
     setDisplayView('Circuits');
     detailsRef.current.snapToIndex(2);
   };
+  const SitesDetails = () => {
+    setDisplayView('Sites');
+    detailsRef.current.snapToIndex(2);
+  };
   return (
     <>
       <SafeAreaView
@@ -101,7 +106,7 @@ const Saved = () => {
             source={imgg.imgSite}
             title="Sites"
             item={siteItem.length}
-            onPress={atmsDetails}
+            onPress={SitesDetails}
           />
         </View>
       </SafeAreaView>

@@ -28,7 +28,7 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
   const vendorRef = useRef(null);
   const [refresh, setRefresh] = useState(false);
   const [loding, setLodding] = useState(true);
-  const [lodding1, setLodding1] = useState(false);
+  const [lodding1, setLodding1] = useState(true);
 
   const [bottomSheetLodder, setbootSheetLodder] = useState(true);
 

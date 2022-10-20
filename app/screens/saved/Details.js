@@ -9,6 +9,7 @@ import moment from 'moment/moment';
 import OrderLoder from '../../components/lodder/OrderLoder';
 import Atms from './Components/Atms';
 import Devices from './Components/Devices';
+import Sites from './Components/Sites';
 
 import Circuits from './Components/Circuits/index';
 
@@ -23,9 +24,8 @@ const Details = ({detailsRef, displayView}) => {
         return <Devices />;
       case displayView === 'Circuits':
         return <Circuits />;
-
-      default:
-        break;
+      case displayView === 'Sites':
+        return <Sites />;
     }
   };
   return (

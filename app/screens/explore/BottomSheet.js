@@ -35,7 +35,7 @@ const BottomSheetView = ({
   marKerType,
 }) => {
   // console.log(cirCuitRef, bottomSheetRef,picRef );
-  const snapPoints = useMemo(() => ['20%', '40%', '95%'], []);
+  const snapPoints = useMemo(() => ['15%', '26%', '95%'], []);
   const location_data = useSelector(state => state.location_details.data);
   const {siteItem} = useSelector(state => state.SiteItem);
   const dataa = siteItem.find(i => i.id === location_data.Location_ID);
@@ -109,9 +109,10 @@ const BottomSheetView = ({
       data: id,
     });
   };
-  const addList = id => {
+  const addList = (id, add) => {
     const dd = {
       id: id,
+      add: add,
     };
     dispatch({
       type: SITE_ITEM,
@@ -246,16 +247,16 @@ const BottomSheetView = ({
                     remove(location_data?.Location_ID);
                   }}>
                   <Text>
-                    <Entypo name="heart" size={24} color="#c338b5" />
+                    <Entypo name="heart" size={22} color="#c338b5" />
                   </Text>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity
                   onPress={() => {
-                    addList(location_data?.Location_ID);
+                    addList(location_data?.Location_ID, location_data?.Address);
                   }}>
                   <Text>
-                    <EvilIcons name="heart" size={30} color="#c338b5" />
+                    <EvilIcons name="heart" size={22} color="#c338b5" />
                   </Text>
                 </TouchableOpacity>
               )}
