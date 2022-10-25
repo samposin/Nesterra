@@ -8,7 +8,6 @@ import {
   StatusBar,
   Animated,
   Easing,
-  TextInput,
   TouchableOpacity,
 } from 'react-native';
 import BottomSheetView from './BottomSheet';
@@ -41,17 +40,15 @@ import {setLatLng} from '../../actions/setLatLang';
 
 import {get_location_details} from '../../actions/loacationDetails';
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {hasLocationPermission} from '../../utils/AskPermission';
 import {LocationKey} from '../../key';
 import CustomMarker from '../../components/CustomMarker';
 import Category from './Category';
 
 import Setting from './Setting';
-import BottomSheetViewImage from '../../components/BottomSheet';
+
 import {photo_url_from_map} from '../../actions/photpUrlFromMap';
 
-import {GET_PHOTO_URL_FROM_MAP} from '../../actions/actionType/action.photoMapurl.type';
 import Lodder from '../../components/lodder';
 import {get_all_devices_inventory} from '../../actions/devicesInventory';
 import {getInventoryCircuit} from '../../actions/circuitInventory';
@@ -60,16 +57,15 @@ import CircuitDetailsExplore from '../../components/BottomSheetTab/Circuits/Circ
 import DeviceDetailsExplore from '../../components/BottomSheetTab/Devices/DeviceDetailsExplore';
 import OrderDetailsExplore from '../../components/BottomSheetTab/Orders/OrderDetailsExplore';
 import AtmsDetails from '../../components/BottomSheetTab/Atms/AtmsDetails';
-// import SerachCircuitIdBranchId from './components/Search';
-// import SerachCircuitIdBranchId from './Search/index';
-// import SerachCircuitIdBranchId from '../../components/Search';
+
 import SearchComponet from './components/Search/SearchComponet';
 import {soundePlay} from '../../components/helper/soundHelper';
 import {getAllAtms} from './../../actions/ATMS/index';
 import MapTypeAndFilterButtom from './components/MapTypeAndFilterButtom/index';
-import Atms from './../../components/BottomSheetTab/Atms/index';
 
 import {dataMar} from '../../utils/MarkerData1';
+import {getLocationInfo} from './../../actions/LocartionInfo/index';
+import {SET_LAT_LNG} from '../../actions/action.type';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -78,16 +74,13 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const Explore = ({
-  getAllAtms,
   navigation,
   get_coordinates,
-  get_order,
+
   get_location_details,
   marker_seleted,
-  setLatLng,
-  get_all_devices_inventory,
 
-  getInventoryCircuit,
+  getLocationInfo,
 }) => {
   const atmdDetailsRef = useRef(null);
   const {mapType} = useSelector(state => state.MapType);
@@ -220,7 +213,6 @@ const Explore = ({
   const [modalVisible, setModalVisible] = useState(false);
   const [locationText, setlocationText] = useState('');
 
-  const [satellite, setSatellite] = useState('standard');
   const [aHeight, setAheight] = useState(new Animated.Value(40));
   const [findDirection, setaWidth] = useState(new Animated.Value(0));
   const [animatioVal, setanimatioVal] = useState(false);
@@ -454,44 +446,13 @@ const Explore = ({
     animateToRegion({
       latitude: lat,
       longitude: lng,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
+      latitudeDelta: 0.02,
+      longitudeDelta: 0.02,
     });
 
     bottomSheetRef.current.close();
   };
-  const fetchNearestPlacesFromGoogle = (lat, lng) => {
-    // const lat = e.nativeEvent.coordinate.latitude;
-    // const lng = e.nativeEvent.coordinate.longitude;
-    let radMetter = 20 * 1000; // Search withing 2 KM radius
-    const url =
-      'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' +
-      lat +
-      ',' +
-      lng +
-      '&radius=' +
-      radMetter +
-      '&key=' +
-      LocationKey;
 
-    fetch(url)
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        if (res.results) {
-          dispatch({
-            type: GET_PHOTO_URL_FROM_MAP,
-            payload: {
-              data: res.results,
-            },
-          });
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
   const onLayoutMap = () => {
     mapRef.current.animateCamera({
       center: {
@@ -507,13 +468,14 @@ const Explore = ({
   const markerChange = id => {
     // cord, setCord
 
-    let lisdata = cord.map(item => {
+    let lisdata = dataMar.map(item => {
       let itm = {...item, isChecked: false};
       return itm;
     });
     lisdata[id].isChecked = true;
+    // console.log(lisdata[id], 'oo');
     setCord(lisdata);
-    setMarkerType(false);
+    // setMarkerType(false);
   };
   const getChange = marker => {
     let marker1 = marker.map(item => {
@@ -523,15 +485,57 @@ const Explore = ({
 
     setCord(marker1);
   };
+  const filterData1 = data => {
+    if (data == 'All') {
+      setCord(dataMar);
+    } else {
+      const fdata = dataMar.filter(function (item) {
+        return item.LocationStatusDesc.toLowerCase() === data.toLowerCase();
+      });
+
+      setCord(fdata);
+    }
+  };
   const filterData = data => {
     const fdata = dataMar.filter(function (item) {
       return item.HierarchyLocationType.toLowerCase() === data.toLowerCase();
     });
+    // console.log(cord.length, fdata);
     setCord(fdata);
   };
   const allDataa = () => {
     getChange(dataMar);
   };
+  const setLatLang = (lat, lng) => {
+    dispatch({
+      type: SET_LAT_LNG,
+      payload: {
+        lat: lat,
+        lng: lng,
+      },
+    });
+  };
+  const searchAddress = data => {
+    if (data) {
+      const dataAdd = dataMar.filter(item => {
+        return item.FullAddress.toLowerCase() === data.toLowerCase();
+      });
+      setCord(dataAdd);
+    } else {
+      setCord(dataMar);
+    }
+  };
+  const searchBranch = data => {
+    if (data) {
+      const dataAdd = dataMar.filter(item => {
+        return item.Branch_ID.toLowerCase() === data.toLowerCase();
+      });
+      setCord(dataAdd);
+    } else {
+      setCord(dataMar);
+    }
+  };
+
   useEffect(() => {
     getChange(dataMar);
   }, []);
@@ -636,27 +640,32 @@ const Explore = ({
                   }}
                   tracksViewChanges={true}
                   onPress={() => {
-                    markerZoom(item.Latitude, item.Longitude);
-                    settIndexZ(0);
-
-                    // bottomSheetRefImage.current.close();
+                    setIsLoading(true);
                     get_location_details({
                       id: item.Location_ID,
+
                       setIsLoading,
                       bottomSheetRef,
                     });
-                    marker_seleted(i);
-                    get_order(item.Location_ID);
-                    getAllAtms(item.Location_ID);
-                    getInventoryCircuit(item.Location_ID);
-                    get_all_devices_inventory(item.Location_ID);
+                    markerZoom(item.Latitude, item.Longitude);
+                    // settIndexZ(0);
+
+                    // bottomSheetRefImage.current.close();
+
+                    // marker_seleted(i);
+                    // get_order(item.Location_ID);
+                    // getAllAtms(item.Location_ID);
+                    // getInventoryCircuit(item.Location_ID);
+                    // get_all_devices_inventory(item.Location_ID);
+                    getLocationInfo(item.Location_ID);
 
                     const lat = item.Latitude;
                     const lng = item.Longitude;
                     // bottomSheetRef.current.snapToIndex(2);
-                    setLatLng({lat, lng});
+                    // setLatLng({lat, lng});
                     // animateToRegion(lat, lng);
-                    fetchNearestPlacesFromGoogle(lat, lng);
+                    // fetchNearestPlacesFromGoogle(lat, lng);
+                    setLatLang(item.Latitude, item.Longitude);
 
                     markerChange(i);
                   }}>
@@ -688,7 +697,7 @@ const Explore = ({
           ) : null} */}
         </MapView>
         {/* ===========get Current position=== */}
-        <MapTypeAndFilterButtom />
+        <MapTypeAndFilterButtom filterData={filterData1} />
         <TouchableOpacity onPress={getLocation} style={styles.currentLocation}>
           <MaterialCommunityIcons name="target" size={26} color="black" />
         </TouchableOpacity>
@@ -1090,7 +1099,7 @@ const Explore = ({
             )}
           </TouchableOpacity>
         </Animated.View> */}
-        {/*         
+        {/*      */}
 
         <View
           style={{
@@ -1131,7 +1140,7 @@ const Explore = ({
               style={{width: '90%', height: 25, resizeMode: 'contain'}}
             />
           </View>
-        </View> */}
+        </View>
         {/* =================search=============== */}
         {/* <Search
           catShow={setCatShow}
@@ -1146,7 +1155,10 @@ const Explore = ({
           isLoading={isLoading}
         /> */}
         {/* <Search /> */}
-        <SearchComponet />
+        <SearchComponet
+          searchAddress={searchAddress}
+          searchBranch={searchBranch}
+        />
 
         {/* =================search=============== */}
         {/* =================Category=============== */}
@@ -1199,6 +1211,7 @@ const Explore = ({
         atmdDetailsRef={atmdDetailsRef}
         detailsLoder={detailsLoder}
       />
+
       {/* =================CircuitDetailsExpolore=============== */}
       {settingView ? (
         <Setting
@@ -1222,6 +1235,7 @@ export default connect(null, {
   get_order,
   getInventoryCircuit,
   getAllAtms,
+  getLocationInfo,
 })(Explore);
 
 const styles = StyleSheet.create({
@@ -1341,15 +1355,15 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   currentLocation: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     backgroundColor: 'white',
     position: 'absolute',
     bottom: 60,
     right: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 25,
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

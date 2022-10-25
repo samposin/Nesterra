@@ -6,13 +6,15 @@ import NoDataViewFlatList from './../../NoDataViewFlatList/index';
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {copyText, tostalert} from '../../helper';
 import AtmsDetails from './AtmsDetails';
+
 import {GetAllAtmdETAILS} from '../../../actions/AtmsAssets';
 import {
   ALL_ATMS_FILTER_BY_ACTIVE,
   ALL_ATMS_ALL,
 } from '../../../actions/actionType/ATMS';
+import DataLoder from '../../lodder/DataLoder';
 
-const TableHeaderFirstColum = ({title, color}) => {
+const TableHeaderFirstColum = ({title, color, border}) => {
   return (
     <View
       style={{
@@ -21,12 +23,14 @@ const TableHeaderFirstColum = ({title, color}) => {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        borderLeftColor: 'white',
+        borderLeftWidth: border,
       }}>
       <Text style={{...styles.boxText1, color: color}}>{title}</Text>
     </View>
   );
 };
-const TableHeaderOtherColum = ({title, color}) => {
+const RanderColum = ({title, color}) => {
   return (
     <View
       style={{
@@ -38,7 +42,14 @@ const TableHeaderOtherColum = ({title, color}) => {
         borderLeftColor: 'white',
         borderLeftWidth: 2,
       }}>
-      <Text style={{...styles.boxText1, color: color}}>{title}</Text>
+      <TouchableOpacity
+        onLongPress={() => {
+          copyText(title);
+
+          tostalert(title);
+        }}>
+        <Text style={{...styles.boxText1, color: color}}>{title}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -49,6 +60,7 @@ const Atms = ({
   setBottomSheetLoder,
   GetAllAtmdETAILS,
   setDetailsLoder,
+  atmLoding,
 }) => {
   const {allAtms} = useSelector(state => state.allAtms);
 
@@ -68,10 +80,10 @@ const Atms = ({
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           marginVertical: 1,
         }}>
-        <TableHeaderFirstColum color="black" title={item.ATM_ID} />
-        <TableHeaderOtherColum color="black" title={item.ATM_Status} />
-        <TableHeaderOtherColum color="black" title={item.Vendor} />
-        <TableHeaderOtherColum color="black" title={item.Model} />
+        <RanderColum color="black" title={item.ATM_ID} />
+        <RanderColum color="black" title={item.ATM_Status} />
+        <RanderColum color="black" title={item.Vendor} />
+        <RanderColum color="black" title={item.Model} />
       </TouchableOpacity>
     );
   };
@@ -87,34 +99,40 @@ const Atms = ({
   };
   return (
     <>
-      <View View style={{flex: 1}}>
-        <View style={styles.tableRow}>
-          <TableHeaderFirstColum color="white" title="ATM ID" />
-          <TableHeaderOtherColum color="white" title="Status" />
-          <TableHeaderOtherColum color="white" title="Vendor" />
-          <TableHeaderOtherColum color="white" title="Model" />
-        </View>
-        <BottomSheetFlatList
-          showsVerticalScrollIndicator={false}
-          data={allAtms}
-          keyExtractor={(item, i) => i.toString()}
-          renderItem={(item, i) => randerItem(item)}
-          ListEmptyComponent={() => {
-            return (
-              <>
-                <NoDataViewFlatList />
-              </>
-            );
-          }}
-        />
-        {allAtms.length > 0 ? (
-          <ToggleView
-            length={allAtms.length}
-            alldata={alldata}
-            activeFilter={activeFilter}
-          />
-        ) : null}
-      </View>
+      {atmLoding ? (
+        <DataLoder />
+      ) : (
+        <>
+          <View View style={{flex: 1}}>
+            <View style={styles.tableRow}>
+              <TableHeaderFirstColum color="white" title="ATM ID" border={0} />
+              <TableHeaderFirstColum color="white" title="Status" border={2} />
+              <TableHeaderFirstColum color="white" title="Vendor" border={2} />
+              <TableHeaderFirstColum color="white" title="Model" border={2} />
+            </View>
+            <BottomSheetFlatList
+              showsVerticalScrollIndicator={false}
+              data={allAtms}
+              keyExtractor={(item, i) => i.toString()}
+              renderItem={(item, i) => randerItem(item)}
+              ListEmptyComponent={() => {
+                return (
+                  <>
+                    <NoDataViewFlatList />
+                  </>
+                );
+              }}
+            />
+            {allAtms.length > 0 ? (
+              <ToggleView
+                length={allAtms.length}
+                alldata={alldata}
+                activeFilter={activeFilter}
+              />
+            ) : null}
+          </View>
+        </>
+      )}
     </>
   );
 };

@@ -1,14 +1,13 @@
 import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
-import React, {useMemo, useRef, useEffect, useCallback} from 'react';
+import React, {useMemo, useRef, useEffect, useState, useCallback} from 'react';
 
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector, connect, useDispatch} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
-import {useState} from 'react';
 import Pics from '../../components/BottomSheetTab/Pics';
 import Hours from '../../components/BottomSheetTab/Hours';
 import Info from '../../components/BottomSheetTab/Info';
@@ -21,28 +20,44 @@ import {
   SITE_ITEM,
   SITE_ITEM_REMOVE,
 } from './../../actions/actionType/SiteItem/index';
+import {LocationKey} from '../../key';
+
+import {GET_PHOTO_URL_FROM_MAP} from '../../actions/actionType/action.photoMapurl.type';
+import {getAllAtms} from '../../actions/ATMS';
+import {get_all_devices_inventory} from '../../actions/devicesInventory';
+import {get_order} from '../../actions/order';
+import {getInventoryCircuit} from '../../actions/circuitInventory';
 
 const BottomSheetView = ({
+  notesRef,
   bottomSheetRef,
   deviceRefExplore,
   cirCuitRefExplore,
   orderRefExplore,
-  catShow,
+
   atmdDetailsRef,
   bottomSheetLoder,
   setDetailsLoder,
-  setMarkerType,
-  marKerType,
+
+  getAllAtms,
+  get_all_devices_inventory,
+  get_order,
+  getInventoryCircuit,
 }) => {
   // console.log(cirCuitRef, bottomSheetRef,picRef );
-  const snapPoints = useMemo(() => ['15%', '26%', '95%'], []);
+  const snapPoints = useMemo(() => ['10%', '23%', '95%'], []);
   const location_data = useSelector(state => state.location_details.data);
   const {siteItem} = useSelector(state => state.SiteItem);
   const dataa = siteItem.find(i => i.id === location_data.Location_ID);
-  // console.log(dataa, 'det');
+  const {lat, lng} = useSelector(state => state.setLatLang);
+  const [isLoding, setDataLoder] = useState(false);
+  const [atmLoding, setAtmLoding] = useState(false);
+  const [circuitLoding, setcircuitLoding] = useState(false);
+  const [devicesLoding, setDevicesLoding] = useState(false);
+  const [orderLoding, setOrderLoding] = useState(false);
   const dispatch = useDispatch();
   const myRef = useRef(null);
-  // console.log(picRef, 'picRef');
+
   const data = [
     {id: 0, name: 'INFO', isActive: true},
     {id: 1, name: 'PICS', isActive: false},
@@ -55,7 +70,8 @@ const BottomSheetView = ({
   ];
   const [item, setItem] = useState(0);
   const [data1, setData1] = useState(data);
-  const changeColor = id => {
+  const changeColor = (id, name) => {
+    getData(name);
     let listData = data1.map(item => {
       let itm = {...item, isActive: false};
       return itm;
@@ -64,7 +80,31 @@ const BottomSheetView = ({
     listData[id].isActive = true;
     setData1(listData);
   };
-
+  const getData = name => {
+    switch (true) {
+      case name === 'ATMS':
+        setAtmLoding(true);
+        getAllAtms(location_data.Location_ID, setAtmLoding);
+        break;
+      case name === 'CIRCUITS':
+        setcircuitLoding(true);
+        getInventoryCircuit(location_data.Location_ID, setcircuitLoding);
+        break;
+      case name === 'HOURS':
+        break;
+      case name === 'DEVICES':
+        setDevicesLoding(true);
+        get_all_devices_inventory(location_data.Location_ID, setDevicesLoding);
+        break;
+      case name === 'PICS':
+        fetchNearestPlacesFromGoogle();
+        break;
+      case name === 'ORDERS':
+        setOrderLoding(true);
+        get_order(location_data.Location_ID, setOrderLoding);
+        break;
+    }
+  };
   const centerTab = i => {
     myRef.current.scrollToIndex({animated: true, index: i, viewPosition: 0.5});
   };
@@ -74,7 +114,7 @@ const BottomSheetView = ({
         return <Info />;
 
       case item == 1:
-        return <Pics />;
+        return <Pics isLoding={isLoding} />;
 
       case item == 2:
         return <Hours />;
@@ -82,6 +122,7 @@ const BottomSheetView = ({
       case item == 3:
         return (
           <Atms
+            atmLoding={atmLoding}
             setDetailsLoder={setDetailsLoder}
             atmdDetailsRef={atmdDetailsRef}
           />
@@ -89,18 +130,26 @@ const BottomSheetView = ({
       case item == 4:
         return (
           <Circuits
+            circuitLoding={circuitLoding}
             cirCuitRefExplore={cirCuitRefExplore}
             bottomSheetRef={bottomSheetRef}
           />
         );
 
       case item == 5:
-        return <Devices deviceRefExplore={deviceRefExplore} />;
+        return (
+          <Devices
+            deviceRefExplore={deviceRefExplore}
+            devicesLoding={devicesLoding}
+          />
+        );
 
       case item == 6:
-        return <Orders orderRefExplore={orderRefExplore} />;
+        return (
+          <Orders orderRefExplore={orderRefExplore} orderLoding={orderLoding} />
+        );
       case item == 7:
-        return <Notes orderRefExplore={orderRefExplore} />;
+        return <Notes notesRef={notesRef} />;
     }
   };
   const remove = id => {
@@ -129,6 +178,40 @@ const BottomSheetView = ({
     // } else {
     //   alert('no');
     // }
+  };
+  const fetchNearestPlacesFromGoogle = () => {
+    setDataLoder(true);
+    // const lat = e.nativeEvent.coordinate.latitude;
+    // const lng = e.nativeEvent.coordinate.longitude;
+    let radMetter = 20 * 1000; // Search withing 2 KM radius
+    const url =
+      'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' +
+      lat +
+      ',' +
+      lng +
+      '&radius=' +
+      radMetter +
+      '&key=' +
+      LocationKey;
+
+    fetch(url)
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        if (res.results) {
+          dispatch({
+            type: GET_PHOTO_URL_FROM_MAP,
+            payload: {
+              data: res.results,
+            },
+          });
+          setDataLoder(false);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
   useEffect(() => {
     // ranDerView(0);
@@ -159,11 +242,10 @@ const BottomSheetView = ({
         animatedPosition={true}>
         <View
           style={{
-            height: 170,
+            height: 155,
             width: '100%',
-            zIndex: 10,
           }}>
-          <View
+          {/* <View
             style={{
               width: '100%',
               height: 40,
@@ -186,8 +268,8 @@ const BottomSheetView = ({
                 </Text>
               </View>
             </TouchableOpacity>
-          </View>
-          <Text
+          </View> */}
+          {/* <Text
             style={{
               fontSize: 18,
               fontWeight: '700',
@@ -197,9 +279,9 @@ const BottomSheetView = ({
             {location_data?.Address}
             <Text>{'  '} </Text>
             {location_data?.Location_ID}
-          </Text>
+          </Text> */}
 
-          <Text style={{fontSize: 16, color: 'black', marginLeft: 10}}>
+          {/* <Text style={{fontSize: 16, color: 'black', marginLeft: 10}}>
             Sity Type:{' '}
             <Text
               style={{
@@ -210,16 +292,16 @@ const BottomSheetView = ({
               }}>
               {location_data?.SubLocationType}
             </Text>
-          </Text>
-          <View
+          </Text> */}
+          {/* <View
             style={{
               width: '100%',
               height: 30,
               marginVertical: 5,
               flexDirection: 'row',
               alignItems: 'center',
-            }}>
-            <View style={{width: '50%', height: '100%', flexDirection: 'row'}}>
+            }}> */}
+          {/* <View style={{width: '50%', height: '100%', flexDirection: 'row'}}>
               <Text style={{fontSize: 16, marginLeft: 10, color: 'black'}}>
                 Sity Status:{' '}
               </Text>
@@ -232,8 +314,8 @@ const BottomSheetView = ({
                     : 'red',
                   borderRadius: 10,
                 }}></View>
-            </View>
-            <View
+            </View> */}
+          {/* <View
               style={{
                 width: '50%',
                 height: '100%',
@@ -260,9 +342,128 @@ const BottomSheetView = ({
                   </Text>
                 </TouchableOpacity>
               )}
+            </View> */}
+          {/* </View> */}
+          <View
+            style={{
+              width: '100%',
+              height: 100,
+              flexDirection: 'row',
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                bottomSheetRef.current.snapToIndex(2);
+              }}
+              style={{
+                width: '80%',
+                height: '100%',
+              }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: '700',
+                  color: 'black',
+                  marginLeft: 10,
+                }}>
+                {location_data?.Address}
+                <Text>{'  '} </Text>
+              </Text>
+              {/* <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: '500',
+                  marginLeft: 10,
+                  marginBottom: 10,
+                }}>
+                {location_data?.SubLocationType}
+              </Text> */}
+              <View style={{width: '100%', flexDirection: 'row'}}>
+                <Text style={{fontSize: 16, marginLeft: 10, color: 'black'}}>
+                  Sity Type:{' '}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: '500',
+                    marginLeft: 10,
+                  }}>
+                  {location_data?.SubLocationType}
+                </Text>
+              </View>
+
+              <View style={{width: '100%', flexDirection: 'row'}}>
+                <Text style={{fontSize: 16, marginLeft: 10, color: 'black'}}>
+                  Sity ID:{' '}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: '500',
+                    marginLeft: 10,
+                  }}>
+                  {location_data?.Location_ID}
+                  {'  '}
+                </Text>
+              </View>
+              <View style={{width: '100%', flexDirection: 'row'}}>
+                <Text style={{fontSize: 16, marginLeft: 10, color: 'black'}}>
+                  Sity Status:{' '}
+                </Text>
+                <View
+                  style={{
+                    width: 20,
+                    height: 20,
+                    backgroundColor: location_data?.LocationStatusDesc
+                      ? '#56ff00'
+                      : 'red',
+                    borderRadius: 10,
+                  }}></View>
+              </View>
+            </TouchableOpacity>
+            <View
+              style={{
+                width: '20%',
+                height: '100%',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                paddingBottom: 10,
+              }}>
+              <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
+                <View
+                  style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 12,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: '#007aff',
+                  }}>
+                  <Text>
+                    <Entypo name="cross" size={20} color="white" />
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              {dataa ? (
+                <TouchableOpacity
+                  onPress={() => {
+                    remove(location_data?.Location_ID);
+                  }}>
+                  <Text>
+                    <Entypo name="heart" size={22} color="#c338b5" />
+                  </Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  onPress={() => {
+                    addList(location_data?.Location_ID, location_data?.Address);
+                  }}>
+                  <Text>
+                    <EvilIcons name="heart" size={24} color="#c338b5" />
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
-
           <BottomSheetFlatList
             horizontal
             ref={myRef}
@@ -273,7 +474,7 @@ const BottomSheetView = ({
               return (
                 <TouchableOpacity
                   onPress={() => {
-                    changeColor(item.id);
+                    changeColor(item.id, item.name);
                     setItem(item.id);
                     centerTab(item.id);
                   }}
@@ -303,7 +504,12 @@ const BottomSheetView = ({
   );
 };
 
-export default BottomSheetView;
+export default connect(null, {
+  getAllAtms,
+  get_all_devices_inventory,
+  getInventoryCircuit,
+  get_order,
+})(BottomSheetView);
 
 const styles = StyleSheet.create({
   textStyles: {

@@ -27,7 +27,8 @@ const data = [
   {id: 1, txt: 'Inactive', name: 'Inactive', isChecked: false},
   {id: 2, txt: 'All', name: 'All', isChecked: false},
 ];
-const Status = () => {
+const Status = ({filterData}) => {
+  // console.log(filterData);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [checkdata, setCheckData] = React.useState(data);
@@ -42,33 +43,41 @@ const Status = () => {
     setCheckData(listData);
   };
   const handleChange = (id, name) => {
+    console.log(id, name);
     seletedColor(id);
 
     setSeletedValue(name);
     //
   };
-  const apply = () => {
+  const apply = data => {
     if (seletedValue == '') {
       warinng('Select A Value');
     } else {
-      if (seletedValue === 'Active') {
-        dispatch({
-          type: FILTER_BY_ACTIVE,
-        });
-        navigation.navigate('Explore');
-      }
-      if (seletedValue === 'Inactive') {
-        dispatch({
-          type: FILTER_BY_INACTIVE,
-        });
-        navigation.navigate('Explore');
-      } else {
-        dispatch({
-          type: FILTER_BY_ALL,
-        });
-        navigation.navigate('Explore');
-      }
+      filterData.filterData(seletedValue);
+      navigation.navigate('Explore');
     }
+
+    // if (seletedValue == '') {
+    //   warinng('Select A Value');
+    // } else {
+    //   if (seletedValue === 'Active') {
+    //     dispatch({
+    //       type: FILTER_BY_ACTIVE,
+    //     });
+    //     navigation.navigate('Explore');
+    //   }
+    //   if (seletedValue === 'Inactive') {
+    //     dispatch({
+    //       type: FILTER_BY_INACTIVE,
+    //     });
+    //     navigation.navigate('Explore');
+    //   } else {
+    //     dispatch({
+    //       type: FILTER_BY_ALL,
+    //     });
+    //     navigation.navigate('Explore');
+    //   }
+    // }
   };
   return (
     <>
@@ -151,7 +160,9 @@ const Status = () => {
               return (
                 <CheckBoxView
                   key={i}
-                  handleChange={handleChange}
+                  handleChange={() => {
+                    handleChange(i, item.name);
+                  }}
                   value={item.isChecked}
                   item={item}
                 />

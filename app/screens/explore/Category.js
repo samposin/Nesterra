@@ -89,7 +89,6 @@ const Category = ({
                   style={{
                     fontSize: 15,
                     color: item.isActive ? 'white' : 'black',
-                    fontWeight: 'bold',
                   }}>
                   {item.name}
                 </Text>

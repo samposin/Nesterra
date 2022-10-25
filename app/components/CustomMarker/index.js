@@ -4,53 +4,10 @@ import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
-  // console.log(mark, 'marKerType');
-
-  const getImage = value => {
-    // console.log(officeType);
-    switch (true) {
-      case value === 'Office':
-        return require('../../images/office.png');
-
-      case value === 'Other':
-        return require('../../images/other.png');
-
-      case value === 'ATM':
-        return require('../../images/atm.png');
-
-      case value === 'Branch':
-        return require('../../images/br.png');
-
-      case value === 'Data Center':
-        return require('../../images/dc.png');
-      case value === '3rd Party':
-        return require('../../images/3rdd.png');
-      case value === 'ITM Kiosk':
-        return require('../../images/itm.png');
-    }
-  };
   const location_data = useSelector(state => state.location_details.data);
   const {siteItem} = useSelector(state => state.SiteItem);
   const dataa = siteItem.find(i => i.id === location_data.Location_ID);
-  // const getMar = officeType => {
-  //   if (mark && marKerType) {
-  //     return require('../../images/green.png');
-  //   } else if (mark) {
-  //     return require('../../images/red.png');
-  //   } else {
-  //     return getImage(officeType);
-  //   }
-  // };
 
-  const getMar = officeType => {
-    if (mark && dataa) {
-      return require('../../images/green.png');
-    } else if (mark) {
-      return require('../../images/red.png');
-    } else {
-      return getImage(officeType);
-    }
-  };
   const getText = value => {
     // console.log(officeType);
     switch (true) {
@@ -74,11 +31,6 @@ const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
   };
 
   return (
-    // <Image
-    //   style={{width: 35, height: 35}}
-    //   // source={mark ? require('../../images/14.png') : getImage(officeType)}
-    //   source={getMar(officeType)}
-    // />
     <>
       <View
         style={{

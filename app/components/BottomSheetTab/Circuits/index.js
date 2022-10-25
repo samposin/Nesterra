@@ -20,8 +20,9 @@ import {
 import {CIRCUIT_DETAILS_EXPLORE} from '../../../actions/actionType/CircuitDetailsExplore';
 import {copyText, tostalert} from '../../helper';
 import ToggleView from './../ToggleView';
+import DataLoder from '../../lodder/DataLoder';
 
-const Circuits = ({cirCuitRefExplore}) => {
+const Circuits = ({cirCuitRefExplore, circuitLoding}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [circuitType, setCircuitType] = useState(true);
@@ -170,18 +171,8 @@ const Circuits = ({cirCuitRefExplore}) => {
       {/* ==============container============== */}
       <View style={{flex: 1}}>
         {/* ==============Table Header============== */}
-        {cirCuitInventory.length == 0 ? (
-          <View
-            style={{
-              width: '100%',
-              height: 300,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-              No Data Found
-            </Text>
-          </View>
+        {circuitLoding ? (
+          <DataLoder />
         ) : (
           <>
             <View

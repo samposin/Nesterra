@@ -19,7 +19,7 @@ import Address from './Address';
 
 import AtmsId from './AtmsId';
 
-const SearchComponet = ({setModalVisible}) => {
+const SearchComponet = ({setModalVisible, searchBranch, searchAddress}) => {
   const [dropDownShow, seTDropDownShow] = useState(false);
   const [searchView, setSearchView] = useState('Address');
   // console.log(searchView);
@@ -28,7 +28,7 @@ const SearchComponet = ({setModalVisible}) => {
       case searchView === 'Circuit ID':
         return <CircuitId />;
       case searchView === 'Branch ID':
-        return <BranchId />;
+        return <BranchId searchBranch={searchBranch} />;
       case searchView === 'Device ID':
         return <DeviceId />;
       case searchView === 'Site ID':
@@ -36,7 +36,7 @@ const SearchComponet = ({setModalVisible}) => {
       case searchView === 'ATM ID':
         return <AtmsId />;
       case searchView === 'Address':
-        return <Address />;
+        return <Address searchAddress={searchAddress} />;
     }
   };
   return (

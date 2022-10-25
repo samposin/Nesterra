@@ -4,4 +4,6 @@ export default {
   imgBranche: require('../../images/branch.png'),
   imgCircuits: require('../../images/iot.png'),
   imgDevices: require('../../images/ecg.png'),
+  imgOrders: require('../../images/completed-task.png'),
+  imgNotes: require('../../images/notes.png'),
 };

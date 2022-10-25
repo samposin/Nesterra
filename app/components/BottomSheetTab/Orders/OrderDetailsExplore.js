@@ -2,20 +2,23 @@ import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native';
 import React, {useMemo, useState} from 'react';
 import BottomSheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
 import OrderLoder from '../../lodder/OrderLoder';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import moment from 'moment';
 import ShortView from './ShortView';
 import CheckBoxView from './../CheckBoxView';
+import {ORDERS_ITEM} from '../../../actions/actionType/OrdersItem';
+import {warinng, success} from '../../helper';
 const OrderDetailsExplore = ({orderRefExplore, bottomSheetRef, lodding}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.orderDetailsExplore);
+  const {orderItem} = useSelector(state => state.OrdersItem);
   const [allView, setAllView] = useState(false);
-  const dataa = false;
-  // console.log(item);
+  const dataa = orderItem.find(i => i.Inventory_ID === item.Inventory_ID);
+  const dispatch = useDispatch();
   const selectedComponent = item => {
     // console.log(item);
     switch (true) {
@@ -27,6 +30,23 @@ const OrderDetailsExplore = ({orderRefExplore, bottomSheetRef, lodding}) => {
         return '#ffc8ce';
       case item === 'Completed':
         return '#c6efcd';
+    }
+  };
+  const addList = it => {
+    if (orderItem.length == 0) {
+      dispatch({
+        type: ORDERS_ITEM,
+        data: it,
+      });
+      success('Item Added Successfully');
+    } else if (orderItem.find(i => i.Inventory_ID === it.Inventory_ID)) {
+      warinng('Already Added');
+    } else {
+      dispatch({
+        type: ORDERS_ITEM,
+        data: it,
+      });
+      success('Item Added Successfully');
     }
   };
   const LightSkyRow = ({title, value}) => {
@@ -250,7 +270,7 @@ const OrderDetailsExplore = ({orderRefExplore, bottomSheetRef, lodding}) => {
           ) : (
             <TouchableOpacity
               onPress={() => {
-                // addList(item);
+                addList(item);
               }}>
               <Text>
                 <EvilIcons name="heart" size={30} color="#c338b5" />

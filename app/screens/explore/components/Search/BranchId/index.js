@@ -64,13 +64,14 @@ import InPutView from '../InPutView';
 import {SEARCH_BY_BRANCH_ID} from '../../../../../actions/action.coordinate.type';
 import {useDispatch} from 'react-redux';
 
-const BranchId = () => {
+const BranchId = ({searchBranch}) => {
   const dispatch = useDispatch();
   const searchId = data => {
-    dispatch({
-      type: SEARCH_BY_BRANCH_ID,
-      data: data,
-    });
+    searchBranch(data);
+    // dispatch({
+    //   type: SEARCH_BY_BRANCH_ID,
+    //   data: data,
+    // });
   };
   return (
     <>

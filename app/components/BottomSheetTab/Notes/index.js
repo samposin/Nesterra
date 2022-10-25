@@ -1,6 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import NotesAdd from './NotesAdd';
 const TableHeaderFirstColum = ({title, color}) => {
   return (
     <View
@@ -32,7 +33,8 @@ const TableHeaderOtherColum = ({title, color}) => {
   );
 };
 
-const Notes = ({index, item}) => {
+const Notes = ({index, item, notesRef}) => {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <View style={{flex: 1}}>
@@ -42,7 +44,10 @@ const Notes = ({index, item}) => {
           <TableHeaderOtherColum color="white" title="Created" />
           <TableHeaderOtherColum color="white" title="UserName" />
         </View>
-        <View
+        <TouchableOpacity
+          onPress={() => {
+            setModalVisible(true);
+          }}
           style={{
             width: 60,
             height: 30,
@@ -55,8 +60,9 @@ const Notes = ({index, item}) => {
             backgroundColor: '#007aff',
           }}>
           <AntDesign name="plus" size={24} color="white" />
-        </View>
+        </TouchableOpacity>
       </View>
+      <NotesAdd modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </>
   );
 };

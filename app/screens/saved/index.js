@@ -108,6 +108,18 @@ const Saved = () => {
             item={siteItem.length}
             onPress={SitesDetails}
           />
+          <ListItem
+            source={imgg.imgOrders}
+            title="Orders"
+            item={siteItem.length}
+            onPress={SitesDetails}
+          />
+          <ListItem
+            source={imgg.imgNotes}
+            title="My Notes"
+            item={''}
+            onPress={SitesDetails}
+          />
         </View>
       </SafeAreaView>
       <Details detailsRef={detailsRef} displayView={displayView} />

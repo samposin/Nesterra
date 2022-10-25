@@ -88,7 +88,7 @@ const ThirdRow = ({
     setDatePickerVisibility1(false);
   };
   const handleConfirm = date => {
-    console.log(date);
+    // console.log(date);
     // dispatch({
     //   type: ORDER_FILTER_BY_DATE,
     //   data: moment(date).format('MM-DD-YY'),
@@ -97,7 +97,7 @@ const ThirdRow = ({
     hideDatePicker();
   };
   const handleConfirm1 = date => {
-    console.log(date, 'DA');
+    // console.log(date, 'DA');
 
     hideDatePicker1();
   };

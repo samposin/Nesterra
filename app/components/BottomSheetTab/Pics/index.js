@@ -8,8 +8,10 @@ import {Modal, Portal, Text, Button, Provider} from 'react-native-paper';
 import {Image} from 'moti';
 import {LocationKey, PhotoUrl} from '../../../key';
 import {useNavigation} from '@react-navigation/native';
+import DataLoder from '../../lodder/DataLoder';
 
-const Pics = ({picRef}) => {
+const Pics = ({picRef, isLoding}) => {
+  console.log(isLoding);
   const navigation = useNavigation();
   const photo = useSelector(state => state.photo_url.photo_url);
   const [visible, setVisible] = React.useState(false);
@@ -60,47 +62,53 @@ const Pics = ({picRef}) => {
   };
 
   return (
-    <View style={styles.container}>
-      {photo ? (
-        <BottomSheetFlatList
-          numColumns={2}
-          showsVerticalScrollIndicator={false}
-          data={photo}
-          keyExtractor={(item, index) => index}
-          renderItem={renderItem}
-          contentContainerStyle={{backgroundColor: 'white'}}
-        />
+    <>
+      {isLoding ? (
+        <DataLoder />
       ) : (
-        <ImageLoder />
-      )}
+        <View style={styles.container}>
+          {photo ? (
+            <BottomSheetFlatList
+              numColumns={2}
+              showsVerticalScrollIndicator={false}
+              data={photo}
+              keyExtractor={(item, index) => index}
+              renderItem={renderItem}
+              contentContainerStyle={{backgroundColor: 'white'}}
+            />
+          ) : (
+            <DataLoder />
+          )}
 
-      <View style={{height: 70}}></View>
-      <>
-        {visible ? (
+          <View style={{height: 70}}></View>
           <>
-            <Portal>
-              <Modal
-                visible={visible}
-                onDismiss={() => setVisible(false)}
-                contentContainerStyle={containerStyle}>
-                <Image
-                  source={{
-                    uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${imgUrl}&key=${LocationKey}`,
-                  }}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    resizeMode: 'cover',
-                    borderRadius: 5,
-                  }}
-                />
-              </Modal>
-            </Portal>
-            <Button style={{marginTop: 30}}>{imgUrl}</Button>
+            {visible ? (
+              <>
+                <Portal>
+                  <Modal
+                    visible={visible}
+                    onDismiss={() => setVisible(false)}
+                    contentContainerStyle={containerStyle}>
+                    <Image
+                      source={{
+                        uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${imgUrl}&key=${LocationKey}`,
+                      }}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        resizeMode: 'cover',
+                        borderRadius: 5,
+                      }}
+                    />
+                  </Modal>
+                </Portal>
+                <Button style={{marginTop: 30}}>{imgUrl}</Button>
+              </>
+            ) : null}
           </>
-        ) : null}
-      </>
-    </View>
+        </View>
+      )}
+    </>
   );
 };
 

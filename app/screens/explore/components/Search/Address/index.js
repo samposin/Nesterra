@@ -5,13 +5,10 @@ import InPutView from '../InPutView';
 import {SEARCH_BY_BRANCH_ID} from '../../../../../actions/action.coordinate.type';
 import {useDispatch} from 'react-redux';
 
-const Address = () => {
+const Address = ({searchAddress}) => {
   const dispatch = useDispatch();
   const searchId = data => {
-    dispatch({
-      type: SEARCH_BY_BRANCH_ID,
-      data: data,
-    });
+    searchAddress(data);
   };
   return (
     <>

@@ -5,7 +5,7 @@ import {Base_url} from '../../key';
 export const get_location_details =
   ({id, setIsLoading, bottomSheetRef}) =>
   async dispatch => {
-    setIsLoading(true);
+    // setIsLoading(true);
 
     Axios.get(`${Base_url}/api/GetLocationDataByLocationID?Locationid=${id}`)
       .then(response => {

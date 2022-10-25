@@ -3,11 +3,11 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
 
-const MapTypeAndFilterButtom = ({setSatellite}) => {
+const MapTypeAndFilterButtom = ({filterData}) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('MapTypeAndFilter', {setSatellite})}
+      onPress={() => navigation.navigate('MapTypeAndFilter', {filterData})}
       style={styles.button}>
       <Ionicons name="md-layers" size={24} color="black" />
     </TouchableOpacity>
@@ -18,15 +18,15 @@ export default MapTypeAndFilterButtom;
 
 const styles = StyleSheet.create({
   button: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     backgroundColor: 'white',
     position: 'absolute',
-    bottom: 120,
+    bottom: 110,
     right: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 25,
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

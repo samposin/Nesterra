@@ -13,7 +13,7 @@ import Type from './Components/Type';
 import Genealogy from './Components/Genealogy';
 import {Heading, VStack} from 'native-base';
 const {height, width} = Dimensions.get('screen');
-const MapTypeAndFilter = ({}) => {
+const MapTypeAndFilter = ({route}) => {
   // console.log(route.params, 'route');
 
   const [setetedView, setSeletedView] = React.useState('Map Type');
@@ -23,7 +23,7 @@ const MapTypeAndFilter = ({}) => {
         return <Type />;
 
       case setetedView === 'Status':
-        return <Status />;
+        return <Status filterData={route.params} />;
       case setetedView === 'Genealogy':
         return <Genealogy />;
     }

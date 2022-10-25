@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
-import {BottomSheetScrollView} from '@gorhom/bottom-sheet';
+import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {connect, useDispatch, useSelector} from 'react-redux';
@@ -20,8 +20,10 @@ import {
 import {DEVICE_DETAILS_FOR_EXPLORE} from '../../../actions/actionType/DeviceDetailsExplore';
 import {copyText, tostalert} from '../../helper';
 import ToggleView from './../ToggleView';
+import DataLoder from '../../lodder/DataLoder';
+import NoDataViewFlatList from '../../NoDataViewFlatList';
 
-const Devices = ({deviceRefExplore}) => {
+const Devices = ({deviceRefExplore, devicesLoding}) => {
   const {devicesInventory} = useSelector(state => state.devicesInventory);
   const {id} = useSelector(state => state.devicesInventory);
   // console.log(id);
@@ -162,23 +164,49 @@ const Devices = ({deviceRefExplore}) => {
       </View>
     );
   };
+  const randerItem = ({index, item}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          // console.log(item);
+          dispatch({
+            type: DEVICE_DETAILS_FOR_EXPLORE,
+            payload: {
+              data: item,
+              id: id,
+            },
+          });
+          // cirCuitRefExplore.current.snapToIndex(2);
+          // dispatch({
+          //   type: DEVICE_DETAILS_EXPLORE,
+          //   payload: {
+          //     data: item,
+          //   },
+          // });
+          deviceRefExplore.current.snapToIndex(2);
+          // navigation.navigate('DevicesDetails', {item})
+        }}
+        style={{
+          width: '100%',
+          height: 50,
+          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+          flexDirection: 'row',
+          marginVertical: 1,
+        }}>
+        <FlatColum title={item.ID} border={0} />
+        <FlatColum title={item.Device_Name} border={2} />
+        <FlatColum title={item.Device_Status} border={2} />
+        <FlatColum title={item.Device_Vendor} border={2} />
+      </TouchableOpacity>
+    );
+  };
   return (
     <>
       {/* ==============container============== */}
       <View style={{flex: 1}}>
         {/* ==============Table Header============== */}
-        {devicesInventory.length == 0 ? (
-          <View
-            style={{
-              width: '100%',
-              height: 300,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-              No Data Found
-            </Text>
-          </View>
+        {devicesLoding ? (
+          <DataLoder />
         ) : (
           <>
             <View
@@ -211,47 +239,27 @@ const Devices = ({deviceRefExplore}) => {
             </View>
             {/* ==============Table Header============== */}
             {/* ==============Table Body============== */}
-            <BottomSheetScrollView
+            <BottomSheetFlatList
+              data={devicesInventory}
+              keyExtractor={(item, i) => i.toString()}
+              renderItem={(item, i) => randerItem(item)}
+              ListEmptyComponent={() => {
+                return (
+                  <>
+                    <NoDataViewFlatList />
+                  </>
+                );
+              }}
+            />
+            {/* <BottomSheetScrollView
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.contentContainer}>
               {devicesInventory.map((item, i) => {
                 return (
-                  <TouchableOpacity
-                    onPress={() => {
-                      // console.log(item);
-                      dispatch({
-                        type: DEVICE_DETAILS_FOR_EXPLORE,
-                        payload: {
-                          data: item,
-                          id: id,
-                        },
-                      });
-                      // cirCuitRefExplore.current.snapToIndex(2);
-                      // dispatch({
-                      //   type: DEVICE_DETAILS_EXPLORE,
-                      //   payload: {
-                      //     data: item,
-                      //   },
-                      // });
-                      deviceRefExplore.current.snapToIndex(2);
-                      // navigation.navigate('DevicesDetails', {item})
-                    }}
-                    key={i}
-                    style={{
-                      width: '100%',
-                      height: 50,
-                      backgroundColor: i % 2 == 0 ? '#d1d0d0' : '#ffffff',
-                      flexDirection: 'row',
-                      marginVertical: 1,
-                    }}>
-                    <FlatColum title={item.ID} border={0} />
-                    <FlatColum title={item.Device_Name} border={2} />
-                    <FlatColum title={item.Device_Status} border={2} />
-                    <FlatColum title={item.Device_Vendor} border={2} />
-                  </TouchableOpacity>
+                  
                 );
               })}
-            </BottomSheetScrollView>
+            </BottomSheetScrollView> */}
             {/* ==============Table Body============== */}
           </>
         )}
