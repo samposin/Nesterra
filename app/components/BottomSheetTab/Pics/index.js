@@ -11,7 +11,7 @@ import {useNavigation} from '@react-navigation/native';
 import DataLoder from '../../lodder/DataLoder';
 
 const Pics = ({picRef, isLoding}) => {
-  console.log(isLoding);
+  // console.log(isLoding);
   const navigation = useNavigation();
   const photo = useSelector(state => state.photo_url.photo_url);
   const [visible, setVisible] = React.useState(false);
@@ -66,8 +66,8 @@ const Pics = ({picRef, isLoding}) => {
       {isLoding ? (
         <DataLoder />
       ) : (
-        <View style={styles.container}>
-          {photo ? (
+        <>
+          <View style={styles.container}>
             <BottomSheetFlatList
               numColumns={2}
               showsVerticalScrollIndicator={false}
@@ -76,37 +76,10 @@ const Pics = ({picRef, isLoding}) => {
               renderItem={renderItem}
               contentContainerStyle={{backgroundColor: 'white'}}
             />
-          ) : (
-            <DataLoder />
-          )}
 
-          <View style={{height: 70}}></View>
-          <>
-            {visible ? (
-              <>
-                <Portal>
-                  <Modal
-                    visible={visible}
-                    onDismiss={() => setVisible(false)}
-                    contentContainerStyle={containerStyle}>
-                    <Image
-                      source={{
-                        uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&maxheight=400&photoreference=${imgUrl}&key=${LocationKey}`,
-                      }}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        resizeMode: 'cover',
-                        borderRadius: 5,
-                      }}
-                    />
-                  </Modal>
-                </Portal>
-                <Button style={{marginTop: 30}}>{imgUrl}</Button>
-              </>
-            ) : null}
-          </>
-        </View>
+            <View style={{height: 70}}></View>
+          </View>
+        </>
       )}
     </>
   );

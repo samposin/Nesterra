@@ -27,6 +27,7 @@ import {getAllAtms} from '../../actions/ATMS';
 import {get_all_devices_inventory} from '../../actions/devicesInventory';
 import {get_order} from '../../actions/order';
 import {getInventoryCircuit} from '../../actions/circuitInventory';
+import {getNotes} from './../../actions/Notes/index';
 
 const BottomSheetView = ({
   notesRef,
@@ -38,6 +39,7 @@ const BottomSheetView = ({
   atmdDetailsRef,
   bottomSheetLoder,
   setDetailsLoder,
+  getNotes,
 
   getAllAtms,
   get_all_devices_inventory,
@@ -50,11 +52,12 @@ const BottomSheetView = ({
   const {siteItem} = useSelector(state => state.SiteItem);
   const dataa = siteItem.find(i => i.id === location_data.Location_ID);
   const {lat, lng} = useSelector(state => state.setLatLang);
-  const [isLoding, setDataLoder] = useState(false);
+  const [isLoding, setDataLoder] = useState(true);
   const [atmLoding, setAtmLoding] = useState(false);
   const [circuitLoding, setcircuitLoding] = useState(false);
   const [devicesLoding, setDevicesLoding] = useState(false);
   const [orderLoding, setOrderLoding] = useState(false);
+  const [notesLoding, setNotesLoding] = useState(false);
   const dispatch = useDispatch();
   const myRef = useRef(null);
 
@@ -97,11 +100,17 @@ const BottomSheetView = ({
         get_all_devices_inventory(location_data.Location_ID, setDevicesLoding);
         break;
       case name === 'PICS':
+        setDataLoder(true);
         fetchNearestPlacesFromGoogle();
         break;
       case name === 'ORDERS':
         setOrderLoding(true);
         get_order(location_data.Location_ID, setOrderLoding);
+        break;
+      case name === 'Notes':
+        setNotesLoding(true);
+        getNotes(setNotesLoding);
+
         break;
     }
   };
@@ -149,7 +158,7 @@ const BottomSheetView = ({
           <Orders orderRefExplore={orderRefExplore} orderLoding={orderLoding} />
         );
       case item == 7:
-        return <Notes notesRef={notesRef} />;
+        return <Notes notesLoding={notesLoding} />;
     }
   };
   const remove = id => {
@@ -180,7 +189,7 @@ const BottomSheetView = ({
     // }
   };
   const fetchNearestPlacesFromGoogle = () => {
-    setDataLoder(true);
+    // setDataLoder(true);
     // const lat = e.nativeEvent.coordinate.latitude;
     // const lng = e.nativeEvent.coordinate.longitude;
     let radMetter = 20 * 1000; // Search withing 2 KM radius
@@ -245,105 +254,6 @@ const BottomSheetView = ({
             height: 155,
             width: '100%',
           }}>
-          {/* <View
-            style={{
-              width: '100%',
-              height: 40,
-
-              alignItems: 'flex-end',
-              paddingRight: 30,
-            }}>
-            <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
-              <View
-                style={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: 12,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: '#007aff',
-                }}>
-                <Text>
-                  <Entypo name="cross" size={20} color="white" />
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </View> */}
-          {/* <Text
-            style={{
-              fontSize: 18,
-              fontWeight: '700',
-              color: 'black',
-              marginLeft: 10,
-            }}>
-            {location_data?.Address}
-            <Text>{'  '} </Text>
-            {location_data?.Location_ID}
-          </Text> */}
-
-          {/* <Text style={{fontSize: 16, color: 'black', marginLeft: 10}}>
-            Sity Type:{' '}
-            <Text
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                marginLeft: 10,
-                marginBottom: 10,
-              }}>
-              {location_data?.SubLocationType}
-            </Text>
-          </Text> */}
-          {/* <View
-            style={{
-              width: '100%',
-              height: 30,
-              marginVertical: 5,
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}> */}
-          {/* <View style={{width: '50%', height: '100%', flexDirection: 'row'}}>
-              <Text style={{fontSize: 16, marginLeft: 10, color: 'black'}}>
-                Sity Status:{' '}
-              </Text>
-              <View
-                style={{
-                  width: 20,
-                  height: 20,
-                  backgroundColor: location_data?.LocationStatusDesc
-                    ? '#56ff00'
-                    : 'red',
-                  borderRadius: 10,
-                }}></View>
-            </View> */}
-          {/* <View
-              style={{
-                width: '50%',
-                height: '100%',
-                paddingRight: 25,
-                justifyContent: 'flex-end',
-                flexDirection: 'row',
-              }}>
-              {dataa ? (
-                <TouchableOpacity
-                  onPress={() => {
-                    remove(location_data?.Location_ID);
-                  }}>
-                  <Text>
-                    <Entypo name="heart" size={22} color="#c338b5" />
-                  </Text>
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  onPress={() => {
-                    addList(location_data?.Location_ID, location_data?.Address);
-                  }}>
-                  <Text>
-                    <EvilIcons name="heart" size={22} color="#c338b5" />
-                  </Text>
-                </TouchableOpacity>
-              )}
-            </View> */}
-          {/* </View> */}
           <View
             style={{
               width: '100%',
@@ -509,6 +419,7 @@ export default connect(null, {
   get_all_devices_inventory,
   getInventoryCircuit,
   get_order,
+  getNotes,
 })(BottomSheetView);
 
 const styles = StyleSheet.create({

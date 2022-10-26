@@ -40,6 +40,7 @@ import MapType from './MapType';
 import SiteItem from './SiteItem';
 import LocationInfo from './LocationInfo';
 import OrdersItem from './OrdersItem';
+import Notes from './Notes';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -81,5 +82,6 @@ const rootReducer = combineReducers({
   SiteItem,
   LocationInfo,
   OrdersItem,
+  Notes,
 });
 export default rootReducer;

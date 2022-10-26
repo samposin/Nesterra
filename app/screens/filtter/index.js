@@ -22,7 +22,7 @@ import SiteSubType from './SiteSubType';
 import Vendor from './Vendor';
 import {clear_all} from '../../actions/selectList';
 import {sity_status_coordinates} from '../../actions/coordinates';
-useSelector;
+
 const data1 = [
   {id: 0, name: 'Site Status', isActive: true},
   {id: 1, name: 'Country', isActive: false},

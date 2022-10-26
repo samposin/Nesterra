@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+
 import {
   Text,
   TouchableOpacity,
@@ -11,11 +12,39 @@ import {
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Modal, Portal} from 'react-native-paper';
+import {Base_url} from '../../../key';
 
 const {width, height} = Dimensions.get('screen');
-const NotesAdd = ({setModalVisible, modalVisible}) => {
+const NotesAdd = ({setModalVisible, modalVisible, setLoder}) => {
   const [note, setNote] = useState('');
 
+  const submit = () => {
+    setLoder(true);
+    fetch(`${Base_url}/api/PostNewSiteNotes`, {
+      method: 'POST',
+      headers: {
+        Accep: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        Location_ID: '1234',
+        UserName: 'Santosh Carpenter',
+        Created: null,
+        Notes: note,
+      }),
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(result => {
+        if (result) {
+          setLoder(false);
+          setNote('');
+          setModalVisible(false);
+        }
+      })
+      .catch(err => console.log(err));
+  };
   return (
     <>
       <Portal>
@@ -104,7 +133,8 @@ const NotesAdd = ({setModalVisible, modalVisible}) => {
                 </View>
               </View>
             </View>
-            <View
+            <TouchableOpacity
+              onPress={submit}
               style={{
                 width: width - 30,
                 height: 50,
@@ -112,7 +142,13 @@ const NotesAdd = ({setModalVisible, modalVisible}) => {
                 alignSelf: 'center',
                 marginTop: 10,
                 borderRadius: 10,
-              }}></View>
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+                Add
+              </Text>
+            </TouchableOpacity>
           </View>
         </Modal>
       </Portal>
@@ -127,7 +163,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
 
     width: width - 10,
-    height: 300,
+    height: 270,
     alignSelf: 'center',
     borderRadius: 10,
     alignItems: 'center',

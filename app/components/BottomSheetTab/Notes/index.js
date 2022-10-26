@@ -1,8 +1,13 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, FlatList, View} from 'react-native';
 import React, {useState} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import NotesAdd from './NotesAdd';
-const TableHeaderFirstColum = ({title, color}) => {
+import Lodder from './../../lodder/index';
+import {useSelector} from 'react-redux';
+import DataLoder from '../../lodder/DataLoder';
+import NoDataViewFlatList from './../../NoDataViewFlatList/index';
+
+const RanderColum = ({title, color, border}) => {
   return (
     <View
       style={{
@@ -11,12 +16,14 @@ const TableHeaderFirstColum = ({title, color}) => {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        borderLeftWidth: border,
+        borderColor: 'white',
       }}>
-      <Text style={{...styles.boxText1, color: color}}>{title}</Text>
+      <Text style={{...styles.boxText1, color: 'black'}}>{title}</Text>
     </View>
   );
 };
-const TableHeaderOtherColum = ({title, color}) => {
+const TableHeaderOtherColum = ({title, color, border}) => {
   return (
     <View
       style={{
@@ -26,43 +33,96 @@ const TableHeaderOtherColum = ({title, color}) => {
         justifyContent: 'center',
         alignItems: 'center',
         borderLeftColor: 'white',
-        borderLeftWidth: 2,
+        borderLeftWidth: border,
       }}>
       <Text style={{...styles.boxText1, color: color}}>{title}</Text>
     </View>
   );
 };
 
-const Notes = ({index, item, notesRef}) => {
+const Notes = ({notesLoding}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [isLoading, setLoder] = useState(false);
+  const {notes} = useSelector(state => state.Notes);
+
+  const randerItem = ({index, item}) => {
+    return (
+      <TouchableOpacity
+        style={{
+          width: '100%',
+          paddingVertical: 5,
+          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignSelf: 'center',
+          borderBottomColor: 'black',
+          marginBottom: 1,
+        }}>
+        <RanderColum title={item.Notes} border={0} />
+        <RanderColum title={item.Location_ID} border={2} />
+        <RanderColum title={item.Created} border={2} />
+        <RanderColum title={item.UserName} border={2} />
+      </TouchableOpacity>
+    );
+  };
   return (
     <>
-      <View style={{flex: 1}}>
-        <View style={styles.tableRow}>
-          <TableHeaderFirstColum color="white" title="Notes" />
-          <TableHeaderOtherColum color="white" title="Site ID" />
-          <TableHeaderOtherColum color="white" title="Created" />
-          <TableHeaderOtherColum color="white" title="UserName" />
-        </View>
-        <TouchableOpacity
-          onPress={() => {
-            setModalVisible(true);
-          }}
-          style={{
-            width: 60,
-            height: 30,
-            borderRadius: 10,
-            position: 'absolute',
-            right: 20,
-            bottom: 60,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#007aff',
-          }}>
-          <AntDesign name="plus" size={24} color="white" />
-        </TouchableOpacity>
-      </View>
-      <NotesAdd modalVisible={modalVisible} setModalVisible={setModalVisible} />
+      {notesLoding ? (
+        <DataLoder />
+      ) : (
+        <>
+          <View style={{flex: 1}}>
+            <View style={styles.tableRow}>
+              <TableHeaderOtherColum color="white" title="Notes" border={0} />
+              <TableHeaderOtherColum color="white" title="Site ID" border={2} />
+              <TableHeaderOtherColum color="white" title="Created" border={2} />
+              <TableHeaderOtherColum
+                color="white"
+                title="UserName"
+                border={2}
+              />
+            </View>
+
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={notes}
+              keyExtractor={(item, i) => i.toString()}
+              renderItem={(item, i) => randerItem(item)}
+              ListEmptyComponent={() => {
+                return (
+                  <>
+                    <NoDataViewFlatList />
+                  </>
+                );
+              }}
+            />
+          </View>
+
+          <TouchableOpacity
+            onPress={() => {
+              setModalVisible(true);
+            }}
+            style={{
+              width: 60,
+              height: 30,
+              borderRadius: 10,
+              position: 'absolute',
+              right: 20,
+              bottom: 60,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#007aff',
+            }}>
+            <AntDesign name="plus" size={24} color="white" />
+          </TouchableOpacity>
+          <NotesAdd
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+            setLoder={setLoder}
+          />
+          {isLoading && <Lodder lodding={isLoading} />}
+        </>
+      )}
     </>
   );
 };
@@ -77,38 +137,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
-  },
-  tableRowColum: {
-    height: '100%',
-
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  tableRowColumLast: {
-    width: '20%',
-    marginHorizontal: 2,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  boxText: {
-    fontWeight: '700',
-    fontSize: 16,
-    color: 'white',
-  },
-
-  boxText1: {
-    fontSize: 16,
-    color: 'white',
-  },
-  tableRow1: {
-    width: '100%',
-
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignSelf: 'center',
-    borderBottomColor: 'black',
-    // borderBottomWidth: 0.7,
-    // backgroundColor: 'green',
   },
 });
