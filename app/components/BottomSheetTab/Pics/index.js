@@ -14,29 +14,14 @@ const Pics = ({picRef, isLoding}) => {
   // console.log(isLoding);
   const navigation = useNavigation();
   const photo = useSelector(state => state.photo_url.photo_url);
-  const [visible, setVisible] = React.useState(false);
-  const [imgUrl, setImageUrl] = React.useState('');
-  // const showModal = () => setVisible(true);
-  // const hideModal = () => setVisible(false);
-  // console.log(photo, 'dfds');
-  const containerStyle = {
-    backgroundColor: 'white',
-    height: 300,
-    width: 400,
-    alignSelf: 'center',
-    borderRadius: 15,
-    padding: 15,
-  };
+
   const renderItem = ({item}) => {
     const url = `${PhotoUrl}${item.photo_reference}&key=${LocationKey}`;
 
     return (
       <TouchableOpacity
         onPress={() => {
-          // setVisible(true);
-          // setImageUrl(item.photo_reference);
           navigation.navigate('BackGroundCorsoul');
-          // picRef.current.snapToIndex(2);
         }}
         style={{
           width: '48%',

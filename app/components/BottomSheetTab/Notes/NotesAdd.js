@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {
   Text,
@@ -13,9 +13,12 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Modal, Portal} from 'react-native-paper';
 import {Base_url} from '../../../key';
-
+import Voice from '@react-native-community/voice';
+import {useNavigation} from '@react-navigation/native';
 const {width, height} = Dimensions.get('screen');
+
 const NotesAdd = ({setModalVisible, modalVisible, setLoder}) => {
+  const navigation = useNavigation();
   const [note, setNote] = useState('');
 
   const submit = () => {
@@ -44,6 +47,46 @@ const NotesAdd = ({setModalVisible, modalVisible, setLoder}) => {
         }
       })
       .catch(err => console.log(err));
+  };
+  const onSpeechStartHandler = e => {
+    console.log('start handler==>>>', e);
+  };
+  const onSpeechEndHandler = async e => {
+    if (e.error === false) {
+      try {
+        await Voice.stop();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const onSpeechResultsHandler = e => {
+    // console.log(modalVisible, 'dd');
+    // setlocationText(e.value[0]);
+    console.log(e);
+
+    // googlePlacesRef.current?.focus();
+  };
+
+  const startRecording = async () => {
+    try {
+      await Voice.start('en-Us');
+    } catch (error) {
+      console.log('error raised', error);
+    }
+  };
+  useEffect(() => {
+    Voice.onSpeechStart = onSpeechStartHandler;
+    Voice.onSpeechEnd = onSpeechEndHandler;
+    Voice.onSpeechResults = onSpeechResultsHandler;
+
+    return () => {
+      Voice.destroy().then(Voice.removeAllListeners);
+    };
+  }, []);
+  const getText = text => {
+    setNote(text);
   };
   return (
     <>
@@ -109,6 +152,12 @@ const NotesAdd = ({setModalVisible, modalVisible, setLoder}) => {
                   placeholder="Please Enter Here"
                   value={note}
                   onChangeText={text => setNote(text)}
+                  style={{
+                    height: '100%',
+                    justifyContent: 'flex-start',
+                    alignItems: 'flex-start',
+                  }}
+                  placeholderTextColor={{textAlign: 'center'}}
                 />
               </View>
               <View
@@ -120,7 +169,11 @@ const NotesAdd = ({setModalVisible, modalVisible, setLoder}) => {
                   justifyContent: 'center',
                   paddingRight: 10,
                 }}>
-                <View
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('VoiceToText', {getText});
+                    setModalVisible(false);
+                  }}
                   style={{
                     width: 30,
                     height: 30,
@@ -130,7 +183,7 @@ const NotesAdd = ({setModalVisible, modalVisible, setLoder}) => {
                     borderRadius: 15,
                   }}>
                   <FontAwesome name="microphone" size={20} color="white" />
-                </View>
+                </TouchableOpacity>
               </View>
             </View>
             <TouchableOpacity
