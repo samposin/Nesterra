@@ -1,68 +1,66 @@
-import {StyleSheet, Text, TouchableOpacity, FlatList, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Dimensions,
+} from 'react-native';
 import React, {useState} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import NotesAdd from './NotesAdd';
 import Lodder from './../../lodder/index';
 import {useSelector} from 'react-redux';
 import DataLoder from '../../lodder/DataLoder';
 import NoDataViewFlatList from './../../NoDataViewFlatList/index';
-
-const RanderColum = ({title, color, border}) => {
-  return (
-    <View
-      style={{
-        ...styles.tableRowColum,
-        width: '25%',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderLeftWidth: border,
-        borderColor: 'white',
-      }}>
-      <Text style={{...styles.boxText1, color: 'black'}}>{title}</Text>
-    </View>
-  );
-};
-const TableHeaderOtherColum = ({title, color, border}) => {
-  return (
-    <View
-      style={{
-        ...styles.tableRowColum,
-        width: '25%',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderLeftColor: 'white',
-        borderLeftWidth: border,
-      }}>
-      <Text style={{...styles.boxText1, color: color}}>{title}</Text>
-    </View>
-  );
-};
+import {useNavigation} from '@react-navigation/native';
+import moment from 'moment';
+import {BottomSheetSectionList} from '@gorhom/bottom-sheet';
+const {width} = Dimensions.get('screen');
 
 const Notes = ({notesLoding}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isLoading, setLoder] = useState(false);
   const {notes} = useSelector(state => state.Notes);
-
-  const randerItem = ({index, item}) => {
+  const navigation = useNavigation();
+  const renderItems = ({item}) => {
     return (
-      <TouchableOpacity
-        style={{
-          width: '100%',
-          paddingVertical: 5,
-          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignSelf: 'center',
-          borderBottomColor: 'black',
-          marginBottom: 1,
-        }}>
-        <RanderColum title={item.Notes} border={0} />
-        <RanderColum title={item.Location_ID} border={2} />
-        <RanderColum title={item.Created} border={2} />
-        <RanderColum title={item.UserName} border={2} />
-      </TouchableOpacity>
+      <View style={styles.itemStyle}>
+        <View
+          style={{
+            width: '100%',
+            height: '50%',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+          <Text style={{fontWeight: '900'}}>
+            {item.Location_ID}
+            {'  '} {`${item.Created.split(' ')[1].split(':')[0]}`}
+            {':'}
+            {`${item.Created.split(' ')[1].split(':')[1]}`}{' '}
+            {`${item.Created.split(' ')[2]}`}
+          </Text>
+          <MaterialCommunityIcons
+            name="dots-horizontal"
+            size={24}
+            color="black"
+          />
+        </View>
+        <View style={{width: '100%', height: '50%'}}>
+          <Text>{item.Notes}</Text>
+        </View>
+      </View>
+    );
+  };
+
+  const renderHeader = ({section}) => {
+    return (
+      <View style={styles.headerStyle}>
+        <Text style={{fontWeight: 'bold'}}>
+          {moment(section.title).format('MMM D')}
+        </Text>
+      </View>
     );
   };
   return (
@@ -72,22 +70,11 @@ const Notes = ({notesLoding}) => {
       ) : (
         <>
           <View style={{flex: 1}}>
-            <View style={styles.tableRow}>
-              <TableHeaderOtherColum color="white" title="Notes" border={0} />
-              <TableHeaderOtherColum color="white" title="Site ID" border={2} />
-              <TableHeaderOtherColum color="white" title="Created" border={2} />
-              <TableHeaderOtherColum
-                color="white"
-                title="UserName"
-                border={2}
-              />
-            </View>
-
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              data={notes}
-              keyExtractor={(item, i) => i.toString()}
-              renderItem={(item, i) => randerItem(item)}
+            <BottomSheetSectionList
+              sections={notes}
+              keyExtractor={(item, index) => item + index}
+              renderItem={renderItems}
+              renderSectionHeader={renderHeader}
               ListEmptyComponent={() => {
                 return (
                   <>
@@ -100,7 +87,8 @@ const Notes = ({notesLoding}) => {
 
           <TouchableOpacity
             onPress={() => {
-              setModalVisible(true);
+              // setModalVisible(true);
+              navigation.navigate('ReducSection');
             }}
             style={{
               width: 60,
@@ -123,6 +111,20 @@ const Notes = ({notesLoding}) => {
           {isLoading && <Lodder lodding={isLoading} />}
         </>
       )}
+      <View
+        style={{
+          width: 100,
+          height: 40,
+          borderRadius: 5,
+          backgroundColor: '#007aff',
+          position: 'absolute',
+          bottom: 60,
+          left: width / 2 - 50,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{color: 'white'}}>{notes.length} Records</Text>
+      </View>
     </>
   );
 };
@@ -137,5 +139,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
+  },
+  itemStyle: {
+    borderBottomWidth: 0.5,
+    paddingVertical: 5,
+    margin: 5,
+    height: 50,
+  },
+  headerStyle: {
+    borderBottomWidth: 0.5,
+
+    paddingVertical: 5,
+    margin: 5,
   },
 });

@@ -1,54 +1,33 @@
 import {GET_NOTES} from '../../actions/actionType/Notes';
-import moment from 'moment/moment';
+import moment from 'moment';
 
 const initialState = {
   notes: [],
 };
-
+moment.suppressDeprecationWarnings = true;
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_NOTES:
-      const subtypeData = action.payload.data.reduce(
-        (acc, {Created, Notes, Location_ID, UserName}) => {
-          console.log(acc);
-          console.log(Created, Notes, Location_ID, UserName);
-          const entry = acc.find(
-            i =>
-              moment(i.Created).format('YYYY-MM-DD') ===
-              moment(Created).format('YYYY-MM-DD'),
-          );
-          if (!entry) {
-            acc.push({
-              Created,
-              Notes,
-              Location_ID,
-              UserName,
-            });
-          } else {
-            entry.Created = Created;
-            entry.Notes = Notes;
-            entry.Location_ID = Location_ID;
-            entry.UserName = UserName;
-          }
+      const data = action.payload.data.map((item, i) => {
+        let d = item.Created.split(' ')[0];
+        return {...item, date: d};
+      });
+      const DATA = Object.values(
+        data.reduce((acc, item) => {
+          if (!acc[item.date])
+            acc[item.date] = {
+              title: item.date,
+              data: [],
+            };
+          acc[item.date].data.push(item);
           return acc;
-        },
-        [],
+        }, {}),
       );
+      // console.log(data);
 
-      // let finalObj = {};
-      // action.payload.data.forEach(games => {
-      //   const date = games.Created.split('T')[0];
-      //   if (finalObj[date]) {
-      //     finalObj[date].push(games);
-      //   } else {
-      //     finalObj[date] = [games];
-      //   }
-      // });
-      // console.log(finalObj);
-      // console.log(subtypeData);
       return {
         ...state,
-        notes: action.payload.data,
+        notes: DATA,
       };
 
     default:
