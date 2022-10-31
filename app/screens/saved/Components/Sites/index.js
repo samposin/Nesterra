@@ -2,6 +2,8 @@ import {StyleSheet, Text, Image, View} from 'react-native';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
+import NoDataViewFlatList from '../../../../components/NoDataViewFlatList';
+
 const Sites = () => {
   const {siteItem} = useSelector(state => state.SiteItem);
 
@@ -51,6 +53,13 @@ const Sites = () => {
           );
         }}
         contentContainerStyle={styles.contentContainer}
+        ListEmptyComponent={() => {
+          return (
+            <>
+              <NoDataViewFlatList />
+            </>
+          );
+        }}
       />
     </View>
   );

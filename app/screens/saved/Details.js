@@ -10,6 +10,7 @@ import OrderLoder from '../../components/lodder/OrderLoder';
 import Atms from './Components/Atms';
 import Devices from './Components/Devices';
 import Sites from './Components/Sites';
+import Orders from './Components/Orders';
 
 import Circuits from './Components/Circuits/index';
 
@@ -26,6 +27,8 @@ const Details = ({detailsRef, displayView}) => {
         return <Circuits />;
       case displayView === 'Sites':
         return <Sites />;
+      case displayView === 'Orders':
+        return <Orders />;
     }
   };
   return (

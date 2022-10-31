@@ -19,7 +19,6 @@ import Circuits from '../screens/circuits/index.js';
 import BackGroundCorsoul from '../screens/BackGroundCorsoul/index.js';
 import Stats from '../screens/stats';
 import VoiceToText from '../screens/Voice';
-import ReducSection from '../screens/Voice/ReducSection';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,7 +43,6 @@ const MainStack = () => {
         <Stack.Screen name="CircuitsDetails" component={CircuitsDetails} />
         <Stack.Screen name="BackGroundCorsoul" component={BackGroundCorsoul} />
         <Stack.Screen name="VoiceToText" component={VoiceToText} />
-        <Stack.Screen name="ReducSection" component={ReducSection} />
       </Stack.Navigator>
     </NavigationContainer>
   );

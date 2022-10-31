@@ -109,36 +109,7 @@ const Explore = ({
   const [modalVisible1, setModalVisible1] = useState(false);
 
   //voice
-  const onSpeechStartHandler = e => {
-    console.log('start handler==>>>', e);
-  };
-  const onSpeechEndHandler = async e => {
-    if (e.error === false) {
-      try {
-        await Voice.stop();
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-  const onSpeechResultsHandler = e => {
-    // console.log(modalVisible, 'dd');
-    // console.log(e, 'loctaion');
-    setlocationText(e.value[0]);
 
-    const voiceText = find(e.value[0]);
-    googlePlacesRef.current?.setAddressText(e.value[0]);
-    // googlePlacesRef.current?.focus();
-
-    // setTimeout(() => {
-    //   if (!voiceText) {
-    //     setModalVisible(false);
-    //     setlocationText('Place Not Found')
-    //      console.log('madan');
-    //   }
-
-    // }, 5000);
-  };
   let timer = null;
   const stopStartTimeOute = () => {
     // setModalVisible1(false)
@@ -188,15 +159,7 @@ const Explore = ({
         setlocationText('');
       });
   };
-  useEffect(() => {
-    Voice.onSpeechStart = onSpeechStartHandler;
-    Voice.onSpeechEnd = onSpeechEndHandler;
-    Voice.onSpeechResults = onSpeechResultsHandler;
 
-    return () => {
-      Voice.destroy().then(Voice.removeAllListeners);
-    };
-  }, []);
   //voice
 
   const dispatch = useDispatch();
@@ -462,7 +425,7 @@ const Explore = ({
       pitch: 180,
     });
   };
-  const [indexZ, settIndexZ] = useState(2);
+
   const [marKerType, setMarkerType] = useState(false);
 
   const markerChange = id => {
@@ -657,14 +620,14 @@ const Explore = ({
                     // getAllAtms(item.Location_ID);
                     // getInventoryCircuit(item.Location_ID);
                     // get_all_devices_inventory(item.Location_ID);
+
                     getLocationInfo(item.Location_ID);
 
-                    const lat = item.Latitude;
-                    const lng = item.Longitude;
                     // bottomSheetRef.current.snapToIndex(2);
                     // setLatLng({lat, lng});
                     // animateToRegion(lat, lng);
                     // fetchNearestPlacesFromGoogle(lat, lng);
+
                     setLatLang(item.Latitude, item.Longitude);
 
                     markerChange(i);

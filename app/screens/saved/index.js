@@ -19,6 +19,7 @@ const Saved = () => {
 
   const {atmsItem} = useSelector(state => state.AtmsItem);
   const {siteItem} = useSelector(state => state.SiteItem);
+  const {orderItem} = useSelector(state => state.OrdersItem);
   const detailsRef = useRef(null);
   const DetailsOneRef = useRef(null);
   const [displayView, setDisplayView] = useState('Atms');
@@ -67,6 +68,10 @@ const Saved = () => {
     setDisplayView('Sites');
     detailsRef.current.snapToIndex(2);
   };
+  const OrdersDetails = () => {
+    setDisplayView('Orders');
+    detailsRef.current.snapToIndex(2);
+  };
   return (
     <>
       <SafeAreaView
@@ -111,8 +116,8 @@ const Saved = () => {
           <ListItem
             source={imgg.imgOrders}
             title="Orders"
-            item={siteItem.length}
-            onPress={SitesDetails}
+            item={orderItem.length}
+            onPress={OrdersDetails}
           />
           <ListItem
             source={imgg.imgNotes}

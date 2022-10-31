@@ -11,9 +11,10 @@ import Voice from '@react-native-community/voice';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useNavigation} from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
+import {warinng} from '../../components/helper';
+
 const VoiceToText = ({route}) => {
-  console.log(route.params);
-  const [seechTextm, setSpeechText] = useState('');
+  const [seechText, setSpeechText] = useState('');
   const navigation = useNavigation();
   const onSpeechStartHandler = e => {
     console.log('start handler==>>>', e);
@@ -31,7 +32,7 @@ const VoiceToText = ({route}) => {
   const onSpeechResultsHandler = e => {
     // console.log(modalVisible, 'dd');
     setSpeechText(e.value[0]);
-    console.log(e);
+    // console.log(e);
 
     // googlePlacesRef.current?.focus();
   };
@@ -52,12 +53,19 @@ const VoiceToText = ({route}) => {
       Voice.destroy().then(Voice.removeAllListeners);
     };
   }, []);
+  const gotoBack = () => {
+    if (seechText == '') {
+      warinng('Notes are empty');
+    } else {
+      route.params.getText(seechText);
+      navigation.goBack();
+    }
+  };
   useEffect(() => {
     setTimeout(() => {
       startRecording();
     }, 1000);
   }, []);
-
   return (
     <SafeAreaView
       style={{
@@ -76,7 +84,7 @@ const VoiceToText = ({route}) => {
         }}>
         <TouchableOpacity
           onPress={() => {
-            navigation.goBack();
+            gotoBack();
           }}>
           <View
             style={{
@@ -101,7 +109,9 @@ const VoiceToText = ({route}) => {
           borderWidth: 1,
           alignSelf: 'center',
           marginTop: 15,
-        }}></View>
+        }}>
+        <Text>{seechText}</Text>
+      </View>
       <View
         style={{
           width: '100%',

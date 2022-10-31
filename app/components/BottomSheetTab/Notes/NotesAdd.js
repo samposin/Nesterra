@@ -48,44 +48,9 @@ const NotesAdd = ({setModalVisible, modalVisible, setLoder}) => {
       })
       .catch(err => console.log(err));
   };
-  const onSpeechStartHandler = e => {
-    console.log('start handler==>>>', e);
-  };
-  const onSpeechEndHandler = async e => {
-    if (e.error === false) {
-      try {
-        await Voice.stop();
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
 
-  const onSpeechResultsHandler = e => {
-    // console.log(modalVisible, 'dd');
-    // setlocationText(e.value[0]);
-    console.log(e);
-
-    // googlePlacesRef.current?.focus();
-  };
-
-  const startRecording = async () => {
-    try {
-      await Voice.start('en-Us');
-    } catch (error) {
-      console.log('error raised', error);
-    }
-  };
-  useEffect(() => {
-    Voice.onSpeechStart = onSpeechStartHandler;
-    Voice.onSpeechEnd = onSpeechEndHandler;
-    Voice.onSpeechResults = onSpeechResultsHandler;
-
-    return () => {
-      Voice.destroy().then(Voice.removeAllListeners);
-    };
-  }, []);
   const getText = text => {
+    setModalVisible(true);
     setNote(text);
   };
   return (

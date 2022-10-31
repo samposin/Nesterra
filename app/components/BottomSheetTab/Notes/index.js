@@ -5,9 +5,11 @@ import {
   View,
   Dimensions,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import NotesAdd from './NotesAdd';
 import Lodder from './../../lodder/index';
 import {useSelector} from 'react-redux';
@@ -17,12 +19,19 @@ import {useNavigation} from '@react-navigation/native';
 import moment from 'moment';
 import {BottomSheetSectionList} from '@gorhom/bottom-sheet';
 const {width} = Dimensions.get('screen');
+import Popover, {
+  PopoverPlacement,
+  PopoverMode,
+  arrowSize,
+} from 'react-native-popover-view';
 
 const Notes = ({notesLoding}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isLoading, setLoder] = useState(false);
   const {notes} = useSelector(state => state.Notes);
   const navigation = useNavigation();
+  const [showPopover, setShowPopover] = useState(false);
+  const touchable = useRef();
   const renderItems = ({item}) => {
     return (
       <View style={styles.itemStyle}>
@@ -41,11 +50,53 @@ const Notes = ({notesLoding}) => {
             {`${item.Created.split(' ')[1].split(':')[1]}`}{' '}
             {`${item.Created.split(' ')[2]}`}
           </Text>
-          <MaterialCommunityIcons
+          {/* <MaterialCommunityIcons
             name="dots-horizontal"
             size={24}
             color="black"
-          />
+          /> */}
+          <Popover
+            arrowSize={{width: 0, height: 0}}
+            placement={PopoverPlacement.TOP}
+            from={
+              <TouchableOpacity>
+                <MaterialCommunityIcons
+                  name="dots-horizontal"
+                  size={24}
+                  color="black"
+                />
+              </TouchableOpacity>
+            }>
+            <View
+              style={{
+                width: 60,
+                height: 70,
+                backgroundColor: 'white',
+              }}>
+              <View
+                style={{
+                  width: '100%',
+                  height: '50%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <TouchableOpacity onPress={() => setShowPopover(false)}>
+                  <MaterialIcons name="delete" size={24} color="red" />
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{
+                  width: '100%',
+                  height: '50%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <TouchableOpacity onPress={() => setShowPopover(false)}>
+                  <FontAwesome name="edit" size={24} color="#007aff" />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Popover>
         </View>
         <View style={{width: '100%', height: '50%'}}>
           <Text>{item.Notes}</Text>
@@ -87,8 +138,7 @@ const Notes = ({notesLoding}) => {
 
           <TouchableOpacity
             onPress={() => {
-              // setModalVisible(true);
-              navigation.navigate('ReducSection');
+              setModalVisible(true);
             }}
             style={{
               width: 60,
