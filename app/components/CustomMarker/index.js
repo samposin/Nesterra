@@ -68,9 +68,7 @@ const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
             borderWidth: mark ? 1.5 : 0,
             borderColor: mark ? '#59ff02' : '#55fe01',
           }}>
-          <Text style={{color: 'black', fontWeight: 'bold'}}>
-            {getText(officeType)}
-          </Text>
+          <Text style={{color: 'black'}}>{getText(officeType)}</Text>
         </View>
       </View>
     </>

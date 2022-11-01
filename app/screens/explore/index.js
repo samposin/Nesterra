@@ -24,7 +24,7 @@ import {LogBox} from 'react-native';
 import {get_order} from '../../actions/order';
 
 // import Sound from 'react-native-sound';
-var Sound = require('react-native-sound');
+import Sound from 'react-native-sound';
 
 LogBox.ignoreLogs(['new NativeEventEmitter']);
 
@@ -48,7 +48,7 @@ import Category from './Category';
 import Setting from './Setting';
 
 import {photo_url_from_map} from '../../actions/photpUrlFromMap';
-
+import MapZoomPanel from './components/MapZoomPanel';
 import Lodder from '../../components/lodder';
 import {get_all_devices_inventory} from '../../actions/devicesInventory';
 import {getInventoryCircuit} from '../../actions/circuitInventory';
@@ -406,6 +406,7 @@ const Explore = ({
     bottomSheetRef.current.close();
   };
   const markerZoom = (lat, lng) => {
+    playSound();
     animateToRegion({
       latitude: lat,
       longitude: lng,
@@ -414,6 +415,24 @@ const Explore = ({
     });
 
     bottomSheetRef.current.close();
+  };
+  const markerZoom1 = ({geometry}) => {
+    console.log(geometry.coordinates[0], geometry.coordinates[1]);
+    console.log(geometry);
+    const la = geometry.coordinates[0];
+    const ln = geometry.coordinates[1];
+    animateToRegion({
+      latitude: ln,
+      longitude: la,
+      latitudeDelta: currentRegion.latitudeDelta / 3,
+      longitudeDelta: currentRegion.longitudeDelta / 3,
+    });
+    setCurrentRegion({
+      latitude: ln,
+      longitude: la,
+      latitudeDelta: currentRegion.latitudeDelta / 3,
+      longitudeDelta: currentRegion.longitudeDelta / 3,
+    });
   };
 
   const onLayoutMap = () => {
@@ -502,6 +521,21 @@ const Explore = ({
   useEffect(() => {
     getChange(dataMar);
   }, []);
+  const sound = require('../../images/sound/first.wav');
+
+  const playSound = () => {
+    const soundVar = new Sound(sound, Sound.MAIN_BUNDLE, err => {
+      if (err) {
+        console.log('NOT ABLE TO PLAY SOUND');
+      }
+    });
+
+    setTimeout(() => {
+      soundVar.play();
+    }, 100);
+
+    soundVar.release();
+  };
 
   return (
     <>
@@ -590,6 +624,8 @@ const Explore = ({
           showsUserLocation={true}
           userLocationPriority={'high'}
           mapType={mapType}
+          onClusterPress={e => markerZoom1(e)}
+          // onRegionChangeComplete={onRegionChangeComplete}
           onLayout={onLayoutMap}>
           {cord &&
             cord.map((item, i) => {
@@ -631,6 +667,7 @@ const Explore = ({
                     setLatLang(item.Latitude, item.Longitude);
 
                     markerChange(i);
+                    playSound();
                   }}>
                   <CustomMarker
                     mark={item.isChecked}

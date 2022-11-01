@@ -270,8 +270,8 @@ const BottomSheetView = ({
               }}>
               <Text
                 style={{
-                  fontSize: 18,
-                  fontWeight: '700',
+                  fontSize: 16,
+
                   color: 'black',
                   marginLeft: 10,
                 }}>
@@ -294,8 +294,9 @@ const BottomSheetView = ({
                 <Text
                   style={{
                     fontSize: 16,
-                    fontWeight: '500',
+
                     marginLeft: 10,
+                    color: 'black',
                   }}>
                   {location_data?.SubLocationType}
                 </Text>
@@ -308,8 +309,9 @@ const BottomSheetView = ({
                 <Text
                   style={{
                     fontSize: 16,
-                    fontWeight: '500',
+
                     marginLeft: 10,
+                    color: 'black',
                   }}>
                   {location_data?.Location_ID}
                   {'  '}

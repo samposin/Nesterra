@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   },
 
   boxText1: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'white',
   },
   tableRow1: {
