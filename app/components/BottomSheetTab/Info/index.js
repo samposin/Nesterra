@@ -14,10 +14,10 @@ const Info = () => {
         {/* =====================Branch Id ====================== */}
         <View style={styles.item}>
           <View style={styles.leftItem}>
-            <Text>Location ID</Text>
+            <Text style={{color: 'black'}}>Location ID</Text>
           </View>
           <View style={styles.rightItem}>
-            <Text>{locationInfo[0]?.Location_ID}</Text>
+            <Text style={{color: 'black'}}>{locationInfo[0]?.Location_ID}</Text>
           </View>
         </View>
         {locationInfo &&
@@ -26,10 +26,10 @@ const Info = () => {
               return (
                 <View key={i} style={styles.item}>
                   <View style={styles.leftItem}>
-                    <Text>{item.Property}</Text>
+                    <Text style={{color: 'black'}}>{item.Property}</Text>
                   </View>
                   <View style={styles.rightItem}>
-                    <Text>{item.Val}</Text>
+                    <Text style={{color: 'black'}}>{item.Val}</Text>
                   </View>
                 </View>
               );

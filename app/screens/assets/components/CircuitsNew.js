@@ -79,7 +79,7 @@ const CircuitsNew = ({
 
             tostalert(title);
           }}>
-          <Text style={styles.boxText1}> {title}</Text>
+          <Text style={{...styles.boxText1, color: 'black'}}> {title}</Text>
         </TouchableOpacity>
       </View>
     );

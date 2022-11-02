@@ -151,7 +151,9 @@ const CircuitBottomSheet = ({
               Cancel
             </Text>
           </TouchableOpacity>
-          <Text style={{fontSize: 16, fontWeight: 'bold'}}>{diplayName}</Text>
+          <Text style={{fontSize: 16, color: 'black', fontWeight: 'bold'}}>
+            {diplayName}
+          </Text>
           <TouchableOpacity
             onPress={() => {
               cirCuitRef.current.close();

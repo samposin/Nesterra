@@ -83,7 +83,7 @@ const Type = ({loding1, setDeviveView, deviceRef}) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Text style={{fontWeight: 'bold'}}>{item.Device_Type}</Text>
+                <Text style={{color: 'black'}}>{item.Device_Type}</Text>
               </TouchableOpacity>
             );
           }}

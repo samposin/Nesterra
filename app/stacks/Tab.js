@@ -86,8 +86,8 @@ const TabNaV = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name="VoiceScreen"
-        component={VoiceScreen}
+        name="Saved"
+        component={Saved}
         options={{
           tabBarIcon: ({focused}) => {
             return (

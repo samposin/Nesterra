@@ -298,7 +298,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   boxText: {
-    fontWeight: '700',
     fontSize: 16,
     color: 'white',
   },

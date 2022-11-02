@@ -81,7 +81,7 @@ const SmartSite = ({loding1, cirCuitRef, bootSheetLodder, setSwitchView}) => {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Text style={{fontWeight: 'bold'}}>{item.id}</Text>
+                  <Text style={{color: 'black'}}>{item.id}</Text>
                 </TouchableOpacity>
               );
             }}

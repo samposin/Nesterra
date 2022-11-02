@@ -18,7 +18,7 @@ const BottomSheetCheckBox = ({item, value, handleChange}) => {
         }}
         color="#1b5a90"
       />
-      <Text>{item.vendor}</Text>
+      <Text style={{color: 'black'}}>{item.vendor}</Text>
     </View>
   );
 };

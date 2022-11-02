@@ -521,7 +521,8 @@ const Explore = ({
   useEffect(() => {
     getChange(dataMar);
   }, []);
-  const sound = require('../../images/sound/first.wav');
+  // const sound = require('../../images/sound/first.wav');
+  const sound = require('../../images/sound/arati.mpeg');
 
   const playSound = () => {
     const soundVar = new Sound(sound, Sound.MAIN_BUNDLE, err => {
@@ -529,10 +530,10 @@ const Explore = ({
         console.log('NOT ABLE TO PLAY SOUND');
       }
     });
+    soundVar.play();
+    // setTimeout(() => {
 
-    setTimeout(() => {
-      soundVar.play();
-    }, 100);
+    // }, 100);
 
     soundVar.release();
   };
@@ -639,6 +640,7 @@ const Explore = ({
                   }}
                   tracksViewChanges={true}
                   onPress={() => {
+                    playSound();
                     setIsLoading(true);
                     get_location_details({
                       id: item.Location_ID,
@@ -667,7 +669,6 @@ const Explore = ({
                     setLatLang(item.Latitude, item.Longitude);
 
                     markerChange(i);
-                    playSound();
                   }}>
                   <CustomMarker
                     mark={item.isChecked}

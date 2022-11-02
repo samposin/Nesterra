@@ -39,7 +39,7 @@ const AtmID = ({bottomSheetLoder, atmRef}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <ActivityIndicator color="red" size="large" />
+          <ActivityIndicator color="#007aff" size="large" />
         </View>
       ) : (
         <>

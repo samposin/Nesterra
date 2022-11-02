@@ -26,7 +26,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
             ...styles.secondTableColum,
             backgroundColor: '#fbe5d6',
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+          <Text style={{color: 'black'}}>{title}</Text>
         </View>
         <View
           style={{
@@ -34,7 +34,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
             borderLeftColor: 'black',
             borderLeftWidth: 0.7,
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+          <Text style={{color: 'black'}}>{value}</Text>
         </View>
       </View>
     );
@@ -47,7 +47,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
             ...styles.secondTableColum,
             backgroundColor: '#b7ecff',
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+          <Text style={{color: 'black'}}>{title}</Text>
         </View>
         <View
           style={{
@@ -55,7 +55,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
             borderLeftColor: 'black',
             borderLeftWidth: 0.7,
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+          <Text style={{color: 'black'}}>{value}</Text>
         </View>
       </View>
     );
@@ -68,7 +68,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
             ...styles.secondTableColum,
             backgroundColor: '#deebf7',
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+          <Text style={{color: 'black'}}>{title}</Text>
         </View>
         <View
           style={{
@@ -76,7 +76,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
             borderLeftColor: 'black',
             borderLeftWidth: 0.7,
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+          <Text style={{color: 'black'}}>{value}</Text>
         </View>
       </View>
     );
@@ -89,7 +89,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
             ...styles.secondTableColum,
             backgroundColor: '#e2f0d9',
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+          <Text style={{color: 'black'}}>{title}</Text>
         </View>
         <View
           style={{
@@ -97,7 +97,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
             borderLeftColor: 'black',
             borderLeftWidth: 0.7,
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+          <Text style={{color: 'black'}}>{value}</Text>
         </View>
       </View>
     );
@@ -110,7 +110,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
             ...styles.secondTableColum,
             backgroundColor: '#ffffcc',
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+          <Text style={{color: 'black'}}>{title}</Text>
         </View>
         <View
           style={{
@@ -118,7 +118,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
             borderLeftColor: 'black',
             borderLeftWidth: 0.7,
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+          <Text style={{color: 'black'}}>{value}</Text>
         </View>
       </View>
     );
@@ -211,9 +211,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       ...styles.secondTableColum,
                       backgroundColor: '#deebf7',
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Device Name
-                    </Text>
+                    <Text style={{color: 'black'}}>Device Name</Text>
                   </View>
 
                   <View
@@ -222,9 +220,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       borderLeftColor: 'black',
                       borderLeftWidth: 0.7,
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Device_Name}
-                    </Text>
+                    <Text style={{color: 'black'}}>{item.Device_Name}</Text>
                   </View>
                 </View>
 
@@ -237,9 +233,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       ...styles.secondTableColum,
                       backgroundColor: item.Device_Name ? '#deebf7' : 'white',
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Device Status
-                    </Text>
+                    <Text style={{color: 'black'}}>Device Status</Text>
                   </View>
                   <View
                     style={{
@@ -249,9 +243,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       backgroundColor:
                         item.Device_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Device_Status}
-                    </Text>
+                    <Text style={{color: 'black'}}>{item.Device_Status}</Text>
                   </View>
                 </View>
 
@@ -277,9 +269,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       ...styles.secondTableColum,
                       backgroundColor: '#b7ecff',
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Site ID
-                    </Text>
+                    <Text style={{color: 'black'}}>Site ID</Text>
                   </View>
 
                   <TouchableOpacity
@@ -295,9 +285,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       alignItems: 'center',
                       justifyContent: 'flex-start',
                     }}>
-                    <Text style={{fontWeight: '700', color: '#007aff'}}>
-                      {item.Site_ID}
-                    </Text>
+                    <Text style={{color: '#007aff'}}>{item.Site_ID}</Text>
                     <Image
                       style={{
                         width: 20,
@@ -318,9 +306,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       ...styles.secondTableColum,
                       backgroundColor: '#b7ecff',
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      Site Status
-                    </Text>
+                    <Text style={{color: 'black'}}>Site Status</Text>
                   </View>
                   <View
                     style={{
@@ -329,9 +315,7 @@ const BottomSheetViewDevices = ({deviceRefDetails, setDeviveView, lodding}) => {
                       borderLeftWidth: 0.7,
                       backgroundColor: item.Site_Status ? '#c6efcd' : '#e7c4b5',
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.Site_Status}
-                    </Text>
+                    <Text style={{color: 'black'}}>{item.Site_Status}</Text>
                   </View>
                 </View>
                 <SkyRow
@@ -655,7 +639,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   boxText: {
-    fontWeight: '700',
     fontSize: 14,
     color: 'white',
   },

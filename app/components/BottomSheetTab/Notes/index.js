@@ -43,7 +43,7 @@ const Notes = ({notesLoding}) => {
             alignItems: 'center',
             justifyContent: 'space-between',
           }}>
-          <Text style={{fontWeight: '900'}}>
+          <Text style={{color: 'black'}}>
             {item.Location_ID}
             {'  '} {`${item.Created.split(' ')[1].split(':')[0]}`}
             {':'}
@@ -99,7 +99,7 @@ const Notes = ({notesLoding}) => {
           </Popover>
         </View>
         <View style={{width: '100%', height: '50%'}}>
-          <Text>{item.Notes}</Text>
+          <Text style={{color: 'black'}}>{item.Notes}</Text>
         </View>
       </View>
     );
@@ -108,7 +108,7 @@ const Notes = ({notesLoding}) => {
   const renderHeader = ({section}) => {
     return (
       <View style={styles.headerStyle}>
-        <Text style={{fontWeight: 'bold'}}>
+        <Text style={{color: 'black'}}>
           {moment(section.title).format('MMM D')}
         </Text>
       </View>

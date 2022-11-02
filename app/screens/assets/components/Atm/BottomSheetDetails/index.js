@@ -43,7 +43,7 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
             ...styles.secondTableColum,
             backgroundColor: bgcolor,
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+          <Text style={{color: 'black'}}>{title}</Text>
         </View>
         <View
           style={{
@@ -51,7 +51,7 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
             borderRightColor: 'black',
             borderLeftWidth: 0.7,
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+          <Text style={{color: 'black'}}>{value}</Text>
         </View>
       </View>
     );
@@ -148,7 +148,7 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
                       backgroundColor: '#ace2ff',
                     }}>
                     <Text style={{fontWeight: '700', color: 'black'}}>
-                      ATM_Status
+                      ATM Status
                     </Text>
                   </View>
                   <View
@@ -159,9 +159,7 @@ const BottomSheetDetails = ({atmdDetailsRef, snapPoints, detailsLoder}) => {
                       backgroundColor:
                         item.ATM_Status == 'Active' ? '#c6efcd' : '#e7c4b5',
                     }}>
-                    <Text style={{fontWeight: '700', color: 'black'}}>
-                      {item.ATM_Status}
-                    </Text>
+                    <Text style={{color: 'black'}}>{item.ATM_Status}</Text>
                   </View>
                 </View>
                 <TabeRow
@@ -335,7 +333,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   boxText: {
-    fontWeight: '700',
     fontSize: 14,
     color: 'white',
   },

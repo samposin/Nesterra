@@ -49,13 +49,13 @@ const OrderDetailsExplore = ({orderRefExplore, bottomSheetRef, lodding}) => {
       success('Item Added Successfully');
     }
   };
-  const LightSkyRow = ({title, value}) => {
+  const LightSkyRow = ({title, value, bgColor}) => {
     return (
       <View style={{...styles.secondTableRow}}>
         <View
           style={{
             ...styles.secondTableColum,
-            backgroundColor: '#deebf7',
+            backgroundColor: bgColor,
           }}>
           <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
         </View>
@@ -305,15 +305,19 @@ const OrderDetailsExplore = ({orderRefExplore, bottomSheetRef, lodding}) => {
               <LightSkyRow
                 title="SmartSites#"
                 value={item.Smart_Site_Order_No}
+                bgColor="#deebf7"
               />
-              <LightSkyRow title="Tangoe#" value={'--'} />
-              <LightSkyRow title="Carrier#" value={'--'} />
-              {/* <LightSkyRow title="PON" value={item.PON} />
-            <LightSkyRow title="Order Number" value={item.Order_Number} /> */}
-              <LightGrewRow title="Project Assignment" value={item.Project} />
-              <LightGrewRow
+              <LightSkyRow title="Tangoe#" value={'--'} bgColor="#deebf7" />
+              <LightSkyRow title="Carrier#" value={'--'} bgColor="#deebf7" />
+              <LightSkyRow
+                title="Project Assignment"
+                value={item.Project}
+                bgColor="#f2f2f2"
+              />
+              <LightSkyRow
                 title="Technical Contact"
                 value={item.Technical_Contact_Name}
+                bgColor="#f2f2f2"
               />
               <View style={{...styles.secondTableRow}}>
                 <View
@@ -339,8 +343,11 @@ const OrderDetailsExplore = ({orderRefExplore, bottomSheetRef, lodding}) => {
                 </View>
               </View>
 
-              {/* <LightGrewRow title="Order Type" value={item.Order_Type} /> */}
-              <LightGrewRow title="Inventory ID" value={item.Inventory_ID} />
+              <LightSkyRow
+                title="Inventory ID"
+                value={item.Inventory_ID}
+                bgColor="#f2f2f2"
+              />
 
               {/* ===================== */}
 
@@ -407,60 +414,85 @@ const OrderDetailsExplore = ({orderRefExplore, bottomSheetRef, lodding}) => {
                   />
                 </TouchableOpacity>
               </View>
-              <SkyRow title="Address" value={item.Address} />
-              <SkyRow title="Branch ID" value={item.Branch_ID} />
-
-              <YellowRow
+              <LightSkyRow
+                title="Address"
+                value={item.Address}
+                bgColor="#b7ecff"
+              />
+              <LightSkyRow
+                title="Branch ID"
+                value={item.Branch_ID}
+                bgColor="#b7ecff"
+              />
+              <LightSkyRow
                 title="Initiation Date"
                 value={moment(item.Initiation_Date).format('MM/DD/YY')}
+                bgColor="#ffffcc"
               />
-              <YellowRow
+              <LightSkyRow
                 title="Creation Date"
                 value={moment(item.Creation_Date).format('MM/DD/YY')}
+                bgColor="#ffffcc"
               />
-              <YellowRow
+              <LightSkyRow
                 title="FOC Date"
                 value={moment(item.FOC_Date).format('MM/DD/YY')}
+                bgColor="#ffffcc"
               />
-              <YellowRow
+
+              <LightSkyRow
                 title="Completion Date"
                 value={moment(item.Order_Completion_Date).format('MM/DD/YY')}
+                bgColor="#ffffcc"
               />
-              <YellowRow
+              <LightSkyRow
                 title="Bill Stop Date"
                 value={
                   item.Bill_Stop_Date
                     ? moment(item.Bill_Stop_Date).format('MM/DD/YY')
                     : '--'
                 }
+                bgColor="#ffffcc"
               />
-              <OrangeLightRow
+              <LightSkyRow
                 title="Vendor"
                 value={item.Vendor ? item.Vendor : '--'}
+                bgColor="#fbe5d6"
               />
-              <OrangeLightRow
+              <LightSkyRow
                 title="Category"
                 value={item.Category ? item.Category : '--'}
+                bgColor="#fbe5d6"
               />
-              <OrangeLightRow
+              <LightSkyRow
                 title="Sub Category"
                 value={item.Subcat_1 ? item.Subcat_1 : '--'}
+                bgColor="#fbe5d6"
               />
-              <DarkYellow title="RC" value={item.RC ? item.RC : '--'} />
-              <DarkYellow title="GL" value={item.GL ? item.GL : '--'} />
-              <DarkYellow
+              <LightSkyRow
+                title="RC"
+                value={item.RC ? item.RC : '--'}
+                bgColor="#e2f0d9"
+              />
+              <LightSkyRow
+                title="GL"
+                value={item.GL ? item.GL : '--'}
+                bgColor="#e2f0d9"
+              />
+              <LightSkyRow
                 title="Monthly Cost"
                 value={
                   item.Monthly_Recurring_Cost
                     ? `$${item.Monthly_Recurring_Cost}`
                     : '--'
                 }
+                bgColor="#e2f0d9"
               />
-              <DarkYellow
+              <LightSkyRow
                 title="Annual Cost"
                 value={item.Annual_Cost ? `$${item.Annual_Cost}` : '--'}
+                bgColor="#e2f0d9"
               />
-
               <View style={{height: 70, width: '100%'}}></View>
             </>
           )

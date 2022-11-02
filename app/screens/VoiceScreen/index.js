@@ -12,14 +12,14 @@ import Sound from 'react-native-sound';
 const soundList = [
   require('../../images/sound/arati.mpeg'),
   require('../../images/sound/two.wav'),
-  require('../../images/sound/arati.mpeg'),
-  require('../../images/sound/four.wav'),
-  require('../../images/sound/arati.mpeg'),
-  require('../../images/sound/six.wav'),
-  require('../../images/sound/arati.mpeg'),
-  require('../../images/sound/arati.mpeg'),
-  require('../../images/sound/nine.wav'),
-  require('../../images/sound/arati.mpeg'),
+  // require('../../images/sound/arati.mpeg'),
+  // require('../../images/sound/four.wav'),
+  // require('../../images/sound/arati.mpeg'),
+  // require('../../images/sound/six.wav'),
+  // require('../../images/sound/arati.mpeg'),
+  // require('../../images/sound/arati.mpeg'),
+  // require('../../images/sound/nine.wav'),
+  // require('../../images/sound/arati.mpeg'),
 ];
 
 const VoiceScreen = () => {

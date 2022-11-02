@@ -69,7 +69,7 @@ const DevicesBottomSheet = ({
               Cancel
             </Text>
           </TouchableOpacity>
-          <Text style={{fontSize: 16, fontWeight: 'bold'}}>{diplayName}</Text>
+          <Text style={{fontSize: 16, color: 'black'}}>{diplayName}</Text>
           <TouchableOpacity
             onPress={() => {
               setDeviveView(true);

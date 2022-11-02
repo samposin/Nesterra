@@ -31,10 +31,10 @@ const BottomSheetViewCircuits = ({
             ...styles.secondTableColum,
             backgroundColor: '#deebf7',
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+          <Text style={{color: 'black'}}>{title}</Text>
         </View>
         <View style={styles.secondTableColum}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{data}</Text>
+          <Text style={{color: 'black'}}>{data}</Text>
         </View>
       </View>
     );
@@ -47,7 +47,7 @@ const BottomSheetViewCircuits = ({
             ...styles.secondTableColum,
             backgroundColor: bgcolor,
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{title}</Text>
+          <Text style={{color: 'black'}}>{title}</Text>
         </View>
         <View
           style={{
@@ -55,7 +55,7 @@ const BottomSheetViewCircuits = ({
             borderRightColor: 'black',
             borderLeftWidth: 1,
           }}>
-          <Text style={{fontWeight: '700', color: 'black'}}>{value}</Text>
+          <Text style={{color: 'black'}}>{value}</Text>
         </View>
       </View>
     );
@@ -154,9 +154,7 @@ const BottomSheetViewCircuits = ({
                         ...styles.secondTableColum,
                         backgroundColor: '#deebf7',
                       }}>
-                      <Text style={{fontWeight: '700', color: 'black'}}>
-                        Circuit Status
-                      </Text>
+                      <Text style={{color: 'black'}}>Circuit Status</Text>
                     </View>
                     <View
                       style={{
@@ -168,7 +166,7 @@ const BottomSheetViewCircuits = ({
                             ? '#c6efcd'
                             : '#e7c4b5',
                       }}>
-                      <Text style={{fontWeight: '700', color: 'black'}}>
+                      <Text style={{color: 'black'}}>
                         {item.Circuit_Status}
                       </Text>
                     </View>
@@ -191,9 +189,7 @@ const BottomSheetViewCircuits = ({
                         ...styles.secondTableColum,
                         backgroundColor: '#b7ecff',
                       }}>
-                      <Text style={{fontWeight: '700', color: 'black'}}>
-                        Site ID
-                      </Text>
+                      <Text style={{color: 'black'}}>Site ID</Text>
                     </View>
 
                     <TouchableOpacity
@@ -209,9 +205,7 @@ const BottomSheetViewCircuits = ({
                         alignItems: 'center',
                         paddingLeft: 10,
                       }}>
-                      <Text style={{fontWeight: '700', color: '#007aff'}}>
-                        {item.Location_ID}
-                      </Text>
+                      <Text style={{color: '#007aff'}}>{item.Location_ID}</Text>
                       <Image
                         style={{
                           width: 20,

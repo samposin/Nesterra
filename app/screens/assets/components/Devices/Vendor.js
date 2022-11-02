@@ -83,7 +83,7 @@ const Vendor = ({loding1, deviceRef}) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Text style={{fontWeight: 'bold'}}>{item.Device_Vendor}</Text>
+                <Text style={{color: 'black'}}>{item.Device_Vendor}</Text>
               </TouchableOpacity>
             );
           }}

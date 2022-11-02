@@ -86,7 +86,7 @@ const Name = ({loding1, setDeviveView, deviceRef}) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Text style={{fontWeight: 'bold'}}>{item.Device_Name}</Text>
+                <Text style={{color: 'black'}}>{item.Device_Name}</Text>
               </TouchableOpacity>
             );
           }}

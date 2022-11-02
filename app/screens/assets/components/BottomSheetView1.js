@@ -69,7 +69,7 @@ const BottomSheetView1 = ({
                 Cancel
               </Text>
             </TouchableOpacity>
-            <Text style={{fontSize: 16, fontWeight: 'bold'}}>{diplayName}</Text>
+            <Text style={{fontSize: 16, color: 'black'}}>{diplayName}</Text>
             <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
               <Text
                 style={{fontSize: 16, fontWeight: 'bold', color: '#007aff'}}>

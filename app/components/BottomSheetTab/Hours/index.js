@@ -19,10 +19,10 @@ const Hours = () => {
               return (
                 <View key={i} style={styles.item}>
                   <View style={styles.leftItem}>
-                    <Text>{item.Property}</Text>
+                    <Text style={{color: 'black'}}>{item.Property}</Text>
                   </View>
                   <View style={styles.rightItem}>
-                    <Text>{item.Val}</Text>
+                    <Text style={{color: 'black'}}>{item.Val}</Text>
                   </View>
                 </View>
               );

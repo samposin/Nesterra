@@ -73,7 +73,7 @@ const OrderType = ({loding1, cirCuitRef, setSwitchView}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{fontWeight: 'bold'}}>{item.Type}</Text>
+              <Text style={{color: 'black'}}>{item.Type}</Text>
             </TouchableOpacity>
           );
         }}

@@ -271,7 +271,8 @@ const BottomSheetView = ({
               <Text
                 style={{
                   fontSize: 16,
-
+                  fontSize: 18,
+                  fontWeight: '600',
                   color: 'black',
                   marginLeft: 10,
                 }}>

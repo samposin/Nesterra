@@ -318,7 +318,5 @@ const styles = StyleSheet.create({
   boxText1: {
     fontSize: 12,
     color: '#000000',
-
-    fontWeight: '700',
   },
 });
