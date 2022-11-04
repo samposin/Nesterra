@@ -7,7 +7,7 @@ export const data = [
   {id: 3, name: 'ATMs', isActive: false, value: 'ATM'},
   {id: 4, name: '3rd Partys', isActive: false, value: '3rd Party'},
   {id: 5, name: 'Other', isActive: false, value: 'Other'},
-  {id: 6, name: 'Data Center', isActive: false, value: 'Data Center'},
+  {id: 6, name: 'DCs', isActive: false, value: 'Data Center'},
 
   {id: 7, name: 'Statistics', isActive: false, value: 'Statistics'},
 ];

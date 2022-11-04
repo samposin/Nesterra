@@ -4,6 +4,8 @@ import {
   TouchableOpacity,
   View,
   Dimensions,
+  Platform,
+  StatusBar,
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -19,12 +21,7 @@ import {useNavigation} from '@react-navigation/native';
 import moment from 'moment';
 import {BottomSheetSectionList} from '@gorhom/bottom-sheet';
 const {width} = Dimensions.get('screen');
-import Popover, {
-  PopoverPlacement,
-  PopoverMode,
-  arrowSize,
-} from 'react-native-popover-view';
-
+import Tooltip from 'react-native-walkthrough-tooltip';
 const Notes = ({notesLoding}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isLoading, setLoder] = useState(false);
@@ -32,6 +29,7 @@ const Notes = ({notesLoding}) => {
   const navigation = useNavigation();
   const [showPopover, setShowPopover] = useState(false);
   const touchable = useRef();
+  const [showTip, setTip] = useState(false);
   const renderItems = ({item}) => {
     return (
       <View style={styles.itemStyle}>
@@ -50,53 +48,30 @@ const Notes = ({notesLoding}) => {
             {`${item.Created.split(' ')[1].split(':')[1]}`}{' '}
             {`${item.Created.split(' ')[2]}`}
           </Text>
-          {/* <MaterialCommunityIcons
-            name="dots-horizontal"
-            size={24}
-            color="black"
-          /> */}
-          <Popover
-            arrowSize={{width: 0, height: 0}}
-            placement={PopoverPlacement.TOP}
-            from={
-              <TouchableOpacity>
-                <MaterialCommunityIcons
-                  name="dots-horizontal"
-                  size={24}
-                  color="black"
-                />
-              </TouchableOpacity>
-            }>
-            <View
-              style={{
-                width: 60,
-                height: 70,
-                backgroundColor: 'white',
-              }}>
+          <Tooltip
+            backgroundColor="rgba(105, 104, 104,0.1)"
+            isVisible={showTip}
+            content={
               <View
                 style={{
-                  width: '100%',
-                  height: '50%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <TouchableOpacity onPress={() => setShowPopover(false)}>
-                  <MaterialIcons name="delete" size={24} color="red" />
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  width: '100%',
-                  height: '50%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <TouchableOpacity onPress={() => setShowPopover(false)}>
-                  <FontAwesome name="edit" size={24} color="#007aff" />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Popover>
+                  width: 50,
+                  height: 100,
+                  backgroundColor: 'yellowgreen',
+                }}></View>
+            }
+            placement="right"
+            onClose={() => setTip(false)}
+            useInteractionManager={true} // need this prop to wait for react navigation
+            // below is for the status bar of react navigation bar
+          ></Tooltip>
+
+          <TouchableOpacity onPress={() => setTip(true)}>
+            <MaterialCommunityIcons
+              name="dots-horizontal"
+              size={24}
+              color="black"
+            />
+          </TouchableOpacity>
         </View>
         <View style={{width: '100%', height: '50%'}}>
           <Text style={{color: 'black'}}>{item.Notes}</Text>

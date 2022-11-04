@@ -22,7 +22,7 @@ const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
         return 'A';
 
       case value === 'Data Center':
-        return 'DC';
+        return 'D';
       case value === '3rd Party':
         return '3rd';
       case value === 'ITM Kiosk':

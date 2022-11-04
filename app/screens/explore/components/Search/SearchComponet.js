@@ -5,7 +5,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import DropDownView from './DropDownView';
@@ -19,24 +19,33 @@ import Address from './Address';
 
 import AtmsId from './AtmsId';
 
-const SearchComponet = ({setModalVisible, searchBranch, searchAddress}) => {
-  const [dropDownShow, seTDropDownShow] = useState(false);
-  const [searchView, setSearchView] = useState('Address');
+const SearchComponet = ({
+  setModalVisible,
+  searchBranch,
+  searchAddress,
+  setsearchComponet,
+  dropDownShow,
+  searchView,
+  seTDropDownShow,
+  setRander,
+}) => {
+  // console.log('first');
+  // const [dropDownShow, seTDropDownShow] = useState(false);
+  // const [searchView, setSearchView] = useState('Address');
+
   // console.log(searchView);
   const ranDerView = () => {
     switch (true) {
       case searchView === 'Circuit ID':
-        return <CircuitId />;
+        return <CircuitId setRander={setRander} />;
       case searchView === 'Branch ID':
-        return <BranchId searchBranch={searchBranch} />;
+        return <BranchId searchBranch={searchBranch} setRander={setRander} />;
       case searchView === 'Device ID':
-        return <DeviceId />;
+        return <DeviceId setRander={setRander} />;
       case searchView === 'Site ID':
-        return <SiteId />;
+        return <SiteId setRander={setRander} />;
       case searchView === 'ATM ID':
-        return <AtmsId />;
-      case searchView === 'Address':
-        return <Address searchAddress={searchAddress} />;
+        return <AtmsId setRander={setRander} />;
     }
   };
   return (
@@ -53,7 +62,7 @@ const SearchComponet = ({setModalVisible, searchBranch, searchAddress}) => {
         </View>
         <TouchableOpacity
           onPress={() => {
-            seTDropDownShow(!dropDownShow);
+            seTDropDownShow(true);
           }}
           style={{...styles.rightVies, position: 'relative'}}>
           <View
@@ -65,9 +74,7 @@ const SearchComponet = ({setModalVisible, searchBranch, searchAddress}) => {
               top: 15,
               left: 0,
             }}></View>
-          <Text style={{color: '#898989', fontWeight: '500'}}>
-            {searchView}
-          </Text>
+          <Text style={{color: 'black'}}>{searchView}</Text>
           {/* <AntDesign
             name="caretdown"
             size={15}
@@ -86,17 +93,17 @@ const SearchComponet = ({setModalVisible, searchBranch, searchAddress}) => {
           />
         </TouchableOpacity>
       </View>
-      {dropDownShow ? (
+      {/* {dropDownShow ? (
         <DropDownView
           seTDropDownShow={seTDropDownShow}
-          setSearchView={setSearchView}
+          setSearchView={addRess}
         />
-      ) : null}
+      ) : null} */}
     </>
   );
 };
 
-export default SearchComponet;
+export default memo(SearchComponet);
 
 const styles = StyleSheet.create({
   container: {

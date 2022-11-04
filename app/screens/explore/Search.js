@@ -5,10 +5,13 @@ import {
   Image,
   StatusBar,
   TouchableOpacity,
+  Dimensions,
+  Text,
 } from 'react-native';
 import Voice from '@react-native-community/voice';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Entypo from 'react-native-vector-icons/Entypo';
+
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {LocationKey} from '../../key';
 import Geocoder from 'react-native-geocoding';
@@ -28,6 +31,8 @@ const Search = ({
   bottomSheetRefImage,
   setIsLoading,
   isLoading,
+  seTDropDownShow,
+  setsearchComponet,
 }) => {
   const dispatch = useDispatch();
   const googlePlacesRef = useRef(null);
@@ -99,15 +104,73 @@ const Search = ({
 
   const renderSearchRightIcons = () => {
     return (
-      <View style={styles.searchRighIcons}>
-        {!modalVisible ? (
+      <View
+        style={{
+          ...styles.searchRighIcons,
+          height: 50,
+          width: '40%',
+        }}>
+        <View
+          style={{
+            width: '30%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <FontAwesome name={'microphone'} size={24} color="#898989" />
+        </View>
+        <View
+          style={{
+            width: '70%',
+            height: '100%',
+            flexDirection: 'row',
+          }}>
+          <View
+            style={{
+              width: '2%',
+              height: '100%',
+              justifyContent: 'center',
+            }}>
+            <View
+              style={{
+                width: 2,
+                height: '50%',
+                backgroundColor: 'black',
+              }}></View>
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              seTDropDownShow(true);
+            }}
+            style={{
+              width: '98%',
+              height: '100%',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingHorizontal: 5,
+            }}>
+            <Text style={{color: 'black'}}>Address</Text>
+            <FontAwesome5
+              name="eject"
+              size={15}
+              style={{
+                transform: [{rotate: '180deg'}],
+                marginLeft: 2,
+                marginTop: 3,
+              }}
+              color={'#007aff'}
+            />
+          </TouchableOpacity>
+        </View>
+        {/* {!modalVisible ? (
           <TouchableOpacity onPress={startRecording} style={styles.mr10}>
             <FontAwesome name="microphone" size={26} color="#a3a2a2" />
           </TouchableOpacity>
         ) : (
           <Entypo name="cross" size={22} color="black" style={styles.mr10} />
-        )}
-        <TouchableOpacity onPress={() => setSettingView(!settingView)}>
+        )} */}
+        {/* <TouchableOpacity onPress={() => setSettingView(!settingView)}>
           <Image
             source={require('../../images/user.png')}
             style={{
@@ -117,7 +180,7 @@ const Search = ({
               tintColor: '#b9b7b7',
             }}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   };
@@ -183,14 +246,14 @@ const styles = StyleSheet.create({
   googlePlaces: {
     container: {
       position: 'absolute',
-      width: '95%',
+      width: Dimensions.get('screen').width - 30,
       alignSelf: 'center',
       zIndex: 0,
       marginTop: 80,
 
       // zIndex: -1,
       backgroundColor: 'white',
-      borderRadius: 20,
+      borderRadius: 25,
       shadowColor: '#000',
       shadowOffset: {
         width: 2,

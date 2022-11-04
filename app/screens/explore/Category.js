@@ -24,6 +24,7 @@ const Category = ({
   const [setectItem, setsetectItem] = React.useState('');
   const myRef = useRef(null);
   const actiText = (id, value) => {
+    // console.log(value);
     if (id == 7) {
       navigation.navigate('Stats');
     } else {
@@ -64,7 +65,7 @@ const Category = ({
 
   return (
     <>
-      <View style={{top: Platform.OS === 'ios' ? 140 : 140}}>
+      <View style={{top: Platform.OS === 'ios' ? 140 : 140, paddingLeft: 20}}>
         <FlatList
           horizontal
           ref={myRef}

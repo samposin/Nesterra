@@ -2,7 +2,6 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useEffect} from 'react';
 import Voice from '@react-native-community/voice';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Entypo from 'react-native-vector-icons/Entypo';
 
 const IconView = (
   {

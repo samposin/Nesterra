@@ -10,13 +10,12 @@ const {width} = Dimensions.get('screen');
 
 const w1 = width - 50;
 const w2 = (w1 / 100) * 30;
-const ButtonView = ({id, setSearchView, seTDropDownShow, title}) => {
+const ButtonView = ({id, setSearchView, title}) => {
   // console.log(id);
   return (
     <TouchableOpacity
       onPress={() => {
         setSearchView(title);
-        seTDropDownShow(false);
       }}
       style={{
         width: '100%',
@@ -25,48 +24,34 @@ const ButtonView = ({id, setSearchView, seTDropDownShow, title}) => {
 
         justifyContent: 'center',
       }}>
-      <Text style={{color: 'black', fontWeight: '500'}}>{title}</Text>
+      <Text style={{color: 'black'}}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
-const DropDownView = ({setSearchView, seTDropDownShow}) => {
+const DropDownView = ({setSearchView}) => {
   return (
     <View style={styles.rightVies1}>
       <ButtonView
         setSearchView={setSearchView}
-        seTDropDownShow={seTDropDownShow}
         id={'Address'}
         title="Address"
       />
+      <ButtonView setSearchView={setSearchView} id={'AtmsId'} title="ATM ID" />
+      <ButtonView setSearchView={setSearchView} id={'SiteId'} title="Site ID" />
       <ButtonView
         setSearchView={setSearchView}
-        seTDropDownShow={seTDropDownShow}
-        id={'AtmsId'}
-        title="ATM ID"
-      />
-      <ButtonView
-        setSearchView={setSearchView}
-        seTDropDownShow={seTDropDownShow}
-        id={'SiteId'}
-        title="Site ID"
-      />
-      <ButtonView
-        setSearchView={setSearchView}
-        seTDropDownShow={seTDropDownShow}
         id={'BranchId'}
         title="Branch ID"
       />
       <ButtonView
         setSearchView={setSearchView}
-        seTDropDownShow={seTDropDownShow}
         id={'CircuitId'}
         title="Circuit ID"
       />
 
       <ButtonView
         setSearchView={setSearchView}
-        seTDropDownShow={seTDropDownShow}
         id={'DeviceId'}
         title="Device ID"
       />

@@ -13,11 +13,12 @@ import {
 import BottomSheetView from './BottomSheet';
 import MapView from 'react-native-map-clustering';
 import {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-// import Search from './Search';
+import Search from './Search';
 
 import MapViewDirections from 'react-native-maps-directions';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Geolocation from 'react-native-geolocation-service';
 import CustomClusteredMarkers from './components/CustomClusteredMarkers';
 import {LogBox} from 'react-native';
@@ -48,7 +49,7 @@ import Category from './Category';
 import Setting from './Setting';
 
 import {photo_url_from_map} from '../../actions/photpUrlFromMap';
-import MapZoomPanel from './components/MapZoomPanel';
+
 import Lodder from '../../components/lodder';
 import {get_all_devices_inventory} from '../../actions/devicesInventory';
 import {getInventoryCircuit} from '../../actions/circuitInventory';
@@ -66,6 +67,8 @@ import MapTypeAndFilterButtom from './components/MapTypeAndFilterButtom/index';
 import {dataMar} from '../../utils/MarkerData1';
 import {getLocationInfo} from './../../actions/LocartionInfo/index';
 import {SET_LAT_LNG} from '../../actions/action.type';
+import DropDownView from './components/Search/DropDownView';
+import RanderView from './components/RanderView';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -84,27 +87,6 @@ const Explore = ({
 }) => {
   const atmdDetailsRef = useRef(null);
   const {mapType} = useSelector(state => state.MapType);
-  // Sound.setCategory('Playback');
-  // const mu = require('../../images/first.wav');
-  // const soundePlay = mu => {
-  //   //   alert('ddsffsda');
-
-  //   const soundVar = new Sound(mu, Sound.MAIN_BUNDLE, error => {
-  //     if (error) {
-  //       console.log(error);
-  //       console.log('NOT ABLE TO PLAY SOUND');
-  //     }
-  //   });
-
-  //   soundVar.play(success => {
-  //     if (success) {
-  //       console.log('successfully finished playing');
-  //     } else {
-  //       console.log('playback failed due to audio decoding errors');
-  //     }
-  //   });
-  //   soundVar.release();
-  // };
 
   const [modalVisible1, setModalVisible1] = useState(false);
 
@@ -472,7 +454,7 @@ const Explore = ({
       setCord(dataMar);
     } else {
       const fdata = dataMar.filter(function (item) {
-        return item.LocationStatusDesc.toLowerCase() === data.toLowerCase();
+        return item.HierarchyLocationType.toLowerCase() === data.toLowerCase();
       });
 
       setCord(fdata);
@@ -537,7 +519,22 @@ const Explore = ({
 
     soundVar.release();
   };
+  const [searchComponet, setsearchComponet] = useState(false);
+  const [dropDownShow, seTDropDownShow] = useState(false);
+  const [rander, setRander] = useState(false);
+  const [searchView, setSearchView] = useState('Circuit ID');
+  const [focusView, setFocusView] = useState('Atm');
 
+  const addRess = data => {
+    if (data === 'Address') {
+      setsearchComponet(false);
+      seTDropDownShow(false);
+    } else {
+      setsearchComponet(true);
+      setSearchView(data);
+      seTDropDownShow(false);
+    }
+  };
   return (
     <>
       {inputRotate ? rotatedIconAntichange() : rotatedIconchange()}
@@ -700,7 +697,7 @@ const Explore = ({
         {/* ===========get Current position=== */}
         <MapTypeAndFilterButtom filterData={filterData1} />
         <TouchableOpacity onPress={getLocation} style={styles.currentLocation}>
-          <MaterialCommunityIcons name="target" size={26} color="black" />
+          <MaterialIcons name="my-location" size={24} color="black" />
         </TouchableOpacity>
         {/* ===========get Current position=== */}
         {/* ===========Direction=== */}
@@ -717,390 +714,6 @@ const Explore = ({
         {/* ===========Direction=== */}
         {/* ===========find Direction=== */}
         {/* <FindeDirection animatioValOff={animatioValOff} /> */}
-        {/* <Animated.View
-          style={{
-            width: SCREEN_WIDTH,
-            height: findDirection,
-            backgroundColor: 'white',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 20,
-            flexDirection: 'row',
-          }}>
-          {animatioValOff ? (
-            <>
-              <View
-                style={{
-                  width: '20%',
-                  height: '100%',
-
-                  flexDirection: 'row',
-                }}>
-                <View
-                  style={{
-                    width: '50%',
-                    height: '100%',
-                    paddingTop: 35,
-                    paddingLeft: 10,
-                  }}>
-                  <TouchableOpacity onPress={animationFindOff}>
-                    <Feather name="arrow-left" size={24} color="black" />
-                  </TouchableOpacity>
-                </View>
-                <View
-                  style={{
-                    width: '50%',
-                    height: '100%',
-                    marginTop: 40,
-                  }}>
-                  <Animated.View
-                    style={{
-                      justifyContent: 'center',
-                      alignItems: 'center',
-
-                      transform: [
-                        {
-                          translateY: transDot,
-                        },
-                      ],
-                    }}>
-                    <FontAwesome5 name="dot-circle" size={12} color="black" />
-                  </Animated.View>
-                  <Animated.View
-                    style={{
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    <MaterialCommunityIcons
-                      name="dots-vertical"
-                      size={22}
-                      color="gray"
-                    />
-                  </Animated.View>
-                  <Animated.View
-                    style={{
-                      justifyContent: 'center',
-                      alignItems: 'center',
-
-                      transform: [
-                        {
-                          translateY: transMap,
-                        },
-                      ],
-                    }}>
-                    <Feather name="map-pin" size={16} color="red" />
-                  </Animated.View>
-                </View>
-              </View>
-              <View
-                style={{
-                  width: '60%',
-                  height: '100%',
-                  marginTop: StatusBar.currentHeight / 2,
-                  position: 'relative',
-                }}>
-                <Animated.View
-                  style={{
-                    position: 'absolute',
-
-                    top: 3,
-                    left: 2,
-                    paddingLeft: 2,
-                    backgroundColor: 'red',
-                    transform: [
-                      {
-                        translateY: transX,
-                      },
-                    ],
-                  }}>
-                  <TextInput
-                    ref={pointStart}
-                    placeholder={startAddress}
-                    style={{
-                      borderColor: 'red',
-                      borderWidth: 1,
-                      position: 'absolute',
-                      top: 0,
-                      paddingVertical: 4,
-                      borderRadius: 25,
-                      width: 240,
-                      paddingLeft: 10,
-                    }}
-                    onFocus={() =>
-                      navigation.navigate('StartPoint', {
-                        startPoint: startPoint,
-                        setStartAddress: setStartAddress,
-                      })
-                    }
-                  />
-                </Animated.View>
-                <Animated.View
-                  style={{
-                    position: 'absolute',
-                    top: 30,
-                    left: 2,
-                    backgroundColor: 'red',
-                    transform: [
-                      {
-                        translateY: transX1,
-                      },
-                    ],
-                  }}>
-                  <TextInput
-                    placeholder={destinationAddress}
-                    style={{
-                      borderColor: 'green',
-                      borderWidth: 1,
-                      borderRadius: 25,
-                      position: 'absolute',
-                      bottom: 0,
-                      width: 240,
-                      paddingVertical: 4,
-                      paddingLeft: 10,
-                    }}
-                    onFocus={() =>
-                      navigation.navigate('DestinationPoint', {
-                        destination: destination,
-                        setDestinationAddress: setDestinationAddress,
-                      })
-                    }
-                  />
-                </Animated.View>
-              </View>
-              <View
-                style={{
-                  width: '20%',
-                  height: '100%',
-
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <TouchableOpacity
-                  onPress={() => {
-                    setInputRotate(!inputRotate);
-                  }}>
-                  <Animated.View
-                    style={{
-                      width: 40,
-                      height: 40,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      transform: [{rotate: spin}],
-                    }}>
-                    <Image
-                      style={{width: 40, height: 40}}
-                      source={require('../../images/rotated.png')}
-                    />
-                  </Animated.View>
-                </TouchableOpacity>
-              </View>
-            </>
-          ) : null}
-        </Animated.View> */}
-        {/* ===========find Direction=== */}
-        {/* =================Map Type Change=============== */}
-        {/* {animatioVal ? (
-          <TouchableOpacity
-            onPress={() => {
-              setanimatioVal(false);
-              animationChangeoff();
-            }}
-            style={{
-              position: 'absolute',
-              top: 0,
-              bottom: 0,
-              left: 0,
-              right: 0,
-              backgroundColor: 'black',
-              opacity: 0.1,
-
-              zIndex: 1,
-            }}></TouchableOpacity>
-        ) : null} */}
-
-        {/* <Animated.View
-          style={{
-            position: 'absolute',
-            top: 200,
-            right: 8,
-            width: aHeight,
-            height: aHeight,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 20,
-            backgroundColor: 'white',
-            zIndex: indexZ,
-          }}>
-          <TouchableOpacity
-            onPress={() => {
-              setanimatioVal(true);
-              settIndexZ(2);
-              animationChange();
-            }}>
-            {!animatioVal ? (
-              <Ionicons
-                name="md-layers"
-                size={24}
-                color={animatioVal ? 'white' : 'black'}
-              />
-            ) : (
-              <>
-                <View style={styles.mapTypeView}>
-                  <View
-                    style={{
-                      ...styles.mapTypeViewUpper,
-                    }}>
-                    <View
-                      style={{
-                        width: '100%',
-                        height: '20%',
-                        borderRadius: 5,
-                      }}>
-                      <Text
-                        style={{
-                          fontWeight: '700',
-                          marginLeft: 10,
-                          marginTop: 5,
-                        }}>
-                        Map Type
-                      </Text>
-                    </View>
-                    <View
-                      style={{
-                        width: '100%',
-                        height: '80%',
-                        justifyContent: 'space-around',
-                        flexDirection: 'row',
-                      }}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          setanimatioVal(false);
-                          animationChangeoff();
-                          setSatellite('hybrid');
-                        }}
-                        style={{
-                          ...styles.mapTypeImageWrap,
-                        }}>
-                        <View
-                          style={{
-                            ...styles.imageView,
-                            borderColor:
-                              satellite === 'hybrid' ? '#1b5a90' : 'white',
-                          }}>
-                          <Image
-                            source={require('../../images/satellite.jpg')}
-                            style={styles.mapTypeImage}
-                          />
-                        </View>
-                        <Text
-                          style={{
-                            color: satellite === 'hybrid' ? '#1b5a90' : 'black',
-                          }}>
-                          Hybrid
-                        </Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        onPress={() => {
-                          setanimatioVal(false);
-                          animationChangeoff();
-                          setSatellite('standard');
-                        }}
-                        style={{
-                          ...styles.mapTypeImageWrap,
-                        }}>
-                        <View
-                          style={{
-                            ...styles.imageView,
-                            borderColor:
-                              satellite === 'standard' ? '#1b5a90' : 'white',
-                          }}>
-                          <Image
-                            source={require('../../images/defaultMap.png')}
-                            style={styles.mapTypeImage}
-                          />
-                        </View>
-                        <Text
-                          style={{
-                            color:
-                              satellite === 'standard' ? '#1b5a90' : 'black',
-                          }}>
-                          Standard
-                        </Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        onPress={() => {
-                          setanimatioVal(false);
-                          animationChangeoff();
-                          setSatellite('terrain');
-                        }}
-                        style={styles.mapTypeImageWrap}>
-                        <View
-                          style={{
-                            ...styles.imageView,
-                            borderColor:
-                              satellite === 'terrain' ? '#1b5a90' : 'white',
-                          }}>
-                          <Image
-                            source={require('../../images/terrain.jpg')}
-                            style={styles.mapTypeImage}
-                          />
-                        </View>
-                        <Text
-                          style={{
-                            color:
-                              satellite === 'terrain' ? '#1b5a90' : 'black',
-                          }}>
-                          Terrain
-                        </Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-
-                  <View style={{...styles.mapTypeViewUpper, paddingTop: 10}}>
-                    <View
-                      style={{
-                        width: '100%',
-                        height: '20%',
-                      }}>
-                      <Text style={{fontWeight: '700', marginLeft: 10}}>
-                        {' '}
-                        Filtter
-                      </Text>
-                    </View>
-                    <View
-                      style={{
-                        width: '100%',
-                        height: '50%',
-                        paddingTop: 5,
-                      }}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          setanimatioVal(false);
-                          animationChangeoff();
-
-                          navigation.navigate('Filtter');
-                        }}
-                        style={{
-                          width: 50,
-                          height: 50,
-                          marginLeft: 10,
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          backgroundColor: '#1b5a90',
-                          borderRadius: 5,
-                        }}>
-                        <AntDesign name="menufold" size={28} color="white" />
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-              </>
-            )}
-          </TouchableOpacity>
-        </Animated.View> */}
-        {/*      */}
 
         <View
           style={{
@@ -1143,24 +756,40 @@ const Explore = ({
           </View>
         </View>
         {/* =================search=============== */}
-        {/* <Search
-          catShow={setCatShow}
-          onPress={onSearchPress}
-          setModalVisible={setModalVisible}
-          settingView={settingView}
-          modalVisible={modalVisible}
-          setlocationText={setlocationText}
-          setSettingView={setSettingView}
-          bottomSheetRefImage={bottomSheetRefImage}
-          setIsLoading={setIsLoading}
-          isLoading={isLoading}
-        /> */}
-        {/* <Search /> */}
-        <SearchComponet
-          searchAddress={searchAddress}
-          searchBranch={searchBranch}
-        />
+        {searchComponet ? (
+          <SearchComponet
+            searchAddress={searchAddress}
+            searchBranch={searchBranch}
+            setsearchComponet={setsearchComponet}
+            searchView={searchView}
+            seTDropDownShow={seTDropDownShow}
+            setRander={setRander}
+          />
+        ) : (
+          <Search
+            catShow={setCatShow}
+            onPress={onSearchPress}
+            setModalVisible={setModalVisible}
+            settingView={settingView}
+            modalVisible={modalVisible}
+            setlocationText={setlocationText}
+            setSettingView={setSettingView}
+            bottomSheetRefImage={bottomSheetRefImage}
+            setIsLoading={setIsLoading}
+            isLoading={isLoading}
+            dropDownShow={dropDownShow}
+            seTDropDownShow={seTDropDownShow}
+            setsearchComponet={setsearchComponet}
+          />
+        )}
 
+        {rander ? <RanderView focusView={focusView} /> : null}
+        {dropDownShow ? (
+          <DropDownView
+            seTDropDownShow={seTDropDownShow}
+            setSearchView={addRess}
+          />
+        ) : null}
         {/* =================search=============== */}
         {/* =================Category=============== */}
         {catShow && (
@@ -1356,15 +985,15 @@ const styles = StyleSheet.create({
     padding: 3,
   },
   currentLocation: {
-    width: 40,
-    height: 40,
+    width: 36,
+    height: 36,
     backgroundColor: 'white',
     position: 'absolute',
     bottom: 60,
     right: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: 18,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
