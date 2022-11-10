@@ -34,7 +34,7 @@ LogBox.ignoreLogs([
 ]);
 
 import ModalView from './ModalView';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import {get_coordinates, marker_seleted} from '../../actions/coordinates';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {setLatLng} from '../../actions/setLatLang';
@@ -69,7 +69,7 @@ import {getLocationInfo} from './../../actions/LocartionInfo/index';
 import {SET_LAT_LNG} from '../../actions/action.type';
 import DropDownView from './components/Search/DropDownView';
 import RanderView from './components/RanderView';
-
+import {CIRCUIT_ID} from '../../actions/actionType/ExploreSearch';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -548,7 +548,7 @@ const Explore = ({
       seTDropDownShow(false);
     }
   };
-  
+
   return (
     <>
       {inputRotate ? rotatedIconAntichange() : rotatedIconchange()}
@@ -713,11 +713,22 @@ const Explore = ({
         <TouchableOpacity onPress={getLocation} style={styles.currentLocation}>
           <MaterialIcons name="my-location" size={24} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>getChange(dataMar)} style={styles.currentLocation1}>
-        <SimpleLineIcons name="reload" size={22} color="black"
-         style={{transform: [{rotate: '180deg'}]}} />
+        <TouchableOpacity
+          onPress={
+            () => {
+              dispatch({type: CIRCUIT_ID});
+            }
+            // getChange(dataMar)
+          }
+          style={styles.currentLocation1}>
+          <SimpleLineIcons
+            name="reload"
+            size={22}
+            color="black"
+            style={{transform: [{rotate: '180deg'}]}}
+          />
         </TouchableOpacity>
-       
+
         {/* ===========get Current position=== */}
         {/* ===========Direction=== */}
         {/* <TouchableOpacity
@@ -778,12 +789,10 @@ const Explore = ({
         {searchComponet ? (
           <SearchComponet
             searchAddress={searchAddress}
-           
             setsearchComponet={setsearchComponet}
             searchView={searchView}
             seTDropDownShow={seTDropDownShow}
             setRander={setRander}
-            
             setFocusView={setFocusView}
           />
         ) : (

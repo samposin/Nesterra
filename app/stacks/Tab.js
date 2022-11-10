@@ -17,6 +17,7 @@ import ExploreStack from './ExploreStack';
 import Extra from '../screens/NEW';
 import VoiceScreen from '../screens/VoiceScreen';
 import Chart from './../components/DataCharts/index';
+import Menu from '../screens/Menu';
 
 const Tab = createBottomTabNavigator();
 const TabNaV = ({navigation}) => {
@@ -100,21 +101,21 @@ const TabNaV = ({navigation}) => {
           },
         }}
       />
-      {/* <Tab.Screen
-        name="VoiceScreen"
-        component={VoiceScreen}
+      <Tab.Screen
+        name="Menu"
+        component={Menu}
         options={{
           tabBarIcon: ({focused}) => {
             return (
               <TabButton
-                name="voice"
-                imagePath={tabButtonImage.imgStats}
+                name="Menu"
+                imagePath={tabButtonImage.menu}
                 focused={focused}
               />
             );
           },
         }}
-      /> */}
+      />
       {/* <Tab.Screen
         name="Login"
         component={Login}
