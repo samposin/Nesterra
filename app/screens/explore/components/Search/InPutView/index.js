@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useDispatch} from 'react-redux';
 
-const InPutView = ({placeHolder, onSearch, onFocus}) => {
+const InPutView = ({placeHolder, onSearch, }) => {
   const [search, setSearch] = useState('');
   const onChange = text => {
     setSearch(text);
@@ -46,9 +46,7 @@ const InPutView = ({placeHolder, onSearch, onFocus}) => {
             placeholder={placeHolder}
             placeholderTextColor="#5c5b5b"
             onChangeText={text => onChange(text)}
-            onFocus={() => {
-              onFocus();
-            }}
+            
           />
         </View>
       </View>

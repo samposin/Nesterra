@@ -17,7 +17,7 @@ import Search from './Search';
 
 import MapViewDirections from 'react-native-maps-directions';
 
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Geolocation from 'react-native-geolocation-service';
 import CustomClusteredMarkers from './components/CustomClusteredMarkers';
@@ -34,7 +34,7 @@ LogBox.ignoreLogs([
 ]);
 
 import ModalView from './ModalView';
-
+import { useIsFocused } from '@react-navigation/native';
 import {get_coordinates, marker_seleted} from '../../actions/coordinates';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {setLatLng} from '../../actions/setLatLang';
@@ -69,6 +69,7 @@ import {getLocationInfo} from './../../actions/LocartionInfo/index';
 import {SET_LAT_LNG} from '../../actions/action.type';
 import DropDownView from './components/Search/DropDownView';
 import RanderView from './components/RanderView';
+
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -448,6 +449,18 @@ const Explore = ({
     });
 
     setCord(marker1);
+    animateToRegion({
+      latitude: 42.361145,
+      longitude: -71.057083,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    });
+    setCurrentRegion({
+      latitude: 42.361145,
+      longitude: -71.057083,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    });
   };
   const filterData1 = data => {
     if (data == 'All') {
@@ -535,6 +548,7 @@ const Explore = ({
       seTDropDownShow(false);
     }
   };
+  
   return (
     <>
       {inputRotate ? rotatedIconAntichange() : rotatedIconchange()}
@@ -699,6 +713,11 @@ const Explore = ({
         <TouchableOpacity onPress={getLocation} style={styles.currentLocation}>
           <MaterialIcons name="my-location" size={24} color="black" />
         </TouchableOpacity>
+        <TouchableOpacity onPress={()=>getChange(dataMar)} style={styles.currentLocation1}>
+        <SimpleLineIcons name="reload" size={22} color="black"
+         style={{transform: [{rotate: '180deg'}]}} />
+        </TouchableOpacity>
+       
         {/* ===========get Current position=== */}
         {/* ===========Direction=== */}
         {/* <TouchableOpacity
@@ -759,11 +778,13 @@ const Explore = ({
         {searchComponet ? (
           <SearchComponet
             searchAddress={searchAddress}
-            searchBranch={searchBranch}
+           
             setsearchComponet={setsearchComponet}
             searchView={searchView}
             seTDropDownShow={seTDropDownShow}
             setRander={setRander}
+            
+            setFocusView={setFocusView}
           />
         ) : (
           <Search
@@ -788,6 +809,7 @@ const Explore = ({
           <DropDownView
             seTDropDownShow={seTDropDownShow}
             setSearchView={addRess}
+            setRander={setRander}
           />
         ) : null}
         {/* =================search=============== */}
@@ -990,6 +1012,25 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     position: 'absolute',
     bottom: 60,
+    right: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 18,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
+  },
+  currentLocation1: {
+    width: 36,
+    height: 36,
+    backgroundColor: 'white',
+    position: 'absolute',
+    bottom: 155,
     right: 10,
     justifyContent: 'center',
     alignItems: 'center',

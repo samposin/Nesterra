@@ -24,10 +24,12 @@ const SearchComponet = ({
   searchBranch,
   searchAddress,
   setsearchComponet,
-  dropDownShow,
+ 
   searchView,
   seTDropDownShow,
   setRander,
+  
+  setFocusView
 }) => {
   // console.log('first');
   // const [dropDownShow, seTDropDownShow] = useState(false);
@@ -37,15 +39,23 @@ const SearchComponet = ({
   const ranDerView = () => {
     switch (true) {
       case searchView === 'Circuit ID':
-        return <CircuitId setRander={setRander} />;
+        return <CircuitId  setRander={setRander}
+        setFocusView={setFocusView}
+         />;
       case searchView === 'Branch ID':
-        return <BranchId searchBranch={searchBranch} setRander={setRander} />;
+        return <BranchId  setRander={setRander}
+        setFocusView={setFocusView} />;
       case searchView === 'Device ID':
-        return <DeviceId setRander={setRander} />;
+        return <DeviceId  setRander={setRander}
+        setFocusView={setFocusView} />;
       case searchView === 'Site ID':
-        return <SiteId setRander={setRander} />;
+        return <SiteId setRander={setRander}
+        setFocusView={setFocusView} />;
       case searchView === 'ATM ID':
-        return <AtmsId setRander={setRander} />;
+        return <AtmsId 
+        setRander={setRander}
+        setFocusView={setFocusView}
+         />;
     }
   };
   return (

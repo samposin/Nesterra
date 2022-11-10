@@ -1,0 +1,1 @@
+export const FILTER_MARKER = 'FILTER_MARKER';

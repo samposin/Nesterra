@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import React from 'react';
+import React,{useEffect} from 'react';
 import SearchAddress from '../components/searchAddress';
 import Explore from '../screens/explore';
 import StartPoint from '../screens/explore/StartPoint';
@@ -9,10 +9,20 @@ import Filtter from '../screens/filtter';
 import Profile from '../screens/profile';
 import SettingProfile from '../screens/explore/SettingProfile';
 import MapTypeAndFilter from '../screens/MapTypeAndFilter';
+import { useDispatch } from 'react-redux';
+import { SITE_ID } from './../actions/actionType/ExploreSearch/index';
 
 const Stack = createNativeStackNavigator();
 
 const ExploreStack = () => {
+  const dispatch=useDispatch()
+  useEffect(() => {
+
+    dispatch({
+      type:SITE_ID
+    })
+  }, [])
+  
   return (
     <Stack.Navigator
       screenOptions={{

@@ -10,12 +10,12 @@ const {width} = Dimensions.get('screen');
 
 const w1 = width - 50;
 const w2 = (w1 / 100) * 30;
-const ButtonView = ({id, setSearchView, title}) => {
+const ButtonView = ({setSearchView, title}) => {
   // console.log(id);
   return (
     <TouchableOpacity
       onPress={() => {
-        setSearchView(title);
+        setSearchView();
       }}
       style={{
         width: '100%',
@@ -29,29 +29,57 @@ const ButtonView = ({id, setSearchView, title}) => {
   );
 };
 
-const DropDownView = ({setSearchView}) => {
+
+const DropDownView = ({setSearchView,setRander}) => {
+  const addSer=()=>{
+    setSearchView('Address')
+    setRander(false)
+  }
+  const atmSer=()=>{
+    setSearchView('ATM ID')
+    setRander(false)
+  }
+  const siteSer=()=>{
+    setSearchView('Site ID')
+    setRander(false)
+
+
+  }
+  const branchSer=()=>{
+    setSearchView('Branch ID')
+    setRander(false)
+  }
+  const circuitSer=()=>{
+    setSearchView('Circuit ID')
+    setRander(false)
+  }
+  const devicesSer=()=>{
+    setSearchView('Device ID')
+    setRander(false)
+  }
+ 
   return (
     <View style={styles.rightVies1}>
       <ButtonView
-        setSearchView={setSearchView}
+        setSearchView={addSer}
         id={'Address'}
         title="Address"
       />
-      <ButtonView setSearchView={setSearchView} id={'AtmsId'} title="ATM ID" />
-      <ButtonView setSearchView={setSearchView} id={'SiteId'} title="Site ID" />
+      <ButtonView setSearchView={atmSer} id={'AtmsId'} title="ATM ID" />
+      <ButtonView setSearchView={siteSer} id={'SiteId'} title="Site ID" />
       <ButtonView
-        setSearchView={setSearchView}
+        setSearchView={branchSer}
         id={'BranchId'}
         title="Branch ID"
       />
       <ButtonView
-        setSearchView={setSearchView}
+        setSearchView={circuitSer}
         id={'CircuitId'}
         title="Circuit ID"
       />
 
       <ButtonView
-        setSearchView={setSearchView}
+        setSearchView={devicesSer}
         id={'DeviceId'}
         title="Device ID"
       />
