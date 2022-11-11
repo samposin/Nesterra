@@ -537,7 +537,8 @@ const Explore = ({
   const [rander, setRander] = useState(false);
   const [searchView, setSearchView] = useState('Circuit ID');
   const [focusView, setFocusView] = useState('Atm');
-
+  const [focusOn, setFocusOn] = useState(true);
+  const [focusOn1, setFocusOn1] = useState(true);
   const addRess = data => {
     if (data === 'Address') {
       setsearchComponet(false);
@@ -714,12 +715,10 @@ const Explore = ({
           <MaterialIcons name="my-location" size={24} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={
-            () => {
-              dispatch({type: CIRCUIT_ID});
-            }
-            // getChange(dataMar)
-          }
+          onPress={() => {
+            // dispatch({type: CIRCUIT_ID});
+            getChange(dataMar);
+          }}
           style={styles.currentLocation1}>
           <SimpleLineIcons
             name="reload"
@@ -794,6 +793,8 @@ const Explore = ({
             seTDropDownShow={seTDropDownShow}
             setRander={setRander}
             setFocusView={setFocusView}
+            setFocusOn1={setFocusOn1}
+            focusOn1={focusOn1}
           />
         ) : (
           <Search
@@ -810,6 +811,8 @@ const Explore = ({
             dropDownShow={dropDownShow}
             seTDropDownShow={seTDropDownShow}
             setsearchComponet={setsearchComponet}
+            focusOn={focusOn}
+            setFocusOn={setFocusOn}
           />
         )}
 

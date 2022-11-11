@@ -9,7 +9,7 @@ const Atm = () => {
   // console.log(dataMar)
   const {data} = useSelector(state => state.ExploreCircuitId);
   // const {data}=useSelector(state=>state.ExploreAtmId)
-  // console.log(data, 'data');
+  console.log(data, 'data');
   const randerItem = ({item}) => {
     return (
       <>

@@ -13,26 +13,14 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case CIRCUIT_ID:
       let dataone = [];
-      dataMar.map((item, i) => {
-        console.log('first');
-        dataone.push(item.Circuit_ID);
-      });
-      const dataone1 = dataone.reduce((acc, item) => {
-        // const entry = acc.find(i => item === item);
 
-        // if (!entry) {
-        //   acc.push({
-        //     Branch_ID,
-        //   });
-        // } else {
-        //   entry.Branch_ID = Branch_ID;
-        // }
-        // return acc;
-        console.log(item);
-      }, []);
+      dataMar.map((item, i) => {
+        dataone.push(item.Circuit_ID.split(','));
+      });
+
       return {
-        data: dataone,
-        data1: dataone,
+        data: dataone.flat(),
+        data1: dataone.flat(),
         error: null,
       };
     case CIRCUIT_ID_SEARCH:

@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState, memo} from 'react';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import DropDownView from './DropDownView';
 // import BranchSearch from './BranchSearch';
@@ -15,7 +15,6 @@ import CircuitId from './CircuitId/index';
 import BranchId from './BranchId';
 import DeviceId from './DeviceId';
 import SiteId from './SiteId';
-import Address from './Address';
 
 import AtmsId from './AtmsId';
 
@@ -24,12 +23,14 @@ const SearchComponet = ({
   searchBranch,
   searchAddress,
   setsearchComponet,
- 
+
   searchView,
   seTDropDownShow,
   setRander,
-  
-  setFocusView
+
+  setFocusView,
+  focusOn1,
+  setFocusOn1,
 }) => {
   // console.log('first');
   // const [dropDownShow, seTDropDownShow] = useState(false);
@@ -39,70 +40,121 @@ const SearchComponet = ({
   const ranDerView = () => {
     switch (true) {
       case searchView === 'Circuit ID':
-        return <CircuitId  setRander={setRander}
-        setFocusView={setFocusView}
-         />;
+        return (
+          <CircuitId
+            setRander={setRander}
+            setFocusView={setFocusView}
+            focusOn1={focusOn1}
+            setFocusOn1={setFocusOn1}
+          />
+        );
       case searchView === 'Branch ID':
-        return <BranchId  setRander={setRander}
-        setFocusView={setFocusView} />;
+        return (
+          <BranchId
+            setRander={setRander}
+            setFocusView={setFocusView}
+            focusOn1={focusOn1}
+            setFocusOn1={setFocusOn1}
+          />
+        );
       case searchView === 'Device ID':
-        return <DeviceId  setRander={setRander}
-        setFocusView={setFocusView} />;
+        return (
+          <DeviceId
+            setRander={setRander}
+            setFocusView={setFocusView}
+            focusOn1={focusOn1}
+            setFocusOn1={setFocusOn1}
+          />
+        );
       case searchView === 'Site ID':
-        return <SiteId setRander={setRander}
-        setFocusView={setFocusView} />;
+        return (
+          <SiteId
+            setRander={setRander}
+            setFocusView={setFocusView}
+            focusOn1={focusOn1}
+            setFocusOn1={setFocusOn1}
+          />
+        );
       case searchView === 'ATM ID':
-        return <AtmsId 
-        setRander={setRander}
-        setFocusView={setFocusView}
-         />;
+        return (
+          <AtmsId
+            setRander={setRander}
+            setFocusView={setFocusView}
+            focusOn1={focusOn1}
+            setFocusOn1={setFocusOn1}
+          />
+        );
     }
   };
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.leftView}>
-          {ranDerView()}
-          {/* <CircuitId /> */}
-          {/* {searchView == 'Branch' ? (
+        <>
+          <View style={styles.leftView}>
+            {ranDerView()}
+            {/* <CircuitId /> */}
+            {/* {searchView == 'Branch' ? (
                 <BranchSearch setModalVisible={setModalVisible} />
               ) : (
                 <CircuitSearch setModalVisible={setModalVisible} />
               )} */}
-        </View>
-        <TouchableOpacity
-          onPress={() => {
-            seTDropDownShow(true);
-          }}
-          style={{...styles.rightVies, position: 'relative'}}>
-          <View
-            style={{
-              width: 2,
-              height: '50%',
-              backgroundColor: 'black',
-              position: 'absolute',
-              top: 15,
-              left: 0,
-            }}></View>
-          <Text style={{color: 'black'}}>{searchView}</Text>
-          {/* <AntDesign
+          </View>
+          {focusOn1 ? (
+            <TouchableOpacity
+              onPress={() => {
+                seTDropDownShow(true);
+              }}
+              style={{
+                ...styles.rightVies,
+                position: 'relative',
+              }}>
+              <View
+                style={{
+                  width: 2,
+                  height: '50%',
+                  backgroundColor: 'black',
+                  position: 'absolute',
+                  top: 15,
+                  left: 0,
+                }}></View>
+              <Text style={{color: 'black'}}>{searchView}</Text>
+              {/* <AntDesign
             name="caretdown"
             size={15}
             style={{marginLeft: 2}}
             color={'#898989'}
           /> */}
-          <FontAwesome5
-            name="eject"
-            size={15}
-            style={{
-              transform: [{rotate: '180deg'}],
-              marginLeft: 2,
-              marginTop: 3,
-            }}
-            color={'#007aff'}
-          />
-        </TouchableOpacity>
+              <FontAwesome5
+                name="eject"
+                size={15}
+                style={{
+                  transform: [{rotate: '180deg'}],
+                  marginLeft: 2,
+                  marginTop: 3,
+                }}
+                color={'#007aff'}
+              />
+            </TouchableOpacity>
+          ) : (
+            <View
+              style={{
+                ...styles.rightVies,
+                position: 'relative',
+                justifyContent: 'flex-end',
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setFocusOn(true);
+                }}>
+                <Entypo name="cross" size={22} color="black" style={{}} />
+              </TouchableOpacity>
+            </View>
+          )}
+        </>
       </View>
+
       {/* {dropDownShow ? (
         <DropDownView
           seTDropDownShow={seTDropDownShow}
