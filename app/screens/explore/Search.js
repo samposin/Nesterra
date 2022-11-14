@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Text,
+  Keyboard,
 } from 'react-native';
 import Voice from '@react-native-community/voice';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -223,13 +224,14 @@ const Search = ({
       placeholder="Search Location"
       onPress={async (data, details = null) => {
         setIsLoading(true);
-
-        dispatch({
-          type: GET_PHOTO_URL_FROM_SEARCH,
-          payload: {
-            data: details.photos,
-          },
-        });
+        setFocusOn(true);
+        // dispatch({
+        //   type: GET_PHOTO_URL_FROM_SEARCH,
+        //   payload: {
+        //     data: details.photos,
+        //   },
+        // });
+        googlePlacesRef.current?.setAddressText('');
         setTimeout(() => {
           setIsLoading(false);
           // bottomSheetRefImage.current.snapToIndex(0);
@@ -245,7 +247,17 @@ const Search = ({
           setFocusOn(false);
           bottomSheetRefImage.current?.close();
         },
-        // onChangeText: text => changeValue(text),
+        onChangeText: text => {
+          // changeValue(text);
+          if (text) {
+            setFocusOn(false);
+            catShow(false);
+          } else {
+            setFocusOn(true);
+            Keyboard.dismiss();
+            catShow(true);
+          }
+        },
       }}
       query={{
         key: `${LocationKey}`,

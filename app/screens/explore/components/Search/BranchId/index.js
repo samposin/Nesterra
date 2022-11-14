@@ -6,7 +6,7 @@ import InPutView from '../InPutView';
 import {useDispatch} from 'react-redux';
 import {BRANCH_ID_SEARCH} from '../../../../../actions/actionType/ExploreSearch';
 
-const BranchId = ({setRander, setFocusView, setFocusOn1}) => {
+const BranchId = ({setRander, setFocusView, focusOn1, setFocusOn1}) => {
   console.log('dfadsf');
   const dispatch = useDispatch();
   const searchId = data => {
@@ -36,7 +36,7 @@ const BranchId = ({setRander, setFocusView, setFocusOn1}) => {
           <InPutView placeHolder="Search Branch ID" onSearch={searchId} />
         </View>
         <View style={{width: '20%', height: '100%'}}>
-          <IconView />
+          {focusOn1 ? <IconView /> : null}
         </View>
       </View>
     </>

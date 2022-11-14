@@ -1,7 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import React,{useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import CircuitInventory from '../screens/CircuitInventory/index.js';
 import CircuitsDetails from '../screens/CircuitsDetails/index.js';
 import DevicesDetails from '../screens/DevicesDetails/index.js';
@@ -19,25 +19,28 @@ import Circuits from '../screens/circuits/index.js';
 import BackGroundCorsoul from '../screens/BackGroundCorsoul/index.js';
 import Stats from '../screens/stats';
 import VoiceToText from '../screens/Voice';
-import { useDispatch } from 'react-redux';
-import { ATM_ID, BRANCH_ID } from '../actions/actionType/ExploreSearch/index.js';
+import {useDispatch} from 'react-redux';
+import {ATM_ID, BRANCH_ID} from '../actions/actionType/ExploreSearch/index.js';
 
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
-  const getBranchId=()=>{
+  const getBranchId = () => {
     dispatch({
-      type:BRANCH_ID
-       })
-  }
-  const dispatch=useDispatch()
+      type: BRANCH_ID,
+    });
+  };
+  const dispatch = useDispatch();
   useEffect(() => {
-   dispatch({
-  type:ATM_ID
-   })
-   getBranchId()
-  }, [])
-  
+    setTimeout(() => {
+      dispatch({
+        type: ATM_ID,
+      });
+    }, 1000);
+    setTimeout(() => {
+      getBranchId();
+    }, 1200);
+  }, []);
 
   return (
     <NavigationContainer>

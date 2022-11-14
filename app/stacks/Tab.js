@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import TabButton from '../components/tabButton/TabButton';
@@ -18,9 +18,25 @@ import Extra from '../screens/NEW';
 import VoiceScreen from '../screens/VoiceScreen';
 import Chart from './../components/DataCharts/index';
 import Menu from '../screens/Menu';
+import {CIRCUIT_ID, SITE_ID} from './../actions/actionType/ExploreSearch/index';
+import {useDispatch} from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 const TabNaV = ({navigation}) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch({
+        type: CIRCUIT_ID,
+      });
+    }, 1000);
+    setTimeout(() => {
+      dispatch({
+        type: SITE_ID,
+      });
+    }, 1500);
+  }, []);
+
   return (
     <Tab.Navigator
       screenOptions={{

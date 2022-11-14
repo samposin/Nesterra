@@ -379,11 +379,18 @@ const Explore = ({
     mapRef.current.animateToRegion(region, 2000);
   };
   const onSearchPress = (lat, lng) => {
+    // console.log(lat, lng);
     animateToRegion({
       latitude: lat,
       longitude: lng,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA,
+      latitudeDelta: 0.02,
+      longitudeDelta: 0.02,
+    });
+    setCurrentRegion({
+      latitude: lat,
+      longitude: lng,
+      latitudeDelta: 0.02,
+      longitudeDelta: 0.02,
     });
 
     bottomSheetRef.current.close();
@@ -548,6 +555,11 @@ const Explore = ({
       setSearchView(data);
       seTDropDownShow(false);
     }
+  };
+  const getAtmId = id => {
+    const atmData = dataMar.find(item => item.ATM_ID == id);
+    onSearchPress(atmData.Latitude, atmData.Longitude);
+    console.log(dataMar[id], 'atmData');
   };
 
   return (
@@ -794,6 +806,7 @@ const Explore = ({
             setRander={setRander}
             setFocusView={setFocusView}
             setFocusOn1={setFocusOn1}
+            setFocusOn={setFocusOn}
             focusOn1={focusOn1}
           />
         ) : (
@@ -816,7 +829,14 @@ const Explore = ({
           />
         )}
 
-        {rander ? <RanderView focusView={focusView} /> : null}
+        {rander ? (
+          <RanderView
+            focusView={focusView}
+            getAtmId={getAtmId}
+            setRander={setRander}
+            setFocusOn1={setFocusOn1}
+          />
+        ) : null}
         {dropDownShow ? (
           <DropDownView
             seTDropDownShow={seTDropDownShow}

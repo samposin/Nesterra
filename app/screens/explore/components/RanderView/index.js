@@ -6,7 +6,7 @@ import Device from './Components/Device';
 import Circuit from './Components/Circuit';
 import Branch from './Components/Branch';
 
-const RanderView = ({focusView}) => {
+const RanderView = ({focusView, getAtmId, setRander, setFocusOn1}) => {
   const ranDerView = () => {
     switch (true) {
       case focusView === 'Circuit':
@@ -18,7 +18,13 @@ const RanderView = ({focusView}) => {
       case focusView === 'Site':
         return <Site />;
       case focusView === 'ATM':
-        return <Atm />;
+        return (
+          <Atm
+            getAtmId={getAtmId}
+            setRander={setRander}
+            setFocusOn1={setFocusOn1}
+          />
+        );
     }
   };
   return (

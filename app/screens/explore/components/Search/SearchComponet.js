@@ -31,6 +31,8 @@ const SearchComponet = ({
   setFocusView,
   focusOn1,
   setFocusOn1,
+  setFocusOn,
+  getAtmId,
 }) => {
   // console.log('first');
   // const [dropDownShow, seTDropDownShow] = useState(false);
@@ -82,6 +84,7 @@ const SearchComponet = ({
             setFocusView={setFocusView}
             focusOn1={focusOn1}
             setFocusOn1={setFocusOn1}
+            getAtmId={getAtmId}
           />
         );
     }
@@ -146,7 +149,8 @@ const SearchComponet = ({
               }}>
               <TouchableOpacity
                 onPress={() => {
-                  setFocusOn(true);
+                  setFocusOn1(true);
+                  setRander(false);
                 }}>
                 <Entypo name="cross" size={22} color="black" style={{}} />
               </TouchableOpacity>
