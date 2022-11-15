@@ -33,6 +33,8 @@ const SearchComponet = ({
   setFocusOn1,
   setFocusOn,
   getAtmId,
+  placeHolder,
+  setPlace,
 }) => {
   // console.log('first');
   // const [dropDownShow, seTDropDownShow] = useState(false);
@@ -48,6 +50,11 @@ const SearchComponet = ({
             setFocusView={setFocusView}
             focusOn1={focusOn1}
             setFocusOn1={setFocusOn1}
+            getAtmId={getAtmId}
+            searchView={searchView}
+            seTDropDownShow={seTDropDownShow}
+            placeHolder={placeHolder}
+            setPlace={setPlace}
           />
         );
       case searchView === 'Branch ID':
@@ -57,6 +64,11 @@ const SearchComponet = ({
             setFocusView={setFocusView}
             focusOn1={focusOn1}
             setFocusOn1={setFocusOn1}
+            getAtmId={getAtmId}
+            searchView={searchView}
+            seTDropDownShow={seTDropDownShow}
+            placeHolder={placeHolder}
+            setPlace={setPlace}
           />
         );
       case searchView === 'Device ID':
@@ -66,6 +78,11 @@ const SearchComponet = ({
             setFocusView={setFocusView}
             focusOn1={focusOn1}
             setFocusOn1={setFocusOn1}
+            getAtmId={getAtmId}
+            searchView={searchView}
+            seTDropDownShow={seTDropDownShow}
+            placeHolder={placeHolder}
+            setPlace={setPlace}
           />
         );
       case searchView === 'Site ID':
@@ -75,6 +92,11 @@ const SearchComponet = ({
             setFocusView={setFocusView}
             focusOn1={focusOn1}
             setFocusOn1={setFocusOn1}
+            getAtmId={getAtmId}
+            searchView={searchView}
+            seTDropDownShow={seTDropDownShow}
+            placeHolder={placeHolder}
+            setPlace={setPlace}
           />
         );
       case searchView === 'ATM ID':
@@ -85,6 +107,10 @@ const SearchComponet = ({
             focusOn1={focusOn1}
             setFocusOn1={setFocusOn1}
             getAtmId={getAtmId}
+            searchView={searchView}
+            seTDropDownShow={seTDropDownShow}
+            placeHolder={placeHolder}
+            setPlace={setPlace}
           />
         );
     }
@@ -93,16 +119,9 @@ const SearchComponet = ({
     <>
       <View style={styles.container}>
         <>
-          <View style={styles.leftView}>
-            {ranDerView()}
-            {/* <CircuitId /> */}
-            {/* {searchView == 'Branch' ? (
-                <BranchSearch setModalVisible={setModalVisible} />
-              ) : (
-                <CircuitSearch setModalVisible={setModalVisible} />
-              )} */}
-          </View>
-          {focusOn1 ? (
+          {ranDerView()}
+          {/* <View style={styles.leftView}></View> */}
+          {/* {focusOn1 ? (
             <TouchableOpacity
               onPress={() => {
                 seTDropDownShow(true);
@@ -121,12 +140,7 @@ const SearchComponet = ({
                   left: 0,
                 }}></View>
               <Text style={{color: 'black'}}>{searchView}</Text>
-              {/* <AntDesign
-            name="caretdown"
-            size={15}
-            style={{marginLeft: 2}}
-            color={'#898989'}
-          /> */}
+            
               <FontAwesome5
                 name="eject"
                 size={15}
@@ -155,16 +169,9 @@ const SearchComponet = ({
                 <Entypo name="cross" size={22} color="black" style={{}} />
               </TouchableOpacity>
             </View>
-          )}
+          )} */}
         </>
       </View>
-
-      {/* {dropDownShow ? (
-        <DropDownView
-          seTDropDownShow={seTDropDownShow}
-          setSearchView={addRess}
-        />
-      ) : null} */}
     </>
   );
 };

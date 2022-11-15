@@ -29,49 +29,42 @@ const ButtonView = ({setSearchView, title}) => {
   );
 };
 
+const DropDownView = ({setSearchView, setRander, setPlace}) => {
+  const addSer = () => {
+    setSearchView('Address');
+    setRander(false);
+  };
+  const atmSer = () => {
+    setSearchView('ATM ID');
+    setRander(false);
+    setPlace('Serach Atm ID');
+  };
+  const siteSer = () => {
+    setPlace('Serach Site ID');
+    setSearchView('Site ID');
+    setRander(false);
+  };
+  const branchSer = () => {
+    setSearchView('Branch ID');
+    setRander(false);
+    setPlace('Serach Branch ID');
+  };
+  const circuitSer = () => {
+    setSearchView('Circuit ID');
+    setPlace('Serach Circuit ID');
+    setRander(false);
+  };
+  const devicesSer = () => {
+    setSearchView('Device ID');
+    setRander(false);
+  };
 
-const DropDownView = ({setSearchView,setRander}) => {
-  const addSer=()=>{
-    setSearchView('Address')
-    setRander(false)
-  }
-  const atmSer=()=>{
-    setSearchView('ATM ID')
-    setRander(false)
-  }
-  const siteSer=()=>{
-    setSearchView('Site ID')
-    setRander(false)
-
-
-  }
-  const branchSer=()=>{
-    setSearchView('Branch ID')
-    setRander(false)
-  }
-  const circuitSer=()=>{
-    setSearchView('Circuit ID')
-    setRander(false)
-  }
-  const devicesSer=()=>{
-    setSearchView('Device ID')
-    setRander(false)
-  }
- 
   return (
     <View style={styles.rightVies1}>
-      <ButtonView
-        setSearchView={addSer}
-        id={'Address'}
-        title="Address"
-      />
+      <ButtonView setSearchView={addSer} id={'Address'} title="Address" />
       <ButtonView setSearchView={atmSer} id={'AtmsId'} title="ATM ID" />
       <ButtonView setSearchView={siteSer} id={'SiteId'} title="Site ID" />
-      <ButtonView
-        setSearchView={branchSer}
-        id={'BranchId'}
-        title="Branch ID"
-      />
+      <ButtonView setSearchView={branchSer} id={'BranchId'} title="Branch ID" />
       <ButtonView
         setSearchView={circuitSer}
         id={'CircuitId'}

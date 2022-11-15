@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {dataMar} from '../../../../../../utils/MarkerData1';
+import React from 'react';
+
 import NoDataViewFlatList from './../../../../../../components/NoDataViewFlatList/index';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useSelector} from 'react-redux';
 
-const Atm = ({getAtmId, setRander, setFocusOn1}) => {
+const Atm = ({getAtmId, setRander, setFocusOn1, setPlace}) => {
   // console.log(dataMar)
   // const {data} = useSelector(state => state.ExploreCircuitId);
   const {data} = useSelector(state => state.ExploreAtmId);
@@ -26,6 +26,7 @@ const Atm = ({getAtmId, setRander, setFocusOn1}) => {
               getAtmId(item.ATM_ID);
               setRander(false);
               setFocusOn1(true);
+              setPlace('Search ATM ID');
               Keyboard.dismiss();
             }}
             style={{

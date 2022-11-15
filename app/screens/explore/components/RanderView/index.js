@@ -6,23 +6,62 @@ import Device from './Components/Device';
 import Circuit from './Components/Circuit';
 import Branch from './Components/Branch';
 
-const RanderView = ({focusView, getAtmId, setRander, setFocusOn1}) => {
+const RanderView = ({
+  focusView,
+  getAtmId,
+  setRander,
+  setFocusOn1,
+  setSearchView,
+  setPlace,
+  getBranchId,
+}) => {
   const ranDerView = () => {
     switch (true) {
       case focusView === 'Circuit':
-        return <Circuit />;
+        return (
+          <Circuit
+            setRander={setRander}
+            setFocusOn1={setFocusOn1}
+            setSearchView={setSearchView}
+            setPlace={setPlace}
+          />
+        );
       case focusView === 'Branch':
-        return <Branch />;
+        return (
+          <Branch
+            setRander={setRander}
+            setFocusOn1={setFocusOn1}
+            setSearchView={setSearchView}
+            setPlace={setPlace}
+            getBranchId={getBranchId}
+          />
+        );
       case focusView === 'Device':
-        return <Device />;
+        return (
+          <Device
+            setRander={setRander}
+            setFocusOn1={setFocusOn1}
+            setSearchView={setSearchView}
+            setPlace={setPlace}
+          />
+        );
       case focusView === 'Site':
-        return <Site />;
+        return (
+          <Site
+            setRander={setRander}
+            setFocusOn1={setFocusOn1}
+            setSearchView={setSearchView}
+            setPlace={setPlace}
+          />
+        );
       case focusView === 'ATM':
         return (
           <Atm
             getAtmId={getAtmId}
             setRander={setRander}
             setFocusOn1={setFocusOn1}
+            setSearchView={setSearchView}
+            setPlace={setPlace}
           />
         );
     }

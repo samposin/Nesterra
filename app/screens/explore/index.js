@@ -407,8 +407,8 @@ const Explore = ({
     bottomSheetRef.current.close();
   };
   const markerZoom1 = ({geometry}) => {
-    console.log(geometry.coordinates[0], geometry.coordinates[1]);
-    console.log(geometry);
+    // console.log(geometry.coordinates[0], geometry.coordinates[1]);
+    // console.log(geometry);
     const la = geometry.coordinates[0];
     const ln = geometry.coordinates[1];
     animateToRegion({
@@ -546,6 +546,7 @@ const Explore = ({
   const [focusView, setFocusView] = useState('Atm');
   const [focusOn, setFocusOn] = useState(true);
   const [focusOn1, setFocusOn1] = useState(true);
+  const [placeHolder, setPlace] = useState('');
   const addRess = data => {
     if (data === 'Address') {
       setsearchComponet(false);
@@ -559,7 +560,10 @@ const Explore = ({
   const getAtmId = id => {
     const atmData = dataMar.find(item => item.ATM_ID == id);
     onSearchPress(atmData.Latitude, atmData.Longitude);
-    console.log(dataMar[id], 'atmData');
+  };
+  const getBranchId = id => {
+    const atmData = dataMar.find(item => item.Branch_ID == id);
+    onSearchPress(atmData.Latitude, atmData.Longitude);
   };
 
   return (
@@ -808,6 +812,8 @@ const Explore = ({
             setFocusOn1={setFocusOn1}
             setFocusOn={setFocusOn}
             focusOn1={focusOn1}
+            setPlace={setPlace}
+            placeHolder={placeHolder}
           />
         ) : (
           <Search
@@ -835,6 +841,8 @@ const Explore = ({
             getAtmId={getAtmId}
             setRander={setRander}
             setFocusOn1={setFocusOn1}
+            setPlace={setPlace}
+            getBranchId={getBranchId}
           />
         ) : null}
         {dropDownShow ? (
@@ -842,6 +850,7 @@ const Explore = ({
             seTDropDownShow={seTDropDownShow}
             setSearchView={addRess}
             setRander={setRander}
+            setPlace={setPlace}
           />
         ) : null}
         {/* =================search=============== */}
