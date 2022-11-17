@@ -383,14 +383,14 @@ const Explore = ({
     animateToRegion({
       latitude: lat,
       longitude: lng,
-      latitudeDelta: 0.02,
-      longitudeDelta: 0.02,
+      latitudeDelta: 0.002,
+      longitudeDelta: 0.002,
     });
     setCurrentRegion({
       latitude: lat,
       longitude: lng,
-      latitudeDelta: 0.02,
-      longitudeDelta: 0.02,
+      latitudeDelta: 0.002,
+      longitudeDelta: 0.002,
     });
 
     bottomSheetRef.current.close();
@@ -559,16 +559,64 @@ const Explore = ({
   };
   const getAtmId = id => {
     const atmData = dataMar.find(item => item.ATM_ID == id);
+
+    let lisdata = dataMar.map(item => {
+      let itm = {...item, isChecked: false};
+      return itm;
+    });
+    for (let index = 0; index < lisdata.length; index++) {
+      if (id === lisdata[index].ATM_ID) {
+        lisdata[index].isChecked = true;
+
+        break;
+      }
+    }
+    setCord(lisdata);
     onSearchPress(atmData.Latitude, atmData.Longitude);
   };
   const getBranchId = id => {
     const atmData = dataMar.find(item => item.Branch_ID == id);
+    let lisdata = dataMar.map(item => {
+      let itm = {...item, isChecked: false};
+      return itm;
+    });
+    for (let index = 0; index < lisdata.length; index++) {
+      if (id === lisdata[index].Branch_ID) {
+        lisdata[index].isChecked = true;
+
+        break;
+      }
+    }
+    setCord(lisdata);
     onSearchPress(atmData.Latitude, atmData.Longitude);
+  };
+  const getsiteId = id => {
+    const lodata = dataMar.find(item => item.Location_ID == id);
+
+    let lisdata = dataMar.map(item => {
+      let itm = {...item, isChecked: false};
+      return itm;
+    });
+    for (let index = 0; index < lisdata.length; index++) {
+      if (id === lisdata[index].Location_ID) {
+        lisdata[index].isChecked = true;
+
+        break;
+      }
+    }
+    setCord(lisdata);
+    onSearchPress(lodata.Latitude, lodata.Longitude);
+  };
+  const getCircuitId = id => {
+    console.log(id);
+
+    let result = dataMar.find(o => o.Circuit_ID.includes(id));
+    console.log(result.Location_ID);
   };
 
   return (
     <>
-      {inputRotate ? rotatedIconAntichange() : rotatedIconchange()}
+      {/* {inputRotate ? rotatedIconAntichange() : rotatedIconchange()} */}
 
       <StatusBar
         translucent
@@ -578,6 +626,7 @@ const Explore = ({
       {/* {modalVisible ? (
         <ModalView
           modalVisible={modalVisible}
+
           catShow={catShow}
           locationText={locationText}
           setModalVisible={setModalVisible}
@@ -843,6 +892,8 @@ const Explore = ({
             setFocusOn1={setFocusOn1}
             setPlace={setPlace}
             getBranchId={getBranchId}
+            getsiteId={getsiteId}
+            getCircuitId={getCircuitId}
           />
         ) : null}
         {dropDownShow ? (

@@ -78,7 +78,7 @@ const SiteId = ({
           </View>
 
           <TextInput
-            style={{color: 'black'}}
+            style={{color: 'black', width: '100%'}}
             placeholder={placeHolder}
             placeholderTextColor="black"
             onChangeText={text => searchId(text)}

@@ -13,7 +13,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useDispatch} from 'react-redux';
-import {BRANCH_ID_SEARCH} from '../../../../../actions/actionType/ExploreSearch';
+import {CIRCUIT_ID_SEARCH} from '../../../../../actions/actionType/ExploreSearch';
 
 const CircuitId = ({
   setRander,
@@ -32,11 +32,10 @@ const CircuitId = ({
       setSearch(data);
 
       dispatch({
-        type: BRANCH_ID_SEARCH,
+        type: CIRCUIT_ID_SEARCH,
         data: data,
       });
       setRander(true);
-      setFocusView('Circuit');
     } else {
       setPlace('Search Circuit ID');
       setFocusOn1(true);
@@ -78,11 +77,12 @@ const CircuitId = ({
           </View>
 
           <TextInput
-            style={{color: 'black'}}
+            style={{color: 'black', width: '100%'}}
             placeholder={placeHolder}
             placeholderTextColor="black"
             onChangeText={text => searchId(text)}
             onFocus={() => {
+              setFocusView('Circuit');
               setFocusOn1(false);
               setPlace('');
             }}
@@ -164,6 +164,7 @@ const CircuitId = ({
               }}>
               <TouchableOpacity
                 onPress={() => {
+                  setFocusView('Circuit');
                   setRander(false);
                   setFocusOn1(true);
                   setPlace('Search Circuit ID');

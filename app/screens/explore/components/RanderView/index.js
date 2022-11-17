@@ -14,7 +14,10 @@ const RanderView = ({
   setSearchView,
   setPlace,
   getBranchId,
+  getsiteId,
+  getCircuitId,
 }) => {
+  // console.log(focusView);
   const ranDerView = () => {
     switch (true) {
       case focusView === 'Circuit':
@@ -24,6 +27,7 @@ const RanderView = ({
             setFocusOn1={setFocusOn1}
             setSearchView={setSearchView}
             setPlace={setPlace}
+            getCircuitId={getCircuitId}
           />
         );
       case focusView === 'Branch':
@@ -52,6 +56,7 @@ const RanderView = ({
             setFocusOn1={setFocusOn1}
             setSearchView={setSearchView}
             setPlace={setPlace}
+            getsiteId={getsiteId}
           />
         );
       case focusView === 'ATM':

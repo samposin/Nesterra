@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
     case CIRCUIT_ID_SEARCH:
       const subtypve = [...state.data1];
       const srcdata = subtypve.filter(function (item) {
-        const itemData = item?.Branch_ID.toUpperCase();
+        const itemData = item.toUpperCase();
 
         return itemData.startsWith(action.data.toUpperCase());
       });

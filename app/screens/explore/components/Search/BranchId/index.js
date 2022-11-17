@@ -36,7 +36,6 @@ const BranchId = ({
         data: data,
       });
       setRander(true);
-      setFocusView('Branch');
     } else {
       setPlace('Search Branch ID');
       setFocusOn1(true);
@@ -78,11 +77,12 @@ const BranchId = ({
           </View>
 
           <TextInput
-            style={{color: 'black'}}
+            style={{color: 'black', width: '100%'}}
             placeholder={placeHolder}
             placeholderTextColor="black"
             onChangeText={text => searchId(text)}
             onFocus={() => {
+              setFocusView('Branch');
               setFocusOn1(false);
               setPlace('');
             }}

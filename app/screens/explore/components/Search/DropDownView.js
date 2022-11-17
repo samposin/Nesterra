@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 const {width} = Dimensions.get('screen');
 
 const w1 = width - 50;
@@ -56,6 +56,7 @@ const DropDownView = ({setSearchView, setRander, setPlace}) => {
   };
   const devicesSer = () => {
     setSearchView('Device ID');
+    setPlace('Serach Device ID');
     setRander(false);
   };
 
@@ -80,7 +81,7 @@ const DropDownView = ({setSearchView, setRander, setPlace}) => {
   );
 };
 
-export default DropDownView;
+export default memo(DropDownView);
 
 const styles = StyleSheet.create({
   rightVies1: {

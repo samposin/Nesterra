@@ -36,7 +36,6 @@ const AtmsId = ({
         data: data,
       });
       setRander(true);
-      setFocusView('ATM');
     } else {
       setPlace('Search ATM ID');
       setFocusOn1(true);
@@ -78,11 +77,12 @@ const AtmsId = ({
           </View>
 
           <TextInput
-            style={{color: 'black'}}
+            style={{color: 'black', width: '100%'}}
             placeholder={placeHolder}
             placeholderTextColor="black"
             onChangeText={text => searchId(text)}
             onFocus={() => {
+              setFocusView('ATM');
               setFocusOn1(false);
               setPlace('');
             }}

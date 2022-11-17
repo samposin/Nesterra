@@ -38,7 +38,9 @@ const Branch = ({getBranchId, setRander, setFocusOn1, setPlace}) => {
                   borderBottomWidth: 0.5,
                 }}>
                 <FontAwesome name="map-marker" size={24} color="black" />
-                <Text style={{marginLeft: 15}}>{item?.Branch_ID}</Text>
+                <Text style={{marginLeft: 15, color: 'black'}}>
+                  {item?.Branch_ID}
+                </Text>
               </View>
             </TouchableOpacity>
           </>
