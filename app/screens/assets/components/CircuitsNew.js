@@ -33,6 +33,8 @@ import TableHeaderFirstColum from './../../../components/TableHeaderFirstColum';
 import TableHeaderOtherColum from './../../../components/TableHeaderOtherColum/index';
 import NoDataViewFlatList from '../../../components/NoDataViewFlatList';
 
+import DataColum from './Circuits/DataColum';
+
 const CircuitsNew = ({
   getAllCircuit,
 
@@ -55,7 +57,7 @@ const CircuitsNew = ({
   const [refresh, setRefresh] = useState(false);
   const [locType, setLocType] = useState(true);
   const [vendor, setVendor] = useState(true);
-  const [cirType, setCirType] = useState(true);
+
   const [bootSheetLodder, setbootSheetLodder] = useState(true);
 
   const [branchType, setBranchType] = useState(true);
@@ -64,48 +66,6 @@ const CircuitsNew = ({
     setLodding3(true);
     getAllCircuit(setLodding3);
   }, []);
-  const DataColum = ({title}) => {
-    return (
-      <View
-        style={{
-          ...styles.tableRowColum2,
-          width: '25%',
-          borderLeftColor: 'white',
-          borderLeftWidth: 2,
-        }}>
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(title);
-
-            tostalert(title);
-          }}>
-          <Text style={{...styles.boxText1, color: 'black'}}> {title}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  const randerItem = ({index, item}) => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          const id = item.Circuit_ID;
-          getAllCircuitDetails(id, setLodding, circuitRefDetails);
-          setSwitchView(false);
-          cirCuitRef.current.close();
-        }}
-        style={{
-          ...styles.tableRow1,
-          height: 55,
-          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-          marginVertical: 1,
-        }}>
-        <DataColum title={item?.Location_ID} />
-        <DataColum title={item?.Circuit_ID} />
-        <DataColum title={item?.Branch_ID ? item.Branch_ID : '--'} />
-        <DataColum title={item?.Vendor} />
-      </TouchableOpacity>
-    );
-  };
 
   const searchFilterDatataByStatus = () => {
     setDiplayName('Status');
@@ -266,7 +226,35 @@ const CircuitsNew = ({
                     showsVerticalScrollIndicator={false}
                     data={allCircuit}
                     keyExtractor={(item, i) => i.toString()}
-                    renderItem={(item, i) => randerItem(item)}
+                    renderItem={({index, item}) => {
+                      return (
+                        <TouchableOpacity
+                          onPress={() => {
+                            const id = item.Circuit_ID;
+                            getAllCircuitDetails(
+                              id,
+                              setLodding,
+                              circuitRefDetails,
+                            );
+                            setSwitchView(false);
+                            cirCuitRef.current.close();
+                          }}
+                          style={{
+                            ...styles.tableRow1,
+                            height: 55,
+                            backgroundColor:
+                              index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                            marginVertical: 1,
+                          }}>
+                          <DataColum title={item?.Location_ID} />
+                          <DataColum title={item?.Circuit_ID} />
+                          <DataColum
+                            title={item?.Branch_ID ? item.Branch_ID : '--'}
+                          />
+                          <DataColum title={item?.Vendor} />
+                        </TouchableOpacity>
+                      );
+                    }}
                     refreshing={refresh}
                     onRefresh={() => {
                       setDiplayName('');

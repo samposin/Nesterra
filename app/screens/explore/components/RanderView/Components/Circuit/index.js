@@ -16,29 +16,6 @@ const Circuit = ({getCircuitId, setRander, setFocusOn1, setPlace}) => {
   // console.log(dataMar)
   const {data} = useSelector(state => state.ExploreCircuitId);
 
-  const randerItem = ({item}) => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          setRander(false);
-          setFocusOn1(true);
-          getCircuitId(item);
-
-          setPlace('Search Circuit ID');
-          Keyboard.dismiss();
-        }}
-        style={{
-          width: '100%',
-          height: 40,
-          flexDirection: 'row',
-          alignItems: 'center',
-          borderBottomWidth: 0.5,
-        }}>
-        <FontAwesome name="map-marker" size={24} color="black" />
-        <Text style={{marginLeft: 15, color: 'black'}}>{item}</Text>
-      </TouchableOpacity>
-    );
-  };
   return (
     <View style={{flex: 1, paddingHorizontal: 30}}>
       <FlatList
@@ -46,7 +23,29 @@ const Circuit = ({getCircuitId, setRander, setFocusOn1, setPlace}) => {
         keyboardShouldPersistTaps="handled"
         data={data}
         keyExtractor={(item, i) => i.toString()}
-        renderItem={(item, i) => randerItem(item)}
+        renderItem={({item, i}) => {
+          return item ? (
+            <TouchableOpacity
+              onPress={() => {
+                setRander(false);
+                setFocusOn1(true);
+                getCircuitId(item);
+
+                setPlace('Search Circuit ID');
+                Keyboard.dismiss();
+              }}
+              style={{
+                width: '100%',
+                height: 40,
+                flexDirection: 'row',
+                alignItems: 'center',
+                borderBottomWidth: 0.5,
+              }}>
+              <FontAwesome name="map-marker" size={24} color="black" />
+              <Text style={{marginLeft: 15, color: 'black'}}>{item}</Text>
+            </TouchableOpacity>
+          ) : null;
+        }}
         ListEmptyComponent={() => {
           return <NoDataViewFlatList />;
         }}

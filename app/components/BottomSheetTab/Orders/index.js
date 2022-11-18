@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import FlatColum from '../../FlatColum';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -17,7 +17,6 @@ import {
   FILTER_BY_STATUS_ACTIVE,
   ALL_DATA,
 } from '../../../actions/actionType/action.Order.type';
-import {copyText, tostalert} from '../../helper';
 
 import {getOrderDetailsExpolore} from '../../../actions/OrderDetailsExplore';
 import ToggleView from './../ToggleView';
@@ -122,60 +121,7 @@ const Orders = ({orderRefExplore, getOrderDetailsExpolore, orderLoding}) => {
       });
     }
   };
-  const RanderColum = ({title, border}) => {
-    return (
-      <View
-        style={{
-          ...styles.tableRowColum1,
-          borderLeftColor: 'white',
-          borderLeftWidth: border,
-        }}>
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(title);
 
-            tostalert(title);
-          }}>
-          <Text style={styles.boxText1}>{title}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  const randerItem = ({index, item}) => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          // console.log(item.Inventory_ID);
-          const loca_Id = id;
-          const inv_Id = item.Inventory_ID;
-          //   inv_Id: item.Inventory_ID,
-          getOrderDetailsExpolore(
-            id,
-            item.Inventory_ID,
-
-            setLodding,
-            orderRefExplore,
-          );
-
-          // navigation.navigate('OrderDetails', {
-          //   loca_Id: id,
-          //   inv_Id: item.Inventory_ID,
-          // });
-        }}
-        style={{
-          width: '100%',
-          height: 50,
-          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-          flexDirection: 'row',
-          marginVertical: 1,
-        }}>
-        <RanderColum title={item.Inventory_ID} border={0} />
-        <RanderColum title={item.vendor} border={2} />
-        <RanderColum title={item.Order_Type} border={2} />
-        <RanderColum title={item.Status} border={2} />
-      </TouchableOpacity>
-    );
-  };
   return (
     <>
       {/* ==============container============== */}
@@ -222,7 +168,32 @@ const Orders = ({orderRefExplore, getOrderDetailsExpolore, orderLoding}) => {
             <BottomSheetFlatList
               data={order}
               keyExtractor={(item, i) => i.toString()}
-              renderItem={(item, i) => randerItem(item)}
+              renderItem={({index, item}) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      getOrderDetailsExpolore(
+                        id,
+                        item.Inventory_ID,
+
+                        setLodding,
+                        orderRefExplore,
+                      );
+                    }}
+                    style={{
+                      width: '100%',
+                      height: 50,
+                      backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                      flexDirection: 'row',
+                      marginVertical: 1,
+                    }}>
+                    <FlatColum title={item.Inventory_ID} border={0} />
+                    <FlatColum title={item.vendor} border={2} />
+                    <FlatColum title={item.Order_Type} border={2} />
+                    <FlatColum title={item.Status} border={2} />
+                  </TouchableOpacity>
+                );
+              }}
               ListEmptyComponent={() => {
                 return (
                   <>

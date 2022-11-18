@@ -6,7 +6,7 @@ import NoDataViewFlatList from './../../NoDataViewFlatList/index';
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {copyText, tostalert} from '../../helper';
 import AtmsDetails from './AtmsDetails';
-
+import FlatColum from '../../FlatColum';
 import {GetAllAtmdETAILS} from '../../../actions/AtmsAssets';
 import {
   ALL_ATMS_FILTER_BY_ACTIVE,
@@ -30,29 +30,6 @@ const TableHeaderFirstColum = ({title, color, border}) => {
     </View>
   );
 };
-const RanderColum = ({title, color}) => {
-  return (
-    <View
-      style={{
-        ...styles.tableRowColum,
-        width: '25%',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderLeftColor: 'white',
-        borderLeftWidth: 2,
-      }}>
-      <TouchableOpacity
-        onLongPress={() => {
-          copyText(title);
-
-          tostalert(title);
-        }}>
-        <Text style={{...styles.boxText1, color: color}}>{title}</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
 
 const Atms = ({
   index,
@@ -67,26 +44,7 @@ const Atms = ({
   // console.log(allAtms);
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
   const dispatch = useDispatch();
-  const randerItem = ({index, item}) => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          GetAllAtmdETAILS(item.ATM_ID, setDetailsLoder);
-          atmdDetailsRef.current.snapToIndex(2);
-        }}
-        style={{
-          ...styles.tableRow1,
-          height: 55,
-          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-          marginVertical: 1,
-        }}>
-        <RanderColum color="black" title={item.ATM_ID} />
-        <RanderColum color="black" title={item.ATM_Status} />
-        <RanderColum color="black" title={item.Vendor} />
-        <RanderColum color="black" title={item.Model} />
-      </TouchableOpacity>
-    );
-  };
+
   const activeFilter = () => {
     dispatch({
       type: ALL_ATMS_FILTER_BY_ACTIVE,
@@ -114,7 +72,26 @@ const Atms = ({
               showsVerticalScrollIndicator={false}
               data={allAtms}
               keyExtractor={(item, i) => i.toString()}
-              renderItem={(item, i) => randerItem(item)}
+              renderItem={({index, item}) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      GetAllAtmdETAILS(item.ATM_ID, setDetailsLoder);
+                      atmdDetailsRef.current.snapToIndex(2);
+                    }}
+                    style={{
+                      ...styles.tableRow1,
+                      height: 55,
+                      backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                      marginVertical: 1,
+                    }}>
+                    <FlatColum title={item.ATM_ID} border={0} />
+                    <FlatColum title={item.ATM_Status} border={2} />
+                    <FlatColum title={item.Vendor} border={2} />
+                    <FlatColum title={item.Model} border={2} />
+                  </TouchableOpacity>
+                );
+              }}
               ListEmptyComponent={() => {
                 return (
                   <>

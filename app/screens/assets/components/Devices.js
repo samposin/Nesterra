@@ -39,6 +39,7 @@ import BottomSheetViewDevices from './DevicesDetails';
 import DevicesBottomSheet from './Devices/index';
 import ToggleView from './../../../components/ToggleView/index';
 import FilterButton from '../../../components/FilterButton';
+import Flatrow from './Devices/Flatrow';
 
 const Devices = ({
   getAllDevice,
@@ -71,63 +72,7 @@ const Devices = ({
     setLodding1(true);
     getAllDevice(setLodding1);
   }, []);
-  const Flatrow = ({title}) => {
-    return (
-      <View
-        style={{
-          ...styles.tableRowColum1,
-          borderLeftColor: 'white',
-          borderLeftWidth: 2,
-        }}>
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(title);
-            tostalert(title);
-          }}>
-          <Text style={styles.boxText1}>{title}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  const randerItem = ({index, item}) => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          setLodding(true);
 
-          const id = item.ID;
-          getAllDeviceDetails(id, setLodding, deviceRefDetails);
-          setDeviveView(false);
-        }}
-        style={{
-          ...styles.tableRow1,
-          height: 50,
-          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-          marginVertical: 1,
-        }}>
-        <Flatrow title={item?.Device_Name} />
-
-        <View
-          style={{
-            ...styles.tableRowColum1,
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-            backgroundColor: selectedComponent(item?.Device_Status),
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.Device_Status);
-              tostalert(item.Device_Status);
-            }}>
-            <Text style={styles.boxText1}>{item?.Device_Status}</Text>
-          </TouchableOpacity>
-        </View>
-        <Flatrow title={item?.Device_Type} />
-
-        <Flatrow title={item?.Device_Vendor} />
-      </TouchableOpacity>
-    );
-  };
   const selectedComponent = item => {
     switch (true) {
       case item === 'Active':
@@ -333,7 +278,54 @@ const Devices = ({
                     showsVerticalScrollIndicator={false}
                     data={deviceAllData}
                     keyExtractor={(item, i) => i.toString()}
-                    renderItem={(item, i) => randerItem(item)}
+                    renderItem={({index, item}) => {
+                      return (
+                        <TouchableOpacity
+                          onPress={() => {
+                            setLodding(true);
+
+                            const id = item.ID;
+                            getAllDeviceDetails(
+                              id,
+                              setLodding,
+                              deviceRefDetails,
+                            );
+                            setDeviveView(false);
+                          }}
+                          style={{
+                            ...styles.tableRow1,
+                            height: 50,
+                            backgroundColor:
+                              index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                            marginVertical: 1,
+                          }}>
+                          <Flatrow title={item?.Device_Name} />
+
+                          <View
+                            style={{
+                              ...styles.tableRowColum1,
+                              borderLeftColor: 'white',
+                              borderLeftWidth: 2,
+                              backgroundColor: selectedComponent(
+                                item?.Device_Status,
+                              ),
+                            }}>
+                            <TouchableOpacity
+                              onLongPress={() => {
+                                copyText(item.Device_Status);
+                                tostalert(item.Device_Status);
+                              }}>
+                              <Text style={styles.boxText1}>
+                                {item?.Device_Status}
+                              </Text>
+                            </TouchableOpacity>
+                          </View>
+                          <Flatrow title={item?.Device_Type} />
+
+                          <Flatrow title={item?.Device_Vendor} />
+                        </TouchableOpacity>
+                      );
+                    }}
                   />
                 </View>
               </>

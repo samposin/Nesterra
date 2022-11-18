@@ -16,6 +16,7 @@ const RanderView = ({
   getBranchId,
   getsiteId,
   getCircuitId,
+  getDeviceId,
 }) => {
   // console.log(focusView);
   const ranDerView = () => {
@@ -47,6 +48,7 @@ const RanderView = ({
             setFocusOn1={setFocusOn1}
             setSearchView={setSearchView}
             setPlace={setPlace}
+            getDeviceId={getDeviceId}
           />
         );
       case focusView === 'Site':

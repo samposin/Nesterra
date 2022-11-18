@@ -45,6 +45,7 @@ import ExploreSiteId from './ExploreSearch/ExploreSiteId';
 import ExploreAtmId from './ExploreSearch/ExploreAtmId';
 import ExploreBranchId from './ExploreSearch/ExploreBranchId';
 import ExploreCircuitId from './ExploreSearch/ExploreCircuitId';
+import ExploreDeviceId from './ExploreSearch/ExploreDeviceId';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -91,5 +92,6 @@ const rootReducer = combineReducers({
   ExploreAtmId,
   ExploreBranchId,
   ExploreCircuitId,
+  ExploreDeviceId,
 });
 export default rootReducer;

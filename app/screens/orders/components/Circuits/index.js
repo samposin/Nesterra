@@ -3,7 +3,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import SecondRow from './SecondRow';
 import ThirdRow from './ThirdRow';
 
-import {copyText, tostalert} from '../../../../components/helper';
 import {get_orders_for_tab} from './../../../../actions/orderFotTab';
 import DataLoder from './../../../../components/lodder/DataLoder';
 
@@ -20,6 +19,8 @@ import {
 } from '../../../../actions/actionType/action.OrdersForTab';
 import NoDataViewFlatList from '../../../../components/NoDataViewFlatList';
 import VendorButtonSheet from './VendorButtonSheet';
+import FlatListColumOther from './FlatListColumOther';
+import FlatListColum from './FlatListColum';
 
 const Circuits = ({get_orders_for_tab, get_order_details}) => {
   const {ordersForTab} = useSelector(state => state.ordersForTab);
@@ -42,85 +43,8 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
   }, []);
 
   //barckground color change
-  const selectedComponent = item => {
-    switch (true) {
-      case item === 'In Progress':
-        return '#ffffbf';
-      case item === 'Initiated':
-        return '#ffc8ce';
-      case item === 'Cancelled':
-        return '#ffc8ce';
-      case item === 'Completed':
-        return '#c6efcd';
-    }
-  };
+
   //barckground color change
-  const FlatListColum = ({item, title}) => {
-    return (
-      <View
-        style={{
-          ...styles.tableRowColum1,
-          width: '20%',
-          borderLeftColor: 'white',
-          borderLeftWidth: 2,
-          backgroundColor: selectedComponent(item?.Status),
-        }}>
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(title);
-            tostalert(title);
-          }}>
-          <Text style={styles.boxText1}> {title}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  const FlatListColumOther = ({item, title}) => {
-    return (
-      <View
-        style={{
-          ...styles.tableRowColum1,
-          width: '20%',
-          borderLeftColor: 'white',
-          borderLeftWidth: 2,
-        }}>
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(title);
-            tostalert(title);
-          }}>
-          <Text style={styles.boxText1}>{title}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  const randerItem = ({index, item}) => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          get_order_details(
-            item.Inventory_ID,
-            setLodding1,
-            bottomSheetRefdetails,
-          );
-        }}
-        style={{
-          ...styles.tableRow1,
-          height: 60,
-          marginVertical: 1,
-          backgroundColor: '#ffffff',
-        }}>
-        <FlatListColum item={item} title={item.Order_Type} />
-        <FlatListColumOther item={item} title={item.vendor} />
-        <FlatListColum item={item} title={item.Status} />
-        <FlatListColumOther
-          item={item}
-          title={moment(item.Creation_Date).format('MM/DD/YY')}
-        />
-        <FlatListColumOther item={item} title={item.Inventory_ID} />
-      </TouchableOpacity>
-    );
-  };
 
   const allData = () => {
     //
@@ -184,7 +108,33 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
               showsVerticalScrollIndicator={false}
               data={ordersForTab}
               keyExtractor={(item, i) => i.toString()}
-              renderItem={(item, i) => randerItem(item)}
+              renderItem={({item, i}) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      get_order_details(
+                        item.Inventory_ID,
+                        setLodding1,
+                        bottomSheetRefdetails,
+                      );
+                    }}
+                    style={{
+                      ...styles.tableRow1,
+                      height: 60,
+                      marginVertical: 1,
+                      backgroundColor: '#ffffff',
+                    }}>
+                    <FlatListColum item={item} title={item.Order_Type} />
+                    <FlatListColumOther item={item} title={item.vendor} />
+                    <FlatListColum item={item} title={item.Status} />
+                    <FlatListColumOther
+                      item={item}
+                      title={moment(item.Creation_Date).format('MM/DD/YY')}
+                    />
+                    <FlatListColumOther item={item} title={item.Inventory_ID} />
+                  </TouchableOpacity>
+                );
+              }}
               refreshing={refresh}
               onRefresh={() => {
                 // setType('');

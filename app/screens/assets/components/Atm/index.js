@@ -19,6 +19,7 @@ import {
 } from '../../../../actions/actionType/AtmsAssets';
 import BottoSheetView from './BottoSheetView';
 import BottomSheetDetails from './BottomSheetDetails';
+import DataColum from './DataColum';
 
 const Atm = ({GetAllAtmNumber, GetAllAtmdETAILS}) => {
   const snapPoints = useMemo(() => ['20%', '47%', '95%'], []);
@@ -35,67 +36,6 @@ const Atm = ({GetAllAtmNumber, GetAllAtmdETAILS}) => {
   const atmdDetailsRef = useRef(null);
   const atmdDetailsRef1 = useRef(null);
 
-  const DataColum = ({title, border}) => {
-    return (
-      <View
-        style={{
-          ...styles.tableRowColum2,
-          width: '25%',
-          borderLeftColor: 'white',
-          borderLeftWidth: border,
-        }}>
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(title);
-
-            tostalert(title);
-          }}>
-          <Text style={{...styles.boxText1, color: 'black'}}> {title}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  const randerItem = ({index, item}) => {
-    // console.log(item.ATM_Status);
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          //
-
-          GetAllAtmdETAILS(item.ATM_ID, setDetailsLoder);
-          atmdDetailsRef.current.snapToIndex(2);
-        }}
-        style={{
-          ...styles.tableRow1,
-          height: 40,
-          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-          marginVertical: 1,
-        }}>
-        <DataColum title={item.ATM_ID} border={0} />
-        <View
-          style={{
-            ...styles.tableRowColum2,
-            width: '25%',
-            borderLeftColor: 'white',
-            borderLeftWidth: 2,
-            backgroundColor:
-              item.ATM_Status === 'Active' ? '#c6efcd' : '#ffc8ce',
-          }}>
-          <TouchableOpacity
-            onLongPress={() => {
-              copyText(item.ATM_Status);
-
-              tostalert(item.ATM_Status);
-            }}>
-            <Text style={styles.boxText1}> {item.ATM_Status}</Text>
-          </TouchableOpacity>
-        </View>
-
-        <DataColum title={item.Model} border={2} />
-        <DataColum title={item.Vendor} border={2} />
-      </TouchableOpacity>
-    );
-  };
   const fiterCircuitsActive = () => {
     dispatch({
       type: FILTER_BY_ACTIVE,
@@ -133,7 +73,46 @@ const Atm = ({GetAllAtmNumber, GetAllAtmdETAILS}) => {
               removeClippedSubviews
               data={data}
               keyExtractor={(item, i) => i.toString()}
-              renderItem={(item, i) => randerItem(item)}
+              renderItem={({index, item}) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      //
+
+                      GetAllAtmdETAILS(item.ATM_ID, setDetailsLoder);
+                      atmdDetailsRef.current.snapToIndex(2);
+                    }}
+                    style={{
+                      ...styles.tableRow1,
+                      height: 40,
+                      backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                      marginVertical: 1,
+                    }}>
+                    <DataColum title={item.ATM_ID} border={0} />
+                    <View
+                      style={{
+                        ...styles.tableRowColum2,
+                        width: '25%',
+                        borderLeftColor: 'white',
+                        borderLeftWidth: 2,
+                        backgroundColor:
+                          item.ATM_Status === 'Active' ? '#c6efcd' : '#ffc8ce',
+                      }}>
+                      <TouchableOpacity
+                        onLongPress={() => {
+                          copyText(item.ATM_Status);
+
+                          tostalert(item.ATM_Status);
+                        }}>
+                        <Text style={styles.boxText1}> {item.ATM_Status}</Text>
+                      </TouchableOpacity>
+                    </View>
+
+                    <DataColum title={item.Model} border={2} />
+                    <DataColum title={item.Vendor} border={2} />
+                  </TouchableOpacity>
+                );
+              }}
               refreshing={refresh}
               onRefresh={() => {
                 setDiplayName('');

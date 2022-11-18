@@ -21,6 +21,7 @@ import {CIRCUIT_DETAILS_EXPLORE} from '../../../actions/actionType/CircuitDetail
 import {copyText, tostalert} from '../../helper';
 import ToggleView from './../ToggleView';
 import DataLoder from '../../lodder/DataLoder';
+import FlatColum from './../../FlatColum/index';
 
 const Circuits = ({cirCuitRefExplore, circuitLoding}) => {
   const navigation = useNavigation();
@@ -30,55 +31,7 @@ const Circuits = ({cirCuitRefExplore, circuitLoding}) => {
   const [categoryType, setCategoryType] = useState(true);
   const [subCat1Type, setsubCat1Type] = useState(true);
   const {cirCuitInventory} = useSelector(state => state.circuitInventory);
-  // console.log(cirCuitInventory[0], 'pp');
-  const RanderColum = ({title, border}) => {
-    return (
-      <View
-        style={{
-          ...styles.tableRowColum1,
-          borderLeftColor: 'white',
-          borderLeftWidth: border,
-        }}>
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(title);
 
-            tostalert(title);
-          }}>
-          <Text style={styles.boxText1}>{title}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  const randerItem = ({index, item}) => {
-    // console.log(i, item);
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          //  navigation.navigate('CircuitsDetails', {item})
-          dispatch({
-            type: CIRCUIT_DETAILS_EXPLORE,
-            payload: {
-              data: item,
-            },
-          });
-          cirCuitRefExplore.current.snapToIndex(2);
-        }}
-        style={{
-          width: '100%',
-          height: 50,
-          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-          flexDirection: 'row',
-          marginVertical: 1,
-        }}>
-        <RanderColum title={item.Circuit_ID} border={0} />
-        <RanderColum title={item.Vendor} border={2} />
-        <RanderColum title={item.Category} border={2} />
-        <RanderColum title={item.SubCat_1} border={2} />
-      </TouchableOpacity>
-    );
-  };
-  // console.log(cirCuitInventory.length);
   const activeFilter = () => {
     dispatch({
       type: FILTER_BY_STATUS_ACTIVE,
@@ -210,7 +163,32 @@ const Circuits = ({cirCuitRefExplore, circuitLoding}) => {
             <BottomSheetFlatList
               data={cirCuitInventory}
               keyExtractor={(item, i) => i.toString()}
-              renderItem={(item, i) => randerItem(item)}
+              renderItem={({index, item}) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      dispatch({
+                        type: CIRCUIT_DETAILS_EXPLORE,
+                        payload: {
+                          data: item,
+                        },
+                      });
+                      cirCuitRefExplore.current.snapToIndex(2);
+                    }}
+                    style={{
+                      width: '100%',
+                      height: 50,
+                      backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                      flexDirection: 'row',
+                      marginVertical: 1,
+                    }}>
+                    <FlatColum title={item.Circuit_ID} border={0} />
+                    <FlatColum title={item.Vendor} border={2} />
+                    <FlatColum title={item.Category} border={2} />
+                    <FlatColum title={item.SubCat_1} border={2} />
+                  </TouchableOpacity>
+                );
+              }}
               ListEmptyComponent={() => {
                 return (
                   <>

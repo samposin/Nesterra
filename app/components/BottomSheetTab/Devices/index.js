@@ -17,11 +17,11 @@ import {
   ALL_DATA,
   FILTER_BY_STATUS_ACTIVE,
 } from '../../../actions/actionType/devicesInventory.type';
-import {DEVICE_DETAILS_FOR_EXPLORE} from '../../../actions/actionType/DeviceDetailsExplore';
-import {copyText, tostalert} from '../../helper';
+
 import ToggleView from './../ToggleView';
 import DataLoder from '../../lodder/DataLoder';
 import NoDataViewFlatList from '../../NoDataViewFlatList';
+import FlatColum from '../../FlatColum';
 
 const Devices = ({deviceRefExplore, devicesLoding}) => {
   const {devicesInventory} = useSelector(state => state.devicesInventory);
@@ -145,61 +145,7 @@ const Devices = ({deviceRefExplore, devicesLoding}) => {
       });
     }
   };
-  const FlatColum = ({title, border}) => {
-    return (
-      <View
-        style={{
-          ...styles.tableRowColum1,
-          borderLeftColor: 'white',
-          borderLeftWidth: border,
-        }}>
-        <TouchableOpacity
-          onLongPress={() => {
-            copyText(title);
 
-            tostalert(title);
-          }}>
-          <Text style={styles.boxText1}>{title}</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  const randerItem = ({index, item}) => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          // console.log(item);
-          dispatch({
-            type: DEVICE_DETAILS_FOR_EXPLORE,
-            payload: {
-              data: item,
-              id: id,
-            },
-          });
-          // cirCuitRefExplore.current.snapToIndex(2);
-          // dispatch({
-          //   type: DEVICE_DETAILS_EXPLORE,
-          //   payload: {
-          //     data: item,
-          //   },
-          // });
-          deviceRefExplore.current.snapToIndex(2);
-          // navigation.navigate('DevicesDetails', {item})
-        }}
-        style={{
-          width: '100%',
-          height: 50,
-          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-          flexDirection: 'row',
-          marginVertical: 1,
-        }}>
-        <FlatColum title={item.ID} border={0} />
-        <FlatColum title={item.Device_Name} border={2} />
-        <FlatColum title={item.Device_Status} border={2} />
-        <FlatColum title={item.Device_Vendor} border={2} />
-      </TouchableOpacity>
-    );
-  };
   return (
     <>
       {/* ==============container============== */}
@@ -242,7 +188,34 @@ const Devices = ({deviceRefExplore, devicesLoding}) => {
             <BottomSheetFlatList
               data={devicesInventory}
               keyExtractor={(item, i) => i.toString()}
-              renderItem={(item, i) => randerItem(item)}
+              renderItem={({index, item}) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      dispatch({
+                        type: DEVICE_DETAILS_FOR_EXPLORE,
+                        payload: {
+                          data: item,
+                          id: id,
+                        },
+                      });
+
+                      deviceRefExplore.current.snapToIndex(2);
+                    }}
+                    style={{
+                      width: '100%',
+                      height: 50,
+                      backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                      flexDirection: 'row',
+                      marginVertical: 1,
+                    }}>
+                    <FlatColum title={item.ID} border={0} />
+                    <FlatColum title={item.Device_Name} border={2} />
+                    <FlatColum title={item.Device_Status} border={2} />
+                    <FlatColum title={item.Device_Vendor} border={2} />
+                  </TouchableOpacity>
+                );
+              }}
               ListEmptyComponent={() => {
                 return (
                   <>

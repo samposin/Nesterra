@@ -69,7 +69,6 @@ import {getLocationInfo} from './../../actions/LocartionInfo/index';
 import {SET_LAT_LNG} from '../../actions/action.type';
 import DropDownView from './components/Search/DropDownView';
 import RanderView from './components/RanderView';
-import {CIRCUIT_ID} from '../../actions/actionType/ExploreSearch';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -608,10 +607,38 @@ const Explore = ({
     onSearchPress(lodata.Latitude, lodata.Longitude);
   };
   const getCircuitId = id => {
-    console.log(id);
+    let lodata = dataMar.find(o => o.Circuit_ID.includes(id));
 
-    let result = dataMar.find(o => o.Circuit_ID.includes(id));
-    console.log(result.Location_ID);
+    let lisdata = dataMar.map(item => {
+      let itm = {...item, isChecked: false};
+      return itm;
+    });
+    for (let index = 0; index < lisdata.length; index++) {
+      if (lodata.Location_ID === lisdata[index].Location_ID) {
+        lisdata[index].isChecked = true;
+
+        break;
+      }
+    }
+    setCord(lisdata);
+    onSearchPress(lodata.Latitude, lodata.Longitude);
+  };
+  const getDeviceId = id => {
+    let lodata = dataMar.find(item => item.Device_Name.includes(id));
+
+    let lisdata = dataMar.map(item => {
+      let itm = {...item, isChecked: false};
+      return itm;
+    });
+    for (let index = 0; index < lisdata.length; index++) {
+      if (lodata.Location_ID === lisdata[index].Location_ID) {
+        lisdata[index].isChecked = true;
+
+        break;
+      }
+    }
+    setCord(lisdata);
+    onSearchPress(lodata.Latitude, lodata.Longitude);
   };
 
   return (
@@ -894,6 +921,7 @@ const Explore = ({
             getBranchId={getBranchId}
             getsiteId={getsiteId}
             getCircuitId={getCircuitId}
+            getDeviceId={getDeviceId}
           />
         ) : null}
         {dropDownShow ? (
