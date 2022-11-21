@@ -65,7 +65,7 @@ const Category = ({
 
   return (
     <>
-      <View style={{top: Platform.OS === 'ios' ? 140 : 140, paddingLeft: 20}}>
+      <View style={{top: Platform.OS === 'ios' ? 140 : 140, paddingLeft: 10}}>
         <FlatList
           horizontal
           ref={myRef}

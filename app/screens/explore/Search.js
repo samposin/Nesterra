@@ -37,6 +37,7 @@ const Search = ({
   setsearchComponet,
   focusOn,
   setFocusOn,
+  getAddress,
 }) => {
   const dispatch = useDispatch();
   const googlePlacesRef = useRef(null);
@@ -223,6 +224,7 @@ const Search = ({
       fetchDetails={true}
       placeholder="Search Location"
       onPress={async (data, details = null) => {
+        // console.log(data, 'details');
         setIsLoading(true);
         setFocusOn(true);
         // dispatch({

@@ -679,6 +679,9 @@ const Explore = ({
     setCord(lisdata);
     onSearchPress(lodata.Latitude, lodata.Longitude);
   };
+  const getAddress = add => {
+    console.log(add);
+  };
 
   return (
     <>
@@ -947,6 +950,7 @@ const Explore = ({
             setsearchComponet={setsearchComponet}
             focusOn={focusOn}
             setFocusOn={setFocusOn}
+            getAddress={getAddress}
           />
         )}
 

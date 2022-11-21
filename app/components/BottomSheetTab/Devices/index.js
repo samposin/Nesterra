@@ -22,8 +22,7 @@ import ToggleView from './../ToggleView';
 import DataLoder from '../../lodder/DataLoder';
 import NoDataViewFlatList from '../../NoDataViewFlatList';
 import FlatColum from '../../FlatColum';
-import {DEVICE_DETAILS_FOR_EXPLORE} from './../../../../appOld/actions/actionType/DeviceDetailsExplore/index';
-
+import {DEVICE_DETAILS_FOR_EXPLORE} from '../../../actions/actionType/DeviceDetailsExplore';
 const Devices = ({deviceRefExplore, devicesLoding}) => {
   const {devicesInventory} = useSelector(state => state.devicesInventory);
   const {id} = useSelector(state => state.devicesInventory);

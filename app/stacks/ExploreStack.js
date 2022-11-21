@@ -10,7 +10,11 @@ import Profile from '../screens/profile';
 import SettingProfile from '../screens/explore/SettingProfile';
 import MapTypeAndFilter from '../screens/MapTypeAndFilter';
 import {useDispatch} from 'react-redux';
-import {SITE_ID, DEVICE_ID} from './../actions/actionType/ExploreSearch/index';
+import {
+  SITE_ID,
+  DEVICE_ID,
+  ADDRESS_ID,
+} from './../actions/actionType/ExploreSearch/index';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,6 +31,11 @@ const ExploreStack = () => {
         type: DEVICE_ID,
       });
     }, 1500);
+    setTimeout(() => {
+      dispatch({
+        type: ADDRESS_ID,
+      });
+    }, 1700);
   }, []);
 
   return (
