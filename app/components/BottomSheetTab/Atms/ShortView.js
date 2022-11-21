@@ -7,6 +7,7 @@ const ShortView = ({}) => {
   const {item} = useSelector(state => state.AssetsAtmsDetails);
 
   const DATArow = ({title, value, bgcolor}) => {
+    // console.log('first');
     return (
       <View style={{...styles.secondTableRow}}>
         <View

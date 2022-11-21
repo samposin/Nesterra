@@ -558,6 +558,12 @@ const Explore = ({
   };
   const getAtmId = id => {
     const atmData = dataMar.find(item => item.ATM_ID == id);
+    get_location_details({
+      id: atmData.Location_ID,
+      setIsLoading,
+      bottomSheetRef,
+    });
+    getLocationInfo(atmData.Location_ID);
 
     let lisdata = dataMar.map(item => {
       let itm = {...item, isChecked: false};
@@ -566,31 +572,48 @@ const Explore = ({
     for (let index = 0; index < lisdata.length; index++) {
       if (id === lisdata[index].ATM_ID) {
         lisdata[index].isChecked = true;
-
         break;
       }
     }
+
     setCord(lisdata);
     onSearchPress(atmData.Latitude, atmData.Longitude);
   };
   const getBranchId = id => {
     const atmData = dataMar.find(item => item.Branch_ID == id);
+
+    get_location_details({
+      id: atmData.Location_ID,
+      setIsLoading,
+      bottomSheetRef,
+    });
+    setLatLang(atmData.Latitude, atmData.Longitude);
+    getLocationInfo(atmData.Location_ID);
     let lisdata = dataMar.map(item => {
       let itm = {...item, isChecked: false};
       return itm;
     });
+
     for (let index = 0; index < lisdata.length; index++) {
       if (id === lisdata[index].Branch_ID) {
         lisdata[index].isChecked = true;
-
         break;
       }
     }
+
     setCord(lisdata);
     onSearchPress(atmData.Latitude, atmData.Longitude);
   };
   const getsiteId = id => {
     const lodata = dataMar.find(item => item.Location_ID == id);
+
+    get_location_details({
+      id: lodata.Location_ID,
+      setIsLoading,
+      bottomSheetRef,
+    });
+    setLatLang(lodata.Latitude, lodata.Longitude);
+    getLocationInfo(lodata.Location_ID);
 
     let lisdata = dataMar.map(item => {
       let itm = {...item, isChecked: false};
@@ -603,11 +626,19 @@ const Explore = ({
         break;
       }
     }
+
     setCord(lisdata);
     onSearchPress(lodata.Latitude, lodata.Longitude);
   };
   const getCircuitId = id => {
     let lodata = dataMar.find(o => o.Circuit_ID.includes(id));
+    getLocationInfo(dataMar.Location_ID);
+    get_location_details({
+      id: dataMar.Location_ID,
+      setIsLoading,
+      bottomSheetRef,
+    });
+    setLatLang(dataMar.Latitude, dataMar.Longitude);
 
     let lisdata = dataMar.map(item => {
       let itm = {...item, isChecked: false};
@@ -620,11 +651,19 @@ const Explore = ({
         break;
       }
     }
+
     setCord(lisdata);
     onSearchPress(lodata.Latitude, lodata.Longitude);
   };
   const getDeviceId = id => {
     let lodata = dataMar.find(item => item.Device_Name.includes(id));
+    getLocationInfo(lodata.Location_ID);
+    get_location_details({
+      id: lodata.Location_ID,
+      setIsLoading,
+      bottomSheetRef,
+    });
+    setLatLang(lodata.Latitude, lodata.Longitude);
 
     let lisdata = dataMar.map(item => {
       let itm = {...item, isChecked: false};

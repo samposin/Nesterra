@@ -1,10 +1,10 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useRef, useState, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import ToggleView from './../ToggleView';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import NoDataViewFlatList from './../../NoDataViewFlatList/index';
 import {connect, useSelector, useDispatch} from 'react-redux';
-import {copyText, tostalert} from '../../helper';
+
 import AtmsDetails from './AtmsDetails';
 import FlatColum from '../../FlatColum';
 import {GetAllAtmdETAILS} from '../../../actions/AtmsAssets';
