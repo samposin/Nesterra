@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import React, {memo} from 'react';
+import React, {memo, useCallback} from 'react';
 const {width} = Dimensions.get('screen');
 
 const w1 = width - 50;
@@ -21,7 +21,6 @@ const ButtonView = ({setSearchView, title}) => {
         width: '100%',
         height: 30,
         paddingLeft: 10,
-
         justifyContent: 'center',
       }}>
       <Text style={{color: 'black'}}>{title}</Text>
@@ -29,36 +28,36 @@ const ButtonView = ({setSearchView, title}) => {
   );
 };
 
-const DropDownView = ({setSearchView, setRander, setPlace}) => {
-  const addSer = () => {
+const DropDownView = ({setSearchView, searchView, setRander, setPlace}) => {
+  const addSer = useCallback(() => {
     setSearchView('Address');
     setRander(false);
-  };
-  const atmSer = () => {
+  }, [searchView]);
+  const atmSer = useCallback(() => {
     setSearchView('ATM ID');
     setRander(false);
     setPlace('Serach Atm ID');
-  };
-  const siteSer = () => {
+  }, [searchView]);
+  const siteSer = useCallback(() => {
     setPlace('Serach Site ID');
     setSearchView('Site ID');
     setRander(false);
-  };
-  const branchSer = () => {
+  }, [searchView]);
+  const branchSer = useCallback(() => {
     setSearchView('Branch ID');
     setRander(false);
     setPlace('Serach Branch ID');
-  };
-  const circuitSer = () => {
+  }, [searchView]);
+  const circuitSer = useCallback(() => {
     setSearchView('Circuit ID');
     setPlace('Serach Circuit ID');
     setRander(false);
-  };
-  const devicesSer = () => {
+  }, [searchView]);
+  const devicesSer = useCallback(() => {
     setSearchView('Device ID');
     setPlace('Serach Device ID');
     setRander(false);
-  };
+  }, [searchView]);
 
   return (
     <View style={styles.rightVies1}>
@@ -71,7 +70,6 @@ const DropDownView = ({setSearchView, setRander, setPlace}) => {
         id={'CircuitId'}
         title="Circuit ID"
       />
-
       <ButtonView
         setSearchView={devicesSer}
         id={'DeviceId'}
@@ -86,7 +84,6 @@ export default memo(DropDownView);
 const styles = StyleSheet.create({
   rightVies1: {
     marginTop: 133,
-
     alignSelf: 'flex-end',
     right: 25,
     zIndex: 100,
@@ -95,7 +92,6 @@ const styles = StyleSheet.create({
     width: w2,
     paddingVertical: 10,
     borderColor: '#898989',
-
     borderWidth: 1,
   },
 });

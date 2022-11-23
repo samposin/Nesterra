@@ -82,6 +82,7 @@ const BranchId = ({
             placeholderTextColor="black"
             onChangeText={text => searchId(text)}
             onFocus={() => {
+              seTDropDownShow(false);
               setFocusView('Branch');
               setFocusOn1(false);
               setPlace('');

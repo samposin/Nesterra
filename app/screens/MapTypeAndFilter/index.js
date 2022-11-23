@@ -11,7 +11,7 @@ import React from 'react';
 import Status from './Components/Status';
 import Type from './Components/Type';
 import Genealogy from './Components/Genealogy';
-import {Heading, VStack} from 'native-base';
+
 const {height, width} = Dimensions.get('screen');
 const MapTypeAndFilter = ({route}) => {
   // console.log(route.params, 'route');

@@ -181,26 +181,6 @@ const Devices = ({
         </View>
       ) : (
         <>
-          {/* <TouchableOpacity
-            onPress={() => {
-              deviceRef.current.close();
-              deviceRefDetails.current.close();
-              setDiplayName('');
-              getAllDevice(setLodding1);
-            }}
-            style={{
-              width: 100,
-              height: 40,
-              borderRadius: 10,
-              backgroundColor: '#d1e7ff',
-              position: 'absolute',
-              top: 7,
-              right: 10,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{color: '#007aff'}}>Clear Search</Text>
-          </TouchableOpacity> */}
           {/* ==============container============== */}
 
           {/* ========ID VIEW============= */}

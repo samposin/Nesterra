@@ -82,6 +82,7 @@ const DeviceId = ({
             placeholderTextColor="black"
             onChangeText={text => searchId(text)}
             onFocus={() => {
+              seTDropDownShow(false);
               setFocusView('Device');
               setFocusOn1(false);
               setPlace('');

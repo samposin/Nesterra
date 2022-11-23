@@ -79,7 +79,6 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const Explore = ({
   navigation,
   get_coordinates,
-
   get_location_details,
   marker_seleted,
 
@@ -382,14 +381,14 @@ const Explore = ({
     animateToRegion({
       latitude: lat,
       longitude: lng,
-      latitudeDelta: 0.002,
-      longitudeDelta: 0.002,
+      latitudeDelta: 0.0011382716049382717,
+      longitudeDelta: 0.0006852471200297287,
     });
     setCurrentRegion({
       latitude: lat,
       longitude: lng,
-      latitudeDelta: 0.002,
-      longitudeDelta: 0.002,
+      latitudeDelta: 0.0011382716049382717,
+      longitudeDelta: 0.0006852471200297287,
     });
 
     bottomSheetRef.current.close();
@@ -407,7 +406,7 @@ const Explore = ({
   };
   const markerZoom1 = ({geometry}) => {
     // console.log(geometry.coordinates[0], geometry.coordinates[1]);
-    // console.log(geometry);
+
     const la = geometry.coordinates[0];
     const ln = geometry.coordinates[1];
     animateToRegion({
@@ -483,7 +482,7 @@ const Explore = ({
     const fdata = dataMar.filter(function (item) {
       return item.HierarchyLocationType.toLowerCase() === data.toLowerCase();
     });
-    // console.log(cord.length, fdata);
+
     setCord(fdata);
   };
   const allDataa = () => {
@@ -790,11 +789,11 @@ const Explore = ({
                     setIsLoading(true);
                     get_location_details({
                       id: item.Location_ID,
-
                       setIsLoading,
                       bottomSheetRef,
                     });
-                    markerZoom(item.Latitude, item.Longitude);
+                    // markerZoom(item.Latitude, item.Longitude);
+                    onSearchPress(item.Latitude, item.Longitude);
                     // settIndexZ(0);
 
                     // bottomSheetRefImage.current.close();
@@ -897,7 +896,6 @@ const Explore = ({
             style={{
               width: '20%',
               height: '100%',
-
               justifyContent: 'center',
               alignItems: 'center',
             }}>
@@ -973,6 +971,7 @@ const Explore = ({
             setSearchView={addRess}
             setRander={setRander}
             setPlace={setPlace}
+            searchView={searchView}
           />
         ) : null}
         {/* =================search=============== */}

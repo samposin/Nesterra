@@ -82,6 +82,7 @@ const AtmsId = ({
             placeholderTextColor="black"
             onChangeText={text => searchId(text)}
             onFocus={() => {
+              seTDropDownShow(false);
               setFocusView('ATM');
               setFocusOn1(false);
               setPlace('');

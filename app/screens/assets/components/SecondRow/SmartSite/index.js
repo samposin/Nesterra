@@ -89,6 +89,7 @@ const SmartSite = ({loding1, cirCuitRef, bootSheetLodder, setSwitchView}) => {
           />
         </>
       )}
+      <View style={{height: 60}}></View>
     </>
   );
 };

@@ -40,14 +40,13 @@ const BottomSheetView = ({
   bottomSheetLoder,
   setDetailsLoder,
   getNotes,
-
   getAllAtms,
   get_all_devices_inventory,
   get_order,
   getInventoryCircuit,
 }) => {
   // console.log(cirCuitRef, bottomSheetRef,picRef );
-  const snapPoints = useMemo(() => ['10%', '23%', '95%'], []);
+  const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
   const location_data = useSelector(state => state.location_details.data);
   const {siteItem} = useSelector(state => state.SiteItem);
   const dataa = siteItem.find(i => i.id === location_data.Location_ID);

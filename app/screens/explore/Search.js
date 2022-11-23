@@ -17,7 +17,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {LocationKey} from '../../key';
 import Geocoder from 'react-native-geocoding';
-useDispatch;
+
 import {GET_PHOTO_URL_FROM_SEARCH} from '../../actions/actionType/action.photoMapurl.type';
 import {useDispatch} from 'react-redux';
 
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
       alignSelf: 'center',
       zIndex: 0,
       marginTop: 80,
-
+      color: 'black',
       // zIndex: -1,
       backgroundColor: 'white',
       borderRadius: 25,

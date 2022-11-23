@@ -82,6 +82,7 @@ const CircuitId = ({
             placeholderTextColor="black"
             onChangeText={text => searchId(text)}
             onFocus={() => {
+              seTDropDownShow(false);
               setFocusView('Circuit');
               setFocusOn1(false);
               setPlace('');

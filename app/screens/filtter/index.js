@@ -83,19 +83,18 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
     switch (true) {
       case item == 0:
         return <SiteStatus />;
-        break;
+
       case item == 1:
         return <Country />;
-        break;
+
       case item == 2:
         return <SiteType />;
-        break;
+
       case item == 3:
         return <SiteSubType />;
-        break;
+
       case item == 4:
         return <Vendor />;
-        break;
     }
   };
 

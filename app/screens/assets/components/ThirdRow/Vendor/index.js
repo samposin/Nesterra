@@ -93,6 +93,7 @@ const Vendor = ({loding1, setSwitchView, cirCuitRef}) => {
             }}
             keyExtractor={item => item.Vendor}
           />
+          <View style={{height: 60}}></View>
         </>
       )}
     </>

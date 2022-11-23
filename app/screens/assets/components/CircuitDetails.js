@@ -23,22 +23,7 @@ const BottomSheetViewCircuits = ({
   // const {inv_Id} = route.params;
   const {item} = useSelector(state => state.allCircuitDetails);
   // console.log(item);
-  const TabeRow = ({title, data}) => {
-    return (
-      <View style={{...styles.secondTableRow}}>
-        <View
-          style={{
-            ...styles.secondTableColum,
-            backgroundColor: '#deebf7',
-          }}>
-          <Text style={{color: 'black'}}>{title}</Text>
-        </View>
-        <View style={styles.secondTableColum}>
-          <Text style={{color: 'black'}}>{data}</Text>
-        </View>
-      </View>
-    );
-  };
+
   const LightGrewRow = ({title, value, bgcolor}) => {
     return (
       <View style={{...styles.secondTableRow}}>
@@ -71,7 +56,7 @@ const BottomSheetViewCircuits = ({
         handleComponent={() => (
           <View style={styles.closeLineContainer}>
             <View style={styles.closeLine}>
-              <SimpleLineIcons name="arrow-up" size={20} color="black" />
+              <SimpleLineIcons name="arrow-up" size={16} color="black" />
             </View>
           </View>
         )}
@@ -394,7 +379,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   boxText: {
-    fontWeight: '700',
     fontSize: 14,
     color: 'white',
   },
