@@ -681,6 +681,34 @@ const Explore = ({
   const getAddress = add => {
     console.log(add);
   };
+  const onSearchPress1 = (lat, lng, add) => {
+    // console.log(add);
+    let lodata = dataMar.find(item => item.FullAddress.includes(add));
+    let lisdata = dataMar.map(item => {
+      let itm = {...item, isChecked: false};
+      return itm;
+    });
+    console.log(lodata);
+    if (lodata) {
+      for (let index = 0; index < lisdata.length; index++) {
+        if (lodata.Location_ID === lisdata[index].Location_ID) {
+          lisdata[index].isChecked = true;
+
+          break;
+        }
+      }
+    }
+
+    setCord(lisdata);
+    animateToRegion({
+      latitude: lat,
+      longitude: lng,
+      latitudeDelta: LATITUDE_DELTA / 1.5,
+      longitudeDelta: LONGITUDE_DELTA,
+    });
+
+    bottomSheetRef.current.close();
+  };
 
   return (
     <>
@@ -934,7 +962,7 @@ const Explore = ({
         ) : (
           <Search
             catShow={setCatShow}
-            onPress={onSearchPress}
+            onPress={onSearchPress1}
             setModalVisible={setModalVisible}
             settingView={settingView}
             modalVisible={modalVisible}

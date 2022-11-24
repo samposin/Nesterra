@@ -224,7 +224,7 @@ const Search = ({
       fetchDetails={true}
       placeholder="Search Location"
       onPress={async (data, details = null) => {
-        // console.log(data, 'details');
+        // console.log(data.description, 'details');
         setIsLoading(true);
         setFocusOn(true);
         // dispatch({
@@ -241,7 +241,7 @@ const Search = ({
 
         const {lat, lng} = details.geometry.location;
         catShow(true);
-        onPress(lat, lng);
+        onPress(lat, lng, data.description);
       }}
       textInputProps={{
         onFocus: () => {
