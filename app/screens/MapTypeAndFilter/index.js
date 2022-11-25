@@ -11,6 +11,7 @@ import React from 'react';
 import Status from './Components/Status';
 import Type from './Components/Type';
 import Genealogy from './Components/Genealogy';
+import SiteType from './Components/SiteType';
 
 const {height, width} = Dimensions.get('screen');
 const MapTypeAndFilter = ({route}) => {
@@ -26,6 +27,8 @@ const MapTypeAndFilter = ({route}) => {
         return <Status filterData={route.params} />;
       case setetedView === 'Genealogy':
         return <Genealogy />;
+      case setetedView === 'Site Type':
+        return <SiteType />;
     }
   };
   return (
@@ -77,6 +80,16 @@ const MapTypeAndFilter = ({route}) => {
               marginVertical: 10,
             }}>
             Genealogy
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setSeletedView('Site Type')}>
+          <Text
+            style={{
+              color: setetedView === 'Site Type' ? '#1c7dce' : '#757575',
+              fontWeight: 'bold',
+              marginVertical: 10,
+            }}>
+            Site Type
           </Text>
         </TouchableOpacity>
       </View>

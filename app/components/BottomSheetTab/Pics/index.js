@@ -6,10 +6,21 @@ import DataLoder from '../../lodder/DataLoder';
 import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {LocationKey, PhotoUrl} from '../../../key';
+import ImageButton from './ImageButton';
+
 const Pics = ({isLoding}) => {
   const navigation = useNavigation();
   const photo = useSelector(state => state.photo_url.photo_url);
-
+  const [imagetype, setImageType] = React.useState('Google');
+  const googleImage = () => {
+    setImageType('Google');
+  };
+  const siteImage = () => {
+    setImageType('Site');
+  };
+  const netWorkImage = () => {
+    setImageType('Network');
+  };
   return (
     <>
       {isLoding ? (
@@ -20,55 +31,31 @@ const Pics = ({isLoding}) => {
             <View
               style={{
                 width: '100%',
-                height: 40,
+                height: 50,
                 flexDirection: 'row',
-                justifyContent: 'space-between',
+
                 paddingHorizontal: 5,
+                paddingVertical: 2,
+                alignItems: 'center',
+                backgroundColor: '#f3f2f8',
               }}>
-              <View
-                style={{
-                  width: '23%',
-                  height: '100%',
-                  justifyContent: 'center',
-                }}>
-                <Text>Filter</Text>
-              </View>
-              <View
-                style={{
-                  width: '23%',
-                  height: '100%',
-                  borderColor: '#007aff',
-                  borderWidth: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 5,
-                }}>
-                <Text>NetWork</Text>
-              </View>
-              <View
-                style={{
-                  width: '23%',
-                  height: '100%',
-                  borderColor: '#007aff',
-                  borderWidth: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 5,
-                }}>
-                <Text>NetWork</Text>
-              </View>
-              <View
-                style={{
-                  width: '23%',
-                  height: '100%',
-                  borderColor: '#007aff',
-                  borderWidth: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 5,
-                }}>
-                <Text>NetWork</Text>
-              </View>
+              <Text style={{color: 'black'}}>Filter :</Text>
+
+              <ImageButton
+                title="Google"
+                onPress={googleImage}
+                imagetype={imagetype}
+              />
+              <ImageButton
+                title="Site"
+                onPress={siteImage}
+                imagetype={imagetype}
+              />
+              <ImageButton
+                title="Network"
+                onPress={netWorkImage}
+                imagetype={imagetype}
+              />
             </View>
             <BottomSheetFlatList
               numColumns={2}
@@ -116,7 +103,6 @@ const Pics = ({isLoding}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     paddingRight: 3,
   },
   contentContainer: {
