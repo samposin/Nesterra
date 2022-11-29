@@ -21,7 +21,7 @@ import Stats from '../screens/stats';
 import VoiceToText from '../screens/Voice';
 import {useDispatch} from 'react-redux';
 import {ATM_ID, BRANCH_ID} from '../actions/actionType/ExploreSearch/index.js';
-
+import MapTypeAndFilter from '../screens/MapTypeAndFilter';
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
@@ -62,6 +62,7 @@ const MainStack = () => {
         <Stack.Screen name="CircuitsDetails" component={CircuitsDetails} />
         <Stack.Screen name="BackGroundCorsoul" component={BackGroundCorsoul} />
         <Stack.Screen name="VoiceToText" component={VoiceToText} />
+        <Stack.Screen name="MapTypeAndFilter" component={MapTypeAndFilter} />
       </Stack.Navigator>
     </NavigationContainer>
   );

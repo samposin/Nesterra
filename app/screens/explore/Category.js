@@ -35,8 +35,8 @@ const Category = ({
           let itm = {...item, isActive: false};
           return itm;
         });
-        // third_party_filter(value);
-        filterData(value);
+        third_party_filter(value);
+        // filterData(value);
         listData[id].isActive = true;
         setAllItem(listData);
       } else if (entry.id == id) {
@@ -44,7 +44,7 @@ const Category = ({
           let itm = {...item, isActive: false};
           return itm;
         });
-        // get_coordinates();
+        get_coordinates();
         allDataa();
         setAllItem(listData);
       } else {
@@ -52,7 +52,7 @@ const Category = ({
           let itm = {...item, isActive: false};
           return itm;
         });
-        // third_party_filter(value);
+        third_party_filter(value);
         filterData(value);
         listData[id].isActive = true;
         setAllItem(listData);

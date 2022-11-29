@@ -7,7 +7,12 @@ import {
   FILTER_BY_INACTIVE,
 } from '../../actions/action.coordinate.type';
 import {GET_COORDINATES, MARKER_IS_SELECTED} from '../../actions/action.type';
-import {FILTER_MARKER} from '../../actions/actionType/action.Coordinatefilter.type';
+import {
+  CHANGE_BORDER,
+  FILTER_MARKER,
+  CHANGE_BORDER_FILTER,
+} from '../../actions/actionType/action.Coordinatefilter.type';
+import {dataMar} from '../../utils/MarkerData1';
 
 const initialState = {
   coordinates: [],
@@ -158,7 +163,21 @@ export default (state = initialState, action) => {
         lngg: 0,
         error: null,
       };
+    case CHANGE_BORDER:
+      let dd = dataMar.map((item, i) => {
+        return {...item, isChecked: false};
+      });
 
+      dd[action.data].isChecked = true;
+      return {
+        ...state,
+        coordinates: dd,
+      };
+    case CHANGE_BORDER_FILTER:
+      return {
+        ...state,
+        coordinates: action.data,
+      };
     default:
       return state;
   }

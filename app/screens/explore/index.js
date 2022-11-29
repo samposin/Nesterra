@@ -34,7 +34,7 @@ LogBox.ignoreLogs([
 ]);
 
 import ModalView from './ModalView';
-import {useIsFocused} from '@react-navigation/native';
+
 import {get_coordinates, marker_seleted} from '../../actions/coordinates';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {setLatLng} from '../../actions/setLatLang';
@@ -69,6 +69,10 @@ import {getLocationInfo} from './../../actions/LocartionInfo/index';
 import {SET_LAT_LNG} from '../../actions/action.type';
 import DropDownView from './components/Search/DropDownView';
 import RanderView from './components/RanderView';
+import {
+  CHANGE_BORDER,
+  CHANGE_BORDER_FILTER,
+} from '../../actions/actionType/action.Coordinatefilter.type';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -144,9 +148,12 @@ const Explore = ({
   //voice
 
   const dispatch = useDispatch();
-  // const {coordinates} = useSelector(state => state.coordinates);
+  const {coordinates} = useSelector(state => state.coordinates);
+
+  // console.log(currentRegion1);
+
   const {lat, lng} = useSelector(state => state.setLatLang);
-  // console.log(coordinates, 'ddd');
+  // console.log(coordinates.length, 'ddd');
   const [cord, setCord] = useState([]);
   const mapRef = useRef(null);
 
@@ -369,9 +376,9 @@ const Explore = ({
       mapRef.current.animateToRegion(region, 500);
     });
   };
-  // useEffect(() => {
-  //   get_coordinates();
-  // }, []);
+  useEffect(() => {
+    get_coordinates();
+  }, []);
 
   const animateToRegion = region => {
     mapRef.current.animateToRegion(region, 2000);
@@ -447,13 +454,13 @@ const Explore = ({
     setCord(lisdata);
     // setMarkerType(false);
   };
-  const getChange = marker => {
-    let marker1 = marker.map(item => {
-      let itm = {...item, isChecked: false};
-      return itm;
-    });
-
-    setCord(marker1);
+  const getChange = () => {
+    // let marker1 = marker.map(item => {
+    //   let itm = {...item, isChecked: false};
+    //   return itm;
+    // });
+    get_coordinates();
+    // setCord(marker1);
     animateToRegion({
       latitude: 42.361145,
       longitude: -71.057083,
@@ -472,7 +479,7 @@ const Explore = ({
       setCord(dataMar);
     } else {
       const fdata = dataMar.filter(function (item) {
-        return item.HierarchyLocationType.toLowerCase() === data.toLowerCase();
+        return item.LocationStatusDesc.toLowerCase() === data.toLowerCase();
       });
 
       setCord(fdata);
@@ -575,7 +582,10 @@ const Explore = ({
       }
     }
 
-    setCord(lisdata);
+    dispatch({
+      type: CHANGE_BORDER_FILTER,
+      data: lisdata,
+    });
     onSearchPress(atmData.Latitude, atmData.Longitude);
   };
   const getBranchId = id => {
@@ -600,7 +610,10 @@ const Explore = ({
       }
     }
 
-    setCord(lisdata);
+    dispatch({
+      type: CHANGE_BORDER_FILTER,
+      data: lisdata,
+    });
     onSearchPress(atmData.Latitude, atmData.Longitude);
   };
   const getsiteId = id => {
@@ -625,19 +638,22 @@ const Explore = ({
         break;
       }
     }
+    dispatch({
+      type: CHANGE_BORDER_FILTER,
+      data: lisdata,
+    });
 
-    setCord(lisdata);
     onSearchPress(lodata.Latitude, lodata.Longitude);
   };
   const getCircuitId = id => {
     let lodata = dataMar.find(o => o.Circuit_ID.includes(id));
-    getLocationInfo(dataMar.Location_ID);
+    getLocationInfo(lodata.Location_ID);
     get_location_details({
-      id: dataMar.Location_ID,
+      id: lodata.Location_ID,
       setIsLoading,
       bottomSheetRef,
     });
-    setLatLang(dataMar.Latitude, dataMar.Longitude);
+    setLatLang(lodata.Latitude, lodata.Longitude);
 
     let lisdata = dataMar.map(item => {
       let itm = {...item, isChecked: false};
@@ -650,8 +666,11 @@ const Explore = ({
         break;
       }
     }
+    dispatch({
+      type: CHANGE_BORDER_FILTER,
+      data: lisdata,
+    });
 
-    setCord(lisdata);
     onSearchPress(lodata.Latitude, lodata.Longitude);
   };
   const getDeviceId = id => {
@@ -675,7 +694,10 @@ const Explore = ({
         break;
       }
     }
-    setCord(lisdata);
+    dispatch({
+      type: CHANGE_BORDER_FILTER,
+      data: lisdata,
+    });
     onSearchPress(lodata.Latitude, lodata.Longitude);
   };
   const getAddress = add => {
@@ -688,7 +710,7 @@ const Explore = ({
       let itm = {...item, isChecked: false};
       return itm;
     });
-    console.log(lodata);
+
     if (lodata) {
       for (let index = 0; index < lisdata.length; index++) {
         if (lodata.Location_ID === lisdata[index].Location_ID) {
@@ -710,6 +732,12 @@ const Explore = ({
     bottomSheetRef.current.close();
   };
 
+  const changeMarkerBorder = id => {
+    dispatch({
+      type: CHANGE_BORDER,
+      data: id,
+    });
+  };
   return (
     <>
       {/* {inputRotate ? rotatedIconAntichange() : rotatedIconchange()} */}
@@ -801,8 +829,8 @@ const Explore = ({
           onClusterPress={e => markerZoom1(e)}
           // onRegionChangeComplete={onRegionChangeComplete}
           onLayout={onLayoutMap}>
-          {cord &&
-            cord.map((item, i) => {
+          {coordinates &&
+            coordinates.map((item, i) => {
               // console.log(item.SubLocationType);
               return (
                 <Marker.Animated
@@ -813,6 +841,7 @@ const Explore = ({
                   }}
                   tracksViewChanges={true}
                   onPress={() => {
+                    changeMarkerBorder(i);
                     playSound();
                     setIsLoading(true);
                     get_location_details({
@@ -841,7 +870,7 @@ const Explore = ({
 
                     setLatLang(item.Latitude, item.Longitude);
 
-                    markerChange(i);
+                    ///      markerChange(i);
                   }}>
                   <CustomMarker
                     mark={item.isChecked}
@@ -871,14 +900,15 @@ const Explore = ({
           ) : null} */}
         </MapView>
         {/* ===========get Current position=== */}
-        <MapTypeAndFilterButtom filterData={filterData1} />
+        {/* <MapTypeAndFilterButtom /> */}
         <TouchableOpacity onPress={getLocation} style={styles.currentLocation}>
           <MaterialIcons name="my-location" size={24} color="black" />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             // dispatch({type: CIRCUIT_ID});
-            getChange(dataMar);
+            getChange();
+            // get_coordinates();
           }}
           style={styles.currentLocation1}>
           <SimpleLineIcons
@@ -1220,7 +1250,7 @@ const styles = StyleSheet.create({
     height: 36,
     backgroundColor: 'white',
     position: 'absolute',
-    bottom: 155,
+    bottom: 110,
     right: 10,
     justifyContent: 'center',
     alignItems: 'center',

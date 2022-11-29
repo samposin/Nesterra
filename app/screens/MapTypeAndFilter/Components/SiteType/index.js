@@ -8,8 +8,6 @@ import {
   View,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-SelectAll;
-import {Heading} from 'native-base';
 
 const {height, width} = Dimensions.get('screen');
 
@@ -20,6 +18,7 @@ import {getlist, is_selected, select_all} from '../../../../actions/selectList';
 import SelectAll from '../../../filtter/SelectAll';
 import CheckBoxComponet from '../../../../components/checkBox';
 import {useNavigation} from '@react-navigation/native';
+import {dataMar} from '../../../../utils/MarkerData1';
 
 const data = [
   {id: 0, txt: 'Data Center', name: 'Data Center', isChecked: false},
@@ -31,18 +30,60 @@ const data = [
 ];
 const SiteType = ({getlist, is_selected, select_all}) => {
   const navigation = useNavigation();
-  const list = useSelector(state => state);
-  // console.log(JSON.stringify(list.checkList), 'filter site type');
-  // console.log(list);
-  const [checked1, setChecked] = React.useState(false);
+  const {list} = useSelector(state => state.selectList);
+  const {checkList} = useSelector(state => state.selectList);
+  const [dataCenter, setDataCenter] = useState(true);
+  const [office, setOffice] = useState(true);
+  const [branch, setbranch] = useState(true);
+  const [atm, setAtm] = useState(true);
+  const [thparty, setThparty] = useState(true);
+  const [other, setOther] = useState(true);
+  let ddd = [];
+  const dpa = checkList.map(item => {
+    return ddd.push(item.name);
+  });
+  const datother = dataMar.filter(
+    item => item.HierarchyLocationType === 'Other',
+  );
+  const datCenter = dataMar.filter(item =>
+    item.HierarchyLocationType.includes('Data Center'),
+  );
+  const dataOffice = dataMar.filter(
+    item => item.HierarchyLocationType === 'Office',
+  );
+  const dataBranch = dataMar.filter(
+    item => item.HierarchyLocationType === 'Branch',
+  );
+  const dataAtm = dataMar.filter(item => item.HierarchyLocationType === 'ATM');
+  const dataThrd = dataMar.filter(item =>
+    item.HierarchyLocationType.includes('3rd Party'),
+  );
+  const changeData = id => {
+    switch (true) {
+      case id == 0:
+        setDataCenter(!dataCenter);
+        break;
+      case id == 1:
+        setOffice(!office);
+        break;
+      case id == 2:
+        setbranch(!branch);
+        break;
 
-  const setState = () => {
-    setChecked(true);
+      case id == 3:
+        setAtm(!atm);
+        break;
+      case id == 4:
+        setThparty(!thparty);
+        break;
+      case id == 5:
+        setOther(!other);
+        break;
+    }
   };
-  const handleChangeAll = () => {
-    select_all(data);
-  };
+
   const handleChange = id => {
+    changeData(id);
     is_selected(id);
   };
 
@@ -66,13 +107,20 @@ const SiteType = ({getlist, is_selected, select_all}) => {
           <View
             style={{
               width: '100%',
-              height: '100%',
+              height: '50%',
+
+              justifyContent: 'flex-end',
+            }}>
+            <Text style={{color: 'black'}}>Filter</Text>
+          </View>
+          <View
+            style={{
+              width: '100%',
+              height: '50%',
 
               justifyContent: 'center',
             }}>
-            <Heading size="sm" style={{color: 'black', marginLeft: 20}}>
-              Filters
-            </Heading>
+            <Text style={{color: 'black'}}>{ddd.toString()}</Text>
           </View>
         </View>
         <View style={styles.mainContainer}>
@@ -89,19 +137,79 @@ const SiteType = ({getlist, is_selected, select_all}) => {
               width: '70%',
               height: '100%',
               backgroundColor: '#ffffff',
+              flexDirection: 'row',
             }}>
-            <Text style={{color: 'black', marginLeft: 8}}>Setected (0)</Text>
-            {list.selectList.list &&
-              list.selectList.list.map((item, i) => {
-                return (
-                  <CheckBoxComponet
-                    key={i}
-                    handleChange={handleChange}
-                    value={item.isChecked}
-                    item={item}
-                  />
-                );
-              })}
+            <View
+              style={{
+                width: '80%',
+                height: '100%',
+              }}>
+              <Text style={{color: 'black', marginLeft: 8, marginVertical: 10}}>
+                Setected {`(${checkList.length})`}
+              </Text>
+              {list &&
+                list.map((item, i) => {
+                  return (
+                    <View
+                      style={{
+                        width: '100%',
+                        height: 40,
+                        flexDirection: 'row',
+                        marginVertical: 1,
+                        alignItems: 'center',
+                      }}>
+                      <View style={{width: '50%', height: '100%'}}>
+                        <CheckBoxComponet
+                          key={i}
+                          handleChange={handleChange}
+                          value={item.isChecked}
+                          item={item}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          width: '50%',
+                          height: '100%',
+                          justifyContent: 'center',
+                          alignItems: 'flex-end',
+                          paddingRight: 15,
+                        }}>
+                        <Text></Text>
+                      </View>
+                    </View>
+                  );
+                })}
+            </View>
+            <View
+              style={{
+                width: '20%',
+                height: '100%',
+              }}>
+              <Text
+                style={{
+                  color: 'black',
+                  marginLeft: 8,
+                  marginVertical: 10,
+                }}></Text>
+              <View style={styles.countItem}>
+                <Text>{dataCenter ? 0 : datCenter.length}</Text>
+              </View>
+              <View style={styles.countItem}>
+                <Text>{office ? 0 : dataOffice.length}</Text>
+              </View>
+              <View style={styles.countItem}>
+                <Text>{branch ? 0 : dataBranch.length}</Text>
+              </View>
+              <View style={styles.countItem}>
+                <Text>{atm ? 0 : dataAtm.length}</Text>
+              </View>
+              <View style={styles.countItem}>
+                <Text>{thparty ? 0 : dataThrd.length}</Text>
+              </View>
+              <View style={styles.countItem}>
+                <Text>{other ? 0 : datother.length}</Text>
+              </View>
+            </View>
           </View>
         </View>
       </View>
@@ -116,7 +224,7 @@ const styles = StyleSheet.create({
     height: 70,
     width: '100%',
     backgroundColor: '#f5f5f5',
-    flexDirection: 'row',
+    paddingLeft: 20,
     justifyContent: 'space-between',
 
     alignItems: 'center',
@@ -136,6 +244,13 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
+    alignItems: 'center',
+  },
+  countItem: {
+    width: '100%',
+    height: 40,
+    flexDirection: 'row',
+    marginVertical: 1,
     alignItems: 'center',
   },
 });

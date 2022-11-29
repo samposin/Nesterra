@@ -1,10 +1,12 @@
 import {StyleSheet, Text, Image, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 
-const MenuItem = ({src, OnPress, title}) => {
+const MenuItem = ({src, onPress, title}) => {
   return (
     <TouchableOpacity
-      onPress={OnPress}
+      onPress={() => {
+        onPress();
+      }}
       style={{
         width: '100%',
         height: 50,

@@ -9,18 +9,17 @@ import {
 } from 'react-native';
 import React from 'react';
 import MenuItem from './MenuItem';
+
 const Imagg = {
-  contact: require('../../images/nenuImage/contract.png'),
-  info: require('../../images/nenuImage/info.png'),
-  pic: require('../../images/nenuImage/pie-chart.png'),
-  mark: require('../../images/nenuImage/question-mark.png'),
-  user: require('../../images/nenuImage/user.png'),
-  logout: require('../../images/nenuImage/logout.png'),
+  contact: require('../../images/nenuImage/contact.png'),
+  filter: require('../../images/nenuImage/filter.png'),
+  setting: require('../../images/nenuImage/cogwheel.png'),
+  stats: require('../../images/nenuImage/pie-chart.png'),
 };
 
 const Menu = ({navigation}) => {
   const onPress = () => {
-    navigation.navigate('Stats');
+    navigation.navigate('MapTypeAndFilter');
   };
   return (
     <>
@@ -34,7 +33,6 @@ const Menu = ({navigation}) => {
             width: '100%',
             height: 50,
             flexDirection: 'row',
-
             alignItems: 'center',
             justifyContent: 'space-between',
             paddingHorizontal: 10,
@@ -57,20 +55,10 @@ const Menu = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={{paddingHorizontal: 15}}>
-          <MenuItem onPress={onPress} src={Imagg.user} title="My Profile" />
-          <MenuItem onPress={onPress} src={Imagg.pic} title="Stats" />
-          <MenuItem onPress={onPress} src={Imagg.info} title="About" />
-          <MenuItem
-            onPress={onPress}
-            src={Imagg.contact}
-            title="Terms of use"
-          />
-          <MenuItem
-            onPress={onPress}
-            src={Imagg.logout}
-            title="Privecy Policy"
-          />
-          <MenuItem onPress={onPress} src={Imagg.mark} title="FAQs" />
+          <MenuItem onPress={onPress} src={Imagg.filter} title="Filters" />
+          <MenuItem onPress={onPress} src={Imagg.contact} title="Contacts" />
+          <MenuItem onPress={onPress} src={Imagg.stats} title="Stats" />
+          <MenuItem onPress={onPress} src={Imagg.setting} title="Settings" />
         </View>
       </SafeAreaView>
     </>

@@ -24,7 +24,7 @@ const MapTypeAndFilter = ({route}) => {
         return <Type />;
 
       case setetedView === 'Status':
-        return <Status filterData={route.params} />;
+        return <Status />;
       case setetedView === 'Genealogy':
         return <Genealogy />;
       case setetedView === 'Site Type':
