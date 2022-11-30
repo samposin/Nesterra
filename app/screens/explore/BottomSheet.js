@@ -109,7 +109,6 @@ const BottomSheetView = ({
       case name === 'Notes':
         setNotesLoding(true);
         getNotes(setNotesLoding);
-
         break;
     }
   };
@@ -120,10 +119,8 @@ const BottomSheetView = ({
     switch (true) {
       case item == 0:
         return <Info />;
-
       case item == 1:
         return <Pics isLoding={isLoding} />;
-
       case item == 2:
         return <Hours />;
 
@@ -294,7 +291,6 @@ const BottomSheetView = ({
                 <Text
                   style={{
                     fontSize: 16,
-
                     marginLeft: 10,
                     color: 'black',
                   }}>
@@ -309,7 +305,6 @@ const BottomSheetView = ({
                 <Text
                   style={{
                     fontSize: 16,
-
                     marginLeft: 10,
                     color: 'black',
                   }}>

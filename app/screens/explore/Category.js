@@ -45,7 +45,7 @@ const Category = ({
           return itm;
         });
         get_coordinates();
-        allDataa();
+        // allDataa();
         setAllItem(listData);
       } else {
         listData = allItem.map(item => {
@@ -53,7 +53,7 @@ const Category = ({
           return itm;
         });
         third_party_filter(value);
-        filterData(value);
+        // filterData(value);
         listData[id].isActive = true;
         setAllItem(listData);
       }

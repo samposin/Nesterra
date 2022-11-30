@@ -17,6 +17,7 @@ import AllDevice from '../screens/AllDevice/index.js';
 import AllDevicesDetails from '../screens/AllDevice/AllDevicesDetails.js';
 import Circuits from '../screens/circuits/index.js';
 import BackGroundCorsoul from '../screens/BackGroundCorsoul/index.js';
+import Contact from '../screens/Contact';
 import Stats from '../screens/stats';
 import VoiceToText from '../screens/Voice';
 import {useDispatch} from 'react-redux';
@@ -63,6 +64,7 @@ const MainStack = () => {
         <Stack.Screen name="BackGroundCorsoul" component={BackGroundCorsoul} />
         <Stack.Screen name="VoiceToText" component={VoiceToText} />
         <Stack.Screen name="MapTypeAndFilter" component={MapTypeAndFilter} />
+        <Stack.Screen name="Contact" component={Contact} />
       </Stack.Navigator>
     </NavigationContainer>
   );

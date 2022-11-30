@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React from 'react';
+import React, {useRef} from 'react';
 import MenuItem from './MenuItem';
-
+import BottomSheetView from './BottomSheetView';
 const Imagg = {
   contact: require('../../images/nenuImage/contact.png'),
   filter: require('../../images/nenuImage/filter.png'),
@@ -18,8 +18,15 @@ const Imagg = {
 };
 
 const Menu = ({navigation}) => {
+  const bottomRef = useRef(null);
   const onPress = () => {
     navigation.navigate('MapTypeAndFilter');
+  };
+  const contact = () => {
+    bottomRef.current.snapToIndex(2);
+  };
+  const stats = () => {
+    navigation.navigate('Stats');
   };
   return (
     <>
@@ -56,11 +63,12 @@ const Menu = ({navigation}) => {
         </View>
         <View style={{paddingHorizontal: 15}}>
           <MenuItem onPress={onPress} src={Imagg.filter} title="Filters" />
-          <MenuItem onPress={onPress} src={Imagg.contact} title="Contacts" />
-          <MenuItem onPress={onPress} src={Imagg.stats} title="Stats" />
+          <MenuItem onPress={contact} src={Imagg.contact} title="Contacts" />
+          <MenuItem onPress={stats} src={Imagg.stats} title="Stats" />
           <MenuItem onPress={onPress} src={Imagg.setting} title="Settings" />
         </View>
       </SafeAreaView>
+      <BottomSheetView bottomRef={bottomRef} />
     </>
   );
 };
