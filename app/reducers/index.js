@@ -41,6 +41,7 @@ import SiteItem from './SiteItem';
 import LocationInfo from './LocationInfo';
 import OrdersItem from './OrdersItem';
 import Notes from './Notes';
+import Contacts from './Contacts';
 import ExploreSiteId from './ExploreSearch/ExploreSiteId';
 import ExploreAtmId from './ExploreSearch/ExploreAtmId';
 import ExploreBranchId from './ExploreSearch/ExploreBranchId';
@@ -95,5 +96,6 @@ const rootReducer = combineReducers({
   ExploreCircuitId,
   ExploreDeviceId,
   ExploreAddress,
+  Contacts,
 });
 export default rootReducer;

@@ -212,6 +212,40 @@ const SiteType = ({getlist, is_selected, select_all}) => {
             </View>
           </View>
         </View>
+        <View
+          style={{
+            width: 260,
+            height: 35,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            position: 'absolute',
+
+            bottom: 100,
+            right: 10,
+          }}>
+          <View
+            style={{
+              width: 100,
+              height: '100%',
+              borderRadius: 5,
+              backgroundColor: '#c7dcfb',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{color: '#1e74bf'}}>Search Clear</Text>
+          </View>
+          <View
+            style={{
+              width: 100,
+              height: '100%',
+              borderRadius: 5,
+              backgroundColor: '#0075f6',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{color: 'white'}}>Apply</Text>
+          </View>
+        </View>
       </View>
     </>
   );

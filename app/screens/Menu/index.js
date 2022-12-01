@@ -10,6 +10,8 @@ import {
 import React, {useRef} from 'react';
 import MenuItem from './MenuItem';
 import BottomSheetView from './BottomSheetView';
+import {getContacts} from './../../actions/Contacts/index';
+import {connect} from 'react-redux';
 const Imagg = {
   contact: require('../../images/nenuImage/contact.png'),
   filter: require('../../images/nenuImage/filter.png'),
@@ -17,12 +19,13 @@ const Imagg = {
   stats: require('../../images/nenuImage/pie-chart.png'),
 };
 
-const Menu = ({navigation}) => {
+const Menu = ({navigation, getContacts}) => {
   const bottomRef = useRef(null);
   const onPress = () => {
     navigation.navigate('MapTypeAndFilter');
   };
   const contact = () => {
+    getContacts();
     bottomRef.current.snapToIndex(2);
   };
   const stats = () => {
@@ -73,6 +76,6 @@ const Menu = ({navigation}) => {
   );
 };
 
-export default Menu;
+export default connect(null, {getContacts})(Menu);
 
 const styles = StyleSheet.create({});

@@ -4,9 +4,13 @@ import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useSelector} from 'react-redux';
+import NoDataViewFlatList from './../../../components/NoDataViewFlatList/index';
 
 const BottomSheetView = ({bottomRef}) => {
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
+  const {item} = useSelector(state => state.Contacts);
+
   return (
     <BottomSheet
       handleIndicatorStyle={{
@@ -65,6 +69,57 @@ const BottomSheetView = ({bottomRef}) => {
           <Text style={{color: 'white'}}>Name</Text>
         </View>
       </View>
+      <BottomSheetFlatList
+        showsVerticalScrollIndicator={false}
+        data={item}
+        keyExtractor={(item, i) => i.toString()}
+        renderItem={({index, item}) => {
+          return (
+            <TouchableOpacity
+              onPress={() => {}}
+              style={{
+                ...styles.tableRow1,
+                height: 40,
+                borderBottomColor: '#b0b3b7',
+                borderBottomWidth: 0.5,
+                flexDirection: 'row',
+              }}>
+              <View
+                style={{
+                  ...styles.headerTitle,
+                  width: '50%',
+                }}>
+                <Text style={{color: 'black'}}>{item.value}</Text>
+              </View>
+              <View
+                style={{
+                  ...styles.headerTitle,
+                  width: '25%',
+                  borderLeftWidth: 0.5,
+                  borderLeftColor: '#b0b3b7',
+                }}>
+                <Text style={{color: 'black'}}>{item.id}</Text>
+              </View>
+              <View
+                style={{
+                  ...styles.headerTitle,
+                  width: '25%',
+                  borderLeftWidth: 0.5,
+                  borderLeftColor: '#b0b3b7',
+                }}>
+                <Text style={{color: 'black'}}>{item.id}</Text>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+        ListEmptyComponent={() => {
+          return (
+            <>
+              <NoDataViewFlatList />
+            </>
+          );
+        }}
+      />
     </BottomSheet>
   );
 };
