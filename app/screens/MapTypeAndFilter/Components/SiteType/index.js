@@ -13,12 +13,18 @@ const {height, width} = Dimensions.get('screen');
 
 import {warinng} from '../../../../components/helper';
 
-import {connect, useSelector} from 'react-redux';
-import {getlist, is_selected, select_all} from '../../../../actions/selectList';
+import {connect, useSelector, useDispatch} from 'react-redux';
+import {
+  getlist,
+  is_selected,
+  clear_all,
+  select_all,
+} from '../../../../actions/selectList';
 import SelectAll from '../../../filtter/SelectAll';
 import CheckBoxComponet from '../../../../components/checkBox';
 import {useNavigation} from '@react-navigation/native';
 import {dataMar} from '../../../../utils/MarkerData1';
+import {FILTER_MULTI_SITE_TYPE} from './../../../../actions/action.type';
 
 const data = [
   {id: 0, txt: 'Data Center', name: 'Data Center', isChecked: false},
@@ -28,7 +34,8 @@ const data = [
   {id: 4, txt: '3rd Party', name: '3rd Party', isChecked: false},
   {id: 5, txt: 'Other', name: 'Other', isChecked: false},
 ];
-const SiteType = ({getlist, is_selected, select_all}) => {
+const SiteType = ({getlist, is_selected, select_all, clear_all}) => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const {list} = useSelector(state => state.selectList);
   const {checkList} = useSelector(state => state.selectList);
@@ -38,6 +45,7 @@ const SiteType = ({getlist, is_selected, select_all}) => {
   const [atm, setAtm] = useState(true);
   const [thparty, setThparty] = useState(true);
   const [other, setOther] = useState(true);
+
   let ddd = [];
   const dpa = checkList.map(item => {
     return ddd.push(item.name);
@@ -86,10 +94,24 @@ const SiteType = ({getlist, is_selected, select_all}) => {
     changeData(id);
     is_selected(id);
   };
-
+  const clearAll = () => {
+    setOffice(true);
+    setDataCenter(true);
+    setbranch(true);
+    setAtm(true);
+    setThparty(true);
+    setOther(true);
+  };
   React.useEffect(() => {
     getlist(data);
   }, []);
+  const filterApply = () => {
+    // console.log(checkList);
+    dispatch({
+      type: FILTER_MULTI_SITE_TYPE,
+      data: checkList,
+    });
+  };
   return (
     <>
       <View
@@ -151,6 +173,7 @@ const SiteType = ({getlist, is_selected, select_all}) => {
                 list.map((item, i) => {
                   return (
                     <View
+                      key={i}
                       style={{
                         width: '100%',
                         height: 40,
@@ -223,7 +246,11 @@ const SiteType = ({getlist, is_selected, select_all}) => {
             bottom: 100,
             right: 10,
           }}>
-          <View
+          <TouchableOpacity
+            onPress={() => {
+              clear_all(data);
+              clearAll();
+            }}
             style={{
               width: 100,
               height: '100%',
@@ -233,8 +260,11 @@ const SiteType = ({getlist, is_selected, select_all}) => {
               alignItems: 'center',
             }}>
             <Text style={{color: '#1e74bf'}}>Search Clear</Text>
-          </View>
-          <View
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              filterApply();
+            }}
             style={{
               width: 100,
               height: '100%',
@@ -244,14 +274,16 @@ const SiteType = ({getlist, is_selected, select_all}) => {
               alignItems: 'center',
             }}>
             <Text style={{color: 'white'}}>Apply</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </>
   );
 };
 
-export default connect(null, {getlist, is_selected, select_all})(SiteType);
+export default connect(null, {getlist, is_selected, clear_all, select_all})(
+  SiteType,
+);
 
 const styles = StyleSheet.create({
   header: {

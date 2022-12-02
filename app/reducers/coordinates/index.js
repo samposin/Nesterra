@@ -6,7 +6,11 @@ import {
   FILTER_BY_ALL,
   FILTER_BY_INACTIVE,
 } from '../../actions/action.coordinate.type';
-import {GET_COORDINATES, MARKER_IS_SELECTED} from '../../actions/action.type';
+import {
+  GET_COORDINATES,
+  MARKER_IS_SELECTED,
+  FILTER_MULTI_SITE_TYPE,
+} from '../../actions/action.type';
 import {
   CHANGE_BORDER,
   FILTER_MARKER,
@@ -178,6 +182,16 @@ export default (state = initialState, action) => {
         ...state,
         coordinates: action.data,
       };
+    case FILTER_MULTI_SITE_TYPE:
+      // console.log(action);
+      const filterByVendor = [...state.coordinates1];
+      const result11 = filterByVendor.filter(item => {
+        return action.data.find(i => {
+          return i.name === item.HierarchyLocationType;
+        });
+      });
+
+      console.log(result11.length, 'result11');
     default:
       return state;
   }

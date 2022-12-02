@@ -11,3 +11,4 @@ export const LOCATION_DETAILS = 'LOCATION_DETAILS';
 
 //Marker is seleted
 export const MARKER_IS_SELECTED = 'MARKER_IS_SELECTED';
+export const FILTER_MULTI_SITE_TYPE = 'FILTER_MULTI_SITE_TYPE';
