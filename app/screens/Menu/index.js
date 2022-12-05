@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React, {useRef} from 'react';
+import React, {useRef, useMemo, useState} from 'react';
 import MenuItem from './MenuItem';
 import BottomSheetView from './BottomSheetView';
 import {getContacts} from './../../actions/Contacts/index';
@@ -21,11 +21,13 @@ const Imagg = {
 
 const Menu = ({navigation, getContacts}) => {
   const bottomRef = useRef(null);
+  const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
+  const [contactLoder, seTcontactLoder] = useState(true);
   const onPress = () => {
     navigation.navigate('MapTypeAndFilter');
   };
   const contact = () => {
-    getContacts();
+    getContacts(seTcontactLoder);
     bottomRef.current.snapToIndex(2);
   };
   const stats = () => {
@@ -71,7 +73,12 @@ const Menu = ({navigation, getContacts}) => {
           <MenuItem onPress={onPress} src={Imagg.setting} title="Settings" />
         </View>
       </SafeAreaView>
-      <BottomSheetView bottomRef={bottomRef} />
+      <BottomSheetView
+        bottomRef={bottomRef}
+        contactLoder={contactLoder}
+        snapPoints={snapPoints}
+      />
+      {/* */}
     </>
   );
 };
