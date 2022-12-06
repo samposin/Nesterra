@@ -6,7 +6,7 @@ export const getContacts = seTcontactLoder => dispatch => {
   seTcontactLoder(true);
   Axios.get(`${Base_url}/api/GetTechnicalContacts`)
     .then(response => {
-      console.log(response.data[0]);
+      // console.log(response.data[0]);
       if (response.data) {
         seTcontactLoder(false);
         dispatch({

@@ -72,16 +72,7 @@ const MapTypeAndFilter = ({route}) => {
             Status
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setSeletedView('Genealogy')}>
-          <Text
-            style={{
-              color: setetedView === 'Genealogy' ? '#1c7dce' : '#757575',
-              fontWeight: 'bold',
-              marginVertical: 10,
-            }}>
-            Genealogy
-          </Text>
-        </TouchableOpacity>
+
         <TouchableOpacity onPress={() => setSeletedView('Site Type')}>
           <Text
             style={{
@@ -90,6 +81,16 @@ const MapTypeAndFilter = ({route}) => {
               marginVertical: 10,
             }}>
             Site Type
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setSeletedView('Genealogy')}>
+          <Text
+            style={{
+              color: setetedView === 'Genealogy' ? '#1c7dce' : '#757575',
+              fontWeight: 'bold',
+              marginVertical: 10,
+            }}>
+            Genealogy
           </Text>
         </TouchableOpacity>
       </View>

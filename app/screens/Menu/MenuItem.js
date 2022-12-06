@@ -12,7 +12,7 @@ const MenuItem = ({src, onPress, title}) => {
         height: 50,
         border: 1,
         borderBottomColor: '#575757',
-        borderBottomWidth: 0.6,
+        borderBottomWidth: 0.9,
         flexDirection: 'row',
         marginVertical: 5,
       }}>

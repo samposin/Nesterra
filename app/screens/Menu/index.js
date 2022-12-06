@@ -33,6 +33,9 @@ const Menu = ({navigation, getContacts}) => {
   const stats = () => {
     navigation.navigate('Stats');
   };
+  const setting = () => {
+    navigation.navigate('MenuSetting');
+  };
   return (
     <>
       <SafeAreaView
@@ -70,7 +73,7 @@ const Menu = ({navigation, getContacts}) => {
           <MenuItem onPress={onPress} src={Imagg.filter} title="Filters" />
           <MenuItem onPress={contact} src={Imagg.contact} title="Contacts" />
           <MenuItem onPress={stats} src={Imagg.stats} title="Stats" />
-          <MenuItem onPress={onPress} src={Imagg.setting} title="Settings" />
+          <MenuItem onPress={setting} src={Imagg.setting} title="Settings" />
         </View>
       </SafeAreaView>
       <BottomSheetView

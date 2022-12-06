@@ -93,6 +93,16 @@ const Pics = ({isLoding}) => {
               contentContainerStyle={{backgroundColor: 'white'}}
             />
             <View style={{height: 70}}></View>
+            <View
+              style={{
+                width: 60,
+                height: 30,
+                backgroundColor: 'red',
+                borderRadius: 5,
+                position: 'absolute',
+                right: 10,
+                bottom: 55,
+              }}></View>
           </View>
         </>
       )}

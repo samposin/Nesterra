@@ -19,6 +19,7 @@ import Circuits from '../screens/circuits/index.js';
 import BackGroundCorsoul from '../screens/BackGroundCorsoul/index.js';
 import Contact from '../screens/Contact';
 import Stats from '../screens/stats';
+import MenuSetting from '../screens/MenuSetting';
 import VoiceToText from '../screens/Voice';
 import {useDispatch} from 'react-redux';
 import {ATM_ID, BRANCH_ID} from '../actions/actionType/ExploreSearch/index.js';
@@ -65,6 +66,7 @@ const MainStack = () => {
         <Stack.Screen name="VoiceToText" component={VoiceToText} />
         <Stack.Screen name="MapTypeAndFilter" component={MapTypeAndFilter} />
         <Stack.Screen name="Contact" component={Contact} />
+        <Stack.Screen name="MenuSetting" component={MenuSetting} />
       </Stack.Navigator>
     </NavigationContainer>
   );
