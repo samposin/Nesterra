@@ -44,6 +44,7 @@ const BottomSheetView = ({
   get_all_devices_inventory,
   get_order,
   getInventoryCircuit,
+  imageAddRef,
 }) => {
   // console.log(cirCuitRef, bottomSheetRef,picRef );
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
@@ -120,7 +121,7 @@ const BottomSheetView = ({
       case item == 0:
         return <Info />;
       case item == 1:
-        return <Pics isLoding={isLoding} />;
+        return <Pics isLoding={isLoding} imageAddRef={imageAddRef} />;
       case item == 2:
         return <Hours />;
 

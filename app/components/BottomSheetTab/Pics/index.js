@@ -7,11 +7,14 @@ import {useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {LocationKey, PhotoUrl} from '../../../key';
 import ImageButton from './ImageButton';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import CameraModal from './../../CameraModal/index';
 
-const Pics = ({isLoding}) => {
+const Pics = ({isLoding, imageAddRef}) => {
   const navigation = useNavigation();
   const photo = useSelector(state => state.photo_url.photo_url);
   const [imagetype, setImageType] = React.useState('Google');
+  const [modalVisible, setModalVisible] = React.useState(false);
   const googleImage = () => {
     setImageType('Google');
   };
@@ -33,7 +36,6 @@ const Pics = ({isLoding}) => {
                 width: '100%',
                 height: 50,
                 flexDirection: 'row',
-
                 paddingHorizontal: 5,
                 paddingVertical: 2,
                 alignItems: 'center',
@@ -93,17 +95,28 @@ const Pics = ({isLoding}) => {
               contentContainerStyle={{backgroundColor: 'white'}}
             />
             <View style={{height: 70}}></View>
-            <View
+            <TouchableOpacity
+              onPress={() => {
+                imageAddRef.current.snapToIndex(2);
+              }}
               style={{
-                width: 60,
-                height: 30,
-                backgroundColor: 'red',
+                width: 55,
+                height: 25,
+                backgroundColor: '#0075f6',
                 borderRadius: 5,
                 position: 'absolute',
                 right: 10,
                 bottom: 55,
-              }}></View>
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <AntDesign name="plus" size={24} color="white" />
+            </TouchableOpacity>
           </View>
+          <CameraModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+          />
         </>
       )}
     </>

@@ -69,10 +69,12 @@ import {getLocationInfo} from './../../actions/LocartionInfo/index';
 import {SET_LAT_LNG} from '../../actions/action.type';
 import DropDownView from './components/Search/DropDownView';
 import RanderView from './components/RanderView';
+
 import {
   CHANGE_BORDER,
   CHANGE_BORDER_FILTER,
 } from '../../actions/actionType/action.Coordinatefilter.type';
+import ImageAdd from './components/ImageAdd';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -351,6 +353,7 @@ const Explore = ({
   const cirCuitRefExplore = useRef(null);
   const deviceRefExplore = useRef(null);
   const orderRefExplore = useRef(null);
+  const imageAddRef = useRef(null);
 
   const handleSheetChanges = useCallback(index => {
     console.log('handleSheetChanges', index);
@@ -1055,6 +1058,7 @@ const Explore = ({
         setDetailsLoder={setDetailsLoder}
         setMarkerType={setMarkerType}
         marKerType={marKerType}
+        imageAddRef={imageAddRef}
       />
 
       {/* <BottomSheetViewImage
@@ -1083,6 +1087,7 @@ const Explore = ({
         atmdDetailsRef={atmdDetailsRef}
         detailsLoder={detailsLoder}
       />
+      <ImageAdd imageAddRef={imageAddRef} />
 
       {/* =================CircuitDetailsExpolore=============== */}
       {settingView ? (
