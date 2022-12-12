@@ -9,11 +9,14 @@ import {
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Modal, Title, Portal} from 'react-native-paper';
+import {getImageFromGallery, getImageFromCamera} from './imagePickerHelper';
 
 const {width, height} = Dimensions.get('screen');
 const CameraModal = ({
   setModalVisible,
   modalVisible,
+  getCameraImage,
+  getGalleryImage,
   //   pickCamera,
   //   pickImageLibrary,
 }) => {
@@ -34,12 +37,13 @@ const CameraModal = ({
             <TouchableOpacity
               onPress={() => {
                 // pickCamera();
+                getCameraImage();
                 setModalVisible(false);
               }}
               style={{
                 width: 200,
                 height: 50,
-                backgroundColor: '#ff3259',
+                backgroundColor: '#0777b9',
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginVertical: 20,
@@ -49,13 +53,13 @@ const CameraModal = ({
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                pickImageLibrary();
+                getGalleryImage();
                 setModalVisible(false);
               }}
               style={{
                 width: 200,
                 height: 50,
-                backgroundColor: '#ff3259',
+                backgroundColor: '#0777b9',
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginVertical: 20,

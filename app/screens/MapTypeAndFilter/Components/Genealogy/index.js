@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text,
   View,
+  ScrollView,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 SelectAll;
@@ -26,10 +27,46 @@ import CheckBoxComponet from '../../../../components/checkBox';
 import {useNavigation} from '@react-navigation/native';
 
 const data = [
-  {id: 0, txt: '3rd Party', name: '3rd Party', isChecked: false},
-  {id: 1, txt: 'citizen Bank', name: 'citizen Bank', isChecked: false},
-  {id: 2, txt: 'Equinox', name: 'Equinox', isChecked: false},
-  {id: 3, txt: 'FANC', name: 'FANC', isChecked: false},
+  {id: 0, txt: 'Charter One P2', name: 'Charter One P2', isChecked: false},
+  {id: 1, txt: 'Clarfeld', name: 'Clarfeld', isChecked: false},
+  {id: 2, txt: 'State Street', name: 'State Street', isChecked: false},
+  {id: 3, txt: 'Investor', name: 'Investor', isChecked: false},
+  {
+    id: 4,
+    txt: 'Farmers & Mechanics',
+    name: 'Farmers & Mechanics',
+    isChecked: false,
+  },
+  {
+    id: 5,
+    txt: 'First New Hampshire',
+    name: 'First New Hampshire',
+    isChecked: false,
+  },
+  {id: 6, txt: 'GreatBanc', name: 'GreatBanc', isChecked: false},
+  {id: 7, txt: 'Medford', name: 'Medford', isChecked: false},
+  {id: 8, txt: 'JMP', name: 'JMP', isChecked: false},
+  {id: 9, txt: 'Trinity Capital', name: 'Trinity Capital', isChecked: false},
+  {id: 10, txt: 'Citizens Bank', name: 'Citizens Bank', isChecked: false},
+  {id: 11, txt: 'DH Capital', name: 'DH Capital', isChecked: false},
+  {
+    id: 12,
+    txt: 'Roxborough-Manayunk',
+    name: 'Roxborough-Manayunk',
+    isChecked: false,
+  },
+  {
+    id: 13,
+    txt: 'Western Reserve',
+    name: 'Western Reserve',
+    isChecked: false,
+  },
+  {id: 14, txt: 'Bowstring', name: 'Bowstring', isChecked: false},
+  {id: 15, txt: 'CambridgePort', name: 'CambridgePort', isChecked: false},
+  {id: 16, txt: 'Woburn', name: 'Woburn', isChecked: false},
+  {id: 16, txt: 'Mellon - Phase 2', name: 'Mellon - Phase 2', isChecked: false},
+  {id: 17, txt: 'CharterOne', name: 'CharterOne', isChecked: false},
+  {id: 17, txt: 'BONE Old Colony', name: 'BONE Old Colony', isChecked: false},
 ];
 const Genealogy = ({getlist, is_selected, select_all}) => {
   const navigation = useNavigation();
@@ -58,7 +95,6 @@ const Genealogy = ({getlist, is_selected, select_all}) => {
           position: 'absolute',
           width: '100%',
           height: height,
-
           top: 0,
           bottom: 0,
           left: 0,
@@ -129,22 +165,25 @@ const Genealogy = ({getlist, is_selected, select_all}) => {
               height: '100%',
               backgroundColor: '#ffffff',
             }}>
-            <SelectAll
-              setState={setState}
-              handleChangeAll={handleChangeAll}
-              checked={list.selectList.checked}
-            />
-            {list.selectList.list &&
-              list.selectList.list.map((item, i) => {
-                return (
-                  <CheckBoxComponet
-                    key={i}
-                    handleChange={handleChange}
-                    value={item.isChecked}
-                    item={item}
-                  />
-                );
-              })}
+            <ScrollView style={{height: '100%'}}>
+              <SelectAll
+                setState={setState}
+                handleChangeAll={handleChangeAll}
+                checked={list.selectList.checked}
+              />
+              {list.selectList.list &&
+                list.selectList.list.map((item, i) => {
+                  return (
+                    <CheckBoxComponet
+                      key={i}
+                      handleChange={handleChange}
+                      value={item.isChecked}
+                      item={item}
+                    />
+                  );
+                })}
+              <View style={{width: '100%', height: 100}}></View>
+            </ScrollView>
           </View>
         </View>
       </View>

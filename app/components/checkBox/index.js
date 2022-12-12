@@ -18,7 +18,7 @@ const CheckBoxComponet = ({item, handleChange}) => {
         }}
         color="#1b5a90"
       />
-      <Text>{item.txt}</Text>
+      <Text style={{color: 'black'}}>{item.txt}</Text>
     </View>
   );
 };

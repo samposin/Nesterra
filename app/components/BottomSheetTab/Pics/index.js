@@ -113,10 +113,6 @@ const Pics = ({isLoding, imageAddRef}) => {
               <AntDesign name="plus" size={24} color="white" />
             </TouchableOpacity>
           </View>
-          <CameraModal
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-          />
         </>
       )}
     </>
