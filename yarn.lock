@@ -7734,6 +7734,11 @@ react-native-sound@^0.11.2:
   resolved "https://registry.yarnpkg.com/react-native-sound/-/react-native-sound-0.11.2.tgz#e542dc5b9e16ab4b3ac7e6eaddb1fc8d98da9038"
   integrity sha512-LmGc8lgOK3qecYMVQpyHvww/C+wgT6sWeMpVbOe4NCRGC2yKd4fo4U0KBUo9PO7AqKESO3I/2GZg1/C0+bwiiA==
 
+react-native-streetview@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-streetview/-/react-native-streetview-0.2.1.tgz#7697f15a8fda0181afe8e7f5a88e9963b6e0eae4"
+  integrity sha512-eV/XkgkUoRRi4Y0Esjqe0zz3E66BSFtAMziUfoVXWr5lYjvs7ZFKDHI3Jwv5sFSDkduHkDLmncTKvPZ1ObIdcA==
+
 react-native-svg@^12.3.0:
   version "12.4.4"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.4.4.tgz#2ba684eaea9a7402fbbe0ed9737e77284631d00e"

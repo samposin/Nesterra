@@ -56,6 +56,7 @@
     "react-native-snackbar": "^2.4.0",
     "react-native-snackbar-component": "^1.1.12",
     "react-native-sound": "^0.11.2",
+    "react-native-streetview": "^0.2.1",
     "react-native-svg": "^12.3.0",
     "react-native-tab-view": "^3.1.1",
     "react-native-vector-icons": "^9.1.0",

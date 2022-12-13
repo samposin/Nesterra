@@ -196,7 +196,7 @@ const ImageAdd = ({imageAddRef}) => {
         getGalleryImage={getGalleryImage}
       />
 
-      {isLoading && <Lodder lodding={isLoading} />}
+      {/* {isLoading && <Lodder lodding={isLoading} />} */}
     </>
   );
 };

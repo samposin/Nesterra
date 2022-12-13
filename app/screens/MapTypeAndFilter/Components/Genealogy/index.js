@@ -66,7 +66,33 @@ const data = [
   {id: 16, txt: 'Woburn', name: 'Woburn', isChecked: false},
   {id: 16, txt: 'Mellon - Phase 2', name: 'Mellon - Phase 2', isChecked: false},
   {id: 17, txt: 'CharterOne', name: 'CharterOne', isChecked: false},
-  {id: 17, txt: 'BONE Old Colony', name: 'BONE Old Colony', isChecked: false},
+  {id: 18, txt: 'BONE Old Colony', name: 'BONE Old Colony', isChecked: false},
+  {id: 19, txt: 'Charter One P1', name: 'Charter One P1', isChecked: false},
+  {id: 20, txt: '3rd Party', name: '3rd Party', isChecked: false},
+  {
+    id: 21,
+    txt: 'Bank of New Haven',
+    name: 'Bank of New Haven',
+    isChecked: false,
+  },
+  {id: 22, txt: 'FAMC', name: 'FAMC', isChecked: false},
+  {id: 23, txt: 'Mellon - Phase 1', name: 'Mellon - Phase 1', isChecked: false},
+  {id: 24, txt: 'Commonwealth', name: 'Commonwealth', isChecked: false},
+  {id: 25, txt: 'HBSC', name: 'HBSC', isChecked: false},
+  {id: 26, txt: 'Charter One P4', name: 'Charter One P4', isChecked: false},
+  {id: 27, txt: 'Charter One P3', name: 'Charter One P3', isChecked: false},
+  {id: 28, txt: 'US Trust', name: 'US Trust', isChecked: false},
+  {
+    id: 29,
+    txt: 'Community Nation Bank',
+    name: 'Community Nation Bank',
+    isChecked: false,
+  },
+  {id: 30, txt: 'Grove Bank', name: 'Grove Bank', isChecked: false},
+  {id: 31, txt: 'Branford Savings', name: 'Branford Savings', isChecked: false},
+  {id: 32, txt: 'Willamette', name: 'Willamette', isChecked: false},
+  {id: 33, txt: 'Remote ATM', name: 'Remote ATM', isChecked: false},
+  {id: 34, txt: 'Equinix', name: 'Equinix', isChecked: false},
 ];
 const Genealogy = ({getlist, is_selected, select_all}) => {
   const navigation = useNavigation();
@@ -166,11 +192,11 @@ const Genealogy = ({getlist, is_selected, select_all}) => {
               backgroundColor: '#ffffff',
             }}>
             <ScrollView style={{height: '100%'}}>
-              <SelectAll
+              {/* <SelectAll
                 setState={setState}
                 handleChangeAll={handleChangeAll}
                 checked={list.selectList.checked}
-              />
+              /> */}
               {list.selectList.list &&
                 list.selectList.list.map((item, i) => {
                   return (
