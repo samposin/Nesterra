@@ -22,6 +22,7 @@ import Stats from '../screens/stats';
 import StreetViewScreen from '../screens/StreetViewScreen';
 import MenuSetting from '../screens/MenuSetting';
 import VoiceToText from '../screens/Voice';
+
 import {useDispatch} from 'react-redux';
 import {ATM_ID, BRANCH_ID} from '../actions/actionType/ExploreSearch/index.js';
 import MapTypeAndFilter from '../screens/MapTypeAndFilter';

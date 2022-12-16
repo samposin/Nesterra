@@ -21,6 +21,7 @@ import {
   FILTER_BY_ALL,
 } from './../../../../actions/action.coordinate.type';
 import {useDispatch} from 'react-redux';
+import ClearAndAppply from '../ClearAndAppply';
 
 const data = [
   {id: 0, txt: 'Active', name: 'Active', isChecked: false},
@@ -79,6 +80,14 @@ const Status = ({filterData}) => {
       }
     }
   };
+  const clear = () => {
+    let listData = checkdata.map(item => {
+      let itm = {...item, isChecked: false};
+      return itm;
+    });
+
+    setCheckData(listData);
+  };
   return (
     <>
       <View
@@ -103,7 +112,7 @@ const Status = ({filterData}) => {
             }}>
             <Heading size="sm">Filters</Heading>
           </View>
-          <View
+          {/* <View
             style={{
               width: '80%',
               height: '100%',
@@ -139,7 +148,7 @@ const Status = ({filterData}) => {
               }}>
               <Text style={{color: '#007aff', fontSize: 18}}>Apply</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
         <View style={styles.mainContainer}>
           <View
@@ -170,6 +179,7 @@ const Status = ({filterData}) => {
             })}
           </View>
         </View>
+        <ClearAndAppply onPress={apply} clear={clear} />
       </View>
     </>
   );

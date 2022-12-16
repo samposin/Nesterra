@@ -25,6 +25,7 @@ import {getlist, is_selected, select_all} from '../../../../actions/selectList';
 import SelectAll from '../../../filtter/SelectAll';
 import CheckBoxComponet from '../../../../components/checkBox';
 import {useNavigation} from '@react-navigation/native';
+import ClearAndAppply from '../ClearAndAppply';
 
 const data = [
   {id: 0, txt: 'Charter One P2', name: 'Charter One P2', isChecked: false},
@@ -137,7 +138,7 @@ const Genealogy = ({getlist, is_selected, select_all}) => {
             }}>
             <Heading size="sm">Filters</Heading>
           </View>
-          <View
+          {/* <View
             style={{
               width: '80%',
               height: '100%',
@@ -174,7 +175,7 @@ const Genealogy = ({getlist, is_selected, select_all}) => {
               }}>
               <Text style={{color: '#007aff', fontSize: 18}}>Apply</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
         <View style={styles.mainContainer}>
           <View
@@ -212,6 +213,7 @@ const Genealogy = ({getlist, is_selected, select_all}) => {
             </ScrollView>
           </View>
         </View>
+        <ClearAndAppply />
       </View>
     </>
   );

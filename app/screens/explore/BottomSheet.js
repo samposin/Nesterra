@@ -6,6 +6,7 @@ import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {useSelector, connect, useDispatch} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 import Pics from '../../components/BottomSheetTab/Pics';
@@ -28,6 +29,7 @@ import {get_all_devices_inventory} from '../../actions/devicesInventory';
 import {get_order} from '../../actions/order';
 import {getInventoryCircuit} from '../../actions/circuitInventory';
 import {getNotes} from './../../actions/Notes/index';
+import {copyText, tostalert} from '../../components/helper';
 
 const BottomSheetView = ({
   notesRef,
@@ -58,6 +60,7 @@ const BottomSheetView = ({
   const [devicesLoding, setDevicesLoding] = useState(false);
   const [orderLoding, setOrderLoding] = useState(false);
   const [notesLoding, setNotesLoding] = useState(false);
+  const [index, sedtIndex] = useState(1);
   const dispatch = useDispatch();
   const myRef = useRef(null);
 
@@ -222,7 +225,10 @@ const BottomSheetView = ({
   useEffect(() => {
     // ranDerView(0);
   }, []);
-
+  const handleSheetChanges = useCallback(index => {
+    // console.log('handleSheetChanges', index);
+    sedtIndex(index);
+  }, []);
   return (
     <>
       <BottomSheet
@@ -245,7 +251,8 @@ const BottomSheetView = ({
         snapPoints={snapPoints}
         enablePanDownToClose={true}
         animateOnMount
-        animatedPosition={true}>
+        animatedPosition={true}
+        onChange={handleSheetChanges}>
         <View
           style={{
             height: 155,
@@ -262,7 +269,7 @@ const BottomSheetView = ({
                 bottomSheetRef.current.snapToIndex(2);
               }}
               style={{
-                width: '80%',
+                width: '70%',
                 height: '100%',
               }}>
               <Text
@@ -330,46 +337,98 @@ const BottomSheetView = ({
             </TouchableOpacity>
             <View
               style={{
-                width: '20%',
+                width: '30%',
+
                 height: '100%',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                paddingBottom: 10,
               }}>
-              <TouchableOpacity onPress={() => bottomSheetRef.current.close()}>
-                <View
+              <View
+                style={{
+                  width: '100%',
+                  height: '20%',
+
+                  alignItems: 'flex-end',
+                  paddingRight: 12,
+                }}>
+                <TouchableOpacity
+                  onPress={() => bottomSheetRef.current.close()}>
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      borderRadius: 10,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: '#007aff',
+                    }}>
+                    <Text>
+                      <Entypo name="cross" size={18} color="white" />
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{
+                  width: '100%',
+                  height: '80%',
+                  justifyContent: index == 1 ? 'space-around' : 'flex-end',
+                  flexDirection: index == 1 ? 'row' : 'column',
+                  alignItems: 'flex-end',
+                  paddingRight: index == 1 ? 0 : 10,
+                  paddingBottom: index == 1 ? 12 : 5,
+                }}>
+                {dataa ? (
+                  <TouchableOpacity
+                    style={{marginBottom: index == 1 ? 0 : 10}}
+                    onPress={() => {
+                      remove(location_data?.Location_ID);
+                    }}>
+                    <Text>
+                      <Entypo name="heart" size={22} color="#c338b5" />
+                    </Text>
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    style={{marginBottom: index == 1 ? 0 : 10}}
+                    onPress={() => {
+                      addList(
+                        location_data?.Location_ID,
+                        location_data?.Address,
+                      );
+                    }}>
+                    <Text>
+                      <EvilIcons name="heart" size={24} color="#c338b5" />
+                    </Text>
+                  </TouchableOpacity>
+                )}
+                {index == 1 ? (
+                  <TouchableOpacity
+                    onPress={() => {
+                      copyText(location_data?.Address);
+                      tostalert(location_data?.Address);
+                    }}>
+                    <Ionicons
+                      name="md-copy-outline"
+                      size={22}
+                      color="#007aff"
+                    />
+                  </TouchableOpacity>
+                ) : null}
+                <TouchableOpacity
                   style={{
-                    width: 24,
-                    height: 24,
-                    borderRadius: 12,
+                    width: 22,
+                    height: 22,
+                    borderRadius: 11,
                     justifyContent: 'center',
                     alignItems: 'center',
                     backgroundColor: '#007aff',
                   }}>
-                  <Text>
-                    <Entypo name="cross" size={20} color="white" />
-                  </Text>
-                </View>
-              </TouchableOpacity>
-              {dataa ? (
-                <TouchableOpacity
-                  onPress={() => {
-                    remove(location_data?.Location_ID);
-                  }}>
-                  <Text>
-                    <Entypo name="heart" size={22} color="#c338b5" />
-                  </Text>
+                  <EvilIcons name="share-google" size={20} color="white" />
                 </TouchableOpacity>
-              ) : (
-                <TouchableOpacity
-                  onPress={() => {
-                    addList(location_data?.Location_ID, location_data?.Address);
-                  }}>
-                  <Text>
-                    <EvilIcons name="heart" size={24} color="#c338b5" />
-                  </Text>
-                </TouchableOpacity>
-              )}
+              </View>
+              {/*
+               */}
             </View>
           </View>
           <BottomSheetFlatList

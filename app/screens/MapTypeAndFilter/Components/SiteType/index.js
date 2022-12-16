@@ -17,14 +17,27 @@ import {connect, useSelector, useDispatch} from 'react-redux';
 import {
   getlist,
   is_selected,
-  clear_all,
+  // clear_all,
   select_all,
 } from '../../../../actions/selectList';
 import SelectAll from '../../../filtter/SelectAll';
 import CheckBoxComponet from '../../../../components/checkBox';
 import {useNavigation} from '@react-navigation/native';
 import {dataMar} from '../../../../utils/MarkerData1';
-import {FILTER_MULTI_SITE_TYPE} from './../../../../actions/action.type';
+import {
+  FILTER_MULTI_SITE_TYPE,
+  SEARCH_CLEAR,
+  LOAD_LIST,
+  IS_SELECTED,
+} from './../../../../actions/action.type';
+import {
+  BRANCH,
+  DATA_CENTER,
+  OFFICEE,
+  ATM,
+  THIRD_PARTY,
+  OTHER,
+} from '../../../../actions/actionType/SiteTypeCheck';
 
 const data = [
   {id: 0, txt: 'Data Center', name: 'Data Center', isChecked: false},
@@ -34,18 +47,28 @@ const data = [
   {id: 4, txt: '3rd Party', name: '3rd Party', isChecked: false},
   {id: 5, txt: 'Other', name: 'Other', isChecked: false},
 ];
-const SiteType = ({getlist, is_selected, select_all, clear_all}) => {
+const data11 = [
+  {id: 0, txt: 'Data Center', name: 'Data Center', isChecked: false},
+  {id: 1, txt: 'Office', name: 'Office', isChecked: false},
+  {id: 2, txt: 'Branch', name: 'Branch', isChecked: false},
+  {id: 3, txt: 'ATM', name: 'ATM', isChecked: false},
+  {id: 4, txt: '3rd Party', name: '3rd Party', isChecked: false},
+  {id: 5, txt: 'Other', name: 'Other', isChecked: false},
+];
+const SiteType = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const {list} = useSelector(state => state.selectList);
-  const {checkList} = useSelector(state => state.selectList);
-  const [dataCenter, setDataCenter] = useState(true);
-  const [office, setOffice] = useState(true);
-  const [branch, setbranch] = useState(true);
-  const [atm, setAtm] = useState(true);
-  const [thparty, setThparty] = useState(true);
-  const [other, setOther] = useState(true);
+  const {data1} = useSelector(state => state.selectList);
+  const {data_center} = useSelector(state => state.SiteTypeCheck);
+  const {branch} = useSelector(state => state.SiteTypeCheck);
+  const {office} = useSelector(state => state.SiteTypeCheck);
+  const {atm} = useSelector(state => state.SiteTypeCheck);
+  const {third_party} = useSelector(state => state.SiteTypeCheck);
+  const {other} = useSelector(state => state.SiteTypeCheck);
 
+  const {checkList} = useSelector(state => state.selectList);
+  // console.log(data1, 'data1', list);
   let ddd = [];
   const dpa = checkList.map(item => {
     return ddd.push(item.name);
@@ -69,30 +92,48 @@ const SiteType = ({getlist, is_selected, select_all, clear_all}) => {
   const changeData = id => {
     switch (true) {
       case id == 0:
-        setDataCenter(!dataCenter);
+        dispatch({
+          type: DATA_CENTER,
+        });
         break;
       case id == 1:
-        setOffice(!office);
+        dispatch({
+          type: OFFICEE,
+        });
         break;
       case id == 2:
-        setbranch(!branch);
+        dispatch({
+          type: BRANCH,
+        });
         break;
 
       case id == 3:
-        setAtm(!atm);
+        dispatch({
+          type: ATM,
+        });
         break;
       case id == 4:
-        setThparty(!thparty);
+        dispatch({
+          type: THIRD_PARTY,
+        });
         break;
       case id == 5:
-        setOther(!other);
+        dispatch({
+          type: OTHER,
+        });
         break;
     }
   };
 
   const handleChange = id => {
     changeData(id);
-    is_selected(id);
+    // is_selected(id);
+    dispatch({
+      type: IS_SELECTED,
+      payload: {
+        id: id,
+      },
+    });
   };
   const clearAll = () => {
     setOffice(true);
@@ -103,7 +144,16 @@ const SiteType = ({getlist, is_selected, select_all, clear_all}) => {
     setOther(true);
   };
   React.useEffect(() => {
-    getlist(data);
+    dispatch({
+      type: LOAD_LIST,
+      payload: {
+        data: data,
+      },
+    });
+    dispatch({
+      type: SEARCH_CLEAR,
+      // data: data1,
+    });
   }, []);
   const filterApply = () => {
     // console.log(checkList);
@@ -111,6 +161,7 @@ const SiteType = ({getlist, is_selected, select_all, clear_all}) => {
       type: FILTER_MULTI_SITE_TYPE,
       data: checkList,
     });
+    navigation.navigate('Explore');
   };
   return (
     <>
@@ -215,22 +266,22 @@ const SiteType = ({getlist, is_selected, select_all, clear_all}) => {
                   marginVertical: 10,
                 }}></Text>
               <View style={styles.countItem}>
-                <Text>{dataCenter ? 0 : datCenter.length}</Text>
+                <Text>{data_center ? datCenter.length : 0}</Text>
               </View>
               <View style={styles.countItem}>
-                <Text>{office ? 0 : dataOffice.length}</Text>
+                <Text>{office ? dataOffice.length : 0}</Text>
               </View>
               <View style={styles.countItem}>
-                <Text>{branch ? 0 : dataBranch.length}</Text>
+                <Text>{branch ? dataBranch.length : 0}</Text>
               </View>
               <View style={styles.countItem}>
-                <Text>{atm ? 0 : dataAtm.length}</Text>
+                <Text>{atm ? dataAtm.length : 0}</Text>
               </View>
               <View style={styles.countItem}>
-                <Text>{thparty ? 0 : dataThrd.length}</Text>
+                <Text>{third_party ? dataThrd.length : 0}</Text>
               </View>
               <View style={styles.countItem}>
-                <Text>{other ? 0 : datother.length}</Text>
+                <Text>{other ? datother.length : 0}</Text>
               </View>
             </View>
           </View>
@@ -248,8 +299,10 @@ const SiteType = ({getlist, is_selected, select_all, clear_all}) => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              clear_all(data);
-              clearAll();
+              dispatch({
+                type: SEARCH_CLEAR,
+                // data: data1,
+              });
             }}
             style={{
               width: 100,
@@ -281,9 +334,7 @@ const SiteType = ({getlist, is_selected, select_all, clear_all}) => {
   );
 };
 
-export default connect(null, {getlist, is_selected, clear_all, select_all})(
-  SiteType,
-);
+export default SiteType;
 
 const styles = StyleSheet.create({
   header: {

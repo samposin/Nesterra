@@ -7,12 +7,17 @@ const Lodder = ({lodding}) => {
   return (
     <>
       {/* <StatusBar hidden /> */}
+      <StatusBar
+        translucent
+        backgroundColor="transparent"
+        barStyle="dark-content"
+      />
       <View
         style={{
           justifyContent: 'center',
           alignItems: 'center',
-
-          height: height + 70,
+          flex: 1,
+          // height: height + StatusBar.currentHeight,
         }}>
         <ProgressDialog
           visible={lodding}

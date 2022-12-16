@@ -18,6 +18,7 @@ import {warinng} from '../../../../components/helper';
 
 import {useDispatch} from 'react-redux';
 import {MAPTYPE} from '../../../../actions/actionType/MapType';
+import ClearAndAppply from '../ClearAndAppply';
 
 const data = [
   {id: 0, txt: 'standard', name: 'Standard', isChecked: false},
@@ -57,6 +58,14 @@ const Type = ({}) => {
       navigation.navigate('Explore');
     }
   };
+  const clear = () => {
+    let listData = checkdata.map(item => {
+      let itm = {...item, isChecked: false};
+      return itm;
+    });
+
+    setCheckData(listData);
+  };
   return (
     <>
       <View
@@ -81,7 +90,7 @@ const Type = ({}) => {
             }}>
             <Heading size="sm">Filters</Heading>
           </View>
-          <View
+          {/* <View
             style={{
               width: '80%',
               height: '100%',
@@ -117,7 +126,7 @@ const Type = ({}) => {
               }}>
               <Text style={{color: '#007aff', fontSize: 18}}>Apply</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
         <View style={styles.mainContainer}>
           <View
@@ -146,6 +155,7 @@ const Type = ({}) => {
             })}
           </View>
         </View>
+        <ClearAndAppply onPress={apply} clear={clear} />
       </View>
     </>
   );

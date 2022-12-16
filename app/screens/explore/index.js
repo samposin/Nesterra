@@ -1087,7 +1087,6 @@ const Explore = ({
         atmdDetailsRef={atmdDetailsRef}
         detailsLoder={detailsLoder}
       />
-      <ImageAdd imageAddRef={imageAddRef} />
 
       {/* =================CircuitDetailsExpolore=============== */}
       {settingView ? (
@@ -1098,6 +1097,8 @@ const Explore = ({
         />
       ) : null}
       {isLoading && <Lodder lodding={isLoading} />}
+
+      <ImageAdd imageAddRef={imageAddRef} />
     </>
   );
 };

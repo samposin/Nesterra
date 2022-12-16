@@ -48,6 +48,7 @@ import ExploreBranchId from './ExploreSearch/ExploreBranchId';
 import ExploreCircuitId from './ExploreSearch/ExploreCircuitId';
 import ExploreDeviceId from './ExploreSearch/ExploreDeviceId';
 import ExploreAddress from './ExploreSearch/ExploreAddress';
+import SiteTypeCheck from './SiteTypeCheck';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -97,5 +98,6 @@ const rootReducer = combineReducers({
   ExploreDeviceId,
   ExploreAddress,
   Contacts,
+  SiteTypeCheck,
 });
 export default rootReducer;
