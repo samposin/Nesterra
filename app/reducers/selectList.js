@@ -16,7 +16,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOAD_LIST:
-      console.log('first');
+      // console.log('first');
       return {
         ...state,
         checked: false,

@@ -98,7 +98,9 @@ const Pics = ({isLoding, imageAddRef}) => {
                       zoom: parseInt(1),
                     }}
                   />
-                ) : null}
+                ) : (
+                  <Text>No Image Found</Text>
+                )}
               </TouchableOpacity>
 
               {/* <ImageButton

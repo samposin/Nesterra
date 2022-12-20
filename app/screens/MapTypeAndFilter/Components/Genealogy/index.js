@@ -9,25 +9,22 @@ import {
   ScrollView,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-SelectAll;
+
 import {Heading} from 'native-base';
 
 const {height, width} = Dimensions.get('screen');
 
 import {warinng} from '../../../../components/helper';
-import {
-  FILTER_BY_INACTIVE,
-  FILTER_BY_ACTIVE,
-  FILTER_BY_ALL,
-} from './../../../../actions/action.coordinate.type';
+
 import {connect, useSelector, useDispatch} from 'react-redux';
 import {getlist, is_selected, select_all} from '../../../../actions/selectList';
 import SelectAll from '../../../filtter/SelectAll';
 import CheckBoxComponet from '../../../../components/checkBox';
 import {useNavigation} from '@react-navigation/native';
 import ClearAndAppply from '../ClearAndAppply';
+import {getGeneoLogyList} from '../../../../actions/GenealogyList';
 
-const data = [
+const data1 = [
   {id: 0, txt: 'Charter One P2', name: 'Charter One P2', isChecked: false},
   {id: 1, txt: 'Clarfeld', name: 'Clarfeld', isChecked: false},
   {id: 2, txt: 'State Street', name: 'State Street', isChecked: false},
@@ -95,11 +92,11 @@ const data = [
   {id: 33, txt: 'Remote ATM', name: 'Remote ATM', isChecked: false},
   {id: 34, txt: 'Equinix', name: 'Equinix', isChecked: false},
 ];
-const Genealogy = ({getlist, is_selected, select_all}) => {
+const Genealogy = ({getGeneoLogyList, is_selected, select_all}) => {
   const navigation = useNavigation();
-  const list = useSelector(state => state);
+  const {data} = useSelector(state => state.GenealogyList);
   // console.log(JSON.stringify(list.checkList), 'filter site type');
-  // console.log(list);
+  // console.log(data);
   const [checked1, setChecked] = React.useState(false);
 
   const setState = () => {
@@ -113,8 +110,10 @@ const Genealogy = ({getlist, is_selected, select_all}) => {
   };
 
   React.useEffect(() => {
-    getlist(data);
+    getGeneoLogyList();
   }, []);
+  const apply = () => {};
+  const clear = () => {};
   return (
     <>
       <View
@@ -198,8 +197,8 @@ const Genealogy = ({getlist, is_selected, select_all}) => {
                 handleChangeAll={handleChangeAll}
                 checked={list.selectList.checked}
               /> */}
-              {list.selectList.list &&
-                list.selectList.list.map((item, i) => {
+              {data1 &&
+                data1.map((item, i) => {
                   return (
                     <CheckBoxComponet
                       key={i}
@@ -213,13 +212,15 @@ const Genealogy = ({getlist, is_selected, select_all}) => {
             </ScrollView>
           </View>
         </View>
-        <ClearAndAppply />
+        <ClearAndAppply onPress={apply} clear={clear} />
       </View>
     </>
   );
 };
 
-export default connect(null, {getlist, is_selected, select_all})(Genealogy);
+export default connect(null, {getGeneoLogyList, is_selected, select_all})(
+  Genealogy,
+);
 
 const styles = StyleSheet.create({
   header: {

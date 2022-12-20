@@ -44,7 +44,7 @@ const NotesAdd = ({setModalVisible, modalVisible, setLoder}) => {
           setLoder(false);
           setNote('');
           setModalVisible(false);
-          console.log(result);
+          // console.log(result);
         }
       })
       .catch(err => console.log(err));

@@ -343,17 +343,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
     paddingLeft: 20,
     justifyContent: 'space-between',
-
     alignItems: 'center',
   },
   mainContainer: {
     height: height - 70,
-
     width: '100%',
     backgroundColor: '#f5f5f5',
     flexDirection: 'row',
     justifyContent: 'space-between',
-
     alignItems: 'center',
   },
   checkbox: {

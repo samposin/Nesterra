@@ -115,7 +115,7 @@ const ThirdRow = ({
           />
           <FilterButton
             title="Address"
-            onPress={() => console.log('first')}
+            onPress={() => {}}
             diplayName={diplayName}
           />
           {/* <FilterButton
