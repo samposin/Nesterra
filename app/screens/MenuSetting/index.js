@@ -14,6 +14,7 @@ const Imagg = {
   info: require('../../images/nenuImage/info.png'),
   contract: require('../../images/nenuImage/contract.png'),
   question: require('../../images/nenuImage/question-mark.png'),
+  compliant: require('../../images/nenuImage/compliant.png'),
 };
 const setting = () => {};
 const MenuSetting = ({navigation}) => {
@@ -50,9 +51,14 @@ const MenuSetting = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={{paddingHorizontal: 15}}>
-        <MenuItem onPress={setting} src={Imagg.user} title="Profile" />
+        <MenuItem onPress={setting} src={Imagg.user} title="My Profile" />
         <MenuItem onPress={setting} src={Imagg.info} title="About" />
-        <MenuItem onPress={setting} src={Imagg.contract} title="Contract" />
+        <MenuItem onPress={setting} src={Imagg.contract} title="Terms of use" />
+        <MenuItem
+          onPress={setting}
+          src={Imagg.compliant}
+          title="Privacy Police"
+        />
         <MenuItem onPress={setting} src={Imagg.question} title="FAQs" />
       </View>
     </SafeAreaView>

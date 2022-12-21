@@ -47,6 +47,7 @@ const BottomSheetView = ({
   get_order,
   getInventoryCircuit,
   imageAddRef,
+  setstreetImage,
 }) => {
   // console.log(cirCuitRef, bottomSheetRef,picRef );
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
@@ -228,6 +229,9 @@ const BottomSheetView = ({
   const handleSheetChanges = useCallback(index => {
     // console.log('handleSheetChanges', index);
     sedtIndex(index);
+    if (index == 2) {
+      setstreetImage(false);
+    }
   }, []);
   return (
     <>

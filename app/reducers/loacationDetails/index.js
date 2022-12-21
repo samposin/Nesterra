@@ -1,25 +1,19 @@
-import { LOCATION_DETAILS } from "../../actions/action.type";
-
+import {LOCATION_DETAILS} from '../../actions/action.type';
 
 const initialState = {
-    data:null,
-    error:null
- 
+  data: {},
+  error: null,
 };
 
 export default (state = initialState, action) => {
-    
-    switch (action.type) {
-        case LOCATION_DETAILS:
-            return {
-                data:action.payload.data,
-                error:null,
+  switch (action.type) {
+    case LOCATION_DETAILS:
+      return {
+        data: action.payload.data,
+        error: null,
+      };
 
-            }
-            
-            
-
-        default:
-            return state
-    }
-}
+    default:
+      return state;
+  }
+};

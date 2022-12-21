@@ -75,6 +75,7 @@ import {
   CHANGE_BORDER_FILTER,
 } from '../../actions/actionType/action.Coordinatefilter.type';
 import ImageAdd from './components/ImageAdd';
+import StreetViewComponents from '../../components/StreetViewComponents';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -152,7 +153,7 @@ const Explore = ({
   const dispatch = useDispatch();
   const {coordinates} = useSelector(state => state.coordinates);
 
-  // console.log(currentRegion1);
+  // console.log(coordinates.length);
 
   const {lat, lng} = useSelector(state => state.setLatLang);
   // console.log(coordinates.length, 'ddd');
@@ -555,6 +556,7 @@ const Explore = ({
   const [focusOn, setFocusOn] = useState(true);
   const [focusOn1, setFocusOn1] = useState(true);
   const [placeHolder, setPlace] = useState('');
+  const [streetImage, setstreetImage] = useState(false);
   const addRess = data => {
     if (data === 'Address') {
       setsearchComponet(false);
@@ -872,7 +874,7 @@ const Explore = ({
                     // fetchNearestPlacesFromGoogle(lat, lng);
 
                     setLatLang(item.Latitude, item.Longitude);
-
+                    setstreetImage(true);
                     ///      markerChange(i);
                   }}>
                   <CustomMarker
@@ -912,6 +914,7 @@ const Explore = ({
             // dispatch({type: CIRCUIT_ID});
             getChange();
             // get_coordinates();
+            setstreetImage(false);
           }}
           style={styles.currentLocation1}>
           <SimpleLineIcons
@@ -1059,6 +1062,7 @@ const Explore = ({
         setMarkerType={setMarkerType}
         marKerType={marKerType}
         imageAddRef={imageAddRef}
+        setstreetImage={setstreetImage}
       />
 
       {/* <BottomSheetViewImage
@@ -1099,6 +1103,7 @@ const Explore = ({
       {isLoading && <Lodder lodding={isLoading} />}
 
       <ImageAdd imageAddRef={imageAddRef} />
+      {streetImage && <StreetViewComponents />}
     </>
   );
 };

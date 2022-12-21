@@ -8,6 +8,8 @@ import {useSelector} from 'react-redux';
 import NoDataViewFlatList from './../../../components/NoDataViewFlatList/index';
 import DataLoder from '../../../components/lodder/DataLoder';
 
+import ToggleButton from './../../../components/ToggleView/ToggleButton';
+
 const BottomSheetView = ({bottomRef, contactLoder}) => {
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
   const {item} = useSelector(state => state.Contacts);
@@ -147,6 +149,7 @@ const BottomSheetView = ({bottomRef, contactLoder}) => {
                 }}
               />
             </View>
+            <ToggleButton />
           </>
         ) : (
           <View

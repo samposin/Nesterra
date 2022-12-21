@@ -125,7 +125,7 @@ const ImageAdd = ({imageAddRef}) => {
               ) : (
                 <Image
                   style={styles.imageView}
-                  source={require('../../../../images/nenuImage/File.jpg')}
+                  source={require('../../../../images/nenuImage/image.png')}
                 />
               )}
             </TouchableOpacity>
