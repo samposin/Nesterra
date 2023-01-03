@@ -6,7 +6,7 @@ import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
 import {useSelector, connect, useDispatch} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 import Pics from '../../components/BottomSheetTab/Pics';
@@ -228,9 +228,16 @@ const BottomSheetView = ({
   }, []);
   const handleSheetChanges = useCallback(index => {
     // console.log('handleSheetChanges', index);
-    sedtIndex(index);
-    if (index == 2) {
-      setstreetImage(false);
+    switch (true) {
+      case index == 1:
+        setstreetImage(true);
+        break;
+      case index == 2:
+        setstreetImage(false);
+        break;
+      case index == -1:
+        setstreetImage(false);
+        break;
     }
   }, []);
   return (
@@ -342,7 +349,6 @@ const BottomSheetView = ({
             <View
               style={{
                 width: '30%',
-
                 height: '100%',
                 justifyContent: 'space-between',
                 alignItems: 'center',
@@ -356,7 +362,10 @@ const BottomSheetView = ({
                   paddingRight: 12,
                 }}>
                 <TouchableOpacity
-                  onPress={() => bottomSheetRef.current.close()}>
+                  onPress={() => {
+                    setstreetImage(false);
+                    bottomSheetRef.current.close();
+                  }}>
                   <View
                     style={{
                       width: 20,
@@ -376,15 +385,19 @@ const BottomSheetView = ({
                 style={{
                   width: '100%',
                   height: '80%',
-                  justifyContent: index == 1 ? 'space-around' : 'flex-end',
-                  flexDirection: index == 1 ? 'row' : 'column',
+                  justifyContent: 'space-around',
                   alignItems: 'flex-end',
-                  paddingRight: index == 1 ? 0 : 10,
-                  paddingBottom: index == 1 ? 12 : 5,
+                  paddingRight: 8,
                 }}>
+                <TouchableOpacity>
+                  <Text>
+                    <EvilIcons name="share-apple" size={28} color="#007aff" />
+                  </Text>
+                  {/* <AntDesign name="upload" size={24} color="#007aff" /> */}
+                </TouchableOpacity>
                 {dataa ? (
                   <TouchableOpacity
-                    style={{marginBottom: index == 1 ? 0 : 10}}
+                    style={{marginBottom: 5, marginRight: 2.5}}
                     onPress={() => {
                       remove(location_data?.Location_ID);
                     }}>
@@ -394,7 +407,7 @@ const BottomSheetView = ({
                   </TouchableOpacity>
                 ) : (
                   <TouchableOpacity
-                    style={{marginBottom: index == 1 ? 0 : 10}}
+                    style={{marginBottom: 5, marginRight: 2.5}}
                     onPress={() => {
                       addList(
                         location_data?.Location_ID,
@@ -406,30 +419,6 @@ const BottomSheetView = ({
                     </Text>
                   </TouchableOpacity>
                 )}
-                {index == 1 ? (
-                  <TouchableOpacity
-                    onPress={() => {
-                      copyText(location_data?.Address);
-                      tostalert(location_data?.Address);
-                    }}>
-                    <Ionicons
-                      name="md-copy-outline"
-                      size={22}
-                      color="#007aff"
-                    />
-                  </TouchableOpacity>
-                ) : null}
-                <TouchableOpacity
-                  style={{
-                    width: 22,
-                    height: 22,
-                    borderRadius: 11,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#007aff',
-                  }}>
-                  <EvilIcons name="share-google" size={20} color="white" />
-                </TouchableOpacity>
               </View>
               {/*
                */}

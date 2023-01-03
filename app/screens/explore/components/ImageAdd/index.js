@@ -1,6 +1,9 @@
 import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native';
-import React, {useMemo, useState} from 'react';
-import BottomSheet, {BottomSheetTextInput} from '@gorhom/bottom-sheet';
+import React, {useMemo, useCallback, useState} from 'react';
+import BottomSheet, {
+  BottomSheetTextInput,
+  BottomSheetScrollView,
+} from '@gorhom/bottom-sheet';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {RadioButton} from 'react-native-paper';
 import CameraModal from '../../../../components/CameraModal';
@@ -23,6 +26,8 @@ const ImageAdd = ({imageAddRef}) => {
   const [comment, setComment] = React.useState('');
   const [modalVisible, setModalVisible] = React.useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [index, sedtIndex] = useState(1);
+
   // console.log(location_data?.Location_ID, 'da');
   // console.log(moment().format('YYYY-MM-DD'));
   // console.log(imageUrl.assets[0].uri, 'imageUrl');
@@ -72,8 +77,9 @@ const ImageAdd = ({imageAddRef}) => {
   };
   const getGalleryImage = () => {
     const data = getImageFromGallery(setImageUrl, setimg);
-    console.log(data, 'data');
+    // console.log(data, 'data');
   };
+
   return (
     <>
       <BottomSheet
@@ -99,7 +105,8 @@ const ImageAdd = ({imageAddRef}) => {
         style={{}}
         keyboardBehavior={true}
         animatedPosition={true}>
-        <View style={{flex: 1}}>
+        <BottomSheetScrollView
+          contentContainerStyle={{flex: 1, justifyContent: 'space-between'}}>
           <View style={styles.topView}>
             <View style={styles.header}>
               <Text style={{fontWeight: 'bold', fontSize: 22, color: 'black'}}>
@@ -161,7 +168,9 @@ const ImageAdd = ({imageAddRef}) => {
                   justifyContent: 'flex-start',
                   backgroundColor: '#f3f2f8',
                   borderRadius: 15,
-                  paddingTop: 0,
+                  paddingTop: 8,
+                  paddingLeft: 8,
+                  textAlignVertical: 'top',
                 }}
                 value={comment}
                 multiline
@@ -171,7 +180,11 @@ const ImageAdd = ({imageAddRef}) => {
               />
             </View>
           </View>
-          <View style={styles.bottomview}>
+          <View
+            style={{
+              ...styles.bottomview,
+              justifyContent: 'flex-start',
+            }}>
             <TouchableOpacity
               onPress={() => submit()}
               style={{
@@ -187,7 +200,7 @@ const ImageAdd = ({imageAddRef}) => {
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </BottomSheetScrollView>
       </BottomSheet>
       <CameraModal
         setModalVisible={setModalVisible}
@@ -240,10 +253,9 @@ const styles = StyleSheet.create({
   },
   bottomview: {
     width: '100%',
-    height: 100,
-    justifyContent: 'center',
+    height: '20%',
+
     alignItems: 'center',
-    paddingBottom: 20,
   },
   imageView: {
     width: 100,

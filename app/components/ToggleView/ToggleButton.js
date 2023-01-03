@@ -2,7 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import ToggleSwitch from 'toggle-switch-react-native';
 
-const ToggleButton = ({size}) => {
+const ToggleButton = ({size, entity, indivisual}) => {
   const [isOn, setIsSwitchOn] = React.useState(false);
 
   return (
@@ -38,6 +38,13 @@ const ToggleButton = ({size}) => {
           size={size}
           onToggle={isOn => {
             setIsSwitchOn(isOn);
+            if (isOn) {
+              //   console.log('yes');
+              indivisual();
+            } else {
+              entity();
+              //   console.log('no');
+            }
           }}
         />
       </View>

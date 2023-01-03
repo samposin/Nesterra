@@ -844,7 +844,7 @@ const Explore = ({
                     latitude: item.Latitude,
                     longitude: item.Longitude,
                   }}
-                  tracksViewChanges={true}
+                  // tracksViewChanges={true}
                   onPress={() => {
                     changeMarkerBorder(i);
                     playSound();

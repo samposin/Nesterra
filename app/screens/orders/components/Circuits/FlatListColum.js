@@ -20,6 +20,7 @@ const FlatListColum = ({item, title}) => {
       style={{
         ...styles.tableRowColum1,
         width: '20%',
+        justifyContent: 'center',
         borderLeftColor: 'white',
         borderLeftWidth: 2,
         backgroundColor: selectedComponent(item?.Status),

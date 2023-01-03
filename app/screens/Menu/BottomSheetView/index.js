@@ -1,19 +1,33 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useMemo} from 'react';
-import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
+import BottomSheet, {
+  BottomSheetFlatList,
+  BottomSheetTextInput,
+} from '@gorhom/bottom-sheet';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import NoDataViewFlatList from './../../../components/NoDataViewFlatList/index';
 import DataLoder from '../../../components/lodder/DataLoder';
 
 import ToggleButton from './../../../components/ToggleView/ToggleButton';
-
+import {INDIVISUAL, VENDOR} from '../../../actions/actionType/Contacts';
 const BottomSheetView = ({bottomRef, contactLoder}) => {
+  const dipatch = useDispatch();
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
   const {item} = useSelector(state => state.Contacts);
 
+  const indivisual = () => {
+    dipatch({
+      type: INDIVISUAL,
+    });
+  };
+  const entity = () => {
+    dipatch({
+      type: VENDOR,
+    });
+  };
   return (
     <>
       <BottomSheet
@@ -48,7 +62,7 @@ const BottomSheetView = ({bottomRef, contactLoder}) => {
               <View style={styles.header}>
                 <Text
                   style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
-                  Tech Contacts
+                  Contacts
                 </Text>
                 <TouchableOpacity
                   style={styles.closeView}
@@ -59,7 +73,9 @@ const BottomSheetView = ({bottomRef, contactLoder}) => {
                 </TouchableOpacity>
               </View>
               <View style={styles.inputWraper}>
-                <View style={styles.inputView}></View>
+                <View style={styles.inputView}>
+                  <BottomSheetTextInput />
+                </View>
                 <View style={styles.searchIconVie}>
                   <AntDesign name="search1" size={24} color="black" />
                 </View>
@@ -98,6 +114,7 @@ const BottomSheetView = ({bottomRef, contactLoder}) => {
                 </View>
               </View>
               <BottomSheetFlatList
+                contentContainerStyl={{flex: 1}}
                 showsVerticalScrollIndicator={false}
                 data={item}
                 keyExtractor={(item, i) => i.toString()}
@@ -149,7 +166,7 @@ const BottomSheetView = ({bottomRef, contactLoder}) => {
                 }}
               />
             </View>
-            <ToggleButton />
+            <ToggleButton indivisual={indivisual} entity={entity} />
           </>
         ) : (
           <View

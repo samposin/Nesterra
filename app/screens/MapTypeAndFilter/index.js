@@ -34,8 +34,8 @@ const MapTypeAndFilter = ({route}) => {
   return (
     <SafeAreaView
       style={{
-        marginTop: StatusBar.currentHeight,
         flex: 1,
+        marginTop: StatusBar.currentHeight,
       }}>
       <StatusBar
         translucent

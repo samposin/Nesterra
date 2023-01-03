@@ -17,10 +17,10 @@ const StreetViewComponents = () => {
       style={{
         width: 100,
         height: 60,
-        backgroundColor: 'red',
         position: 'absolute',
         bottom: 210,
         left: 10,
+        borderRadius: 15,
       }}>
       <StreetView
         style={styles.streetView}
@@ -47,5 +47,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    borderRadius: 15,
   },
 });
