@@ -1,4 +1,4 @@
-import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native';
 import React, {useMemo, useRef, useEffect, useState, useCallback} from 'react';
 
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
@@ -67,7 +67,7 @@ const BottomSheetView = ({
 
   const data = [
     {id: 0, name: 'INFO', isActive: true},
-    {id: 1, name: 'PICS', isActive: false},
+    {id: 1, name: 'Images', isActive: false},
     {id: 2, name: 'HOURS', isActive: false},
     {id: 3, name: 'ATMS', isActive: false},
     {id: 4, name: 'CIRCUITS', isActive: false},
@@ -103,7 +103,7 @@ const BottomSheetView = ({
         setDevicesLoding(true);
         get_all_devices_inventory(location_data.Location_ID, setDevicesLoding);
         break;
-      case name === 'PICS':
+      case name === 'Images':
         setDataLoder(true);
         fetchNearestPlacesFromGoogle();
         break;
@@ -394,6 +394,20 @@ const BottomSheetView = ({
                     <EvilIcons name="share-apple" size={28} color="#007aff" />
                   </Text>
                   {/* <AntDesign name="upload" size={24} color="#007aff" /> */}
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <View style={{width: 22, height: 22, marginRight: 2}}>
+                    <Image
+                      source={require('../../images/Icons/checkedd.png')}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        resizeMode: 'cover',
+                        tintColor: '#2a95e7',
+                        marginRight: 10,
+                      }}
+                    />
+                  </View>
                 </TouchableOpacity>
                 {dataa ? (
                   <TouchableOpacity

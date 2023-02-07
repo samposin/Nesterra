@@ -27,6 +27,7 @@ import {useDispatch} from 'react-redux';
 import {ATM_ID, BRANCH_ID} from '../actions/actionType/ExploreSearch/index.js';
 import MapTypeAndFilter from '../screens/MapTypeAndFilter';
 import Mtest from '../screens/Mtest/index.js';
+import Menu from './../screens/Menu/index';
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
@@ -71,7 +72,7 @@ const MainStack = () => {
         <Stack.Screen name="Contact" component={Contact} />
         <Stack.Screen name="MenuSetting" component={MenuSetting} />
         <Stack.Screen name="StreetViewScreen" component={StreetViewScreen} />
-        <Stack.Screen name="Mtest" component={Mtest} />
+        <Stack.Screen name="Menu" component={Menu} />
       </Stack.Navigator>
     </NavigationContainer>
   );

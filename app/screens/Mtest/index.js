@@ -1,126 +1,187 @@
-import {
-  StyleSheet,
-  Text,
-  StatusBar,
-  ScrollView,
-  SafeAreaView,
-  View,
-  Image,
-} from 'react-native';
+// import {StyleSheet, Text, SafeAreaView, View} from 'react-native';
+// import React from 'react';
+// import Header from './../stats/Header';
+// import {ReloadInstructions} from 'react-native/Libraries/NewAppScreen';
+// import BackGroundCorsoul from './../../../appOld/screens/BackGroundCorsoul/index';
+
+// const Mtest = () => {
+//   return (
+//     <SafeAreaView>
+//       <View style={styles.rana}>
+//         <View
+//           style={{
+//             width: '100%',
+//             height: 100,
+//             justifyContent: 'center',
+//             alignItems: 'center',
+//           }}>
+//           <Text style={{fontSize: 30, color: 'white'}}>Your Logos </Text>
+//         </View>
+//         {/* <View style={styles.topheder}></View> */}
+//       </View>
+//       {/* <Text>Mtest</Text> */}
+//       <View style={styles.raju}></View>
+//     </SafeAreaView>
+//   );
+// };
+
+// export default Mtest;
+
+// const styles = StyleSheet.create({
+//   rana: {
+//     width: '100%',
+//     height: 75000,
+//     backgroundColor: '#b326f0',
+//     borderRadius: 30,
+//     shadowColor: '#000',
+//     shadowOffset: {
+//       width: 0,
+//       height: 9,
+//     },
+//     shadowOpacity: 0.5,
+//     shadowRadius: 12.35,
+//     elevation: 19,
+//   },
+//   raju: {width: '100%:', height: 100, backgroundColor: 'red'},
+// });
+
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {Center} from 'native-base';
 
-import AntDesign from 'react-native-vector-icons/AntDesign';
-
-const Buu = ({vi}) => {
-  return (
-    <View
-      style={{
-        width: 100,
-        height: 40,
-        backgroundColor: vi,
-        marginLeft: 10,
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text style={{fontSize: 15, color: 'white'}}>download</Text>
-    </View>
-  );
-};
 const Mtest = () => {
   return (
-    <>
-      <SafeAreaView
+    <View>
+      <Text>index</Text>
+      <View
         style={{
           width: '100%',
-          height: '100%',
-          marginTop: StatusBar.currentHeight,
+          height: 100,
+          backgroundColor: 'white',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
         }}>
         <View
           style={{
-            width: '100%',
-            height: 80,
-            flexDirection: 'row',
-          }}>
-          <View
-            style={{
-              width: '20%',
-              height: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <View
-              style={{
-                width: 60,
-                height: 60,
+            width: 100,
+            height: 50,
+            backgroundColor: 'pink',
+            borderRadius: 30,
+            justifyContent: 'center',
+            alignItems: 'center',
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 9,
+            },
+            shadowOpacity: 0.48,
+            shadowRadius: 11.95,
 
-                borderRadius: 30,
-              }}>
-              <Image
-                source={require('../../images/IMG20180629124923.jpg')}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  resizeMode: 'cover',
-                  borderRadius: 30,
-                }}
-              />
-            </View>
-          </View>
-          <View
-            style={{
-              width: '70%',
-              height: '100%',
-            }}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
-                Name Name
-              </Text>
-              <View
-                style={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: 3,
-                  backgroundColor: '#0F9764',
-                  marginLeft: 5,
-                }}></View>
-              <Text style={{marginLeft: 5, color: '#0F9764'}}>NameName</Text>
-            </View>
-            <Text>Name Name</Text>
-            <Text>Name Name</Text>
-          </View>
-          <View
-            style={{
-              width: '10%',
-              height: '100%',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <AntDesign name="delete" size={24} color="black" />
-          </View>
+            elevation: 18,
+          }}>
+          <Text style={{color: 'greenyellow'}}>bottom</Text>
         </View>
-      </SafeAreaView>
-    </>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 100,
+          backgroundColor: 'white',
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+        }}>
+        <View
+          style={{
+            width: 100,
+            height: 50,
+            backgroundColor: 'pink',
+            borderRadius: 30,
+            justifyContent: 'center',
+            alignItems: 'center',
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 9,
+            },
+            shadowOpacity: 0.48,
+            shadowRadius: 11.95,
+
+            elevation: 18,
+          }}>
+          <Text style={{color: 'greenyellow'}}>bottom</Text>
+        </View>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 100,
+          backgroundColor: 'white',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            width: 100,
+            height: 50,
+            backgroundColor: 'pink',
+            borderRadius: 30,
+            justifyContent: 'center',
+            alignItems: 'center',
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 9,
+            },
+            shadowOpacity: 0.48,
+            shadowRadius: 11.95,
+
+            elevation: 18,
+          }}>
+          <Text style={{color: 'greenyellow'}}>bottom</Text>
+        </View>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 100,
+          backgroundColor: 'white',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+        }}>
+        <View
+          style={{
+            width: 100,
+            height: 50,
+            backgroundColor: 'pink',
+            borderRadius: 30,
+            justifyContent: 'center',
+            alignItems: 'center',
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 9,
+            },
+            shadowOpacity: 0.48,
+            shadowRadius: 11.95,
+
+            elevation: 18,
+          }}>
+          <Text style={{color: 'greenyellow'}}>bottom</Text>
+        </View>
+      </View>
+      <View
+        style={{
+          backgroundColor: 'bluewhite',
+          width: '100%',
+          height: 300,
+          alignItems: 'center',
+        }}>
+        <Text style={{color: 'red', fontSize: 40}}>he is good girl</Text>
+        <Text style={{color: 'red', fontSize: 40}}>he is good girl</Text>
+      </View>
+    </View>
   );
 };
 
 export default Mtest;
 
-const styles = StyleSheet.create({
-  container: {
-    fontSize: 20,
-  },
-  ppp: {width: '100%', height: '50%'},
-  anup: {},
-  main: {
-    width: '90%',
-    height: 40,
-    backgroundColor: '#c3c3c3',
-    alignSelf: 'center',
-    flexDirection: 'row',
-
-    // marginLeft: 20,
-    // marginRight: 20,
-  },
-});
+const styles = StyleSheet.create({});

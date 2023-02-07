@@ -83,7 +83,9 @@ const RanderView = ({
         position: 'absolute',
         marginTop: 130,
         zIndex: 100,
-        borderRadius: 5,
+        // borderRadius: 5,
+        borderBottomEndRadius: 5,
+        borderBottomLeftRadius: 5,
       }}>
       {ranDerView()}
     </View>

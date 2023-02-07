@@ -158,9 +158,6 @@ const SiteId = ({
               style={{
                 width: '100%',
                 height: '100%',
-                alignItems: 'flex-end',
-                justifyContent: 'center',
-                paddingRight: 10,
               }}>
               <TouchableOpacity
                 onPress={() => {
@@ -168,7 +165,27 @@ const SiteId = ({
                   setFocusOn1(true);
                   setPlace('Search Site ID');
                   Keyboard.dismiss();
+                }}
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  paddingRight: 5,
+                  flexDirection: 'row',
+
+                  width: '100%',
+                  height: '100%',
                 }}>
+                <View
+                  style={{
+                    width: 70,
+                    height: 30,
+                    backgroundColor: '#d4f4df',
+                    borderRadius: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{color: '#52bc71'}}>Site ID</Text>
+                </View>
                 <Entypo name="cross" size={22} color="black" style={{}} />
               </TouchableOpacity>
             </View>

@@ -7,6 +7,7 @@ import tabButtonImage from '../components/imageLink/tabButtonImage';
 import Orders from '../screens/orders';
 
 import Mtest from '../screens/Mtest';
+import Mtest2 from '../screens/Mtest/Mtest2.js';
 import Login from '../screens/Login';
 import Notification from '../screens/Notification';
 import OtpReceive from '../screens/OtpReceive';
@@ -21,6 +22,7 @@ import Chart from './../components/DataCharts/index';
 import Menu from '../screens/Menu';
 import {CIRCUIT_ID, SITE_ID} from './../actions/actionType/ExploreSearch/index';
 import {useDispatch} from 'react-redux';
+import Reports from './../screens/Reports/index';
 
 const Tab = createBottomTabNavigator();
 const TabNaV = ({navigation}) => {
@@ -87,6 +89,7 @@ const TabNaV = ({navigation}) => {
             );
           },
         }}
+        dtg
       />
       <Tab.Screen
         name="Orders"
@@ -97,6 +100,21 @@ const TabNaV = ({navigation}) => {
               <TabButton
                 name="Orders"
                 imagePath={tabButtonImage.imgOrder}
+                focused={focused}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Reports"
+        component={Reports}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <TabButton
+                name="Reports"
+                imagePath={tabButtonImage.report}
                 focused={focused}
               />
             );
@@ -118,21 +136,7 @@ const TabNaV = ({navigation}) => {
           },
         }}
       />
-      <Tab.Screen
-        name="Menu"
-        component={Menu}
-        options={{
-          tabBarIcon: ({focused}) => {
-            return (
-              <TabButton
-                name="Menu"
-                imagePath={tabButtonImage.menu}
-                focused={focused}
-              />
-            );
-          },
-        }}
-      />
+
       {/* <Tab.Screen
         name="Login"
         component={Login}

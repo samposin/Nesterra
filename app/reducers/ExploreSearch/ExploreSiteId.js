@@ -12,17 +12,24 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case SITE_ID:
-      const dataone = dataMar.reduce((acc, {Location_ID}) => {
-        const entry = acc.find(i => i.Location_ID === Location_ID);
-        if (!entry) {
-          acc.push({
-            Location_ID,
-          });
-        } else {
-          entry.Location_ID = Location_ID;
-        }
-        return acc;
-      }, []);
+      const dataone = dataMar.reduce(
+        (acc, {Location_ID, FullAddress, SubLocationType}) => {
+          const entry = acc.find(i => i.Location_ID === Location_ID);
+          if (!entry) {
+            acc.push({
+              Location_ID,
+              FullAddress,
+              SubLocationType,
+            });
+          } else {
+            entry.Location_ID = Location_ID;
+            entry.FullAddress = FullAddress;
+            entry.SubLocationType = SubLocationType;
+          }
+          return acc;
+        },
+        [],
+      );
       // console.log(dataone);
       return {
         data: dataone,

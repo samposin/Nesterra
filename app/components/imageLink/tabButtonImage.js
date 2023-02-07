@@ -6,4 +6,5 @@ export default {
   imgSearch: require('../../images/search.png'),
   bookmark: require('../../images/bookmark.png'),
   menu: require('../../images/menu.png'),
+  report: require('../../images/clipboard.png'),
 };

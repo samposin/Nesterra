@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
       dataMar.map((item, i) => {
         dataone.push(item.Circuit_ID.split(','));
       });
-
+      // console.log(dataone, 'dataone');
       return {
         data: dataone.flat(),
         data1: dataone.flat(),

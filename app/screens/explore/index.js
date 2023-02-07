@@ -14,6 +14,7 @@ import BottomSheetView from './BottomSheet';
 import MapView from 'react-native-map-clustering';
 import {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Search from './Search';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import MapViewDirections from 'react-native-maps-directions';
 
@@ -924,6 +925,19 @@ const Explore = ({
             style={{transform: [{rotate: '180deg'}]}}
           />
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Menu');
+          }}
+          style={styles.currentLocation2}>
+          {/* <SimpleLineIcons
+            name="reload"
+            size={22}
+            color="black"
+            style={{transform: [{rotate: '180deg'}]}}
+          /> */}
+          <Ionicons name="menu-outline" size={24} color="black" />
+        </TouchableOpacity>
 
         {/* ===========get Current position=== */}
         {/* ===========Direction=== */}
@@ -1266,6 +1280,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 18,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
+  },
+  currentLocation2: {
+    width: 32,
+    height: 32,
+    backgroundColor: 'white',
+    position: 'absolute',
+    top: 200,
+    right: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 16,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

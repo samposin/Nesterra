@@ -15,6 +15,7 @@ import Devices from './components/Devices';
 import Circuits from './components/Circuits';
 import {connect} from 'react-redux';
 import Button from '../../components/button/Button';
+import {returnMapZoom} from './../search/components/helpers';
 
 const Orders = ({}) => {
   const circuitRefDetails = useRef(null);

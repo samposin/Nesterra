@@ -699,6 +699,9 @@ const Explore = ({
         <TouchableOpacity onPress={getLocation} style={styles.currentLocation}>
           <MaterialIcons name="my-location" size={24} color="black" />
         </TouchableOpacity>
+        <View style={styles.currentLocation1}>
+          <Text>ddddd</Text>
+        </View>
         {/* ===========get Current position=== */}
         {/* ===========Direction=== */}
         {/* <TouchableOpacity
@@ -990,6 +993,25 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     position: 'absolute',
     bottom: 60,
+    right: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 18,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
+  },
+  currentLocation1: {
+    width: 36,
+    height: 36,
+    backgroundColor: 'red',
+    position: 'absolute',
+    bottom: 200,
     right: 10,
     justifyContent: 'center',
     alignItems: 'center',

@@ -169,6 +169,11 @@ const AtmsId = ({
                   setFocusOn1(true);
                   setPlace('Search ATM ID');
                   Keyboard.dismiss();
+                }}
+                style={{
+                  width: 30,
+                  height: 20,
+                  backgroundColor: 'red',
                 }}>
                 <Entypo name="cross" size={22} color="black" style={{}} />
               </TouchableOpacity>
