@@ -171,10 +171,24 @@ const AtmsId = ({
                   Keyboard.dismiss();
                 }}
                 style={{
-                  width: 30,
-                  height: 20,
-                  backgroundColor: 'red',
+                  width: '100%',
+                  height: '100%',
+                  justifyContent: 'flex-end',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingRight: 2,
                 }}>
+                <View
+                  style={{
+                    width: 70,
+                    height: 30,
+                    backgroundColor: '#d4f4df',
+                    borderRadius: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{color: '#52bc71'}}>ATM ID</Text>
+                </View>
                 <Entypo name="cross" size={22} color="black" style={{}} />
               </TouchableOpacity>
             </View>

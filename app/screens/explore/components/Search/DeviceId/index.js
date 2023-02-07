@@ -170,7 +170,26 @@ const DeviceId = ({
                   setFocusOn1(true);
                   setPlace('Search Device ID');
                   Keyboard.dismiss();
+                }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                  alignItems: 'center',
+                  paddingRight: 2,
                 }}>
+                <View
+                  style={{
+                    width: 80,
+                    height: 30,
+                    backgroundColor: '#d4f4df',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 10,
+                  }}>
+                  <Text style={{color: '#52bc71'}}>Device ID</Text>
+                </View>
                 <Entypo name="cross" size={22} color="black" style={{}} />
               </TouchableOpacity>
             </View>
