@@ -8,11 +8,23 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
-import StateAnalysis from './StateAnalysis/index';
-import SiteCertiFication from './SiteCertiFication/index';
+import StateAnalysis from './StateAnalysis';
+import SiteCertiFication from './SiteCertiFication';
+import AssetsAndExpenses from './AssetsAndExpenses';
 
 const Reports = () => {
   const [select, setSeleted] = useState('assets');
+  const ranDerView = () => {
+    switch (true) {
+      case select === 'assets':
+        return <AssetsAndExpenses />;
+
+      case select === 'state':
+        return <SiteCertiFication />;
+      case select === 'site':
+        return <StateAnalysis />;
+    }
+  };
   return (
     <SafeAreaView
       style={{
@@ -27,680 +39,53 @@ const Reports = () => {
         <Text style={{paddingRight: 20}}>refresh</Text>
         {/* =============== button view=========== */}
       </View>
-      <View style={styles.buttonView}>
-        <TouchableOpacity
-          style={{
-            ...styles.seclectButton,
-            backgroundColor: select === 'assets' ? 'white' : '#d6d6d8',
-          }}
-          onPress={() => {
-            setSeleted('assets');
-          }}>
-          <Text style={{fontSize: 11, fontWeight: 'bold'}}>
-            Assets & Expenses
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            ...styles.seclectButton,
-            backgroundColor: select === 'state' ? 'white' : '#d6d6d8',
-          }}
-          onPress={() => {
-            setSeleted('state');
-          }}>
-          <Text style={{fontSize: 11, fontWeight: 'bold'}}>State Analysis</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            ...styles.seclectButton,
-            backgroundColor: select === 'site' ? 'white' : '#d6d6d8',
-          }}
-          onPress={() => {
-            setSeleted('site');
-          }}>
-          <Text style={{fontSize: 11, fontWeight: 'bold'}}>
-            Site Certification
-          </Text>
-        </TouchableOpacity>
+      <View style={{width: '100%', paddingHorizontal: 10}}>
+        <View style={styles.buttonView}>
+          <TouchableOpacity
+            style={{
+              ...styles.seclectButton,
+              backgroundColor: select === 'assets' ? 'white' : '#d6d6d8',
+            }}
+            onPress={() => {
+              setSeleted('assets');
+            }}>
+            <Text style={{fontSize: 11, fontWeight: 'bold'}}>
+              Assets & Expenses
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              ...styles.seclectButton,
+              backgroundColor: select === 'state' ? 'white' : '#d6d6d8',
+            }}
+            onPress={() => {
+              setSeleted('state');
+            }}>
+            <Text style={{fontSize: 11, fontWeight: 'bold'}}>
+              State Analysis
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              ...styles.seclectButton,
+              backgroundColor: select === 'site' ? 'white' : '#d6d6d8',
+            }}
+            onPress={() => {
+              setSeleted('site');
+            }}>
+            <Text style={{fontSize: 11, fontWeight: 'bold'}}>
+              Site Certification
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
       {/* =============== button view=========== */}
       {/* =============== button view=========== */}
       {/* =============== button view first=========== */}
 
       <ScrollView>
-        <View
-          style={{
-            width: '100%',
-            height: 465,
-            backgroundColor: '#fef7dd',
-            paddingHorizontal: 10,
-          }}>
-          <View
-            style={{
-              width: '100%',
-              height: 100,
-              // backgroundColor: '',
-            }}></View>
+        {ranDerView()}
 
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              backgroundColor: '#ffffff',
-
-              borderBottomWidth: 1,
-
-              borderColor: '#bebebe',
-              flexDirection: 'row',
-            }}>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 1,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>Category</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>AT&T</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>Verizon</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>Granite</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>Other</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>Total</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              backgroundColor: '#ffffff',
-
-              borderBottomWidth: 1,
-
-              borderColor: '#b9b9b9',
-              flexDirection: 'row',
-            }}>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 1,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>Cable/Sat</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 4,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$0</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$0</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$0</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$257K</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$257K</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              backgroundColor: '#ffffff',
-
-              borderBottomWidth: 1,
-
-              borderColor: '#b9b9b9',
-              flexDirection: 'row',
-            }}>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 1,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>Data</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 4,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$19.9M</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$4.8M</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$8,967</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$208.2K</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$24.3M</Text>
-            </View>
-          </View>
-
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              backgroundColor: '#ffffff',
-
-              borderBottomWidth: 1,
-
-              borderColor: '#b9b9b9',
-              flexDirection: 'row',
-            }}>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 1,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>Service</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 4,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$10.8M</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$89.9K</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$0</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$0</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$10.9M</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              backgroundColor: '#ffffff',
-
-              borderBottomWidth: 1,
-
-              borderColor: '#b9b9b9',
-              flexDirection: 'row',
-            }}>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 1,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>Voice</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 4,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$2.1M</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$8.1M</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$2.3M</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$183.8K</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$12.7M</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              backgroundColor: '#ffffff',
-
-              borderBottomWidth: 1,
-
-              borderColor: '#b9b9b9',
-              flexDirection: 'row',
-            }}>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 1,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>Wireless</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 4,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$1.2M</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$903.4K</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$0</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$0</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$2.2M</Text>
-            </View>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              backgroundColor: '#ffffff',
-
-              borderBottomWidth: 1,
-
-              borderColor: '#b9b9b9',
-              flexDirection: 'row',
-            }}>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 1,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>Total</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 4,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$33.4M</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$13.9M</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$2.3M</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$609.1K</Text>
-            </View>
-            <View
-              style={{
-                width: '16.66%',
-                height: '100%',
-                borderEndWidth: 3,
-                borderColor: '#f2f2f2',
-                justifyContent: 'center',
-                marginLeft: 5,
-                // backgroundColor: 'green',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold'}}>$50.2M</Text>
-            </View>
-          </View>
-        </View>
-
-        {/* ----bottom view frist --- */}
-
-        {/* ----bottom view scound ------ */}
-
-        <View
-          style={{
-            widtth: '100%',
-            height: 300,
-            backgroundColor: '#eef2e1',
-            paddingHorizontal: 5,
-          }}>
-          <View
-            style={{
-              widtth: '100%',
-              height: 100,
-              // backgroundColor: 'w',
-            }}></View>
-
-          <View
-            style={{
-              width: '100%',
-              height: 50,
-              backgroundColor: '#ffffff',
-              borderBottomWidth: 1,
-              borderColor: '#bababc',
-              flexDirection: 'row',
-            }}></View>
-        </View>
         {/* --- bottom view scound--- */}
       </ScrollView>
 
@@ -716,7 +101,7 @@ const styles = StyleSheet.create({
     width: '33%',
     height: '100%',
     // backgroundColor: 'red',
-    borderRadius: 10,
+    borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -734,7 +119,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flexDirection: 'row',
     // justifyContent: 'space-between',
-    paddingHorizontal: 10,
-    padding: 5,
+    padding: 4,
+    borderRadius: 10,
   },
 });
