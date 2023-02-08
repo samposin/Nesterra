@@ -19,9 +19,9 @@ const Reports = () => {
       case select === 'assets':
         return <AssetsAndExpenses />;
 
-      case select === 'state':
-        return <SiteCertiFication />;
       case select === 'site':
+        return <SiteCertiFication />;
+      case select === 'state':
         return <StateAnalysis />;
     }
   };
