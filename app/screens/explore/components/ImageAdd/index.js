@@ -2,9 +2,12 @@ import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native';
 import React, {useMemo, useCallback, useState} from 'react';
 import BottomSheet, {
   BottomSheetTextInput,
+  BottomSheetBackdrop,
   BottomSheetScrollView,
 } from '@gorhom/bottom-sheet';
 import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {RadioButton} from 'react-native-paper';
 import CameraModal from '../../../../components/CameraModal';
 import {
@@ -19,7 +22,7 @@ import Lodder from '../../../../components/lodder';
 
 const ImageAdd = ({imageAddRef}) => {
   const location_data = useSelector(state => state?.location_details?.data);
-  const snapPoints = useMemo(() => ['10%', '26%', '93%'], []);
+  const snapPoints = useMemo(() => ['5%', '10%', '28%'], []);
   const [ImageType, setChecked] = React.useState('site');
   const [imageUrl, setImageUrl] = React.useState('');
   const [img, setimg] = React.useState('');
@@ -31,6 +34,17 @@ const ImageAdd = ({imageAddRef}) => {
   // console.log(location_data?.Location_ID, 'da');
   // console.log(moment().format('YYYY-MM-DD'));
   // console.log(imageUrl.assets[0].uri, 'imageUrl');
+  const renderBackdrop = useCallback(
+    props => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={1}
+        appearsOnIndex={2}
+      />
+    ),
+    [],
+  );
+
   const submit = () => {
     if (img == '') {
       warinng('Chooose An Image');
@@ -95,6 +109,7 @@ const ImageAdd = ({imageAddRef}) => {
         //     </View>
         //   </View>
         // )}
+        backdropComponent={renderBackdrop}
         enabledInnerScrolling={true}
         enabledContentGestureInteraction={false}
         ref={imageAddRef}
@@ -105,7 +120,7 @@ const ImageAdd = ({imageAddRef}) => {
         style={{}}
         keyboardBehavior={true}
         animatedPosition={true}>
-        <BottomSheetScrollView
+        {/* <BottomSheetScrollView
           contentContainerStyle={{flex: 1, justifyContent: 'space-between'}}>
           <View style={styles.topView}>
             <View style={styles.header}>
@@ -120,10 +135,10 @@ const ImageAdd = ({imageAddRef}) => {
                 <Entypo name="cross" size={20} color="white" />
               </TouchableOpacity>
             </View>
-            {/*======= image view=========== */}
+            
             <TouchableOpacity
               onPress={() => {
-                // getImageFromCamera(setImageUrl);
+               
                 setModalVisible(true);
               }}
               style={styles.imageView}>
@@ -137,7 +152,7 @@ const ImageAdd = ({imageAddRef}) => {
               )}
             </TouchableOpacity>
 
-            {/*============== Radio View============== */}
+            
             <Text style={styles.text}>Image Type</Text>
             <View style={styles.radioView}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -200,14 +215,61 @@ const ImageAdd = ({imageAddRef}) => {
               </Text>
             </TouchableOpacity>
           </View>
-        </BottomSheetScrollView>
-      </BottomSheet>
-      <CameraModal
+        </BottomSheetScrollView> */}
+        {/* <CameraModal
         setModalVisible={setModalVisible}
         modalVisible={modalVisible}
         getCameraImage={getCameraImage}
         getGalleryImage={getGalleryImage}
-      />
+      /> */}
+
+        {/* ============================= */}
+        <Text
+          style={{
+            marginLeft: 20,
+            fontSize: 20,
+            color: 'black',
+            fontWeight: 'bold',
+          }}>
+          Add Attachment
+        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            getImageFromCamera();
+            imageAddRef.current.close();
+          }}>
+          <View style={styles.itemView}>
+            <Entypo name="camera" size={24} color="black" />
+
+            <Text style={{marginLeft: 15, color: 'black'}}>Take Photo</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            getImageFromGallery();
+            imageAddRef.current.close();
+          }}>
+          <View style={styles.itemView}>
+            <FontAwesome name="photo" size={22} color="black" />
+
+            <Text style={{marginLeft: 15, color: 'black'}}>
+              Choose from photos
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View style={styles.itemView}>
+            <MaterialCommunityIcons
+              name="file-plus-outline"
+              size={30}
+              color="black"
+            />
+            <Text style={{marginLeft: 15, color: 'black'}}>Add document</Text>
+          </View>
+        </TouchableOpacity>
+
+        {/* ============================= */}
+      </BottomSheet>
 
       {isLoading && <Lodder lodding={isLoading} />}
     </>
@@ -286,6 +348,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     borderRadius: 15,
+    marginTop: 10,
+  },
+  itemView: {
+    // width: '100%',
+    // height: 40,
+    // backgroundColor: 'green',
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
     marginTop: 10,
   },
 });

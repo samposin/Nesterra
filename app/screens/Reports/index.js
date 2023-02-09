@@ -6,14 +6,26 @@ import {
   StatusBar,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import StateAnalysis from './StateAnalysis';
 import SiteCertiFication from './SiteCertiFication';
 import AssetsAndExpenses from './AssetsAndExpenses';
+import {getReportSiteAnalysis} from './../../actions/Reports/SiteAnlysis/index';
+import {connect} from 'react-redux';
+import ButtonView from './Components/ButtonView/index';
+import {Title} from 'react-native-paper';
 
-const Reports = () => {
+const Reports = ({getReportSiteAnalysis}) => {
   const [select, setSeleted] = useState('assets');
+
+  useEffect(() => {
+    getReportSiteAnalysis();
+  }, []);
+
+  // console.log(select);
+
   const ranDerView = () => {
     switch (true) {
       case select === 'assets':
@@ -33,55 +45,59 @@ const Reports = () => {
         backgroundColor: 'white',
       }}>
       <View style={styles.hearderView}>
-        <Text style={{paddingLeft: 20, fontSize: 25, fontWeight: 'bold'}}>
+        <Text style={{fontSize: 25, fontWeight: 'bold', color: 'black'}}>
           Interective Reports
         </Text>
-        <Text style={{paddingRight: 20}}>refresh</Text>
+        <View
+          style={{
+            width: 30,
+            height: 30,
+            borderColor: '#2c75c2',
+            borderRadius: 15,
+            borderWidth: 1.5,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Image
+            source={require('../../images/Icons/syncronization.png')}
+            style={{
+              width: '70%',
+              height: '70%',
+              resizeMode: 'cover',
+              tintColor: '#2c75c2',
+            }}
+          />
+        </View>
         {/* =============== button view=========== */}
       </View>
       <View style={{width: '100%', paddingHorizontal: 10}}>
         <View style={styles.buttonView}>
-          <TouchableOpacity
-            style={{
-              ...styles.seclectButton,
-              backgroundColor: select === 'assets' ? 'white' : '#d6d6d8',
-            }}
+          <ButtonView
+            Title="Assets & Expenses"
+            select={select}
+            value="assets"
             onPress={() => {
               setSeleted('assets');
-            }}>
-            <Text style={{fontSize: 11, fontWeight: 'bold'}}>
-              Assets & Expenses
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              ...styles.seclectButton,
-              backgroundColor: select === 'state' ? 'white' : '#d6d6d8',
             }}
-            onPress={() => {
-              setSeleted('state');
-            }}>
-            <Text style={{fontSize: 11, fontWeight: 'bold'}}>
-              State Analysis
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              ...styles.seclectButton,
-              backgroundColor: select === 'site' ? 'white' : '#d6d6d8',
-            }}
+          />
+          <ButtonView
+            Title=" State Analysis"
+            select={select}
+            value="site"
             onPress={() => {
               setSeleted('site');
-            }}>
-            <Text style={{fontSize: 11, fontWeight: 'bold'}}>
-              Site Certification
-            </Text>
-          </TouchableOpacity>
+            }}
+          />
+          <ButtonView
+            Title="Site Certification"
+            select={select}
+            value="state"
+            onPress={() => {
+              setSeleted('state');
+            }}
+          />
         </View>
       </View>
-      {/* =============== button view=========== */}
-      {/* =============== button view=========== */}
-      {/* =============== button view first=========== */}
 
       <ScrollView>
         {ranDerView()}
@@ -94,7 +110,7 @@ const Reports = () => {
   );
 };
 
-export default Reports;
+export default connect(null, {getReportSiteAnalysis})(Reports);
 
 const styles = StyleSheet.create({
   seclectButton: {
@@ -107,14 +123,16 @@ const styles = StyleSheet.create({
   },
   hearderView: {
     width: '100%',
+    height: 40,
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 10,
   },
   buttonView: {
     width: '100%',
-    height: 50,
+    height: 40,
     backgroundColor: '#d6d6d8',
     marginTop: 10,
     flexDirection: 'row',

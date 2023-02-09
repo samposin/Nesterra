@@ -26,6 +26,10 @@ const dataOne = [
   {quarter: 6, earnings: 500},
 ];
 const StateAnalysis = () => {
+  const {SiteAnlysis} = useSelector(state => state.SiteAnlysis);
+
+  console.log(SiteAnlysis);
+
   return (
     <>
       {/* ========================== */}

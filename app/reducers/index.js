@@ -50,6 +50,7 @@ import ExploreDeviceId from './ExploreSearch/ExploreDeviceId';
 import ExploreAddress from './ExploreSearch/ExploreAddress';
 import SiteTypeCheck from './SiteTypeCheck';
 import GenealogyList from './GenealogyList';
+import SiteAnlysis from './Reports/SiteAnlysis';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -101,5 +102,7 @@ const rootReducer = combineReducers({
   Contacts,
   SiteTypeCheck,
   GenealogyList,
+  //===================
+  SiteAnlysis,
 });
 export default rootReducer;
