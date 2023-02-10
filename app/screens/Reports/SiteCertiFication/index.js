@@ -4,7 +4,9 @@ import React from 'react';
 const SiteCertiFication = () => {
   return (
     <View style={{width: '100%', height: 100, backgroundColor: 'red'}}>
-      <Text>SiteCertiFication</Text>
+      <Text style={{color: 'red', fontSize: 20, fontWeight: '200'}}>
+        SiteCertiFication
+      </Text>
     </View>
   );
 };
