@@ -3,7 +3,7 @@ import React from 'react';
 
 const SiteCertiFication = () => {
   return (
-    <View>
+    <View style={{width: '100%', height: 100, backgroundColor: 'red'}}>
       <Text>SiteCertiFication</Text>
     </View>
   );
