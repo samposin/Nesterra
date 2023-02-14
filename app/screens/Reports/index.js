@@ -15,13 +15,14 @@ import AssetsAndExpenses from './AssetsAndExpenses';
 import {getReportSiteAnalysis} from './../../actions/Reports/SiteAnlysis/index';
 import {connect} from 'react-redux';
 import ButtonView from './Components/ButtonView/index';
-import {Title} from 'react-native-paper';
 
-const Reports = ({getReportSiteAnalysis}) => {
+import {getReport} from '../../actions/Reports';
+
+const Reports = ({getReport}) => {
   const [select, setSeleted] = useState('assets');
 
   useEffect(() => {
-    getReportSiteAnalysis();
+    getReport();
   }, []);
 
   // console.log(select);
@@ -37,6 +38,7 @@ const Reports = ({getReportSiteAnalysis}) => {
         return <StateAnalysis />;
     }
   };
+
   return (
     <SafeAreaView
       style={{
@@ -81,19 +83,19 @@ const Reports = ({getReportSiteAnalysis}) => {
             }}
           />
           <ButtonView
-            Title=" State Analysis"
+            Title="State Analysis"
             select={select}
-            value="site"
+            value="state"
             onPress={() => {
-              setSeleted('site');
+              setSeleted('state');
             }}
           />
           <ButtonView
             Title="Site Certification"
             select={select}
-            value="state"
+            value="site"
             onPress={() => {
-              setSeleted('state');
+              setSeleted('site');
             }}
           />
         </View>
@@ -110,7 +112,7 @@ const Reports = ({getReportSiteAnalysis}) => {
   );
 };
 
-export default connect(null, {getReportSiteAnalysis})(Reports);
+export default connect(null, {getReport})(Reports);
 
 const styles = StyleSheet.create({
   seclectButton: {
@@ -139,5 +141,9 @@ const styles = StyleSheet.create({
     // justifyContent: 'space-between',
     padding: 4,
     borderRadius: 10,
+  },
+  scroll: {
+    borderColor: 'blue',
+    borderRadius: 2,
   },
 });

@@ -7,9 +7,6 @@ const ButtonView = ({Title, select, value, onPress}) => {
       style={{
         ...styles.seclectButton,
         backgroundColor: select === value ? 'white' : '#d6d6d8',
-
-        borderLeftWidth: select === value ? 0 : 2,
-        borderLeftColor: 'red',
       }}
       onPress={() => {
         onPress();

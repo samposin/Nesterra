@@ -1,18 +1,23 @@
 import Axios from 'axios';
-import {Base_url} from '../../key';
-import {ALL_ATMS} from '../actionType/ATMS';
 
-export const getAllAtms = (id, setAtmLoding) => dispatch => {
-  Axios.get(`${Base_url}/api/GetAllCustomATM?Locationid=${id}`)
+import {Base_url} from '../../key';
+
+import {REPORT_ALL_HOME} from './../actionType/Reports/index';
+
+export const getReport = id => dispatch => {
+  Axios.get(
+    `${Base_url}/api/GetStatBreakDownData?state=0&city=0&status=active&geneology=0&sitetype=0`,
+  )
     .then(response => {
       if (response.data) {
+        // console.log(response.data.circuitsDataModels, 'circuitsDataModels');
         dispatch({
-          type: ALL_ATMS,
+          type: REPORT_ALL_HOME,
           payload: {
             data: response.data,
           },
         });
-        setAtmLoding(false);
+        // setAtmLoding(false);
       }
     })
     .catch(error => {
