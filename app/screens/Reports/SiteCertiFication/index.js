@@ -36,16 +36,8 @@ const SiteCertiFication = () => {
   return (
     <>
       {/* ========================== */}
-      <Text
-        style={{
-          fontSize: 20,
-          fontWeight: '700',
-          marginLeft: 10,
-          marginTop: 10,
-        }}>
-        Site (By State)
-      </Text>
-      {/* ========================== */}
+      <Text style={styles.titleText}>Site (By State)</Text>
+
       <VictoryChart width={300} height={300}>
         <VictoryAxis
           style={{
@@ -75,16 +67,8 @@ const SiteCertiFication = () => {
           }
         />
       </VictoryChart>
-      <Text
-        style={{
-          fontSize: 20,
-          fontWeight: '700',
-          marginLeft: 10,
-          marginTop: 10,
-        }}>
-        Monthly Spend (By State)
-      </Text>
-      {/* ========================== */}
+      <Text style={styles.titleText}>Monthly Spend (By State)</Text>
+
       <VictoryChart width={300} height={300}>
         <VictoryAxis
           style={{
@@ -172,4 +156,11 @@ const SiteCertiFication = () => {
 
 export default SiteCertiFication;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  titleText: {
+    fontSize: 20,
+    fontWeight: '700',
+    marginLeft: 10,
+    marginTop: 10,
+  },
+});
