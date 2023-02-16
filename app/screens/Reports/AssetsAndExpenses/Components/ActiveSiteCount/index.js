@@ -61,4 +61,9 @@ const ActiveSiteCount = () => {
 
 export default ActiveSiteCount;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  borderView: {
+    marginLeft: 10,
+    left: 20,
+  },
+});
