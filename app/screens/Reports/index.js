@@ -103,7 +103,7 @@ const Reports = ({getReport}) => {
 
       <ScrollView>
         {ranDerView()}
-
+        <View style={{height: 50}}></View>
         {/* --- bottom view scound--- */}
       </ScrollView>
 

@@ -6,6 +6,7 @@ const initialState = {
   SiteCirtificaionTwo: [],
   SiteCirtificaionThree: [],
   SiteCirtificaionFour: [],
+  circuitCountPie: [],
 };
 
 export default (state = initialState, action) => {
@@ -43,6 +44,7 @@ export default (state = initialState, action) => {
         SiteCirtificaionTwo: dd,
         SiteCirtificaionThree: SiteCirtificaionThree,
         SiteCirtificaionFour: action.payload.data.monthlyspendDataModels,
+        circuitCountPie: action.payload.data.inv_circuit_count.slice(1, 5),
       };
 
     default:
