@@ -3,8 +3,10 @@ import React from 'react';
 
 import MainCountView from './Components/MainCountView';
 import {color} from 'react-native-reanimated';
+import {useSelector} from 'react-redux';
 
 const AssetsAndExpenses = () => {
+  const {circuitCountPie} = useSelector(state => state.SiteAnlysis);
   return (
     <>
       <MainCountView HeaderText="Active Site Count" colours="#fef7dd" />

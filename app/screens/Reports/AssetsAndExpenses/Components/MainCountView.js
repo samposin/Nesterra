@@ -5,13 +5,14 @@ import {Svg} from 'react-native-svg';
 import {useSelector} from 'react-redux';
 const {width, height} = Dimensions.get('screen');
 import {VictoryPie, VictoryLabel} from 'victory-native';
+import Item from './Item';
 
 const MainCountView = ({HeaderText, colours}) => {
   const {SiteAnlysis} = useSelector(state => state.SiteAnlysis);
   const {circuitCountPie} = useSelector(state => state.SiteAnlysis);
-  console.log(circuitCountPie, 'circuitCountPie');
+  // console.log(circuitCountPie, 'circuitCountPie');
   const [category, setCategy] = useState(null);
-  console.log(HeaderText, colours);
+  // console.log(HeaderText, colours);
   return (
     <View style={{...styles.mainView, backgroundColor: colours}}>
       <View style={{}}>
@@ -66,7 +67,44 @@ const MainCountView = ({HeaderText, colours}) => {
           <CountView color="red" title="Atm (2606)" />
         </View>
       </View>
-      <View style={styles.activeText}></View>
+      <View style={styles.activeText}>
+        <View
+          style={{
+            width: '100%',
+            height: 50,
+            borderBottomColor: 'red',
+            borderBottomWidth: 0.5,
+            flexDirection: 'row',
+          }}>
+          <Item item1="Category" />
+          <Item item1="AT&T" />
+          <Item item1="Verizon" />
+          <Item item1="Granite" />
+          <Item item1="Other" />
+          <Item item1="Total" />
+        </View>
+        {circuitCountPie &&
+          circuitCountPie.map((item, i) => {
+            return (
+              <View
+                key={i}
+                style={{
+                  width: '100%',
+                  height: 50,
+                  borderBottomColor: 'red',
+                  borderBottomWidth: 0.5,
+                  flexDirection: 'row',
+                }}>
+                <Item item1={item?.Category} />
+                <Item item1={item?.AT_T} />
+                <Item item1={item?.Verizon} />
+                <Item item1={item?.Granite} />
+                <Item item1={item?.Other} />
+                <Item item1={item?.Total} />
+              </View>
+            );
+          })}
+      </View>
     </View>
   );
 };
@@ -76,7 +114,6 @@ export default MainCountView;
 const styles = StyleSheet.create({
   mainView: {
     width: '100%',
-    height: 470,
 
     marginTop: 20,
   },
@@ -109,7 +146,7 @@ const styles = StyleSheet.create({
 
   activeText: {
     width: '100%',
-    height: 200,
+    height: 300,
     backgroundColor: 'white',
     marginTop: 20,
   },
