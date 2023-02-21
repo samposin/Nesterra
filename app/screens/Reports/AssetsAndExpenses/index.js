@@ -9,8 +9,8 @@ const AssetsAndExpenses = () => {
   const {circuitCountPie} = useSelector(state => state.SiteAnlysis);
   return (
     <>
-      <MainCountView HeaderText="Active Site Count" colours="#fef7dd" />
-      <MainCountView HeaderText="Circuit Count" />
+      <MainCountView HeaderText="Active Site Count" />
+      <MainCountView HeaderText="Circuit Count" colours="#fef7dd" />
       <MainCountView HeaderText="Annul Circuit Spend " />
     </>
   );

@@ -927,7 +927,7 @@ const Explore = ({
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Menu');
+            navigation.navigate('Profile');
           }}
           style={styles.currentLocation2}>
           {/* <SimpleLineIcons

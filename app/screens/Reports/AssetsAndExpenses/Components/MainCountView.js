@@ -114,8 +114,9 @@ export default MainCountView;
 const styles = StyleSheet.create({
   mainView: {
     width: '100%',
-
-    marginTop: 20,
+    height: 500,
+    backgroundColor: 'blue',
+    marginTop: 30,
   },
   upperText: {
     fontSize: 20,
