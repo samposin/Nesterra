@@ -175,8 +175,8 @@ const Mtest = () => {
           height: 300,
           alignItems: 'center',
         }}>
-        <Text style={{color: 'red', fontSize: 40}}>he is good girl</Text>
-        <Text style={{color: 'red', fontSize: 40}}>he is good girl</Text>
+        <Text style={{color: 'red', fontSize: 40}}>Text</Text>
+        <Text style={{color: 'red', fontSize: 40}}>Text</Text>
       </View>
     </View>
   );
