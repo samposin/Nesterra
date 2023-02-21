@@ -176,7 +176,6 @@ const Mtest = () => {
           alignItems: 'center',
         }}>
         <Text style={{color: 'red', fontSize: 40}}>Text</Text>
-        <Text style={{color: 'red', fontSize: 40}}>Text</Text>
       </View>
     </View>
   );
