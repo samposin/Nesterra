@@ -927,7 +927,7 @@ const Explore = ({
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Profile');
+            navigation.navigate('Saved');
           }}
           style={styles.currentLocation2}>
           {/* <SimpleLineIcons
@@ -936,7 +936,7 @@ const Explore = ({
             color="black"
             style={{transform: [{rotate: '180deg'}]}}
           /> */}
-          <Ionicons name="menu-outline" size={24} color="black" />
+          <Ionicons name="bookmark-outline" size={24} color="black" />
         </TouchableOpacity>
 
         {/* ===========get Current position=== */}

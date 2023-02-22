@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useMemo} from 'react';
+import React, {useMemo, useState} from 'react';
 import BottomSheet, {
   BottomSheetFlatList,
   BottomSheetTextInput,
@@ -10,10 +10,14 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import NoDataViewFlatList from './../../../components/NoDataViewFlatList/index';
 import DataLoder from '../../../components/lodder/DataLoder';
+import {RadioButton} from 'react-native-paper';
 
 import ToggleButton from './../../../components/ToggleView/ToggleButton';
 import {INDIVISUAL, VENDOR} from '../../../actions/actionType/Contacts';
+import RadioButtonView from './RadioButtonView';
+import {COLORS} from './../../Reports/AssetsAndExpenses/constants/theme';
 const BottomSheetView = ({bottomRef, contactLoder}) => {
+  const [userType, setUserType] = useState('Citizense');
   const dipatch = useDispatch();
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
   const {item} = useSelector(state => state.Contacts);
@@ -28,6 +32,7 @@ const BottomSheetView = ({bottomRef, contactLoder}) => {
       type: VENDOR,
     });
   };
+
   return (
     <>
       <BottomSheet
@@ -80,6 +85,32 @@ const BottomSheetView = ({bottomRef, contactLoder}) => {
                   <AntDesign name="search1" size={24} color="black" />
                 </View>
               </View>
+              <View style={styles.radioButtonView}>
+                <RadioButtonView
+                  title="Citizense"
+                  colors="black"
+                  userType={userType}
+                  onPress={() => {
+                    setUserType('Citizense');
+                  }}
+                />
+                <RadioButtonView
+                  title="Vendors"
+                  colors="black"
+                  userType={userType}
+                  onPress={() => {
+                    setUserType('Vendors');
+                  }}
+                />
+                <RadioButtonView
+                  title="3rd Party"
+                  colors="black"
+                  userType={userType}
+                  onPress={() => {
+                    setUserType('3rd Party');
+                  }}
+                />
+              </View>
               <View
                 style={{
                   width: '100%',
@@ -94,15 +125,7 @@ const BottomSheetView = ({bottomRef, contactLoder}) => {
                     width: '50%',
                     borderLeftWidth: 0,
                   }}>
-                  <Text style={{color: 'white'}}>Name</Text>
-                </View>
-                <View
-                  style={{
-                    ...styles.headerTitle,
-                    width: '25%',
-                    borderLeftWidth: 2,
-                  }}>
-                  <Text style={{color: 'white'}}>Type</Text>
+                  <Text style={{color: 'white'}}>Department</Text>
                 </View>
                 <View
                   style={{
@@ -111,6 +134,14 @@ const BottomSheetView = ({bottomRef, contactLoder}) => {
                     borderLeftWidth: 2,
                   }}>
                   <Text style={{color: 'white'}}>Name</Text>
+                </View>
+                <View
+                  style={{
+                    ...styles.headerTitle,
+                    width: '25%',
+                    borderLeftWidth: 2,
+                  }}>
+                  <Text style={{color: 'white'}}>Title</Text>
                 </View>
               </View>
               <BottomSheetFlatList
@@ -227,5 +258,13 @@ const styles = StyleSheet.create({
     height: '100%',
     paddingLeft: 5,
     borderLeftColor: 'white',
+  },
+  radioButtonView: {
+    width: '100%',
+    height: 50,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 40,
+    // backgroundColor: 'pink',
   },
 });

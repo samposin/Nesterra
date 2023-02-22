@@ -26,7 +26,7 @@ const TabButton = ({focused, imagePath, name}) => {
           }}> */}
         <Image
           style={{
-            tintColor: focused ? '#0A7AFF' : 'gray',
+            tintColor: focused ? '#0A7AFF' : 'black',
             resizeMode: 'contain',
             // marginVertical: 2,
             // marginTop: 2,
@@ -47,7 +47,7 @@ const TabButton = ({focused, imagePath, name}) => {
             style={{
               fontSize: 11,
               fontWeight: '800',
-              color: focused ? '#0A7AFF' : 'gray',
+              color: focused ? '#0A7AFF' : 'black',
             }}>
             {name}
           </Text>

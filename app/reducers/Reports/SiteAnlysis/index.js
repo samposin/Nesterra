@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
         SiteCirtificaionTwo: dd,
         SiteCirtificaionThree: SiteCirtificaionThree,
         SiteCirtificaionFour: action.payload.data.monthlyspendDataModels,
-        circuitCountPie: action.payload.data.inv_circuit_count.slice(1, 5),
+        circuitCountPie: action.payload.data.inv_site_count,
       };
 
     default:

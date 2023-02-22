@@ -160,17 +160,19 @@ const Pics = ({isLoding, imageAddRef}) => {
                 imageAddRef.current.snapToIndex(2);
               }}
               style={{
-                width: 55,
-                height: 25,
-                backgroundColor: '#0075f6',
-                borderRadius: 5,
+                width: 65,
+                height: 28,
+                backgroundColor: '#33c759',
+                borderRadius: 15,
                 position: 'absolute',
                 right: 10,
                 bottom: 55,
                 justifyContent: 'center',
                 alignItems: 'center',
+                flexDirection: 'row',
               }}>
-              <AntDesign name="plus" size={24} color="white" />
+              <AntDesign name="plus" size={20} color="white" />
+              <Text style={{color: 'white', marginLeft: 5}}>Add</Text>
             </TouchableOpacity>
           </View>
         </>

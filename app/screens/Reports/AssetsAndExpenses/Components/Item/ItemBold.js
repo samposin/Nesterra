@@ -2,7 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 
-const Item = ({item1, color1, width, item}) => {
+const ItemBold = ({item1, color1, width, item}) => {
   // console.log(item.LocationType);
   return (
     <View
@@ -20,10 +20,7 @@ const Item = ({item1, color1, width, item}) => {
         style={{
           color: 'black',
           fontSize: moderateScale(12),
-          fontWeight:
-            item?.LocationType && item?.LocationType === 'Total'
-              ? 'bold'
-              : null,
+          fontWeight: 'bold',
         }}>
         {item1}
       </Text>
@@ -31,6 +28,6 @@ const Item = ({item1, color1, width, item}) => {
   );
 };
 
-export default Item;
+export default ItemBold;
 
 const styles = StyleSheet.create({});

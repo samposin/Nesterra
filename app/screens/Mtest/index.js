@@ -168,13 +168,7 @@ const Mtest = () => {
           <Text style={{color: 'greenyellow'}}>bottom</Text>
         </View>
       </View>
-      <View
-        style={{
-          backgroundColor: 'bluewhite',
-          width: '100%',
-          height: 300,
-          alignItems: 'center',
-        }}>
+      <View style={styles.viewText}>
         <Text style={{color: 'red', fontSize: 40}}>Text Text</Text>
       </View>
     </View>
@@ -183,4 +177,11 @@ const Mtest = () => {
 
 export default Mtest;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  viewText: {
+    backgroundColor: 'bluewhite',
+    width: '100%',
+    height: 300,
+    alignItems: 'center',
+  },
+});

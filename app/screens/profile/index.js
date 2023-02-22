@@ -9,6 +9,8 @@ import {
 import React from 'react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import Entypo from 'react-native-vector-icons/Entypo';
+import TextItemView from './Components/TextItemView';
+
 const Profile = () => {
   return (
     <SafeAreaView style={{flex: 1, marginTop: StatusBar.currentHeight}}>
@@ -27,21 +29,47 @@ const Profile = () => {
           />
         </View>
       </View>
-      <Text style={styles.profileText1}>Santosh Cerpenter</Text>
+      <Text style={{...styles.profileText1, color: 'black'}}>
+        Santosh Cerpenter
+      </Text>
+      <Text
+        style={{
+          ...styles.profileText1,
+          color: 'gray',
+          marginBottom: scale(10),
+          fontSize: scale(15),
+        }}>
+        Title -
+      </Text>
+      {/* ========item====== */}
 
-      <View style={styles.profileText3}>
-        <View style={styles.ProfileText2}>
-          <Text style={{fontSize: 30}}>Email</Text>
-          <Text style={{fontSize: 15, color: 'black'}}>
-            Sontosh.cerperter@nesterra.net
-          </Text>
-        </View>
-      </View>
+      <TextItemView
+        leftText="Email"
+        rightText="Sontosh.cerperter@nesterra.net"
+      />
+      <TextItemView leftText="Emp Id" rightText="-" />
+      <TextItemView
+        leftText="Phone#"
+        rightText="Sontosh.cerperter@nesterra.net"
+      />
 
-      <View style={styles.ProfileText4}>
-        <View style={styles.profileText5}>
-          <Text style={{fontSize: 30}}>Emp id</Text>
-        </View>
+      <TextItemView leftText="Desk Phone#" rightText="-" />
+      <TextItemView leftText="Status" rightText="Active" />
+      <TextItemView leftText="Business Unit" rightText="Nesterra" />
+      <TextItemView leftText="Activation Date" rightText="2022-05-25" />
+      <View
+        style={{
+          width: '100%',
+          height: 1,
+
+          paddingHorizontal: 10,
+        }}>
+        <View
+          style={{
+            width: '100%',
+            borderTopColor: '#c6c6c6',
+            borderTopWidth: 0.5,
+          }}></View>
       </View>
     </SafeAreaView>
   );
@@ -87,9 +115,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   profileText1: {
-    marginTop: 20,
     fontSize: scale(20),
-    color: 'black',
+
     fontWeight: 'bold',
     // justifyContent: 'center',
     textAlign: 'center',

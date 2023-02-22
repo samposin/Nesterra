@@ -122,14 +122,14 @@ const TabNaV = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name="Saved"
-        component={Saved}
+        name="Menu"
+        component={Menu}
         options={{
           tabBarIcon: ({focused}) => {
             return (
               <TabButton
-                name="Saved"
-                imagePath={tabButtonImage.bookmark}
+                name="Menu"
+                imagePath={tabButtonImage.menu}
                 focused={focused}
               />
             );

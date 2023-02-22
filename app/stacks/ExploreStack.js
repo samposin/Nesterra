@@ -8,6 +8,7 @@ import DestinationPoint from '../screens/explore/DestinationPoint';
 import Filtter from '../screens/filtter';
 import Profile from '../screens/profile';
 import SettingProfile from '../screens/explore/SettingProfile';
+import Saved from './../screens/saved/index';
 
 import {useDispatch} from 'react-redux';
 import {
@@ -50,6 +51,7 @@ const ExploreStack = () => {
       <Stack.Screen name="StartPoint" component={StartPoint} />
       <Stack.Screen name="DestinationPoint" component={DestinationPoint} />
       <Stack.Screen name="SettingProfile" component={SettingProfile} />
+      <Stack.Screen name="Saved" component={Saved} />
     </Stack.Navigator>
   );
 };
