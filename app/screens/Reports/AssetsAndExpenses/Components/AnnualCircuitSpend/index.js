@@ -16,13 +16,14 @@ import ItemBold from '../Item/ItemBold';
 import ItemHeaderBold from '../Item/ItemHeaderBold';
 import CountView from '../CountView';
 
-const ActiveSiteCount = ({HeaderText, colours}) => {
+const AnnualCircuitSpend = ({HeaderText, colours}) => {
   const {SiteAnlysis} = useSelector(state => state.SiteAnlysis);
-  const {circuitCountPie} = useSelector(state => state.SiteAnlysis);
+  const {AnnualCircuitSpend} = useSelector(state => state.SiteAnlysis);
   // console.log(SiteAnlysis.inv_site_count, 'circuitCountPie');
-
+  // console.log(circuitCountPie, 'circuitCountPie');
   const [category, setCategy] = useState(null);
   // console.log(HeaderText, colours);
+  //   console.log(SiteAnlysis.inv_circuit_spend, 'circuitCountPie');
 
   return (
     <View style={{width: '100%', padding: 10}}>
@@ -49,13 +50,13 @@ const ActiveSiteCount = ({HeaderText, colours}) => {
                 '#027f01',
                 '#c7291d',
               ]}
-              x="LocationType"
-              y="Quantity"
+              x="Category"
+              y="Total"
               radius={({datum}) =>
-                category && category == datum.LocationType ? 80 : 70
+                category && category == datum.Category ? 80 : 70
               }
               innerRadius={30}
-              data={circuitCountPie}
+              data={AnnualCircuitSpend}
               events={[
                 {
                   target: 'data',
@@ -66,10 +67,10 @@ const ActiveSiteCount = ({HeaderText, colours}) => {
                           target: 'labels',
                           mutation: props => {
                             console.log(
-                              circuitCountPie[props.index].LocationType,
+                              AnnualCircuitSpend[props.index].Category,
                             );
                             let categoryName =
-                              circuitCountPie[props.index].LocationType;
+                              AnnualCircuitSpend[props.index].Category;
                             setCategy(categoryName);
                           },
                         },
@@ -84,10 +85,8 @@ const ActiveSiteCount = ({HeaderText, colours}) => {
                 position: 'absolute',
                 top: 70,
               }}>
-              <Text style={{color: 'black'}}>
-                {/* {circuitCountPie[circuitCountPie.length - 1].UniqueLocCount} */}
-              </Text>
-              <Text style={{color: 'black'}}>Total</Text>
+              <Text>2990</Text>
+              <Text>Total</Text>
             </View>
           </View>
           <View style={styles.rightView}>
@@ -114,8 +113,8 @@ const ActiveSiteCount = ({HeaderText, colours}) => {
             <Item item1="Quantity" width="20%" />
             <ItemHeaderBold item1="Unique Location" width="20%" />
           </View>
-          {circuitCountPie &&
-            circuitCountPie.map((item, i) => {
+          {AnnualCircuitSpend &&
+            AnnualCircuitSpend.map((item, i) => {
               return (
                 <TouchableOpacity
                   onPressIn={() => {
@@ -131,19 +130,19 @@ const ActiveSiteCount = ({HeaderText, colours}) => {
                     borderTopWidth: 0.7,
                     flexDirection: 'row',
                     backgroundColor:
-                      category && category === item.LocationType
-                        ? '#bfffc0'
-                        : null,
+                      category && category === item.Category ? '#bfffc0' : null,
                   }}>
-                  <Item item1={item?.LocationType} width="20%" item={item} />
-                  <Item item1={item?.State} width="20%" item={item} />
-                  <Item item1={item?.City} width="20%" item={item} />
-                  <Item item1={item?.Quantity} width="20%" item={item} />
-                  <ItemBold
-                    item1={item?.UniqueLocCount}
+                  <Item
+                    item1={`$${parseFloat(
+                      Number(item?.LocationType / 1000000).toFixed(1),
+                    )}`}
                     width="20%"
                     item={item}
                   />
+                  <Item item1={item?.State} width="20%" item={item} />
+                  <Item item1={item?.City} width="20%" item={item} />
+                  <Item item1={item?.Quantity} width="20%" item={item} />
+                  <ItemBold item1={item?.Total} width="20%" item={item} />
                 </TouchableOpacity>
               );
             })}
@@ -153,7 +152,7 @@ const ActiveSiteCount = ({HeaderText, colours}) => {
   );
 };
 
-export default ActiveSiteCount;
+export default AnnualCircuitSpend;
 
 const styles = StyleSheet.create({
   mainView: {
@@ -182,16 +181,12 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '70%',
     height: 180,
-
     justifyContent: 'center',
     alignItems: 'center',
   },
   rightView: {
     width: '30%',
     height: 180,
-    // backgroundColor: 'green',
-    // backgroundColor: 'green',
-    // backgroundColor: 'green',
     // backgroundColor: 'green',
   },
 
