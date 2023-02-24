@@ -36,7 +36,6 @@ const SiteActionStatus = ({HeaderText, colours}) => {
   //   Object.assign({}, o, {number: array1[i].key1}),
   // );
 
-  // console.log(result, 'pppp');
   return (
     <View style={{width: '100%', padding: 10}}>
       <View
