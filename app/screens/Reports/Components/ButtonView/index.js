@@ -6,13 +6,18 @@ const ButtonView = ({Title, select, value, onPress}) => {
     <TouchableOpacity
       style={{
         ...styles.seclectButton,
-        backgroundColor: select === value ? 'white' : '#d6d6d8',
+        backgroundColor: select === value ? '#007cff' : '#d6d6d8',
       }}
       onPress={() => {
         onPress();
         // setSeleted('assets');
       }}>
-      <Text style={{fontSize: 13, fontWeight: 'bold', color: 'black'}}>
+      <Text
+        style={{
+          fontSize: 13,
+          fontWeight: 'bold',
+          color: select === value ? 'white' : 'black',
+        }}>
         {Title}
       </Text>
     </TouchableOpacity>

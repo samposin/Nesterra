@@ -3,7 +3,7 @@ import React from 'react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 
 const ItemHeader = ({item1, color1, width, item}) => {
-  console.log(item.LocationType);
+  // console.log(item.LocationType);
   return (
     <View
       style={{
@@ -12,7 +12,6 @@ const ItemHeader = ({item1, color1, width, item}) => {
 
         paddingLeft: moderateScale(5),
         borderStartColor: '#bababa',
-        alignItems: 'center',
 
         borderStartWidth: 0.7,
       }}>

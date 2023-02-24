@@ -64,9 +64,9 @@ const MainCountView = ({HeaderText, colours}) => {
                         {
                           target: 'labels',
                           mutation: props => {
-                            console.log(
-                              circuitCountPie[props.index].LocationType,
-                            );
+                            // console.log(
+                            //   circuitCountPie[props.index].LocationType,
+                            // );
                             let categoryName =
                               circuitCountPie[props.index].LocationType;
                             setCategy(categoryName);
@@ -115,7 +115,7 @@ const MainCountView = ({HeaderText, colours}) => {
               return (
                 <TouchableOpacity
                   onPressIn={() => {
-                    console.log(item.LocationType);
+                    // console.log(item.LocationType);
                     setCategy(item.LocationType);
                   }}
                   key={i}

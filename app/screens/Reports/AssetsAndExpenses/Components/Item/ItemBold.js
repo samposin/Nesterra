@@ -12,7 +12,6 @@ const ItemBold = ({item1, color1, width, item}) => {
 
         paddingLeft: moderateScale(5),
         borderStartColor: '#bababa',
-        alignItems: 'center',
 
         borderStartWidth: 0.7,
       }}>

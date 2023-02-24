@@ -5,20 +5,26 @@ import {
   SafeAreaView,
   StatusBar,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import Entypo from 'react-native-vector-icons/Entypo';
 import TextItemView from './Components/TextItemView';
 
-const Profile = () => {
+const Profile = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, marginTop: StatusBar.currentHeight}}>
       <View style={styles.mainView}>
         <Text style={styles.ProfileText}>Profile</Text>
 
         <View style={styles.closeView}>
-          <Entypo name="cross" size={scale(16)} color="white" />
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}>
+            <Entypo name="cross" size={scale(16)} color="white" />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.profileView}>

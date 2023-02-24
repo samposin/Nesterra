@@ -13,7 +13,7 @@ const AssetsAndExpenses = () => {
   return (
     <>
       <ActiveSiteCount HeaderText="Active Site Count" />
-      {/* <AnnualCircuitSpend HeaderText="Active Site Count" /> */}
+      <AnnualCircuitSpend HeaderText="Annual Circuit Spend" />
     </>
   );
 };

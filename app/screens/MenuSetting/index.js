@@ -17,6 +17,7 @@ const Imagg = {
   compliant: require('../../images/nenuImage/compliant.png'),
 };
 const setting = () => {};
+
 const MenuSetting = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, marginTop: StatusBar.currentHeight}}>
@@ -51,7 +52,13 @@ const MenuSetting = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={{paddingHorizontal: 15}}>
-        <MenuItem onPress={setting} src={Imagg.user} title="My Profile" />
+        <MenuItem
+          onPress={() => {
+            navigation.navigate('Profile');
+          }}
+          src={Imagg.user}
+          title="My Profile"
+        />
         <MenuItem onPress={setting} src={Imagg.info} title="About" />
         <MenuItem onPress={setting} src={Imagg.contract} title="Terms of use" />
         <MenuItem
