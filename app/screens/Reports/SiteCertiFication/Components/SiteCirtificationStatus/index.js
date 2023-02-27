@@ -12,3 +12,4 @@ const SiteCirtificationStatus = () => {
 export default SiteCirtificationStatus;
 
 const styles = StyleSheet.create({});
+//index
