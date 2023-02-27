@@ -12,11 +12,14 @@ import MenuItem from './MenuItem';
 import BottomSheetView from './BottomSheetView';
 import {getContacts} from './../../actions/Contacts/index';
 import {connect} from 'react-redux';
+import ProfileItem from './ProfileItem';
 const Imagg = {
-  contact: require('../../images/nenuImage/contact.png'),
-  filter: require('../../images/nenuImage/filter.png'),
-  setting: require('../../images/nenuImage/cogwheel.png'),
-  stats: require('../../images/nenuImage/pie-chart.png'),
+  profile: require('../../images/Icons/user.png'),
+  contact: require('../../images/nenuImage/Icons/contact-book.png'),
+  saved: require('../../images/nenuImage/Icons/save-instagram.png'),
+  filter: require('../../images/nenuImage/Icons/filter.png'),
+  setting: require('../../images/nenuImage/Icons/settings.png'),
+  logout: require('../../images/nenuImage/Icons/exit.png'),
 };
 
 const Menu = ({navigation, getContacts}) => {
@@ -36,6 +39,9 @@ const Menu = ({navigation, getContacts}) => {
   const setting = () => {
     navigation.navigate('MenuSetting');
   };
+  const Profile = () => {
+    navigation.navigate('Profile');
+  };
   return (
     <>
       <SafeAreaView
@@ -43,7 +49,7 @@ const Menu = ({navigation, getContacts}) => {
           flex: 1,
           marginTop: StatusBar.currentHeight,
         }}>
-        <View
+        {/* <View
           style={{
             width: '100%',
             height: 50,
@@ -68,12 +74,21 @@ const Menu = ({navigation, getContacts}) => {
             }}>
             <Text style={{color: '#575757'}}>Logout</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
+
         <View style={{paddingHorizontal: 15}}>
+          <ProfileItem
+            onPress={onPress}
+            src={Imagg.profile}
+            name="Santosh Carperter"
+            email="sontosh.cerpenter@nesterra.net"
+          />
+          <MenuItem onPress={Profile} src={Imagg.profile} title="My Profile" />
           <MenuItem onPress={onPress} src={Imagg.filter} title="Filters" />
+          <MenuItem onPress={contact} src={Imagg.saved} title="Saved" />
           <MenuItem onPress={contact} src={Imagg.contact} title="Contacts" />
-          <MenuItem onPress={stats} src={Imagg.stats} title="Stats" />
           <MenuItem onPress={setting} src={Imagg.setting} title="Settings" />
+          <MenuItem onPress={stats} src={Imagg.logout} title="Logout" />
         </View>
       </SafeAreaView>
       <BottomSheetView

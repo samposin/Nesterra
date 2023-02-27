@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 
-import imgg from '../../components/imageLink/saveTabImage';
+import {imgg} from '../../components/imageLink/saveTabImage';
 import {useSelector} from 'react-redux';
 import Details from './Details';
 
@@ -43,11 +43,17 @@ const Saved = () => {
             source={source}
           />
         </View>
-        <View style={{width: '85%', height: '100%', justifyContent: 'center'}}>
+        <View
+          style={{
+            width: '85%',
+            height: '100%',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
           <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
             {title}
           </Text>
-          <Text>{item} Items</Text>
+          <Text style={{marginLeft: 7}}>{item} </Text>
         </View>
       </TouchableOpacity>
     );
@@ -110,7 +116,7 @@ const Saved = () => {
           <ListItem
             source={imgg.imgSite}
             title="Sites"
-            item={siteItem.length}
+            item={`(${siteItem.length})`}
             onPress={SitesDetails}
           />
           <ListItem
