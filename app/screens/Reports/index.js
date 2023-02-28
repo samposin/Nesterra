@@ -144,5 +144,6 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
     borderRadius: 2,
     // borderRadius: 2,
+    // borderRadius: 2,
   },
 });
