@@ -99,14 +99,15 @@ const SiteActionStatus = ({HeaderText, colours}) => {
             </View>
           </View>
           <View style={styles.rightView}>
-            {/* {result.map((item, i) => {
-              return (
-                <CountView
-                  color={item.number}
-                  title={`${item.CertificationStatus}(${item.Count})`}
-                />
-              );
-            })} */}
+            <CountView color={'#0679e4'} title={`Assigned (204)`} />
+            <CountView color={'#118000'} title={`Draft (1)`} />
+            <CountView color={'#d81617'} title={`Intiated (7)`} />
+            <CountView color={'#f6bb1f'} title={`Not Assigned (1,555)`} />
+            <CountView color={'#157df6'} title={`Pending OPS Approval (1)`} />
+            <CountView
+              color={'#0c7a07'}
+              title={`Pending Teach Approval (85)`}
+            />
           </View>
         </View>
       </View>
@@ -139,17 +140,19 @@ const styles = StyleSheet.create({
   },
   leftView: {
     position: 'relative',
-    width: '40%',
+    width: '50%',
     height: 180,
 
     justifyContent: 'center',
     alignItems: 'center',
   },
   rightView: {
-    width: '60%',
+    width: '50%',
     height: 180,
     // backgroundColor: 'green',
     // backgroundColor: 'green',
+    alignItems: 'flex-start',
+    marginTop: 50,
   },
 
   lowerView: {

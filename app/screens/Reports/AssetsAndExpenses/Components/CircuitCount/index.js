@@ -16,22 +16,21 @@ import ItemBold from '../Item/ItemBold';
 import ItemHeaderBold from '../Item/ItemHeaderBold';
 import CountView from '../CountView';
 
-const AnnualCircuitSpend = ({HeaderText, colours}) => {
+const CirCuitCount = ({HeaderText, colours}) => {
   const {SiteAnlysis} = useSelector(state => state.SiteAnlysis);
-  const {AnnualCircuitSpend} = useSelector(state => state.SiteAnlysis);
+  const {circuitCountPie} = useSelector(state => state.SiteAnlysis);
   // console.log(SiteAnlysis.inv_site_count, 'circuitCountPie');
-  // console.log(circuitCountPie, 'circuitCountPie');
+
   const [category, setCategy] = useState(null);
   // console.log(HeaderText, colours);
-  // console.log(AnnualCircuitSpend, 'circuitCountPie');
 
   return (
-    <View style={{width: '100%', padding: 5}}>
+    <View style={{width: '100%', padding: 10}}>
       <View
         style={{
           ...styles.mainView,
           paddingVertical: 10,
-          marginTop: 5,
+          marginTop: 10,
           borderRadius: 15,
         }}>
         <View style={{}}>
@@ -50,13 +49,13 @@ const AnnualCircuitSpend = ({HeaderText, colours}) => {
                 '#027f01',
                 '#c7291d',
               ]}
-              x="Category"
-              y="Total"
+              x="LocationType"
+              y="Quantity"
               radius={({datum}) =>
-                category && category == datum.Category ? 80 : 70
+                category && category == datum.LocationType ? 80 : 70
               }
               innerRadius={30}
-              data={AnnualCircuitSpend}
+              data={circuitCountPie}
               events={[
                 {
                   target: 'data',
@@ -66,11 +65,11 @@ const AnnualCircuitSpend = ({HeaderText, colours}) => {
                         {
                           target: 'labels',
                           mutation: props => {
-                            // console.log(
-                            //   AnnualCircuitSpend[props.index].Category,
-                            // );
+                            console.log(
+                              circuitCountPie[props.index].LocationType,
+                            );
                             let categoryName =
-                              AnnualCircuitSpend[props.index].Category;
+                              circuitCountPie[props.index].LocationType;
                             setCategy(categoryName);
                           },
                         },
@@ -85,16 +84,18 @@ const AnnualCircuitSpend = ({HeaderText, colours}) => {
                 position: 'absolute',
                 top: 70,
               }}>
-              <Text>2990</Text>
-              <Text>Total</Text>
+              <Text style={{color: 'black'}}>
+                {/* {circuitCountPie[circuitCountPie.length - 1].UniqueLocCount} */}
+              </Text>
+              <Text style={{color: 'black'}}>Total</Text>
             </View>
           </View>
           <View style={styles.rightView}>
-            <CountView color="#137afa" title="Cable/Sat ($257K)" />
-            <CountView color="#038000" title="Data ($24.8M)" />
-            <CountView color="#cc1a1a" title="Service ($10.7M)" />
-            <CountView color="#fbba16" title="Voice ($12.7M)" />
-            <CountView color="#1178f1" title="Wireless ($2.1M)" />
+            <CountView color="#127bee" title="Cable Sat (114)" />
+            <CountView color="#077d05" title="Data (3,885)" />
+            <CountView color="#d6231f" title="Service (3,071)" />
+            <CountView color="#f4bc35" title="Voice (12K)" />
+            <CountView color="#1279f2" title="Wireless  (941)" />
           </View>
         </View>
         <View style={styles.lowerView}>
@@ -106,20 +107,19 @@ const AnnualCircuitSpend = ({HeaderText, colours}) => {
               borderTopWidth: 0.7,
               flexDirection: 'row',
             }}>
-            <Item item1="Category" width="16.66%" />
-            <Item item1="AT&T" width="16.66%" />
-            <Item item1="Verizon" width="16.66%" />
-            <Item item1="Granite" width="16.66%" />
-            <ItemHeaderBold item1="Other" width="16.66%" />
-            <ItemHeaderBold item1="Total" width="16.66%" />
+            <Item item1="Location Type" width="20%" />
+            <Item item1="States" width="20%" />
+            <Item item1="Cities" width="20%" />
+            <Item item1="Quantity" width="20%" />
+            <ItemHeaderBold item1="Unique Location" width="20%" />
           </View>
-          {AnnualCircuitSpend &&
-            AnnualCircuitSpend.map((item, i) => {
+          {circuitCountPie &&
+            circuitCountPie.map((item, i) => {
               return (
                 <TouchableOpacity
                   onPressIn={() => {
-                    // console.log(item.Category);
-                    setCategy(item.Category);
+                    console.log(item.LocationType);
+                    setCategy(item.LocationType);
                   }}
                   key={i}
                   style={{
@@ -130,44 +130,17 @@ const AnnualCircuitSpend = ({HeaderText, colours}) => {
                     borderTopWidth: 0.7,
                     flexDirection: 'row',
                     backgroundColor:
-                      category && category === item.Category ? '#bfffc0' : null,
+                      category && category === item.LocationType
+                        ? '#bfffc0'
+                        : null,
                   }}>
-                  <Item item1={item?.Category} width="20%" item={item} />
-
-                  <Item
-                    item1={`${parseFloat(
-                      Number(item?.AT_T / 1000000).toFixed(1),
-                    )}`}
-                    width="16.66%"
-                    item={item}
-                  />
-                  <Item
-                    item1={`${parseFloat(
-                      Number(item?.Verizon / 1000000).toFixed(1),
-                    )}`}
-                    width="16.66%"
-                    item={item}
-                  />
-                  <Item
-                    item1={`${parseFloat(
-                      Number(item?.Granite / 1000000).toFixed(1),
-                    )}`}
-                    width="16.66%"
-                    item={item}
-                  />
-
-                  <Item
-                    item1={`${parseFloat(
-                      Number(item?.Other / 1000000).toFixed(1),
-                    )}`}
-                    width="16.66%"
-                    item={item}
-                  />
+                  <Item item1={item?.LocationType} width="20%" item={item} />
+                  <Item item1={item?.State} width="20%" item={item} />
+                  <Item item1={item?.City} width="20%" item={item} />
+                  <Item item1={item?.Quantity} width="20%" item={item} />
                   <ItemBold
-                    item1={`${parseFloat(
-                      Number(item?.Total / 1000000).toFixed(1),
-                    )}`}
-                    width="16.66%"
+                    item1={item?.UniqueLocCount}
+                    width="20%"
                     item={item}
                   />
                 </TouchableOpacity>
@@ -179,13 +152,13 @@ const AnnualCircuitSpend = ({HeaderText, colours}) => {
   );
 };
 
-export default AnnualCircuitSpend;
+export default CirCuitCount;
 
 const styles = StyleSheet.create({
   mainView: {
     width: '100%',
 
-    backgroundColor: '#fff4de',
+    backgroundColor: '#ecf4df',
 
     paddingHorizontal: 5,
   },
@@ -208,12 +181,16 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '60%',
     height: 180,
+
     justifyContent: 'center',
     alignItems: 'center',
   },
   rightView: {
     width: '40%',
     height: 180,
+    // backgroundColor: 'green',
+    // backgroundColor: 'green',
+    // backgroundColor: 'green',
     // backgroundColor: 'green',
   },
 

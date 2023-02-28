@@ -52,23 +52,21 @@ const Reports = ({getReport}) => {
         </Text>
         <View
           style={{
-            width: 30,
-            height: 30,
-            borderColor: '#2c75c2',
-            borderRadius: 15,
-            borderWidth: 1.5,
+            width: 100,
+            height: '100%',
+            // backgroundColor: 'red',
+            // borderColor: '#2c75c2',
+            // borderRadius: 15,
+            // borderWidth: 1.5,
             justifyContent: 'center',
-            alignItems: 'center',
+            // alignItems: 'center',
           }}>
-          <Image
-            source={require('../../images/Icons/syncronization.png')}
-            style={{
-              width: '70%',
-              height: '70%',
-              resizeMode: 'cover',
-              tintColor: '#2c75c2',
-            }}
-          />
+          <View style={{width: 30, height: 30}}>
+            <Image
+              source={require('../../images/saved/refresh.png')}
+              style={{width: '100%', height: '100%', resizeMode: 'cover'}}
+            />
+          </View>
         </View>
         {/* =============== button view=========== */}
       </View>

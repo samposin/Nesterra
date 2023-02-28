@@ -87,8 +87,8 @@ const MainCountView = ({HeaderText, colours}) => {
             />
           </View>
           <View style={styles.rightView}>
-            <CountView color="green" title="Atm (2606)" />
-            <CountView color="yellow" title="Branch (2606)" />
+            <CountView color="#1a79fb" title="Atm (2606)" />
+            <CountView color="#0b7b0b" title="Branch (2606)" />
             <CountView color="red" title="Atm (2606)" />
             <CountView color="red" title="Atm (2606)" />
             <CountView color="red" title="Atm (2606)" />

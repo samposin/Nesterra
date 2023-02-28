@@ -6,7 +6,7 @@ import {color} from 'react-native-reanimated';
 import {useSelector} from 'react-redux';
 import ActiveSiteCount from './Components/ActiveSiteCount';
 import AnnualCircuitSpend from './Components/AnnualCircuitSpend';
-
+import CirCuitCount from './Components/CircuitCount';
 const AssetsAndExpenses = () => {
   const {circuitCountPie} = useSelector(state => state.SiteAnlysis);
   // console.log(circuitCountPie);
@@ -14,6 +14,7 @@ const AssetsAndExpenses = () => {
     <>
       <ActiveSiteCount HeaderText="Active Site Count" />
       <AnnualCircuitSpend HeaderText="Annual Circuit Spend" />
+      <CirCuitCount HeaderText="Circuit Count " />
     </>
   );
 };

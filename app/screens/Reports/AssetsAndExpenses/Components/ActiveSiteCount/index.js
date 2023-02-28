@@ -91,12 +91,13 @@ const ActiveSiteCount = ({HeaderText, colours}) => {
             </View>
           </View>
           <View style={styles.rightView}>
-            <CountView color="green" title="Atm (2606)" />
-            <CountView color="yellow" title="Branch (2606)" />
-            <CountView color="red" title="Atm (2606)" />
-            <CountView color="red" title="Atm (2606)" />
-            <CountView color="red" title="Atm (2606)" />
-            <CountView color="red" title="Atm (2606)" />
+            <CountView color="#0d77fe" title="3rd Party (24))" />
+            <CountView color="#0b7b0b" title="ATM (2,607)" />
+            <CountView color="#db2325" title="Branch (1,120)" />
+            <CountView color="#faba12" title="Data Center (12)" />
+            <CountView color="#0a7af7" title="ITM Kiosk (59)" />
+            <CountView color="#018300" title="Office (135)" />
+            <CountView color="#d32820" title="Other (35)" />
           </View>
         </View>
         <View style={styles.lowerView}>
@@ -180,14 +181,14 @@ const styles = StyleSheet.create({
   },
   leftView: {
     position: 'relative',
-    width: '70%',
+    width: '60%',
     height: 180,
 
     justifyContent: 'center',
     alignItems: 'center',
   },
   rightView: {
-    width: '30%',
+    width: '40%',
     height: 180,
     // backgroundColor: 'green',
     // backgroundColor: 'green',

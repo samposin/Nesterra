@@ -12,8 +12,9 @@ import React, {useState, useRef, useEffect} from 'react';
 import {imgg} from '../../components/imageLink/saveTabImage';
 import {useSelector} from 'react-redux';
 import Details from './Details';
+import Entypo from 'react-native-vector-icons/Entypo';
 
-const Saved = () => {
+const Saved = ({navigation}) => {
   const {circuitItems} = useSelector(state => state.CircuitsItems);
   const {devicestItems} = useSelector(state => state.DevicesItems);
 
@@ -86,9 +87,18 @@ const Saved = () => {
           flex: 1,
         }}>
         <View style={styles.container}>
-          <Text style={{fontSize: 30, color: 'black', fontWeight: 'bold'}}>
-            Saved
-          </Text>
+          <View style={styles.mainView}>
+            <Text style={{fontSize: 30, color: 'black', fontWeight: 'bold'}}>
+              Saved
+            </Text>
+            <TouchableOpacity
+              style={styles.closeView}
+              onPress={() => {
+                navigation.goBack();
+              }}>
+              <Entypo name="cross" size={20} color="white" />
+            </TouchableOpacity>
+          </View>
           <ListItem
             source={imgg.imgAtm}
             title="ATMS"
@@ -145,5 +155,22 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
     // paddingHorizontal: 10,
+  },
+  mainView: {
+    width: '100%',
+    height: 50,
+    // backgroundColor: 'red',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  closeView: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#0472ef',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 20,
   },
 });

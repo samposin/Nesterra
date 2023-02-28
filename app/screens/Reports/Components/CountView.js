@@ -15,7 +15,7 @@ export default CountView;
 const styles = StyleSheet.create({
   header1: {
     width: '100%',
-    height: 20,
+    height: 18,
     // backgroundColor: 'red',
     flexDirection: 'row',
     alignItems: 'center',
