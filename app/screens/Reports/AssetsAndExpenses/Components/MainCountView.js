@@ -123,7 +123,6 @@ const MainCountView = ({HeaderText, colours}) => {
                     width: '100%',
                     height: 35,
                     borderTopColor: '#bababa',
-
                     borderTopWidth: 0.7,
                     flexDirection: 'row',
                     backgroundColor:
@@ -154,9 +153,7 @@ export default MainCountView;
 const styles = StyleSheet.create({
   mainView: {
     width: '100%',
-
     backgroundColor: '#d1e1d4',
-
     paddingHorizontal: 5,
   },
   upperText: {
@@ -177,7 +174,6 @@ const styles = StyleSheet.create({
   leftView: {
     width: '70%',
     height: 180,
-
     justifyContent: 'center',
     alignItems: 'center',
   },

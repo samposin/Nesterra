@@ -75,6 +75,16 @@ const DropDownView = ({setSearchView, searchView, setRander, setPlace}) => {
         id={'DeviceId'}
         title="Device ID"
       />
+      <ButtonView
+        setSearchView={devicesSer}
+        id={'office ID'}
+        title="Office ID"
+      />
+      <ButtonView
+        setSearchView={devicesSer}
+        id={'Property Name'}
+        title="Property Name"
+      />
     </View>
   );
 };

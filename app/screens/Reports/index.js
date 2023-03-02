@@ -17,6 +17,7 @@ import {connect} from 'react-redux';
 import ButtonView from './Components/ButtonView/index';
 
 import {getReport} from '../../actions/Reports';
+import {imag} from '../../components/imageLink';
 
 const Reports = ({getReport}) => {
   const [select, setSeleted] = useState('assets');
@@ -50,24 +51,34 @@ const Reports = ({getReport}) => {
         <Text style={{fontSize: 25, fontWeight: 'bold', color: 'black'}}>
           Interective Reports
         </Text>
-        <View
+        <TouchableOpacity
           style={{
             width: 100,
             height: '100%',
-            // backgroundColor: 'red',
-            // borderColor: '#2c75c2',
-            // borderRadius: 15,
-            // borderWidth: 1.5,
-            justifyContent: 'center',
-            // alignItems: 'center',
+
+            // justifyContent: 'center',
+            flexDirection: 'row',
+            alignItems: 'center',
           }}>
-          <View style={{width: 30, height: 30}}>
+          <View
+            style={{
+              width: 30,
+              height: 30,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
             <Image
-              source={require('../../images/saved/refresh.png')}
-              style={{width: '100%', height: '100%', resizeMode: 'cover'}}
+              source={imag.refresh}
+              style={{
+                width: '70%',
+                height: '70%',
+                resizeMode: 'cover',
+                tintColor: '#2782d1',
+              }}
             />
           </View>
-        </View>
+          <Text style={{color: '#2782d1'}}>Reset</Text>
+        </TouchableOpacity>
         {/* =============== button view=========== */}
       </View>
       <View style={{width: '100%', paddingHorizontal: 10}}>

@@ -102,7 +102,6 @@ const SiteActionStatus = ({HeaderText, colours}) => {
             <CountView color={'#0679e4'} title={`Assigned (204)`} />
             <CountView color={'#118000'} title={`Draft (1)`} />
             <CountView color={'#d81617'} title={`Intiated (7)`} />
-            <CountView color={'#f6bb1f'} title={`Not Assigned (1,555)`} />
             <CountView color={'#157df6'} title={`Pending OPS Approval (1)`} />
             <CountView
               color={'#0c7a07'}

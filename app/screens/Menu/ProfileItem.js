@@ -40,7 +40,7 @@ const ProfileItem = ({onPress, name, email}) => {
         <Text style={{marginLeft: 10, color: 'black', fontWeight: 'bold'}}>
           {name}
         </Text>
-        <Text style={{marginLeft: 10, color: '#a9a7a7'}}>{email}</Text>
+        <Text style={styles.emailText}>{email}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -48,4 +48,9 @@ const ProfileItem = ({onPress, name, email}) => {
 
 export default ProfileItem;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  email: {
+    rginLeft: 10,
+    color: '#a9a7a7',
+  },
+});
