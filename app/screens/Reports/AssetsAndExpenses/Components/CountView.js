@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
     flexDirection: 'row',
     alignItems: 'center',
+
     marginLeft: 10,
   },
   header1Text: {
@@ -26,5 +27,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontSize: 12,
     color: 'black',
+    // color: 'black',
   },
 });
