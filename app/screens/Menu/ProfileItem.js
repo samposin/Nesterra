@@ -50,7 +50,7 @@ export default ProfileItem;
 
 const styles = StyleSheet.create({
   email: {
-    rginLeft: 10,
+    margitLeft: 10,
     color: '#a9a7a7',
   },
 });

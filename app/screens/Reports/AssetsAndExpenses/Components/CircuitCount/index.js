@@ -189,9 +189,6 @@ const styles = StyleSheet.create({
     width: '40%',
     height: 180,
     // backgroundColor: 'green',
-    // backgroundColor: 'green',
-    // backgroundColor: 'green',
-    // backgroundColor: 'green',
   },
 
   lowerView: {

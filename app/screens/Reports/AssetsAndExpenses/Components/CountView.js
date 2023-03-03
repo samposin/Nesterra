@@ -28,5 +28,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'black',
     // color: 'black',
+    //color:'black
   },
 });
