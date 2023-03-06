@@ -7,6 +7,7 @@ const ZoomMarkers = () => {
       style={{
         width: '100%',
         // backgroundColor: 'red',
+        // backgroundColor: 'red',
         height: 150,
         position: 'absolute',
         left: 0,
