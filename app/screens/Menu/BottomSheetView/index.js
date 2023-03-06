@@ -266,7 +266,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 40,
     // backgroundColor: 'pink',
+<<<<<<< HEAD
     // backgroundColor: 'pink',
     // backgroundColor: 'pink',
+=======
+>>>>>>> 6845439a9104408b5874f7ec3b46f6a1c57c35e5
   },
 });

@@ -239,6 +239,9 @@ const styles = StyleSheet.create({
 
     justifyContent: 'center',
     alignItems: 'center',
+<<<<<<< HEAD
     // alignItems: 'center',
+=======
+>>>>>>> 6845439a9104408b5874f7ec3b46f6a1c57c35e5
   },
 });
