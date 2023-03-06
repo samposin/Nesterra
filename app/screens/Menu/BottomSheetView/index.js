@@ -267,5 +267,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     // backgroundColor: 'pink',
     // backgroundColor: 'pink',
+    // backgroundColor: 'pink',
   },
 });
