@@ -77,6 +77,7 @@ import {
 } from '../../actions/actionType/action.Coordinatefilter.type';
 import ImageAdd from './components/ImageAdd';
 import StreetViewComponents from '../../components/StreetViewComponents';
+import ZoomMarkers from './components/ZoomMarkers/index';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -558,6 +559,7 @@ const Explore = ({
   const [focusOn1, setFocusOn1] = useState(true);
   const [placeHolder, setPlace] = useState('');
   const [streetImage, setstreetImage] = useState(false);
+  const [markerZoomStatus, setmarkerZoomStatus] = useState(false);
   const addRess = data => {
     if (data === 'Address') {
       setsearchComponet(false);
@@ -834,6 +836,16 @@ const Explore = ({
           mapType={mapType}
           onClusterPress={e => markerZoom1(e)}
           // onRegionChangeComplete={onRegionChangeComplete}
+          onRegionChangeComplete={async region => {
+            const coords = await mapRef?.current?.getCamera();
+            console.log(coords, region);
+            if (coords.zoom > 16) {
+              setmarkerZoomStatus(true);
+            } else {
+              setmarkerZoomStatus(false);
+            }
+            // console.log('coords', coords.zoom, region);
+          }}
           onLayout={onLayoutMap}>
           {coordinates &&
             coordinates.map((item, i) => {
@@ -1105,6 +1117,7 @@ const Explore = ({
         atmdDetailsRef={atmdDetailsRef}
         detailsLoder={detailsLoder}
       />
+      {markerZoomStatus ? <ZoomMarkers /> : null}
 
       {/* =================CircuitDetailsExpolore=============== */}
       {settingView ? (

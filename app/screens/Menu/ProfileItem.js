@@ -49,8 +49,8 @@ const ProfileItem = ({onPress, name, email}) => {
 export default ProfileItem;
 
 const styles = StyleSheet.create({
-  email: {
-    margitLeft: 10,
+  emailText: {
+    marginLeft: 10,
     color: '#a9a7a7',
   },
 });
