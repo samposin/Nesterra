@@ -1,7 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {useSelector} from 'react-redux';
 
 const ZoomMarkers = () => {
+  const {regionMarkers} = useSelector(state => state.coordinates);
+  console.log(regionMarkers, 'zoom');
   return (
     <View
       style={{

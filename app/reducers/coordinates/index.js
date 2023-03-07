@@ -17,6 +17,7 @@ import {
   CHANGE_BORDER_FILTER,
 } from '../../actions/actionType/action.Coordinatefilter.type';
 import {dataMar} from '../../utils/MarkerData1';
+import {REGION_MARKERS} from './../../actions/action.coordinate.type';
 
 const initialState = {
   coordinates: [],
@@ -24,6 +25,7 @@ const initialState = {
   error: null,
   latt: 0,
   lngg: 0,
+  regionMarkers: [],
 };
 
 export default (state = initialState, action) => {
@@ -190,8 +192,26 @@ export default (state = initialState, action) => {
           return i.name === item.HierarchyLocationType;
         });
       });
+    case REGION_MARKERS:
+      let dd1 = [];
+      action.data.map(item => {
+        dd1.push(item.geometry.coordinates[0]);
+      });
 
-      console.log(result11.length, 'result11');
+      const filterByVendor1 = [...state.coordinates1];
+      const result111 = filterByVendor1.filter(item => {
+        return dd1.find(i => {
+          return i === item.Longitude;
+        });
+      });
+
+      return {
+        ...state,
+        regionMarkers: result111,
+      };
+
+    // console.log(result11.length, 'result11');
+
     default:
       return state;
   }

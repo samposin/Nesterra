@@ -78,6 +78,7 @@ import {
 import ImageAdd from './components/ImageAdd';
 import StreetViewComponents from '../../components/StreetViewComponents';
 import ZoomMarkers from './components/ZoomMarkers/index';
+import {REGION_MARKERS} from '../../actions/action.coordinate.type';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -746,6 +747,15 @@ const Explore = ({
       data: id,
     });
   };
+  const dataregion = markers => {
+    // console.log(markers, 'pdod');
+    let dd = [];
+    markers.map(item => {
+      console.log(item.properties.coordinate.latitude);
+      dd.push(item.properties.coordinate.latitude);
+    });
+    // console.log(dd, 'ddd');
+  };
   return (
     <>
       {/* {inputRotate ? rotatedIconAntichange() : rotatedIconchange()} */}
@@ -816,7 +826,7 @@ const Explore = ({
           }}
           maxZoomLevel={20}
           minZoomLevel={0}
-          radius={50}
+          radius={20}
           style={styles.map}
           initialRegion={currentRegion}
           ref={mapRef}
@@ -836,10 +846,17 @@ const Explore = ({
           mapType={mapType}
           onClusterPress={e => markerZoom1(e)}
           // onRegionChangeComplete={onRegionChangeComplete}
-          onRegionChangeComplete={async region => {
+          onRegionChangeComplete={async (region, markers) => {
             const coords = await mapRef?.current?.getCamera();
-            console.log(coords, region);
-            if (coords.zoom > 16) {
+            // console.log(coords);
+
+            if (coords.zoom > 17) {
+              dispatch({
+                type: REGION_MARKERS,
+                data: markers,
+              });
+              // dataregion(markers);
+              // console.log(markers.length, 'markee');
               setmarkerZoomStatus(true);
             } else {
               setmarkerZoomStatus(false);
