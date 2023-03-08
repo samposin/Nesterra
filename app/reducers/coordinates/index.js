@@ -210,11 +210,11 @@ export default (state = initialState, action) => {
         regionMarkers: result111,
       };
 
-    // console.log(result11.length, 'result11');
-    // console.log(result11.length, 'result11');
-    // console.log(result11.length, 'result11');
-
     default:
       return state;
   }
 };
+let nem = [
+  {name: '1', enapa: 7},
+  {name: '2', enapa: 'pdoaad'},
+];
