@@ -26,9 +26,15 @@ const MenuItem = ({src, onPress, title}) => {
         }}>
         <Image
           source={src}
-          style={{width: 30, height: 30, resizeMode: 'contain'}}
+          style={{width: 25, height: 25, resizeMode: 'contain'}}
         />
-        <Text style={{marginLeft: 10, color: 'black', fontWeight: 'bold'}}>
+        <Text
+          style={{
+            marginLeft: 10,
+            color: 'black',
+            fontSize: 15,
+            fontWeight: 'bold',
+          }}>
           {title}
         </Text>
       </View>

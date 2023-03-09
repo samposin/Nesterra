@@ -15,6 +15,7 @@ import {
   CHANGE_BORDER,
   FILTER_MARKER,
   CHANGE_BORDER_FILTER,
+  CHANGE_BORDER_BY_LOCATIO_ID,
 } from '../../actions/actionType/action.Coordinatefilter.type';
 import {dataMar} from '../../utils/MarkerData1';
 import {REGION_MARKERS} from './../../actions/action.coordinate.type';
@@ -178,6 +179,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         coordinates: dd,
+      };
+    case CHANGE_BORDER_BY_LOCATIO_ID:
+      const findLoactionId = dataMar.findIndex(item.Location_ID == action.data);
+      let dATAd = dataMar.map((item, i) => {
+        return {...item, isChecked: false};
+      });
+
+      dd[findLoactionId].isChecked = true;
+      return {
+        ...state,
+        coordinates: dATAd,
       };
     case CHANGE_BORDER_FILTER:
       return {

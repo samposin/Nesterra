@@ -1,9 +1,42 @@
-import {StyleSheet, Text, FlatList, ScrollView, View} from 'react-native';
-import React from 'react';
-import {useSelector} from 'react-redux';
+import {
+  StyleSheet,
+  Text,
+  FlatList,
+  ScrollView,
+  View,
+  Image,
+} from 'react-native';
+
+import React, {useRef} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  CHANGE_BORDER,
+  CHANGE_BORDER_BY_LOCATIO_ID,
+} from '../../../../actions/actionType/action.Coordinatefilter.type';
 
 const ZoomMarkers = () => {
+  const dispatch = useDispatch();
   const {regionMarkers} = useSelector(state => state.coordinates);
+  const _onViewableItemsChanged = ({viewableItems, changed}) => {
+    console.log('Visible items are', viewableItems);
+    console.log('Changed in this iteration', changed);
+    // dispatch({
+    //   type: CHANGE_BORDER_BY_LOCATIO_ID,
+    //   data: changed[0].Location_ID,
+    // });
+  };
+  const onViewCallBack = React.useCallback(({viewableItems, changed}) => {
+    console.log(viewableItems);
+    // Use viewable items in state or as intended
+    dispatch({
+      type: CHANGE_BORDER_BY_LOCATIO_ID,
+      data: changed[0].Location_ID,
+    });
+  }, []);
+  const _viewabilityConfig = React.useRef({
+    viewAreaCoveragePercentThreshold: 50,
+  });
+  const viewabilityConfigCallbackPairs = useRef([{onViewableItemsChanged}]);
   // console.log(regionMarkers, 'zoom');
   return (
     <View
@@ -23,6 +56,10 @@ const ZoomMarkers = () => {
         data={regionMarkers}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
+        // onViewableItemsChanged={onViewCallBack}
+        // viewabilityConfig={{viewAreaCoveragePercentThreshold: 50}}
+        // viewabilityConfig={_viewabilityConfig.current}
+        // viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
         renderItem={({item, index}) => {
           return (
             <View
@@ -66,9 +103,10 @@ const ZoomMarkers = () => {
                   Site Type:
                 </Text>
                 {'  '}
-                {item.SubLocationType.length > 15
-                  ? `${item.SubLocationType.substring(0, 15)}...`
-                  : item.SubLocationType}
+                {item?.SubLocationType !== null &&
+                item?.SubLocationType.length > 2
+                  ? `${item?.SubLocationType.substring(0, 5)}...`
+                  : item?.SubLocationType}
               </Text>
               <Text
                 style={{

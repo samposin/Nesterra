@@ -33,14 +33,19 @@ const ProfileItem = ({onPress, name, email}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{color: 'black', fontWeight: 'bold'}}>SC</Text>
+          <Text style={{color: 'black', fontWeight: 'bold'}}>AB</Text>
         </View>
       </View>
       <View style={{width: '90%', height: '100%', justifyContent: 'center'}}>
-        <Text style={{marginLeft: 10, color: 'black', fontWeight: 'bold'}}>
+        <Text
+          style={{
+            marginLeft: 10,
+            color: 'black',
+            fontWeight: 'bold',
+            fontSize: 18,
+          }}>
           {name}
         </Text>
-        <Text style={styles.emailText}>{email}</Text>
       </View>
     </TouchableOpacity>
   );
