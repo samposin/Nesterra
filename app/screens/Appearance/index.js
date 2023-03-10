@@ -13,7 +13,7 @@ import {RadioButton} from 'react-native-paper';
 // import Appearance from './index';
 import {moderateScale} from 'react-native-size-matters';
 
-const Appearance = ({bottomRef}) => {
+const Appearance = ({navigation}) => {
   return (
     <SafeAreaView
       style={{
@@ -25,7 +25,7 @@ const Appearance = ({bottomRef}) => {
         <TouchableOpacity
           style={styles.closeView}
           onPress={() => {
-            bottomRef.current.close();
+            navigation.navigate('Menu');
           }}>
           <Entypo name="cross" size={20} color="white" />
         </TouchableOpacity>

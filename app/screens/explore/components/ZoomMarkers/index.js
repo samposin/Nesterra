@@ -7,7 +7,7 @@ import {
   Image,
 } from 'react-native';
 
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {
   CHANGE_BORDER,
@@ -16,6 +16,8 @@ import {
 
 const ZoomMarkers = () => {
   const dispatch = useDispatch();
+  const [che, setChange] = useState(null);
+  console.log(che);
   const {regionMarkers} = useSelector(state => state.coordinates);
   const _onViewableItemsChanged = ({viewableItems, changed}) => {
     console.log('Visible items are', viewableItems);
@@ -36,8 +38,20 @@ const ZoomMarkers = () => {
   const _viewabilityConfig = React.useRef({
     viewAreaCoveragePercentThreshold: 50,
   });
-  const viewabilityConfigCallbackPairs = useRef([{onViewableItemsChanged}]);
+  // const viewabilityConfigCallbackPairs = useRef([{onViewableItemsChanged}]);
   // console.log(regionMarkers, 'zoom');
+  const onViewableItemsChanged = ({viewableItems, changed}) => {
+    // console.log(JSON.stringify(info), 'pp');
+    console.log('Visible items are', viewableItems);
+    console.log('Changed in this iteration', changed);
+    console.log('here are the chaneges', viewableItems);
+    if (changed.length >= 1)
+      changed[0].isViewable ? setChange(changed[0].index) : null;
+  };
+
+  // 2. create a reference to the function (above)
+  const viewabilityConfigCallbackPairs = useRef([{onViewableItemsChanged}]);
+
   return (
     <View
       style={{
@@ -56,6 +70,9 @@ const ZoomMarkers = () => {
         data={regionMarkers}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
+        viewabilityConfig={{viewAreaCoveragePercentThreshold: 5}}
+        // viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
+
         // onViewableItemsChanged={onViewCallBack}
         // viewabilityConfig={{viewAreaCoveragePercentThreshold: 50}}
         // viewabilityConfig={_viewabilityConfig.current}

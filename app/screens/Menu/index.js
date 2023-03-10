@@ -8,12 +8,13 @@ import {
   Image,
 } from 'react-native';
 import React, {useRef, useMemo, useState} from 'react';
-import MenuItem from './MenuItem';
+
 import BottomSheetView from './BottomSheetView';
 import {getContacts} from './../../actions/Contacts/index';
 import {connect} from 'react-redux';
 import ProfileItem from './ProfileItem';
 import {Title} from 'react-native-paper';
+import MenuItem from './../../components/MenuItem/index';
 const Imagg = {
   profile: require('../../images/Icons/user.png'),
   contact: require('../../images/nenuImage/Icons/contact-book.png'),
@@ -99,8 +100,20 @@ const Menu = ({navigation, getContacts}) => {
           <MenuItem onPress={onPress} src={Imagg.filter} title="Filters" />
           <MenuItem onPress={contact} src={Imagg.saved} title="Saved" />
           <MenuItem onPress={contact} src={Imagg.contact} title="Contacts" />
-          <MenuItem onPress={contact} src={Imagg.Help} title="Help Desk" />
-          <MenuItem onPress={setting} src={Imagg.setting} title="Legal" />
+          <MenuItem
+            onPress={() => {
+              navigation.navigate('HelpDesk');
+            }}
+            src={Imagg.Help}
+            title="Help Desk"
+          />
+          <MenuItem
+            onPress={() => {
+              navigation.navigate('Legal');
+            }}
+            src={Imagg.setting}
+            title="Legal"
+          />
           <MenuItem
             onPress={Appearance}
             src={Imagg.Appearence}
