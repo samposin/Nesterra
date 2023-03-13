@@ -51,7 +51,7 @@ import ExploreAddress from './ExploreSearch/ExploreAddress';
 import SiteTypeCheck from './SiteTypeCheck';
 import GenealogyList from './GenealogyList';
 import SiteAnlysis from './Reports/SiteAnlysis';
-
+import appearanceType from './Appearance';
 const rootReducer = combineReducers({
   setLatLang,
   selectList,
@@ -104,5 +104,7 @@ const rootReducer = combineReducers({
   GenealogyList,
   //===================
   SiteAnlysis,
+  //=================
+  appearanceType,
 });
 export default rootReducer;

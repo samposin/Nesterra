@@ -36,7 +36,41 @@ const StateAnalysis = () => {
   return (
     <>
       {/* ========================== */}
-      <Text style={styles.titleText}>Site (By State)</Text>
+      <View
+        style={{
+          width: '100%',
+          height: 40,
+          // backgroundColor: 'pink',
+          marginTop: 10,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <Text>NY</Text>
+        <View
+          style={{
+            width: '50%',
+            height: 40,
+            backgroundColor: 'white',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <View
+            style={{
+              width: '40%',
+              height: 40,
+              backgroundColor: '#0d7afd',
+            }}></View>
+
+          <View
+            style={{
+              width: '40%',
+              height: 40,
+              backgroundColor: '#0d7afd',
+            }}></View>
+        </View>
+      </View>
+      <Text style={styles.titleText}>Sites (By City)</Text>
 
       <VictoryChart width={300} height={300}>
         <VictoryAxis

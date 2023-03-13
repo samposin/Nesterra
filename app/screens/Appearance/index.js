@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   StatusBar,
   TouchableOpacity,
+  Appearance,
 } from 'react-native';
 import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -12,8 +13,20 @@ import {RadioButton} from 'react-native-paper';
 
 // import Appearance from './index';
 import {moderateScale} from 'react-native-size-matters';
+import {useSelector, useDispatch} from 'react-redux';
+import {APPEARANCE_TYPE} from '../../actions/actionType/Appearance';
+const colorScheme = Appearance.getColorScheme();
 
-const Appearance = ({navigation}) => {
+const AppearanceScreen = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {appearanceType} = useSelector(state => state.appearanceType);
+  console.log(colorScheme, 'colorScheme');
+  const modeSET = () => {
+    dispatch({
+      type: APPEARANCE_TYPE,
+      data: colorScheme,
+    });
+  };
   return (
     <SafeAreaView
       style={{
@@ -25,7 +38,7 @@ const Appearance = ({navigation}) => {
         <TouchableOpacity
           style={styles.closeView}
           onPress={() => {
-            navigation.navigate('Menu');
+            navigation.navigate('TabNaV');
           }}>
           <Entypo name="cross" size={20} color="white" />
         </TouchableOpacity>
@@ -71,7 +84,7 @@ const Appearance = ({navigation}) => {
   );
 };
 
-export default Appearance;
+export default AppearanceScreen;
 
 const styles = StyleSheet.create({
   mainView: {
@@ -85,7 +98,7 @@ const styles = StyleSheet.create({
   AppearanceText: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'black',
+    color: colorScheme == 'light' ? 'red' : 'green',
     marginLeft: 15,
   },
   closeView: {

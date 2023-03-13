@@ -66,7 +66,12 @@ const BottomSheetView = ({bottomRef, contactLoder}) => {
               }}>
               <View style={styles.header}>
                 <Text
-                  style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 25,
+                    color: 'black',
+                    marginLeft: 8,
+                  }}>
                   Contacts
                 </Text>
                 <TouchableOpacity
@@ -79,7 +84,10 @@ const BottomSheetView = ({bottomRef, contactLoder}) => {
               </View>
               <View style={styles.inputWraper}>
                 <View style={styles.inputView}>
-                  <BottomSheetTextInput />
+                  <BottomSheetTextInput
+                    placeholder="Search here"
+                    style={{marginLeft: 5}}
+                  />
                 </View>
                 <View style={styles.searchIconVie}>
                   <AntDesign name="search1" size={24} color="black" />

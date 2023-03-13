@@ -119,7 +119,7 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
         barStyle="dark-content"
       />
       <View style={{...styles.header, marginTop: StatusBar.currentHeight}}>
-        <Heading size="sm">Filters</Heading>
+        {/* <Heading size="sm">Filters bb</Heading> */}
         <TouchableOpacity
           onPress={() => {
             clear_all(list.selectList.list);

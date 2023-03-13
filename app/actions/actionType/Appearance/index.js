@@ -1,0 +1,1 @@
+export const APPEARANCE_TYPE = 'APPEARANCE_TYPE';

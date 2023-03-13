@@ -10,9 +10,8 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {Input} from 'react-native-paper';
 
-const HelpDes = ({navigation}) => {
+const HelpDesK = ({navigation}) => {
   const [isCheck, setisCheck] = useState(false);
   return (
     <SafeAreaView
@@ -113,7 +112,7 @@ const HelpDes = ({navigation}) => {
   );
 };
 
-export default HelpDes;
+export default HelpDesK;
 
 const styles = StyleSheet.create({
   mainView: {

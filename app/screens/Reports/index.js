@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  TextInput,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import StateAnalysis from './StateAnalysis';
@@ -15,6 +16,7 @@ import AssetsAndExpenses from './AssetsAndExpenses';
 import {getReportSiteAnalysis} from './../../actions/Reports/SiteAnlysis/index';
 import {connect} from 'react-redux';
 import ButtonView from './Components/ButtonView/index';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 import {getReport} from '../../actions/Reports';
 import {imag} from '../../components/imageLink';
@@ -107,6 +109,44 @@ const Reports = ({getReport}) => {
               setSeleted('site');
             }}
           />
+        </View>
+      </View>
+
+      <View
+        style={{
+          width: '100%',
+          height: 40,
+          // backgroundColor: 'pink',
+          paddingHorizontal: 15,
+          marginTop: 10,
+        }}>
+        <View
+          style={{
+            width: '100%',
+            height: 40,
+            backgroundColor: '#f2f2f7',
+            flexDirection: 'row',
+            borderRadius: 5,
+            shadowColor: 'black',
+          }}>
+          <View
+            style={{
+              width: '10%',
+              height: '100%',
+              // backgroundColor: 'pink',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <EvilIcons name="search" size={30} color="black" />
+          </View>
+          <View
+            style={{
+              width: '90%',
+              height: '100%',
+              justifyContentce: 'center',
+            }}>
+            <TextInput placeholder="Search Site ID" />
+          </View>
         </View>
       </View>
 
