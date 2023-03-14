@@ -15,7 +15,7 @@ import {RadioButton} from 'react-native-paper';
 import ToggleButton from './../../../components/ToggleView/ToggleButton';
 import {INDIVISUAL, VENDOR} from '../../../actions/actionType/Contacts';
 import RadioButtonView from './RadioButtonView';
-import {COLORS} from './../../Reports/AssetsAndExpenses/constants/theme';
+
 const BottomSheetView = ({bottomRef, contactLoder}) => {
   const [userType, setUserType] = useState('Citizense');
   const dipatch = useDispatch();

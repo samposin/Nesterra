@@ -1,5 +1,10 @@
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {StyleSheet, Text, useColorScheme} from 'react-native';
 
 import React, {useState, useEffect} from 'react';
 import CircuitInventory from '../screens/CircuitInventory/index.js';
@@ -23,7 +28,7 @@ import StreetViewScreen from '../screens/StreetViewScreen';
 import MenuSetting from '../screens/MenuSetting';
 import VoiceToText from '../screens/Voice';
 
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ATM_ID, BRANCH_ID} from '../actions/actionType/ExploreSearch/index.js';
 import MapTypeAndFilter from '../screens/MapTypeAndFilter';
 import Mtest from '../screens/Mtest/index.js';
@@ -34,6 +39,7 @@ import AppearanceScreen from './../screens/Appearance/index';
 const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
   const getBranchId = () => {
     dispatch({
       type: BRANCH_ID,
@@ -50,9 +56,10 @@ const MainStack = () => {
       getBranchId();
     }, 1200);
   }, []);
-
+  const scheme = useColorScheme();
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={appearanceType === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,

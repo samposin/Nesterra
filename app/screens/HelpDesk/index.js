@@ -10,8 +10,11 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {useSelector} from 'react-redux';
 
 const HelpDesK = ({navigation}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+
   const [isCheck, setisCheck] = useState(false);
   return (
     <SafeAreaView
@@ -20,7 +23,14 @@ const HelpDesK = ({navigation}) => {
         marginTop: StatusBar.currentHeight,
       }}>
       <View style={styles.mainView}>
-        <Text style={styles.helpDeskText}>Help Desk</Text>
+        <Text
+          style={
+            appearanceType === 'dark'
+              ? styles.helpDeskText
+              : styles.helpDeskText1
+          }>
+          Help Desk
+        </Text>
         <TouchableOpacity
           style={styles.closeView}
           onPress={() => {
@@ -127,6 +137,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     marginLeft: 15,
+    color: 'white',
+  },
+  helpDeskText1: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginLeft: 15,
     color: 'black',
   },
   closeView: {
@@ -140,7 +156,7 @@ const styles = StyleSheet.create({
   },
   typeText: {
     fontSize: 20,
-    color: 'black',
+
     marginLeft: 15,
     fontWeight: 'bold',
   },
