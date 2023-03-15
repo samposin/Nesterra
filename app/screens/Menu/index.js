@@ -11,7 +11,7 @@ import React, {useRef, useMemo, useState} from 'react';
 
 import BottomSheetView from './BottomSheetView';
 import {getContacts} from './../../actions/Contacts/index';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import ProfileItem from './ProfileItem';
 import {Title} from 'react-native-paper';
 import MenuItem from './../../components/MenuItem/index';
@@ -30,6 +30,7 @@ const Imagg = {
 };
 
 const Menu = ({navigation, getContacts}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
   const bottomRef = useRef(null);
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
   const [contactLoder, seTcontactLoder] = useState(true);
@@ -86,7 +87,12 @@ const Menu = ({navigation, getContacts}) => {
           <View style={styles.imageView}>
             <Image
               source={Imagg.siteTitle}
-              style={{width: '100%', height: '100%', resizeMode: 'center'}}
+              style={{
+                width: '100%',
+                height: '100%',
+                resizeMode: 'center',
+                tintColor: appearanceType == 'dark' ? 'white' : null,
+              }}
             />
           </View>
         </View>

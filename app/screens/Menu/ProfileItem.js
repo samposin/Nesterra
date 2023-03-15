@@ -1,7 +1,10 @@
 import {StyleSheet, Text, Image, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import {useSelector} from 'react-redux';
 
 const ProfileItem = ({onPress, name, email}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -33,14 +36,20 @@ const ProfileItem = ({onPress, name, email}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Text style={{color: 'black', fontWeight: 'bold'}}>AB</Text>
+          <Text
+            style={{
+              color: appearanceType == 'dark' ? 'white' : 'black',
+              fontWeight: 'bold',
+            }}>
+            AB
+          </Text>
         </View>
       </View>
       <View style={{width: '90%', height: '100%', justifyContent: 'center'}}>
         <Text
           style={{
             marginLeft: 10,
-            color: 'black',
+            color: appearanceType == 'dark' ? 'white' : 'black',
             fontWeight: 'bold',
             fontSize: 18,
           }}>
@@ -49,6 +58,7 @@ const ProfileItem = ({onPress, name, email}) => {
       </View>
     </TouchableOpacity>
   );
+  9;
 };
 
 export default ProfileItem;

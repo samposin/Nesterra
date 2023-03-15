@@ -1,7 +1,10 @@
 import {StyleSheet, Text, Image, TouchableOpacity, View} from 'react-native';
 import React from 'react';
+import {useSelector} from 'react-redux';
 
 const MenuItem = ({src, onPress, title}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -26,12 +29,17 @@ const MenuItem = ({src, onPress, title}) => {
         }}>
         <Image
           source={src}
-          style={{width: 25, height: 25, resizeMode: 'contain'}}
+          style={{
+            width: 25,
+            height: 25,
+            resizeMode: 'contain',
+            tintColor: appearanceType == 'dark' ? 'white' : 'black',
+          }}
         />
         <Text
           style={{
             marginLeft: 10,
-            color: 'black',
+            color: appearanceType == 'dark' ? 'white' : 'black',
             fontSize: 15,
             fontWeight: 'bold',
           }}>

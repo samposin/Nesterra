@@ -118,7 +118,7 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
         backgroundColor="transparent"
         barStyle="dark-content"
       />
-      <View style={{...styles.header, marginTop: StatusBar.currentHeight}}>
+      <View style={{...styles.header, marginTop: 20}}>
         {/* <Heading size="sm">Filters bb</Heading> */}
         <TouchableOpacity
           onPress={() => {
@@ -143,7 +143,7 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
                   <Heading
                     size="xs"
                     style={{color: item.isActive ? '#1b5a90' : '#757575'}}>
-                    {item.name}
+                    {/* {item.name} */}
                     {/* {item.isActive} */}
                   </Heading>
                 </TouchableOpacity>
@@ -203,17 +203,18 @@ const styles = StyleSheet.create({
   header: {
     height: 50,
     width: '100%',
-    backgroundColor: '#f5f5f5',
+    // backgroundColor: '#f5f5f5',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     alignItems: 'center',
+    backgroundColor: 'red',
   },
   mainContainer: {
     height: height - 195,
     width: '100%',
     flexDirection: 'row',
-    backgroundColor: '#ffffff',
+    backgroundColor: 'red',
   },
   mainContainerLeft: {
     height: '100%',

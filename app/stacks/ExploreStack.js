@@ -54,8 +54,6 @@ const ExploreStack = () => {
       <Stack.Screen name="DestinationPoint" component={DestinationPoint} />
       <Stack.Screen name="SettingProfile" component={SettingProfile} />
       <Stack.Screen name="Saved" component={Saved} />
-      <Stack.Screen name="Legal" component={Legal} />
-      <Stack.Screen name="HelpDesk" component={HelpDesk} />
     </Stack.Navigator>
   );
 };

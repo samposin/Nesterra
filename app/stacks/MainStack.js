@@ -33,8 +33,10 @@ import {ATM_ID, BRANCH_ID} from '../actions/actionType/ExploreSearch/index.js';
 import MapTypeAndFilter from '../screens/MapTypeAndFilter';
 import Mtest from '../screens/Mtest/index.js';
 import Menu from './../screens/Menu/index';
+import Legal from './../screens/Legal/index';
 
 import AppearanceScreen from './../screens/Appearance/index';
+import HelpDesk from '../screens/HelpDesk/index.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -82,8 +84,11 @@ const MainStack = () => {
         <Stack.Screen name="Contact" component={Contact} />
         <Stack.Screen name="MenuSetting" component={MenuSetting} />
         <Stack.Screen name="StreetViewScreen" component={StreetViewScreen} />
-        <Stack.Screen name="Menu" component={Menu} />
+        {/* <Stack.Screen name="Menu" component={Menu} /> */}
         <Stack.Screen name="Appearance" component={AppearanceScreen} />
+
+        <Stack.Screen name="HelpDesk" component={HelpDesk} />
+        <Stack.Screen name="Legal" component={Legal} />
       </Stack.Navigator>
     </NavigationContainer>
   );

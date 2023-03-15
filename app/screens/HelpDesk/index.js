@@ -12,7 +12,7 @@ import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useSelector} from 'react-redux';
 
-const HelpDesK = ({navigation}) => {
+const HelpDesk = ({navigation}) => {
   const {appearanceType} = useSelector(state => state.appearanceType);
 
   const [isCheck, setisCheck] = useState(false);
@@ -34,14 +34,24 @@ const HelpDesK = ({navigation}) => {
         <TouchableOpacity
           style={styles.closeView}
           onPress={() => {
-            navigation.navigate('Menu');
+            navigation.navigate('TabNaV');
           }}>
           <Entypo name="cross" size={20} color="white" />
         </TouchableOpacity>
       </View>
-      <Text style={styles.typeText}>Type</Text>
-      <View style={{...styles.upperView, position: 'relative'}}>
-        <View style={styles.lowerView}>
+      <Text
+        style={appearanceType === 'dark' ? styles.typeText : styles.typeText1}>
+        Type
+      </Text>
+      <View
+        style={{
+          ...styles.upperView,
+          position: 'relative',
+        }}>
+        <View
+          style={
+            appearanceType === 'dark' ? styles.lowerView : styles.lowerView1
+          }>
           {isCheck ? (
             <TouchableOpacity
               onPress={() => {
@@ -57,7 +67,14 @@ const HelpDesK = ({navigation}) => {
               }}></TouchableOpacity>
           ) : null}
 
-          <Text style={styles.askQuestionText}>Ask a Question</Text>
+          <Text
+            style={
+              appearanceType === 'dark'
+                ? styles.askQuestionText
+                : styles.askQuestionText1
+            }>
+            Ask a Question
+          </Text>
           <TouchableOpacity
             onPress={() => {
               setisCheck(true);
@@ -70,17 +87,38 @@ const HelpDesK = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <Text style={styles.subjectText}>Subject</Text>
+      <Text
+        style={appearanceType === 'dark' ? styles.typeText : styles.typeText1}>
+        Subject
+      </Text>
       <View style={styles.sudjectView}>
         <View style={styles.inputView}>
           <TextInput />
         </View>
       </View>
 
-      <Text style={styles.subjectText1}>Description</Text>
+      <Text
+        style={
+          appearanceType === 'dark' ? styles.subjectText : styles.subjectText1
+        }>
+        Description
+      </Text>
       <View style={styles.sudjectView1}>
         <View style={styles.inputView1}>
-          <TextInput multiline numberOfLines={5} />
+          <TextInput
+            textAlignVertical={'top'}
+            multiline
+            numberOfLines={5}
+            placeholderTextColor={{textAlign: 'top'}}
+            style={{
+              height: '100%',
+              width: '100%',
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start',
+              verticalAlign: 'top',
+              backgroundColor: appearanceType === 'dark' ? 'black' : '',
+            }}
+          />
         </View>
       </View>
       <View
@@ -122,7 +160,7 @@ const HelpDesK = ({navigation}) => {
   );
 };
 
-export default HelpDesK;
+export default HelpDesk;
 
 const styles = StyleSheet.create({
   mainView: {
@@ -143,7 +181,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     marginLeft: 15,
-    color: 'black',
+    color: 'white',
   },
   closeView: {
     width: 20,
@@ -156,7 +194,13 @@ const styles = StyleSheet.create({
   },
   typeText: {
     fontSize: 20,
-
+    color: 'white',
+    marginLeft: 15,
+    fontWeight: 'bold',
+  },
+  typeText1: {
+    fontSize: 20,
+    color: 'black',
     marginLeft: 15,
     fontWeight: 'bold',
   },
@@ -171,6 +215,17 @@ const styles = StyleSheet.create({
   lowerView: {
     width: '100%',
     height: 50,
+    backgroundColor: '#1c1c1e',
+    borderWidth: 1,
+    borderColor: '#a6a6a8',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: 5,
+  },
+  lowerView1: {
+    width: '100%',
+    height: 50,
     backgroundColor: '#f2f1f6',
     borderWidth: 1,
     borderColor: '#a6a6a8',
@@ -180,6 +235,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   askQuestionText: {
+    marginLeft: 10,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  askQuestionText1: {
     marginLeft: 10,
     color: 'black',
     fontWeight: 'bold',
@@ -196,7 +257,7 @@ const styles = StyleSheet.create({
   },
   subjectText: {
     fontSize: 20,
-    color: 'black',
+    color: 'white',
     marginLeft: 15,
     fontWeight: 'bold',
   },

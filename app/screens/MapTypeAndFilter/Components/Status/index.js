@@ -28,8 +28,10 @@ const data = [
   {id: 1, txt: 'Inactive', name: 'Inactive', isChecked: false},
   {id: 2, txt: 'All', name: 'All', isChecked: false},
 ];
+
 const Status = ({filterData}) => {
   // console.log(filterData);
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [checkdata, setCheckData] = React.useState(data);
@@ -104,13 +106,21 @@ const Status = ({filterData}) => {
         <View style={styles.header}>
           <View
             style={{
-              width: '20%',
+              width: '100%',
               height: '100%',
+              paddingHorizontal: 10,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
 
-              justifyContent: 'center',
               alignItems: 'center',
             }}>
             <Heading size="sm">Filters</Heading>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Menu');
+              }}>
+              <Heading size="sm">Filters</Heading>
+            </TouchableOpacity>
           </View>
           {/* <View
             style={{

@@ -78,12 +78,20 @@ const AppearanceScreen = ({navigation}) => {
           }>
           System
         </Text>
-
-        <RadioButton
-          onPress={() => appAndSystem()}
-          color={appearanceType === 'dark' ? 'white' : 'red'}
-          status={system ? 'checked' : 'unchecked'}
-        />
+        <View
+          style={{
+            width: 40,
+            height: '100%',
+            marginRight: 10,
+          }}>
+          <RadioButton
+            uncheckedColor={appearanceType == 'dark' ? 'white' : '#0472ef'}
+            onPress={() => appAndSystem()}
+            color={appearanceType === 'dark' ? 'white' : '#0472ef'}
+            status={system ? 'checked' : 'unchecked'}
+            borderRadius={10}
+          />
+        </View>
       </View>
 
       <View style={styles.systemView}>
@@ -105,7 +113,8 @@ const AppearanceScreen = ({navigation}) => {
             onPress={() => {
               modeSET('light');
             }}
-            color={appearanceType == 'dark' ? 'white' : '#3d69ee'}
+            uncheckedColor={appearanceType == 'dark' ? 'white' : '#0472ef'}
+            color={appearanceType == 'dark' ? 'white' : '#0472ef'}
             status={
               system == null && 'light' === appearanceType
                 ? 'checked'
@@ -133,7 +142,8 @@ const AppearanceScreen = ({navigation}) => {
             onPress={() => {
               modeSET('dark');
             }}
-            color={appearanceType == 'dark' ? 'white' : '#3d69ee'}
+            color={appearanceType == 'dark' ? 'white' : '#0472ef'}
+            uncheckedColor={appearanceType == 'dark' ? 'white' : '#0472ef'}
             status={
               system == null && 'dark' === appearanceType
                 ? 'checked'
