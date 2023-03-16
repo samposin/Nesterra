@@ -93,7 +93,14 @@ const HelpDesk = ({navigation}) => {
       </Text>
       <View style={styles.sudjectView}>
         <View style={styles.inputView}>
-          <TextInput />
+          <TextInput
+            style={{
+              height: '100%',
+              width: '100%',
+
+              backgroundColor: appearanceType === 'dark' ? 'black' : 'white',
+            }}
+          />
         </View>
       </View>
 

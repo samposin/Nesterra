@@ -46,11 +46,11 @@ const StateAnalysis = () => {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-        <Text>NY</Text>
+        <Text></Text>
         <View
           style={{
             width: '50%',
-            height: 40,
+            height: 33,
             backgroundColor: 'white',
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -58,15 +58,28 @@ const StateAnalysis = () => {
           <View
             style={{
               width: '40%',
-              height: 40,
-              backgroundColor: '#0d7afd',
-            }}></View>
+              height: 33,
+              backgroundColor: '#9bc2f2',
+              borderRadius: 5,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text
+              style={{
+                color: '#0079fe',
+                fontWeight: 'bold',
+              }}>
+              City List
+            </Text>
+          </View>
 
           <View
             style={{
               width: '40%',
-              height: 40,
-              backgroundColor: '#0d7afd',
+              height: 35,
+              backgroundColor: '#9bc2f2',
+              marginRight: 13,
+              borderRadius: 5,
             }}></View>
         </View>
       </View>

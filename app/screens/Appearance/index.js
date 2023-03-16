@@ -5,7 +5,7 @@ import {
   SafeAreaView,
   StatusBar,
   TouchableOpacity,
-  Appearance,
+  useColorScheme,
 } from 'react-native';
 import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -19,19 +19,20 @@ import {
   APPEARANCE_TYPE_SYSTEM,
 } from '../../actions/actionType/Appearance';
 import RadioButtonView from './../../components/RadioButtonView/index';
-const colorScheme = Appearance.getColorScheme();
 
 const AppearanceScreen = ({navigation}) => {
+  const colorScheme1 = useColorScheme();
+
   const dispatch = useDispatch();
   const {appearanceType} = useSelector(state => state.appearanceType);
   const {system} = useSelector(state => state.appearanceType);
-  console.log(colorScheme, 'colorScheme', system);
+  console.log(colorScheme1, 'sudipta');
   // const [type, setType] = use;
   const appAndSystem = () => {
     dispatch({
       type: APPEARANCE_TYPE_SYSTEM,
       payload: {
-        data: colorScheme,
+        data: colorScheme1,
         system: 'system',
       },
     });

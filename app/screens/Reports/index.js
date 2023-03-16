@@ -47,7 +47,6 @@ const Reports = ({getReport}) => {
       style={{
         marginTop: StatusBar.currentHeight,
         flex: 1,
-        backgroundColor: 'white',
       }}>
       <View style={styles.hearderView}>
         <Text style={{fontSize: 25, fontWeight: 'bold', color: 'black'}}>
