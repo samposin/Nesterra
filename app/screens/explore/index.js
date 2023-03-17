@@ -751,7 +751,7 @@ const Explore = ({
     // console.log(markers, 'pdod');
     let dd = [];
     markers.map(item => {
-      console.log(item.properties.coordinate.latitude);
+      // console.log(item.properties.coordinate.latitude);
       dd.push(item.properties.coordinate.latitude);
     });
     // console.log(dd, 'ddd');

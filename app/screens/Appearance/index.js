@@ -26,7 +26,7 @@ const AppearanceScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const {appearanceType} = useSelector(state => state.appearanceType);
   const {system} = useSelector(state => state.appearanceType);
-  console.log(colorScheme1, 'sudipta');
+  // console.log(colorScheme1, 'sudipta');
   // const [type, setType] = use;
   const appAndSystem = () => {
     dispatch({

@@ -14,7 +14,7 @@ import StateAnalysis from './StateAnalysis';
 import SiteCertiFication from './SiteCertiFication';
 import AssetsAndExpenses from './AssetsAndExpenses';
 import {getReportSiteAnalysis} from './../../actions/Reports/SiteAnlysis/index';
-import {connect} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import ButtonView from './Components/ButtonView/index';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
@@ -23,6 +23,7 @@ import {imag} from '../../components/imageLink';
 
 const Reports = ({getReport}) => {
   const [select, setSeleted] = useState('assets');
+  const {appearanceType} = useSelector(state => state.appearanceType);
 
   useEffect(() => {
     getReport();
@@ -49,7 +50,12 @@ const Reports = ({getReport}) => {
         flex: 1,
       }}>
       <View style={styles.hearderView}>
-        <Text style={{fontSize: 25, fontWeight: 'bold', color: 'black'}}>
+        <Text
+          style={{
+            fontSize: 25,
+            fontWeight: 'bold',
+            color: appearanceType == 'dark' ? 'white' : 'black',
+          }}>
           Interective Reports
         </Text>
         <TouchableOpacity
@@ -83,7 +89,11 @@ const Reports = ({getReport}) => {
         {/* =============== button view=========== */}
       </View>
       <View style={{width: '100%', paddingHorizontal: 10}}>
-        <View style={styles.buttonView}>
+        <View
+          style={[
+            styles.buttonView,
+            {backgroundColor: appearanceType == 'dark' ? '#1c1c1f' : 'black'},
+          ]}>
           <ButtonView
             Title="Assets & Expenses"
             select={select}
@@ -174,7 +184,7 @@ const styles = StyleSheet.create({
   hearderView: {
     width: '100%',
     height: 40,
-    backgroundColor: 'white',
+
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
