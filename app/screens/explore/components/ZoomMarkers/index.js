@@ -19,14 +19,7 @@ const ZoomMarkers = () => {
   const [che, setChange] = useState(null);
   console.log(che);
   const {regionMarkers} = useSelector(state => state.coordinates);
-  const _onViewableItemsChanged = ({viewableItems, changed}) => {
-    console.log('Visible items are', viewableItems);
-    console.log('Changed in this iteration', changed);
-    // dispatch({
-    //   type: CHANGE_BORDER_BY_LOCATIO_ID,
-    //   data: changed[0].Location_ID,
-    // });
-  };
+
   const onViewCallBack = React.useCallback(({viewableItems, changed}) => {
     console.log(viewableItems);
     // Use viewable items in state or as intended
@@ -35,23 +28,15 @@ const ZoomMarkers = () => {
       data: changed[0].Location_ID,
     });
   }, []);
-  const _viewabilityConfig = React.useRef({
-    viewAreaCoveragePercentThreshold: 50,
-  });
-  // const viewabilityConfigCallbackPairs = useRef([{onViewableItemsChanged}]);
-  // console.log(regionMarkers, 'zoom');
-  const onViewableItemsChanged = ({viewableItems, changed}) => {
-    // console.log(JSON.stringify(info), 'pp');
-    console.log('Visible items are', viewableItems);
-    console.log('Changed in this iteration', changed);
-    console.log('here are the chaneges', viewableItems);
-    if (changed.length >= 1)
-      changed[0].isViewable ? setChange(changed[0].index) : null;
+  const onViewableItemsChanged = ({viewableItems}) => {
+    console.log(viewableItems);
   };
 
-  // 2. create a reference to the function (above)
-  const viewabilityConfigCallbackPairs = useRef([{onViewableItemsChanged}]);
+  const viewabilityConfig = {itemVisiblePercentThreshold: 100};
 
+  const viewabilityConfigCallbackPairs = useRef([
+    {viewabilityConfig, onViewableItemsChanged},
+  ]);
   return (
     <View
       style={{
@@ -70,13 +55,7 @@ const ZoomMarkers = () => {
         data={regionMarkers}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item, index) => index.toString()}
-        viewabilityConfig={{viewAreaCoveragePercentThreshold: 5}}
-        // viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
-
-        // onViewableItemsChanged={onViewCallBack}
-        // viewabilityConfig={{viewAreaCoveragePercentThreshold: 50}}
-        // viewabilityConfig={_viewabilityConfig.current}
-        // viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
+        viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
         renderItem={({item, index}) => {
           return (
             <View
@@ -89,7 +68,7 @@ const ZoomMarkers = () => {
                 },
                 shadowOpacity: 0.3,
                 shadowRadius: 4.65,
-
+                position: 'relative',
                 elevation: 8,
                 width: 300,
                 height: 140,
@@ -97,6 +76,15 @@ const ZoomMarkers = () => {
                 borderRadius: 15,
                 marginHorizontal: 10,
               }}>
+              <View
+                style={{
+                  width: 100,
+                  height: 100,
+                  backgroundColor: 'yellow',
+                  position: 'absolute',
+                  left: 0,
+                  top: -10,
+                }}></View>
               <Text
                 style={{
                   fontSize: 17,

@@ -38,8 +38,9 @@ const Menu = ({navigation, getContacts}) => {
     navigation.navigate('MapTypeAndFilter');
   };
   const contact = () => {
-    getContacts(seTcontactLoder);
-    bottomRef.current.snapToIndex(2);
+    // getContacts(seTcontactLoder);
+    // bottomRef.current.snapToIndex(2);
+    navigation.navigate('Contact');
   };
   const stats = () => {
     navigation.navigate('Stats');
@@ -91,7 +92,7 @@ const Menu = ({navigation, getContacts}) => {
                 width: '100%',
                 height: '100%',
                 resizeMode: 'center',
-                tintColor: appearanceType == 'dark' ? 'white' : null,
+                tintColor: appearanceType == 'dark' ? 'white' : 'white',
               }}
             />
           </View>
