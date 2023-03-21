@@ -9,6 +9,7 @@ import {
   Animated,
   Easing,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import BottomSheetView from './BottomSheet';
 import MapView from 'react-native-map-clustering';
@@ -364,7 +365,17 @@ const Explore = ({
   }, []);
   // added by Dildar Khan end
   //anup
-
+  const goTo = (lat, lng) => {
+    console.log(lat, lng);
+    const region = {
+      latitude: lat,
+      longitude: lng,
+      latitudeDelta: 0.0112333,
+      longitudeDelta: 0.001233,
+    };
+    console.log(region, 'zoom');
+    mapRef.current.animateToRegion(region, 500);
+  };
   const getLocation = async () => {
     const hasPermission = await hasLocationPermission();
 
@@ -391,7 +402,7 @@ const Explore = ({
     mapRef.current.animateToRegion(region, 2000);
   };
   const onSearchPress = (lat, lng) => {
-    // console.log(lat, lng);
+    console.log(lat, lng);
     animateToRegion({
       latitude: lat,
       longitude: lng,
@@ -848,7 +859,7 @@ const Explore = ({
           // onRegionChangeComplete={onRegionChangeComplete}
           onRegionChangeComplete={async (region, markers) => {
             const coords = await mapRef?.current?.getCamera();
-            // console.log(coords);
+            console.log(coords);
 
             if (coords.zoom > 17) {
               dispatch({
@@ -941,10 +952,22 @@ const Explore = ({
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
+            Alert.alert('Alert Title', 'My Alert Msg', [
+              {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+              {
+                text: 'Confirm',
+                onPress: () => {
+                  getChange();
+                  // get_coordinates();
+                  setstreetImage(false);
+                },
+              },
+            ]);
             // dispatch({type: CIRCUIT_ID});
-            getChange();
-            // get_coordinates();
-            setstreetImage(false);
           }}
           style={styles.currentLocation1}>
           <SimpleLineIcons
@@ -1134,7 +1157,7 @@ const Explore = ({
         atmdDetailsRef={atmdDetailsRef}
         detailsLoder={detailsLoder}
       />
-      {markerZoomStatus ? <ZoomMarkers /> : null}
+      {markerZoomStatus ? <ZoomMarkers onSearchPress={goTo} /> : null}
 
       {/* =================CircuitDetailsExpolore=============== */}
       {settingView ? (

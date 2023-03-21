@@ -6,6 +6,7 @@ import {
   View,
   Image,
 } from 'react-native';
+import StreetView from 'react-native-streetview';
 
 import React, {useRef, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
@@ -14,10 +15,10 @@ import {
   CHANGE_BORDER_BY_LOCATIO_ID,
 } from '../../../../actions/actionType/action.Coordinatefilter.type';
 
-const ZoomMarkers = () => {
+const ZoomMarkers = ({onSearchPress}) => {
   const dispatch = useDispatch();
   const [che, setChange] = useState(null);
-  console.log(che);
+  // console.log(che);
   const {regionMarkers} = useSelector(state => state.coordinates);
 
   const onViewCallBack = React.useCallback(({viewableItems, changed}) => {
@@ -29,10 +30,16 @@ const ZoomMarkers = () => {
     });
   }, []);
   const onViewableItemsChanged = ({viewableItems}) => {
-    console.log(viewableItems);
+    const dataa = viewableItems.find(i => i.isViewable == true);
+    console.log(dataa.item, 'ppp');
+    // console.log(
+    //   viewableItems[0].item.Latitude,
+    //   viewableItems[0].item.Longitude,
+    // );
+    onSearchPress(dataa.item.Latitude, dataa.item.Longitude);
   };
 
-  const viewabilityConfig = {itemVisiblePercentThreshold: 100};
+  const viewabilityConfig = {itemVisiblePercentThreshold: 50};
 
   const viewabilityConfigCallbackPairs = useRef([
     {viewabilityConfig, onViewableItemsChanged},
@@ -46,7 +53,7 @@ const ZoomMarkers = () => {
         height: 150,
         position: 'absolute',
         right: 0,
-        bottom: 50,
+        bottom: 70,
 
         justifyContent: 'center',
       }}>
@@ -71,7 +78,7 @@ const ZoomMarkers = () => {
                 position: 'relative',
                 elevation: 8,
                 width: 300,
-                height: 140,
+                height: 200,
                 backgroundColor: '#ffffff',
                 borderRadius: 15,
                 marginHorizontal: 10,
@@ -79,80 +86,101 @@ const ZoomMarkers = () => {
               <View
                 style={{
                   width: 100,
-                  height: 100,
-                  backgroundColor: 'yellow',
-                  position: 'absolute',
-                  left: 0,
-                  top: -10,
-                }}></View>
-              <Text
-                style={{
-                  fontSize: 17,
-                  color: 'black',
-                  marginTop: 10,
-                  marginLeft: 18,
-                  fontWeight: 'bold',
+                  height: 60,
+                  backgroundColor: 'yellowgreen',
+                  marginBottom: 5,
                 }}>
-                {item.FullAddress.length > 29
-                  ? `${item.FullAddress.substring(0, 30)}...`
-                  : item.FullAddress}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 15,
-                  color: 'black',
-                  marginTop: 10,
-                  marginLeft: 18,
-                }}>
-                <Text style={{color: 'black', fontWeight: '500'}}>
-                  Site Type:
-                </Text>
-                {'  '}
-                {item?.SubLocationType !== null &&
-                item?.SubLocationType.length > 2
-                  ? `${item?.SubLocationType.substring(0, 5)}...`
-                  : item?.SubLocationType}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 15,
-                  color: 'black',
-                  marginTop: 10,
-                  marginLeft: 18,
-                }}>
-                <Text style={{color: 'black', fontWeight: '500'}}>
-                  Site ID:
-                </Text>
-                {'   '}
-                {item.Location_ID}
-              </Text>
+                <StreetView
+                  style={styles.streetView}
+                  allGesturesEnabled={true}
+                  coordinate={{
+                    latitude: item.Latitude,
+                    longitude: item.Longitude,
+                  }}
+                  pov={{
+                    tilt: parseFloat(0),
+                    bearing: parseFloat(0),
+                    zoom: parseInt(1),
+                  }}
+                />
+              </View>
               <View
                 style={{
                   width: '100%',
-                  height: 30,
-                  // backgroundColor: 'pink',
-                  flexDirection: 'row',
-                  marginTop: 5,
+                  height: 140,
+                  // backgroundColor: 'red',
                 }}>
+                <Text
+                  style={{
+                    fontSize: 17,
+                    color: 'black',
+                    marginTop: 10,
+                    marginLeft: 18,
+                    fontWeight: 'bold',
+                  }}>
+                  {item.FullAddress.length > 29
+                    ? `${item.FullAddress.substring(0, 30)}...`
+                    : item.FullAddress}
+                </Text>
                 <Text
                   style={{
                     fontSize: 15,
                     color: 'black',
+                    marginTop: 10,
                     marginLeft: 18,
-                    fontWeight: '500',
                   }}>
-                  Site Status:
+                  <Text style={{color: 'black', fontWeight: '500'}}>
+                    Site Type:
+                  </Text>
+                  {'  '}
+                  {item?.SubLocationType !== null &&
+                  item?.SubLocationType.length > 2
+                    ? `${item?.SubLocationType.substring(0, 5)}...`
+                    : item?.SubLocationType}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    color: 'black',
+                    marginTop: 10,
+                    marginLeft: 18,
+                  }}>
+                  <Text style={{color: 'black', fontWeight: '500'}}>
+                    Site ID:
+                  </Text>
+                  {'   '}
+                  {item.Location_ID}
                 </Text>
                 <View
                   style={{
-                    width: 20,
-                    height: 20,
-                    backgroundColor:
-                      item.LocationStatusDesc == 'Active' ? '#57fd05' : 'red',
-                    marginLeft: 20,
-                    borderRadius: 10,
-                  }}></View>
+                    width: '100%',
+                    height: 30,
+                    // backgroundColor: 'pink',
+                    flexDirection: 'row',
+                    marginTop: 5,
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 15,
+                      color: 'black',
+                      marginLeft: 18,
+                      fontWeight: '500',
+                    }}>
+                    Site Status:
+                  </Text>
+                  <View
+                    style={{
+                      width: 20,
+                      height: 20,
+                      backgroundColor:
+                        item.LocationStatusDesc == 'Active' ? '#57fd05' : 'red',
+                      marginLeft: 20,
+                      borderRadius: 10,
+                    }}></View>
+                </View>
               </View>
+              {/*
+               */}
             </View>
           );
         }}
@@ -163,4 +191,12 @@ const ZoomMarkers = () => {
 
 export default ZoomMarkers;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  streetView: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+});
