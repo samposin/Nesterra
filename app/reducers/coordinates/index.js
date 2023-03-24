@@ -13,6 +13,7 @@ import {
 } from '../../actions/action.type';
 import {
   CHANGE_BORDER,
+  CHANGE_BORDER1,
   FILTER_MARKER,
   CHANGE_BORDER_FILTER,
   CHANGE_BORDER_BY_LOCATIO_ID,
@@ -31,6 +32,19 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case CHANGE_BORDER1:
+      //  const md=   dataMar.findIndex(i => i.Location_ID == location)
+      // console.log(action.data);
+      // let ddD = dataMar.map((item, i) => {
+      //   return {...item, isChecked: false};
+      // });
+
+      // dd[action.data].isChecked = true;
+      return {
+        ...state,
+        coordinates: action.data,
+      };
+
     case GET_COORDINATES:
       let data1 = action.payload.data.map(item => {
         return {...item, isChecked: false};

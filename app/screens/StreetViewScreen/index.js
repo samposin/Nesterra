@@ -11,11 +11,12 @@ import StreetView from 'react-native-streetview';
 import {useSelector} from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useNavigation} from '@react-navigation/native';
+import SafeArea from './../../components/SafeArea/index';
 
 const StreetViewScreen = ({navigation}) => {
   const location_data = useSelector(state => state.location_details.data);
   return (
-    <SafeAreaView style={{flex: 1, marginTop: StatusBar.currentHeight}}>
+    <SafeArea>
       <TouchableOpacity
         onPress={() => {
           navigation.goBack();
@@ -48,7 +49,7 @@ const StreetViewScreen = ({navigation}) => {
           }}
         />
       </View>
-    </SafeAreaView>
+    </SafeArea>
   );
 };
 

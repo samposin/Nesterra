@@ -80,6 +80,7 @@ import ImageAdd from './components/ImageAdd';
 import StreetViewComponents from '../../components/StreetViewComponents';
 import ZoomMarkers from './components/ZoomMarkers/index';
 import {REGION_MARKERS} from '../../actions/action.coordinate.type';
+import ZoomMarkersView from './components/ZoomMarkers/ZoomMarkersView';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -353,6 +354,7 @@ const Explore = ({
   };
   // added by Dildar Khan start
   const bottomSheetRef = useRef(null);
+  const bottomSheetRefZoom = useRef(null);
 
   const bottomSheetRefImage = useRef(null);
   const cirCuitRefExplore = useRef(null);
@@ -366,14 +368,14 @@ const Explore = ({
   // added by Dildar Khan end
   //anup
   const goTo = (lat, lng) => {
-    console.log(lat, lng);
+    // console.log(lat, lng);
     const region = {
       latitude: lat,
       longitude: lng,
-      latitudeDelta: 0.0112333,
-      longitudeDelta: 0.001233,
+      latitudeDelta: 0.02305261197147246,
+      longitudeDelta: 0.015684552490697,
     };
-    console.log(region, 'zoom');
+    // console.log(region, 'zoom');
     mapRef.current.animateToRegion(region, 500);
   };
   const getLocation = async () => {
@@ -856,23 +858,19 @@ const Explore = ({
           userLocationPriority={'high'}
           mapType={mapType}
           onClusterPress={e => markerZoom1(e)}
-          // onRegionChangeComplete={onRegionChangeComplete}
           onRegionChangeComplete={async (region, markers) => {
             const coords = await mapRef?.current?.getCamera();
-            console.log(coords);
-
-            if (coords.zoom > 17) {
+            console.log(region);
+            if (coords.zoom > 15) {
               dispatch({
                 type: REGION_MARKERS,
                 data: markers,
               });
-              // dataregion(markers);
-              // console.log(markers.length, 'markee');
+              bottomSheetRefZoom.current.snapToIndex(2);
               setmarkerZoomStatus(true);
             } else {
               setmarkerZoomStatus(false);
             }
-            // console.log('coords', coords.zoom, region);
           }}
           onLayout={onLayoutMap}>
           {coordinates &&
@@ -890,13 +888,14 @@ const Explore = ({
                     changeMarkerBorder(i);
                     playSound();
                     setIsLoading(true);
+                    setmarkerZoomStatus(false);
                     get_location_details({
                       id: item.Location_ID,
                       setIsLoading,
                       bottomSheetRef,
                     });
                     // markerZoom(item.Latitude, item.Longitude);
-                    onSearchPress(item.Latitude, item.Longitude);
+                    // onSearchPress(item.Latitude, item.Longitude);
                     // settIndexZ(0);
 
                     // bottomSheetRefImage.current.close();
@@ -1157,7 +1156,7 @@ const Explore = ({
         atmdDetailsRef={atmdDetailsRef}
         detailsLoder={detailsLoder}
       />
-      {markerZoomStatus ? <ZoomMarkers onSearchPress={goTo} /> : null}
+      {/* {markerZoomStatus ? <ZoomMarkers onSearchPress={goTo} /> : null} */}
 
       {/* =================CircuitDetailsExpolore=============== */}
       {settingView ? (
@@ -1171,6 +1170,10 @@ const Explore = ({
 
       <ImageAdd imageAddRef={imageAddRef} />
       {streetImage && <StreetViewComponents />}
+      <ZoomMarkersView
+        bottomSheetRefZoom={bottomSheetRefZoom}
+        onSearchPress={goTo}
+      />
     </>
   );
 };

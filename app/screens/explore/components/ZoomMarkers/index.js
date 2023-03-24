@@ -12,8 +12,10 @@ import React, {useRef, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {
   CHANGE_BORDER,
+  CHANGE_BORDER1,
   CHANGE_BORDER_BY_LOCATIO_ID,
 } from '../../../../actions/actionType/action.Coordinatefilter.type';
+import {dataMar} from '../../../../utils/MarkerData1';
 
 const ZoomMarkers = ({onSearchPress}) => {
   const dispatch = useDispatch();
@@ -21,17 +23,29 @@ const ZoomMarkers = ({onSearchPress}) => {
   // console.log(che);
   const {regionMarkers} = useSelector(state => state.coordinates);
 
-  const onViewCallBack = React.useCallback(({viewableItems, changed}) => {
-    console.log(viewableItems);
-    // Use viewable items in state or as intended
-    dispatch({
-      type: CHANGE_BORDER_BY_LOCATIO_ID,
-      data: changed[0].Location_ID,
-    });
-  }, []);
+  // const onViewCallBack = React.useCallback(({viewableItems, changed}) => {
+  //   console.log(viewableItems);
+  //   // Use viewable items in state or as intended
+  //   dispatch({
+  //     type: CHANGE_BORDER_BY_LOCATIO_ID,
+  //     data: changed[0].Location_ID,
+  //   });
+  // }, []);
   const onViewableItemsChanged = ({viewableItems}) => {
     const dataa = viewableItems.find(i => i.isViewable == true);
-    console.log(dataa.item, 'ppp');
+
+    const location = dataa.item.Location_ID;
+    const ddd = dataMar.findIndex(i => i.Location_ID == location);
+    let ddD = dataMar.map((item, i) => {
+      return {...item, isChecked: false};
+    });
+
+    ddD[ddd].isChecked = true;
+
+    dispatch({
+      type: CHANGE_BORDER1,
+      data: ddD,
+    });
     // console.log(
     //   viewableItems[0].item.Latitude,
     //   viewableItems[0].item.Longitude,
