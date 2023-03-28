@@ -24,21 +24,24 @@ const Stack = createNativeStackNavigator();
 const ExploreStack = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    setTimeout(() => {
-      dispatch({
-        type: SITE_ID,
-      });
-    }, 1000);
-    setTimeout(() => {
-      dispatch({
-        type: DEVICE_ID,
-      });
-    }, 1500);
-    setTimeout(() => {
-      dispatch({
-        type: ADDRESS_ID,
-      });
-    }, 1700);
+    dispatch({
+      type: SITE_ID,
+    });
+    dispatch({
+      type: DEVICE_ID,
+    });
+    dispatch({
+      type: ADDRESS_ID,
+    });
+    // setTimeout(() => {
+
+    // }, 1000);
+    // setTimeout(() => {
+
+    // }, 1500);
+    // setTimeout(() => {
+
+    // }, 1700);
   }, []);
 
   return (

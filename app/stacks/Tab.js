@@ -30,16 +30,18 @@ const TabNaV = ({navigation}) => {
   // console.log(appearanceType, 'appearanceType');
   const dispatch = useDispatch();
   useEffect(() => {
-    setTimeout(() => {
-      dispatch({
-        type: CIRCUIT_ID,
-      });
-    }, 1000);
-    setTimeout(() => {
-      dispatch({
-        type: SITE_ID,
-      });
-    }, 1500);
+    dispatch({
+      type: CIRCUIT_ID,
+    });
+    dispatch({
+      type: SITE_ID,
+    });
+    // setTimeout(() => {
+
+    // }, 1000);
+    // setTimeout(() => {
+
+    // }, 1500);
   }, []);
 
   return (

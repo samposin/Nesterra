@@ -81,6 +81,7 @@ import StreetViewComponents from '../../components/StreetViewComponents';
 import ZoomMarkers from './components/ZoomMarkers/index';
 import {REGION_MARKERS} from '../../actions/action.coordinate.type';
 import ZoomMarkersView from './components/ZoomMarkers/ZoomMarkersView';
+import Certification from './components/Certification';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -857,21 +858,21 @@ const Explore = ({
           showsUserLocation={true}
           userLocationPriority={'high'}
           mapType={mapType}
-          // onClusterPress={e => markerZoom1(e)}
-          // onRegionChangeComplete={async (region, markers) => {
-          //   const coords = await mapRef?.current?.getCamera();
-          //   // console.log(region);
-          //   if (coords.zoom > 15) {
-          //     dispatch({
-          //       type: REGION_MARKERS,
-          //       data: markers,
-          //     });
-          //     bottomSheetRefZoom.current.snapToIndex(2);
-          //     setmarkerZoomStatus(true);
-          //   } else {
-          //     setmarkerZoomStatus(false);
-          //   }
-          // }}
+          onClusterPress={e => markerZoom1(e)}
+          onRegionChangeComplete={async (region, markers) => {
+            const coords = await mapRef?.current?.getCamera();
+            // console.log(region);
+            if (coords.zoom > 15) {
+              dispatch({
+                type: REGION_MARKERS,
+                data: markers,
+              });
+              bottomSheetRefZoom.current.snapToIndex(2);
+              setmarkerZoomStatus(true);
+            } else {
+              setmarkerZoomStatus(false);
+            }
+          }}
           onLayout={onLayoutMap}>
           {coordinates &&
             coordinates.map((item, i) => {
@@ -1169,6 +1170,7 @@ const Explore = ({
       {isLoading && <Lodder lodding={isLoading} />}
 
       <ImageAdd imageAddRef={imageAddRef} />
+      {/* <Certification /> */}
       {streetImage && <StreetViewComponents />}
       <ZoomMarkersView
         bottomSheetRefZoom={bottomSheetRefZoom}

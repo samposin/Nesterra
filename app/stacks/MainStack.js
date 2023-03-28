@@ -49,14 +49,16 @@ const MainStack = () => {
   };
   const dispatch = useDispatch();
   useEffect(() => {
-    setTimeout(() => {
-      dispatch({
-        type: ATM_ID,
-      });
-    }, 1000);
-    setTimeout(() => {
-      getBranchId();
-    }, 1200);
+    dispatch({
+      type: ATM_ID,
+    });
+    getBranchId();
+    // setTimeout(() => {
+
+    // }, 1000);
+    // setTimeout(() => {
+
+    // }, 1200);
   }, []);
   const scheme = useColorScheme();
   return (
