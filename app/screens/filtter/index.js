@@ -8,7 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import React, {useEffect} from 'react';
-import {Heading, VStack} from 'native-base';
+
 import ApplyButton from '../../components/button/ApplyButton';
 import {useSelector, connect} from 'react-redux';
 
@@ -131,25 +131,21 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
       </View>
       <View style={styles.mainContainer}>
         <View style={styles.mainContainerLeft}>
-          <VStack space="6" mt="8">
-            {allItem.map((item, i) => {
-              return (
-                <TouchableOpacity
-                  key={i}
-                  onPress={() => {
-                    setItem(item.id);
-                    actiText(item.id);
-                  }}>
-                  <Heading
-                    size="xs"
-                    style={{color: item.isActive ? '#1b5a90' : '#757575'}}>
-                    {/* {item.name} */}
-                    {/* {item.isActive} */}
-                  </Heading>
-                </TouchableOpacity>
-              );
-            })}
-          </VStack>
+          {allItem.map((item, i) => {
+            return (
+              <TouchableOpacity
+                key={i}
+                onPress={() => {
+                  setItem(item.id);
+                  actiText(item.id);
+                }}>
+                <Text style={{color: item.isActive ? '#1b5a90' : '#757575'}}>
+                  {/* {item.name} */}
+                  {/* {item.isActive} */}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
         </View>
         <View style={styles.mainContainerRight}>{selectedComponent()}</View>
       </View>

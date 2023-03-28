@@ -10,11 +10,7 @@ import StreetView from 'react-native-streetview';
 
 import React, {useRef, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {
-  CHANGE_BORDER,
-  CHANGE_BORDER1,
-  CHANGE_BORDER_BY_LOCATIO_ID,
-} from '../../../../actions/actionType/action.Coordinatefilter.type';
+import {CHANGE_BORDER1} from '../../../../actions/actionType/action.Coordinatefilter.type';
 import {dataMar} from '../../../../utils/MarkerData1';
 
 const ZoomMarkers = ({onSearchPress}) => {
@@ -193,8 +189,6 @@ const ZoomMarkers = ({onSearchPress}) => {
                     }}></View>
                 </View>
               </View>
-              {/*
-               */}
             </View>
           );
         }}

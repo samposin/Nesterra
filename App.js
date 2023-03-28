@@ -5,7 +5,7 @@ global.__reanimatedWorkletInit = () => {};
 import React from 'react';
 import MainStack from './app/stacks/MainStack';
 import {LogBox} from 'react-native';
-import {NativeBaseProvider} from 'native-base';
+
 import {Provider as PaperProvider} from 'react-native-paper';
 import {Provider} from 'react-redux';
 import 'react-native-reanimated';
@@ -23,11 +23,9 @@ const App = () => {
     <GestureHandlerRootView style={{flex: 1}}>
       <BottomSheetModalProvider>
         <Provider store={store}>
-          <NativeBaseProvider>
-            <PaperProvider>
-              <MainStack />
-            </PaperProvider>
-          </NativeBaseProvider>
+          <PaperProvider>
+            <MainStack />
+          </PaperProvider>
         </Provider>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>

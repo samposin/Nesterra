@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 import React from 'react';
 
-import {Heading} from 'native-base';
-
 import CheckBoxView from './../CheckBoxView/index';
 import {useNavigation} from '@react-navigation/native';
 const {height, width} = Dimensions.get('screen');
@@ -114,12 +112,12 @@ const Status = ({filterData}) => {
 
               alignItems: 'center',
             }}>
-            <Heading size="sm">Filters</Heading>
+            <Text style={{fontSize: 14}}>Filters</Text>
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('Menu');
               }}>
-              <Heading size="sm">Filters</Heading>
+              <Text style={{fontSize: 16}}>Filters</Text>
             </TouchableOpacity>
           </View>
           {/* <View

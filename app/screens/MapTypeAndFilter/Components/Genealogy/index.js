@@ -10,8 +10,6 @@ import {
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 
-import {Heading} from 'native-base';
-
 const {height, width} = Dimensions.get('screen');
 
 import {warinng} from '../../../../components/helper';
@@ -135,7 +133,7 @@ const Genealogy = ({getGeneoLogyList, is_selected, select_all}) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Heading size="sm">Filters</Heading>
+            <Text style={{fontSize: 14}}>Filters</Text>
           </View>
           {/* <View
             style={{

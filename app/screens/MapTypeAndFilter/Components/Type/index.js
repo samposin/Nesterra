@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 import React from 'react';
 
-import {Heading} from 'native-base';
-
 import CheckBoxView from './../CheckBoxView/index';
 import {useNavigation} from '@react-navigation/native';
 const {height, width} = Dimensions.get('screen');
@@ -88,7 +86,7 @@ const Type = ({}) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Heading size="sm">Filters</Heading>
+            <Text style={{fontSize: 16}}>Filters</Text>
           </View>
           {/* <View
             style={{

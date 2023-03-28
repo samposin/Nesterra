@@ -11,8 +11,11 @@ import BottomSheet, {
 import {useSelector, useDispatch} from 'react-redux';
 import {CHANGE_BORDER1} from '../../../../actions/actionType/action.Coordinatefilter.type';
 import {dataMar} from '../../../../utils/MarkerData1';
+import {SET_LAT_LNG} from '../../../../actions/action.type';
+import {useNavigation} from '@react-navigation/native';
 
 const ZoomMarkersView = ({bottomSheetRefZoom, onSearchPress}) => {
+  const navigation = useNavigation();
   const {regionMarkers} = useSelector(state => state.coordinates);
 
   const dispatch = useDispatch();
@@ -24,6 +27,7 @@ const ZoomMarkersView = ({bottomSheetRefZoom, onSearchPress}) => {
   const renderBackdrop = useCallback(
     props => (
       <BottomSheetBackdrop
+        opacity={0.1}
         backgroundStyle={{backgroundColor: 'red'}}
         {...props}
         disappearsOnIndex={1}
@@ -32,14 +36,23 @@ const ZoomMarkersView = ({bottomSheetRefZoom, onSearchPress}) => {
     ),
     [],
   );
-
+  const setLatLang = (lat, lng) => {
+    console.log(lat, lng);
+    dispatch({
+      type: SET_LAT_LNG,
+      payload: {
+        lat: lat,
+        lng: lng,
+      },
+    });
+    navigation.navigate('StreetViewScreen');
+  };
   // callbacks
   const handleSheetChanges = useCallback(index => {
     if (index == -1) {
       let ddD = dataMar.map((item, i) => {
         return {...item, isChecked: false};
       });
-
       dispatch({
         type: CHANGE_BORDER1,
         data: ddD,
@@ -103,11 +116,14 @@ const ZoomMarkersView = ({bottomSheetRefZoom, onSearchPress}) => {
                     marginHorizontal: 10,
                     paddingBottom: 50,
                   }}>
-                  <View
+                  <TouchableOpacity
+                    onPress={() => {
+                      setLatLang(item.Latitude, item.Longitude);
+                    }}
                     style={{
                       width: 100,
                       height: 60,
-
+                      marginLeft: 20,
                       marginBottom: 5,
                     }}>
                     <StreetView
@@ -123,7 +139,7 @@ const ZoomMarkersView = ({bottomSheetRefZoom, onSearchPress}) => {
                         zoom: parseInt(1),
                       }}
                     />
-                  </View>
+                  </TouchableOpacity>
                   <View
                     style={{
                       width: '100%',
@@ -233,6 +249,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    borderColor: 'red',
+    borderWidth: 3,
+    borderRadius: 20,
   },
   container: {
     flex: 1,
