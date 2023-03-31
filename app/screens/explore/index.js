@@ -770,6 +770,7 @@ const Explore = ({
     });
     // console.log(dd, 'ddd');
   };
+  const [certifiedModal, setCertifiedModal] = useState(false);
   return (
     <>
       {/* {inputRotate ? rotatedIconAntichange() : rotatedIconchange()} */}
@@ -1060,6 +1061,7 @@ const Explore = ({
             focusOn1={focusOn1}
             setPlace={setPlace}
             placeHolder={placeHolder}
+            rander={rander}
           />
         ) : (
           <Search
@@ -1079,6 +1081,7 @@ const Explore = ({
             focusOn={focusOn}
             setFocusOn={setFocusOn}
             getAddress={getAddress}
+            rander={rander}
           />
         )}
 
@@ -1118,6 +1121,7 @@ const Explore = ({
       </View>
       {/* =================BottomSheetView=============== */}
       <BottomSheetView
+        setCertifiedModal={setCertifiedModal}
         bottomSheetRef={bottomSheetRef}
         catShow={setCatShow}
         cirCuitRefExplore={cirCuitRefExplore}
@@ -1170,7 +1174,10 @@ const Explore = ({
       {isLoading && <Lodder lodding={isLoading} />}
 
       <ImageAdd imageAddRef={imageAddRef} />
-      {/* <Certification /> */}
+      <Certification
+        certifiedModal={certifiedModal}
+        setCertifiedModal={setCertifiedModal}
+      />
       {streetImage && <StreetViewComponents />}
       <ZoomMarkersView
         bottomSheetRefZoom={bottomSheetRefZoom}

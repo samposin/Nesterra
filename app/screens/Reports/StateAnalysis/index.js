@@ -12,6 +12,7 @@ import {
 } from 'victory-native';
 
 import {useSelector, connect} from 'react-redux';
+import SimpleButton from '../../../components/button/SimpleButton';
 export const data = [
   {id: 0, name: 'Score', isActive: false, value: 'Score'},
   {id: 1, name: 'Splits', isActive: false, value: 'Splits'},
@@ -44,6 +45,7 @@ const StateAnalysis = () => {
           marginTop: 10,
           flexDirection: 'row',
           justifyContent: 'space-between',
+          paddingRight: 10,
           alignItems: 'center',
         }}>
         <Text></Text>
@@ -51,36 +53,12 @@ const StateAnalysis = () => {
           style={{
             width: '50%',
             height: 33,
-            backgroundColor: 'white',
+
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <View
-            style={{
-              width: '40%',
-              height: 33,
-              backgroundColor: '#9bc2f2',
-              borderRadius: 5,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text
-              style={{
-                color: '#0079fe',
-                fontWeight: 'bold',
-              }}>
-              City List
-            </Text>
-          </View>
-
-          <View
-            style={{
-              width: '40%',
-              height: 35,
-              backgroundColor: '#9bc2f2',
-              marginRight: 13,
-              borderRadius: 5,
-            }}></View>
+          <SimpleButton title="City List" />
+          <SimpleButton title="See Sites" />
         </View>
       </View>
       <Text style={styles.titleText}>Sites (By City)</Text>

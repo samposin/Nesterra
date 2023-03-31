@@ -1,4 +1,11 @@
-import {StyleSheet, TouchableOpacity, Image, Text, View} from 'react-native';
+import {
+  StyleSheet,
+  Share,
+  TouchableOpacity,
+  Image,
+  Text,
+  View,
+} from 'react-native';
 import React, {useMemo, useRef, useEffect, useState, useCallback} from 'react';
 
 import BottomSheet, {BottomSheetFlatList} from '@gorhom/bottom-sheet';
@@ -48,6 +55,7 @@ const BottomSheetView = ({
   getInventoryCircuit,
   imageAddRef,
   setstreetImage,
+  setCertifiedModal,
 }) => {
   // console.log(cirCuitRef, bottomSheetRef,picRef );
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
@@ -240,6 +248,27 @@ const BottomSheetView = ({
         break;
     }
   }, []);
+  console.log(location_data);
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'React Native | A framework for building native apps using React',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <>
       <BottomSheet
@@ -266,13 +295,13 @@ const BottomSheetView = ({
         onChange={handleSheetChanges}>
         <View
           style={{
-            height: 155,
+            height: 165,
             width: '100%',
           }}>
           <View
             style={{
               width: '100%',
-              height: 100,
+              height: 120,
               flexDirection: 'row',
             }}>
             <TouchableOpacity
@@ -303,6 +332,19 @@ const BottomSheetView = ({
                 }}>
                 {location_data?.SubLocationType}
               </Text> */}
+              <View style={{width: '100%', flexDirection: 'row'}}>
+                <Text style={{fontSize: 16, marginLeft: 10, color: 'black'}}>
+                  Property Name:{' '}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    marginLeft: 10,
+                    color: 'black',
+                  }}>
+                  {location_data?.SubLocationType}
+                </Text>
+              </View>
               <View style={{width: '100%', flexDirection: 'row'}}>
                 <Text style={{fontSize: 16, marginLeft: 10, color: 'black'}}>
                   Sity Type:{' '}
@@ -389,13 +431,16 @@ const BottomSheetView = ({
                   alignItems: 'flex-end',
                   paddingRight: 8,
                 }}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onShare}>
                   <Text>
                     <EvilIcons name="share-apple" size={28} color="#007aff" />
                   </Text>
                   {/* <AntDesign name="upload" size={24} color="#007aff" /> */}
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setCertifiedModal(true);
+                  }}>
                   <View style={{width: 22, height: 22, marginRight: 2}}>
                     <Image
                       source={require('../../images/Icons/checkedd.png')}

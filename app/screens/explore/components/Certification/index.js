@@ -10,14 +10,18 @@ import React from 'react';
 import {Modal, Portal} from 'react-native-paper';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {certifiedImg} from '../../../../components/imageLink';
+import TextView from './TextView';
+import SimpleButton from './../../../../components/button/SimpleButton';
 const {width, height} = Dimensions.get('screen');
 
-const Certification = () => {
+const Certification = ({navigation, certifiedModal, setCertifiedModal}) => {
   return (
     <Portal>
       <Modal
-        visible={true}
-        onDismiss={() => {}}
+        visible={certifiedModal}
+        onDismiss={() => {
+          setCertifiedModal(false);
+        }}
         contentContainerStyle={styles.containerStyle}>
         <View
           style={{
@@ -50,15 +54,45 @@ const Certification = () => {
           <TouchableOpacity
             style={styles.closeView}
             onPress={() => {
-              navigation.navigate('Menu');
+              setCertifiedModal(false);
             }}>
             <Entypo name="cross" size={20} color="white" />
           </TouchableOpacity>
         </View>
         <View style={{width: '100%', height: '75%'}}>
-          <Text></Text>
-          <Text></Text>
-          <Text></Text>
+          <TextView
+            title="Engineer Assigned: "
+            value="Not Assigned"
+            color="#2297e7"
+          />
+          <TextView title="Last certified: " value="TBD" color="black" />
+          <TextView
+            title="Last certified By: "
+            value="Not Assigned"
+            color="black"
+          />
+          <TextView title="Next Certification " value="TBD" color="black" />
+          <View
+            style={{
+              width: '100%',
+              height: 40,
+              // backgroundColor: 'pink',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <SimpleButton title="Report" />
+            {/* <View
+              style={{
+                width: 80,
+                height: 30,
+                backgroundColor: '#d1e7ff',
+                borderRadius: 7,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{color: '#3573a6'}}>Report</Text>
+            </View> */}
+          </View>
         </View>
       </Modal>
     </Portal>
