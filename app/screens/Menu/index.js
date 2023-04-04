@@ -92,7 +92,7 @@ const Menu = ({navigation, getContacts}) => {
                 width: '100%',
                 height: '100%',
                 resizeMode: 'center',
-                tintColor: appearanceType == 'dark' ? 'white' : 'white',
+                tintColor: appearanceType == 'dark' ? 'white' : null,
               }}
             />
           </View>
@@ -105,7 +105,11 @@ const Menu = ({navigation, getContacts}) => {
             name="Akash Brahme"
           />
           <MenuItem onPress={onPress} src={Imagg.filter} title="Filters" />
-          <MenuItem onPress={contact} src={Imagg.saved} title="Saved" />
+          <MenuItem
+            onPress={Appearance}
+            src={Imagg.Appearence}
+            title="Appearance"
+          />
           <MenuItem onPress={contact} src={Imagg.contact} title="Contacts" />
           <MenuItem
             onPress={() => {
@@ -114,6 +118,9 @@ const Menu = ({navigation, getContacts}) => {
             src={Imagg.Help}
             title="Help Desk"
           />
+          <MenuItem onPress={contact} src={Imagg.saved} title="Saved" />
+          <MenuItem onPress={stats} src={Imagg.share} title="Share App" />
+
           <MenuItem
             onPress={() => {
               navigation.navigate('Legal');
@@ -121,13 +128,7 @@ const Menu = ({navigation, getContacts}) => {
             src={Imagg.setting}
             title="Legal"
           />
-          <MenuItem
-            onPress={Appearance}
-            src={Imagg.Appearence}
-            title="Appearance"
-          />
 
-          <MenuItem onPress={stats} src={Imagg.share} title="Share App" />
           <MenuItem onPress={stats} src={Imagg.logout} title="Logout" />
         </View>
       </SafeAreaView>
