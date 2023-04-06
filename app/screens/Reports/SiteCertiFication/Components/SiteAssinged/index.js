@@ -25,6 +25,8 @@ const dataOne = [
   {quarter: 5, earnings: 608},
 ];
 const SiteAssinged = () => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+
   const {SiteAnlysis} = useSelector(state => state.SiteAnlysis);
   const {SiteCirtificaionOne} = useSelector(state => state.SiteAnlysis);
   const {SiteCirtificaionTwo} = useSelector(state => state.SiteAnlysis);
@@ -36,7 +38,13 @@ const SiteAssinged = () => {
   return (
     <>
       {/* ========================== */}
-      <Text style={styles.titleText}>Site Assigned</Text>
+      <Text
+        style={{
+          ...styles.titleText,
+          color: appearanceType == 'dark' ? 'white' : 'black',
+        }}>
+        Site Assigned
+      </Text>
 
       <VictoryChart width={300} height={300}>
         <VictoryAxis
@@ -79,6 +87,5 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginLeft: 10,
     marginTop: 10,
-    color: 'black',
   },
 });

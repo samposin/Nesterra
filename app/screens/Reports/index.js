@@ -88,12 +88,49 @@ const Reports = ({getReport}) => {
         </TouchableOpacity>
         {/* =============== button view=========== */}
       </View>
+      <View
+        style={{
+          width: '100%',
+          height: 40,
+          // backgroundColor: 'pink',
+          paddingHorizontal: 15,
+          marginTop: 10,
+        }}>
+        <View
+          style={{
+            width: '100%',
+            height: 40,
+            backgroundColor: '#f2f2f7',
+            flexDirection: 'row',
+            borderRadius: 5,
+            shadowColor: 'black',
+            borderWidth: 2,
+          }}>
+          <View
+            style={{
+              width: '10%',
+              height: '100%',
+              // backgroundColor: 'pink',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <EvilIcons name="search" size={30} color="black" />
+          </View>
+          <View
+            style={{
+              width: '90%',
+              height: '100%',
+              justifyContentce: 'center',
+            }}>
+            <TextInput placeholder="Search Site ID" />
+          </View>
+        </View>
+      </View>
       <View style={{width: '100%', paddingHorizontal: 10}}>
         <View
-          style={[
-            styles.buttonView,
-            {backgroundColor: appearanceType == 'dark' ? '#1c1c1f' : 'black'},
-          ]}>
+          style={
+            appearanceType == 'dark' ? styles.buttonView1 : styles.buttonView
+          }>
           <ButtonView
             Title="Assets & Expenses"
             select={select}
@@ -118,44 +155,6 @@ const Reports = ({getReport}) => {
               setSeleted('site');
             }}
           />
-        </View>
-      </View>
-
-      <View
-        style={{
-          width: '100%',
-          height: 40,
-          // backgroundColor: 'pink',
-          paddingHorizontal: 15,
-          marginTop: 10,
-        }}>
-        <View
-          style={{
-            width: '100%',
-            height: 40,
-            backgroundColor: '#f2f2f7',
-            flexDirection: 'row',
-            borderRadius: 5,
-            shadowColor: 'black',
-          }}>
-          <View
-            style={{
-              width: '10%',
-              height: '100%',
-              // backgroundColor: 'pink',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <EvilIcons name="search" size={30} color="black" />
-          </View>
-          <View
-            style={{
-              width: '90%',
-              height: '100%',
-              justifyContentce: 'center',
-            }}>
-            <TextInput placeholder="Search Site ID" />
-          </View>
         </View>
       </View>
 
@@ -194,6 +193,16 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 40,
     backgroundColor: '#d6d6d8',
+    marginTop: 10,
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+    padding: 4,
+    borderRadius: 10,
+  },
+  buttonView1: {
+    width: '100%',
+    height: 40,
+    backgroundColor: '#1c1c1f',
     marginTop: 10,
     flexDirection: 'row',
     // justifyContent: 'space-between',

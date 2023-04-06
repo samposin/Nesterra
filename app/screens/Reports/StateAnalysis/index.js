@@ -26,6 +26,8 @@ const dataOne = [
   {quarter: 5, earnings: 608},
 ];
 const StateAnalysis = () => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+
   const {SiteAnlysis} = useSelector(state => state.SiteAnlysis);
   const {SiteCirtificaionOne} = useSelector(state => state.SiteAnlysis);
   const {SiteCirtificaionTwo} = useSelector(state => state.SiteAnlysis);
@@ -61,7 +63,13 @@ const StateAnalysis = () => {
           <SimpleButton title="See Sites" />
         </View>
       </View>
-      <Text style={styles.titleText}>Sites (By City)</Text>
+      <Text
+        style={{
+          ...styles.titleText,
+          color: appearanceType == 'dark' ? 'white' : 'black',
+        }}>
+        Sites (By City)
+      </Text>
 
       <VictoryChart width={300} height={300}>
         <VictoryAxis
@@ -92,7 +100,13 @@ const StateAnalysis = () => {
           }
         />
       </VictoryChart>
-      <Text style={styles.titleText}>Monthly Spend (By State)</Text>
+      <Text
+        style={{
+          ...styles.titleText,
+          color: appearanceType == 'dark' ? 'white' : 'black',
+        }}>
+        Monthly Spend (By State)
+      </Text>
 
       <VictoryChart width={300} height={300}>
         <VictoryAxis
@@ -127,10 +141,8 @@ const StateAnalysis = () => {
       </VictoryChart>
       <Text
         style={{
-          fontSize: 20,
-          fontWeight: '700',
-          marginLeft: 10,
-          marginTop: 10,
+          ...styles.titleText,
+          color: appearanceType == 'dark' ? 'white' : 'black',
         }}>
         Circiits (By State)
       </Text>
@@ -187,6 +199,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginLeft: 10,
     marginTop: 10,
+    color: 'black',
     // justifyContent:'center'
   },
 });

@@ -12,8 +12,11 @@ import {useSelector} from 'react-redux';
 
 import {VictoryPie, VictoryLabel} from 'victory-native';
 import CountView from '../../../Components/CountView';
+import {color} from 'react-native-reanimated';
 
 const SiteActionStatus = ({HeaderText, colours}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+
   const {SiteAnlysis} = useSelector(state => state.SiteAnlysis);
   const {circuitCountPie} = useSelector(state => state.SiteAnlysis);
 
@@ -46,7 +49,13 @@ const SiteActionStatus = ({HeaderText, colours}) => {
           borderRadius: 15,
         }}>
         <View>
-          <Text style={styles.upperText}>{HeaderText}</Text>
+          <Text
+            style={{
+              ...styles.upperText,
+              color: appearanceType == 'dark' ? 'white' : 'blakc',
+            }}>
+            {HeaderText}
+          </Text>
         </View>
         <View style={{...styles.upperView}}>
           <View style={styles.leftView}>
@@ -124,7 +133,7 @@ const styles = StyleSheet.create({
   },
   upperText: {
     fontSize: 20,
-    color: 'black',
+
     fontWeight: 'bold',
     marginLeft: 20,
   },

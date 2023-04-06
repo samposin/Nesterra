@@ -67,7 +67,6 @@ const Profile = ({navigation}) => {
         style={{
           width: '100%',
           height: 1,
-
           paddingHorizontal: 10,
         }}>
         <View

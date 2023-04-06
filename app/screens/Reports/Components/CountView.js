@@ -1,11 +1,20 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {useSelector} from 'react-redux';
 
 const CountView = ({color, title}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+
   return (
     <View style={styles.header1}>
       <View style={{width: 10, height: 10, backgroundColor: color}}></View>
-      <Text style={styles.header1Text}>{title}</Text>
+      <Text
+        style={{
+          ...styles.header1Text,
+          color: appearanceType == 'dark' ? 'white' : 'black',
+        }}>
+        {title}
+      </Text>
     </View>
   );
 };
