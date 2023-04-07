@@ -37,6 +37,7 @@ import Legal from './../screens/Legal/index';
 
 import AppearanceScreen from './../screens/Appearance/index';
 import HelpDesk from '../screens/HelpDesk/index.js';
+import Saved from './../screens/saved/index';
 
 const Stack = createNativeStackNavigator();
 
@@ -91,6 +92,7 @@ const MainStack = () => {
 
         <Stack.Screen name="HelpDesk" component={HelpDesk} />
         <Stack.Screen name="Legal" component={Legal} />
+        <Stack.Screen name="Saved" component={Saved} />
       </Stack.Navigator>
     </NavigationContainer>
   );

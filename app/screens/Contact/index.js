@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, Text, View, TextInput, FlatList} from 'react-native';
 import React, {useMemo, useState, useEffect} from 'react';
 
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -21,7 +21,8 @@ const Contact = ({navigation, getContacts}) => {
   const dipatch = useDispatch();
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
   const {item} = useSelector(state => state.Contacts);
-  console.log(item);
+  // console.log(item);
+  const {appearanceType} = useSelector(state => state.appearanceType);
 
   const indivisual = () => {
     dipatch({
@@ -64,7 +65,7 @@ const Contact = ({navigation, getContacts}) => {
                     style={{
                       fontWeight: 'bold',
                       fontSize: 25,
-                      color: 'black',
+                      color: appearanceType == 'dark' ? 'white' : 'black',
                       marginLeft: 8,
                     }}>
                     Contacts
@@ -78,15 +79,22 @@ const Contact = ({navigation, getContacts}) => {
                     <Entypo name="cross" size={20} color="white" />
                   </TouchableOpacity>
                 </View>
-                <View style={styles.inputWraper}>
+                <View
+                  style={{
+                    ...styles.inputWraper,
+                    borderColor: appearanceType == 'dark' ? 'white' : 'black',
+                  }}>
                   <View style={styles.inputView}>
-                    {/* <BottomSheetTextInput
-                  placeholder="Search here"
-                  style={{marginLeft: 5}}
-                /> */}
+                    <TextInput
+                      placeholderTextColor={
+                        appearanceType == 'dark' ? 'white' : 'black'
+                      }
+                      placeholder="Search here"
+                      style={{marginLeft: 5}}
+                    />
                   </View>
                   <View style={styles.searchIconVie}>
-                    <AntDesign name="search1" size={24} color="black" />
+                    {/* <AntDesign name="search1" size={24} color="black" /> */}
                   </View>
                 </View>
                 <View style={styles.radioButtonView}>
@@ -169,7 +177,13 @@ const Contact = ({navigation, getContacts}) => {
                             ...styles.headerTitle,
                             width: '25%',
                           }}>
-                          <Text style={{color: 'black'}}>{item.value}</Text>
+                          <Text
+                            style={{
+                              color:
+                                appearanceType == 'dark' ? 'white' : 'black',
+                            }}>
+                            {item.value}
+                          </Text>
                         </View>
                         <View
                           style={{
@@ -178,7 +192,11 @@ const Contact = ({navigation, getContacts}) => {
                             borderLeftWidth: 0.5,
                             borderLeftColor: '#b0b3b7',
                           }}>
-                          <Text style={{color: 'black'}}>
+                          <Text
+                            style={{
+                              color:
+                                appearanceType == 'dark' ? 'white' : 'black',
+                            }}>
                             {item.Department}
                           </Text>
                         </View>
@@ -189,7 +207,13 @@ const Contact = ({navigation, getContacts}) => {
                             borderLeftWidth: 0.5,
                             borderLeftColor: '#b0b3b7',
                           }}>
-                          <Text style={{color: 'black'}}>{item.Title}</Text>
+                          <Text
+                            style={{
+                              color:
+                                appearanceType == 'dark' ? 'white' : 'black',
+                            }}>
+                            {item.Title}
+                          </Text>
                         </View>
                       </TouchableOpacity>
                     );
@@ -247,7 +271,7 @@ const styles = StyleSheet.create({
   inputWraper: {
     width: '90%',
     height: 50,
-    borderColor: 'black',
+
     borderWidth: 1,
     borderRadius: 5,
     alignSelf: 'center',

@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
   Image,
+  Share,
 } from 'react-native';
 import React, {useRef, useMemo, useState} from 'react';
 
@@ -34,13 +35,13 @@ const Menu = ({navigation, getContacts}) => {
   const bottomRef = useRef(null);
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
   const [contactLoder, seTcontactLoder] = useState(true);
-  const onPress = () => {
-    navigation.navigate('MapTypeAndFilter');
+  const onPress = text => {
+    navigation.navigate(text);
   };
-  const contact = () => {
+  const contact = text => {
     // getContacts(seTcontactLoder);
     // bottomRef.current.snapToIndex(2);
-    navigation.navigate('Contact');
+    navigation.navigate(text);
   };
   const stats = () => {
     navigation.navigate('Stats');
@@ -50,6 +51,25 @@ const Menu = ({navigation, getContacts}) => {
   };
   const Appearance = () => {
     navigation.navigate('Appearance');
+  };
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'React Native | A framework for building native apps using React',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
   };
   return (
     <>
@@ -104,27 +124,31 @@ const Menu = ({navigation, getContacts}) => {
             src={Imagg.profile}
             name="Akash Brahme"
           />
-          <MenuItem onPress={onPress} src={Imagg.filter} title="Filters" />
           <MenuItem
-            onPress={Appearance}
+            onPress={() => onPress('MapTypeAndFilter')}
+            src={Imagg.filter}
+            title="Filters"
+          />
+          <MenuItem
+            onPress={() => onPress('Appearance')}
             src={Imagg.Appearence}
             title="Appearance"
           />
           <MenuItem onPress={contact} src={Imagg.contact} title="Contacts" />
           <MenuItem
-            onPress={() => {
-              navigation.navigate('HelpDesk');
-            }}
+            onPress={() => onPress('HelpDesk')}
             src={Imagg.Help}
             title="Help Desk"
           />
-          <MenuItem onPress={contact} src={Imagg.saved} title="Saved" />
-          <MenuItem onPress={stats} src={Imagg.share} title="Share App" />
+          <MenuItem
+            onPress={() => onPress('Saved')}
+            src={Imagg.saved}
+            title="Saved"
+          />
+          <MenuItem onPress={onShare} src={Imagg.share} title="Share App" />
 
           <MenuItem
-            onPress={() => {
-              navigation.navigate('Legal');
-            }}
+            onPress={() => onPress('Legal')}
             src={Imagg.setting}
             title="Legal"
           />
