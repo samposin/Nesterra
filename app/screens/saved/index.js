@@ -15,6 +15,8 @@ import Details from './Details';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 const Saved = ({navigation}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+
   const {circuitItems} = useSelector(state => state.CircuitsItems);
   const {devicestItems} = useSelector(state => state.DevicesItems);
 
@@ -33,28 +35,44 @@ const Saved = ({navigation}) => {
         style={{
           width: '100%',
           height: 60,
-          borderBottomColor: 'black',
-          borderBottomWidth: 0.8,
+          borderBottomColor: appearanceType == 'dark' ? 'white' : 'black',
+          borderBottomWidth: 0.5,
 
           flexDirection: 'row',
         }}>
-        <View style={{width: '15%', height: '100%', justifyContent: 'center'}}>
+        <View style={{width: '10%', height: '100%', justifyContent: 'center'}}>
           <Image
-            style={{width: 30, height: 30, resizeMode: 'contain'}}
+            style={{
+              width: 25,
+              height: 25,
+              resizeMode: 'contain',
+              tintColor: appearanceType == 'dark' ? 'white' : 'black',
+            }}
             source={source}
           />
         </View>
         <View
           style={{
-            width: '85%',
+            width: '90%',
             height: '100%',
             flexDirection: 'row',
             alignItems: 'center',
           }}>
-          <Text style={{fontSize: 20, fontWeight: '700', color: 'black'}}>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: '700',
+              color: appearanceType == 'dark' ? 'white' : 'black',
+            }}>
             {title}
           </Text>
-          <Text style={{marginLeft: 7}}>{item} </Text>
+          <Text
+            style={{
+              marginLeft: 7,
+              color: appearanceType == 'dark' ? 'white' : 'black',
+            }}>
+            {item}{' '}
+          </Text>
         </View>
       </TouchableOpacity>
     );

@@ -87,7 +87,9 @@ const StateAnalysis = () => {
 
         <VictoryBar
           style={{
-            data: {fill: '#017f01', width: 25},
+            tickLabels: {color: 'red'},
+            axisLabel: {fontSize: 5, padding: 30},
+            data: {fill: '#017f01', width: 25, tickLabels: {fill: 'red'}},
           }}
           animate={{duration: 100}}
           horizontal
@@ -96,7 +98,11 @@ const StateAnalysis = () => {
           y="circuits"
           labels={({datum}) => `${datum._y}`}
           labelComponent={
-            <VictoryLabel textAnchor="end" dx={-10} style={[{fill: 'white'}]} />
+            <VictoryLabel
+              textAnchor="end"
+              dx={-10}
+              style={[{fill: 'white', color: 'red'}]}
+            />
           }
         />
       </VictoryChart>

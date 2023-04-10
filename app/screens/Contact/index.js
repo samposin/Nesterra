@@ -126,7 +126,7 @@ const Contact = ({navigation, getContacts}) => {
                 <View
                   style={{
                     width: '100%',
-                    height: 50,
+                    height: 35,
                     marginTop: 10,
                     backgroundColor: '#0078fb',
                     flexDirection: 'row',
@@ -143,7 +143,7 @@ const Contact = ({navigation, getContacts}) => {
                     style={{
                       ...styles.headerTitle,
                       width: '40%',
-                      borderLeftWidth: 2,
+                      borderLeftWidth: 0.5,
                     }}>
                     <Text style={{color: 'white'}}> Department</Text>
                   </View>
@@ -151,7 +151,7 @@ const Contact = ({navigation, getContacts}) => {
                     style={{
                       ...styles.headerTitle,
                       width: '35%',
-                      borderLeftWidth: 2,
+                      borderLeftWidth: 0.5,
                     }}>
                     <Text style={{color: 'white'}}>Title</Text>
                   </View>

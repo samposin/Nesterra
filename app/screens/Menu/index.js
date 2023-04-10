@@ -134,7 +134,11 @@ const Menu = ({navigation, getContacts}) => {
             src={Imagg.Appearence}
             title="Appearance"
           />
-          <MenuItem onPress={contact} src={Imagg.contact} title="Contacts" />
+          <MenuItem
+            onPress={() => onPress('Contact')}
+            src={Imagg.contact}
+            title="Contacts"
+          />
           <MenuItem
             onPress={() => onPress('HelpDesk')}
             src={Imagg.Help}

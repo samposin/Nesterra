@@ -13,6 +13,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import {useSelector} from 'react-redux';
 
 const HelpDesk = ({navigation}) => {
+  const [type, setType] = useState('Ask a Question');
   const {appearanceType} = useSelector(state => state.appearanceType);
 
   const [isCheck, setisCheck] = useState(false);
@@ -58,12 +59,13 @@ const HelpDesk = ({navigation}) => {
                 setisCheck(false);
               }}
               style={{
-                width: 100,
-                height: 100,
+                width: 200,
+                height: 200,
                 backgroundColor: 'yellow',
                 position: 'absolute',
-                right: 0,
-                top: 0,
+                right: -20,
+                top: 10,
+                zIndex: 1000,
               }}></TouchableOpacity>
           ) : null}
 
@@ -73,7 +75,7 @@ const HelpDesk = ({navigation}) => {
                 ? styles.askQuestionText
                 : styles.askQuestionText1
             }>
-            Ask a Question
+            {type}
           </Text>
           <TouchableOpacity
             onPress={() => {
@@ -97,7 +99,8 @@ const HelpDesk = ({navigation}) => {
             style={{
               height: '100%',
               width: '100%',
-
+              borderRadius: 5,
+              color: appearanceType === 'dark' ? 'white' : 'black',
               backgroundColor: appearanceType === 'dark' ? 'black' : 'white',
             }}
           />
@@ -118,8 +121,10 @@ const HelpDesk = ({navigation}) => {
             numberOfLines={5}
             placeholderTextColor={{textAlign: 'top'}}
             style={{
+              borderRadius: 5,
               height: '100%',
               width: '100%',
+              color: appearanceType === 'dark' ? 'white' : 'black',
               justifyContent: 'flex-start',
               alignItems: 'flex-start',
               verticalAlign: 'top',
@@ -188,7 +193,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     marginLeft: 15,
-    color: 'white',
+    color: 'black',
   },
   closeView: {
     width: 20,
