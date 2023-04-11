@@ -10,6 +10,7 @@ import {
 import React from 'react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import Entypo from 'react-native-vector-icons/Entypo';
+import Feather from 'react-native-vector-icons/Feather';
 import TextItemView from './Components/TextItemView';
 
 const Profile = ({navigation}) => {
@@ -29,6 +30,21 @@ const Profile = ({navigation}) => {
       </View>
       <View style={styles.profileView}>
         <View style={styles.imageView}>
+          <View
+            style={{
+              width: 30,
+              height: 30,
+              borderRadius: 15,
+              backgroundColor: 'black',
+              position: 'absolute',
+              bottom: 0,
+              right: 5,
+              justifyContent: 'center',
+              alignItems: 'center',
+              zIndex: 20,
+            }}>
+            <Feather name="edit-2" size={15} color="white" />
+          </View>
           <Image
             source={require('../../images/Icons/user.png')}
             style={styles.userImage}
@@ -114,8 +130,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imageView: {
-    width: scale(100),
-    height: scale(100),
+    width: scale(80),
+    height: scale(80),
     justifyContent: 'center',
     alignItems: 'center',
   },

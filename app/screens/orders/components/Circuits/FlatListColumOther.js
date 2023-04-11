@@ -9,7 +9,7 @@ const FlatListColumOther = ({item, title}) => {
         width: '20%',
         justifyContent: 'center',
         borderLeftColor: 'white',
-        borderLeftWidth: 2,
+        borderLeftWidth: 1,
       }}>
       <TouchableOpacity
         onLongPress={() => {

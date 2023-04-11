@@ -38,20 +38,10 @@ const Menu = ({navigation, getContacts}) => {
   const onPress = text => {
     navigation.navigate(text);
   };
-  const contact = text => {
-    // getContacts(seTcontactLoder);
-    // bottomRef.current.snapToIndex(2);
-    navigation.navigate(text);
-  };
   const stats = () => {
     navigation.navigate('Stats');
   };
-  const setting = () => {
-    navigation.navigate('MenuSetting');
-  };
-  const Appearance = () => {
-    navigation.navigate('Appearance');
-  };
+
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -120,7 +110,7 @@ const Menu = ({navigation, getContacts}) => {
 
         <View style={{paddingHorizontal: 15}}>
           <ProfileItem
-            onPress={onPress}
+            onPress={() => onPress('Profile')}
             src={Imagg.profile}
             name="Akash Brahme"
           />
@@ -157,7 +147,13 @@ const Menu = ({navigation, getContacts}) => {
             title="Legal"
           />
 
-          <MenuItem onPress={stats} src={Imagg.logout} title="Logout" />
+          <MenuItem
+            onPress={() => {
+              //
+            }}
+            src={Imagg.logout}
+            title="Logout"
+          />
         </View>
       </SafeAreaView>
       <BottomSheetView

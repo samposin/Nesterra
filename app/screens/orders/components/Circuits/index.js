@@ -21,8 +21,11 @@ import NoDataViewFlatList from '../../../../components/NoDataViewFlatList';
 import VendorButtonSheet from './VendorButtonSheet';
 import FlatListColumOther from './FlatListColumOther';
 import FlatListColum from './FlatListColum';
+import AddButton from '../../../../components/button/AddButton';
+import {useNavigation} from '@react-navigation/native';
 
 const Circuits = ({get_orders_for_tab, get_order_details}) => {
+  const navigation = useNavigation();
   const {ordersForTab} = useSelector(state => state.ordersForTab);
   const dispatch = useDispatch();
   const cirCuitRef = useRef(null);
@@ -176,6 +179,13 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
             bottomSheetLodder={bottomSheetLodder}
             vendorRef={vendorRef}
             setSwitchView={setSwitchView}
+          />
+
+          <AddButton
+            position={110}
+            onPress={() => {
+              navigation.navigate('AddOrder');
+            }}
           />
         </>
       )}
