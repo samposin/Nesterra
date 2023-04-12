@@ -9,6 +9,12 @@ import {
 import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Button from './Components/Button';
+import {
+  CircleView,
+  CircleView1,
+  CircleView2,
+  ResetView,
+} from './Components/CircleView';
 
 const AddOrder = ({navigation}) => {
   const [buttonType, setButtonType] = useState('Circuits');
@@ -25,7 +31,7 @@ const AddOrder = ({navigation}) => {
         <TouchableOpacity
           style={styles.closeView}
           onPress={() => {
-            navigation.navigate('Menu');
+            navigation.navigate('Orders');
           }}>
           <Entypo name="cross" size={20} color="white" />
         </TouchableOpacity>
@@ -57,86 +63,18 @@ const AddOrder = ({navigation}) => {
       </View>
       <View style={styles.stepView}>
         <View style={styles.stepViewIner}>
-          <View style={styles.view1}>
-            <View
-              style={{
-                width: 25,
-                height: 25,
-                borderRadius: 12.5,
-                backgroundColor: '#3478f6',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 18, fontWeight: 'bold'}}>1</Text>
-            </View>
-          </View>
-          <View style={styles.view2}>
-            <View
-              style={{
-                width: '100%',
-                height: 2,
-                backgroundColor: '#aaaaaa',
-              }}></View>
-          </View>
-          <View style={styles.view1}>
-            <View
-              style={{
-                width: 25,
-                height: 25,
-                borderRadius: 12.5,
-                backgroundColor: '#3478f6',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 13, fontWeight: 'bold', color: 'white'}}>
-                2
-              </Text>
-            </View>
-          </View>
-          <View style={styles.view2}>
-            <View
-              style={{
-                width: '100%',
-                height: 2,
-                backgroundColor: '#aaaaaa',
-              }}></View>
-          </View>
-          <View style={styles.view1}>
-            <View
-              style={{
-                width: 25,
-                height: 25,
-                borderRadius: 12.5,
-                backgroundColor: '#3478f6',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 18, fontWeight: 'bold'}}>3</Text>
-            </View>
-          </View>
-          <View style={styles.view2}>
-            <View
-              style={{
-                width: '100%',
-                height: 2,
-                backgroundColor: '#aaaaaa',
-              }}></View>
-          </View>
-          <View style={styles.view1}>
-            <View
-              style={{
-                width: 25,
-                height: 25,
-                borderRadius: 12.5,
-                backgroundColor: '#3478f6',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{fontSize: 18, fontWeight: 'bold'}}>4</Text>
-            </View>
-          </View>
+          <CircleView title="1" />
+          <CircleView1 />
+
+          <CircleView title="2" />
+          <CircleView1 />
+          <CircleView title="3" />
+          <CircleView1 />
+          <CircleView title="4" />
         </View>
       </View>
+      <CircleView2 />
+      <ResetView />
     </SafeAreaView>
   );
 };
@@ -151,12 +89,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 10,
   },
   addOrderText: {
     fontSize: 25,
     fontWeight: 'bold',
     color: 'black',
-    marginLeft: 15,
   },
   closeView: {
     width: 20,

@@ -153,13 +153,21 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
           <>
             {/* ============TOOGLE=========== */}
             {switchView ? (
-              <ToggleView
-                name="Circuits"
-                size={'medium'}
-                length={ordersForTab.length}
-                alldata={allData}
-                activeFilter={fiterCircuitsActive}
-              />
+              <>
+                <ToggleView
+                  name="Circuits"
+                  size={'medium'}
+                  length={ordersForTab.length}
+                  alldata={allData}
+                  activeFilter={fiterCircuitsActive}
+                />
+                <AddButton
+                  position={110}
+                  onPress={() => {
+                    navigation.navigate('AddOrder');
+                  }}
+                />
+              </>
             ) : null}
             {/* ============TOOGLE=========== */}
           </>
@@ -179,13 +187,6 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
             bottomSheetLodder={bottomSheetLodder}
             vendorRef={vendorRef}
             setSwitchView={setSwitchView}
-          />
-
-          <AddButton
-            position={110}
-            onPress={() => {
-              navigation.navigate('AddOrder');
-            }}
           />
         </>
       )}

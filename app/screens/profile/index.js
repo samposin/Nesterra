@@ -7,13 +7,15 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useRef} from 'react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 import TextItemView from './Components/TextItemView';
+import TakeImageBottomSheet from './Components/TakeImageBottomSheet';
 
 const Profile = ({navigation}) => {
+  const imageAddRef = useRef(null);
   return (
     <SafeAreaView style={{flex: 1, marginTop: StatusBar.currentHeight}}>
       <View style={styles.mainView}>
@@ -30,7 +32,10 @@ const Profile = ({navigation}) => {
       </View>
       <View style={styles.profileView}>
         <View style={styles.imageView}>
-          <View
+          <TouchableOpacity
+            onPress={() => {
+              imageAddRef.current.snapToIndex(2);
+            }}
             style={{
               width: 30,
               height: 30,
@@ -44,7 +49,7 @@ const Profile = ({navigation}) => {
               zIndex: 20,
             }}>
             <Feather name="edit-2" size={15} color="white" />
-          </View>
+          </TouchableOpacity>
           <Image
             source={require('../../images/Icons/user.png')}
             style={styles.userImage}
@@ -92,6 +97,7 @@ const Profile = ({navigation}) => {
             borderTopWidth: 0.5,
           }}></View>
       </View>
+      <TakeImageBottomSheet imageAddRef={imageAddRef} />
     </SafeAreaView>
   );
 };
