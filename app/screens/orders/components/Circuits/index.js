@@ -156,16 +156,10 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
               <>
                 <ToggleView
                   name="Circuits"
-                  size={'medium'}
+                  // size={'medium'}
                   length={ordersForTab.length}
                   alldata={allData}
                   activeFilter={fiterCircuitsActive}
-                />
-                <AddButton
-                  position={110}
-                  onPress={() => {
-                    navigation.navigate('AddOrder');
-                  }}
                 />
               </>
             ) : null}

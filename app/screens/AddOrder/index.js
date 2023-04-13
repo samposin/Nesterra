@@ -8,13 +8,16 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
+
 import Button from './Components/Button';
 import {
   CircleView,
   CircleView1,
   CircleView2,
+  CircleViewCircle,
   ResetView,
 } from './Components/CircleView';
+import InputView from './Components/InputView';
 
 const AddOrder = ({navigation}) => {
   const [buttonType, setButtonType] = useState('Circuits');
@@ -24,7 +27,8 @@ const AddOrder = ({navigation}) => {
   return (
     <SafeAreaView
       style={{
-        marginTop: StatusBar.currentHeight,
+        // marginTop: StatusBar.currentHeight,
+        marginTop: 25,
       }}>
       <View style={styles.addOrderView}>
         <Text style={styles.addOrderText}>AddOrder</Text>
@@ -66,15 +70,51 @@ const AddOrder = ({navigation}) => {
           <CircleView title="1" />
           <CircleView1 />
 
-          <CircleView title="2" />
+          <CircleViewCircle title="2" />
           <CircleView1 />
-          <CircleView title="3" />
+          <CircleViewCircle title="3" />
           <CircleView1 />
-          <CircleView title="4" />
+          <CircleViewCircle title="4" />
         </View>
       </View>
       <CircleView2 />
       <ResetView />
+      <InputView />
+      <View style={styles.endbutton}>
+        <View
+          style={{
+            width: '40%',
+            height: 32,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              color: '#3478f6',
+            }}>
+            Save Draft
+          </Text>
+        </View>
+        <View
+          style={{
+            width: '40%',
+            height: 32,
+            backgroundColor: '#dbf1dc',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              color: '#3478f6',
+            }}>
+            Next
+          </Text>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -103,15 +143,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#0472ef',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 20,
   },
   buttonView: {
     width: '100%',
     height: 40,
     alignItems: 'center',
+    paddingHorizontal: 10,
   },
   buttonView2: {
-    width: '90%',
+    width: '100%',
     flexDirection: 'row',
     backgroundColor: '#e1e1e1',
     height: '100%',
@@ -121,7 +161,7 @@ const styles = StyleSheet.create({
   stepView: {
     width: '100%',
     height: 60,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     borderTopColor: '#a8a8a8',
     borderTopWidth: 1,
     marginTop: 10,
@@ -142,5 +182,14 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  endbutton: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#fbfaf8',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 5,
   },
 });

@@ -13,7 +13,27 @@ export const CircleView = ({title}) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Text style={{fontSize: 18, fontWeight: 'bold', color: 'white'}}>
+        <Text style={{fontSize: 15, fontWeight: 'bold', color: 'white'}}>
+          {title}
+        </Text>
+      </View>
+    </View>
+  );
+};
+export const CircleViewCircle = ({title}) => {
+  return (
+    <View style={styles.view1}>
+      <View
+        style={{
+          width: 25,
+          height: 25,
+          borderRadius: 12.5,
+          borderWidth: 1.5,
+          borderColor: '#ababaf',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{fontSize: 15, fontWeight: 'bold', color: '#ababaf'}}>
           {title}
         </Text>
       </View>
@@ -74,10 +94,42 @@ export const ResetView = ({}) => {
         flexDirection: 'row',
         paddingHorizontal: 20,
       }}>
-      <View style={{width: '50%', height: '100%', justifyContent: 'center'}}>
-        <Text>New Orders</Text>
+      <View style={{width: '60%', height: '100%', justifyContent: 'center'}}>
+        <Text style={{color: 'black', fontWeight: 'bold'}}>
+          New Orders #2864
+        </Text>
       </View>
-      <View style={{width: '50%', height: '100%'}}></View>
+      <View
+        style={{
+          width: '40%',
+          height: '100%',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-around',
+        }}>
+        <View
+          style={{
+            width: 58,
+            height: 28,
+            backgroundColor: '#62bf63',
+            borderRadius: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{color: 'white', fontWeight: 'bold'}}>New</Text>
+        </View>
+        <View
+          style={{
+            width: 60,
+            height: 30,
+            backgroundColor: '#ccddf2',
+            borderRadius: 7,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{color: '#3171e9', fontWeight: 'bold'}}>Reset</Text>
+        </View>
+      </View>
     </View>
   );
 };
