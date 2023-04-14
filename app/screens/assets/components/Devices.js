@@ -37,7 +37,8 @@ import {tostalert, copyText} from '../../../components/helper';
 import DataLoder from '../../../components/lodder/DataLoder';
 import BottomSheetViewDevices from './DevicesDetails';
 import DevicesBottomSheet from './Devices/index';
-import ToggleView from './../../../components/ToggleView/index';
+import ToggleView1 from './../../../components/ToggleView/ToggleView1';
+
 import FilterButton from '../../../components/FilterButton';
 import Flatrow from './Devices/Flatrow';
 
@@ -319,7 +320,7 @@ const Devices = ({
           {/* ============TOOGLE=========== */}
           {deviveView ? (
             <>
-              <ToggleView
+              <ToggleView1
                 name="Devices"
                 size={'medium'}
                 length={deviceAllData.length}

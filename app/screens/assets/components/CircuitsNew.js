@@ -28,7 +28,7 @@ import {
 } from '../../../actions/actionType/AllCircuit';
 
 import SecondRow from './SecondRow';
-import ToggleView from './../../../components/ToggleView/index';
+import ToggleView1 from './../../../components/ToggleView/ToggleView1';
 import TableHeaderFirstColum from './../../../components/TableHeaderFirstColum';
 import TableHeaderOtherColum from './../../../components/TableHeaderOtherColum/index';
 import NoDataViewFlatList from '../../../components/NoDataViewFlatList';
@@ -287,7 +287,7 @@ const CircuitsNew = ({
           {/* ============TOOGLE=========== */}
           {switchView ? (
             <>
-              <ToggleView
+              <ToggleView1
                 name="Circuits"
                 size={'medium'}
                 length={allCircuit.length}
