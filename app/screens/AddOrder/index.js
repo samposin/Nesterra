@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   StatusBar,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -30,91 +31,93 @@ const AddOrder = ({navigation}) => {
         // marginTop: StatusBar.currentHeight,
         marginTop: 25,
       }}>
-      <View style={styles.addOrderView}>
-        <Text style={styles.addOrderText}>AddOrder</Text>
-        <TouchableOpacity
-          style={styles.closeView}
-          onPress={() => {
-            navigation.navigate('Orders');
-          }}>
-          <Entypo name="cross" size={20} color="white" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.buttonView}>
-        <View style={styles.buttonView2}>
-          <Button
-            title="Circuits"
-            buttonType={buttonType}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.addOrderView}>
+          <Text style={styles.addOrderText}>AddOrder</Text>
+          <TouchableOpacity
+            style={styles.closeView}
             onPress={() => {
-              setButtonType('Circuits');
-            }}
-          />
-          <Button
-            title="Devices"
-            buttonType={buttonType}
-            onPress={() => {
-              setButtonType('Devices');
-            }}
-          />
-          <Button
-            title="Equinix"
-            buttonType={buttonType}
-            onPress={() => {
-              setButtonType('Equinix');
-            }}
-          />
+              navigation.navigate('Orders');
+            }}>
+            <Entypo name="cross" size={20} color="white" />
+          </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.stepView}>
-        <View style={styles.stepViewIner}>
-          <CircleView title="1" />
-          <CircleView1 />
+        <View style={styles.buttonView}>
+          <View style={styles.buttonView2}>
+            <Button
+              title="Circuits"
+              buttonType={buttonType}
+              onPress={() => {
+                setButtonType('Circuits');
+              }}
+            />
+            <Button
+              title="Devices"
+              buttonType={buttonType}
+              onPress={() => {
+                setButtonType('Devices');
+              }}
+            />
+            <Button
+              title="Equinix"
+              buttonType={buttonType}
+              onPress={() => {
+                setButtonType('Equinix');
+              }}
+            />
+          </View>
+        </View>
+        <View style={styles.stepView}>
+          <View style={styles.stepViewIner}>
+            <CircleView title="1" />
+            <CircleView1 />
 
-          <CircleViewCircle title="2" />
-          <CircleView1 />
-          <CircleViewCircle title="3" />
-          <CircleView1 />
-          <CircleViewCircle title="4" />
+            <CircleViewCircle title="2" />
+            <CircleView1 />
+            <CircleViewCircle title="3" />
+            <CircleView1 />
+            <CircleViewCircle title="4" />
+          </View>
         </View>
-      </View>
-      <CircleView2 />
-      <ResetView />
-      <InputView />
-      <View style={styles.endbutton}>
-        <View
-          style={{
-            width: '40%',
-            height: 32,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 10,
-          }}>
-          <Text
+        <CircleView2 />
+        <ResetView />
+        <InputView />
+        <View style={styles.endbutton}>
+          <View
             style={{
-              fontWeight: 'bold',
-              color: '#3478f6',
+              width: '40%',
+              height: 32,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10,
             }}>
-            Save Draft
-          </Text>
-        </View>
-        <View
-          style={{
-            width: '40%',
-            height: 32,
-            backgroundColor: '#dbf1dc',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 10,
-          }}>
-          <Text
+            <Text
+              style={{
+                fontWeight: 'bold',
+                color: '#3478f6',
+              }}>
+              Save Draft
+            </Text>
+          </View>
+          <View
             style={{
-              fontWeight: 'bold',
-              color: '#3478f6',
+              width: '40%',
+              height: 32,
+              backgroundColor: '#dbf1dc',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10,
             }}>
-            Next
-          </Text>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                color: '#3478f6',
+              }}>
+              Next
+            </Text>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

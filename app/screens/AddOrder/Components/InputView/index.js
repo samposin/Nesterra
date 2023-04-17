@@ -3,7 +3,9 @@ import React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import InputTypeView from '../InputTypeView';
-
+import InputTypeView1 from '../InputTypeView/InputTypeView1';
+import {serviceType} from './../../../../utils/addOrders';
+serviceType;
 const InputView = () => {
   return (
     <View style={styles.mainView}>
@@ -23,9 +25,13 @@ const InputView = () => {
         </View>
         <InputTypeView title="2864" title2="Purpose" />
         <InputTypeView title="04/11/23" title2="Funding Source/Rc*" />
-        <InputTypeView title="Service Category" title2="Service Type" />
-        <InputTypeView title="Order Type" title2="Reason for Order" />
-        <InputTypeView title="05/26/23" title2="45" />
+        {/* <InputTypeView1 title="Service Category" title2="Service Type" /> */}
+        <InputTypeView1
+          title="Order Type"
+          title2="Reason for Order"
+          data={serviceType}
+        />
+        {/* <InputTypeView1 title="05/26/23" title2="45" /> */}
         <Text
           style={{
             fontSize: 18,
