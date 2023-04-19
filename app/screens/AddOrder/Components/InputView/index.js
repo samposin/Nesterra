@@ -4,8 +4,8 @@ import Entypo from 'react-native-vector-icons/Entypo';
 
 import InputTypeView from '../InputTypeView';
 import InputTypeView1 from '../InputTypeView/InputTypeView1';
-import {serviceType} from './../../../../utils/addOrders';
-serviceType;
+import {serviceType, OrdersTyep} from './../../../../utils/addOrders';
+
 const InputView = () => {
   return (
     <View style={styles.mainView}>

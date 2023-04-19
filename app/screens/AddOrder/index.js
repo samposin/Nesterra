@@ -19,8 +19,10 @@ import {
   ResetView,
 } from './Components/CircleView';
 import InputView from './Components/InputView';
+import {useSelector} from 'react-redux';
 
 const AddOrder = ({navigation}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
   const [buttonType, setButtonType] = useState('Circuits');
   const textChange = text => {
     setButtonType(text);
@@ -43,7 +45,14 @@ const AddOrder = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.buttonView}>
-          <View style={styles.buttonView2}>
+          <View
+            style={[
+              styles.buttonView2,
+              {
+                backgroundColor:
+                  appearanceType == 'dark' ? '#28282b' : '#3173db',
+              },
+            ]}>
             <Button
               title="Circuits"
               buttonType={buttonType}
@@ -82,6 +91,7 @@ const AddOrder = ({navigation}) => {
         <CircleView2 />
         <ResetView />
         <InputView />
+
         <View style={styles.endbutton}>
           <View
             style={{

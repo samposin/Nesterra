@@ -5,3 +5,9 @@ export const serviceType = [
   {label: 'Voice', value: 'Voice'},
   {label: 'Wireless', value: 'Wireless'},
 ];
+export const OrdersTyep = [
+  {label: 'Add', value: 'Add'},
+  {label: 'Change', value: 'Change'},
+  {label: 'Disco', value: 'Disco'},
+  {label: 'Move', value: 'Move'},
+];

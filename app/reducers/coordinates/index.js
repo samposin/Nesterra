@@ -61,6 +61,7 @@ export default (state = initialState, action) => {
     //==============SEARCH
     case SEARCH_BY_SITE_ID:
       // console.log(action.data, 'action.data');
+
       const searchData = [...state.coordinates1];
       if (action.data) {
         const newData1 = searchData.filter(function (item) {
@@ -127,6 +128,12 @@ export default (state = initialState, action) => {
       // });
       // marker[action.payload.id].isChecked = true;
       let coord = [...state.coordinates1];
+      const t0 = performance.now(); // Start the timer
+
+      // Code to be timed here
+      // ...
+
+      const t1 = performance.now(); // End the timer
 
       const fdata = coord.filter(function (item) {
         return (
@@ -134,7 +141,7 @@ export default (state = initialState, action) => {
           action.payload.HierarchyLocationType.toLowerCase()
         );
       });
-
+      console.log(`Time taken: ${t1 - t0} milliseconds`);
       return {
         ...state,
         coordinates: fdata,
