@@ -13,8 +13,10 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 import TextItemView from './Components/TextItemView';
 import TakeImageBottomSheet from './Components/TakeImageBottomSheet';
+import {useSelector} from 'react-redux';
 
 const Profile = ({navigation}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
   const imageAddRef = useRef(null);
   return (
     <SafeAreaView style={{flex: 1, marginTop: StatusBar.currentHeight}}>
@@ -40,7 +42,7 @@ const Profile = ({navigation}) => {
               width: 30,
               height: 30,
               borderRadius: 15,
-              backgroundColor: 'black',
+              backgroundColor: '#2e3635',
               position: 'absolute',
               bottom: 0,
               right: 5,
@@ -52,11 +54,18 @@ const Profile = ({navigation}) => {
           </TouchableOpacity>
           <Image
             source={require('../../images/Icons/user.png')}
-            style={styles.userImage}
+            style={{
+              ...styles.userImage,
+              tintColor: appearanceType == 'dark' ? 'white' : 'black',
+            }}
           />
         </View>
       </View>
-      <Text style={{...styles.profileText1, color: 'black'}}>
+      <Text
+        style={{
+          ...styles.profileText1,
+          color: appearanceType == 'dark' ? 'white' : 'black',
+        }}>
         Santosh Cerpenter
       </Text>
       <Text

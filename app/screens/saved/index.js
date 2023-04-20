@@ -101,7 +101,7 @@ const Saved = ({navigation}) => {
     <>
       <SafeAreaView
         style={{
-          marginTop: StatusBar.currentHeight,
+          marginTop: 28,
           flex: 1,
         }}>
         <View style={styles.container}>

@@ -1,7 +1,10 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {useSelector} from 'react-redux';
 
 const Button = ({title, buttonType, onPress}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -9,11 +12,28 @@ const Button = ({title, buttonType, onPress}) => {
       }}
       style={{
         ...styles.button1,
-        backgroundColor: title == buttonType ? '#3173db' : '#e1e1e1',
+        backgroundColor:
+          appearanceType == 'dark'
+            ? title == buttonType
+              ? '#007aff'
+              : '#28282b'
+            : title == buttonType
+            ? '#007aff'
+            : 'transparent',
+
+        // title == buttonType ? '#3173db' : '#e1e1e1',
       }}>
       <Text
         style={{
-          color: title == buttonType ? 'white' : 'black',
+          //title == buttonType ? 'white' : 'black',
+          color:
+            appearanceType == 'dark'
+              ? title == buttonType
+                ? 'white'
+                : 'white'
+              : title == buttonType
+              ? 'white'
+              : 'black',
           fontWeight: 'bold',
         }}>
         {title}

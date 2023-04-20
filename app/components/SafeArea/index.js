@@ -5,7 +5,7 @@ const SafeArea = ({children}) => {
   return (
     <SafeAreaView
       style={{
-        marginTop: StatusBar.currentHeight,
+        marginTop: 28,
       }}>
       {children}
     </SafeAreaView>

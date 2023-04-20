@@ -50,7 +50,7 @@ const AddOrder = ({navigation}) => {
               styles.buttonView2,
               {
                 backgroundColor:
-                  appearanceType == 'dark' ? '#28282b' : '#3173db',
+                  appearanceType == 'dark' ? '#1c1c1f' : '#d6d6d8',
               },
             ]}>
             <Button

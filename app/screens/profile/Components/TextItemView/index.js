@@ -1,14 +1,26 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {scale, verticalScale, moderateScale} from 'react-native-size-matters';
+import {useSelector} from 'react-redux';
 
 const TextItemView = ({leftText, rightText}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
   return (
     <View style={styles.profileText3}>
       <View style={styles.ProfileText2}>
-        <Text style={{fontSize: scale(15)}}>{leftText}</Text>
         <Text
-          style={{fontSize: scale(15), color: 'black', marginRight: scale(3)}}>
+          style={{
+            fontSize: scale(15),
+            color: appearanceType == 'dark' ? 'white' : 'black',
+          }}>
+          {leftText}
+        </Text>
+        <Text
+          style={{
+            fontSize: scale(15),
+            color: appearanceType == 'dark' ? 'white' : 'black',
+            marginRight: scale(3),
+          }}>
           {rightText}
         </Text>
       </View>

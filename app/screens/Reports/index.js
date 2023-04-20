@@ -100,10 +100,11 @@ const Reports = ({getReport}) => {
           style={{
             width: '100%',
             height: 40,
-            backgroundColor: '#f2f2f7',
+            backgroundColor: appearanceType == 'dark' ? '#010101' : null,
             flexDirection: 'row',
             borderRadius: 5,
             shadowColor: 'black',
+            borderColor: appearanceType == 'dark' ? 'white' : null,
             borderWidth: 2,
           }}>
           <View
@@ -114,7 +115,11 @@ const Reports = ({getReport}) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <EvilIcons name="search" size={30} color="black" />
+            <EvilIcons
+              name="search"
+              size={30}
+              color={appearanceType == 'dark' ? 'white' : 'black'}
+            />
           </View>
           <View
             style={{
@@ -122,7 +127,13 @@ const Reports = ({getReport}) => {
               height: '100%',
               justifyContentce: 'center',
             }}>
-            <TextInput placeholder="Search Site ID" />
+            <TextInput
+              placeholder="Search Site ID"
+              style={{}}
+              placeholderTextColor={
+                appearanceType == 'dark' ? 'white' : 'black'
+              }
+            />
           </View>
         </View>
       </View>
