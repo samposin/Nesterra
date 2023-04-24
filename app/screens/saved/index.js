@@ -190,5 +190,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 20,
+    // width: 20,
+    // height: 20,
+    // borderRadius: 10,
+    // backgroundColor: '#0472ef',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // marginRight: 20,
   },
 });
