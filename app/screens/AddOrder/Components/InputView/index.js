@@ -23,14 +23,45 @@ const InputView = () => {
             </View>
           </View>
         </View>
+        <View
+          style={{
+            width: '100%',
+            height: 37,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: 15,
+          }}>
+          <View
+            style={{
+              width: '48%',
+              height: '100%',
+            }}>
+            <InputTypeView1
+              title="Order Type"
+              title2="Reason for Order"
+              data={serviceType}
+            />
+          </View>
+          <View
+            style={{
+              width: '48%',
+              height: '100%',
+            }}>
+            <InputTypeView1
+              title="Order Type"
+              title2="Reason for Order"
+              data={serviceType}
+            />
+          </View>
+        </View>
         <InputTypeView title="2864" title2="Purpose" />
         <InputTypeView title="04/11/23" title2="Funding Source/Rc*" />
         {/* <InputTypeView1 title="Service Category" title2="Service Type" /> */}
-        <InputTypeView1
+        {/* <InputTypeView1
           title="Order Type"
           title2="Reason for Order"
           data={serviceType}
-        />
+        /> */}
         {/* <InputTypeView1 title="05/26/23" title2="45" /> */}
         <Text
           style={{

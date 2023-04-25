@@ -90,6 +90,12 @@ const AddOrder = ({navigation}) => {
         </View>
         <CircleView2 />
         <ResetView />
+        {/* <View
+          style={{
+            width: '100%',
+            height: 50,
+            backgroundColor: 'yellowgreen',
+          }}></View> */}
         <InputView />
 
         <View style={styles.endbutton}>

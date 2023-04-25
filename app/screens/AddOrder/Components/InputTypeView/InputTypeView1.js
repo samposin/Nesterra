@@ -28,61 +28,36 @@ const InputTypeView1 = ({title, title2, data}) => {
 
   return (
     <>
-      <View
-        style={{
-          width: '100%',
-          height: 37,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginTop: 15,
-        }}>
-        <View
-          style={{
-            width: '48%',
-            height: '100%',
-            borderRadius: 7,
-            borderColor: 'black',
-            borderWidth: 1,
-            justifyContent: 'center',
-            paddingHorizontal: 10,
-          }}></View>
-        <View
-          style={{
-            width: '48%',
-            height: '100%',
-          }}>
-          <View style={styles.container}>
-            {renderLabel()}
-            <Dropdown
-              style={[styles.dropdown, isFocus && {borderColor: 'black'}]}
-              placeholderStyle={styles.placeholderStyle}
-              selectedTextStyle={styles.selectedTextStyle}
-              inputSearchStyle={styles.inputSearchStyle}
-              iconStyle={styles.iconStyle}
-              data={data}
-              maxHeight={'100%'}
-              labelField="label"
-              valueField="value"
-              placeholder={!isFocus ? title : '...'}
-              searchPlaceholder="Search..."
-              value={value}
-              onFocus={() => setIsFocus(true)}
-              onBlur={() => setIsFocus(false)}
-              onChange={item => {
-                setValue(item.value);
-                setIsFocus(false);
-              }}
-              // renderLeftIcon={() => (
-              //   <AntDesign
-              //     style={styles.icon}
-              //     color={isFocus ? 'blue' : 'black'}
-              //     name="Safety"
-              //     size={20}
-              //   />
-              // )}
-            />
-          </View>
-        </View>
+      <View style={styles.container}>
+        {renderLabel()}
+        <Dropdown
+          style={[styles.dropdown, isFocus && {borderColor: 'black'}]}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={data}
+          maxHeight={'100%'}
+          labelField="label"
+          valueField="value"
+          placeholder={!isFocus ? title : '...'}
+          searchPlaceholder="Search..."
+          value={value}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onChange={item => {
+            setValue(item.value);
+            setIsFocus(false);
+          }}
+          // renderLeftIcon={() => (
+          //   <AntDesign
+          //     style={styles.icon}
+          //     color={isFocus ? 'blue' : 'black'}
+          //     name="Safety"
+          //     size={20}
+          //   />
+          // )}
+        />
       </View>
     </>
   );
