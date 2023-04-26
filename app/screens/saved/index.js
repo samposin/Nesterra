@@ -120,25 +120,25 @@ const Saved = ({navigation}) => {
           <ListItem
             source={imgg.imgAtm}
             title="ATMS"
-            item={atmsItem.length}
+            item={`(${atmsItem.length})`}
             onPress={atmsDetails}
           />
           <ListItem
             source={imgg.imgBranche}
             title="Branches"
-            item={0}
+            item={`(0)`}
             onPress={devicesDetails}
           />
           <ListItem
             source={imgg.imgCircuits}
             title="Circuits"
-            item={circuitItems.length}
+            item={`(${circuitItems.length})`}
             onPress={circuitsDetails}
           />
           <ListItem
             source={imgg.imgDevices}
             title="Devices"
-            item={devicestItems.length}
+            item={`(${devicestItems.length})`}
             onPress={devicesDetails}
           />
           <ListItem
@@ -150,7 +150,7 @@ const Saved = ({navigation}) => {
           <ListItem
             source={imgg.imgOrders}
             title="Orders"
-            item={orderItem.length}
+            item={`(${orderItem.length})`}
             onPress={OrdersDetails}
           />
           <ListItem
