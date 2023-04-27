@@ -297,5 +297,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#000000',
   },
+  // boxText: {
+  //   fontWeight: '700',
+  //   fontSize: 16,
+  //   color: '#000000',
+  // },
   ///=========Table
 });
