@@ -59,7 +59,6 @@ const data = [
   {quarter: 47, earnings: 150},
   {quarter: 48, earnings: 140},
   {quarter: 49, earnings: 120},
-  {quarter: 50, earnings: 100},
 ];
 const ChartBarView = () => {
   return (

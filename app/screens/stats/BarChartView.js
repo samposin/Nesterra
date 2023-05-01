@@ -11,5 +11,3 @@ const BarchartView = () => {
 };
 
 export default BarchartView;
-
-const styles = StyleSheet.create({});

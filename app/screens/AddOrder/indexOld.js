@@ -20,26 +20,12 @@ import {
 } from './Components/CircleView';
 import InputView from './Components/InputView';
 import {useSelector} from 'react-redux';
-import Circuits from './Components/Circuits';
-import Devices from './Components/Devices';
-import Equinix from './Components/Equinix';
 
 const AddOrder = ({navigation}) => {
   const {appearanceType} = useSelector(state => state.appearanceType);
   const [buttonType, setButtonType] = useState('Circuits');
   const textChange = text => {
     setButtonType(text);
-  };
-  const ranDerView = () => {
-    switch (true) {
-      case buttonType === 'Circuits':
-        return <Circuits />;
-
-      case buttonType === 'Devices':
-        return <Devices />;
-      case buttonType === 'Equinix':
-        return <Equinix />;
-    }
   };
   return (
     <SafeAreaView
@@ -90,7 +76,63 @@ const AddOrder = ({navigation}) => {
             />
           </View>
         </View>
-        {ranDerView()}
+        <View style={styles.stepView}>
+          <View style={styles.stepViewIner}>
+            <CircleView title="1" />
+            <CircleView1 />
+
+            <CircleViewCircle title="2" />
+            <CircleView1 />
+            <CircleViewCircle title="3" />
+            <CircleView1 />
+            <CircleViewCircle title="4" />
+          </View>
+        </View>
+        <CircleView2 />
+        <ResetView />
+        {/* <View
+            style={{
+              width: '100%',
+              height: 50,
+              backgroundColor: 'yellowgreen',
+            }}></View> */}
+        <InputView />
+
+        <View style={styles.endbutton}>
+          <View
+            style={{
+              width: '40%',
+              height: 32,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10,
+            }}>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                color: '#3478f6',
+              }}>
+              Save Draft
+            </Text>
+          </View>
+          <View
+            style={{
+              width: '40%',
+              height: 32,
+              backgroundColor: '#dbf1dc',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 10,
+            }}>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                color: '#3478f6',
+              }}>
+              Next
+            </Text>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
