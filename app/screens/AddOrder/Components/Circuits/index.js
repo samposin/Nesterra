@@ -60,8 +60,23 @@ const Circuits = () => {
             <Text>06/04/23</Text>
           </View>
         </View>
-        <View style={styles.item}></View>
+        <View style={{...styles.item1}}>
+          <View style={styles.DateView}>
+            <Text
+              style={{
+                position: 'absolute',
+                top: -10,
+                left: 10,
+                backgroundColor: '#f2f2f2',
+                paddingHorizontal: 5,
+              }}>
+              Order No
+            </Text>
+            <Text>2897</Text>
+          </View>
+        </View>
       </View>
+
       {/* ================date picker=================== */}
     </>
   );
