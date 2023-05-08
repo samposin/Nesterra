@@ -9,11 +9,14 @@ import {
 
 import InputTypeView1 from '../InputTypeView/InputTypeView1';
 import {serviceType} from '../../../../utils/addOrders';
+import { Input } from 'react-native-paper';
+import {InputViewWithIcon,InputViewWithOutIcon} from '../InputViewWithIcon';
 
 const Circuits = () => {
   const [text, setText] = React.useState('');
   return (
     <>
+   
       <View style={styles.stepView}>
         <View style={styles.stepViewIner}>
           <CircleView title="1" />
@@ -27,57 +30,55 @@ const Circuits = () => {
         </View>
       </View>
       <ResetView />
-      <View style={styles.itemWraper}>
-        <View style={styles.item}>
-          <InputTypeView1
-            title="Order Type"
-            title2="Reason for Order"
-            data={serviceType}
-          />
-        </View>
-        <View style={styles.item}>
-          <InputTypeView1
-            title="Order Type"
-            title2="Reason for Order"
-            data={serviceType}
-          />
-        </View>
-      </View>
-      {/* ================date picker=================== */}
-      <View style={styles.itemWraper}>
-        <View style={styles.item1}>
-          <View style={styles.DateView}>
-            <Text
-              style={{
-                position: 'absolute',
-                top: -10,
-                left: 10,
-                backgroundColor: '#f2f2f2',
-                paddingHorizontal: 5,
-              }}>
-              Date Created
-            </Text>
-            <Text>06/04/23</Text>
-          </View>
-        </View>
-        <View style={{...styles.item1}}>
-          <View style={styles.DateView}>
-            <Text
-              style={{
-                position: 'absolute',
-                top: -10,
-                left: 10,
-                backgroundColor: '#f2f2f2',
-                paddingHorizontal: 5,
-              }}>
-              Order No
-            </Text>
-            <Text>2897</Text>
-          </View>
-        </View>
+        {/* ================date picker=================== */}
+     <View style={styles.itemWraper}>
+       
+       <InputViewWithIcon text="Date Created" value='08/05/23'/>
+       <InputViewWithOutIcon  text="Order No" value='2897'/>
       </View>
 
       {/* ================date picker=================== */}
+      <View style={styles.itemWraper}>
+        <View style={styles.item}>
+          <InputTypeView1
+            title="Order Type"
+           
+            data={serviceType}
+          />
+        </View>
+        <View style={styles.item}>
+          <InputTypeView1
+            title="Select Project"
+           
+            data={serviceType}
+          />
+        </View>
+      </View>
+      <View style={styles.itemWraper}>
+        <View style={styles.item}>
+          <InputTypeView1
+            title="Service Category"
+           
+            data={serviceType}
+          />
+        </View>
+        <View style={styles.item}>
+          <InputTypeView1
+            title="Select Project"
+         
+            data={serviceType}
+          />
+        </View>
+      </View>
+         {/* ================date picker=================== */}
+     <View style={styles.itemWraper}>
+       
+       <InputViewWithIcon text="Due Date" value='08/05/23'/>
+       <InputViewWithOutIcon  text="Date from today" value='2897'/>
+      </View>
+
+      {/* ================date picker=================== */}
+     
     </>
   );
 };
@@ -100,11 +101,11 @@ const styles = StyleSheet.create({
   },
   itemWraper: {
     width: '100%',
-    height: 45,
+    height: 40,
     flexDirection: 'row',
     paddingHorizontal: 10,
     justifyContent: 'space-between',
-    marginVertical: 8,
+    marginTop:15
   },
   item: {
     width: '48%',

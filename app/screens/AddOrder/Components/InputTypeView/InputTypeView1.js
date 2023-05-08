@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     fontSize: 16,
     color: 'black',
-    fontWeight: 'bold',
+  
   },
   selectedTextStyle: {
     fontSize: 16,
