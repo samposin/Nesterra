@@ -184,6 +184,11 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
           />
         </>
       )}
+      <AddButton
+        onPress={() => {
+          navigation.navigate('AddOrder');
+        }}
+      />
     </>
   );
 };

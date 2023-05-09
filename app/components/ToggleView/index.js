@@ -35,15 +35,15 @@ const ToggleView = ({activeFilter, size, name, alldata, length}) => {
         style={{
           width: '52%',
           height: '100%',
-
+          backgroundColor: '#007aff',
           borderRadius: 10,
           alignItems: 'center',
-
-          justifyContent: 'flex-end',
+          flexDirection: 'row',
+          justifyContent: 'center',
         }}>
-        {/* <Text style={{color: 'white', fontSize: 16}}>
+        <Text style={{color: 'white', fontSize: 16}}>
           {isOn ? 'All' : ' Active'}{' '}
-        </Text> */}
+        </Text>
         {/* <ToggleSwitch
           isOn={isOn}
           onColor="#b3b8b4"
@@ -61,11 +61,11 @@ const ToggleView = ({activeFilter, size, name, alldata, length}) => {
             }
           }}
         /> */}
-        <AddButton
+        {/* <AddButton
           onPress={() => {
             navigation.navigate('AddOrder');
           }}
-        />
+        /> */}
       </View>
     </View>
   );
