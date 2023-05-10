@@ -105,6 +105,8 @@ const styles = StyleSheet.create({
 
     position: 'absolute',
     top: Platform.OS === 'ios' ? 140 : 140,
+    // position: 'absolute',
+    // top: Platform.OS === 'ios' ? 140 : 140,
     //paddingHorizontal: 10,
   },
 });
