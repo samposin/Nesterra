@@ -9,14 +9,13 @@ import {
 
 import InputTypeView1 from '../InputTypeView/InputTypeView1';
 import {serviceType} from '../../../../utils/addOrders';
-import { Input } from 'react-native-paper';
-import {InputViewWithIcon,InputViewWithOutIcon} from '../InputViewWithIcon';
+import {Input} from 'react-native-paper';
+import {InputViewWithIcon, InputViewWithOutIcon} from '../InputViewWithIcon';
 
 const Circuits = () => {
   const [text, setText] = React.useState('');
   return (
     <>
-   
       <View style={styles.stepView}>
         <View style={styles.stepViewIner}>
           <CircleView title="1" />
@@ -30,55 +29,71 @@ const Circuits = () => {
         </View>
       </View>
       <ResetView />
-        {/* ================date picker=================== */}
-     <View style={styles.itemWraper}>
-       
-       <InputViewWithIcon text="Date Created" value='08/05/23'/>
-       <InputViewWithOutIcon  text="Order No" value='2897'/>
+      {/* ================date picker=================== */}
+      <View style={styles.itemWraper}>
+        <InputViewWithIcon text="Date Created" value="08/05/23" />
+        <InputViewWithOutIcon text="Order No" value="2897" />
       </View>
 
       {/* ================date picker=================== */}
       <View style={styles.itemWraper}>
         <View style={styles.item}>
-          <InputTypeView1
-            title="Order Type"
-           
-            data={serviceType}
-          />
+          <InputTypeView1 title="Order Type" data={serviceType} />
         </View>
         <View style={styles.item}>
-          <InputTypeView1
-            title="Select Project"
-           
-            data={serviceType}
-          />
+          <InputTypeView1 title="Select Project" data={serviceType} />
         </View>
       </View>
       <View style={styles.itemWraper}>
         <View style={styles.item}>
-          <InputTypeView1
-            title="Service Category"
-           
-            data={serviceType}
-          />
+          <InputTypeView1 title="Service Category" data={serviceType} />
         </View>
         <View style={styles.item}>
-          <InputTypeView1
-            title="Select Project"
-         
-            data={serviceType}
-          />
+          <InputTypeView1 title="Select Project" data={serviceType} />
         </View>
       </View>
-         {/* ================date picker=================== */}
-     <View style={styles.itemWraper}>
-       
-       <InputViewWithIcon text="Due Date" value='08/05/23'/>
-       <InputViewWithOutIcon  text="Date from today" value='2897'/>
+      {/* ================date picker=================== */}
+      <View style={styles.itemWraper}>
+        <InputViewWithIcon text="Due Date" value="08/05/23" />
+        <InputViewWithOutIcon text="Date from today" value="2897" />
       </View>
 
       {/* ================date picker=================== */}
-     
+      <View style={styles.endbutton}>
+        <View
+          style={{
+            width: '40%',
+            height: 32,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              color: '#3478f6',
+            }}>
+            Save Draft
+          </Text>
+        </View>
+        <View
+          style={{
+            width: '40%',
+            height: 32,
+            backgroundColor: '#dbf1dc',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              color: '#3478f6',
+            }}>
+            Next
+          </Text>
+        </View>
+      </View>
     </>
   );
 };
@@ -105,7 +120,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 10,
     justifyContent: 'space-between',
-    marginTop:15
+    marginTop: 15,
   },
   item: {
     width: '48%',
@@ -126,5 +141,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 5,
+  },
+  endbutton: {
+    // height: 50,
+    // backgroundColor: '#fbfaf8',
+    // flexDirection: 'row',
+    // justifyContent: 'space-around',
+    // alignItems: 'center',
+    // marginTop: 5,
+    // position: 'absolute',
+    // bottom: 60,
+    // left: 0,
+    // right: 0,
   },
 });
