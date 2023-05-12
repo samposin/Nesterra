@@ -129,7 +129,7 @@ const AddOrder = ({navigation}) => {
                 fontWeight: 'bold',
                 color: '#3478f6',
               }}>
-              Next
+              Nextt
             </Text>
           </View>
         </View>
@@ -205,10 +205,10 @@ const styles = StyleSheet.create({
   endbutton: {
     width: '100%',
     height: 50,
-    backgroundColor: '#fbfaf8',
-    flexDirection: 'row',
+    backgroundColor: 'red',
+    // flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginTop: 5,
+    // marginTop: 5,
   },
 });

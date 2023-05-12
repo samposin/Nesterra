@@ -15,7 +15,7 @@ import {InputViewWithIcon, InputViewWithOutIcon} from '../InputViewWithIcon';
 const Circuits = () => {
   const [text, setText] = React.useState('');
   return (
-    <>
+    <View style={{flex: 1}}>
       <View style={styles.stepView}>
         <View style={styles.stepViewIner}>
           <CircleView title="1" />
@@ -94,7 +94,15 @@ const Circuits = () => {
           </Text>
         </View>
       </View>
-    </>
+      <View
+        style={{
+          width: '100%',
+          height: 50,
+          backgroundColor: 'yellowgreen',
+          position: 'absolute',
+          bottom: 0,
+        }}></View>
+    </View>
   );
 };
 
@@ -143,15 +151,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   endbutton: {
-    // height: 50,
-    // backgroundColor: '#fbfaf8',
-    // flexDirection: 'row',
-    // justifyContent: 'space-around',
-    // alignItems: 'center',
-    // marginTop: 5,
+    height: 50,
+    width: '100%',
+    backgroundColor: '#fbfaf8',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 5,
     // position: 'absolute',
-    // bottom: 60,
-    // left: 0,
-    // right: 0,
+    bottom: 60,
+    left: 0,
+    right: 0,
   },
 });
