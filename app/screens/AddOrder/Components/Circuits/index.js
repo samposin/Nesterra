@@ -3,6 +3,7 @@ import React from 'react';
 import {
   CircleView,
   CircleView1,
+  CircleView2,
   CircleViewCircle,
   ResetView,
 } from '../CircleView';
@@ -11,98 +12,44 @@ import InputTypeView1 from '../InputTypeView/InputTypeView1';
 import {serviceType} from '../../../../utils/addOrders';
 import {Input} from 'react-native-paper';
 import {InputViewWithIcon, InputViewWithOutIcon} from '../InputViewWithIcon';
+import InputView from '../InputView';
+import One from './Components/One';
 
 const Circuits = () => {
+  const [buttonType, setButtontype] = React.useState('one');
+  const ranDerView = () => {
+    switch (true) {
+      case buttonType === 'one':
+        return <One />;
+
+      case buttonType === 'two':
+        return <Devices />;
+      case buttonType === 'three':
+        return <Equinix />;
+    }
+  };
+  const clickButton = text => {
+    setButtontype(text);
+  };
   const [text, setText] = React.useState('');
   return (
-    <View style={{flex: 1}}>
-      <View style={styles.stepView}>
-        <View style={styles.stepViewIner}>
-          <CircleView title="1" />
-          <CircleView1 />
+    <>
+      <View style={{flex: 1}}>
+        <View style={styles.stepView}>
+          <View style={styles.stepViewIner}>
+            <CircleView title="1" onPress={() => {}} />
+            <CircleView1 />
 
-          <CircleViewCircle title="2" />
-          <CircleView1 />
-          <CircleViewCircle title="3" />
-          <CircleView1 />
-          <CircleViewCircle title="4" />
+            <CircleViewCircle title="2" />
+            <CircleView1 />
+            <CircleViewCircle title="3" />
+            <CircleView1 />
+            <CircleViewCircle title="4" />
+          </View>
         </View>
       </View>
-      <ResetView />
-      {/* ================date picker=================== */}
-      <View style={styles.itemWraper}>
-        <InputViewWithIcon text="Date Created" value="08/05/23" />
-        <InputViewWithOutIcon text="Order No" value="2897" />
-      </View>
-
-      {/* ================date picker=================== */}
-      <View style={styles.itemWraper}>
-        <View style={styles.item}>
-          <InputTypeView1 title="Order Type" data={serviceType} />
-        </View>
-        <View style={styles.item}>
-          <InputTypeView1 title="Select Project" data={serviceType} />
-        </View>
-      </View>
-      <View style={styles.itemWraper}>
-        <View style={styles.item}>
-          <InputTypeView1 title="Service Category" data={serviceType} />
-        </View>
-        <View style={styles.item}>
-          <InputTypeView1 title="Select Project" data={serviceType} />
-        </View>
-      </View>
-      {/* ================date picker=================== */}
-      <View style={styles.itemWraper}>
-        <InputViewWithIcon text="Due Date" value="08/05/23" />
-        <InputViewWithOutIcon text="Date from today" value="2897" />
-      </View>
-
-      {/* ================date picker=================== */}
-      <View style={styles.endbutton}>
-        <View
-          style={{
-            width: '40%',
-            height: 32,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 10,
-          }}>
-          <Text
-            style={{
-              fontWeight: 'bold',
-              color: '#3478f6',
-            }}>
-            Save Draft
-          </Text>
-        </View>
-        <View
-          style={{
-            width: '40%',
-            height: 32,
-            backgroundColor: '#dbf1dc',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 10,
-          }}>
-          <Text
-            style={{
-              fontWeight: 'bold',
-              color: '#3478f6',
-            }}>
-            Next
-          </Text>
-        </View>
-      </View>
-      <View
-        style={{
-          width: '100%',
-          height: 50,
-          backgroundColor: 'yellowgreen',
-          position: 'absolute',
-          bottom: 0,
-        }}></View>
-    </View>
+      {ranDerView()}
+    </>
   );
 };
 
