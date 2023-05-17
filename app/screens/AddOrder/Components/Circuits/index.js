@@ -14,18 +14,23 @@ import {Input} from 'react-native-paper';
 import {InputViewWithIcon, InputViewWithOutIcon} from '../InputViewWithIcon';
 import InputView from '../InputView';
 import One from './Components/One';
+import Two from './Components/Two';
+import Three from './Components/Three';
+import Four from './Components/Four';
 
 const Circuits = () => {
-  const [buttonType, setButtontype] = React.useState('one');
+  const [buttonType, setButtontype] = React.useState('1');
   const ranDerView = () => {
     switch (true) {
-      case buttonType === 'one':
+      case buttonType == '1':
         return <One />;
 
-      case buttonType === 'two':
-        return <Devices />;
-      case buttonType === 'three':
-        return <Equinix />;
+      case buttonType == '2':
+        return <Two />;
+      case buttonType == '3':
+        return <Three />;
+      case buttonType == '4':
+        return <Four />;
     }
   };
   const clickButton = text => {
@@ -37,14 +42,38 @@ const Circuits = () => {
       <View style={{flex: 1}}>
         <View style={styles.stepView}>
           <View style={styles.stepViewIner}>
-            <CircleView title="1" onPress={() => {}} />
+            <CircleView
+              title="1"
+              onPress={() => {
+                clickButton('1');
+              }}
+              buttonType={buttonType}
+            />
             <CircleView1 />
 
-            <CircleViewCircle title="2" />
+            <CircleViewCircle
+              title="2"
+              onPress={() => {
+                clickButton('2');
+              }}
+              buttonType={buttonType}
+            />
             <CircleView1 />
-            <CircleViewCircle title="3" />
+            <CircleViewCircle
+              title="3"
+              onPress={() => {
+                clickButton('3');
+              }}
+              buttonType={buttonType}
+            />
             <CircleView1 />
-            <CircleViewCircle title="4" />
+            <CircleViewCircle
+              title="4"
+              onPress={() => {
+                clickButton('4');
+              }}
+              buttonType={buttonType}
+            />
           </View>
         </View>
       </View>

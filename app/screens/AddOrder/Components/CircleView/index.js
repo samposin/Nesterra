@@ -1,42 +1,68 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-export const CircleView = ({title}) => {
+export const CircleView = ({title, buttonType, onPress}) => {
   return (
     <View style={styles.view1}>
-      <View
+      <TouchableOpacity
+        onPress={() => {
+          onPress();
+        }}
         style={{
           width: 25,
           height: 25,
           borderRadius: 12.5,
-          backgroundColor: '#3478f6',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text style={{fontSize: 15, fontWeight: 'bold', color: 'white'}}>
-          {title}
-        </Text>
-      </View>
-    </View>
-  );
-};
-export const CircleViewCircle = ({title}) => {
-  return (
-    <View style={styles.view1}>
-      <View
-        style={{
-          width: 25,
-          height: 25,
-          borderRadius: 12.5,
-          borderWidth: 1.5,
+          borderWidth: title == buttonType ? 0 : 1.5,
+          backgroundColor: title == buttonType ? '#3478f6' : null,
+
           borderColor: '#ababaf',
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <Text style={{fontSize: 15, fontWeight: 'bold', color: '#ababaf'}}>
+        <Text
+          style={{
+            fontSize: 15,
+            fontWeight: 'bold',
+            color: title == buttonType ? 'white' : '#ababaf',
+          }}>
           {title}
         </Text>
-      </View>
+      </TouchableOpacity>
+    </View>
+  );
+};
+export const CircleViewCircle = ({
+  title,
+
+  buttonType,
+  onPress,
+}) => {
+  return (
+    <View style={styles.view1}>
+      <TouchableOpacity
+        onPress={() => {
+          onPress();
+        }}
+        style={{
+          width: 25,
+          height: 25,
+          borderRadius: 12.5,
+          borderWidth: title == buttonType ? 0 : 1.5,
+          backgroundColor: title == buttonType ? '#3478f6' : null,
+
+          borderColor: '#ababaf',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text
+          style={{
+            fontSize: 15,
+            fontWeight: 'bold',
+            color: title == buttonType ? 'white' : '#ababaf',
+          }}>
+          {title}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

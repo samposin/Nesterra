@@ -8,10 +8,11 @@ import {
 import InputView from '../../../InputView';
 import {serviceType} from '../../../../../../utils/addOrders';
 import {ResetView} from '../../../CircleView';
-const Two = () => {
+const Four = () => {
   const [text, setText] = React.useState('');
   return (
     <View style={{flex: 1}}>
+      <ResetView />
       {/* ================date picker=================== */}
       <View style={styles.itemWraper}>
         <InputViewWithIcon text="Date Created" value="08/05/23" />
@@ -47,7 +48,7 @@ const Two = () => {
   );
 };
 
-export default Two;
+export default Four;
 
 const styles = StyleSheet.create({
   stepView: {
