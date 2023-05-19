@@ -70,7 +70,9 @@ const MainStack = () => {
         screenOptions={{
           headerShown: false,
         }}>
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="TabNaV" component={TabNaV} />
+
         <Stack.Screen name="Stats" component={Stats} />
         <Stack.Screen name="OtpReceive" component={OtpReceive} />
         <Stack.Screen name="AllDevice" component={AllDevice} />
