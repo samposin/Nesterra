@@ -71,6 +71,7 @@ const MainStack = () => {
           headerShown: false,
         }}>
         {/* <Stack.Screen name="Login" component={Login} /> */}
+        {/* <Stack.Screen name="Login" component={Login} /> */}
         <Stack.Screen name="TabNaV" component={TabNaV} />
 
         <Stack.Screen name="Stats" component={Stats} />
