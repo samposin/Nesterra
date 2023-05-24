@@ -131,7 +131,7 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
       </View>
       <View style={styles.mainContainer}>
         <View style={styles.mainContainerLeft}>
-          {allItem.map((item, i) => {
+          {/* {allItem.map((item, i) => {
             return (
               <TouchableOpacity
                 key={i}
@@ -140,14 +140,13 @@ const Filtter = ({clear_all, navigation, sity_status_coordinates}) => {
                   actiText(item.id);
                 }}>
                 <Text style={{color: item.isActive ? '#1b5a90' : '#757575'}}>
-                  {/* {item.name} */}
-                  {/* {item.isActive} */}
+                
                 </Text>
               </TouchableOpacity>
             );
-          })}
+          })} */}
         </View>
-        <View style={styles.mainContainerRight}>{selectedComponent()}</View>
+        {/* <View style={styles.mainContainerRight}>{selectedComponent()}</View> */}
       </View>
 
       <View style={styles.buttonUpper}>

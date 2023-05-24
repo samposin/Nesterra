@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text,
   View,
+  TextInput,
 } from 'react-native';
 import React from 'react';
 
@@ -17,9 +18,10 @@ import {warinng} from '../../../../components/helper';
 import {useDispatch} from 'react-redux';
 import {MAPTYPE} from '../../../../actions/actionType/MapType';
 import ClearAndAppply from '../ClearAndAppply';
+import BackButton from './../../../../components/BackButton/index';
 
 const data = [
-  {id: 0, txt: 'standard', name: 'Standard', isChecked: false},
+  {id: 0, txt: 'standard', name: 'Standard', isChecked: true},
   {id: 1, txt: 'hybrid', name: 'Hybrid', isChecked: false},
   {id: 2, txt: 'terrain', name: 'Terrain', isChecked: false},
 ];
@@ -80,67 +82,52 @@ const Type = ({}) => {
         <View style={styles.header}>
           <View
             style={{
-              width: '20%',
+              width: '100%',
               height: '100%',
+              flexDirection: 'row',
+              paddingHorizontal: 10,
 
-              justifyContent: 'center',
+              justifyContent: 'space-between',
               alignItems: 'center',
             }}>
             <Text style={{fontSize: 16}}>Filters</Text>
+            <BackButton
+              onPress={() => {
+                navigation.navigate('Menu');
+              }}
+            />
           </View>
-          {/* <View
-            style={{
-              width: '80%',
-              height: '100%',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: 15,
-            }}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Explore');
-              }}
-              style={{
-                width: '45%',
-                height: 45,
-                backgroundColor: '#007aff',
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: 'white', fontSize: 18}}>Close</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                apply();
-              }}
-              style={{
-                width: '45%',
-                height: 45,
-                backgroundColor: '#e0dfe5',
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: '#007aff', fontSize: 18}}>Apply</Text>
-            </TouchableOpacity>
-          </View> */}
         </View>
         <View style={styles.mainContainer}>
           <View
             style={{
-              width: '30%',
+              width: '40%',
               height: '100%',
-              backgroundColor: 'red',
+
               justifyContent: 'center',
               alignItems: 'center',
             }}></View>
           <View
             style={{
-              width: '70%',
+              width: '60%',
               height: '100%',
               backgroundColor: '#ffffff',
+
+              marginLeft: 10,
             }}>
+            <Text style={{color: 'black', marginLeft: 8, marginVertical: 10}}>
+              Setected {`(${0})`}
+            </Text>
+            <View
+              style={{
+                width: '100%',
+                height: 45,
+                marginLeft: 8,
+              }}>
+              <TextInput
+                style={{width: '80%', borderWidth: 1, borderRadius: 5}}
+              />
+            </View>
             {checkdata.map((item, i) => {
               return (
                 <CheckBoxView
@@ -153,7 +140,7 @@ const Type = ({}) => {
             })}
           </View>
         </View>
-        <ClearAndAppply onPress={apply} clear={clear} />
+        {/* <ClearAndAppply onPress={apply} clear={clear} /> */}
       </View>
     </>
   );

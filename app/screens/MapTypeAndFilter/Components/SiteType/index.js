@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text,
   View,
+  TextInput,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 
@@ -199,7 +200,7 @@ const SiteType = () => {
         <View style={styles.mainContainer}>
           <View
             style={{
-              width: '30%',
+              width: '40%',
               height: '100%',
               backgroundColor: 'red',
               justifyContent: 'center',
@@ -207,10 +208,11 @@ const SiteType = () => {
             }}></View>
           <View
             style={{
-              width: '70%',
+              width: '60%',
               height: '100%',
               backgroundColor: '#ffffff',
               flexDirection: 'row',
+              marginLeft: 10,
             }}>
             <View
               style={{
@@ -220,6 +222,17 @@ const SiteType = () => {
               <Text style={{color: 'black', marginLeft: 8, marginVertical: 10}}>
                 Setected {`(${checkList.length})`}
               </Text>
+              <View
+                style={{
+                  width: '100%',
+                  height: 45,
+                  marginLeft: 8,
+                }}>
+                <TextInput
+                  style={{width: '80%', borderWidth: 1, borderRadius: 5}}
+                />
+              </View>
+
               {list &&
                 list.map((item, i) => {
                   return (

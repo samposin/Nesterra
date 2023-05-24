@@ -50,7 +50,7 @@ const ExploreStack = () => {
       }}>
       <Stack.Screen name="Explore" component={Explore} />
       <Stack.Screen name="Profile" component={Profile} />
-      {/* <Stack.Screen name="Filtter" component={Filtter} /> */}
+      <Stack.Screen name="Filtter" component={Filtter} />
       <Stack.Screen name="SearchAddress" component={SearchAddress} />
       <Stack.Screen name="StartPoint" component={StartPoint} />
       <Stack.Screen name="DestinationPoint" component={DestinationPoint} />

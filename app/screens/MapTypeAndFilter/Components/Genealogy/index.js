@@ -177,7 +177,7 @@ const Genealogy = ({getGeneoLogyList, is_selected, select_all}) => {
         <View style={styles.mainContainer}>
           <View
             style={{
-              width: '30%',
+              width: '40%',
               height: '100%',
               backgroundColor: 'red',
               justifyContent: 'center',
@@ -185,9 +185,10 @@ const Genealogy = ({getGeneoLogyList, is_selected, select_all}) => {
             }}></View>
           <View
             style={{
-              width: '70%',
+              width: '60%',
               height: '100%',
               backgroundColor: '#ffffff',
+              marginLeft: 10,
             }}>
             <ScrollView style={{height: '100%'}}>
               {/* <SelectAll
