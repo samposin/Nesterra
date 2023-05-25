@@ -1,6 +1,8 @@
 import {StyleSheet, Text, Image, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {useSelector} from 'react-redux';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const MenuItem = ({src, onPress, title}) => {
   const {appearanceType} = useSelector(state => state.appearanceType);
@@ -12,16 +14,16 @@ const MenuItem = ({src, onPress, title}) => {
       }}
       style={{
         width: '100%',
-        height: 50,
+        height: 40,
         border: 1,
         borderBottomColor: '#575757',
-        borderBottomWidth: 0.9,
+        borderBottomWidth: 0.3,
         flexDirection: 'row',
         marginVertical: 5,
       }}>
       <View
         style={{
-          width: '30%',
+          width: '50%',
           height: '100%',
           justifyContent: 'flex-start',
           alignItems: 'center',
@@ -38,7 +40,7 @@ const MenuItem = ({src, onPress, title}) => {
         />
         <Text
           style={{
-            marginLeft: 10,
+            marginLeft: 20,
             color: appearanceType == 'dark' ? 'white' : 'black',
             fontSize: 15,
             fontWeight: 'bold',
@@ -46,7 +48,18 @@ const MenuItem = ({src, onPress, title}) => {
           {title}
         </Text>
       </View>
-      <View style={{width: '70%', height: '100%'}}></View>
+      <View
+        style={{
+          width: '50%',
+          height: '100%',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+        }}>
+        <Text>
+          {/* <AntDesign name="right" size={22} color="#b8b8b8" /> */}
+          <Entypo name="chevron-thin-right" size={22} color="#b8b8b8" />
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 };

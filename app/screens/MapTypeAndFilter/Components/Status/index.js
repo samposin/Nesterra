@@ -129,43 +129,6 @@ const Status = ({filterData}) => {
               }}
             />
           </View>
-          {/* <View
-            style={{
-              width: '80%',
-              height: '100%',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              paddingHorizontal: 15,
-            }}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Explore');
-              }}
-              style={{
-                width: '45%',
-                height: 45,
-                backgroundColor: '#007aff',
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: 'white', fontSize: 18}}>Close</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                apply();
-              }}
-              style={{
-                width: '45%',
-                height: 45,
-                backgroundColor: '#e0dfe5',
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: '#007aff', fontSize: 18}}>Apply</Text>
-            </TouchableOpacity>
-          </View> */}
         </View>
         <View style={styles.mainContainer}>
           <View

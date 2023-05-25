@@ -39,6 +39,8 @@ import AppearanceScreen from './../screens/Appearance/index';
 import HelpDesk from '../screens/HelpDesk/index.js';
 import Saved from './../screens/saved/index';
 import AddOrder from './../screens/AddOrder/index';
+import Settings from '../screens/Settings/index.js';
+import About from '../screens/About/index.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -93,6 +95,8 @@ const MainStack = () => {
         <Stack.Screen name="StreetViewScreen" component={StreetViewScreen} />
         {/* <Stack.Screen name="Menu" component={Menu} /> */}
         <Stack.Screen name="Appearance" component={AppearanceScreen} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="About" component={About} />
 
         <Stack.Screen name="HelpDesk" component={HelpDesk} />
         <Stack.Screen name="Legal" component={Legal} />

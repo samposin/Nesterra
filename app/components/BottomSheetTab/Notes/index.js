@@ -10,14 +10,13 @@ import {
 import React, {useState, useRef, useEffect} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 import NotesAdd from './NotesAdd';
 import Lodder from './../../lodder/index';
 import {useSelector} from 'react-redux';
 import DataLoder from '../../lodder/DataLoder';
 import NoDataViewFlatList from './../../NoDataViewFlatList/index';
-import {useNavigation} from '@react-navigation/native';
+
 import moment from 'moment';
 import {BottomSheetSectionList} from '@gorhom/bottom-sheet';
 const {width} = Dimensions.get('screen');
@@ -26,9 +25,7 @@ const Notes = ({notesLoding}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [isLoading, setLoder] = useState(false);
   const {notes} = useSelector(state => state.Notes);
-  const navigation = useNavigation();
-  const [showPopover, setShowPopover] = useState(false);
-  const touchable = useRef();
+
   const [showTip, setTip] = useState(false);
   const renderItems = ({item}) => {
     return (

@@ -39,6 +39,7 @@ import {
   THIRD_PARTY,
   OTHER,
 } from '../../../../actions/actionType/SiteTypeCheck';
+import BackButton from '../../../../components/BackButton';
 
 const data = [
   {id: 0, txt: 'Data Center', name: 'Data Center', isChecked: false},
@@ -181,20 +182,19 @@ const SiteType = () => {
           <View
             style={{
               width: '100%',
-              height: '50%',
+              height: '100%',
+              flexDirection: 'row',
+              paddingHorizontal: 10,
 
-              justifyContent: 'flex-end',
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}>
-            <Text style={{color: 'black'}}>Filter</Text>
-          </View>
-          <View
-            style={{
-              width: '100%',
-              height: '50%',
-
-              justifyContent: 'center',
-            }}>
-            <Text style={{color: 'black'}}>{ddd.toString()}</Text>
+            <Text style={{fontSize: 16}}>Filters</Text>
+            <BackButton
+              onPress={() => {
+                navigation.navigate('Menu');
+              }}
+            />
           </View>
         </View>
         <View style={styles.mainContainer}>

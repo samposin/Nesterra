@@ -20,7 +20,7 @@ const Legal = ({navigation}) => {
         marginTop: StatusBar.currentHeight,
       }}>
       <View style={styles.mainView}>
-        <Text style={styles.settingText}>Settinges</Text>
+        <Text style={styles.settingText}>Legal</Text>
         <TouchableOpacity
           style={styles.closeView}
           onPress={() => {
@@ -30,12 +30,20 @@ const Legal = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={{width: '100%', paddingHorizontal: 15}}>
-        <MenuItem onPress={() => {}} src={LegaleImage.about} title="About " />
         <MenuItem
-          onPress={() => {}}
-          src={LegaleImage.term}
-          title="Terms of use"
+          onPress={() => {
+            navigation.navigate('About');
+          }}
+          src={LegaleImage.about}
+          title="About "
         />
+        <TouchableOpacity>
+          <MenuItem
+            onPress={() => {}}
+            src={LegaleImage.term}
+            title="Terms of use"
+          />
+        </TouchableOpacity>
         <MenuItem
           onPress={() => {}}
           src={LegaleImage.privacy}

@@ -10,7 +10,7 @@ const ClearAndAppply = ({onPress, clear}) => {
         flexDirection: 'row',
         justifyContent: 'space-between',
         position: 'absolute',
-
+        zIndex: 100,
         bottom: 100,
         right: 10,
       }}>

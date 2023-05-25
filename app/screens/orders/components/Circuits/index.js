@@ -152,13 +152,9 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
 
           <>
             {/* ============TOOGLE=========== */}
+
             {switchView ? (
               <>
-                <AddButton
-                  onPress={() => {
-                    navigation.navigate('AddOrder');
-                  }}
-                />
                 <ToggleView
                   name="Circuits"
                   // size={'medium'}
@@ -189,6 +185,11 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
           />
         </>
       )}
+      <AddButton
+        onPress={() => {
+          navigation.navigate('AddOrder');
+        }}
+      />
     </>
   );
 };

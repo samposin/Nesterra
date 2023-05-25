@@ -11,6 +11,7 @@ const DisPlayItem = ({title, setetedView, onPress, count}) => {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        height: 35,
       }}>
       <Text
         style={{

@@ -7,6 +7,7 @@ import {
   Text,
   View,
   ScrollView,
+  TextInput,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 
@@ -21,6 +22,7 @@ import CheckBoxComponet from '../../../../components/checkBox';
 import {useNavigation} from '@react-navigation/native';
 import ClearAndAppply from '../ClearAndAppply';
 import {getGeneoLogyList} from '../../../../actions/GenealogyList';
+import BackButton from '../../../../components/BackButton';
 
 const data1 = [
   {id: 0, txt: 'Charter One P2', name: 'Charter One P2', isChecked: false},
@@ -127,52 +129,21 @@ const Genealogy = ({getGeneoLogyList, is_selected, select_all}) => {
         <View style={styles.header}>
           <View
             style={{
-              width: '20%',
-              height: '100%',
-
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 14}}>Filters</Text>
-          </View>
-          {/* <View
-            style={{
-              width: '80%',
+              width: '100%',
               height: '100%',
               flexDirection: 'row',
+              paddingHorizontal: 10,
+
               justifyContent: 'space-between',
-              paddingHorizontal: 15,
+              alignItems: 'center',
             }}>
-            <TouchableOpacity
+            <Text style={{fontSize: 16}}>Filters</Text>
+            <BackButton
               onPress={() => {
-                navigation.navigate('Explore');
+                navigation.navigate('Menu');
               }}
-              style={{
-                width: '45%',
-                height: 45,
-                backgroundColor: '#007aff',
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: 'white', fontSize: 18}}>Close</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                // apply();
-                navigation.navigate('Explore');
-              }}
-              style={{
-                width: '45%',
-                height: 45,
-                backgroundColor: '#e0dfe5',
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: '#007aff', fontSize: 18}}>Apply</Text>
-            </TouchableOpacity>
-          </View> */}
+            />
+          </View>
         </View>
         <View style={styles.mainContainer}>
           <View
@@ -190,6 +161,19 @@ const Genealogy = ({getGeneoLogyList, is_selected, select_all}) => {
               backgroundColor: '#ffffff',
               marginLeft: 10,
             }}>
+            <Text style={{color: 'black', marginLeft: 8, marginVertical: 10}}>
+              Setected {`(${0})`}
+            </Text>
+            <View
+              style={{
+                width: '100%',
+                height: 45,
+                marginLeft: 8,
+              }}>
+              <TextInput
+                style={{width: '80%', borderWidth: 1, borderRadius: 5}}
+              />
+            </View>
             <ScrollView style={{height: '100%'}}>
               {/* <SelectAll
                 setState={setState}
@@ -211,7 +195,7 @@ const Genealogy = ({getGeneoLogyList, is_selected, select_all}) => {
             </ScrollView>
           </View>
         </View>
-        <ClearAndAppply onPress={apply} clear={clear} />
+        {/* <ClearAndAppply onPress={apply} clear={clear} /> */}
       </View>
     </>
   );
