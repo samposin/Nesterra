@@ -3,13 +3,13 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Checkbox} from 'react-native-paper';
 
-const SimpleCheckBox = ({text, ml}) => {
+const SimpleCheckBox = ({text, ml, mt}) => {
   const colors = '#1b5a90';
   // console.log(item);
 
   const [checked, setChecked] = React.useState(false);
   return (
-    <View style={{...styles.container, marginLeft: ml}}>
+    <View style={{...styles.container, marginLeft: ml, marginTop: mt}}>
       <Checkbox
         status={checked ? 'checked' : 'unchecked'}
         onPress={() => {
@@ -29,8 +29,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-
-    marginTop: 10,
   },
 });
 

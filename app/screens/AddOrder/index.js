@@ -44,54 +44,51 @@ const AddOrder = ({navigation}) => {
   return (
     <SafeAreaView
       style={{
-        // marginTop: StatusBar.currentHeight,
-        marginTop: 25,
+        marginTop: StatusBar.currentHeight,
+        // marginTop: 25,
       }}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.addOrderView}>
-          <Text style={styles.addOrderText}>AddOrder</Text>
-          <TouchableOpacity
-            style={styles.closeView}
+      <View style={styles.addOrderView}>
+        <Text style={styles.addOrderText}>AddOrder</Text>
+        <TouchableOpacity
+          style={styles.closeView}
+          onPress={() => {
+            navigation.navigate('Orders');
+          }}>
+          <Entypo name="cross" size={20} color="white" />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.buttonView}>
+        <View
+          style={[
+            styles.buttonView2,
+            {
+              backgroundColor: appearanceType == 'dark' ? '#1c1c1f' : '#d6d6d8',
+            },
+          ]}>
+          <Button
+            title="Circuits"
+            buttonType={buttonType}
             onPress={() => {
-              navigation.navigate('Orders');
-            }}>
-            <Entypo name="cross" size={20} color="white" />
-          </TouchableOpacity>
+              setButtonType('Circuits');
+            }}
+          />
+          <Button
+            title="Devices"
+            buttonType={buttonType}
+            onPress={() => {
+              setButtonType('Devices');
+            }}
+          />
+          <Button
+            title="Equinix"
+            buttonType={buttonType}
+            onPress={() => {
+              setButtonType('Equinix');
+            }}
+          />
         </View>
-        <View style={styles.buttonView}>
-          <View
-            style={[
-              styles.buttonView2,
-              {
-                backgroundColor:
-                  appearanceType == 'dark' ? '#1c1c1f' : '#d6d6d8',
-              },
-            ]}>
-            <Button
-              title="Circuits"
-              buttonType={buttonType}
-              onPress={() => {
-                setButtonType('Circuits');
-              }}
-            />
-            <Button
-              title="Devices"
-              buttonType={buttonType}
-              onPress={() => {
-                setButtonType('Devices');
-              }}
-            />
-            <Button
-              title="Equinix"
-              buttonType={buttonType}
-              onPress={() => {
-                setButtonType('Equinix');
-              }}
-            />
-          </View>
-        </View>
-        {ranDerView()}
-      </ScrollView>
+      </View>
+      {ranDerView()}
     </SafeAreaView>
   );
 };

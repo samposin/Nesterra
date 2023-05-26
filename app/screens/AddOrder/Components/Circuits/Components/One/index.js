@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TextInput, ScrollView} from 'react-native';
 import React from 'react';
 import InputTypeView1 from '../../../InputTypeView/InputTypeView1';
 import {
@@ -11,8 +11,7 @@ import {ResetView} from '../../../CircleView';
 const One = () => {
   const [text, setText] = React.useState('');
   return (
-    <View style={{flex: 1}}>
-      <ResetView />
+    <ScrollView>
       {/* ================date picker=================== */}
       <View style={styles.itemWraper}>
         <InputViewWithIcon text="Date Created" value="08/05/23" />
@@ -43,8 +42,164 @@ const One = () => {
       </View>
 
       {/* ================date picker=================== */}
-      <InputView />
-    </View>
+      {/* <InputView /> */}
+
+      <View style={styles.itemWraper}>
+        <View
+          style={{
+            width: '48%',
+            height: '100%',
+            // backgroundColor: '#35BDD0',
+          }}>
+          <TextInput
+            placeholder="RC Code#"
+            style={{
+              width: '100%',
+              height: '100%',
+              borderWidth: 1,
+              borderColor: 'black',
+              // marginLeft: 10,
+              borderRadius: 7,
+            }}
+          />
+        </View>
+        <View
+          style={{
+            width: '48%',
+            height: '100%',
+            // backgroundColor: 'pink',
+            justifyContent: 'center',
+            paddingLeft: 10,
+          }}>
+          <Text style={{color: 'red'}}>7 digits</Text>
+        </View>
+        <View style={{width: '50%', height: '100%'}}></View>
+      </View>
+
+      <View
+        style={{
+          width: '100%',
+          height: 130,
+          // backgroundColor: 'pink',
+          paddingHorizontal: 10,
+          paddingTop: 15,
+        }}>
+        <TextInput
+          textAlignVertical={'top'}
+          multiline
+          numberOfLines={5}
+          placeholder="Reagon For Order (optional)"
+          placeholderTextColor={{textAlign: 'top'}}
+          style={{
+            borderRadius: 5,
+            height: '100%',
+            width: '100%',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            verticalAlign: 'top',
+            borderColor: 'black',
+            borderWidth: 1,
+            color: 'black',
+          }}
+        />
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 130,
+          // backgroundColor: 'pink',
+          paddingHorizontal: 10,
+          paddingTop: 15,
+        }}>
+        <TextInput
+          textAlignVertical={'top'}
+          multiline
+          numberOfLines={5}
+          placeholder="Reagon For Order (optional)"
+          placeholderTextColor={{textAlign: 'top'}}
+          style={{
+            borderRadius: 5,
+            height: '100%',
+            width: '100%',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            verticalAlign: 'top',
+            borderColor: 'black',
+            borderWidth: 1,
+            color: 'black',
+          }}
+        />
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 130,
+          // backgroundColor: 'pink',
+          paddingHorizontal: 10,
+          paddingTop: 15,
+        }}>
+        <TextInput
+          textAlignVertical={'top'}
+          multiline
+          numberOfLines={5}
+          placeholder="Reagon For Order (optional)"
+          placeholderTextColor={{textAlign: 'top'}}
+          style={{
+            borderRadius: 5,
+            height: '100%',
+            width: '100%',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            verticalAlign: 'top',
+            borderColor: 'black',
+            borderWidth: 1,
+            color: 'black',
+          }}
+        />
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 140,
+          flexDirection: 'row',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+        }}>
+        <View
+          style={{
+            width: '40%',
+            height: 32,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              color: '#3478f6',
+            }}>
+            Save Draft
+          </Text>
+        </View>
+        <View
+          style={{
+            width: '40%',
+            height: 32,
+            backgroundColor: '#dbf1dc',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              color: '#3478f6',
+            }}>
+            Next
+          </Text>
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 

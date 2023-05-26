@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, SafeAreaView, StatusBar, View} from 'react-native';
 import React from 'react';
 import {
   CircleView,
@@ -39,44 +39,43 @@ const Circuits = () => {
   const [text, setText] = React.useState('');
   return (
     <>
-      <View style={{flex: 1}}>
-        <View style={styles.stepView}>
-          <View style={styles.stepViewIner}>
-            <CircleView
-              title="1"
-              onPress={() => {
-                clickButton('1');
-              }}
-              buttonType={buttonType}
-            />
-            <CircleView1 />
+      <View style={styles.stepView}>
+        <View style={styles.stepViewIner}>
+          <CircleView
+            title="1"
+            onPress={() => {
+              clickButton('1');
+            }}
+            buttonType={buttonType}
+          />
+          <CircleView1 />
 
-            <CircleViewCircle
-              title="2"
-              onPress={() => {
-                clickButton('2');
-              }}
-              buttonType={buttonType}
-            />
-            <CircleView1 />
-            <CircleViewCircle
-              title="3"
-              onPress={() => {
-                clickButton('3');
-              }}
-              buttonType={buttonType}
-            />
-            <CircleView1 />
-            <CircleViewCircle
-              title="4"
-              onPress={() => {
-                clickButton('4');
-              }}
-              buttonType={buttonType}
-            />
-          </View>
+          <CircleViewCircle
+            title="2"
+            onPress={() => {
+              clickButton('2');
+            }}
+            buttonType={buttonType}
+          />
+          <CircleView1 />
+          <CircleViewCircle
+            title="3"
+            onPress={() => {
+              clickButton('3');
+            }}
+            buttonType={buttonType}
+          />
+          <CircleView1 />
+          <CircleViewCircle
+            title="4"
+            onPress={() => {
+              clickButton('4');
+            }}
+            buttonType={buttonType}
+          />
         </View>
       </View>
+      <ResetView />
       {ranDerView()}
     </>
   );

@@ -135,7 +135,7 @@ const Login = () => {
                     />
                   </View>
                   {/* ========= checkBox========== */}
-                  <SimpleCheckBox ml={26} text="Rebember Me" />
+                  <SimpleCheckBox ml={26} mt={10} text="Rebember Me" />
                   {/* ========= checkBox========== */}
                   <TouchableOpacity
                     onPress={() => alert('kkk')}

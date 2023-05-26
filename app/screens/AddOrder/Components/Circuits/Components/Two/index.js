@@ -1,49 +1,78 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
-import InputTypeView1 from '../../../InputTypeView/InputTypeView1';
-import {
-  InputViewWithIcon,
-  InputViewWithOutIcon,
-} from '../../../InputViewWithIcon';
-import InputView from '../../../InputView';
-import {serviceType} from '../../../../../../utils/addOrders';
-import {ResetView} from '../../../CircleView';
+
+import TextView from '../../../../../../components/TextView';
+
+import TextInputView from './TextInputView';
+import SimpleCheckBox from '../../../../../../components/checkBox/SimpleCheckBox';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 const Two = () => {
   const [text, setText] = React.useState('');
   return (
-    <View style={{flex: 1}}>
-      {/* ================date picker=================== */}
-      <View style={styles.itemWraper}>
-        <InputViewWithIcon text="Date Created" value="08/05/23" />
-        <InputViewWithOutIcon text="Order No" value="2897" />
+    <ScrollView>
+      <View
+        style={{
+          width: '100%',
+          height: 60,
+          // backgroundColor: 'red',
+          paddingHorizontal: 15,
+          paddingVertical: 10,
+        }}>
+        <View style={{...styles.titleView, flexDirection: 'row'}}>
+          <Text style={{color: 'white', marginLeft: 10}}>
+            Tachknical Contact
+          </Text>
+        </View>
       </View>
 
-      {/* ================date picker=================== */}
-      <View style={styles.itemWraper}>
-        <View style={styles.item}>
-          <InputTypeView1 title="Order Type" data={serviceType} />
-        </View>
-        <View style={styles.item}>
-          <InputTypeView1 title="Select Project" data={serviceType} />
+      <View style={styles.selectBoxWraper}>
+        <View style={styles.selectBox}>
+          <TextView title="Select Contact" color="black" size={16} />
+          <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
         </View>
       </View>
-      <View style={styles.itemWraper}>
-        <View style={styles.item}>
-          <InputTypeView1 title="Service Category" data={serviceType} />
-        </View>
-        <View style={styles.item}>
-          <InputTypeView1 title="Select Project" data={serviceType} />
-        </View>
-      </View>
-      {/* ================date picker=================== */}
-      <View style={styles.itemWraper}>
-        <InputViewWithIcon text="Due Date" value="08/05/23" />
-        <InputViewWithOutIcon text="Date from today" value="2897" />
-      </View>
+      <TextInputView margin={10} />
+      <TextInputView margin={18} />
 
-      {/* ================date picker=================== */}
-      <InputView />
-    </View>
+      <View
+        style={{
+          width: '100%',
+
+          // backgroundColor: 'red',
+          paddingHorizontal: 27,
+
+          marginTop: 20,
+        }}>
+        <Text style={{color: 'red'}}>
+          All Orders must have a unique Technical & Primary site contact All
+          Orders must have a unique Technical & Primary site contact All Orders
+          must have a unique Technical & Primary site contact{' '}
+        </Text>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 60,
+          // backgroundColor: 'red',
+          paddingHorizontal: 15,
+          paddingVertical: 10,
+        }}>
+        <View style={styles.titleView1}>
+          <Text style={{color: 'white'}}>Site Contact</Text>
+          <SimpleCheckBox ml={5} text={'Same as tech Contact'} mt={0} />
+        </View>
+      </View>
+      <TextInputView margin={10} />
+      <TextInputView margin={10} />
+      <TextInputView margin={10} />
+      <TextInputView margin={10} />
+      <TextInputView margin={10} />
+      <TextInputView margin={10} />
+      <TextInputView margin={10} />
+      <TextInputView margin={10} />
+      <TextInputView margin={10} />
+    </ScrollView>
   );
 };
 
@@ -103,5 +132,42 @@ const styles = StyleSheet.create({
     bottom: 60,
     left: 0,
     right: 0,
+  },
+  selectBox: {
+    width: '100%',
+    height: '100%',
+    // backgroundColor: 'blue',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: 'black',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+
+    paddingHorizontal: 10,
+  },
+  titleView: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#0472ef',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  titleView1: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#0472ef',
+    borderRadius: 5,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+  },
+  selectBoxWraper: {
+    width: '100%',
+    height: 40,
+    // backgroundColor: 'red',
+    paddingHorizontal: 27,
   },
 });
