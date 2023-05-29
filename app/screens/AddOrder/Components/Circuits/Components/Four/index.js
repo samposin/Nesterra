@@ -8,42 +8,57 @@ import {
 import InputView from '../../../InputView';
 import {serviceType} from '../../../../../../utils/addOrders';
 import {ResetView} from '../../../CircleView';
+import TextInputView from '../Two/TextInputView';
 const Four = () => {
   const [text, setText] = React.useState('');
   return (
     <View style={{flex: 1}}>
-      <ResetView />
       {/* ================date picker=================== */}
-      <View style={styles.itemWraper}>
-        <InputViewWithIcon text="Date Created" value="08/05/23" />
-        <InputViewWithOutIcon text="Order No" value="2897" />
-      </View>
 
       {/* ================date picker=================== */}
       <View style={styles.itemWraper}>
         <View style={styles.item}>
-          <InputTypeView1 title="Order Type" data={serviceType} />
+          <InputTypeView1 title="Accesss Speed" data={serviceType} />
         </View>
         <View style={styles.item}>
-          <InputTypeView1 title="Select Project" data={serviceType} />
+          <InputTypeView1 title="Port Speed" data={serviceType} />
         </View>
       </View>
       <View style={styles.itemWraper}>
         <View style={styles.item}>
-          <InputTypeView1 title="Service Category" data={serviceType} />
+          <InputTypeView1 title="Preferred Carrier" data={serviceType} />
         </View>
         <View style={styles.item}>
-          <InputTypeView1 title="Select Project" data={serviceType} />
+          <InputTypeView1 title="Demarc Location *" data={serviceType} />
+        </View>
+      </View>
+      <View style={styles.itemWraper}>
+        <View style={styles.item}>
+          <InputTypeView1 title="Preferred Carrier" data={serviceType} />
+        </View>
+        <View style={styles.item}>
+          <TextInputView margin={0} label="Smartsite Id" />
+        </View>
+      </View>
+      <View
+        style={{
+          width: '100%',
+          height: 40,
+          // backgroundColor: 'red',
+          marginTop: 20,
+          flexDirection: 'row',
+        }}>
+        <View style={{width: '50%', height: 60}}>
+          <TextInputView margin={10} label="Zip" />
+        </View>
+        <View style={{width: '50%', height: 60}}>
+          <TextInputView margin={10} label="State / Province" />
         </View>
       </View>
       {/* ================date picker=================== */}
-      <View style={styles.itemWraper}>
-        <InputViewWithIcon text="Due Date" value="08/05/23" />
-        <InputViewWithOutIcon text="Date from today" value="2897" />
-      </View>
 
       {/* ================date picker=================== */}
-      <InputView />
+      {/* <InputView /> */}
     </View>
   );
 };
@@ -74,7 +89,7 @@ const styles = StyleSheet.create({
   },
   item: {
     width: '48%',
-    height: 45,
+    height: 40,
   },
   item1: {
     width: '48%',

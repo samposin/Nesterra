@@ -32,7 +32,7 @@ const One = () => {
           <InputTypeView1 title="Service Category" data={serviceType} />
         </View>
         <View style={styles.item}>
-          <InputTypeView1 title="Select Project" data={serviceType} />
+          <InputTypeView1 title="Service Type" data={serviceType} />
         </View>
       </View>
       {/* ================date picker=================== */}
@@ -76,60 +76,6 @@ const One = () => {
         <View style={{width: '50%', height: '100%'}}></View>
       </View>
 
-      <View
-        style={{
-          width: '100%',
-          height: 130,
-          // backgroundColor: 'pink',
-          paddingHorizontal: 10,
-          paddingTop: 15,
-        }}>
-        <TextInput
-          textAlignVertical={'top'}
-          multiline
-          numberOfLines={5}
-          placeholder="Reagon For Order (optional)"
-          placeholderTextColor={{textAlign: 'top'}}
-          style={{
-            borderRadius: 5,
-            height: '100%',
-            width: '100%',
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start',
-            verticalAlign: 'top',
-            borderColor: 'black',
-            borderWidth: 1,
-            color: 'black',
-          }}
-        />
-      </View>
-      <View
-        style={{
-          width: '100%',
-          height: 130,
-          // backgroundColor: 'pink',
-          paddingHorizontal: 10,
-          paddingTop: 15,
-        }}>
-        <TextInput
-          textAlignVertical={'top'}
-          multiline
-          numberOfLines={5}
-          placeholder="Reagon For Order (optional)"
-          placeholderTextColor={{textAlign: 'top'}}
-          style={{
-            borderRadius: 5,
-            height: '100%',
-            width: '100%',
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start',
-            verticalAlign: 'top',
-            borderColor: 'black',
-            borderWidth: 1,
-            color: 'black',
-          }}
-        />
-      </View>
       <View
         style={{
           width: '100%',

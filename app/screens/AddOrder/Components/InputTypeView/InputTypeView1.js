@@ -18,7 +18,12 @@ const InputTypeView1 = ({title, title2, data}) => {
   const renderLabel = () => {
     if (isFocus) {
       return (
-        <Text style={[styles.label, isFocus && {color: 'black'}]}>
+        <Text
+          style={[
+            styles.label,
+            {borderRadius: 10},
+            isFocus && {color: 'black'},
+          ]}>
           Dropdown label
         </Text>
       );
@@ -95,7 +100,6 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     fontSize: 16,
     color: 'black',
-  
   },
   selectedTextStyle: {
     fontSize: 16,

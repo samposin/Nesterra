@@ -860,20 +860,20 @@ const Explore = ({
           userLocationPriority={'high'}
           mapType={mapType}
           onClusterPress={e => markerZoom1(e)}
-          onRegionChangeComplete={async (region, markers) => {
-            const coords = await mapRef?.current?.getCamera();
-            // console.log(region);
-            if (coords.zoom > 15) {
-              dispatch({
-                type: REGION_MARKERS,
-                data: markers,
-              });
-              bottomSheetRefZoom.current.snapToIndex(2);
-              setmarkerZoomStatus(true);
-            } else {
-              setmarkerZoomStatus(false);
-            }
-          }}
+          // onRegionChangeComplete={async (region, markers) => {
+          //   const coords = await mapRef?.current?.getCamera();
+          //   // console.log(region);
+          //   if (coords.zoom > 15) {
+          //     dispatch({
+          //       type: REGION_MARKERS,
+          //       data: markers,
+          //     });
+          //     bottomSheetRefZoom.current.snapToIndex(2);
+          //     setmarkerZoomStatus(true);
+          //   } else {
+          //     setmarkerZoomStatus(false);
+          //   }
+          // }}
           onLayout={onLayoutMap}>
           {coordinates &&
             coordinates.map((item, i) => {

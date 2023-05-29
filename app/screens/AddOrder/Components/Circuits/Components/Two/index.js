@@ -32,15 +32,15 @@ const Two = () => {
           <MaterialIcons name="keyboard-arrow-down" size={24} color="black" />
         </View>
       </View>
-      <TextInputView margin={10} />
-      <TextInputView margin={18} />
+      <TextInputView margin={10} label="Email *" />
+      <TextInputView margin={10} label="Phone *" />
 
       <View
         style={{
           width: '100%',
 
           // backgroundColor: 'red',
-          paddingHorizontal: 27,
+          paddingHorizontal: 10,
 
           marginTop: 20,
         }}>
@@ -63,15 +63,10 @@ const Two = () => {
           <SimpleCheckBox ml={5} text={'Same as tech Contact'} mt={0} />
         </View>
       </View>
-      <TextInputView margin={10} />
-      <TextInputView margin={10} />
-      <TextInputView margin={10} />
-      <TextInputView margin={10} />
-      <TextInputView margin={10} />
-      <TextInputView margin={10} />
-      <TextInputView margin={10} />
-      <TextInputView margin={10} />
-      <TextInputView margin={10} />
+      <TextInputView margin={10} label="Select Contact *" />
+      <TextInputView margin={10} label="Email *" />
+
+      <View style={{width: '100%', height: 300}}></View>
     </ScrollView>
   );
 };

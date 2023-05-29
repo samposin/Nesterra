@@ -2,18 +2,18 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {TextInput} from 'react-native-paper';
 
-const TextInputView = ({margin}) => {
+const TextInputView = ({margin, label}) => {
   return (
     <View
       style={{
         width: '100%',
         height: 40,
         // backgroundColor: 'red',
-        paddingHorizontal: 27,
+        paddingHorizontal: 10,
         marginTop: margin,
       }}>
       <TextInput
-        label="Email *"
+        label={label}
         mode="outlined"
         theme={{
           colors: {
@@ -23,7 +23,7 @@ const TextInputView = ({margin}) => {
         style={{
           height: 40,
           width: '100%',
-          alignSelf: 'center',
+          // alignSelf: 'center',
           // borderColor: 'red',
           // borderWidth: 1,
         }}
