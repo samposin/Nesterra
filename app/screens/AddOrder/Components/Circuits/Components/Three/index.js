@@ -29,14 +29,14 @@ const Three = () => {
         style={{
           width: '100%',
           height: 40,
-          // backgroundColor: 'red',
-
+          paddingHorizontal: 10,
           flexDirection: 'row',
+          justifyContent: 'space-between',
         }}>
-        <View style={{width: '50%', height: 60}}>
+        <View style={{width: '48%', height: 60}}>
           <TextInputView margin={10} label="Site Name" />
         </View>
-        <View style={{width: '50%', height: 60}}>
+        <View style={{width: '48%', height: 60}}>
           <TextInputView margin={10} label="Smartsite Id" />
         </View>
       </View>
@@ -52,14 +52,16 @@ const Three = () => {
         style={{
           width: '100%',
           height: 40,
-          // backgroundColor: 'red',
+          paddingHorizontal: 10,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
 
           flexDirection: 'row',
         }}>
-        <View style={{width: '50%', height: 60}}>
+        <View style={{width: '48%', height: 60}}>
           <TextInputView margin={10} label="City" />
         </View>
-        <View style={{width: '50%', height: 60}}>
+        <View style={{width: '48%', height: 60}}>
           <TextInputView margin={10} label="State / Province" />
         </View>
       </View>
@@ -69,17 +71,27 @@ const Three = () => {
           height: 40,
           // backgroundColor: 'red',
           marginTop: 20,
+          paddingHorizontal: 10,
           flexDirection: 'row',
+          justifyContent: 'space-between',
         }}>
-        <View style={{width: '50%', height: 60}}>
+        <View style={{width: '48%', height: 60}}>
           <TextInputView margin={10} label="Zip" />
         </View>
-        <View style={{width: '50%', height: 60}}>
+        <View style={{width: '48%', height: 60}}>
           <TextInputView margin={10} label="State / Province" />
         </View>
       </View>
-      <TextInputView margin={25} label="Site Access Restriction / Notes " />
-      <TextInputView margin={20} label="Special Requirements / Notes" />
+      <TextInputView
+        margin={25}
+        label="Site Access Restriction / Notes "
+        paddingHorizontal={10}
+      />
+      <TextInputView
+        margin={20}
+        label="Special Requirements / Notes"
+        paddingHorizontal={10}
+      />
 
       <View style={{width: '100%', height: 300}}></View>
       {/* <View style={{width: '100%', height: 300}}></View> */}

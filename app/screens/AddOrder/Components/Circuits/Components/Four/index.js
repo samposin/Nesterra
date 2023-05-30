@@ -9,57 +9,120 @@ import InputView from '../../../InputView';
 import {serviceType} from '../../../../../../utils/addOrders';
 import {ResetView} from '../../../CircleView';
 import TextInputView from '../Two/TextInputView';
+import TabView from './TabView';
+import ButtonView from './ButtonView';
+import BottomViewButton from './BottomViewButton';
 const Four = () => {
   const [text, setText] = React.useState('');
   return (
-    <View style={{flex: 1}}>
-      {/* ================date picker=================== */}
+    <>
+      <View>
+        <TabView />
+        <ButtonView />
+        {/* ================date picker=================== */}
 
-      {/* ================date picker=================== */}
-      <View style={styles.itemWraper}>
-        <View style={styles.item}>
-          <InputTypeView1 title="Accesss Speed" data={serviceType} />
+        {/* ================date picker=================== */}
+        <View style={styles.itemWraper}>
+          <View style={styles.item}>
+            <InputTypeView1 title="Accesss Speed" data={serviceType} />
+          </View>
+          <View style={styles.item}>
+            <InputTypeView1 title="Port Speed" data={serviceType} />
+          </View>
         </View>
-        <View style={styles.item}>
-          <InputTypeView1 title="Port Speed" data={serviceType} />
+        <View style={styles.itemWraper}>
+          <View style={styles.item}>
+            <InputTypeView1 title="Preferred Carrier" data={serviceType} />
+          </View>
+          <View style={styles.item}>
+            <InputTypeView1 title="Demarc Location *" data={serviceType} />
+          </View>
         </View>
-      </View>
-      <View style={styles.itemWraper}>
-        <View style={styles.item}>
-          <InputTypeView1 title="Preferred Carrier" data={serviceType} />
+        {/* <View
+          style={{
+            width: '100%',
+            height: 45,
+            flexDirection: 'row',
+            paddingHorizontal: 10,
+            justifyContent: 'space-between',
+          }}>
+          <View
+            style={{
+              width: '48%',
+              height: 45,
+              marginTop: 15,
+            }}>
+            <InputTypeView1 title="Preferred Carrier" data={serviceType} />
+          </View>
+          <View
+            style={{
+              width: '50%',
+              height: 45,
+              marginTop: 0,
+            }}>
+            <TextInputView margin={10} label="Smartsite I" />
+          </View>
         </View>
-        <View style={styles.item}>
-          <InputTypeView1 title="Demarc Location *" data={serviceType} />
-        </View>
-      </View>
-      <View style={styles.itemWraper}>
-        <View style={styles.item}>
-          <InputTypeView1 title="Preferred Carrier" data={serviceType} />
-        </View>
-        <View style={styles.item}>
-          <TextInputView margin={0} label="Smartsite Id" />
-        </View>
-      </View>
-      <View
-        style={{
-          width: '100%',
-          height: 40,
-          // backgroundColor: 'red',
-          marginTop: 20,
-          flexDirection: 'row',
-        }}>
-        <View style={{width: '50%', height: 60}}>
-          <TextInputView margin={10} label="Zip" />
-        </View>
-        <View style={{width: '50%', height: 60}}>
-          <TextInputView margin={10} label="State / Province" />
-        </View>
-      </View>
-      {/* ================date picker=================== */}
+        <View
+          style={{
+            width: '100%',
+            height: 45,
+            flexDirection: 'row',
+            paddingHorizontal: 10,
+            justifyContent: 'space-between',
+            marginTop: 10,
+          }}>
+          <View
+            style={{
+              width: '48%',
+              height: 45,
+              marginTop: 15,
+            }}>
+            <InputTypeView1 title="Preferred Carrier" data={serviceType} />
+          </View>
+          <View
+            style={{
+              width: '50%',
+              height: 45,
+              marginTop: 0,
+            }}>
+            <TextInputView margin={10} label="Smartsite I" />
+          </View>
+        </View> */}
 
-      {/* ================date picker=================== */}
-      {/* <InputView /> */}
-    </View>
+        <View style={styles.itemRow}>
+          <View style={styles.singleItem}>
+            <TextInputView margin={10} label="Route Location *" />
+          </View>
+          <View style={styles.singleItem}>
+            <TextInputView margin={10} label="Warking Phone On-..." />
+          </View>
+        </View>
+
+        <View style={{...styles.itemRow, marginTop: 15}}>
+          <View style={styles.singleItem}>
+            <TextInputView margin={10} label="Coustomer Edge IP A..." />
+          </View>
+          <View style={styles.singleItem}>
+            <TextInputView margin={10} label="Coustomar Mask *" />
+          </View>
+        </View>
+        <View style={{...styles.itemRow, marginTop: 15}}>
+          <View style={styles.singleItem}>
+            <TextInputView margin={10} label="Coustomer AS# *" />
+          </View>
+          <View style={styles.singleItem}>
+            <TextInputView margin={10} label="BGP Multipath" />
+          </View>
+        </View>
+
+        {/* ================date picker=================== */}
+
+        {/* ================date picker=================== */}
+        {/* <InputView /> */}
+        <BottomViewButton />
+      </View>
+    </>
   );
 };
 
@@ -120,4 +183,13 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
+  itemRow: {
+    width: '100%',
+    height: 40,
+    // backgroundColor: 'red',
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    justifyContent: 'space-between',
+  },
+  singleItem: {width: '48%', height: 60},
 });

@@ -75,6 +75,21 @@ const Circuits = () => {
           />
         </View>
       </View>
+      <View
+        style={{
+          width: '100%',
+          height: 30,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          borderBottomColor: '#a8a8a8',
+          borderBottomWidth: 1,
+        }}>
+        <Text style={{color: 'black', marginLeft: 9}}>General</Text>
+        <Text style={{color: 'black'}}>Contacts</Text>
+        <Text style={{color: 'black', marginLeft: 5}}>Location</Text>
+        <Text style={{color: 'black', marginRight: 9}}>Technical</Text>
+      </View>
+
       <ResetView />
       {ranDerView()}
     </>
@@ -86,11 +101,12 @@ export default Circuits;
 const styles = StyleSheet.create({
   stepView: {
     width: '100%',
-    height: 60,
+    height: 50,
     paddingHorizontal: 10,
     borderTopColor: '#a8a8a8',
     borderTopWidth: 1,
     marginTop: 10,
+    // backgroundColor: 'red',
   },
   stepViewIner: {
     width: '100%',

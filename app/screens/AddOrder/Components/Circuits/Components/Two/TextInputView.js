@@ -2,15 +2,16 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {TextInput} from 'react-native-paper';
 
-const TextInputView = ({margin, label}) => {
+const TextInputView = ({margin, label, paddingHorizontal}) => {
   return (
     <View
       style={{
         width: '100%',
-        height: 40,
+        height: 34,
         // backgroundColor: 'red',
-        paddingHorizontal: 10,
         marginTop: margin,
+        borderRadius: 10,
+        paddingHorizontal: paddingHorizontal,
       }}>
       <TextInput
         label={label}
@@ -21,7 +22,7 @@ const TextInputView = ({margin, label}) => {
           },
         }}
         style={{
-          height: 40,
+          height: 34,
           width: '100%',
           // alignSelf: 'center',
           // borderColor: 'red',
