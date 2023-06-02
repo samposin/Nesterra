@@ -12,6 +12,8 @@ import {useNavigation} from '@react-navigation/native';
 import MenuItem from '../../components/MenuItem';
 import {MenuImage} from '../../components/imageLink/MenuLink';
 import ToggleSwitch from 'toggle-switch-react-native';
+import TextView from '../../components/TextView';
+import IconImage from '../../components/IconImage';
 
 const Settings = () => {
   const [isOn, setIsSwitchOn] = React.useState(true);
@@ -29,9 +31,15 @@ const Settings = () => {
           alignItems: 'center',
           paddingHorizontal: 15,
         }}>
-        <Text style={{fontSize: 25, fontWeight: 'bold', color: 'black'}}>
-          Settinges
-        </Text>
+        {/* <TextView title="Settinges" color="black" size={25} /> */}
+        <TextView
+          title="Settinges"
+          color="black"
+          size={25}
+          marginLeft={0}
+          bold="bold"
+        />
+
         <BackButton
           onPress={() => {
             navigation.navigate('Menu');
@@ -57,20 +65,16 @@ const Settings = () => {
             alignItems: 'center',
           }}>
           <View style={{width: 25, height: 25}}>
-            <Image
-              source={MenuImage.volume}
-              style={{width: '100%', height: '100%', resizeMode: 'cover'}}
-            />
+            <IconImage src={MenuImage.volume} />
           </View>
-          <Text
-            style={{
-              fontSize: 15,
-              fontWeight: 'bold',
-              color: 'black',
-              marginLeft: 10,
-            }}>
-            Tab Sounds
-          </Text>
+
+          <TextView
+            title="Tab Sounds"
+            color="black"
+            size={16}
+            marginLeft={10}
+            bold="bold"
+          />
         </View>
 
         <View

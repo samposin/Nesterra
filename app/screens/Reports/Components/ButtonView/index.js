@@ -46,7 +46,7 @@ export default ButtonView;
 
 const styles = StyleSheet.create({
   seclectButton: {
-    width: '33%',
+    width: '25%',
     height: '100%',
     // backgroundColor: 'red',
     borderRadius: 5,

@@ -12,7 +12,8 @@ import {
 import React, {useState, useEffect} from 'react';
 import StateAnalysis from './StateAnalysis';
 import SiteCertiFication from './SiteCertiFication';
-import AssetsAndExpenses from './AssetsAndExpenses';
+import Overview from './Overview';
+import Report from './Report';
 import {getReportSiteAnalysis} from './../../actions/Reports/SiteAnlysis/index';
 import {connect, useSelector} from 'react-redux';
 import ButtonView from './Components/ButtonView/index';
@@ -20,9 +21,10 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 import {getReport} from '../../actions/Reports';
 import {imag} from '../../components/imageLink';
+import Search from '../../components/search/Search';
 
 const Reports = ({getReport}) => {
-  const [select, setSeleted] = useState('assets');
+  const [select, setSeleted] = useState('overview');
   const {appearanceType} = useSelector(state => state.appearanceType);
 
   useEffect(() => {
@@ -33,13 +35,15 @@ const Reports = ({getReport}) => {
 
   const ranDerView = () => {
     switch (true) {
-      case select === 'assets':
-        return <AssetsAndExpenses />;
+      case select === 'overview':
+        return <Overview />;
 
       case select === 'site':
         return <SiteCertiFication />;
       case select === 'state':
         return <StateAnalysis />;
+      case select === 'report':
+        return <Report />;
     }
   };
 
@@ -92,50 +96,11 @@ const Reports = ({getReport}) => {
         style={{
           width: '100%',
           height: 40,
-          // backgroundColor: 'pink',
+          // backgroundColor: 'red',
           paddingHorizontal: 15,
           marginTop: 10,
         }}>
-        <View
-          style={{
-            width: '100%',
-            height: 40,
-            backgroundColor: appearanceType == 'dark' ? '#010101' : null,
-            flexDirection: 'row',
-            borderRadius: 5,
-            shadowColor: 'black',
-            borderColor: appearanceType == 'dark' ? 'white' : null,
-            borderWidth: 2,
-          }}>
-          <View
-            style={{
-              width: '10%',
-              height: '100%',
-              // backgroundColor: 'pink',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <EvilIcons
-              name="search"
-              size={30}
-              color={appearanceType == 'dark' ? 'white' : 'black'}
-            />
-          </View>
-          <View
-            style={{
-              width: '90%',
-              height: '100%',
-              justifyContentce: 'center',
-            }}>
-            <TextInput
-              placeholder="Search Site ID"
-              style={{}}
-              placeholderTextColor={
-                appearanceType == 'dark' ? 'white' : 'black'
-              }
-            />
-          </View>
-        </View>
+        <Search />
       </View>
       <View style={{width: '100%', paddingHorizontal: 10}}>
         <View
@@ -143,15 +108,15 @@ const Reports = ({getReport}) => {
             appearanceType == 'dark' ? styles.buttonView1 : styles.buttonView
           }>
           <ButtonView
-            Title="Assets & Expenses"
+            Title="Overview"
             select={select}
-            value="assets"
+            value="overview"
             onPress={() => {
-              setSeleted('assets');
+              setSeleted('overview');
             }}
           />
           <ButtonView
-            Title="State Analysis"
+            Title="State/Cities"
             select={select}
             value="state"
             onPress={() => {
@@ -159,11 +124,19 @@ const Reports = ({getReport}) => {
             }}
           />
           <ButtonView
-            Title="Site Certification"
+            Title="Site Cert"
             select={select}
             value="site"
             onPress={() => {
               setSeleted('site');
+            }}
+          />
+          <ButtonView
+            Title="OCR Report"
+            select={select}
+            value="report"
+            onPress={() => {
+              setSeleted('report');
             }}
           />
         </View>

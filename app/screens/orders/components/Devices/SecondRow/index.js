@@ -11,6 +11,7 @@ const SecondRow = () => {
         height: 60,
         paddingLeft: 10,
         flexDirection: 'row',
+        marginTop: 55,
       }}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <FilterButton

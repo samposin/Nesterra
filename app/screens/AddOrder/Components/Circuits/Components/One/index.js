@@ -145,6 +145,45 @@ const One = () => {
           </Text>
         </View>
       </View>
+      <View style={styles.endButton}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            // backgroundColor: 'red',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <View
+            style={{
+              width: '40%',
+              height: '100%',
+              backgroundColor: '#ffffd1',
+              borderColor: 'black',
+              borderRadius: 12,
+              borderWidth: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{color: '#007aff', fontSize: 16, fontWeight: 'bold'}}>
+              Save Draft
+            </Text>
+          </View>
+          <View
+            style={{
+              width: '40%',
+              height: '100%',
+              backgroundColor: '#d6f2da',
+              borderRadius: 12,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{color: '#007aff', fontSize: 16, fontWeight: 'bold'}}>
+              Next
+            </Text>
+          </View>
+        </View>
+      </View>
     </ScrollView>
   );
 };
@@ -205,5 +244,16 @@ const styles = StyleSheet.create({
     bottom: 60,
     left: 0,
     right: 0,
+  },
+  endButton: {
+    width: '100%',
+    height: 50,
+    // backgroundColor: 'green',
+    position: 'absolute',
+    bottom: 50,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 35,
+    paddingVertical: 7,
   },
 });

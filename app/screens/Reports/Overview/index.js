@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux';
 import ActiveSiteCount from './Components/ActiveSiteCount';
 import AnnualCircuitSpend from './Components/AnnualCircuitSpend';
 import CirCuitCount from './Components/CircuitCount';
-const AssetsAndExpenses = () => {
+const Overview = () => {
   const {circuitCountPie} = useSelector(state => state.SiteAnlysis);
   // console.log(circuitCountPie);
   return (
@@ -19,6 +19,6 @@ const AssetsAndExpenses = () => {
   );
 };
 
-export default AssetsAndExpenses;
+export default Overview;
 
 const styles = StyleSheet.create({});
