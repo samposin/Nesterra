@@ -62,7 +62,7 @@ const Search = (
           shadowRadius: 3.84,
 
           elevation: 5,
-          borderRadius: 25,
+          borderRadius: 10,
           backgroundColor: appearanceType == 'dark' ? '#28282b' : 'white',
         }}>
         <View
@@ -169,7 +169,7 @@ const Search = (
 
                   <FontAwesome5
                     name="eject"
-                    size={15}
+                    size={10}
                     style={{
                       transform: [{rotate: '180deg'}],
                       marginLeft: 2,
