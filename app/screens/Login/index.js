@@ -11,14 +11,88 @@ import {
   Keyboard,
 } from 'react-native';
 import {TextInput} from 'react-native-paper';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import SimpleCheckBox from '../../components/checkBox/SimpleCheckBox';
 const {width, height} = Dimensions.get('screen');
+import {isAuthenticated, signIn} from '@okta/okta-react-native';
+import {createConfig} from '@okta/okta-react-native';
+import configFile from './samples.config';
 
 const Login = () => {
-  const [userName, setUserName] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [username, setUserName] = React.useState(
+    'santoshcarpanter@nesterra.net',
+  );
+  const [password, setPassword] = React.useState('Purna301');
+  const [authenticated, setAuthenticated] = React.useState(false);
+  const [progress, setProgress] = React.useState(true);
+  console.log(configFile.oidc.clientId);
+  const singInn = () => {
+    signIn({username, password})
+      .then(_token => {
+        console.log(_token, 'tk');
+        // this.setState({
+        //   progress: false,
+        //   username: '',
+        //   password: '',
+        //   error: ''
+        // }, () => navigation.navigate('Profile'));
+      })
+      .catch(error => {
+        console.log(error, 'fe');
+        // this.setState({
+        //   progress: false,
+        //   username: '',
+        //   password: '',
+        //   error: error.message
+        // });
+      });
+  };
+  // export default {
+  //   oidc: {
+  //     clientId: CLIENT_ID, // e.g.: `a0abcEf0gH123ssJS4o5`
+  //     redirectUri: REDIRECT_URI, // e.g.: `com.okta.example:/callback`
+  //     endSessionRedirectUri: LOGOUT_REDIRECT_URI, // e.g.: com.okta.example:/logout
+  //     discoveryUri: ISSUER, // e.g.: https://dev-1234.okta.com/oauth2/default
+  //     scopes: ['openid', 'profile', 'offline_access'],
+  //     requireHardwareBackedKeyStore: false,
+  //   },
+  // };
+  const checkAuthentication = async () => {
+    try {
+      const result = await isAuthenticated();
+      setAuthenticated(result.authenticated);
+      setProgress(false);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // this.setState({
+    //   authenticated: ,
+    //   progress: false
+    // });
+  };
+  const getauth = async () => {
+    try {
+      await createConfig({
+        clientId: configFile.oidc.clientId,
+        redirectUri: configFile.oidc.redirectUri,
+        endSessionRedirectUri: configFile.oidc.endSessionRedirectUri,
+        discoveryUri: configFile.oidc.discoveryUri,
+        scopes: configFile.oidc.scopes,
+        requireHardwareBackedKeyStore:
+          configFile.oidc.requireHardwareBackedKeyStore,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getauth();
+    // checkAuthentication();
+  }, []);
+
   return (
     <>
       <SafeAreaView
@@ -42,9 +116,6 @@ const Login = () => {
                   style={{
                     width: '80%',
                     height: 80,
-
-                    flexDirection: 'row',
-                    alignItems: 'center',
                   }}>
                   <Image
                     style={{width: '100%', height: 40, resizeMode: 'contain'}}
@@ -100,7 +171,7 @@ const Login = () => {
                     <TextInput
                       label="Username"
                       mode="outlined"
-                      value={userName}
+                      value={username}
                       theme={{
                         colors: {
                           primary: '#95bcd8', // Outline color here
@@ -117,7 +188,7 @@ const Login = () => {
                       Password
                     </Text>
                     <TextInput
-                      label="Username"
+                      label="Password"
                       mode="outlined"
                       value={password}
                       secureTextEntry={true}
@@ -138,7 +209,7 @@ const Login = () => {
                   <SimpleCheckBox ml={26} mt={10} text="Rebember Me" />
                   {/* ========= checkBox========== */}
                   <TouchableOpacity
-                    onPress={() => alert('kkk')}
+                    onPress={() => singInn()}
                     style={{
                       width: width - 122,
                       marginTop: 20,
