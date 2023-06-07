@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import {CLIENT_ID, REDIRECT_URI, LOGOUT_REDIRECT_URI, ISSUER} from '@env';
+// import {CLIENT_ID, REDIRECT_URI, LOGOUT_REDIRECT_URI, ISSUER} from '@env';
 
 /* 
   clientId, redirectUri, endSessionRedirectUri - these values can be found on the "General" tab of the application that you created earlier in Admin Console.
