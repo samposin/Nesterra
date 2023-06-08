@@ -13,9 +13,9 @@ const FilterButton = ({diplayName, title, onPress}) => {
       }}
       style={{
         width: 100,
-        height: 40,
+        height: 30,
         marginRight: 10,
-        borderRadius: 10,
+        borderRadius: 7,
         borderWidth: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',

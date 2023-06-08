@@ -52,7 +52,7 @@ const SiteActionStatus = ({HeaderText, colours}) => {
           <Text
             style={{
               ...styles.upperText,
-              color: appearanceType == 'dark' ? 'white' : 'blakc',
+              color: appearanceType == 'dark' ? 'white' : 'black',
             }}>
             {HeaderText}
           </Text>

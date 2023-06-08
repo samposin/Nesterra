@@ -11,9 +11,9 @@ const Button = ({displyCompomnet, title, onPress}) => {
           onPress();
         }}
         style={{
-          width: 90,
-          height: 40,
-          borderRadius: 10,
+          width: 80,
+          height: 30,
+          borderRadius: 7,
           marginRight: 10,
           backgroundColor:
             appearanceType == 'dark'

@@ -1,10 +1,10 @@
 import Axios from 'axios';
-import {Base_url} from '../../key';
+import {Base_url, headers} from '../../key';
 import {ALL_CONTACT} from '../actionType/Contacts';
 
 export const getContacts = seTcontactLoder => dispatch => {
   seTcontactLoder(true);
-  Axios.get(`${Base_url}/api/GetTechnicalContacts`)
+  Axios.get(`${Base_url}/api/GetTechnicalContacts`, headers)
     .then(response => {
       // console.log(response.data.length);
       if (response.data) {

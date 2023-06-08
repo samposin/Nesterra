@@ -27,7 +27,7 @@ const Sites = () => {
                 style={{
                   width: '20%',
                   height: '100%',
-
+                  backgroundColor: 'red',
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>

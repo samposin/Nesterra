@@ -64,9 +64,17 @@ const Atms = ({
           <View View style={{flex: 1}}>
             <View style={styles.tableRow}>
               <TableHeaderFirstColum color="white" title="ATM ID" border={0} />
-              <TableHeaderFirstColum color="white" title="Status" border={2} />
-              <TableHeaderFirstColum color="white" title="Vendor" border={2} />
-              <TableHeaderFirstColum color="white" title="Model" border={2} />
+              <TableHeaderFirstColum
+                color="white"
+                title="Status"
+                border={1.5}
+              />
+              <TableHeaderFirstColum
+                color="white"
+                title="Vendor"
+                border={1.5}
+              />
+              <TableHeaderFirstColum color="white" title="Model" border={1.5} />
             </View>
             <BottomSheetFlatList
               showsVerticalScrollIndicator={false}
@@ -81,14 +89,14 @@ const Atms = ({
                     }}
                     style={{
                       ...styles.tableRow1,
-                      height: 55,
+                      height: 40,
                       backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
                       marginVertical: 1,
                     }}>
                     <FlatColum title={item.ATM_ID} border={0} />
-                    <FlatColum title={item.ATM_Status} border={2} />
-                    <FlatColum title={item.Vendor} border={2} />
-                    <FlatColum title={item.Model} border={2} />
+                    <FlatColum title={item.ATM_Status} border={1.5} />
+                    <FlatColum title={item.Vendor} border={1.5} />
+                    <FlatColum title={item.Model} border={1.5} />
                   </TouchableOpacity>
                 );
               }}

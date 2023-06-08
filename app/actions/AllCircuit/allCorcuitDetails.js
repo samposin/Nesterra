@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import {Base_url} from '../../key';
+import {Base_url, headers} from '../../key';
 import {ALL_CIRCUIT_DETAILS} from '../actionType/AllCircuit';
 
 export const getAllCircuitDetails =
@@ -7,7 +7,7 @@ export const getAllCircuitDetails =
     // console.log(id);
     setLodding(true);
     // Axios.get(`${Base_url}/api/GetCircuitInventoryByCircuitId?CircuitId=${id}`)
-    Axios.get(`${Base_url}/api/GetCircuitInventoryByCircuitId/${id}`)
+    Axios.get(`${Base_url}/api/GetCircuitInventoryByCircuitId/${id}`, headers)
       .then(response => {
         if (response.data.length > 0) {
           circuitRefDetails.current.snapToIndex(2);

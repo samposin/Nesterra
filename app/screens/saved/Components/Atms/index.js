@@ -33,6 +33,7 @@ const Atms = () => {
           backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
           flexDirection: 'row',
           marginVertical: 10,
+          // backgroundColor: 'green',
         }}>
         <RanderColum title={item.ATM_ID} border={0} />
         <RanderColum title={item.ATM_Status} border={2} />
@@ -94,7 +95,6 @@ const styles = StyleSheet.create({
     width: '25%',
     height: '100%',
     backgroundColor: '#007aff',
-
     justifyContent: 'center',
     alignItems: 'center',
   },

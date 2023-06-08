@@ -194,6 +194,11 @@ const Assets = ({
               displyCompomnet={displyCompomnet}
               title="ATMS"
             />
+            <Button
+              onPress={setComponentATM}
+              displyCompomnet={displyCompomnet}
+              title="Interfaces"
+            />
           </View>
           <View style={styles.searchViewRight}></View>
         </View>

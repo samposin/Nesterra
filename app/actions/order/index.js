@@ -1,10 +1,11 @@
 import {GET_ORDER, GET_ORDER_DETAILS} from '../actionType/action.Order.type';
 import Axios from 'axios';
-import {Base_url} from '../../key';
+import {Base_url, headers} from '../../key';
 
 export const get_order = (id, setOrderLoding) => dispatch => {
   Axios.get(
     `${Base_url}/api/GetOrdersCustomdetailsByLocationID?Locationid=${id}`,
+    headers,
   )
     .then(response => {
       if (response.data) {
@@ -31,6 +32,7 @@ export const get_order_details =
     setLodding1(true);
     Axios.get(
       `${Base_url}/api/GetOrdersAlldetailsByInventoryID?InventoryID=${inv_Id}`,
+      headers,
     )
       .then(response => {
         if (response.data.length > 0) {

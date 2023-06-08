@@ -1,9 +1,9 @@
 import Axios from 'axios';
-import {Base_url} from '../../key';
+import {Base_url, headers} from '../../key';
 import {ALL_ATMS} from '../actionType/ATMS';
 
 export const getAllAtms = (id, setAtmLoding) => dispatch => {
-  Axios.get(`${Base_url}/api/GetAllCustomATM?Locationid=${id}`)
+  Axios.get(`${Base_url}/api/GetAllCustomATM?Locationid=${id}`, headers)
     .then(response => {
       if (response.data) {
         dispatch({

@@ -1,6 +1,7 @@
 import {StyleSheet, Text, Image, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {useSelector} from 'react-redux';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const ProfileItem = ({onPress, name, email}) => {
   const {appearanceType} = useSelector(state => state.appearanceType);
@@ -45,7 +46,15 @@ const ProfileItem = ({onPress, name, email}) => {
           </Text>
         </View>
       </View>
-      <View style={{width: '90%', height: '100%', justifyContent: 'center'}}>
+      <View
+        style={{
+          width: '90%',
+          height: '100%',
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+          // backgroundColor: 'red',
+          alignItems: 'center',
+        }}>
         <Text
           style={{
             marginLeft: 10,
@@ -55,6 +64,7 @@ const ProfileItem = ({onPress, name, email}) => {
           }}>
           {name}
         </Text>
+        <Entypo name="chevron-thin-right" size={22} color="#b8b8b8" />
       </View>
     </TouchableOpacity>
   );

@@ -156,7 +156,7 @@ const Saved = ({navigation}) => {
           <ListItem
             source={imgg.imgNotes}
             title="My Notes"
-            item={''}
+            item={'(3)'}
             onPress={SitesDetails}
           />
         </View>
