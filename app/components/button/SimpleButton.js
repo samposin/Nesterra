@@ -5,14 +5,14 @@ const SimpleButton = ({title}) => {
   return (
     <View
       style={{
-        width: 80,
-        height: 30,
+        width: 70,
+        height: 25,
         backgroundColor: '#d1e7ff',
         borderRadius: 7,
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text style={{color: '#3573a6'}}> {title}</Text>
+      <Text style={{color: '#007aff'}}> {title}</Text>
     </View>
   );
 };

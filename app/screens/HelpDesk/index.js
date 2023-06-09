@@ -214,15 +214,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'black',
     marginLeft: 15,
-    fontWeight: 'bold',
   },
   upperView: {
     width: '100%',
     height: 60,
     //   backgroundColor: 'pink',
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 15,
   },
   lowerView: {
     width: '100%',
@@ -233,7 +230,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderRadius: 5,
   },
   lowerView1: {
     width: '100%',

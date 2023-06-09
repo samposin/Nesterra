@@ -13,6 +13,8 @@ import {
 
 import {useSelector, connect} from 'react-redux';
 import SimpleButton from '../../../components/button/SimpleButton';
+import Entypo from 'react-native-vector-icons/Entypo';
+
 export const data = [
   {id: 0, name: 'Score', isActive: false, value: 'Score'},
   {id: 1, name: 'Splits', isActive: false, value: 'Splits'},
@@ -53,23 +55,56 @@ const StateAnalysis = () => {
         <Text></Text>
         <View
           style={{
-            width: '50%',
-            height: 33,
-
+            // width: '20%',
+            // height: 33,
+            // backgroundColor: 'red',
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
           <SimpleButton title="City List" />
-          <SimpleButton title="See Sites" />
+          {/* <SimpleButton title="City List" /> */}
         </View>
       </View>
-      <Text
+      <View
         style={{
-          ...styles.titleText,
-          color: appearanceType == 'dark' ? 'white' : 'black',
+          width: '100%',
+          height: 30,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          // backgroundColor: 'green',
+          alignItems: 'center',
         }}>
-        Sites (By City)
-      </Text>
+        <Text
+          style={{
+            ...styles.titleText,
+            color: appearanceType == 'dark' ? 'white' : 'black',
+          }}>
+          Sites (By State)
+        </Text>
+        <View
+          style={{
+            width: '25%',
+            height: ' 100%',
+            backgroundColor: '#d1e7ff',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderRadius: 7,
+            marginRight: 7,
+          }}>
+          <Text style={{marginLeft: 5, color: '#007aff'}}>See Sites</Text>
+          <View
+            style={{
+              width: '25%',
+              height: ' 100%',
+              // backgroundColor: 'red',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Entypo name="location-pin" size={20} color="#007aff" />
+          </View>
+        </View>
+      </View>
 
       <VictoryChart width={300} height={300}>
         <VictoryAxis
@@ -111,7 +146,7 @@ const StateAnalysis = () => {
           ...styles.titleText,
           color: appearanceType == 'dark' ? 'white' : 'black',
         }}>
-        Monthly Spend (By State)
+        Annual Spend (By State)
       </Text>
 
       <VictoryChart width={300} height={300}>
@@ -150,7 +185,7 @@ const StateAnalysis = () => {
           ...styles.titleText,
           color: appearanceType == 'dark' ? 'white' : 'black',
         }}>
-        Circiits (By State)
+        Circuits (By State)
       </Text>
       {/* ========================== */}
       <VictoryChart width={300} height={300}>
@@ -204,7 +239,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     marginLeft: 10,
-    marginTop: 10,
     color: 'black',
     // justifyContent:'center'
   },

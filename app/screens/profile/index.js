@@ -66,33 +66,27 @@ const Profile = ({navigation}) => {
           ...styles.profileText1,
           color: appearanceType == 'dark' ? 'white' : 'black',
         }}>
-        Santosh Cerpenter
+        Akash Brahme
       </Text>
       <Text
         style={{
           ...styles.profileText1,
           color: 'gray',
           marginBottom: scale(10),
-          fontSize: scale(15),
+          fontSize: scale(13),
         }}>
         Title -
       </Text>
       {/* ========item====== */}
 
-      <TextItemView
-        leftText="Email"
-        rightText="Sontosh.cerperter@nesterra.net"
-      />
-      <TextItemView leftText="Emp Id" rightText="-" />
-      <TextItemView
-        leftText="Phone#"
-        rightText="Sontosh.cerperter@nesterra.net"
-      />
+      <TextItemView leftText="Email" rightText="Akash.Brahme@nesterra.net" />
+      <TextItemView leftText="Emp Id" rightText="Nest001" />
+      <TextItemView leftText="Phone#" rightText="(9600)494-1846" />
 
       <TextItemView leftText="Desk Phone#" rightText="-" />
       <TextItemView leftText="Status" rightText="Active" />
       <TextItemView leftText="Business Unit" rightText="Nesterra" />
-      <TextItemView leftText="Activation Date" rightText="2022-05-25" />
+      <TextItemView leftText="Activation Date" rightText="2023-01-09" />
       <View
         style={{
           width: '100%',
@@ -107,6 +101,26 @@ const Profile = ({navigation}) => {
           }}></View>
       </View>
       <TakeImageBottomSheet imageAddRef={imageAddRef} />
+      <View
+        style={{
+          width: '100%',
+          height: 40,
+          // backgroundColor: 'pink',
+          marginTop: 100,
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            width: 300,
+            height: 35,
+            backgroundColor: '#74747b',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 5,
+          }}>
+          <Text style={{color: 'white', fontSize: 14}}>Save</Text>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -138,7 +152,7 @@ const styles = StyleSheet.create({
   },
   profileView: {
     width: '100%',
-    height: scale(150),
+    height: scale(140),
 
     // backgroundColor: '#7c7c7c',
     justifyContent: 'center',

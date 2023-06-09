@@ -21,7 +21,7 @@ const Contact = ({navigation, getContacts}) => {
   const dipatch = useDispatch();
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
   const {item} = useSelector(state => state.Contacts);
-  // console.log(item);
+  console.log(item);
   const {appearanceType} = useSelector(state => state.appearanceType);
 
   const indivisual = () => {

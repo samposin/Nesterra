@@ -10,14 +10,14 @@ const TextItemView = ({leftText, rightText}) => {
       <View style={styles.ProfileText2}>
         <Text
           style={{
-            fontSize: scale(15),
-            color: appearanceType == 'dark' ? 'white' : 'black',
+            fontSize: scale(13),
+            color: appearanceType == 'dark' ? 'white' : '#77777e',
           }}>
           {leftText}
         </Text>
         <Text
           style={{
-            fontSize: scale(15),
+            fontSize: scale(13),
             color: appearanceType == 'dark' ? 'white' : 'black',
             marginRight: scale(3),
           }}>
@@ -33,10 +33,10 @@ export default TextItemView;
 const styles = StyleSheet.create({
   profileText3: {
     width: '100%',
-    height: moderateScale(50),
+    height: moderateScale(40),
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: moderateScale(15),
+    paddingHorizontal: moderateScale(25),
     // backgroundColor: 'red',
   },
   ProfileText2: {
