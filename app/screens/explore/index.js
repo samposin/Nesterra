@@ -69,7 +69,7 @@ import MapTypeAndFilterButtom from './components/MapTypeAndFilterButtom/index';
 import {dataMar} from '../../utils/MarkerData1';
 import {getLocationInfo} from './../../actions/LocartionInfo/index';
 import {SET_LAT_LNG} from '../../actions/action.type';
-import DropDownView from './components/Search/DropDownView';
+import BackDropOne from './components/Search/DropDownView';
 import RanderView from './components/RanderView';
 
 import {
@@ -82,6 +82,7 @@ import ZoomMarkers from './components/ZoomMarkers/index';
 import {REGION_MARKERS} from '../../actions/action.coordinate.type';
 import ZoomMarkersView from './components/ZoomMarkers/ZoomMarkersView';
 import Certification from './components/Certification';
+import BackdropView from './components/BackdropView';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -362,6 +363,7 @@ const Explore = ({
   const deviceRefExplore = useRef(null);
   const orderRefExplore = useRef(null);
   const imageAddRef = useRef(null);
+  const bottomSheetRefBB = useRef(null);
 
   const handleSheetChanges = useCallback(index => {
     console.log('handleSheetChanges', index);
@@ -887,6 +889,8 @@ const Explore = ({
                   }}
                   // tracksViewChanges={true}
                   onPress={() => {
+                    // bottomSheetRefBB.current.snapToIndex(1);
+                    // bottomSheetRefBB.current.snapToIndex(2);
                     changeMarkerBorder(i);
                     playSound();
                     setIsLoading(true);
@@ -896,6 +900,7 @@ const Explore = ({
                       setIsLoading,
                       bottomSheetRef,
                     });
+
                     // markerZoom(item.Latitude, item.Longitude);
                     // onSearchPress(item.Latitude, item.Longitude);
                     // settIndexZ(0);
@@ -1183,6 +1188,7 @@ const Explore = ({
         bottomSheetRefZoom={bottomSheetRefZoom}
         onSearchPress={goTo}
       />
+      <BackdropView bottomSheetRefBB={bottomSheetRefBB} />
     </>
   );
 };

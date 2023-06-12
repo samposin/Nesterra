@@ -2,12 +2,12 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {copyText, tostalert} from '../../../../components/helper';
 
-const DataColum = ({title}) => {
+const DataColum = ({title, width}) => {
   return (
     <View
       style={{
         ...styles.tableRowColum2,
-        width: '25%',
+        width: width,
         borderLeftColor: 'white',
         borderLeftWidth: 2,
       }}>

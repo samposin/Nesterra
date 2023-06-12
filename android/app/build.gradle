@@ -260,7 +260,7 @@ android {
 
         }
     }
-}
+
 
 dependencies {
          // If your app supports Android versions before Ice Cream Sandwich (API level 14)

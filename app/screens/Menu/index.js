@@ -17,6 +17,7 @@ import ProfileItem from './ProfileItem';
 import {Title} from 'react-native-paper';
 import MenuItem from './../../components/MenuItem/index';
 import {MenuImage} from '../../components/imageLink/MenuLink';
+import BackdropView from '../explore/components/BackdropView';
 
 // const MenuImage = {
 //   profile: require('../../images/Icons/user.png'),
@@ -35,6 +36,7 @@ import {MenuImage} from '../../components/imageLink/MenuLink';
 const Menu = ({navigation, getContacts}) => {
   const {appearanceType} = useSelector(state => state.appearanceType);
   const bottomRef = useRef(null);
+  const bottomRef1 = useRef(null);
   const snapPoints = useMemo(() => ['10%', '26%', '95%'], []);
   const [contactLoder, seTcontactLoder] = useState(true);
   const onPress = text => {
@@ -149,7 +151,9 @@ const Menu = ({navigation, getContacts}) => {
           />
 
           <MenuItem
-            onPress={() => onPress('Legal')}
+            onPress={() => {
+              bottomRef.current.snapToIndex(2);
+            }}
             src={MenuImage.Legal}
             title="Legal"
           />
@@ -168,6 +172,7 @@ const Menu = ({navigation, getContacts}) => {
         contactLoder={contactLoder}
         snapPoints={snapPoints}
       />
+      <BackdropView bottomRef={bottomRef1} />
       {/* */}
     </>
   );
