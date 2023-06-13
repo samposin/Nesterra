@@ -78,7 +78,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: true,  // clean and rebuild if changing
+    enableHermes: false,  // clean and rebuild if changing
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -130,7 +130,7 @@ android {
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
-
+defaultConfig {
 
         applicationId "com.nesterra"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -260,7 +260,7 @@ android {
 
         }
     }
-
+}
 
 dependencies {
          // If your app supports Android versions before Ice Cream Sandwich (API level 14)

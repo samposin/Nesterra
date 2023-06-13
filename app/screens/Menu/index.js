@@ -152,7 +152,7 @@ const Menu = ({navigation, getContacts}) => {
 
           <MenuItem
             onPress={() => {
-              bottomRef.current.snapToIndex(2);
+              bottomRef1.current.snapToIndex(2);
             }}
             src={MenuImage.Legal}
             title="Legal"
@@ -172,7 +172,7 @@ const Menu = ({navigation, getContacts}) => {
         contactLoder={contactLoder}
         snapPoints={snapPoints}
       />
-      <BackdropView bottomRef={bottomRef1} />
+      {/* <BackdropView bottomRef={bottomRef1} /> */}
       {/* */}
     </>
   );

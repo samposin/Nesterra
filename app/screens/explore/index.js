@@ -889,17 +889,17 @@ const Explore = ({
                   }}
                   // tracksViewChanges={true}
                   onPress={() => {
-                    // bottomSheetRefBB.current.snapToIndex(1);
+                    bottomSheetRefBB.current.snapToIndex(1);
                     // bottomSheetRefBB.current.snapToIndex(2);
-                    changeMarkerBorder(i);
-                    playSound();
-                    setIsLoading(true);
-                    setmarkerZoomStatus(false);
-                    get_location_details({
-                      id: item.Location_ID,
-                      setIsLoading,
-                      bottomSheetRef,
-                    });
+                    // changeMarkerBorder(i);
+                    // playSound();
+                    // setIsLoading(true);
+                    // setmarkerZoomStatus(false);
+                    // get_location_details({
+                    //   id: item.Location_ID,
+                    //   setIsLoading,
+                    //   bottomSheetRef,
+                    // });
 
                     // markerZoom(item.Latitude, item.Longitude);
                     // onSearchPress(item.Latitude, item.Longitude);
@@ -1188,7 +1188,7 @@ const Explore = ({
         bottomSheetRefZoom={bottomSheetRefZoom}
         onSearchPress={goTo}
       />
-      <BackdropView bottomSheetRefBB={bottomSheetRefBB} />
+      {/* <BackdropView bottomSheetRefBB={bottomSheetRefBB} /> */}
     </>
   );
 };
