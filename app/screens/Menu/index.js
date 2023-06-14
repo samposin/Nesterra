@@ -152,7 +152,7 @@ const Menu = ({navigation, getContacts}) => {
 
           <MenuItem
             onPress={() => {
-              bottomRef1.current.snapToIndex(2);
+              // bottomRef1.current.snapToIndex(2);
             }}
             src={MenuImage.Legal}
             title="Legal"

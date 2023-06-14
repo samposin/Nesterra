@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-
+apply plugin: "com.facebook.react"
 import com.android.build.OutputFile
 
 /**
@@ -264,6 +264,8 @@ defaultConfig {
 
 dependencies {
          // If your app supports Android versions before Ice Cream Sandwich (API level 14)
+         implementation "com.facebook.react:react-android"
+   implementation "com.facebook.react:hermes-android"
   implementation 'com.facebook.fresco:animated-base-support:1.3.0'
 
   // For animated GIF support

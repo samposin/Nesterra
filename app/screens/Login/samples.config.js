@@ -19,13 +19,13 @@
   For more details, https://developer.okta.com/docs/guides/sign-into-mobile-app/create-okta-application/
 */
 
-export default {
-  oidc: {
-    clientId: `0oaiu88te3e3TzbMe357`, // e.g.: `a0abcEf0gH123ssJS4o5`
-    redirectUri: `com.okta.nesterra:/callback`,
-    endSessionRedirectUri: 'com.okta.dev-81495851:/',
-    discoveryUri: `https://nesterra.okta.com/oauth2/default`,
-    scopes: 'openid',
-    requireHardwareBackedKeyStore: false,
-  },
-};
+// export default {
+//   oidc: {
+//     clientId: `0oaiu88te3e3TzbMe357`, // e.g.: `a0abcEf0gH123ssJS4o5`
+//     redirectUri: `com.okta.nesterra:/callback`,
+//     endSessionRedirectUri: 'com.okta.dev-81495851:/',
+//     discoveryUri: `https://nesterra.okta.com/oauth2/default`,
+//     scopes: 'openid',
+//     requireHardwareBackedKeyStore: false,
+//   },
+// };

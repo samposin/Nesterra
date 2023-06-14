@@ -89,7 +89,7 @@ const Settings = () => {
             onColor="#34c759"
             offColor="#b3b8b4"
             labelStyle={{color: 'black', fontWeight: '500'}}
-            size="large"
+            size="medium"
             onToggle={isOn => {
               setIsSwitchOn(isOn);
               if (isOn) {

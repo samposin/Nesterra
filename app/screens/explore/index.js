@@ -18,7 +18,7 @@ import Search from './Search';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import MapViewDirections from 'react-native-maps-directions';
-
+DropDownView;
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Geolocation from 'react-native-geolocation-service';
@@ -83,6 +83,7 @@ import {REGION_MARKERS} from '../../actions/action.coordinate.type';
 import ZoomMarkersView from './components/ZoomMarkers/ZoomMarkersView';
 import Certification from './components/Certification';
 import BackdropView from './components/BackdropView';
+import DropDownView from './components/Search/DropDownView';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -1188,7 +1189,7 @@ const Explore = ({
         bottomSheetRefZoom={bottomSheetRefZoom}
         onSearchPress={goTo}
       />
-      {/* <BackdropView bottomSheetRefBB={bottomSheetRefBB} /> */}
+      <BackdropView bottomSheetRef={bottomSheetRefBB} />
     </>
   );
 };
