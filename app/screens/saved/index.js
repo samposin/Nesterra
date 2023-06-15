@@ -56,23 +56,44 @@ const Saved = ({navigation}) => {
             width: '90%',
             height: '100%',
             flexDirection: 'row',
-            alignItems: 'center',
+            // alignItems: 'center',
+            justifyContent: 'space-between',
+            // backgroundColor: 'pink',
           }}>
-          <Text
+          <View
             style={{
-              fontSize: 16,
-              fontWeight: '700',
-              color: appearanceType == 'dark' ? 'white' : 'black',
+              width: '50%',
+              height: '100%',
+              flexDirection: 'row',
+              alignItems: 'center',
             }}>
-            {title}
-          </Text>
-          <Text
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: '700',
+                color: appearanceType == 'dark' ? 'white' : 'black',
+              }}>
+              {title}
+            </Text>
+            <Text
+              style={{
+                marginLeft: 7,
+                color: appearanceType == 'dark' ? 'white' : 'black',
+              }}>
+              {item}{' '}
+            </Text>
+          </View>
+          <View
             style={{
-              marginLeft: 7,
-              color: appearanceType == 'dark' ? 'white' : 'black',
+              width: '50%',
+              height: '100%',
+              // backgroundColor: 'pink',
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
             }}>
-            {item}{' '}
-          </Text>
+            <Entypo name="chevron-thin-right" size={18} color="#b8b8b8" />
+          </View>
         </View>
       </TouchableOpacity>
     );

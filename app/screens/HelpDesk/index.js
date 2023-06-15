@@ -11,6 +11,9 @@ import {
 import React, {useState} from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useSelector} from 'react-redux';
+import InputTypeView1 from '../AddOrder/Components/InputTypeView/InputTypeView1';
+import {serviceType} from '../../utils/addOrders';
+import CustomDropDown from './CustomDropDown';
 
 const HelpDesk = ({navigation}) => {
   const [type, setType] = useState('Ask a Question');
@@ -48,26 +51,14 @@ const HelpDesk = ({navigation}) => {
         style={{
           ...styles.upperView,
           position: 'relative',
+          paddingHorizontal: 15,
+          zIndex: 2000,
         }}>
-        <View
+        {/* <View
           style={
             appearanceType === 'dark' ? styles.lowerView : styles.lowerView1
           }>
-          {isCheck ? (
-            <TouchableOpacity
-              onPress={() => {
-                setisCheck(false);
-              }}
-              style={{
-                width: 200,
-                height: 200,
-                backgroundColor: 'yellow',
-                position: 'absolute',
-                right: -20,
-                top: 10,
-                zIndex: 1000,
-              }}></TouchableOpacity>
-          ) : null}
+         
 
           <Text
             style={
@@ -87,8 +78,10 @@ const HelpDesk = ({navigation}) => {
               source={require('../../images/legal/downArrow.png')}
             />
           </TouchableOpacity>
-        </View>
+        </View>*/}
+        {/* <InputTypeView1 title="Select Project" data={serviceType} /> */}
       </View>
+
       <Text
         style={appearanceType === 'dark' ? styles.typeText : styles.typeText1}>
         Subject
@@ -168,6 +161,7 @@ const HelpDesk = ({navigation}) => {
           <Text style={{color: 'white', fontSize: 15}}>Submit Request</Text>
         </View>
       </View>
+      <CustomDropDown />
     </SafeAreaView>
   );
 };

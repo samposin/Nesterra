@@ -51,8 +51,8 @@ const InputTypeView1 = ({title, title2, data}) => {
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onChange={item => {
-            setValue(item.value);
-            setIsFocus(false);
+            // setValue(item.value);
+            // setIsFocus(false);
           }}
           // renderLeftIcon={() => (
           //   <AntDesign
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
     zIndex: 999,
     paddingHorizontal: 8,
     fontSize: 14,
+    width: 200,
   },
   placeholderStyle: {
     fontSize: 16,

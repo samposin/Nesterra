@@ -1088,6 +1088,7 @@ const Explore = ({
             setFocusOn={setFocusOn}
             getAddress={getAddress}
             rander={rander}
+            setRander={setRander}
           />
         )}
 
@@ -1104,15 +1105,9 @@ const Explore = ({
             getDeviceId={getDeviceId}
           />
         ) : null}
-        {dropDownShow ? (
-          <DropDownView
-            seTDropDownShow={seTDropDownShow}
-            setSearchView={addRess}
-            setRander={setRander}
-            setPlace={setPlace}
-            searchView={searchView}
-          />
-        ) : null}
+        {/* {dropDownShow ? ( */}
+
+        {/* // ) : null} */}
         {/* =================search=============== */}
         {/* =================Category=============== */}
         {catShow && (
@@ -1190,6 +1185,13 @@ const Explore = ({
         onSearchPress={goTo}
       />
       <BackdropView bottomSheetRef={bottomSheetRefBB} />
+      <DropDownView
+        seTDropDownShow={seTDropDownShow}
+        setSearchView={addRess}
+        setRander={setRander}
+        setPlace={setPlace}
+        searchView={searchView}
+      />
     </>
   );
 };
