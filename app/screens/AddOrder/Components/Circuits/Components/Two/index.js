@@ -63,6 +63,21 @@ const Two = () => {
           <SimpleCheckBox ml={5} text={'Same as tech Contact'} mt={0} />
         </View>
       </View>
+      <View
+        style={{
+          width: '100%',
+          height: 40,
+          paddingHorizontal: 15,
+          flexDirection: 'row',
+        }}>
+        <View style={{width: '50%', height: '100%'}}>
+          <Text>Local Contact</Text>
+        </View>
+        <View style={{width: '50%', height: '100%'}}>
+          <Text>Alternative Local Contact</Text>
+        </View>
+      </View>
+
       <TextInputView
         margin={10}
         label="Select Contact *"

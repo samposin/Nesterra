@@ -44,7 +44,7 @@ const One = () => {
       {/* ================date picker=================== */}
       {/* <InputView /> */}
 
-      <View style={styles.itemWraper}>
+      {/* <View style={styles.itemWraper}>
         <View
           style={{
             width: '48%',
@@ -74,8 +74,43 @@ const One = () => {
           <Text style={{color: 'red'}}>7 digits</Text>
         </View>
         <View style={{width: '50%', height: '100%'}}></View>
+      </View> */}
+      <View
+        style={{
+          width: '100%',
+          height: 50,
+          // backgroundColor: '#3478f6',
+          marginTop: 10,
+        }}>
+        <View
+          style={{
+            // width: '100%',
+            height: '100%',
+            backgroundColor: '#ccddf2',
+            marginHorizontal: 10,
+            borderRadius: 5,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <Text style={{fontWeight: 'bold', color: 'black', marginLeft: 10}}>
+            Multiple voice lines/devices
+          </Text>
+          <View
+            style={{
+              width: 90,
+              height: 37,
+              backgroundColor: '#3478f6',
+              marginRight: 10,
+              borderRadius: 5,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-around',
+            }}>
+            <Text style={{fontSize: 18, color: 'white'}}>add</Text>
+          </View>
+        </View>
       </View>
-
       <View
         style={{
           width: '100%',
@@ -106,18 +141,22 @@ const One = () => {
       <View
         style={{
           width: '100%',
-          height: 140,
+          height: 100,
           flexDirection: 'row',
           alignItems: 'flex-end',
-          justifyContent: 'center',
+          justifyContent: 'space-around',
         }}>
         <View
           style={{
             width: '40%',
             height: 32,
+            flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-            borderRadius: 10,
+            borderRadius: 7,
+            borderWidth: 1,
+            backgroundColor: '#ffffd1',
+            borderColor: 'black',
           }}>
           <Text
             style={{
@@ -134,7 +173,7 @@ const One = () => {
             backgroundColor: '#dbf1dc',
             justifyContent: 'center',
             alignItems: 'center',
-            borderRadius: 10,
+            borderRadius: 7,
           }}>
           <Text
             style={{
@@ -145,7 +184,7 @@ const One = () => {
           </Text>
         </View>
       </View>
-      <View style={styles.endButton}>
+      {/* <View style={styles.endButton}>
         <View
           style={{
             width: '100%',
@@ -183,7 +222,7 @@ const One = () => {
             </Text>
           </View>
         </View>
-      </View>
+      </View> */}
     </ScrollView>
   );
 };

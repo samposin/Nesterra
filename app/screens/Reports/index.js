@@ -13,7 +13,7 @@ import React, {useState, useEffect} from 'react';
 import StateAnalysis from './StateAnalysis';
 import SiteCertiFication from './SiteCertiFication';
 import Overview from './Overview';
-import Report from './Report';
+import OcrReport from './OcrReport';
 import {getReportSiteAnalysis} from './../../actions/Reports/SiteAnlysis/index';
 import {connect, useSelector} from 'react-redux';
 import ButtonView from './Components/ButtonView/index';
@@ -43,7 +43,7 @@ const Reports = ({getReport}) => {
       case select === 'state':
         return <StateAnalysis />;
       case select === 'report':
-        return <Report />;
+        return <OcrReport />;
     }
   };
 
@@ -84,7 +84,6 @@ const Reports = ({getReport}) => {
                 width: '70%',
                 height: '70%',
                 resizeMode: 'cover',
-                tintColor: '#2782d1',
               }}
             />
           </View>
@@ -171,7 +170,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 10,
   },
   buttonView: {
     width: '100%',
@@ -196,7 +194,5 @@ const styles = StyleSheet.create({
   scroll: {
     borderColor: 'blue',
     borderRadius: 2,
-    // borderRadius: 2,
-    // borderRadius: 2,
   },
 });

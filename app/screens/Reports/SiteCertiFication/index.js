@@ -35,7 +35,7 @@ const SiteCertiFication = () => {
       .then(result => {
         console.log(result, 'rere');
         setSiteCerData(result?.Site_cer_data);
-        console.log(result.Site_cer_data, 'dwqd');
+        // console.log(result.Site_cer_data, 'dwqd');
       })
       .catch(error => console.log(error));
   };

@@ -1,12 +1,9 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {ResetView} from '../CircleView';
 
 const Devices = () => {
-  return (
-    <View>
-      <Text>Devices</Text>
-    </View>
-  );
+  return <>{/* <ResetView /> */}</>;
 };
 
 export default Devices;
