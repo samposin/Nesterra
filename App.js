@@ -1,5 +1,5 @@
 import 'react-native-reanimated';
-
+import 'react-native-gesture-handler';
 global.__reanimatedWorkletInit = () => {};
 
 import React from 'react';
@@ -12,11 +12,11 @@ import 'react-native-reanimated';
 import store from './app/store/store';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
-LogBox.ignoreLogs([
-  'new NativeEventEmitter',
-  "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
-]);
-LogBox.ignoreAllLogs();
+// LogBox.ignoreLogs([
+//   'new NativeEventEmitter',
+//   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
+// ]);
+// LogBox.ignoreAllLogs();
 
 const App = () => {
   return (

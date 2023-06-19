@@ -77,13 +77,7 @@ const Settings = () => {
           />
         </View>
 
-        <View
-          style={{
-            width: '50%',
-            height: '100%',
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-          }}>
+        <View style={styles.toggleView}>
           <ToggleSwitch
             isOn={isOn}
             onColor="#34c759"
@@ -116,4 +110,11 @@ const Settings = () => {
 
 export default Settings;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  toggleView: {
+    width: '50%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+  },
+});
