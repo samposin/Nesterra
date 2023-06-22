@@ -1,1 +1,0 @@
-export const REPORT_ALL_HOME = 'REPORT_ALL_HOME';
