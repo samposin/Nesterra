@@ -1,9 +1,12 @@
 import Axios from 'axios';
-import {Base_url} from '../../key';
+import {Base_url, headers} from '../../key';
 import {GET_ALL_CIRCUIT_INVENTORY} from '../actionType/circuitInventory.type';
 
 export const getInventoryCircuit = (id, setcircuitLoding) => dispatch => {
-  Axios.get(`${Base_url}/api/GetCircuitInventoryByLocationId?Locationid=${id}`)
+  Axios.get(
+    `${Base_url}/api/GetCircuitInventoryByLocationId?Locationid=${id}`,
+    headers,
+  )
     .then(response => {
       //   console.log(response.data.length);
       if (response.data) {

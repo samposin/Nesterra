@@ -59,7 +59,10 @@ const Reports = ({getReport}) => {
             fontSize: 25,
             fontWeight: 'bold',
             color: appearanceType == 'dark' ? 'white' : 'black',
+<<<<<<< HEAD:Nesterra-anup/app/screens/Reports/index.js
             marginLeft: 15,
+=======
+>>>>>>> 7605d47dd02e5e1a0e2e15aa3e171353bb2b0f18:app/screens/Reports/index.js
           }}>
           Interective Reports
         </Text>

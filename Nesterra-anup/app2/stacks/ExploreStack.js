@@ -8,6 +8,11 @@ import DestinationPoint from '../screens/explore/DestinationPoint';
 import Filtter from '../screens/filtter';
 import Profile from '../screens/profile';
 import SettingProfile from '../screens/explore/SettingProfile';
+<<<<<<< HEAD:Nesterra-anup/app2/stacks/ExploreStack.js
+=======
+import Legal from './../screens/Legal/index';
+import HelpDesk from './../screens/HelpDesk/index';
+>>>>>>> 7605d47dd02e5e1a0e2e15aa3e171353bb2b0f18:app/stacks/ExploreStack.js
 
 import {useDispatch} from 'react-redux';
 import {
@@ -21,21 +26,24 @@ const Stack = createNativeStackNavigator();
 const ExploreStack = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    setTimeout(() => {
-      dispatch({
-        type: SITE_ID,
-      });
-    }, 1000);
-    setTimeout(() => {
-      dispatch({
-        type: DEVICE_ID,
-      });
-    }, 1500);
-    setTimeout(() => {
-      dispatch({
-        type: ADDRESS_ID,
-      });
-    }, 1700);
+    dispatch({
+      type: SITE_ID,
+    });
+    dispatch({
+      type: DEVICE_ID,
+    });
+    dispatch({
+      type: ADDRESS_ID,
+    });
+    // setTimeout(() => {
+
+    // }, 1000);
+    // setTimeout(() => {
+
+    // }, 1500);
+    // setTimeout(() => {
+
+    // }, 1700);
   }, []);
 
   return (
@@ -45,7 +53,7 @@ const ExploreStack = () => {
       }}>
       <Stack.Screen name="Explore" component={Explore} />
       <Stack.Screen name="Profile" component={Profile} />
-      {/* <Stack.Screen name="Filtter" component={Filtter} /> */}
+      <Stack.Screen name="Filtter" component={Filtter} />
       <Stack.Screen name="SearchAddress" component={SearchAddress} />
       <Stack.Screen name="StartPoint" component={StartPoint} />
       <Stack.Screen name="DestinationPoint" component={DestinationPoint} />

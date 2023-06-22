@@ -1,8 +1,11 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {copyText} from '../../../../components/helper';
+import {useSelector} from 'react-redux';
 
 const FlatListColum = ({item, title}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+
   const selectedComponent = item => {
     switch (true) {
       case item === 'In Progress':
@@ -22,7 +25,7 @@ const FlatListColum = ({item, title}) => {
         width: '20%',
         justifyContent: 'center',
         borderLeftColor: 'white',
-        borderLeftWidth: 2,
+        borderLeftWidth: 1,
         backgroundColor: selectedComponent(item?.Status),
       }}>
       <TouchableOpacity
@@ -30,7 +33,10 @@ const FlatListColum = ({item, title}) => {
           copyText(title);
           tostalert(title);
         }}>
-        <Text style={styles.boxText1}> {title}</Text>
+        <Text style={{color: appearanceType == 'dark' ? 'white' : 'black'}}>
+          {' '}
+          {title}
+        </Text>
       </TouchableOpacity>
     </View>
   );

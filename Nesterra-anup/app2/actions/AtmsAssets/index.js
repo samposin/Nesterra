@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import {Base_url} from '../../key';
+import {Base_url, headers} from '../../key';
 import {
   ALL_ATMS,
   ATMS_ALL_BRANCH_ID,
@@ -16,6 +16,7 @@ export const GetAllAtmNumber = setLoder => dispatch => {
   setLoder(true);
   Axios.get(
     `${Base_url}/api/GetAllCustomATM?atmid=0&model=0&vendor=0&siteid&type=0&branchid=0`,
+    headers,
   )
     .then(response => {
       if (response.data.length > 0) {
@@ -61,7 +62,7 @@ export const GetAllAtmSiteId = setLoder => dispatch => {
 export const GetAllAtmVendor = setBottomSheetLoder => dispatch => {
   // console.log(name);
   setBottomSheetLoder(true);
-  Axios.get(`${Base_url}/api/GetAtmVendorsList`)
+  Axios.get(`${Base_url}/api/GetAtmVendorsList`, headers)
     .then(response => {
       if (response.data.length > 0) {
         // console.log(response.data.length, '[dfds');
@@ -83,7 +84,7 @@ export const GetAllAtmVendor = setBottomSheetLoder => dispatch => {
 export const GetAllAtmType = setBottomSheetLoder => dispatch => {
   // console.log(name);
   setBottomSheetLoder(true);
-  Axios.get(`${Base_url}/api/getatmtypelist`)
+  Axios.get(`${Base_url}/api/getatmtypelist`, headers)
     .then(response => {
       if (response.data.length > 0) {
         // console.log(response.data.length, 'type');
@@ -105,7 +106,7 @@ export const GetAllAtmType = setBottomSheetLoder => dispatch => {
 export const GetAllAtmModel = setBottomSheetLoder => dispatch => {
   // console.log(name);
   setBottomSheetLoder(true);
-  Axios.get(`${Base_url}/api/GetAtmModelsList`)
+  Axios.get(`${Base_url}/api/GetAtmModelsList`, headers)
     .then(response => {
       if (response.data.length > 0) {
         // console.log(response.data.length);
@@ -127,7 +128,7 @@ export const GetAllAtmModel = setBottomSheetLoder => dispatch => {
 export const GetAllAtmAtmId = setBottomSheetLoder => dispatch => {
   // console.log(name);
   setBottomSheetLoder(true);
-  Axios.get(`${Base_url}/api/GetAtmIds`)
+  Axios.get(`${Base_url}/api/GetAtmIds`, headers)
     .then(response => {
       if (response.data.length > 0) {
         // console.log(response.data.length, 'AAAA');
@@ -150,7 +151,7 @@ export const GetAllAtmAtmId = setBottomSheetLoder => dispatch => {
 export const GetAllAtmdETAILS = (id, setDetailsLoder) => dispatch => {
   // console.log(name);
   setDetailsLoder(true);
-  Axios.get(`${Base_url}/api//GetAllATMDetailsByATMId?atmid=${id}`)
+  Axios.get(`${Base_url}/api//GetAllATMDetailsByATMId?atmid=${id}`, headers)
     .then(response => {
       if (response.data.length > 0) {
         setDetailsLoder(false);

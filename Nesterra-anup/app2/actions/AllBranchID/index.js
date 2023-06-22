@@ -1,11 +1,11 @@
 import Axios from 'axios';
-import {Base_url} from '../../key';
+import {Base_url, headers} from '../../key';
 
 import {ALL_BRANCH_ID} from '../actionType/AllBranchID';
 
 export const getAllBrachrID = setLodding1 => dispatch => {
   setLodding1(true);
-  Axios.get(`${Base_url}/api/GetCircuitInventoryBranchIds`)
+  Axios.get(`${Base_url}/api/GetCircuitInventoryBranchIds`, headers)
     .then(response => {
       const data = response.data.sort((a, b) => {
         let fa = a.id.toLowerCase(),

@@ -13,10 +13,13 @@ import {
 } from '../../actions/action.type';
 import {
   CHANGE_BORDER,
+  CHANGE_BORDER1,
   FILTER_MARKER,
   CHANGE_BORDER_FILTER,
+  CHANGE_BORDER_BY_LOCATIO_ID,
 } from '../../actions/actionType/action.Coordinatefilter.type';
 import {dataMar} from '../../utils/MarkerData1';
+import {REGION_MARKERS} from './../../actions/action.coordinate.type';
 
 const initialState = {
   coordinates: [],
@@ -24,10 +27,24 @@ const initialState = {
   error: null,
   latt: 0,
   lngg: 0,
+  regionMarkers: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case CHANGE_BORDER1:
+      //  const md=   dataMar.findIndex(i => i.Location_ID == location)
+      // console.log(action.data);
+      // let ddD = dataMar.map((item, i) => {
+      //   return {...item, isChecked: false};
+      // });
+
+      // dd[action.data].isChecked = true;
+      return {
+        ...state,
+        coordinates: action.data,
+      };
+
     case GET_COORDINATES:
       let data1 = action.payload.data.map(item => {
         return {...item, isChecked: false};
@@ -44,6 +61,7 @@ export default (state = initialState, action) => {
     //==============SEARCH
     case SEARCH_BY_SITE_ID:
       // console.log(action.data, 'action.data');
+
       const searchData = [...state.coordinates1];
       if (action.data) {
         const newData1 = searchData.filter(function (item) {
@@ -110,6 +128,12 @@ export default (state = initialState, action) => {
       // });
       // marker[action.payload.id].isChecked = true;
       let coord = [...state.coordinates1];
+      const t0 = performance.now(); // Start the timer
+
+      // Code to be timed here
+      // ...
+
+      const t1 = performance.now(); // End the timer
 
       const fdata = coord.filter(function (item) {
         return (
@@ -117,7 +141,7 @@ export default (state = initialState, action) => {
           action.payload.HierarchyLocationType.toLowerCase()
         );
       });
-
+      console.log(`Time taken: ${t1 - t0} milliseconds`);
       return {
         ...state,
         coordinates: fdata,
@@ -177,6 +201,17 @@ export default (state = initialState, action) => {
         ...state,
         coordinates: dd,
       };
+    case CHANGE_BORDER_BY_LOCATIO_ID:
+      const findLoactionId = dataMar.findIndex(item.Location_ID == action.data);
+      let dATAd = dataMar.map((item, i) => {
+        return {...item, isChecked: false};
+      });
+
+      dd[findLoactionId].isChecked = true;
+      return {
+        ...state,
+        coordinates: dATAd,
+      };
     case CHANGE_BORDER_FILTER:
       return {
         ...state,
@@ -190,9 +225,29 @@ export default (state = initialState, action) => {
           return i.name === item.HierarchyLocationType;
         });
       });
+    case REGION_MARKERS:
+      let dd1 = [];
+      action.data.map(item => {
+        dd1.push(item.geometry.coordinates[0]);
+      });
 
-      console.log(result11.length, 'result11');
+      const filterByVendor1 = [...state.coordinates1];
+      const result111 = filterByVendor1.filter(item => {
+        return dd1.find(i => {
+          return i === item.Longitude;
+        });
+      });
+
+      return {
+        ...state,
+        regionMarkers: result111,
+      };
+
     default:
       return state;
   }
 };
+let nem = [
+  {name: '1', enapa: 7},
+  {name: '2', enapa: 'pdoaad'},
+];

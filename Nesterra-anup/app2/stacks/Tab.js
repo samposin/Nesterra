@@ -21,23 +21,27 @@ import VoiceScreen from '../screens/VoiceScreen';
 import Chart from './../components/DataCharts/index';
 import Menu from '../screens/Menu';
 import {CIRCUIT_ID, SITE_ID} from './../actions/actionType/ExploreSearch/index';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Reports from './../screens/Reports/index';
 
 const Tab = createBottomTabNavigator();
 const TabNaV = ({navigation}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+  // console.log(appearanceType, 'appearanceType');
   const dispatch = useDispatch();
   useEffect(() => {
-    setTimeout(() => {
-      dispatch({
-        type: CIRCUIT_ID,
-      });
-    }, 1000);
-    setTimeout(() => {
-      dispatch({
-        type: SITE_ID,
-      });
-    }, 1500);
+    dispatch({
+      type: CIRCUIT_ID,
+    });
+    dispatch({
+      type: SITE_ID,
+    });
+    // setTimeout(() => {
+
+    // }, 1000);
+    // setTimeout(() => {
+
+    // }, 1500);
   }, []);
 
   return (
@@ -45,12 +49,13 @@ const TabNaV = ({navigation}) => {
       screenOptions={{
         lazy: true,
         headerShown: false,
-        tabBarActiveTintColor: 'red',
+        // tabBarActiveTintColor: 'red',
         tabBarInactiveTintColor: 'gray',
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
-          backgroundColor: 'white',
+          backgroundColor: appearanceType == 'dark' ? '#28282b' : 'white',
+
           // borderRadius: 50,
           bottom: 0,
           left: 0,

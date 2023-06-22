@@ -11,7 +11,8 @@ import {connect, useSelector, useDispatch} from 'react-redux';
 import DataLoder from '../../../../components/lodder/DataLoder';
 import {copyText, tostalert} from '../../../../components/helper';
 import NoDataViewFlatList from '../../../../components/NoDataViewFlatList';
-import ToggleView from '../../../../components/ToggleView';
+// import ToggleView from '../../../../components/ToggleView';
+import ToggleView1 from '../../../../components/ToggleView/ToggleView1';
 
 import {
   FILTER_ALL_ATMS,
@@ -125,7 +126,7 @@ const Atm = ({GetAllAtmNumber, GetAllAtmdETAILS}) => {
           </View>
           {switchView ? (
             <>
-              <ToggleView
+              <ToggleView1
                 name="Circuits"
                 size={'medium'}
                 length={data.length}

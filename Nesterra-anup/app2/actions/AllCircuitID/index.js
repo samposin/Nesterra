@@ -1,11 +1,11 @@
 import Axios from 'axios';
-import {Base_url} from '../../key';
+import {Base_url, headers} from '../../key';
 import {ALL_CIRCUIT_ID} from '../actionType/AllCircuitID';
 
 export const getAllCircuitID = setLodding1 => dispatch => {
   setLodding1(true);
   // console.log('first');
-  Axios.get(`${Base_url}/api/GetCircuitInventoryCircuitIds`)
+  Axios.get(`${Base_url}/api/GetCircuitInventoryCircuitIds`, headers)
     .then(response => {
       const data = response.data.sort((a, b) => {
         let fa = a.id.toLowerCase(),

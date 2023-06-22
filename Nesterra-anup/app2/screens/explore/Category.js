@@ -24,6 +24,7 @@ const Category = ({
   const [setectItem, setsetectItem] = React.useState('');
   const myRef = useRef(null);
   const actiText = (id, value) => {
+    const t0 = performance.now();
     // console.log(value);
     if (id == 7) {
       navigation.navigate('Stats');
@@ -39,6 +40,8 @@ const Category = ({
         // filterData(value);
         listData[id].isActive = true;
         setAllItem(listData);
+        const t1 = performance.now();
+        console.log(`Time taken: ${t1 - t0} ppp`);
       } else if (entry.id == id) {
         listData = allItem.map(item => {
           let itm = {...item, isActive: false};
@@ -47,7 +50,10 @@ const Category = ({
         get_coordinates();
         // allDataa();
         setAllItem(listData);
+        const t1 = performance.now();
+        console.log(`Time taken: ${t1 - t0} pp`);
       } else {
+        const t0 = performance.now(); // Start the timer
         listData = allItem.map(item => {
           let itm = {...item, isActive: false};
           return itm;
@@ -56,6 +62,9 @@ const Category = ({
         // filterData(value);
         listData[id].isActive = true;
         setAllItem(listData);
+        const t1 = performance.now(); // End the timer
+
+        console.log(`Time taken: ${t1 - t0} www`);
       }
     }
   };

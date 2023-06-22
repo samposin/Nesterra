@@ -294,7 +294,11 @@ const OtpReceive = () => {
                       </View>
                     )}
 
-                    <SimpleCheckBox text="Send push automatically" />
+                    <SimpleCheckBox
+                      text="Send push automatically"
+                      ml={10}
+                      mt={10}
+                    />
 
                     <View style={{height: 150}}></View>
                   </ScrollView>

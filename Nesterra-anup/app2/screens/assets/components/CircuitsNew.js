@@ -28,7 +28,7 @@ import {
 } from '../../../actions/actionType/AllCircuit';
 
 import SecondRow from './SecondRow';
-import ToggleView from './../../../components/ToggleView/index';
+import ToggleView1 from './../../../components/ToggleView/ToggleView1';
 import TableHeaderFirstColum from './../../../components/TableHeaderFirstColum';
 import TableHeaderOtherColum from './../../../components/TableHeaderOtherColum/index';
 import NoDataViewFlatList from '../../../components/NoDataViewFlatList';
@@ -185,20 +185,21 @@ const CircuitsNew = ({
           />
           {/* ========ID VIEW============= */}
           {/* ========TABLE HEADER============= */}
+
           <View style={styles.tableHeader}>
             <TableHeaderFirstColum
-              onPress={typeClick}
-              title="Site ID"
-              type={locType}
-              width="25%"
-            />
-
-            <TableHeaderOtherColum
               onPress={circuitClick}
               title="Circuit ID"
               type={vendor}
-              width="25%"
+              width="30%"
             />
+            <TableHeaderOtherColum
+              onPress={typeClick}
+              title="Site ID"
+              type={locType}
+              width="20%"
+            />
+
             <TableHeaderOtherColum
               onPress={BranchIdClick}
               title="Branch ID"
@@ -246,12 +247,13 @@ const CircuitsNew = ({
                               index % 2 == 0 ? '#d1d0d0' : '#ffffff',
                             marginVertical: 1,
                           }}>
-                          <DataColum title={item?.Location_ID} />
-                          <DataColum title={item?.Circuit_ID} />
+                          <DataColum title={item?.Circuit_ID} width="30%" />
+                          <DataColum title={item?.Location_ID} width="25%" />
                           <DataColum
+                            width="25%"
                             title={item?.Branch_ID ? item.Branch_ID : '--'}
                           />
-                          <DataColum title={item?.Vendor} />
+                          <DataColum title={item?.Vendor} width="25%" />
                         </TouchableOpacity>
                       );
                     }}
@@ -287,7 +289,7 @@ const CircuitsNew = ({
           {/* ============TOOGLE=========== */}
           {switchView ? (
             <>
-              <ToggleView
+              <ToggleView1
                 name="Circuits"
                 size={'medium'}
                 length={allCircuit.length}

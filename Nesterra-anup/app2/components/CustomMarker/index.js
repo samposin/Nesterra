@@ -13,14 +13,12 @@ const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
     switch (true) {
       case value === 'Office':
         return 'O';
-
       case value === 'Other':
         return '+';
       case value === 'Branch':
         return 'B';
       case value === 'ATM':
         return 'A';
-
       case value === 'Data Center':
         return 'D';
       case value === '3rd Party':
@@ -45,7 +43,6 @@ const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
             style={{
               width: 20,
               height: 20,
-
               position: 'absolute',
               top: 5,
               right: 5,
@@ -61,12 +58,12 @@ const CustomMarker = ({isChecked, marKerType, mark, officeType}) => {
           style={{
             width: 30,
             height: 30,
-            backgroundColor: mark ? '#f6fecd' : '#55fe01',
+            backgroundColor: mark ? '#fff808' : '#55fe01',
             borderRadius: 15,
             justifyContent: 'center',
             alignItems: 'center',
-            borderWidth: mark ? 1.5 : 0,
-            borderColor: mark ? '#59ff02' : '#55fe01',
+            // borderWidth: mark ? 1.5 : 0,
+            // borderColor: mark ? '#59ff02' : '#55fe01',
           }}>
           <Text style={{color: 'black'}}>{getText(officeType)}</Text>
         </View>

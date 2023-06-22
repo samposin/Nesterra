@@ -3,7 +3,6 @@ import React from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const TableHeaderFirstColum = ({title, type, width, onPress}) => {
-  const active = true;
   return (
     <TouchableOpacity
       onPress={() => {

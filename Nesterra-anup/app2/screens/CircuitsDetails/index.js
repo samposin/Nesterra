@@ -44,7 +44,6 @@ const CircuitsDetails = ({route}) => {
                 style={{
                   fontWeight: '700',
                   fontSize: 15,
-                  color: 'black',
                 }}></Text>
             </View>
           </View>

@@ -50,7 +50,12 @@ import ExploreDeviceId from './ExploreSearch/ExploreDeviceId';
 import ExploreAddress from './ExploreSearch/ExploreAddress';
 import SiteTypeCheck from './SiteTypeCheck';
 import GenealogyList from './GenealogyList';
+<<<<<<< HEAD:Nesterra-anup/app2/reducers/index.js
 
+=======
+import SiteAnlysis from './Reports/SiteAnlysis';
+import appearanceType from './Appearance';
+>>>>>>> 7605d47dd02e5e1a0e2e15aa3e171353bb2b0f18:app/reducers/index.js
 const rootReducer = combineReducers({
   setLatLang,
   selectList,
@@ -101,5 +106,12 @@ const rootReducer = combineReducers({
   Contacts,
   SiteTypeCheck,
   GenealogyList,
+<<<<<<< HEAD:Nesterra-anup/app2/reducers/index.js
+=======
+  //===================
+  SiteAnlysis,
+  //=================
+  appearanceType,
+>>>>>>> 7605d47dd02e5e1a0e2e15aa3e171353bb2b0f18:app/reducers/index.js
 });
 export default rootReducer;

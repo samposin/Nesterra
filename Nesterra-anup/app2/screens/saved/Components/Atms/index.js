@@ -26,14 +26,7 @@ const Atms = () => {
   const randerItem = ({index, item}) => {
     // console.log(i, item);
     return (
-      <View
-        style={{
-          width: '100%',
-          height: 50,
-          backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-          flexDirection: 'row',
-          marginVertical: 10,
-        }}>
+      <View style={styles.mainView}>
         <RanderColum title={item.ATM_ID} border={0} />
         <RanderColum title={item.ATM_Status} border={2} />
         <RanderColum title={item.Vendor} border={2} />
@@ -94,7 +87,6 @@ const styles = StyleSheet.create({
     width: '25%',
     height: '100%',
     backgroundColor: '#007aff',
-
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -104,5 +96,13 @@ const styles = StyleSheet.create({
 
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  mainView: {
+    width: '100%',
+    height: 50,
+    backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+    flexDirection: 'row',
+    marginVertical: 10,
+    // backgroundColor: 'green',
   },
 });

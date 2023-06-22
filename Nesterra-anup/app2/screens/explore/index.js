@@ -9,6 +9,7 @@ import {
   Animated,
   Easing,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import BottomSheetView from './BottomSheet';
 import MapView from 'react-native-map-clustering';
@@ -17,7 +18,7 @@ import Search from './Search';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import MapViewDirections from 'react-native-maps-directions';
-
+DropDownView;
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Geolocation from 'react-native-geolocation-service';
@@ -68,7 +69,7 @@ import MapTypeAndFilterButtom from './components/MapTypeAndFilterButtom/index';
 import {dataMar} from '../../utils/MarkerData1';
 import {getLocationInfo} from './../../actions/LocartionInfo/index';
 import {SET_LAT_LNG} from '../../actions/action.type';
-import DropDownView from './components/Search/DropDownView';
+import BackDropOne from './components/Search/DropDownView';
 import RanderView from './components/RanderView';
 
 import {
@@ -77,6 +78,12 @@ import {
 } from '../../actions/actionType/action.Coordinatefilter.type';
 import ImageAdd from './components/ImageAdd';
 import StreetViewComponents from '../../components/StreetViewComponents';
+import ZoomMarkers from './components/ZoomMarkers/index';
+import {REGION_MARKERS} from '../../actions/action.coordinate.type';
+import ZoomMarkersView from './components/ZoomMarkers/ZoomMarkersView';
+import Certification from './components/Certification';
+import BackdropView from './components/BackdropView';
+import DropDownView from './components/Search/DropDownView';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -350,19 +357,31 @@ const Explore = ({
   };
   // added by Dildar Khan start
   const bottomSheetRef = useRef(null);
+  const bottomSheetRefZoom = useRef(null);
 
   const bottomSheetRefImage = useRef(null);
   const cirCuitRefExplore = useRef(null);
   const deviceRefExplore = useRef(null);
   const orderRefExplore = useRef(null);
   const imageAddRef = useRef(null);
+  const bottomSheetRefBB = useRef(null);
 
   const handleSheetChanges = useCallback(index => {
     console.log('handleSheetChanges', index);
   }, []);
   // added by Dildar Khan end
   //anup
-
+  const goTo = (lat, lng) => {
+    // console.log(lat, lng);
+    const region = {
+      latitude: lat,
+      longitude: lng,
+      latitudeDelta: 0.02305261197147246,
+      longitudeDelta: 0.015684552490697,
+    };
+    // console.log(region, 'zoom');
+    mapRef.current.animateToRegion(region, 500);
+  };
   const getLocation = async () => {
     const hasPermission = await hasLocationPermission();
 
@@ -389,7 +408,7 @@ const Explore = ({
     mapRef.current.animateToRegion(region, 2000);
   };
   const onSearchPress = (lat, lng) => {
-    // console.log(lat, lng);
+    console.log(lat, lng);
     animateToRegion({
       latitude: lat,
       longitude: lng,
@@ -558,6 +577,7 @@ const Explore = ({
   const [focusOn1, setFocusOn1] = useState(true);
   const [placeHolder, setPlace] = useState('');
   const [streetImage, setstreetImage] = useState(false);
+  const [markerZoomStatus, setmarkerZoomStatus] = useState(false);
   const addRess = data => {
     if (data === 'Address') {
       setsearchComponet(false);
@@ -744,6 +764,16 @@ const Explore = ({
       data: id,
     });
   };
+  const dataregion = markers => {
+    // console.log(markers, 'pdod');
+    let dd = [];
+    markers.map(item => {
+      // console.log(item.properties.coordinate.latitude);
+      dd.push(item.properties.coordinate.latitude);
+    });
+    // console.log(dd, 'ddd');
+  };
+  const [certifiedModal, setCertifiedModal] = useState(false);
   return (
     <>
       {/* {inputRotate ? rotatedIconAntichange() : rotatedIconchange()} */}
@@ -814,7 +844,7 @@ const Explore = ({
           }}
           maxZoomLevel={20}
           minZoomLevel={0}
-          radius={50}
+          radius={20}
           style={styles.map}
           initialRegion={currentRegion}
           ref={mapRef}
@@ -833,7 +863,20 @@ const Explore = ({
           userLocationPriority={'high'}
           mapType={mapType}
           onClusterPress={e => markerZoom1(e)}
-          // onRegionChangeComplete={onRegionChangeComplete}
+          // onRegionChangeComplete={async (region, markers) => {
+          //   const coords = await mapRef?.current?.getCamera();
+          //   // console.log(region);
+          //   if (coords.zoom > 15) {
+          //     dispatch({
+          //       type: REGION_MARKERS,
+          //       data: markers,
+          //     });
+          //     bottomSheetRefZoom.current.snapToIndex(2);
+          //     setmarkerZoomStatus(true);
+          //   } else {
+          //     setmarkerZoomStatus(false);
+          //   }
+          // }}
           onLayout={onLayoutMap}>
           {coordinates &&
             coordinates.map((item, i) => {
@@ -847,16 +890,20 @@ const Explore = ({
                   }}
                   // tracksViewChanges={true}
                   onPress={() => {
-                    changeMarkerBorder(i);
-                    playSound();
-                    setIsLoading(true);
-                    get_location_details({
-                      id: item.Location_ID,
-                      setIsLoading,
-                      bottomSheetRef,
-                    });
+                    bottomSheetRefBB.current.snapToIndex(1);
+                    // bottomSheetRefBB.current.snapToIndex(2);
+                    // changeMarkerBorder(i);
+                    // playSound();
+                    // setIsLoading(true);
+                    // setmarkerZoomStatus(false);
+                    // get_location_details({
+                    //   id: item.Location_ID,
+                    //   setIsLoading,
+                    //   bottomSheetRef,
+                    // });
+
                     // markerZoom(item.Latitude, item.Longitude);
-                    onSearchPress(item.Latitude, item.Longitude);
+                    // onSearchPress(item.Latitude, item.Longitude);
                     // settIndexZ(0);
 
                     // bottomSheetRefImage.current.close();
@@ -912,10 +959,22 @@ const Explore = ({
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
+            Alert.alert('Alert Title', 'My Alert Msg', [
+              {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+              {
+                text: 'Confirm',
+                onPress: () => {
+                  getChange();
+                  // get_coordinates();
+                  setstreetImage(false);
+                },
+              },
+            ]);
             // dispatch({type: CIRCUIT_ID});
-            getChange();
-            // get_coordinates();
-            setstreetImage(false);
           }}
           style={styles.currentLocation1}>
           <SimpleLineIcons
@@ -1008,6 +1067,7 @@ const Explore = ({
             focusOn1={focusOn1}
             setPlace={setPlace}
             placeHolder={placeHolder}
+            rander={rander}
           />
         ) : (
           <Search
@@ -1027,6 +1087,8 @@ const Explore = ({
             focusOn={focusOn}
             setFocusOn={setFocusOn}
             getAddress={getAddress}
+            rander={rander}
+            setRander={setRander}
           />
         )}
 
@@ -1043,15 +1105,9 @@ const Explore = ({
             getDeviceId={getDeviceId}
           />
         ) : null}
-        {dropDownShow ? (
-          <DropDownView
-            seTDropDownShow={seTDropDownShow}
-            setSearchView={addRess}
-            setRander={setRander}
-            setPlace={setPlace}
-            searchView={searchView}
-          />
-        ) : null}
+        {/* {dropDownShow ? ( */}
+
+        {/* // ) : null} */}
         {/* =================search=============== */}
         {/* =================Category=============== */}
         {catShow && (
@@ -1066,6 +1122,7 @@ const Explore = ({
       </View>
       {/* =================BottomSheetView=============== */}
       <BottomSheetView
+        setCertifiedModal={setCertifiedModal}
         bottomSheetRef={bottomSheetRef}
         catShow={setCatShow}
         cirCuitRefExplore={cirCuitRefExplore}
@@ -1105,6 +1162,7 @@ const Explore = ({
         atmdDetailsRef={atmdDetailsRef}
         detailsLoder={detailsLoder}
       />
+      {/* {markerZoomStatus ? <ZoomMarkers onSearchPress={goTo} /> : null} */}
 
       {/* =================CircuitDetailsExpolore=============== */}
       {settingView ? (
@@ -1117,7 +1175,23 @@ const Explore = ({
       {isLoading && <Lodder lodding={isLoading} />}
 
       <ImageAdd imageAddRef={imageAddRef} />
+      <Certification
+        certifiedModal={certifiedModal}
+        setCertifiedModal={setCertifiedModal}
+      />
       {streetImage && <StreetViewComponents />}
+      <ZoomMarkersView
+        bottomSheetRefZoom={bottomSheetRefZoom}
+        onSearchPress={goTo}
+      />
+      <BackdropView bottomSheetRef={bottomSheetRefBB} />
+      <DropDownView
+        seTDropDownShow={seTDropDownShow}
+        setSearchView={addRess}
+        setRander={setRander}
+        setPlace={setPlace}
+        searchView={searchView}
+      />
     </>
   );
 };

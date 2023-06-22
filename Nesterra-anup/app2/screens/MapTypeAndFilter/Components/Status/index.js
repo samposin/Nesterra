@@ -5,11 +5,11 @@ import {
   Dimensions,
   TouchableOpacity,
   Text,
+  TextInput,
   View,
 } from 'react-native';
 import React from 'react';
-
-import {Heading} from 'native-base';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 import CheckBoxView from './../CheckBoxView/index';
 import {useNavigation} from '@react-navigation/native';
@@ -22,14 +22,17 @@ import {
 } from './../../../../actions/action.coordinate.type';
 import {useDispatch} from 'react-redux';
 import ClearAndAppply from '../ClearAndAppply';
+import BackButton from './../../../../components/BackButton/index';
 
 const data = [
   {id: 0, txt: 'Active', name: 'Active', isChecked: false},
   {id: 1, txt: 'Inactive', name: 'Inactive', isChecked: false},
   {id: 2, txt: 'All', name: 'All', isChecked: false},
 ];
+
 const Status = ({filterData}) => {
   // console.log(filterData);
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [checkdata, setCheckData] = React.useState(data);
@@ -104,56 +107,33 @@ const Status = ({filterData}) => {
         <View style={styles.header}>
           <View
             style={{
-              width: '20%',
+              width: '100%',
               height: '100%',
-
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Heading size="sm">Filters</Heading>
-          </View>
-          {/* <View
-            style={{
-              width: '80%',
-              height: '100%',
+              paddingHorizontal: 10,
               flexDirection: 'row',
               justifyContent: 'space-between',
-              paddingHorizontal: 15,
+
+              alignItems: 'center',
             }}>
-            <TouchableOpacity
+            <Text style={{fontSize: 14}}>Filters</Text>
+            {/* <TouchableOpacity
+              style={styles.closeView}
               onPress={() => {
-                navigation.navigate('Explore');
-              }}
-              style={{
-                width: '45%',
-                height: 45,
-                backgroundColor: '#007aff',
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
+                navigation.navigate('Menu');
               }}>
-              <Text style={{color: 'white', fontSize: 18}}>Close</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+              <Entypo name="cross" size={20} color="white" />
+            </TouchableOpacity> */}
+            <BackButton
               onPress={() => {
-                apply();
+                navigation.navigate('Menu');
               }}
-              style={{
-                width: '45%',
-                height: 45,
-                backgroundColor: '#e0dfe5',
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: '#007aff', fontSize: 18}}>Apply</Text>
-            </TouchableOpacity>
-          </View> */}
+            />
+          </View>
         </View>
         <View style={styles.mainContainer}>
           <View
             style={{
-              width: '30%',
+              width: '40%',
               height: '100%',
               backgroundColor: 'red',
               justifyContent: 'center',
@@ -161,10 +141,24 @@ const Status = ({filterData}) => {
             }}></View>
           <View
             style={{
-              width: '70%',
+              width: '60%',
               height: '100%',
               backgroundColor: '#ffffff',
+              marginLeft: 10,
             }}>
+            <Text style={{color: 'black', marginLeft: 8, marginVertical: 10}}>
+              Setected {`(${0})`}
+            </Text>
+            <View
+              style={{
+                width: '100%',
+                height: 45,
+                marginLeft: 8,
+              }}>
+              <TextInput
+                style={{width: '80%', borderWidth: 1, borderRadius: 5}}
+              />
+            </View>
             {checkdata.map((item, i) => {
               return (
                 <CheckBoxView
@@ -206,5 +200,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
 
     alignItems: 'center',
+  },
+  closeView: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#0472ef',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 20,
   },
 });

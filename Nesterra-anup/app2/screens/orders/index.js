@@ -56,6 +56,7 @@ const Orders = ({}) => {
         style={{
           marginTop: StatusBar.currentHeight,
           flex: 1,
+          position: 'relative',
         }}>
         {/* ==============container============== */}
 
@@ -80,13 +81,90 @@ const Orders = ({}) => {
               displyCompomnet={displyCompomnet}
               title="Devices"
             />
+            <Button
+              onPress={setComponentDeives}
+              displyCompomnet={displyCompomnet}
+              title="Equinix"
+            />
           </View>
+
           <View style={styles.searchViewRight}></View>
+        </View>
+        <View
+          style={{
+            width: '100%',
+            height: 30,
+            // backgroundColor: 'pink',
+            //paddingHorizontal: 20,
+            paddingVertical: 3,
+          }}>
+          <View
+            style={{
+              width: '100%',
+              height: '100%',
+              // backgroundColor: 'red',
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
+            <View
+              style={{
+                width: '25%',
+                height: '100%',
+                backgroundColor: '#7fc781',
+                borderRadius: 7,
+                marginRight: 9,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{color: 'white', fontSize: 12}}>Search</Text>
+            </View>
+
+            <View
+              style={{
+                width: '25%',
+                height: '100%',
+                backgroundColor: '#7fb4ee',
+                borderRadius: 7,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{color: 'white', fontSize: 12}}>Clear Search</Text>
+            </View>
+            <View
+              style={{
+                width: '25%',
+                height: '100%',
+              }}></View>
+          </View>
+          {/* <View
+            style={{
+              width: '100%',
+              height: 20,
+              backgroundColor: 'white',
+              marginTop: 15,
+            }}></View> */}
+          <Text style={{color: 'black', paddingLeft: 15, paddingTop: 8}}>
+            Current Selection:
+          </Text>
+          <Text style={{color: '#007aff', paddingLeft: 15, paddingTop: 8}}>
+            All
+          </Text>
         </View>
         {/* ==============Search View=========== */}
 
         {ranDerView()}
       </SafeAreaView>
+      <View
+        styles={{
+          width: '100%',
+          height: 100,
+          position: 'absolute',
+          bottom: 150,
+          left: 10,
+          right: 0,
+          backgroundColor: 'red',
+          zIndex: 400,
+        }}></View>
     </>
   );
 };
@@ -98,7 +176,6 @@ const styles = StyleSheet.create({
   searchViewLeft: {
     width: '80%',
     height: '100%',
-
     flexDirection: 'row',
     alignItems: 'center',
   },

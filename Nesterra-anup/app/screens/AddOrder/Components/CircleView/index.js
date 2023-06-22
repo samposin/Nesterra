@@ -86,46 +86,17 @@ export const CircleView2 = ({}) => {
       style={{
         width: '100%',
         height: 30,
-        // backgroundColor: 'red',
         borderBottomWidth: 1,
         borderBottomColor: '#a8a8a8',
-        // paddingLeft: 20,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        paddingLeft: 20,
       }}>
       <Text
         style={{
-          fontSize: 15,
-          // fontWeight: 'bold',
+          fontSize: 18,
+          fontWeight: 'bold',
           color: 'black',
-          marginLeft: 10,
         }}>
         General
-      </Text>
-      <Text
-        style={{
-          fontSize: 15,
-          // fontWeight: 'bold',
-          color: 'black',
-        }}>
-        Contact
-      </Text>
-      <Text
-        style={{
-          fontSize: 15,
-          // fontWeight: 'bold',
-          color: 'black',
-        }}>
-        Location
-      </Text>
-      <Text
-        style={{
-          fontSize: 15,
-          // fontWeight: 'bold',
-          color: 'black',
-          marginRight: 10,
-        }}>
-        Technical
       </Text>
     </View>
   );

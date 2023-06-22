@@ -20,6 +20,7 @@ import Geocoder from 'react-native-geocoding';
 
 import {GET_PHOTO_URL_FROM_SEARCH} from '../../actions/actionType/action.photoMapurl.type';
 import {useDispatch} from 'react-redux';
+import {TabRouter} from '@react-navigation/native';
 
 const Search = ({
   catShow,
@@ -38,6 +39,7 @@ const Search = ({
   focusOn,
   setFocusOn,
   getAddress,
+  setRander,
 }) => {
   const dispatch = useDispatch();
   const googlePlacesRef = useRef(null);
@@ -148,6 +150,7 @@ const Search = ({
               <TouchableOpacity
                 onPress={() => {
                   seTDropDownShow(true);
+                  // setRander(true);
                 }}
                 style={{
                   width: '98%',

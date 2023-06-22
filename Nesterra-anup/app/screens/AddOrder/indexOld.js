@@ -89,7 +89,7 @@ const AddOrder = ({navigation}) => {
           </View>
         </View>
         <CircleView2 />
-        {/* <ResetView /> */}
+        <ResetView />
         {/* <View
             style={{
               width: '100%',

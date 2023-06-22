@@ -1,15 +1,17 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import ToggleSwitch from 'toggle-switch-react-native';
+import {useNavigation} from '@react-navigation/native';
+import AddButton from '../button/AddButton';
 
 const ToggleView = ({activeFilter, size, name, alldata, length}) => {
   const [isOn, setIsSwitchOn] = React.useState(false);
-
+  const navigation = useNavigation();
   return (
     <View
       style={{
         width: 230,
-        height: 45,
+        height: 35,
         position: 'absolute',
         right: 8,
         bottom: 55,
@@ -37,13 +39,12 @@ const ToggleView = ({activeFilter, size, name, alldata, length}) => {
           borderRadius: 10,
           alignItems: 'center',
           flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingHorizontal: 5,
+          justifyContent: 'center',
         }}>
         <Text style={{color: 'white', fontSize: 16}}>
           {isOn ? 'All' : ' Active'}{' '}
         </Text>
-        <ToggleSwitch
+        {/* <ToggleSwitch
           isOn={isOn}
           onColor="#b3b8b4"
           offColor="#34c759"
@@ -59,7 +60,12 @@ const ToggleView = ({activeFilter, size, name, alldata, length}) => {
               //   console.log('no');
             }
           }}
-        />
+        /> */}
+        {/* <AddButton
+          onPress={() => {
+            navigation.navigate('AddOrder');
+          }}
+        /> */}
       </View>
     </View>
   );

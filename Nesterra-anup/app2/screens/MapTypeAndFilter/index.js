@@ -12,7 +12,9 @@ import Status from './Components/Status';
 import Type from './Components/Type';
 import Genealogy from './Components/Genealogy';
 import SiteType from './Components/SiteType';
-
+import DisPlayItem from './Components/DisPlayItem';
+import SiteCertified from './Components/SiteCertified';
+import PropertyName from './Components/PropertyName';
 const {height, width} = Dimensions.get('screen');
 const MapTypeAndFilter = ({route}) => {
   // console.log(route.params, 'route');
@@ -23,12 +25,16 @@ const MapTypeAndFilter = ({route}) => {
       case setetedView === 'Map Type':
         return <Type />;
 
-      case setetedView === 'Status':
+      case setetedView === 'Site Status':
         return <Status />;
       case setetedView === 'Genealogy':
         return <Genealogy />;
       case setetedView === 'Site Type':
         return <SiteType />;
+      case setetedView === 'Property Name':
+        return <PropertyName />;
+      case setetedView === 'Site Certified':
+        return <SiteCertified />;
     }
   };
   return (
@@ -46,53 +52,49 @@ const MapTypeAndFilter = ({route}) => {
       {selectedComponent()}
       <View
         style={{
-          width: '30%',
+          width: '40%',
           height: height - 70,
           marginTop: 70,
           backgroundColor: '#f5f5f5',
-          paddingLeft: 30,
+          paddingLeft: 20,
         }}>
-        <TouchableOpacity onPress={() => setSeletedView('Map Type')}>
-          <Text
-            style={{
-              color: setetedView === 'Map Type' ? '#1c7dce' : '#757575',
-              fontWeight: 'bold',
-              marginVertical: 10,
-            }}>
-            Map Type
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setSeletedView('Status')}>
-          <Text
-            style={{
-              color: setetedView === 'Status' ? '#1c7dce' : '#757575',
-              fontWeight: 'bold',
-              marginVertical: 10,
-            }}>
-            Status
-          </Text>
-        </TouchableOpacity>
+        <DisPlayItem
+          setetedView={setetedView}
+          onPress={() => setSeletedView('Map Type')}
+          title="Map Type"
+          count={1}
+        />
+        <DisPlayItem
+          setetedView={setetedView}
+          onPress={() => setSeletedView('Site Status')}
+          title="Site Status"
+          count={0}
+        />
+        <DisPlayItem
+          setetedView={setetedView}
+          onPress={() => setSeletedView('Site Type')}
+          title="Site Type"
+          count={0}
+        />
+        <DisPlayItem
+          setetedView={setetedView}
+          onPress={() => setSeletedView('Genealogy')}
+          title="Genealogy"
+          count={0}
+        />
+        <DisPlayItem
+          setetedView={setetedView}
+          onPress={() => setSeletedView('Property Name')}
+          title="Property Name"
+          count={0}
+        />
 
-        <TouchableOpacity onPress={() => setSeletedView('Site Type')}>
-          <Text
-            style={{
-              color: setetedView === 'Site Type' ? '#1c7dce' : '#757575',
-              fontWeight: 'bold',
-              marginVertical: 10,
-            }}>
-            Site Type
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setSeletedView('Genealogy')}>
-          <Text
-            style={{
-              color: setetedView === 'Genealogy' ? '#1c7dce' : '#757575',
-              fontWeight: 'bold',
-              marginVertical: 10,
-            }}>
-            Genealogy
-          </Text>
-        </TouchableOpacity>
+        <DisPlayItem
+          setetedView={setetedView}
+          onPress={() => setSeletedView('Site Certified')}
+          title="Site Certified"
+          count={0}
+        />
       </View>
     </SafeAreaView>
   );
