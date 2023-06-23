@@ -123,7 +123,7 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
                     }}
                     style={{
                       ...styles.tableRow1,
-                      height: 60,
+                      height: 40,
                       marginVertical: 1,
                       backgroundColor: '#ffffff',
                     }}>
@@ -153,7 +153,7 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
           <>
             {/* ============TOOGLE=========== */}
 
-            {switchView ? (
+            {/* {switchView ? (
               <>
                 <ToggleView
                   name="Circuits"
@@ -163,7 +163,7 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
                   activeFilter={fiterCircuitsActive}
                 />
               </>
-            ) : null}
+            ) : null} */}
             {/* ============TOOGLE=========== */}
           </>
           <BottomSheetViewDetails

@@ -45,7 +45,7 @@ const ThirdRow = ({
       <View
         style={{
           width: '100%',
-          height: 60,
+          height: 40,
           paddingLeft: 10,
           flexDirection: 'row',
         }}>

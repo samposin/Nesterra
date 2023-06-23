@@ -42,7 +42,7 @@ import ToggleView1 from './../../../components/ToggleView/ToggleView1';
 import FilterButton from '../../../components/FilterButton';
 import Flatrow from './Devices/Flatrow';
 import {boxColor} from '../../../actions/Helper';
-
+import NoDataViewFlatList from '../../../components/NoDataViewFlatList';
 const Devices = ({
   getAllDevice,
   getAllDeviceDetails,
@@ -241,76 +241,56 @@ const Devices = ({
           {/* ==============Services Category============== */}
 
           <>
-            {deviceAllData.length == 0 ? (
-              <View
-                style={{
-                  width: '100%',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  height: 300,
-                }}>
-                <Text style={{fontSize: 20, fontWeight: 'bold'}}>
-                  No Data Found
-                </Text>
-              </View>
-            ) : (
-              <>
-                <View style={styles.table}>
-                  <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={deviceAllData}
-                    keyExtractor={(item, i) => i.toString()}
-                    renderItem={({index, item}) => {
-                      return (
-                        <TouchableOpacity
-                          onPress={() => {
-                            setLodding(true);
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={deviceAllData}
+              keyExtractor={(item, i) => i.toString()}
+              renderItem={({index, item}) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => {
+                      setLodding(true);
 
-                            const id = item.ID;
-                            getAllDeviceDetails(
-                              id,
-                              setLodding,
-                              deviceRefDetails,
-                            );
-                            setDeviveView(false);
-                          }}
-                          style={{
-                            ...styles.tableRow1,
-                            height: 35,
-                            backgroundColor:
-                              index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-                            marginVertical: 1,
-                          }}>
-                          <Flatrow title={item?.Device_Name} width="35%" />
-
-                          <View
-                            style={{
-                              ...styles.tableRowColum1,
-                              borderLeftColor: 'white',
-                              width: '20%',
-                              borderLeftWidth: 2,
-                              backgroundColor: boxColor(item?.Device_Status),
-                            }}>
-                            <TouchableOpacity
-                              onLongPress={() => {
-                                copyText(item.Device_Status);
-                                tostalert(item.Device_Status);
-                              }}>
-                              <Text style={styles.boxText1}>
-                                {item?.Device_Status}
-                              </Text>
-                            </TouchableOpacity>
-                          </View>
-                          <Flatrow title={item?.Device_Type} width="20%" />
-
-                          <Flatrow title={item?.Device_Vendor} width="25%" />
-                        </TouchableOpacity>
-                      );
+                      const id = item.ID;
+                      getAllDeviceDetails(id, setLodding, deviceRefDetails);
+                      setDeviveView(false);
                     }}
-                  />
-                </View>
-              </>
-            )}
+                    style={{
+                      ...styles.tableRow1,
+                      height: 35,
+                      backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                      marginVertical: 1,
+                    }}>
+                    <Flatrow title={item?.Device_Name} width="35%" />
+
+                    <View
+                      style={{
+                        ...styles.tableRowColum1,
+                        borderLeftColor: 'white',
+                        width: '20%',
+                        borderLeftWidth: 2,
+                        backgroundColor: boxColor(item?.Device_Status),
+                      }}>
+                      <TouchableOpacity
+                        onLongPress={() => {
+                          copyText(item.Device_Status);
+                          tostalert(item.Device_Status);
+                        }}>
+                        <Text style={styles.boxText1}>
+                          {item?.Device_Status}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                    <Flatrow title={item?.Device_Type} width="20%" />
+
+                    <Flatrow title={item?.Device_Vendor} width="25%" />
+                  </TouchableOpacity>
+                );
+              }}
+              ListEmptyComponent={() => {
+                return <NoDataViewFlatList />;
+              }}
+            />
           </>
 
           {/* ==============Summary View=========== */}
@@ -364,7 +344,7 @@ const styles = StyleSheet.create({
   ///========id View
   idView: {
     width: '100%',
-    height: 60,
+    height: 40,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
@@ -476,7 +456,7 @@ const styles = StyleSheet.create({
   },
   tableRow: {
     width: '100%',
-    height: 50,
+    height: 30,
     backgroundColor: '#007aff',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -499,7 +479,7 @@ const styles = StyleSheet.create({
   tableRowColumLast: {
     width: '25%',
     marginHorizontal: 2,
-    height: 50,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
   },

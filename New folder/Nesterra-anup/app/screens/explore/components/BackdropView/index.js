@@ -17,20 +17,22 @@ const BackdropView = ({bottomSheetRef}) => {
   const renderBackdrop = useCallback(
     props => (
       <BottomSheetBackdrop
+        style={{backgroundColor: 'transparent'}}
         {...props}
         disappearsOnIndex={-1}
         appearsOnIndex={2}
+        opacity={0.1}
       />
     ),
     [],
   );
   return (
     <BottomSheet
-      style={{backgroundColor: 'green'}}
       ref={bottomSheetRef}
       index={-1}
       snapPoints={snapPoints}
       backdropComponent={renderBackdrop}
+      backgroundStyle={{backgroundColor: 'transparent'}}
       onChange={handleSheetChanges}>
       <View style={styles.contentContainer}>
         <Text>Awesome 🎉</Text>
@@ -43,12 +45,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    backgroundColor: 'grey',
   },
   contentContainer: {
     width: '100%',
     height: 200,
-    backgroundColor: 'red',
+    backgroundColor: 'transparent',
+    opacity: 0.5,
   },
 });
 

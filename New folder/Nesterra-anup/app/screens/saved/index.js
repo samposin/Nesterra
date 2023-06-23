@@ -13,6 +13,7 @@ import {imgg} from '../../components/imageLink/saveTabImage';
 import {useSelector} from 'react-redux';
 
 import Entypo from 'react-native-vector-icons/Entypo';
+// import Details from './Details';
 
 // const Saved = ({navigation}) => {
 //   const {appearanceType} = useSelector(state => state.appearanceType);

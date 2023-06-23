@@ -61,6 +61,7 @@ const Atm = ({GetAllAtmNumber, GetAllAtmdETAILS}) => {
             atmRef={atmRef}
             diplayName={diplayName}
           />
+
           <ThirdRow
             atmRef={atmRef}
             setDiplayName={setDiplayName}
@@ -68,62 +69,62 @@ const Atm = ({GetAllAtmNumber, GetAllAtmdETAILS}) => {
             diplayName={diplayName}
           />
           <TableHeader />
-          <View style={styles.table}>
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              removeClippedSubviews
-              data={data}
-              keyExtractor={(item, i) => i.toString()}
-              renderItem={({index, item}) => {
-                return (
-                  <TouchableOpacity
-                    onPress={() => {
-                      //
+          {/* <View style={styles.table}> */}
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            removeClippedSubviews
+            data={data}
+            keyExtractor={(item, i) => i.toString()}
+            renderItem={({index, item}) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    //
 
-                      GetAllAtmdETAILS(item.ATM_ID, setDetailsLoder);
-                      atmdDetailsRef.current.snapToIndex(2);
-                    }}
+                    GetAllAtmdETAILS(item.ATM_ID, setDetailsLoder);
+                    atmdDetailsRef.current.snapToIndex(2);
+                  }}
+                  style={{
+                    ...styles.tableRow1,
+                    height: 30,
+                    backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                    marginVertical: 1,
+                  }}>
+                  <DataColum title={item.ATM_ID} border={0} />
+                  <View
                     style={{
-                      ...styles.tableRow1,
-                      height: 30,
-                      backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
-                      marginVertical: 1,
+                      ...styles.tableRowColum2,
+                      width: '25%',
+                      borderLeftColor: 'white',
+                      borderLeftWidth: 1,
+                      backgroundColor:
+                        item.ATM_Status === 'Active' ? '#c6efcd' : '#ffc8ce',
                     }}>
-                    <DataColum title={item.ATM_ID} border={0} />
-                    <View
-                      style={{
-                        ...styles.tableRowColum2,
-                        width: '25%',
-                        borderLeftColor: 'white',
-                        borderLeftWidth: 1,
-                        backgroundColor:
-                          item.ATM_Status === 'Active' ? '#c6efcd' : '#ffc8ce',
+                    <TouchableOpacity
+                      onLongPress={() => {
+                        copyText(item.ATM_Status);
+
+                        tostalert(item.ATM_Status);
                       }}>
-                      <TouchableOpacity
-                        onLongPress={() => {
-                          copyText(item.ATM_Status);
+                      <Text style={styles.boxText1}> {item.ATM_Status}</Text>
+                    </TouchableOpacity>
+                  </View>
 
-                          tostalert(item.ATM_Status);
-                        }}>
-                        <Text style={styles.boxText1}> {item.ATM_Status}</Text>
-                      </TouchableOpacity>
-                    </View>
-
-                    <DataColum title={item.Model} border={2} />
-                    <DataColum title={item.Vendor} border={2} />
-                  </TouchableOpacity>
-                );
-              }}
-              refreshing={refresh}
-              onRefresh={() => {
-                setDiplayName('');
-                GetAllAtmNumber(setLoder);
-              }}
-              ListEmptyComponent={() => {
-                return <NoDataViewFlatList />;
-              }}
-            />
-          </View>
+                  <DataColum title={item.Model} border={2} />
+                  <DataColum title={item.Vendor} border={2} />
+                </TouchableOpacity>
+              );
+            }}
+            refreshing={refresh}
+            onRefresh={() => {
+              setDiplayName('');
+              GetAllAtmNumber(setLoder);
+            }}
+            ListEmptyComponent={() => {
+              return <NoDataViewFlatList />;
+            }}
+          />
+          {/* </View> */}
           {switchView ? (
             <>
               <ToggleView1
@@ -215,7 +216,6 @@ const styles = StyleSheet.create({
   table: {
     width: '100%',
     alignSelf: 'center',
-    marginTop: 5,
   },
   tableRow1: {
     width: '100%',

@@ -16,7 +16,7 @@ const SecondRow = ({diplayName, atmRef, setDiplayName}) => {
       <View
         style={{
           width: '100%',
-          height: 47,
+          height: 40,
           paddingLeft: 10,
           flexDirection: 'row',
         }}>

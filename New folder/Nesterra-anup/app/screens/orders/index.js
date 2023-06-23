@@ -143,12 +143,12 @@ const Orders = ({}) => {
               backgroundColor: 'white',
               marginTop: 15,
             }}></View> */}
-          <Text style={{color: 'black', paddingLeft: 15, paddingTop: 8}}>
+          {/* <Text style={{color: 'black', paddingLeft: 15, paddingTop: 8}}>
             Current Selection:
           </Text>
           <Text style={{color: '#007aff', paddingLeft: 15, paddingTop: 8}}>
             All
-          </Text>
+          </Text> */}
         </View>
         {/* ==============Search View=========== */}
 
