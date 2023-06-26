@@ -139,6 +139,14 @@ const Reports = ({getReport}) => {
               setSeleted('report');
             }}
           />
+          <ButtonView
+            Title="Atm Report"
+            select={select}
+            value="Atmreport"
+            onPress={() => {
+              setSeleted('Atmreport');
+            }}
+          />
         </View>
       </View>
 

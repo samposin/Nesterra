@@ -49,6 +49,15 @@ const HelpDesk = ({navigation}) => {
       </Text>
       <View
         style={{
+          width: '100%',
+          height: 45,
+          marginTop: 5,
+        }}>
+        <CustomDropDown />
+      </View>
+      {/*  */}
+      <View
+        style={{
           ...styles.upperView,
           position: 'relative',
           paddingHorizontal: 15,
@@ -157,11 +166,11 @@ const HelpDesk = ({navigation}) => {
             borderRadius: 5,
             justifyContent: 'center',
             alignItems: 'center',
+            borderBottomColor: '#3478f6',
           }}>
           <Text style={{color: 'white', fontSize: 15}}>Submit Request</Text>
         </View>
       </View>
-      <CustomDropDown />
     </SafeAreaView>
   );
 };
@@ -211,7 +220,7 @@ const styles = StyleSheet.create({
   },
   upperView: {
     width: '100%',
-    height: 60,
+    height: 10,
     //   backgroundColor: 'pink',
     justifyContent: 'center',
   },

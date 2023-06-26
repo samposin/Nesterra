@@ -129,7 +129,7 @@ const ModalView = ({
     <>
       <TouchableOpacity
         onPress={() => {
-          stopStartTimeOute();
+          // stopStartTimeOute();
           // console.log("first")
           setModalVisible(false);
           setModalVisible1(false);
@@ -214,6 +214,7 @@ const styles = StyleSheet.create({
     zIndex: 999,
     top: height / 2 - 175,
     position: 'absolute',
+    zIndex: 3000,
   },
   container1: {
     position: 'absolute',
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
 
-    zIndex: 998,
+    zIndex: 6500,
 
     justifyContent: 'center',
     alignItems: 'center',

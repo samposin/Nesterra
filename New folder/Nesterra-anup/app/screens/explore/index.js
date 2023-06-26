@@ -35,8 +35,6 @@ LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
 
-import ModalView from './ModalView';
-
 import {get_coordinates, marker_seleted} from '../../actions/coordinates';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {setLatLng} from '../../actions/setLatLang';
@@ -84,6 +82,7 @@ import ZoomMarkersView from './components/ZoomMarkers/ZoomMarkersView';
 import Certification from './components/Certification';
 import BackdropView from './components/BackdropView';
 import DropDownView from './components/Search/DropDownView';
+import ModalView from './ModalView';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -1192,6 +1191,7 @@ const Explore = ({
         setPlace={setPlace}
         searchView={searchView}
       />
+      {/* <ModalView /> */}
     </>
   );
 };

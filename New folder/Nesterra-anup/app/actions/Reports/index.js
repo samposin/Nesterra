@@ -10,6 +10,7 @@ export const getReport = id => dispatch => {
     headers,
   )
     .then(response => {
+      // console.log(response, 'res');
       if (response.data) {
         // console.log(response.data.circuitsDataModels, 'circuitsDataModels');
         dispatch({

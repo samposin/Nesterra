@@ -1,120 +1,203 @@
+// import {
+//   StyleSheet,
+//   Text,
+//   View,
+//   StatusBar,
+//   Image,
+//   SafeAreaView,
+// } from 'react-native';
+// import React from 'react';
+// import BackButton from '../../components/BackButton';
+// import {useNavigation} from '@react-navigation/native';
+// import MenuItem from '../../components/MenuItem';
+// import {MenuImage} from '../../components/imageLink/MenuLink';
+// import ToggleSwitch from 'toggle-switch-react-native';
+// import TextView from '../../components/TextView';
+// import IconImage from '../../components/IconImage';
+
+// const Settings = () => {
+//   const [isOn, setIsSwitchOn] = React.useState(true);
+
+//   const navigation = useNavigation();
+//   return (
+//     <SafeAreaView style={{flex: 1, marginTop: StatusBar.currentHeight}}>
+//       <View
+//         style={{
+//           width: '100%',
+//           //   height: 50,
+//           //   backgroundColor: 'pink',
+//           flexDirection: 'row',
+//           justifyContent: 'space-between',
+//           alignItems: 'center',
+//           paddingHorizontal: 15,
+//         }}>
+//         {/* <TextView title="Settinges" color="black" size={25} /> */}
+//         <TextView
+//           title="Settinges"
+//           color="black"
+//           size={25}
+//           marginLeft={0}
+//           bold="bold"
+//         />
+
+//         <BackButton
+//           onPress={() => {
+//             navigation.navigate('Menu');
+//           }}
+//         />
+//       </View>
+//       <View
+//         style={{
+//           width: '100%',
+//           height: 60,
+//           //   backgroundColor: 'pink',
+//           flexDirection: 'row',
+
+//           borderBottomColor: 'black',
+//           paddingHorizontal: 20,
+//           flexDirection: 'row',
+//         }}>
+//         <View
+//           style={{
+//             width: '50%',
+//             height: '100%',
+//             flexDirection: 'row',
+//             alignItems: 'center',
+//           }}>
+//           <View style={{width: 25, height: 25}}>
+//             <IconImage src={MenuImage.volume} />
+//           </View>
+
+//           <TextView
+//             title="Tab Sounds"
+//             color="black"
+//             size={16}
+//             marginLeft={10}
+//             bold="bold"
+//           />
+//         </View>
+
+//         <View style={styles.toggleView}>
+//           <ToggleSwitch
+//             isOn={isOn}
+//             onColor="#34c759"
+//             offColor="#b3b8b4"
+//             labelStyle={{color: 'black', fontWeight: '500'}}
+//             size="medium"
+//             onToggle={isOn => {
+//               setIsSwitchOn(isOn);
+//               if (isOn) {
+//                 console.log('yes');
+//                 // alldata();
+//               } else {
+//                 // activeFilter();
+//                 console.log('no');
+//               }
+//             }}
+//           />
+//         </View>
+//       </View>
+//       <View style={{paddingHorizontal: 15}}>
+//         <MenuItem
+//           onPress={() => navigation.navigate('Appearance')}
+//           src={MenuImage.Appearence}
+//           title="Appearence"
+//         />
+//       </View>
+//     </SafeAreaView>
+//   );
+// };
+
+// export default Settings;
+
+// const styles = StyleSheet.create({
+//   toggleView: {
+//     width: '50%',
+//     height: '100%',
+//     justifyContent: 'center',
+//     alignItems: 'flex-end',
+//   },
+// });
+
+import React, {useState} from 'react';
 import {
+  Alert,
+  Modal,
   StyleSheet,
   Text,
+  Pressable,
   View,
-  StatusBar,
-  Image,
-  SafeAreaView,
+  Dimensions,
 } from 'react-native';
-import React from 'react';
-import BackButton from '../../components/BackButton';
-import {useNavigation} from '@react-navigation/native';
-import MenuItem from '../../components/MenuItem';
-import {MenuImage} from '../../components/imageLink/MenuLink';
-import ToggleSwitch from 'toggle-switch-react-native';
-import TextView from '../../components/TextView';
-import IconImage from '../../components/IconImage';
-
+const {width, height} = Dimensions.get('screen');
 const Settings = () => {
-  const [isOn, setIsSwitchOn] = React.useState(true);
-
-  const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(true);
   return (
-    <SafeAreaView style={{flex: 1, marginTop: StatusBar.currentHeight}}>
-      <View
-        style={{
-          width: '100%',
-          //   height: 50,
-          //   backgroundColor: 'pink',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingHorizontal: 15,
-        }}>
-        {/* <TextView title="Settinges" color="black" size={25} /> */}
-        <TextView
-          title="Settinges"
-          color="black"
-          size={25}
-          marginLeft={0}
-          bold="bold"
-        />
-
-        <BackButton
-          onPress={() => {
-            navigation.navigate('Menu');
-          }}
-        />
-      </View>
-      <View
-        style={{
-          width: '100%',
-          height: 60,
-          //   backgroundColor: 'pink',
-          flexDirection: 'row',
-
-          borderBottomColor: 'black',
-          paddingHorizontal: 20,
-          flexDirection: 'row',
+    <View style={{flex: 1}}>
+      <Modal
+        animationType="slide"
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(!modalVisible);
         }}>
         <View
           style={{
-            width: '50%',
-            height: '100%',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
-          <View style={{width: 25, height: 25}}>
-            <IconImage src={MenuImage.volume} />
-          </View>
+            width: width,
+            height,
+            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+            opacity: 0.5,
 
-          <TextView
-            title="Tab Sounds"
-            color="black"
-            size={16}
-            marginLeft={10}
-            bold="bold"
-          />
-        </View>
-
-        <View style={styles.toggleView}>
-          <ToggleSwitch
-            isOn={isOn}
-            onColor="#34c759"
-            offColor="#b3b8b4"
-            labelStyle={{color: 'black', fontWeight: '500'}}
-            size="medium"
-            onToggle={isOn => {
-              setIsSwitchOn(isOn);
-              if (isOn) {
-                console.log('yes');
-                // alldata();
-              } else {
-                // activeFilter();
-                console.log('no');
-              }
-            }}
-          />
-        </View>
-      </View>
-      <View style={{paddingHorizontal: 15}}>
-        <MenuItem
-          onPress={() => navigation.navigate('Appearance')}
-          src={MenuImage.Appearence}
-          title="Appearence"
-        />
-      </View>
-    </SafeAreaView>
+            top: 0,
+            position: 'absolute',
+          }}></View>
+      </Modal>
+    </View>
   );
 };
 
-export default Settings;
-
 const styles = StyleSheet.create({
-  toggleView: {
-    width: '50%',
-    height: '100%',
+  centeredView: {
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'flex-end',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'gray',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
   },
 });
+
+export default Settings;

@@ -298,7 +298,7 @@ export default Saved;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
     // paddingHorizontal: 10,
   },
   mainView: {

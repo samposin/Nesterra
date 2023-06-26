@@ -267,12 +267,12 @@ const CustomDropDown = () => {
   };
   return (
     <>
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, paddingHorizontal: 13}}>
         <TouchableOpacity
           style={{
             width: '100%',
-            height: 50,
-            borderRadius: 10,
+            height: 40,
+            borderRadius: 5,
 
             borderWidth: 0.5,
             alignSelf: 'center',
