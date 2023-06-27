@@ -92,9 +92,15 @@ const Contact = ({navigation, getContacts}) => {
                       placeholder="Search here"
                       style={{marginLeft: 5}}
                     />
+                    {/* <View
+                      style={{
+                        width: '10',
+                        height: '100%',
+                        backgroundColor: 'red',
+                      }}></View> */}
                   </View>
                   <View style={styles.searchIconVie}>
-                    {/* <AntDesign name="search1" size={24} color="black" /> */}
+                    <AntDesign name="search1" size={22} color="black" />
                   </View>
                 </View>
                 <View style={styles.radioButtonView}>
@@ -269,9 +275,9 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   inputWraper: {
-    width: '90%',
-    height: 50,
-
+    width: '95%',
+    height: 40,
+    // backgroundColor: 'green',
     borderWidth: 1,
     borderRadius: 5,
     alignSelf: 'center',
@@ -296,6 +302,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 40,
+    alignItems: 'center',
     // backgroundColor: 'pink',
   },
 });

@@ -78,7 +78,7 @@ const HeaderButton = ({title, active, onPress}) => {
         justifyContent: 'space-around',
         alignItems: 'center',
         borderLeftColor: 'white',
-        borderLeftWidth: 2,
+        borderLeftWidth: 1,
       }}>
       <Text style={{...styles.boxText1, color: 'white'}}>{title}</Text>
       <Text style={{marginTop: 1, marginRight: 3}}>
@@ -204,11 +204,12 @@ export default Tableheader;
 const styles = StyleSheet.create({
   tableRow: {
     width: '100%',
-    height: 40,
+    height: 35,
     backgroundColor: '#007aff',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
+    marginTop: 10,
   },
   tableRowColum: {
     height: '100%',

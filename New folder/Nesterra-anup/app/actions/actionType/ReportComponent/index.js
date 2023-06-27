@@ -1,0 +1,1 @@
+export const REPORT_COMPONENT = 'REPORT_COMPONENT';

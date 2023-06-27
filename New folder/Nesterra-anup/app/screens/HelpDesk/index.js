@@ -217,6 +217,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'black',
     marginLeft: 15,
+    fontWeight: 'bold',
   },
   upperView: {
     width: '100%',

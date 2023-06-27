@@ -55,6 +55,7 @@ import appearanceType from './Appearance';
 
 //report
 import OCRReport from './Reports/OCRReport';
+import ReportComponent from './ReportComponent';
 
 const rootReducer = combineReducers({
   setLatLang,
@@ -111,5 +112,6 @@ const rootReducer = combineReducers({
   //=================
   appearanceType,
   OCRReport,
+  ReportComponent,
 });
 export default rootReducer;

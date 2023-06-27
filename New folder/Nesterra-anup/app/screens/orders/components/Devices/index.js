@@ -12,8 +12,8 @@ const Devices = () => {
   };
   return (
     <>
-      <SecondRow />
-      <ThirdRow />
+      {/* <SecondRow />
+      <ThirdRow /> */}
       <View style={styles.tableRow}>
         <TableHeaderFirstColum onPress={typeSet} type={type} title="Type" />
         <TableHeaderOtherColum onPress={typeSet} type={type} title="Vendor" />
@@ -34,5 +34,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignSelf: 'center',
+    marginTop: 15,
   },
 });

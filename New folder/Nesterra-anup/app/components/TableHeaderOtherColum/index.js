@@ -18,7 +18,9 @@ const TableHeaderOtherColum = ({title, width, type, onPress}) => {
         borderLeftColor: 'white',
         borderLeftWidth: 1,
       }}>
-      <Text style={{...styles.boxText1, color: 'white'}}>{title}</Text>
+      <Text style={{...styles.boxText1, color: 'white', marginLeft: 5}}>
+        {title}
+      </Text>
       {/* <Text style={{marginTop: 1, marginRight: 3}}>
         <AntDesign
           name={type ? 'caretup' : 'caretdown'}

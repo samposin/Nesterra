@@ -15,15 +15,18 @@ import SiteCertiFication from './SiteCertiFication';
 import Overview from './Overview';
 import OcrReport from './OcrReport';
 import {getReportSiteAnalysis} from './../../actions/Reports/SiteAnlysis/index';
-import {connect, useSelector} from 'react-redux';
+import {connect, useSelector, useDispatch} from 'react-redux';
 import ButtonView from './Components/ButtonView/index';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 import {getReport} from '../../actions/Reports';
 import {imag} from '../../components/imageLink';
 import Search from '../../components/search/Search';
+import AtmReport from './AtmReport/index';
+import {REPORT_COMPONENT} from './../../actions/actionType/ReportComponent/index';
 
 const Reports = ({getReport}) => {
+  const dispatch = useDispatch();
   const [select, setSeleted] = useState('overview');
   const {appearanceType} = useSelector(state => state.appearanceType);
 
@@ -44,6 +47,8 @@ const Reports = ({getReport}) => {
         return <StateAnalysis />;
       case select === 'report':
         return <OcrReport />;
+      case select === 'Atmreport':
+        return <AtmReport />;
     }
   };
 
@@ -113,6 +118,10 @@ const Reports = ({getReport}) => {
             value="overview"
             onPress={() => {
               setSeleted('overview');
+              dispatch({
+                type: REPORT_COMPONENT,
+                data: 'overview',
+              });
             }}
           />
           <ButtonView
@@ -121,6 +130,10 @@ const Reports = ({getReport}) => {
             value="state"
             onPress={() => {
               setSeleted('state');
+              dispatch({
+                type: REPORT_COMPONENT,
+                data: 'state',
+              });
             }}
           />
           <ButtonView
@@ -129,6 +142,10 @@ const Reports = ({getReport}) => {
             value="site"
             onPress={() => {
               setSeleted('site');
+              dispatch({
+                type: REPORT_COMPONENT,
+                data: 'site',
+              });
             }}
           />
           <ButtonView
@@ -137,6 +154,10 @@ const Reports = ({getReport}) => {
             value="report"
             onPress={() => {
               setSeleted('report');
+              dispatch({
+                type: REPORT_COMPONENT,
+                data: 'report',
+              });
             }}
           />
           <ButtonView

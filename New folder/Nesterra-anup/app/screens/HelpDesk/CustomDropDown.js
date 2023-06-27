@@ -287,8 +287,8 @@ const CustomDropDown = () => {
           onPress={() => {
             setClicked(!clicked);
           }}>
-          <Text style={{fontWeight: '600'}}>
-            {selectedCountry == '' ? 'Select Country' : selectedCountry}
+          <Text style={{fontWeight: '600', color: 'black'}}>
+            {selectedCountry == '' ? 'Ask a Question' : selectedCountry}
           </Text>
           {/* {clicked ? (
           <Image

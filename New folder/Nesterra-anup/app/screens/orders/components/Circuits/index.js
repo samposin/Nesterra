@@ -89,7 +89,7 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
             }}>
             <Text style={{color: '#007aff'}}>Clear Search</Text>
           </TouchableOpacity> */}
-          <SecondRow
+          {/* <SecondRow
             diplayName={diplayName}
             setDiplayName={setDiplayName}
             cirCuitRef={cirCuitRef}
@@ -103,7 +103,7 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
             cirCuitRef={cirCuitRef}
             vendorRef={vendorRef}
             setSwitchView={setSwitchView}
-          />
+          /> */}
           <Tableheader />
 
           <View style={styles.table}>

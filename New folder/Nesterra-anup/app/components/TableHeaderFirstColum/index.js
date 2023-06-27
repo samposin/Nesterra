@@ -15,7 +15,9 @@ const TableHeaderFirstColum = ({title, type, width, onPress}) => {
         justifyContent: 'space-around',
         alignItems: 'center',
       }}>
-      <Text style={{...styles.boxText1, color: 'white'}}>{title}</Text>
+      <Text style={{...styles.boxText1, color: 'white', marginLeft: 5}}>
+        {title}
+      </Text>
       {/* <Text style={{marginTop: 1, marginRight: 3}}>
         <AntDesign
           name={type ? 'caretup' : 'caretdown'}
