@@ -123,18 +123,35 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
                     }}
                     style={{
                       ...styles.tableRow1,
-                      height: 40,
+                      height: 30,
                       marginVertical: 1,
                       backgroundColor: '#ffffff',
                     }}>
-                    <FlatListColum item={item} title={item.Order_Type} />
-                    <FlatListColumOther item={item} title={item.vendor} />
-                    <FlatListColum item={item} title={item.Status} />
+                    <FlatListColum
+                      item={item}
+                      width="15%"
+                      title={item.Order_Type}
+                    />
                     <FlatListColumOther
                       item={item}
+                      width="15%"
+                      title={item.vendor}
+                    />
+                    <FlatListColum
+                      item={item}
+                      width="25%"
+                      title={item.Status}
+                    />
+                    <FlatListColumOther
+                      item={item}
+                      width="18%"
                       title={moment(item.Creation_Date).format('MM/DD/YY')}
                     />
-                    <FlatListColumOther item={item} title={item.Inventory_ID} />
+                    <FlatListColumOther
+                      item={item}
+                      width="27%"
+                      title={item.Inventory_ID}
+                    />
                   </TouchableOpacity>
                 );
               }}

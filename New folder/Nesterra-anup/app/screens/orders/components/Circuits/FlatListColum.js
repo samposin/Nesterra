@@ -3,7 +3,7 @@ import React from 'react';
 import {copyText} from '../../../../components/helper';
 import {useSelector} from 'react-redux';
 
-const FlatListColum = ({item, title}) => {
+const FlatListColum = ({item, title, width}) => {
   const {appearanceType} = useSelector(state => state.appearanceType);
 
   const selectedComponent = item => {
@@ -22,7 +22,7 @@ const FlatListColum = ({item, title}) => {
     <View
       style={{
         ...styles.tableRowColum1,
-        width: '20%',
+        width: width,
         justifyContent: 'center',
         borderLeftColor: 'white',
         borderLeftWidth: 1,

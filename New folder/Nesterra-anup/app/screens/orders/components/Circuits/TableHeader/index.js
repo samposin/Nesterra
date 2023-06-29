@@ -19,7 +19,7 @@ import {
   GET_ONLY_VENDOR,
 } from '../../../../../actions/actionType/action.OrdersForTab';
 
-const HeaderButtonFirst = ({active, onPress}) => {
+const HeaderButtonFirst = ({active, width, onPress}) => {
   return (
     <TouchableOpacity
       onPress={() => {
@@ -38,23 +38,23 @@ const HeaderButtonFirst = ({active, onPress}) => {
       }}
       style={{
         ...styles.tableRowColum,
-        width: '20%',
+        width: width,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
       }}>
       <Text style={{...styles.boxText1, color: 'white'}}>Type</Text>
-      <Text style={{marginTop: 1, marginRight: 3}}>
+      {/* <Text style={{marginTop: 1, marginRight: 3}}>
         <AntDesign
           name={active ? 'caretup' : 'caretdown'}
           size={16}
           color="white"
         />
-      </Text>
+      </Text> */}
     </TouchableOpacity>
   );
 };
-const HeaderButton = ({title, active, onPress}) => {
+const HeaderButton = ({title, active, onPress, width}) => {
   return (
     <TouchableOpacity
       onPress={() => {
@@ -73,7 +73,7 @@ const HeaderButton = ({title, active, onPress}) => {
       }}
       style={{
         ...styles.tableRowColum,
-        width: '20%',
+        width: width,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
@@ -81,13 +81,13 @@ const HeaderButton = ({title, active, onPress}) => {
         borderLeftWidth: 1,
       }}>
       <Text style={{...styles.boxText1, color: 'white'}}>{title}</Text>
-      <Text style={{marginTop: 1, marginRight: 3}}>
+      {/* <Text style={{marginTop: 1, marginRight: 3}}>
         <AntDesign
           name={active ? 'caretup' : 'caretdown'}
           size={16}
           color="white"
         />
-      </Text>
+      </Text> */}
     </TouchableOpacity>
   );
 };
@@ -169,27 +169,27 @@ const Tableheader = () => {
   return (
     <>
       <View style={{...styles.tableRow}}>
-        <HeaderButtonFirst active={orderType} width="20%" onPress={typeSort} />
+        <HeaderButtonFirst active={orderType} width="15%" onPress={typeSort} />
         <HeaderButton
-          width="20%"
+          width="15%"
           title="Vendor"
           active={vendor}
           onPress={vendorSort}
         />
         <HeaderButton
-          width="20%"
+          width="25%"
           title="Status"
           active={status}
           onPress={statusSort}
         />
         <HeaderButton
-          width="20%"
+          width="18%"
           title="Initation"
           active={dateType}
           onPress={dateSort}
         />
         <HeaderButton
-          width="20%"
+          width="27%"
           title="Item#"
           active={invType}
           onPress={itemSort}

@@ -98,8 +98,48 @@ const Orders = ({}) => {
         <View
           style={{
             width: '100%',
-            height: 30,
-            // backgroundColor: 'pink',
+            height: 25,
+            flexDirection: 'row',
+            // backgroundColor: 'green',
+          }}>
+          <View
+            style={{
+              width: 135,
+              height: 27,
+              backgroundColor: '#7fc781',
+              borderRadius: 7,
+              marginRight: 9,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: 40,
+            }}>
+            <Text style={{color: 'white', fontSize: 12}}>Search</Text>
+          </View>
+          <View
+            style={{
+              width: 135,
+              height: 27,
+              backgroundColor: '#7fb4ee',
+              borderRadius: 7,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{color: 'white', fontSize: 12}}>Clear Search</Text>
+          </View>
+        </View>
+
+        <Text style={{color: 'black', paddingLeft: 15, paddingTop: 8}}>
+          Current Selection:
+        </Text>
+        <Text style={{color: '#007aff', paddingLeft: 15, paddingTop: 8}}>
+          All
+        </Text>
+
+        {/* <View
+          style={{
+            width: '100%',
+            height: 50,
+            backgroundColor: 'pink',
             //paddingHorizontal: 20,
             paddingVertical: 3,
           }}>
@@ -110,56 +150,22 @@ const Orders = ({}) => {
               // backgroundColor: 'red',
               flexDirection: 'row',
               justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                width: '25%',
-                height: '100%',
-                backgroundColor: '#7fc781',
-                borderRadius: 7,
-                marginRight: 9,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: 'white', fontSize: 12}}>Search</Text>
-            </View>
-
-            <View
-              style={{
-                width: '25%',
-                height: '100%',
-                backgroundColor: '#7fb4ee',
-                borderRadius: 7,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: 'white', fontSize: 12}}>Clear Search</Text>
-            </View>
-            <View
-              style={{
-                width: '25%',
-                height: '100%',
-              }}></View>
-          </View>
-          {/* <View
+            }}></View>
+          <View
             style={{
               width: '100%',
               height: 20,
               backgroundColor: 'white',
               marginTop: 15,
-            }}></View> */}
-          <Text style={{color: 'black', paddingLeft: 15, paddingTop: 8}}>
-            Current Selection:
-          </Text>
-          <Text style={{color: '#007aff', paddingLeft: 15, paddingTop: 8}}>
-            All
-          </Text>
-        </View>
+            }}>
+           
+          </View>
+        </View> */}
         {/* ==============Search View=========== */}
 
         {ranDerView()}
-      </SafeAreaView>
-      <View
+
+        {/* <View
         styles={{
           width: '100%',
           height: 100,
@@ -169,7 +175,8 @@ const Orders = ({}) => {
           right: 0,
           backgroundColor: 'red',
           zIndex: 400,
-        }}></View>
+        }}></View> */}
+      </SafeAreaView>
     </>
   );
 };

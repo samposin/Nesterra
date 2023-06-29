@@ -1,12 +1,12 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 
-const FlatListColumOther = ({item, title}) => {
+const FlatListColumOther = ({item, width, title}) => {
   return (
     <View
       style={{
         ...styles.tableRowColum1,
-        width: '20%',
+        width: width,
         justifyContent: 'center',
         borderLeftColor: 'white',
         borderLeftWidth: 1,
