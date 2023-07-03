@@ -16,6 +16,7 @@ import Circuits from './components/Circuits';
 import {connect} from 'react-redux';
 import Button from '../../components/button/Button';
 import {returnMapZoom} from './../search/components/helpers';
+import TextView from '../../components/TextView';
 
 const Orders = ({}) => {
   const circuitRefDetails = useRef(null);
@@ -101,6 +102,7 @@ const Orders = ({}) => {
             height: 25,
             flexDirection: 'row',
             // backgroundColor: 'green',
+            marginBottom: 12,
           }}>
           <View
             style={{
@@ -127,10 +129,14 @@ const Orders = ({}) => {
             <Text style={{color: 'white', fontSize: 12}}>Clear Search</Text>
           </View>
         </View>
+        <TextView
+          title="Current Selection:"
+          color="black"
+          bold="normal"
+          size={15}
+          marginLeft={15}
+        />
 
-        <Text style={{color: 'black', paddingLeft: 15, paddingTop: 8}}>
-          Current Selection:
-        </Text>
         <Text style={{color: '#007aff', paddingLeft: 15, paddingTop: 8}}>
           All
         </Text>

@@ -174,14 +174,17 @@ const Details = ({detailsRef}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: 'grey',
-  },
+  container: {},
   contentContainer: {
-    flex: 1,
-    alignItems: 'center',
+    alignSelf: 'center',
+  },
+  closeLine: {
+    width: 30,
+    height: 30,
+    borderRadius: 3,
+    marginTop: 9,
+
+    alignSelf: 'center',
   },
 });
 

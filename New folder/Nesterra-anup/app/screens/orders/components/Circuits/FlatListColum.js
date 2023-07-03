@@ -2,6 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {copyText} from '../../../../components/helper';
 import {useSelector} from 'react-redux';
+import TextView from '../../../../components/TextView';
 
 const FlatListColum = ({item, title, width}) => {
   const {appearanceType} = useSelector(state => state.appearanceType);
@@ -33,10 +34,17 @@ const FlatListColum = ({item, title, width}) => {
           copyText(title);
           tostalert(title);
         }}>
-        <Text style={{color: appearanceType == 'dark' ? 'white' : 'black'}}>
+        <Text style={{color: appearanceType == 'dark' ? 'black' : 'black'}}>
           {' '}
           {title}
         </Text>
+        {/* <TextView
+          title={title}
+          color="black"
+          size={15}
+          bold={'normal'}
+          marginLeft={0}
+        /> */}
       </TouchableOpacity>
     </View>
   );

@@ -35,6 +35,7 @@ import NoDataViewFlatList from '../../../components/NoDataViewFlatList';
 
 import DataColum from './Circuits/DataColum';
 import {boxColor} from '../../../actions/Helper';
+import TextView from '../../../components/TextView';
 
 const CircuitsNew = ({
   getAllCircuit,
@@ -254,14 +255,18 @@ const CircuitsNew = ({
                             //
                             marginVertical: 1,
                           }}>
-                          <DataColum title={item?.Circuit_ID} width="30%" />
+                          <DataColum
+                            title={item?.Circuit_ID}
+                            width="30%"
+                            borderLeftWidth={0}
+                          />
 
                           <View
                             style={{
                               ...styles.tableRowColum1,
                               borderLeftColor: 'white',
                               width: '20%',
-                              borderLeftWidth: 2,
+                              // borderLeftWidth: 2,
                               backgroundColor: boxColor(item?.Circuit_Status),
                             }}>
                             <TouchableOpacity
@@ -269,16 +274,22 @@ const CircuitsNew = ({
                                 copyText(item.Circuit_Status);
                                 tostalert(item.Device_Status);
                               }}>
-                              <Text style={styles.boxText1}>
+                              <Text
+                                style={{...styles.boxText1, color: 'black'}}>
                                 {item?.Circuit_Status}
                               </Text>
                             </TouchableOpacity>
                           </View>
                           <DataColum
+                            borderLeftWidth={0}
                             width="30%"
                             title={item?.Type ? item.Type : '--'}
                           />
-                          <DataColum title={item?.Vendor} width="20%" />
+                          <DataColum
+                            title={item?.Vendor}
+                            width="20%"
+                            borderLeftWidth={0}
+                          />
                         </TouchableOpacity>
                       );
                     }}

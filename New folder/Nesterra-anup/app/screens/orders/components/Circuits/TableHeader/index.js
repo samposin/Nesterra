@@ -177,7 +177,7 @@ const Tableheader = () => {
           onPress={vendorSort}
         />
         <HeaderButton
-          width="25%"
+          width="20%"
           title="Status"
           active={status}
           onPress={statusSort}
@@ -189,7 +189,7 @@ const Tableheader = () => {
           onPress={dateSort}
         />
         <HeaderButton
-          width="27%"
+          width="32%"
           title="Item#"
           active={invType}
           onPress={itemSort}

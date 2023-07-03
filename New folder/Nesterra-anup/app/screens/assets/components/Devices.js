@@ -43,11 +43,14 @@ import FilterButton from '../../../components/FilterButton';
 import Flatrow from './Devices/Flatrow';
 import {boxColor} from '../../../actions/Helper';
 import NoDataViewFlatList from '../../../components/NoDataViewFlatList';
+import TextView from '../../../components/TextView';
+
 const Devices = ({
   getAllDevice,
   getAllDeviceDetails,
   //  deviceRefDetails,
 }) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
   const {deviceAllData} = useSelector(state => state.deviceAllData);
 
   // const {isLoding} = useSelector(state => state.deviceAllData);
@@ -258,7 +261,12 @@ const Devices = ({
                     style={{
                       ...styles.tableRow1,
                       height: 35,
-                      backgroundColor: index % 2 == 0 ? '#d1d0d0' : '#ffffff',
+                      backgroundColor:
+                        appearanceType == 'dark'
+                          ? '#000'
+                          : index % 2 == 0
+                          ? '#d1d0d0'
+                          : '#ffffff',
                       marginVertical: 1,
                     }}>
                     <Flatrow title={item?.Device_Name} width="35%" />
@@ -266,9 +274,9 @@ const Devices = ({
                     <View
                       style={{
                         ...styles.tableRowColum1,
-                        borderLeftColor: 'white',
+                        // borderLeftColor: 'white',
                         width: '20%',
-                        borderLeftWidth: 2,
+                        // borderLeftWidth: 2,
                         backgroundColor: boxColor(item?.Device_Status),
                       }}>
                       <TouchableOpacity
@@ -279,6 +287,13 @@ const Devices = ({
                         <Text style={styles.boxText1}>
                           {item?.Device_Status}
                         </Text>
+                        {/* <TextView
+                          title={item?.Device_Status}
+                          color="black"
+                          bold={'normal'}
+                          marginLeft={2}
+                          size={15}
+                        /> */}
                       </TouchableOpacity>
                     </View>
                     <Flatrow title={item?.Device_Type} width="20%" />

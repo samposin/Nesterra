@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {copyText, tostalert} from '../../../../components/helper';
+import TextView from '../../../../components/TextView';
 
 const Flatrow = ({title, width}) => {
   return (
@@ -8,7 +9,7 @@ const Flatrow = ({title, width}) => {
       style={{
         ...styles.tableRowColum1,
         borderLeftColor: 'white',
-        borderLeftWidth: 2,
+
         width: width,
       }}>
       <TouchableOpacity
@@ -16,7 +17,13 @@ const Flatrow = ({title, width}) => {
           copyText(title);
           tostalert(title);
         }}>
-        <Text style={styles.boxText1}>{title}</Text>
+        <TextView
+          title={title}
+          color="black"
+          bold={'normal'}
+          marginLeft={2}
+          size={15}
+        />
       </TouchableOpacity>
     </View>
   );

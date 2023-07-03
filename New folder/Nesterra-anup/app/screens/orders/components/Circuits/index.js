@@ -25,6 +25,8 @@ import AddButton from '../../../../components/button/AddButton';
 import {useNavigation} from '@react-navigation/native';
 
 const Circuits = ({get_orders_for_tab, get_order_details}) => {
+  const {appearanceType} = useSelector(state => state.appearanceType);
+
   const navigation = useNavigation();
   const {ordersForTab} = useSelector(state => state.ordersForTab);
   const dispatch = useDispatch();
@@ -111,10 +113,11 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
               showsVerticalScrollIndicator={false}
               data={ordersForTab}
               keyExtractor={(item, i) => i.toString()}
-              renderItem={({item, i}) => {
+              renderItem={({index, item}) => {
                 return (
                   <TouchableOpacity
                     onPress={() => {
+                      setSwitchView(false);
                       get_order_details(
                         item.Inventory_ID,
                         setLodding1,
@@ -125,32 +128,42 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
                       ...styles.tableRow1,
                       height: 30,
                       marginVertical: 1,
-                      backgroundColor: '#ffffff',
+                      backgroundColor:
+                        appearanceType == 'dark'
+                          ? '#000'
+                          : index % 2 == 0
+                          ? '#d1d0d0'
+                          : '#ffffff',
                     }}>
                     <FlatListColum
                       item={item}
                       width="15%"
                       title={item.Order_Type}
+                      borderLeftWidth={0}
                     />
                     <FlatListColumOther
                       item={item}
                       width="15%"
                       title={item.vendor}
+                      borderLeftWidth={0}
                     />
                     <FlatListColum
                       item={item}
-                      width="25%"
+                      width="20%"
                       title={item.Status}
+                      borderLeftWidth={0}
                     />
                     <FlatListColumOther
                       item={item}
                       width="18%"
+                      borderLeftWidth={0}
                       title={moment(item.Creation_Date).format('MM/DD/YY')}
                     />
                     <FlatListColumOther
                       item={item}
-                      width="27%"
+                      width="32%"
                       title={item.Inventory_ID}
+                      borderLeftWidth={0}
                     />
                   </TouchableOpacity>
                 );
@@ -202,11 +215,13 @@ const Circuits = ({get_orders_for_tab, get_order_details}) => {
           />
         </>
       )}
-      <AddButton
-        onPress={() => {
-          navigation.navigate('AddOrder');
-        }}
-      />
+      {switchView ? (
+        <AddButton
+          onPress={() => {
+            navigation.navigate('AddOrder');
+          }}
+        />
+      ) : null}
     </>
   );
 };
